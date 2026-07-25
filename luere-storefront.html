@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#FDFBF7" />
+<meta name="description" content="LUÈRE — clean luxury skincare, beauty, hair care and wellness. High-performance formulas crafted for the modern ritual. Cruelty-free, vegan, dermatologist-tested." />
+<title>LUÈRE — Clean Luxury Skincare & Beauty</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   LUÈRE — design tokens
+   ============================================================ */
+:root{
+  /* palette */
+  --porcelain:#FDFBF7;
+  --cream:#F6EDE1;
+  --sand:#EDE1CE;
+  --sand-deep:#E4D5BD;
+  --blush:#ECD7D0;
+  --ink:#2A241D;
+  --ink-soft:#4A4238;
+  --taupe:#9A8D7B;
+  --line:#E5D9C7;
+  --gold:#C2A15C;
+  --gold-deep:#9F7C36;
+  --gold-light:#E6CE96;
+  --rose:#C2708A;
+  --white:#FFFFFF;
+  --grad-gold:linear-gradient(135deg,#E6CE96 0%,#C2A15C 46%,#9F7C36 100%);
+
+  /* type */
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+  /* radius */
+  --r-s:10px; --r-m:18px; --r-l:28px; --r-pill:999px;
+
+  /* elevation */
+  --sh-s:0 4px 16px rgba(42,36,29,.06);
+  --sh-m:0 16px 44px rgba(42,36,29,.10);
+  --sh-l:0 32px 72px rgba(42,36,29,.16);
+
+  /* motion */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur:.5s;
+
+  --nav-h:74px;
+  --wrap:1240px;
+}
+
+/* ============================================================
+   base
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--porcelain);
+  line-height:1.62;font-weight:300;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+svg,img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:inherit}
+ul{list-style:none}
+::selection{background:var(--gold-light);color:var(--ink)}
+:focus-visible{outline:2px solid var(--gold-deep);outline-offset:3px;border-radius:4px}
+
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(1.15rem,4vw,2.6rem)}
+.section{padding-block:clamp(3.4rem,8vw,6.4rem)}
+[id]{scroll-margin-top:calc(var(--nav-h) + 22px)}
+
+/* type helpers */
+.eyebrow{
+  font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold-deep);font-weight:500;display:inline-flex;align-items:center;gap:.7rem;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+.eyebrow.center::after{content:"";width:26px;height:1px;background:var(--gold)}
+.serif{font-family:var(--serif)}
+
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.6rem;flex-wrap:wrap;margin-bottom:clamp(1.9rem,4vw,3rem)}
+.section-head.center{flex-direction:column;align-items:center;text-align:center}
+.section-head h2{
+  font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,5.4vw,3.4rem);
+  line-height:1.04;letter-spacing:-.012em;margin-top:.55rem;
+}
+.section-head .lead{color:var(--taupe);margin-top:.75rem;font-size:1rem;max-width:52ch}
+.link-arrow{
+  font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);
+  display:inline-flex;gap:.5rem;align-items:center;border-bottom:1px solid var(--gold);
+  padding-bottom:.35rem;transition:gap .3s var(--ease);white-space:nowrap;font-weight:500;
+}
+.link-arrow:hover{gap:.85rem}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  font-size:.78rem;font-weight:500;letter-spacing:.17em;text-transform:uppercase;
+  padding:1.05rem 2.1rem;border-radius:var(--r-pill);transition:all var(--dur) var(--ease);
+  white-space:nowrap;
+}
+.btn-primary{background:var(--ink);color:var(--porcelain)}
+.btn-primary:hover{background:var(--gold-deep);transform:translateY(-2px);box-shadow:var(--sh-m)}
+.btn-gold{background:var(--grad-gold);color:#fff;box-shadow:0 8px 24px rgba(159,124,54,.28)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(159,124,54,.36)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);background:rgba(255,255,255,.4)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-deep);transform:translateY(-2px)}
+
+/* reveal */
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+[data-reveal].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+}
+
+/* ============================================================
+   announcement bar
+   ============================================================ */
+.announce{background:var(--ink);color:#EFE6D6;overflow:hidden;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase}
+.announce-track{display:flex;width:max-content;white-space:nowrap;padding-block:.62rem;animation:marquee 34s linear infinite}
+.announce:hover .announce-track{animation-play-state:paused}
+.announce-track span{display:inline-flex;align-items:center;gap:.9rem;padding-inline:2.4rem;color:#DCCFB6}
+.announce-track b{color:var(--gold-light);font-weight:500}
+.announce-track span::before{content:"✦";color:var(--gold);font-size:.7rem}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   navigation
+   ============================================================ */
+.nav{position:sticky;top:0;z-index:60;background:rgba(253,251,247,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:background .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.nav.scrolled{background:rgba(253,251,247,.96);border-bottom-color:var(--line);box-shadow:0 6px 26px rgba(42,36,29,.05)}
+.nav-inner{height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem}
+.nav-left{justify-self:start;display:flex;align-items:center;gap:1.7rem}
+.nav-right{justify-self:end;display:flex;align-items:center;gap:.35rem}
+.brand{justify-self:center;font-family:var(--serif);font-size:1.55rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1;padding-left:.1em}
+.brand span{color:var(--gold-deep)}
+
+.nav-links{display:none;gap:1.85rem;align-items:center}
+.nav-links a{position:relative;font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;font-weight:400;color:var(--ink-soft);padding-block:.5rem}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:.15rem;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+
+.icon-btn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;color:var(--ink);transition:background .3s var(--ease),color .3s var(--ease);position:relative}
+.icon-btn:hover{background:var(--cream);color:var(--gold-deep)}
+.icon-btn svg{width:20px;height:20px}
+.cart-count{position:absolute;top:3px;right:1px;min-width:18px;height:18px;padding:0 4px;background:var(--grad-gold);color:#fff;border-radius:999px;font-size:.6rem;font-weight:600;display:grid;place-items:center;transform:scale(0);transition:transform .35s var(--ease);font-family:var(--sans)}
+.cart-count.show{transform:scale(1)}
+.nav-toggle{display:grid}
+
+@media (min-width:1040px){
+  .nav-links{display:flex}
+  .nav-toggle{display:none}
+}
+
+/* drawers + overlay */
+.overlay{position:fixed;inset:0;background:rgba(42,36,29,.42);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s var(--ease);z-index:80}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;bottom:0;z-index:90;background:var(--porcelain);display:flex;flex-direction:column;transition:transform .5s var(--ease)}
+.drawer-left{left:0;width:min(86vw,370px);transform:translateX(-102%);padding:1.6rem 1.5rem}
+.drawer-left.open{transform:none}
+.drawer-right{right:0;width:min(92vw,430px);transform:translateX(102%)}
+.drawer-right.open{transform:none}
+
+.drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.6rem}
+.drawer-head .brand{font-size:1.35rem;padding:0}
+.drawer-close{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;transition:background .3s}
+.drawer-close:hover{background:var(--cream)}
+
+.m-links{display:flex;flex-direction:column;gap:.2rem;margin-top:.4rem}
+.m-links a{font-family:var(--serif);font-size:1.7rem;font-weight:500;padding-block:.55rem;border-bottom:1px solid var(--line);transition:color .3s,padding-left .3s var(--ease)}
+.m-links a:hover{color:var(--gold-deep);padding-left:.4rem}
+.m-foot{margin-top:auto;padding-top:1.4rem;display:flex;flex-direction:column;gap:.4rem;color:var(--taupe);font-size:.8rem}
+
+/* cart */
+.cart-head{padding:1.5rem 1.5rem 1.1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.cart-head h3{font-family:var(--serif);font-size:1.5rem;font-weight:600}
+.ship-bar{padding:1rem 1.5rem;background:var(--cream);font-size:.78rem;color:var(--ink-soft)}
+.ship-bar b{color:var(--gold-deep);font-weight:500}
+.ship-track{height:5px;border-radius:99px;background:var(--sand-deep);margin-top:.55rem;overflow:hidden}
+.ship-fill{height:100%;background:var(--grad-gold);width:0;transition:width .6s var(--ease)}
+.cart-items{flex:1;overflow-y:auto;padding:.5rem 1.5rem}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--taupe);gap:1.1rem;padding:2rem}
+.cart-empty .ce-ic{width:56px;height:56px;color:var(--sand-deep)}
+.cart-empty p{font-family:var(--serif);font-size:1.4rem;color:var(--ink)}
+.c-item{display:grid;grid-template-columns:64px 1fr auto;gap:.9rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--line)}
+.c-thumb{width:64px;height:64px;border-radius:12px;display:grid;place-items:center;overflow:hidden}
+.c-thumb svg{width:66%}
+.c-info h5{font-family:var(--serif);font-size:1.1rem;font-weight:600;line-height:1.15}
+.c-info .c-cat{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe)}
+.c-qty{display:inline-flex;align-items:center;gap:.7rem;margin-top:.45rem;border:1px solid var(--line);border-radius:99px;padding:.2rem .5rem}
+.c-qty button{width:22px;height:22px;display:grid;place-items:center;font-size:1rem;color:var(--ink-soft);border-radius:50%}
+.c-qty button:hover{color:var(--gold-deep)}
+.c-qty span{font-size:.82rem;min-width:14px;text-align:center}
+.c-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+.c-price{font-size:.95rem;font-weight:500}
+.c-remove{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe);border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.c-remove:hover{color:var(--rose);border-color:var(--rose)}
+.cart-foot{border-top:1px solid var(--line);padding:1.3rem 1.5rem calc(1.3rem + env(safe-area-inset-bottom));background:var(--porcelain)}
+.cart-sub{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
+.cart-sub .cs-l{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--taupe)}
+.cart-sub .cs-v{font-family:var(--serif);font-size:1.7rem;font-weight:600}
+.cart-note{font-size:.72rem;color:var(--taupe);margin-bottom:1rem}
+.cart-foot .btn{width:100%}
+
+/* ============================================================
+   hero
+   ============================================================ */
+.hero{position:relative;overflow:hidden;
+  background:
+    radial-gradient(120% 78% at 88% 6%, rgba(230,206,150,.34), transparent 55%),
+    radial-gradient(94% 90% at 6% 104%, rgba(236,215,208,.5), transparent 58%),
+    linear-gradient(180deg,var(--porcelain) 0%,var(--cream) 100%);
+}
+.hero-grid{display:grid;gap:2rem;align-items:center;padding-block:clamp(2.4rem,6vw,4.6rem)}
+.hero-copy .eyebrow{margin-bottom:1.3rem}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.9rem,8.4vw,5.5rem);line-height:1.0;letter-spacing:-.018em}
+.hero h1 em{font-style:italic;color:var(--gold-deep)}
+.hero-sub{margin-top:1.4rem;font-size:1.06rem;color:var(--ink-soft);max-width:46ch;line-height:1.7}
+.hero-cta{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap}
+.hero-proof{display:flex;align-items:center;gap:1.1rem;margin-top:2rem;flex-wrap:wrap}
+.hero-proof .stars{color:var(--gold);display:inline-flex;gap:1px}
+.hero-proof .hp-text{font-size:.82rem;color:var(--ink-soft)}
+.hero-proof .hp-text b{font-weight:500}
+.hero-proof .divider{width:1px;height:26px;background:var(--line)}
+
+.hero-visual{position:relative;justify-self:center;width:100%;max-width:480px}
+.hero-visual svg{width:100%;height:auto}
+.float-chip{position:absolute;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:.7rem .95rem;box-shadow:var(--sh-m);display:flex;align-items:center;gap:.6rem;font-size:.76rem}
+.float-chip .fc-star{color:var(--gold);display:inline-flex;gap:1px}
+.float-chip b{font-weight:500;color:var(--ink)}
+.float-chip small{color:var(--taupe);font-size:.68rem;display:block}
+.chip-rating{top:12%;left:-4%;animation:floaty 6s var(--ease) infinite}
+.chip-clean{bottom:16%;right:-3%;animation:floaty 7s var(--ease) infinite .8s}
+.chip-clean .fc-ic{width:30px;height:30px;border-radius:50%;background:var(--cream);display:grid;place-items:center;color:var(--gold-deep)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+
+@media (min-width:900px){
+  .hero-grid{grid-template-columns:1.06fr .94fr;gap:2.5rem;padding-block:clamp(3rem,6vw,5.5rem)}
+}
+
+/* ============================================================
+   trust bar
+   ============================================================ */
+.trust{background:var(--ink);color:#EFE6D6}
+.trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 1rem;padding-block:2.1rem}
+.trust-item{display:flex;gap:.85rem;align-items:center;justify-content:center}
+.trust-item .ti-ic{color:var(--gold-light);flex-shrink:0;width:30px;height:30px}
+.trust-item h4{font-size:.84rem;letter-spacing:.03em;font-weight:500;color:#fff}
+.trust-item p{font-size:.7rem;color:#B0A48F;margin-top:.1rem}
+@media (min-width:840px){
+  .trust-grid{grid-template-columns:repeat(4,1fr)}
+  .trust-item{padding-inline:1rem}
+  .trust-item + .trust-item{border-left:1px solid rgba(255,255,255,.1)}
+}
+
+/* ============================================================
+   product cards
+   ============================================================ */
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:76%;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail > .card{scroll-snap-align:start}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+@media (min-width:640px){.rail{grid-auto-columns:44%}.product-grid{grid-template-columns:repeat(3,1fr);gap:1.4rem}}
+@media (min-width:1040px){.rail{grid-auto-columns:calc((100% - 3 * 1.4rem)/4);overflow:visible}.product-grid{grid-template-columns:repeat(4,1fr)}}
+
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s var(--ease)}
+.card:hover{transform:translateY(-6px);box-shadow:var(--sh-m);border-color:var(--sand-deep)}
+.card-media{position:relative;aspect-ratio:1/1;display:grid;place-items:center;padding:1.1rem;overflow:hidden}
+.card-media .product{width:62%;transition:transform .6s var(--ease)}
+.card:hover .card-media .product{transform:translateY(-5px) scale(1.05)}
+.badge{position:absolute;top:.75rem;left:.75rem;background:var(--ink);color:var(--porcelain);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.36rem .62rem;border-radius:99px;font-weight:500}
+.badge.sale{background:var(--grad-gold);color:#fff}
+.badge.new{background:var(--white);color:var(--gold-deep);border:1px solid var(--gold)}
+.wish{position:absolute;top:.65rem;right:.65rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.72);backdrop-filter:blur(4px);display:grid;place-items:center;color:var(--ink-soft);transition:color .3s,background .3s,transform .3s}
+.wish:hover{background:#fff;transform:scale(1.08)}
+.wish.active{color:var(--rose)}
+.wish svg{width:17px;height:17px}
+.card-body{padding:1rem 1.05rem 1.15rem;display:flex;flex-direction:column;gap:.42rem;flex:1}
+.card-cat{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--taupe)}
+.card-name{font-family:var(--serif);font-size:1.28rem;font-weight:600;line-height:1.14}
+.card-desc{font-size:.78rem;color:var(--taupe);line-height:1.5}
+.rating{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--ink-soft);margin-top:.15rem}
+.stars{display:inline-flex;gap:1px;color:var(--gold)}
+.stars svg{width:13px;height:13px}
+.rating .r-count{color:var(--taupe)}
+.price-row{display:flex;align-items:center;gap:.55rem;margin-top:.25rem}
+.price{font-size:1.05rem;font-weight:500}
+.price.old{color:var(--taupe);text-decoration:line-through;font-weight:300;font-size:.88rem}
+.add{margin-top:.65rem;width:100%;background:var(--cream);border:1px solid var(--line);color:var(--ink);padding:.82rem;border-radius:99px;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease)}
+.add:hover{background:var(--ink);color:var(--porcelain);border-color:var(--ink)}
+
+/* ============================================================
+   categories
+   ============================================================ */
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media (min-width:960px){.cats{grid-template-columns:repeat(4,1fr)}}
+.cat{position:relative;border-radius:var(--r-l);overflow:hidden;min-height:290px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;border:1px solid var(--line);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.cat:hover{transform:translateY(-6px);box-shadow:var(--sh-m)}
+.cat-art{position:absolute;inset:0;display:grid;place-items:center;transition:transform .7s var(--ease)}
+.cat-art svg{width:58%;opacity:.92}
+.cat:hover .cat-art{transform:scale(1.07)}
+.cat-scrim{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(253,251,247,.35) 70%,rgba(253,251,247,.9) 100%)}
+.cat-meta{position:relative;z-index:1}
+.cat-meta span{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep)}
+.cat-meta h3{font-family:var(--serif);font-size:1.65rem;font-weight:600;margin-top:.15rem}
+.cat-meta .cat-go{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);display:inline-flex;gap:.4rem;align-items:center;margin-top:.5rem;transition:gap .3s var(--ease)}
+.cat:hover .cat-meta .cat-go{gap:.75rem;color:var(--gold-deep)}
+
+/* ============================================================
+   the edit — tabs
+   ============================================================ */
+.tabs{display:flex;gap:.55rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.2rem}
+.tab{padding:.72rem 1.35rem;border-radius:99px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);font-weight:500;transition:all .3s var(--ease)}
+.tab.active{background:var(--ink);color:var(--porcelain);border-color:var(--ink)}
+.tab:hover:not(.active){border-color:var(--gold);color:var(--gold-deep)}
+
+/* ============================================================
+   story
+   ============================================================ */
+.story{background:var(--sand)}
+.story-grid{display:grid;gap:2.4rem;align-items:center}
+@media (min-width:920px){.story-grid{grid-template-columns:.9fr 1.1fr;gap:3.4rem}}
+.story-visual svg{width:100%;height:auto;filter:drop-shadow(0 24px 44px rgba(42,36,29,.12))}
+.pillars{display:grid;gap:1.35rem;margin-top:1.7rem}
+.pillar{display:flex;gap:1rem}
+.pillar .p-ic{flex-shrink:0;width:46px;height:46px;border-radius:50%;background:var(--porcelain);border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold-deep)}
+.pillar .p-ic svg{width:22px;height:22px}
+.pillar h4{font-family:var(--serif);font-size:1.28rem;font-weight:600;line-height:1.2}
+.pillar p{font-size:.86rem;color:var(--ink-soft);margin-top:.2rem;max-width:46ch}
+
+/* ============================================================
+   testimonials
+   ============================================================ */
+.testi{background:var(--porcelain);position:relative}
+.quotes{position:relative;max-width:800px;margin-inline:auto;text-align:center}
+.q-mark{font-family:var(--serif);font-size:7rem;line-height:.5;color:var(--gold-light);height:2.6rem;display:block;margin-bottom:.4rem}
+.q-track{position:relative;min-height:210px}
+.q-slide{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease);pointer-events:none}
+.q-slide.active{position:relative;opacity:1;transform:none;pointer-events:auto}
+.q-slide .stars{color:var(--gold);justify-content:center;display:flex;gap:2px;margin-bottom:1.1rem}
+.q-slide .stars svg{width:16px;height:16px}
+.q-text{font-family:var(--serif);font-size:clamp(1.35rem,3.4vw,2rem);line-height:1.36;font-weight:500;color:var(--ink)}
+.q-meta{margin-top:1.5rem;display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.q-avatar{width:48px;height:48px;border-radius:50%;background:var(--grad-gold);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:1.2rem;font-weight:600}
+.q-name{font-weight:500;font-size:.92rem}
+.q-role{font-size:.72rem;letter-spacing:.06em;color:var(--taupe);display:inline-flex;align-items:center;gap:.35rem}
+.q-role svg{width:14px;height:14px;color:var(--gold-deep)}
+.q-nav{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-top:2rem}
+.q-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);transition:border-color .3s,color .3s,background .3s}
+.q-arrow:hover{border-color:var(--gold);color:var(--gold-deep);background:var(--cream)}
+.q-dots{display:flex;gap:.5rem}
+.q-dot{width:8px;height:8px;border-radius:50%;background:var(--sand-deep);transition:width .35s var(--ease),background .35s}
+.q-dot.active{width:24px;border-radius:99px;background:var(--gold)}
+
+/* ============================================================
+   offer band
+   ============================================================ */
+.offer{background:linear-gradient(140deg,#2A241D 0%,#3B322A 100%);color:#F0E7D8;text-align:center;position:relative;overflow:hidden}
+.offer::before,.offer::after{content:"";position:absolute;border-radius:50%;filter:blur(10px)}
+.offer::before{width:280px;height:280px;background:radial-gradient(circle,rgba(230,206,150,.22),transparent 70%);top:-90px;left:-60px}
+.offer::after{width:320px;height:320px;background:radial-gradient(circle,rgba(194,112,138,.18),transparent 70%);bottom:-120px;right:-70px}
+.offer .wrap{position:relative;z-index:1}
+.offer h2{font-family:var(--serif);font-size:clamp(2.1rem,5.4vw,3.3rem);font-weight:500;line-height:1.05;color:#fff}
+.offer p{color:#C9BCA6;margin-top:1rem;max-width:44ch;margin-inline:auto;font-size:1rem}
+.news-form{display:flex;gap:.6rem;max-width:470px;margin:1.8rem auto 0;flex-wrap:wrap;justify-content:center}
+.news-form input{flex:1;min-width:220px;padding:1.05rem 1.35rem;border-radius:99px;border:1px solid rgba(230,206,150,.32);background:rgba(255,255,255,.06);color:#fff;font-size:.9rem;font-weight:300}
+.news-form input::placeholder{color:#A99E88}
+.news-form input:focus-visible{outline-color:var(--gold-light)}
+.news-note{margin-top:1rem;font-size:.72rem;color:#A99E88;letter-spacing:.04em}
+.news-success{font-family:var(--serif);font-size:1.5rem;color:var(--gold-light);margin-top:1.6rem}
+
+/* ============================================================
+   faq
+   ============================================================ */
+.faq{max-width:820px;margin-inline:auto}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;display:flex;justify-content:space-between;gap:1.2rem;align-items:center;text-align:left;padding:1.45rem 0;font-family:var(--serif);font-size:clamp(1.15rem,2.6vw,1.4rem);font-weight:600;color:var(--ink);transition:color .3s}
+.faq-item.open .faq-q{color:var(--gold-deep)}
+.fq-ic{flex-shrink:0;width:28px;height:28px;position:relative}
+.fq-ic::before,.fq-ic::after{content:"";position:absolute;background:currentColor;top:50%;left:50%;transition:transform .35s var(--ease)}
+.fq-ic::before{width:14px;height:1.5px;transform:translate(-50%,-50%)}
+.fq-ic::after{width:1.5px;height:14px;transform:translate(-50%,-50%)}
+.faq-item.open .fq-ic::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+.faq-a{overflow:hidden;max-height:0;transition:max-height .45s var(--ease)}
+.faq-a-inner{padding-bottom:1.45rem;color:var(--ink-soft);font-size:.94rem;line-height:1.7;max-width:66ch}
+
+/* ============================================================
+   footer
+   ============================================================ */
+.footer{background:var(--ink);color:#C6BAA6;padding-top:clamp(3rem,7vw,4.6rem)}
+.f-top{display:grid;gap:2.4rem}
+@media (min-width:760px){.f-top{grid-template-columns:1.5fr 1fr 1fr 1fr}}
+.f-brand h3{font-family:var(--serif);color:#fff;font-size:1.75rem;letter-spacing:.16em;text-transform:uppercase}
+.f-brand p{margin-top:.9rem;font-size:.86rem;max-width:34ch;color:#A99E88;line-height:1.7}
+.social{display:flex;gap:.55rem;margin-top:1.3rem}
+.social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;color:#C6BAA6;transition:border-color .3s,color .3s}
+.social a:hover{border-color:var(--gold);color:var(--gold-light)}
+.social svg{width:17px;height:17px}
+.f-col h5{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin-bottom:1.1rem;font-weight:500}
+.f-col a{display:block;font-size:.86rem;padding-block:.36rem;color:#B4A992;transition:color .3s,padding-left .3s}
+.f-col a:hover{color:var(--gold-light);padding-left:.25rem}
+.f-bottom{border-top:1px solid rgba(255,255,255,.09);margin-top:2.6rem;padding-block:1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.f-bottom .f-legal{font-size:.74rem;color:#8B8069;display:flex;gap:1.1rem;flex-wrap:wrap}
+.f-legal a:hover{color:var(--gold-light)}
+.pay{display:flex;gap:.4rem;flex-wrap:wrap}
+.pay span{font-size:.58rem;letter-spacing:.06em;font-weight:600;color:#C6BAA6;border:1px solid rgba(255,255,255,.14);border-radius:5px;padding:.32rem .5rem;background:rgba(255,255,255,.03)}
+
+/* ============================================================
+   toast + back to top
+   ============================================================ */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,150%);background:var(--ink);color:#F0E7D8;padding:.95rem 1.4rem;border-radius:99px;font-size:.82rem;display:flex;align-items:center;gap:.6rem;z-index:200;box-shadow:var(--sh-l);transition:transform .5s var(--ease);max-width:calc(100vw - 32px)}
+.toast.show{transform:translate(-50%,0)}
+.toast .t-ic{color:var(--gold-light);display:grid;place-items:center}
+.toast .t-ic svg{width:18px;height:18px}
+.totop{position:fixed;right:20px;bottom:22px;width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--porcelain);display:grid;place-items:center;z-index:70;opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease),background .3s;box-shadow:var(--sh-m)}
+.totop.show{opacity:1;transform:none}
+.totop:hover{background:var(--gold-deep)}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+
+<!-- announcement -->
+<div class="announce" aria-hidden="true">
+  <div class="announce-track" id="announceTrack"></div>
+</div>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <button class="icon-btn nav-toggle" id="menuOpen" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+        </button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#bestsellers">Bestsellers</a>
+          <a href="#edit" data-cat="skincare">Skincare</a>
+          <a href="#edit" data-cat="beauty">Beauty</a>
+          <a href="#edit" data-cat="hair">Hair</a>
+          <a href="#edit" data-cat="wellness">Wellness</a>
+          <a href="#story">About</a>
+        </nav>
+      </div>
+
+      <a href="#top" class="brand">Lu<span>è</span>re</a>
+
+      <div class="nav-right">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" id="cartOpen" aria-label="Open bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9h12l-1 11H7L6 9z"/><path d="M9 9V7a3 3 0 0 1 6 0v2" stroke-linecap="round"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- overlays / drawers -->
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer drawer-left" id="menuDrawer" aria-label="Menu" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="brand">Lu<span>è</span>re</span>
+    <button class="drawer-close" data-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav class="m-links" aria-label="Mobile">
+    <a href="#bestsellers" data-close>Bestsellers</a>
+    <a href="#edit" data-cat="skincare" data-close>Skincare</a>
+    <a href="#edit" data-cat="beauty" data-close>Beauty</a>
+    <a href="#edit" data-cat="hair" data-close>Hair Care</a>
+    <a href="#edit" data-cat="wellness" data-close>Wellness</a>
+    <a href="#story" data-close>Our story</a>
+    <a href="#faq" data-close>FAQ</a>
+  </nav>
+  <div class="m-foot">
+    <span>Free shipping over $75</span>
+    <span>30-day money-back guarantee</span>
+  </div>
+</aside>
+
+<aside class="drawer drawer-right" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true">
+  <div class="cart-head">
+    <h3>Your bag</h3>
+    <button class="drawer-close" data-close aria-label="Close bag">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="ship-bar" id="shipBar"></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-sub"><span class="cs-l">Subtotal</span><span class="cs-v" id="cartSubtotal">$0</span></div>
+    <p class="cart-note">Shipping &amp; taxes calculated at checkout.</p>
+    <button class="btn btn-gold" id="checkoutBtn">Proceed to checkout</button>
+  </div>
+</aside>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow" data-reveal>Clean luxury skincare &amp; beauty</span>
+          <h1 data-reveal style="transition-delay:.08s">The quiet luxury<br>of <em>luminous</em> skin.</h1>
+          <p class="hero-sub" data-reveal style="transition-delay:.16s">High-performance, clean formulas and considered beauty essentials — crafted for the modern ritual. Cruelty-free, dermatologist-tested, endlessly repurchased.</p>
+          <div class="hero-cta" data-reveal style="transition-delay:.24s">
+            <a href="#bestsellers" class="btn btn-primary">Shop bestsellers</a>
+            <a href="#edit" data-cat="skincare" class="btn btn-ghost">Explore skincare</a>
+          </div>
+          <div class="hero-proof" data-reveal style="transition-delay:.32s">
+            <span class="stars" aria-hidden="true"></span>
+            <span class="hp-text"><b>4.9/5</b> from 12,480 reviews</span>
+            <span class="divider"></span>
+            <span class="hp-text">Loved by <b>50,000+</b></span>
+          </div>
+        </div>
+
+        <div class="hero-visual" data-reveal style="transition-delay:.18s">
+          <svg viewBox="0 0 460 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LUÈRE signature serum">
+            <circle cx="366" cy="120" r="140" fill="#E6CE96" opacity=".24"/>
+            <circle cx="86" cy="424" r="120" fill="#ECD7D0" opacity=".42"/>
+            <!-- arch panel -->
+            <path d="M112 486 L112 202 A118 118 0 0 1 348 202 L348 486 Z" fill="#FFFDF9"/>
+            <path d="M112 486 L112 202 A118 118 0 0 1 348 202 L348 486" fill="none" stroke="#E5D9C7" stroke-width="1.5"/>
+            <!-- botanical sprig -->
+            <g stroke="#C2A15C" stroke-width="1.6" fill="none" opacity=".8" stroke-linecap="round">
+              <path d="M300 150 q34 26 40 92"/>
+            </g>
+            <g fill="#C2A15C" opacity=".72">
+              <ellipse cx="312" cy="172" rx="11" ry="4.4" transform="rotate(38 312 172)"/>
+              <ellipse cx="326" cy="198" rx="12" ry="4.6" transform="rotate(30 326 198)"/>
+              <ellipse cx="334" cy="226" rx="11" ry="4.4" transform="rotate(22 334 226)"/>
+            </g>
+            <g stroke="#C2A15C" stroke-width="1.5" fill="none" opacity=".6" stroke-linecap="round">
+              <path d="M150 430 q-20 -34 -14 -82"/>
+            </g>
+            <g fill="#C2A15C" opacity=".5">
+              <ellipse cx="132" cy="366" rx="10" ry="4" transform="rotate(-42 132 366)"/>
+              <ellipse cx="128" cy="392" rx="10" ry="4" transform="rotate(-30 128 392)"/>
+            </g>
+            <!-- serum bottle -->
+            <rect x="212" y="150" width="36" height="44" rx="13" fill="#C2A15C"/>
+            <rect x="221" y="157" width="10" height="30" rx="5" fill="#E6CE96" opacity=".75"/>
+            <rect x="203" y="194" width="54" height="22" rx="6" fill="#9F7C36"/>
+            <rect x="182" y="216" width="96" height="214" rx="28" fill="#DCE7DF"/>
+            <rect x="198" y="234" width="17" height="176" rx="8.5" fill="#ffffff" opacity=".32"/>
+            <rect x="200" y="300" width="60" height="92" rx="9" fill="#ffffff" opacity=".62"/>
+            <text x="230" y="352" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="34" font-weight="600" fill="#9F7C36">L</text>
+            <text x="230" y="374" text-anchor="middle" font-family="Jost,sans-serif" font-size="7.5" letter-spacing="2.6" fill="#9F7C36">LUÈRE</text>
+            <!-- floating dots -->
+            <circle cx="160" cy="150" r="5" fill="#C2A15C" opacity=".7"/>
+            <circle cx="352" cy="360" r="6" fill="#C2708A" opacity=".55"/>
+            <circle cx="110" cy="300" r="4" fill="#C2A15C" opacity=".5"/>
+          </svg>
+
+          <div class="float-chip chip-rating">
+            <span class="fc-star" aria-hidden="true"></span>
+            <div><b>4.9 rating</b><small>12,480 reviews</small></div>
+          </div>
+          <div class="float-chip chip-clean">
+            <span class="fc-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s6 3 6 9-3 9-6 9-6-3-6-9 6-9 6-9z"/><path d="M12 21V8" stroke-linecap="round"/></svg>
+            </span>
+            <div><b>Clean formula</b><small>Vegan &amp; cruelty-free</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST ============ -->
+  <section class="trust" aria-label="Why shop with us">
+    <div class="wrap">
+      <div class="trust-grid" id="trustGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ BEST SELLERS ============ -->
+  <section class="section" id="bestsellers">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="sh-copy">
+          <span class="eyebrow">Loved by thousands</span>
+          <h2>The bestsellers</h2>
+          <p class="lead">The formulas our community can't stop repurchasing.</p>
+        </div>
+        <a href="#edit" class="link-arrow">Shop all
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="rail" id="bestSellers"></div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="section" id="categories" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow center">Find your ritual</span>
+        <h2>Shop by category</h2>
+      </div>
+      <div class="cats" id="catGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ THE EDIT ============ -->
+  <section class="section" id="edit" style="background:var(--cream)">
+    <div class="wrap">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow center">Curated for you</span>
+        <h2>The edit</h2>
+        <p class="lead">Handpicked essentials for every step of your routine.</p>
+      </div>
+      <div class="tabs" id="tabs" data-reveal></div>
+      <div class="product-grid" id="editGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ STORY ============ -->
+  <section class="story section" id="story">
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="story-visual" data-reveal>
+          <svg viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The LUÈRE ritual">
+            <rect x="20" y="20" width="380" height="420" rx="26" fill="#FFFDF9"/>
+            <circle cx="120" cy="120" r="80" fill="#DCE7DF" opacity=".8"/>
+            <circle cx="300" cy="330" r="96" fill="#ECD7D0" opacity=".8"/>
+            <!-- jar -->
+            <ellipse cx="150" cy="300" rx="60" ry="9" fill="#2A241D" opacity=".07"/>
+            <rect x="98" y="180" width="104" height="40" rx="16" fill="#C2A15C"/>
+            <rect x="98" y="180" width="104" height="13" rx="6.5" fill="#E6CE96" opacity=".6"/>
+            <rect x="104" y="214" width="92" height="86" rx="18" fill="#DCE7DF"/>
+            <rect x="116" y="226" width="13" height="64" rx="6.5" fill="#fff" opacity=".3"/>
+            <text x="150" y="272" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="26" font-weight="600" fill="#9F7C36">L</text>
+            <!-- dropper -->
+            <ellipse cx="290" cy="340" rx="42" ry="7" fill="#2A241D" opacity=".07"/>
+            <rect x="278" y="150" width="26" height="34" rx="10" fill="#C2A15C"/>
+            <rect x="272" y="184" width="38" height="16" rx="5" fill="#9F7C36"/>
+            <rect x="258" y="200" width="66" height="130" rx="18" fill="#ECD7D0"/>
+            <rect x="270" y="214" width="11" height="102" rx="5.5" fill="#fff" opacity=".34"/>
+            <text x="291" y="280" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="24" font-weight="600" fill="#9F7C36">L</text>
+            <!-- sprig -->
+            <g stroke="#C2A15C" stroke-width="1.5" fill="none" opacity=".7" stroke-linecap="round"><path d="M210 120 q26 -6 44 14"/></g>
+            <g fill="#C2A15C" opacity=".6"><ellipse cx="232" cy="118" rx="10" ry="4" transform="rotate(-18 232 118)"/><ellipse cx="252" cy="126" rx="10" ry="4" transform="rotate(6 252 126)"/></g>
+          </svg>
+        </div>
+        <div class="story-copy">
+          <span class="eyebrow" data-reveal>Our promise</span>
+          <h2 class="section-head" style="margin:0" data-reveal><span style="font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,5.4vw,3.2rem);line-height:1.05;display:block;margin-top:.5rem">Beauty, considered.</span></h2>
+          <p data-reveal style="color:var(--ink-soft);margin-top:1rem;font-size:1rem;max-width:48ch">We make the products we couldn't find: effective actives, honest ingredient lists, and textures that turn skincare into the best part of your day.</p>
+          <div class="pillars">
+            <div class="pillar" data-reveal>
+              <span class="p-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 4v5c0 4.4-3 7.5-7 9-4-1.5-7-4.6-7-9V7l7-4z"/><path d="M9.5 12l2 2 3.5-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <div><h4>Clean, proven formulas</h4><p>Dermatologist-tested actives at effective concentrations. Nothing you don't need.</p></div>
+            </div>
+            <div class="pillar" data-reveal style="transition-delay:.08s">
+              <span class="p-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c5-3 8-7 8-11a4 4 0 0 0-8-1 4 4 0 0 0-8 1c0 4 3 8 8 11z"/></svg></span>
+              <div><h4>Consciously made</h4><p>Vegan, cruelty-free, and packaged with recyclable materials.</p></div>
+            </div>
+            <div class="pillar" data-reveal style="transition-delay:.16s">
+              <span class="p-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke-linecap="round"/></svg></span>
+              <div><h4>Ritual, not routine</h4><p>Textures and scents designed to make self-care something you look forward to.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="testi section" id="reviews">
+    <div class="wrap">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow center">Real results</span>
+        <h2>Loved by 50,000+</h2>
+      </div>
+      <div class="quotes" data-reveal>
+        <span class="q-mark" aria-hidden="true">&ldquo;</span>
+        <div class="q-track" id="qTrack"></div>
+        <div class="q-nav">
+          <button class="q-arrow" id="qPrev" aria-label="Previous review">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="q-dots" id="qDots"></div>
+          <button class="q-arrow" id="qNext" aria-label="Next review">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OFFER ============ -->
+  <section class="offer section" id="offer">
+    <div class="wrap">
+      <div data-reveal>
+        <span class="eyebrow center" style="color:var(--gold-light);justify-content:center;display:inline-flex">Join the maison</span>
+        <h2 style="margin-top:1rem">Enjoy 10% off<br>your first ritual.</h2>
+        <p>Be first to new launches, receive rituals worth savouring, and unlock your welcome offer.</p>
+        <form class="news-form" id="newsForm" novalidate>
+          <input type="email" id="newsEmail" placeholder="Your email address" aria-label="Email address" required />
+          <button type="submit" class="btn btn-gold">Claim 10% off</button>
+        </form>
+        <p class="news-note">No spam, only good skin days. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow center">Good to know</span>
+        <h2>Questions, answered</h2>
+      </div>
+      <div class="faq" id="faqList" data-reveal></div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <h3>Luère</h3>
+        <p>Clean luxury skincare, beauty &amp; wellness — crafted for the modern ritual.</p>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2.1 1.6 3.6 3.6 3.9v2.6c-1.3.1-2.5-.3-3.6-1v5.9c0 3.3-2.4 5.6-5.5 5.6-3 0-5.3-2.2-5.3-5.1 0-3 2.4-5.2 5.6-4.9v2.7c-.4-.1-.9-.2-1.3-.1-1.2.2-2 1.1-1.9 2.4.1 1.2 1 2 2.2 2 1.4 0 2.3-1 2.3-2.6V3H16z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9.5 20c-.4-1.3 0-3 .5-5 .5-2 .8-3.5.3-4.6-.4-.9-.2-2 .8-2.6 1.4-.9 3.4.2 3.4 2.3 0 1.6-1 3.4-1.7 3.4-.7 0-1.2-.6-1-1.3" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Shop</h5>
+        <a href="#bestsellers">Bestsellers</a>
+        <a href="#edit" data-cat="skincare">Skincare</a>
+        <a href="#edit" data-cat="beauty">Beauty</a>
+        <a href="#edit" data-cat="hair">Hair Care</a>
+        <a href="#edit" data-cat="wellness">Wellness</a>
+      </div>
+      <div class="f-col">
+        <h5>Help</h5>
+        <a href="#faq">Shipping</a>
+        <a href="#faq">Returns</a>
+        <a href="#">Track order</a>
+        <a href="#faq">FAQ</a>
+        <a href="#">Contact us</a>
+      </div>
+      <div class="f-col">
+        <h5>Maison</h5>
+        <a href="#story">Our story</a>
+        <a href="#story">Ingredients</a>
+        <a href="#story">Sustainability</a>
+        <a href="#">Journal</a>
+        <a href="#">Careers</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <div class="f-legal">
+        <span>© <span id="year"></span> Luère</span>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="pay" aria-label="Accepted payments">
+        <span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>APPLE&nbsp;PAY</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- toast + back to top -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="t-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5 9-11" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  <span id="toastMsg">Added to bag</span>
+</div>
+<button class="totop" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19V6M6 12l6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   LUÈRE — application (vanilla, no dependencies)
+   ============================================================ */
+(function(){
+  "use strict";
+  const $  = (s,c=document)=>c.querySelector(s);
+  const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
+  const money = n => '$' + (Number.isInteger(n) ? n : n.toFixed(2));
+
+  /* ---------- bespoke SVG product family ---------- */
+  const G='#C2A15C', GL='#E6CE96', GD='#9F7C36', ROSE='#C2708A';
+  const mono = (x,y,s)=>`<text x="${x}" y="${y}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="${s}" font-weight="600" fill="${GD}">L</text>`;
+  const shadow = (cx=80,rx=38)=>`<ellipse cx="${cx}" cy="190" rx="${rx}" ry="6" fill="#2A241D" opacity=".07"/>`;
+  const svgWrap = inner =>`<svg class="product" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${inner}</svg>`;
+
+  const SILHOUETTE = {
+    dropper:t=>svgWrap(`${shadow()}
+      <rect x="70" y="18" width="20" height="26" rx="8" fill="${G}"/>
+      <rect x="73" y="21" width="6" height="20" rx="3" fill="${GL}" opacity=".7"/>
+      <rect x="66" y="44" width="28" height="13" rx="3" fill="${GD}"/>
+      <rect x="56" y="57" width="48" height="119" rx="14" fill="${t}"/>
+      <rect x="62" y="65" width="9" height="100" rx="4.5" fill="#fff" opacity=".28"/>
+      <rect x="66" y="96" width="28" height="46" rx="4" fill="#fff" opacity=".55"/>${mono(80,124,17)}`),
+    jar:t=>svgWrap(`${shadow(80,40)}
+      <rect x="44" y="70" width="72" height="30" rx="12" fill="${G}"/>
+      <rect x="44" y="70" width="72" height="10" rx="5" fill="${GL}" opacity=".6"/>
+      <rect x="48" y="96" width="64" height="82" rx="16" fill="${t}"/>
+      <rect x="55" y="104" width="10" height="62" rx="5" fill="#fff" opacity=".26"/>
+      <rect x="66" y="124" width="28" height="32" rx="4" fill="#fff" opacity=".5"/>${mono(80,147,16)}`),
+    pump:t=>svgWrap(`${shadow()}
+      <rect x="74" y="18" width="12" height="16" rx="3" fill="${G}"/>
+      <rect x="86" y="21" width="15" height="6" rx="3" fill="${GD}"/>
+      <rect x="66" y="34" width="28" height="12" rx="3" fill="${GD}"/>
+      <rect x="52" y="46" width="56" height="130" rx="16" fill="${t}"/>
+      <rect x="59" y="54" width="10" height="110" rx="5" fill="#fff" opacity=".26"/>
+      <rect x="62" y="98" width="36" height="46" rx="4" fill="#fff" opacity=".5"/>${mono(80,126,17)}`),
+    mist:t=>svgWrap(`${shadow(80,34)}
+      <rect x="70" y="22" width="14" height="18" rx="3" fill="${G}"/>
+      <rect x="84" y="26" width="16" height="7" rx="3" fill="${GD}"/>
+      <rect x="66" y="40" width="24" height="12" rx="3" fill="${GD}"/>
+      <rect x="58" y="52" width="44" height="124" rx="11" fill="${t}"/>
+      <rect x="64" y="60" width="8" height="104" rx="4" fill="#fff" opacity=".26"/>
+      <rect x="66" y="98" width="28" height="48" rx="4" fill="#fff" opacity=".5"/>${mono(80,126,15)}`),
+    tube:t=>svgWrap(`${shadow(80,32)}
+      <rect x="66" y="22" width="28" height="18" rx="5" fill="${G}"/>
+      <rect x="66" y="22" width="28" height="7" rx="3" fill="${GL}" opacity=".6"/>
+      <rect x="54" y="40" width="52" height="128" rx="14" fill="${t}"/>
+      <rect x="54" y="160" width="52" height="9" rx="3" fill="${GD}" opacity=".45"/>
+      <rect x="61" y="52" width="9" height="96" rx="4" fill="#fff" opacity=".24"/>
+      <rect x="66" y="88" width="28" height="46" rx="4" fill="#fff" opacity=".5"/>${mono(80,116,16)}`),
+    compact:t=>svgWrap(`${shadow(80,40)}
+      <circle cx="80" cy="112" r="48" fill="${t}"/>
+      <circle cx="80" cy="112" r="48" fill="none" stroke="${G}" stroke-width="3"/>
+      <circle cx="80" cy="112" r="31" fill="#fff" opacity=".5"/>
+      <circle cx="80" cy="112" r="31" fill="none" stroke="${GL}" stroke-width="1.5"/>
+      <path d="M52 92 A48 48 0 0 1 108 92" stroke="#fff" stroke-opacity=".45" stroke-width="6" fill="none" stroke-linecap="round"/>${mono(80,120,20)}`),
+    lipstick:t=>svgWrap(`${shadow(80,30)}
+      <path d="M70 40 Q80 24 90 40 L90 60 L70 60 Z" fill="${ROSE}"/>
+      <rect x="66" y="60" width="28" height="22" rx="3" fill="${GL}"/>
+      <rect x="60" y="82" width="40" height="94" rx="11" fill="${t}"/>
+      <rect x="60" y="118" width="40" height="18" rx="3" fill="${G}"/>
+      <rect x="66" y="90" width="7" height="80" rx="3.5" fill="#fff" opacity=".26"/>${mono(80,160,15)}`)
+  };
+
+  /* ---------- catalog ---------- */
+  const TINT = { skincare:'#DCE7DF', beauty:'#ECD7D0', hair:'#ECD9BE', wellness:'#DEE3CE' };
+  const CAT_LABEL = { skincare:'Skincare', beauty:'Beauty', hair:'Hair Care', wellness:'Wellness' };
+
+  const PRODUCTS = [
+    // skincare
+    {id:'sk1',cat:'skincare',shape:'dropper',name:'Radiance Renewal Serum',desc:'Vitamin C + peptides for a lit-from-within glow.',price:58,was:72,rating:4.9,reviews:3120,badge:'Bestseller',best:true},
+    {id:'sk2',cat:'skincare',shape:'jar',name:'Hydra-Glow Moisture Cream',desc:'72-hour hyaluronic hydration, weightless finish.',price:46,rating:4.8,reviews:1890,best:true},
+    {id:'sk3',cat:'skincare',shape:'pump',name:'Gentle Rose Cleanser',desc:'Cream-to-foam cleanse that never strips.',price:32,rating:4.7,reviews:980},
+    {id:'sk4',cat:'skincare',shape:'tube',name:'Overnight Repair Mask',desc:'Wake to smoother, replenished skin.',price:40,was:50,rating:4.8,reviews:640,badge:'-20%',sale:true},
+    {id:'sk5',cat:'skincare',shape:'mist',name:'Brightening Essence Mist',desc:'A fine veil of niacinamide + rosewater.',price:36,rating:4.6,reviews:720,badge:'New',isNew:true},
+    // beauty
+    {id:'be1',cat:'beauty',shape:'compact',name:'Luminous Silk Highlighter',desc:'A soft-focus, second-skin glow.',price:34,rating:4.9,reviews:1240,badge:'Bestseller',best:true},
+    {id:'be2',cat:'beauty',shape:'lipstick',name:'Velvet Matte Lip',desc:'Cushiony colour that lasts all day.',price:28,rating:4.7,reviews:2050},
+    {id:'be3',cat:'beauty',shape:'pump',name:'Skin Perfecting Tint',desc:'Breathable coverage with skincare inside.',price:42,was:52,rating:4.6,reviews:810,badge:'-20%',sale:true},
+    {id:'be4',cat:'beauty',shape:'compact',name:'Rose Petal Blush',desc:'A wash of your-cheeks-but-better colour.',price:30,rating:4.8,reviews:560,badge:'New',isNew:true},
+    // hair
+    {id:'ha1',cat:'hair',shape:'dropper',name:'Silk Restore Hair Oil',desc:'Lightweight shine, zero grease.',price:44,rating:4.9,reviews:1670,badge:'Bestseller',best:true},
+    {id:'ha2',cat:'hair',shape:'jar',name:'Nourishing Repair Mask',desc:'Deep weekly treatment for tired lengths.',price:38,rating:4.7,reviews:720},
+    {id:'ha3',cat:'hair',shape:'mist',name:'Volumizing Root Mist',desc:'Body and lift from root to tip.',price:34,was:42,rating:4.6,reviews:430,badge:'-20%',sale:true},
+    {id:'ha4',cat:'hair',shape:'pump',name:'Botanical Shine Serum',desc:'Frizz-smoothing gloss in a drop.',price:40,rating:4.8,reviews:590,badge:'New',isNew:true},
+    // wellness
+    {id:'we1',cat:'wellness',shape:'dropper',name:'Beauty Sleep Elixir',desc:'Magnesium + botanicals for deep rest.',price:52,rating:4.9,reviews:1420,badge:'Bestseller',best:true},
+    {id:'we2',cat:'wellness',shape:'jar',name:'Collagen Glow Blend',desc:'Marine collagen for skin, hair & nails.',price:48,was:60,rating:4.8,reviews:980,badge:'-20%',sale:true},
+    {id:'we3',cat:'wellness',shape:'pump',name:'Calm Ritual Body Oil',desc:'Silken, fast-absorbing, quietly scented.',price:46,rating:4.7,reviews:610,badge:'New',isNew:true}
+  ];
+  const byId = id => PRODUCTS.find(p=>p.id===id);
+  const artFor = p => SILHOUETTE[p.shape](TINT[p.cat]);
+
+  /* ---------- stars ---------- */
+  const STAR='M12 2l2.9 6.1 6.7.6-5.1 4.5 1.6 6.6L12 17.3 5.9 20.4l1.6-6.6L2.4 9.3l6.7-.6z';
+  function stars(rating){
+    const full = Math.round(rating);
+    let out='';
+    for(let i=1;i<=5;i++){
+      out += `<svg viewBox="0 0 24 24" ${i<=full?'fill="currentColor"':'fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55"'}><path d="${STAR}"/></svg>`;
+    }
+    return out;
+  }
+
+  /* ---------- product card ---------- */
+  function cardHTML(p,i){
+    const badge = p.badge ? `<span class="badge ${p.sale?'sale':''} ${p.isNew?'new':''}">${p.badge}</span>` : '';
+    const oldPrice = p.was ? `<span class="price old">${money(p.was)}</span>` : '';
+    return `<article class="card" data-reveal style="transition-delay:${(i%4)*70}ms">
+      <div class="card-media" style="background:linear-gradient(160deg,#fff,${TINT[p.cat]})">
+        ${badge}
+        <button class="wish" data-wish aria-label="Save ${p.name} to wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c-5-3-8-7-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 4-3 8-8 11z"/></svg>
+        </button>
+        ${artFor(p)}
+      </div>
+      <div class="card-body">
+        <span class="card-cat">${CAT_LABEL[p.cat]}</span>
+        <h3 class="card-name">${p.name}</h3>
+        <p class="card-desc">${p.desc}</p>
+        <div class="rating"><span class="stars" aria-hidden="true">${stars(p.rating)}</span><span>${p.rating}</span><span class="r-count">(${p.reviews.toLocaleString()})</span></div>
+        <div class="price-row"><span class="price">${money(p.price)}</span>${oldPrice}</div>
+        <button class="add" data-add="${p.id}">Add to bag</button>
+      </div>
+    </article>`;
+  }
+
+  /* ---------- render sections ---------- */
+  $('#bestSellers').innerHTML = PRODUCTS.filter(p=>p.best).map(cardHTML).join('');
+
+  const TABS = ['skincare','beauty','hair','wellness'];
+  $('#tabs').innerHTML = TABS.map((c,i)=>`<button class="tab ${i===0?'active':''}" data-tab="${c}">${CAT_LABEL[c]}</button>`).join('');
+  function renderEdit(cat){
+    $('#editGrid').innerHTML = PRODUCTS.filter(p=>p.cat===cat).map(cardHTML).join('');
+    observeReveals($('#editGrid'));
+  }
+  function setTab(cat){
+    $$('#tabs .tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===cat));
+    renderEdit(cat);
+  }
+  $('#tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)setTab(b.dataset.tab);});
+  renderEdit('skincare');
+
+  /* categories */
+  const CATS=[
+    {cat:'skincare',shape:'dropper',tag:'Serums · Creams · Masks'},
+    {cat:'beauty',shape:'compact',tag:'Complexion · Lips · Cheeks'},
+    {cat:'hair',shape:'mist',tag:'Oils · Masks · Treatments'},
+    {cat:'wellness',shape:'jar',tag:'Supplements · Body · Sleep'}
+  ];
+  $('#catGrid').innerHTML = CATS.map((c,i)=>`
+    <a class="cat" href="#edit" data-cat="${c.cat}" data-reveal style="transition-delay:${i*70}ms;background:linear-gradient(160deg,#fff,${TINT[c.cat]})">
+      <div class="cat-art">${SILHOUETTE[c.shape](TINT[c.cat])}</div>
+      <div class="cat-scrim"></div>
+      <div class="cat-meta">
+        <span>${c.tag}</span>
+        <h3>${CAT_LABEL[c.cat]}</h3>
+        <span class="cat-go">Explore
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>`).join('');
+
+  /* trust */
+  const TRUST=[
+    {t:'Fast, tracked shipping',s:'Dispatched in 24h · 3–5 day delivery',ic:'<path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>'},
+    {t:'Secure checkout',s:'256-bit encrypted payments',ic:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke-linecap="round"/>'},
+    {t:'30-day money-back',s:'Love it, or your money back',ic:'<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v4h4" stroke-linecap="round" stroke-linejoin="round"/>'},
+    {t:'Cruelty-free & vegan',s:'Never tested on animals',ic:'<path d="M12 21c-5-3-8-7-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 4-3 8-8 11z"/>'}
+  ];
+  $('#trustGrid').innerHTML = TRUST.map(x=>`
+    <div class="trust-item">
+      <span class="ti-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">${x.ic}</svg></span>
+      <div><h4>${x.t}</h4><p>${x.s}</p></div>
+    </div>`).join('');
+
+  /* testimonials */
+  const REVIEWS=[
+    {name:'Sofia R.',role:'Verified buyer',rating:5,text:'My skin has never looked more luminous. The Radiance Serum is the only thing I\u2019ve repurchased three times in a row.'},
+    {name:'Amara K.',role:'Verified buyer',rating:5,text:'Everything feels considered — the textures, the scent, the packaging. It turned my evenings into an actual ritual.'},
+    {name:'Noa L.',role:'Verified buyer',rating:5,text:'Finally clean formulas that genuinely work. Three weeks in and the compliments haven\u2019t stopped.'},
+    {name:'Priya M.',role:'Verified buyer',rating:5,text:'The hair oil is pure magic — a single drop and my ends look salon-fresh. Nothing else comes close.'},
+    {name:'Elena V.',role:'Verified buyer',rating:5,text:'Worth every penny. It feels like the luxury brands at a fraction of the fuss, and the results speak for themselves.'}
+  ];
+  $('#qTrack').innerHTML = REVIEWS.map((r,i)=>`
+    <div class="q-slide ${i===0?'active':''}" data-slide="${i}">
+      <div class="stars" aria-hidden="true">${stars(r.rating)}</div>
+      <p class="q-text">${r.text}</p>
+      <div class="q-meta">
+        <span class="q-avatar">${r.name.charAt(0)}</span>
+        <span class="q-name">${r.name}</span>
+        <span class="q-role"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5 9-11" stroke-linecap="round" stroke-linejoin="round"/></svg>${r.role}</span>
+      </div>
+    </div>`).join('');
+  $('#qDots').innerHTML = REVIEWS.map((_,i)=>`<button class="q-dot ${i===0?'active':''}" data-dot="${i}" aria-label="Review ${i+1}"></button>`).join('');
+
+  let qi=0, qTimer;
+  const slides=$$('.q-slide'), dots=$$('.q-dot');
+  function goQ(n){
+    qi=(n+REVIEWS.length)%REVIEWS.length;
+    slides.forEach((s,i)=>s.classList.toggle('active',i===qi));
+    dots.forEach((d,i)=>d.classList.toggle('active',i===qi));
+  }
+  function autoQ(){clearInterval(qTimer);qTimer=setInterval(()=>goQ(qi+1),6000);}
+  $('#qPrev').addEventListener('click',()=>{goQ(qi-1);autoQ();});
+  $('#qNext').addEventListener('click',()=>{goQ(qi+1);autoQ();});
+  dots.forEach(d=>d.addEventListener('click',()=>{goQ(+d.dataset.dot);autoQ();}));
+  $('#qTrack').addEventListener('mouseenter',()=>clearInterval(qTimer));
+  $('#qTrack').addEventListener('mouseleave',autoQ);
+  autoQ();
+
+  /* faq */
+  const FAQ=[
+    {q:'How long does shipping take?',a:'Orders are dispatched within 24 hours on business days. Standard delivery arrives in 3–5 business days, with express options at checkout. Every order ships fully tracked, and you\u2019ll receive updates by email at each step.'},
+    {q:'What is your returns policy?',a:'We offer a 30-day money-back guarantee. If a product isn\u2019t right for you, contact our team for a full refund or exchange — even if it\u2019s been opened. Your glow should feel effortless, and so should shopping with us.'},
+    {q:'Are your products cruelty-free and vegan?',a:'Always. Luère is certified cruelty-free and every formula is 100% vegan. We never test on animals and we never work with suppliers who do.'},
+    {q:'What\u2019s inside your formulas?',a:'Clean, dermatologist-tested actives at concentrations that actually perform — no parabens, sulfates, or unnecessary fillers. Every ingredient list is published in full on each product page.'},
+    {q:'How do I choose the right products for me?',a:'Start with your primary concern — hydration, brightening, or smoothing — and build from there. Our edit is organised by category and step, and our team is happy to build a personalised routine over email.'},
+    {q:'Do you ship internationally?',a:'Yes, we ship to most countries worldwide. Duties and delivery times are shown at checkout based on your destination, so there are no surprises.'}
+  ];
+  $('#faqList').innerHTML = FAQ.map(f=>`
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">${f.q}<span class="fq-ic" aria-hidden="true"></span></button>
+      <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
+    </div>`).join('');
+  $('#faqList').addEventListener('click',e=>{
+    const q=e.target.closest('.faq-q'); if(!q) return;
+    const item=q.parentElement, a=item.querySelector('.faq-a'), open=item.classList.contains('open');
+    $$('.faq-item').forEach(it=>{it.classList.remove('open');it.querySelector('.faq-a').style.maxHeight=null;it.querySelector('.faq-q').setAttribute('aria-expanded','false');});
+    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';q.setAttribute('aria-expanded','true');}
+  });
+
+  /* announcement */
+  const ANN=['Complimentary shipping over <b>$75</b>','<b>30-day</b> money-back guarantee','Cruelty-free &amp; <b>vegan</b>','New in — <b>The Wellness Edit</b>'];
+  $('#announceTrack').innerHTML = (ANN.map(a=>`<span>${a}</span>`).join('')).repeat(2);
+
+  /* ---------- cart ---------- */
+  const FREE_SHIP = 75;
+  let cart = [];
+  const cartCountEl=$('#cartCount');
+
+  function cartTotal(){return cart.reduce((s,l)=>s+byId(l.id).price*l.qty,0);}
+  function cartQty(){return cart.reduce((s,l)=>s+l.qty,0);}
+
+  function renderCart(){
+    const qty=cartQty();
+    cartCountEl.textContent=qty;
+    cartCountEl.classList.toggle('show',qty>0);
+
+    const items=$('#cartItems');
+    if(!cart.length){
+      items.innerHTML=`<div class="cart-empty">
+        <svg class="ce-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 9h12l-1 11H7L6 9z"/><path d="M9 9V7a3 3 0 0 1 6 0v2" stroke-linecap="round"/></svg>
+        <p>Your bag is empty</p>
+        <button class="btn btn-ghost" data-close>Start shopping</button>
+      </div>`;
+    } else {
+      items.innerHTML = cart.map(l=>{
+        const p=byId(l.id);
+        return `<div class="c-item">
+          <div class="c-thumb" style="background:linear-gradient(160deg,#fff,${TINT[p.cat]})">${artFor(p)}</div>
+          <div class="c-info">
+            <span class="c-cat">${CAT_LABEL[p.cat]}</span>
+            <h5>${p.name}</h5>
+            <div class="c-qty">
+              <button data-dec="${p.id}" aria-label="Decrease quantity">&minus;</button>
+              <span>${l.qty}</span>
+              <button data-inc="${p.id}" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <div class="c-right">
+            <span class="c-price">${money(p.price*l.qty)}</span>
+            <button class="c-remove" data-rm="${p.id}">Remove</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    const total=cartTotal();
+    $('#cartSubtotal').textContent=money(total);
+
+    const remain=Math.max(0,FREE_SHIP-total);
+    const bar=$('#shipBar');
+    bar.innerHTML = remain>0
+      ? `Add <b>${money(remain)}</b> more for free shipping<div class="ship-track"><div class="ship-fill" style="width:${Math.min(100,total/FREE_SHIP*100)}%"></div></div>`
+      : `<b>You\u2019ve unlocked free shipping</b> \u2728<div class="ship-track"><div class="ship-fill" style="width:100%"></div></div>`;
+  }
+
+  function addToCart(id){
+    const line=cart.find(l=>l.id===id);
+    if(line) line.qty++; else cart.push({id,qty:1});
+    renderCart();
+    toast('Added to bag');
+  }
+
+  document.addEventListener('click',e=>{
+    const add=e.target.closest('[data-add]'); if(add){addToCart(add.dataset.add);return;}
+    const inc=e.target.closest('[data-inc]'); if(inc){const l=cart.find(x=>x.id===inc.dataset.inc);l.qty++;renderCart();return;}
+    const dec=e.target.closest('[data-dec]'); if(dec){const l=cart.find(x=>x.id===dec.dataset.dec);l.qty--;if(l.qty<1)cart=cart.filter(x=>x!==l);renderCart();return;}
+    const rm=e.target.closest('[data-rm]'); if(rm){cart=cart.filter(x=>x.id!==rm.dataset.rm);renderCart();return;}
+    const w=e.target.closest('[data-wish]'); if(w){w.classList.toggle('active');return;}
+  });
+  renderCart();
+
+  $('#checkoutBtn').addEventListener('click',()=>{
+    if(!cart.length){toast('Your bag is empty');return;}
+    toast('Demo storefront — connect your checkout to go live');
+  });
+
+  /* ---------- drawers ---------- */
+  const overlay=$('#overlay'), menu=$('#menuDrawer'), cartD=$('#cartDrawer');
+  function openDrawer(d){d.classList.add('open');d.setAttribute('aria-hidden','false');overlay.classList.add('open');document.body.style.overflow='hidden';}
+  function closeDrawers(){[menu,cartD].forEach(d=>{d.classList.remove('open');d.setAttribute('aria-hidden','true');});overlay.classList.remove('open');document.body.style.overflow='';}
+  $('#menuOpen').addEventListener('click',()=>openDrawer(menu));
+  $('#cartOpen').addEventListener('click',()=>openDrawer(cartD));
+  overlay.addEventListener('click',closeDrawers);
+  document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeDrawers();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawers();});
+
+  /* category nav links → open edit tab */
+  document.addEventListener('click',e=>{
+    const link=e.target.closest('[data-cat]'); if(!link) return;
+    setTab(link.dataset.cat);
+  });
+
+  /* ---------- newsletter ---------- */
+  $('#newsForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=$('#newsEmail').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Please enter a valid email');return;}
+    $('#newsForm').outerHTML='<p class="news-success">You\u2019re in \u2014 check your inbox for 10% off. \u2728</p>';
+  });
+
+  /* ---------- sticky nav + back to top ---------- */
+  const nav=$('#nav'), toTop=$('#toTop');
+  function onScroll(){
+    const y=window.scrollY;
+    nav.classList.toggle('scrolled',y>10);
+    toTop.classList.toggle('show',y>640);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  /* ---------- toast ---------- */
+  const toastEl=$('#toast'); let toastT;
+  function toast(msg){
+    $('#toastMsg').textContent=msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastT);
+    toastT=setTimeout(()=>toastEl.classList.remove('show'),2600);
+  }
+
+  /* ---------- scroll reveal ---------- */
+  let io;
+  if('IntersectionObserver' in window){
+    io=new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  }
+  function observeReveals(root=document){
+    if(!io){$$('[data-reveal]',root).forEach(el=>el.classList.add('in'));return;}
+    $$('[data-reveal]',root).forEach(el=>{if(!el.classList.contains('in'))io.observe(el);});
+  }
+  observeReveals();
+
+  /* ---------- fill decorative star clusters ---------- */
+  $$('.hero-proof .stars, .chip-rating .fc-star').forEach(el=>el.innerHTML=stars(5));
+
+  /* year */
+  $('#year').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
