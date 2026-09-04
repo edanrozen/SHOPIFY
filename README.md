@@ -44,7 +44,9 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 |---|---|
 | `assets/pluma.css` | Design tokens, typography, buttons, reveal animation, RTL rules |
 | `assets/pluma.js` | IntersectionObserver scroll reveal (progressive enhancement) |
-| `sections/pl-hero.liquid` | Hero |
+| `sections/pl-hero-full.liquid` | Full-bleed lifestyle hero (used on the homepage) |
+| `sections/pl-hero.liquid` | Split hero (alternative, kept available in the editor) |
+| `sections/pl-showcase.liquid` | "Dogs and cats" editorial band, two lifestyle images |
 | `sections/pl-marquee.liquid` | Trust ticker |
 | `sections/pl-products.liquid` | Product grid (hides ₪0 prices behind a "coming soon" pill) |
 | `sections/pl-problem.liquid` | Problem / stats |
@@ -67,7 +69,7 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 
 ## Before launch
 
-1. Replace the placeholder product photography (see `Product images` below).
+1. Confirm the photo mapping (see `Product images` below).
 2. Set real prices — then delete the `pre_launch` branch in `snippets/price.liquid`.
 3. Replace the sample testimonials in `templates/index.json` with real reviews.
 4. Fill in shipping, returns and privacy policies (linked from the footer).
@@ -75,6 +77,19 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 
 ## Product images
 
-The product photos are **temporary illustrations** generated for this preview, not the real
-product photography. Swap them in Shopify admin (Products → Media) or re-attach via the API
-once real images are hosted.
+Eight photos were uploaded to Shopify Files and wired up as follows:
+
+| File | Where it is used |
+|---|---|
+| `…17.24.23-2.jpg` | `pluma-nest` + `home-rest` collection |
+| `…17.24.24-3.jpg` | `pluma-glide-comb` |
+| `…17.24.24-2.jpg` | `pluma-clean-pro` + `grooming` collection |
+| `…17.24.24-4.jpg` | `pluma-clean-xl` |
+| `…17.29.26.jpg` | `pluma-dart` + `play` collection |
+| `…17.26.53.jpg` | Homepage hero background |
+| `…17.24.23.jpg` | Showcase band, image 1 |
+| `…17.24.24.jpg` | Showcase band, image 2 |
+
+The session could not fetch `cdn.shopify.com` (blocked by the environment's egress proxy), so
+the mapping was inferred from each file's pixel dimensions rather than from viewing the images.
+Verify it on the preview and swap in the theme editor / product media if anything is off.

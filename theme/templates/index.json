@@ -1,21 +1,22 @@
 {
   "sections": {
     "pl_hero": {
-      "type": "pl-hero",
+      "type": "pl-hero-full",
       "settings": {
-        "eyebrow": "טיפוח פרווה · כלים שנשארים",
+        "image": "shopify://shop_images/WhatsApp_Image_2026-09-04_at_17.26.53.jpg",
+        "focal": "center",
+        "height": 85,
+        "scrim": 60,
+        "eyebrow": "טיפוח פרווה לכלבים ולחתולים",
         "heading": "השיער נשאר עליהם. לא על הספה.",
-        "subheading": "כלי טיפוח שמורידים את הפרווה לפני שהיא מגיעה לרהיטים — בלי סוללות, בלי מילויים, ובלי רולר דביק שנגמר בדיוק כשצריך אותו.",
+        "subheading": "כלי טיפוח שמורידים את הפרווה לפני שהיא מגיעה לרהיטים — וכל מה שצריך כדי שהבית ייראה טוב גם עם חיה בפנים.",
         "cta_label": "לקולקציית הטיפוח",
-        "cta_link": "shopify://collections/grooming",
+        "cta_link": "/collections/grooming",
         "cta2_label": "איך זה עובד",
         "cta2_link": "#pl-ritual",
         "chip_1": "משלוח חינם מעל ₪199",
         "chip_2": "30 יום להתנסות בבית",
-        "chip_3": "אחריות שנתיים",
-        "collection": "grooming",
-        "badge_value": "4,000+",
-        "badge_label": "בתים בישראל כבר נקיים"
+        "chip_3": "אחריות שנתיים"
       }
     },
     "pl_marquee": {
@@ -35,10 +36,50 @@
         "heading": "כלים שנשארים בבית שנים",
         "body": "מעט מוצרים, וכל אחד נכנס לקטלוג רק אחרי שהוכיח שהוא פותר בעיה אמיתית — לא כי אפשר היה לייבא אותו בזול.",
         "link_label": "לכל המוצרים",
-        "link_url": "shopify://collections/grooming",
+        "link_url": "/collections/all",
         "price_placeholder": "המחיר יעודכן בקרוב",
         "card_cta": "לפרטים",
         "background": "#FBF9F5"
+      }
+    },
+    "pl_showcase": {
+      "type": "pl-showcase",
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "title": "לכלבים",
+            "text": "פרווה ארוכה, נשירה עונתית וכמות גדולה — הגליל הרחב והמסרק עושים את העבודה בפחות מעברים."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "title": "לחתולים",
+            "text": "פלומה דקה שנתקעת עמוק בסיבי הבד — השיניים הצפופות מוציאות אותה לפני שהיא מגיעה לספה."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "title": "ולבית שלכם",
+            "text": "מיטה, צעצוע וכלי טיפוח שנראים טוב בסלון — בלי פלסטיק צעקני ובלי התנצלויות."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "eyebrow": "כלב, חתול, או שניהם",
+        "heading": "בנוי לכלבים ולחתולים כאחד",
+        "body": "פרווה של כלב ופרווה של חתול מתנהגות אחרת לגמרי — אורך שונה, מרקם שונה, עונות נשירה שונות. בחרנו כלים שעובדים על שתיהן, כך שלא תצטרכו ערכה נפרדת לכל חיה בבית.",
+        "cta_label": "לכל הכלים",
+        "cta_link": "/collections/all",
+        "image_1": "shopify://shop_images/WhatsApp_Image_2026-09-04_at_17.24.23.jpg",
+        "image_2": "shopify://shop_images/WhatsApp_Image_2026-09-04_at_17.24.24.jpg"
       }
     },
     "pl_problem": {
@@ -69,7 +110,11 @@
           }
         }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "eyebrow": "למה בכלל",
         "heading": "כלב או חתול בבית = שיער בכל מקום",
@@ -101,13 +146,17 @@
           }
         }
       },
-      "block_order": ["r1", "r2", "r3"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
       "settings": {
         "eyebrow": "שגרה של שלוש דקות",
         "heading": "איך שומרים על בית בלי פרווה",
         "body": "לא צריך יותר זמן — צריך סדר פעולות. זו השגרה שאנחנו ממליצים עליה, ואפשר לעשות אותה מול הטלוויזיה.",
         "cta_label": "להרכיב ערכה",
-        "cta_link": "shopify://collections/grooming"
+        "cta_link": "/collections/grooming"
       }
     },
     "pl_bundle": {
@@ -118,7 +167,7 @@
         "heading": "ערכת הפרווה המלאה",
         "body": "שלושת הכלים שעושים את כל העבודה — סירוק, איסוף ותחזוקה. מי שקונה את שלושתם מפסיק לקנות רולרים דביקים לתמיד.",
         "cta_label": "לראות מה בפנים",
-        "cta_link": "shopify://collections/grooming",
+        "cta_link": "/collections/grooming",
         "note": "מחירי הערכה יפורסמו עם ההשקה"
       }
     },
@@ -153,7 +202,11 @@
           }
         }
       },
-      "block_order": ["v1", "v2", "v3"],
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
       "settings": {
         "eyebrow": "מה אומרים",
         "heading": "לקוחות שכבר הפסיקו לשאוב כל יום",
@@ -199,7 +252,13 @@
           }
         }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {
         "eyebrow": "שאלות שחוזרות",
         "heading": "כל מה ששואלים אותנו לפני שקונים",
@@ -226,6 +285,7 @@
     "pl_hero",
     "pl_marquee",
     "pl_products",
+    "pl_showcase",
     "pl_problem",
     "pl_ritual",
     "pl_bundle",
