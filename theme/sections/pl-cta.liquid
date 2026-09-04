@@ -1,0 +1,98 @@
+<section class="pl-cta pl-section">
+  <div class="pl-wrap">
+    <div class="pl-cta__inner pl-reveal">
+      {%- if section.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="pl-h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}<p class="pl-lede pl-cta__lede">{{ section.settings.body }}</p>{%- endif -%}
+
+      {%- form 'customer', class: 'pl-cta__form' -%}
+        <input type="hidden" name="contact[tags]" value="{{ section.settings.tag }}">
+        <label class="visually-hidden" for="pl-cta-email-{{ section.id }}">{{ section.settings.placeholder }}</label>
+        <div class="pl-field">
+          <input
+            id="pl-cta-email-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            placeholder="{{ section.settings.placeholder }}"
+            autocomplete="email"
+            required
+          >
+          <button type="submit" class="pl-btn pl-btn--solid pl-field__btn">{{ section.settings.button }}</button>
+        </div>
+
+        {%- if form.posted_successfully? -%}
+          <p class="pl-cta__msg pl-cta__msg--ok" role="status">{{ section.settings.success }}</p>
+        {%- elsif form.errors -%}
+          <p class="pl-cta__msg pl-cta__msg--err" role="alert">{{ form.errors.messages.email }}</p>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.note != blank -%}
+        <p class="pl-small pl-cta__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-cta { background: var(--pl-porcelain); }
+  .pl-cta__inner {
+    background: linear-gradient(155deg, var(--pl-cream) 0%, var(--pl-sand) 100%);
+    border-radius: var(--pl-r-l);
+    padding: clamp(34px, 5.4vw, 84px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pl-cta__lede { margin-inline: auto; }
+  .pl-cta__form { width: 100%; max-width: 34rem; margin-block-start: 32px; }
+  .pl-field {
+    display: flex;
+    gap: 8px;
+    background: var(--pl-white);
+    border-radius: var(--pl-r-pill);
+    padding: 6px;
+    box-shadow: var(--pl-sh-s);
+  }
+  .pl-field input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    padding-inline: 20px;
+    font-family: var(--pl-sans);
+    font-size: .97rem;
+    color: var(--pl-ink);
+  }
+  .pl-field input:focus { outline: none; }
+  .pl-field input::placeholder { color: var(--pl-taupe); }
+  .pl-field:focus-within { box-shadow: 0 0 0 2px var(--pl-clay); }
+  .pl-field__btn { padding: 15px 28px; white-space: nowrap; }
+  @media (max-width: 520px) {
+    .pl-field { flex-direction: column; border-radius: var(--pl-r-m); padding: 10px; }
+    .pl-field input { padding: 12px 14px; }
+  }
+  .pl-cta__msg { font-family: var(--pl-sans); font-size: .9rem; margin-block-start: 14px; }
+  .pl-cta__msg--ok { color: var(--pl-moss); }
+  .pl-cta__msg--err { color: var(--pl-clay-deep); }
+  .pl-cta__note { margin-block-start: 18px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Waitlist",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "רשימת המתנה" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "המחירים נסגרים בימים אלה" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "השאירו מייל ותהיו הראשונים לקבל את מחירי ההשקה, לפני שהם עולים — יחד עם מדריך קצר לשגרת טיפוח שעובדת." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "כתובת האימייל שלכם" },
+    { "type": "text", "id": "button", "label": "Button", "default": "לשמור לי מקום" },
+    { "type": "text", "id": "tag", "label": "Customer tag", "default": "waitlist" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "נרשמתם. נעדכן אתכם ראשונים." },
+    { "type": "text", "id": "note", "label": "Note", "default": "בלי ספאם. אפשר להסיר את עצמכם בקליק אחד." }
+  ],
+  "presets": [{ "name": "PLUMA · Waitlist" }]
+}
+{% endschema %}

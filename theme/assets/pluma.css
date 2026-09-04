@@ -1,0 +1,185 @@
+/* ==========================================================================
+   PLUMA — design system
+   Hebrew-first (RTL), warm-porcelain palette, serif display + humanist sans.
+   Scoped so it layers on top of Horizon without fighting it.
+   ========================================================================== */
+
+:root {
+  /* palette */
+  --pl-porcelain: #FBF9F5;
+  --pl-cream:     #F4EEE4;
+  --pl-sand:      #E9DECC;
+  --pl-sand-deep: #DCCDB4;
+  --pl-ink:       #1C1A17;
+  --pl-ink-soft:  #564F45;
+  --pl-taupe:     #8C8175;
+  --pl-line:      #E4DACB;
+  --pl-clay:      #B5643A;
+  --pl-clay-deep: #8E4A28;
+  --pl-moss:      #57644F;
+  --pl-white:     #FFFFFF;
+
+  /* type */
+  --pl-serif: 'Frank Ruhl Libre', 'Cormorant Garamond', Georgia, serif;
+  --pl-sans:  'Assistant', 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* rhythm */
+  --pl-wrap: 1280px;
+  --pl-gutter: clamp(20px, 5vw, 64px);
+  --pl-r-s: 10px;
+  --pl-r-m: 18px;
+  --pl-r-l: 28px;
+  --pl-r-pill: 999px;
+
+  /* elevation */
+  --pl-sh-s: 0 2px 10px rgba(28, 26, 23, .05);
+  --pl-sh-m: 0 14px 40px rgba(28, 26, 23, .09);
+  --pl-sh-l: 0 30px 70px rgba(28, 26, 23, .14);
+
+  /* motion */
+  --pl-ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Primitives
+   -------------------------------------------------------------------------- */
+.pl-section { padding-block: clamp(56px, 8vw, 118px); }
+.pl-wrap {
+  width: 100%;
+  max-width: var(--pl-wrap);
+  margin-inline: auto;
+  padding-inline: var(--pl-gutter);
+}
+
+.pl-eyebrow {
+  font-family: var(--pl-sans);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--pl-clay);
+  margin: 0 0 18px;
+}
+/* Hebrew has no case; heavy letter-spacing on Hebrew hurts legibility */
+.pl-eyebrow:lang(he) { letter-spacing: .1em; text-transform: none; }
+[dir="rtl"] .pl-eyebrow { letter-spacing: .1em; text-transform: none; }
+
+.pl-h1 {
+  font-family: var(--pl-serif);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+  line-height: 1.06;
+  letter-spacing: -.01em;
+  color: var(--pl-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+.pl-h2 {
+  font-family: var(--pl-serif);
+  font-weight: 500;
+  font-size: clamp(1.85rem, 4vw, 3.05rem);
+  line-height: 1.14;
+  color: var(--pl-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+.pl-h3 {
+  font-family: var(--pl-serif);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+  line-height: 1.25;
+  color: var(--pl-ink);
+  margin: 0;
+}
+.pl-lede {
+  font-family: var(--pl-sans);
+  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+  color: var(--pl-ink-soft);
+  margin: 20px 0 0;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+.pl-body {
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--pl-ink-soft);
+  margin: 0;
+}
+.pl-small {
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  line-height: 1.6;
+  color: var(--pl-taupe);
+  margin: 0;
+}
+
+/* buttons */
+.pl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--pl-sans);
+  font-size: .97rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 17px 34px;
+  border-radius: var(--pl-r-pill);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .35s var(--pl-ease), background-color .3s var(--pl-ease),
+              color .3s var(--pl-ease), border-color .3s var(--pl-ease), box-shadow .35s var(--pl-ease);
+}
+.pl-btn:focus-visible { outline: 2px solid var(--pl-clay); outline-offset: 3px; }
+.pl-btn--solid { background: var(--pl-ink); color: var(--pl-porcelain); }
+.pl-btn--solid:hover { background: var(--pl-clay); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
+.pl-btn--ghost { background: transparent; color: var(--pl-ink); border-color: var(--pl-sand-deep); }
+.pl-btn--ghost:hover { border-color: var(--pl-ink); transform: translateY(-2px); }
+.pl-btn--light { background: var(--pl-porcelain); color: var(--pl-ink); }
+.pl-btn--light:hover { background: var(--pl-white); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
+
+/* price placeholder (prices intentionally not published yet) */
+.pl-price-soon,
+.price--coming-soon {
+  display: inline-block;
+  font-family: var(--pl-sans);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--pl-clay);
+  background: rgba(181, 100, 58, .09);
+  border-radius: var(--pl-r-pill);
+  padding: 5px 13px;
+  white-space: nowrap;
+}
+
+/* scroll reveal */
+.pl-reveal { opacity: 0; transform: translateY(22px); }
+.pl-reveal.is-in { opacity: 1; transform: none; transition: opacity .85s var(--pl-ease), transform .85s var(--pl-ease); }
+@media (prefers-reduced-motion: reduce) {
+  .pl-reveal, .pl-reveal.is-in { opacity: 1; transform: none; transition: none; }
+  .pl-marquee__track { animation: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Theme-level overrides (preview theme only)
+   -------------------------------------------------------------------------- */
+body { background: var(--pl-porcelain); }
+
+/* Hebrew typography for Horizon's own templates (product, collection, cart) */
+h1, h2, h3, .h1, .h2, .h3 { font-family: var(--pl-serif); }
+body, button, input, select, textarea, p, li, a { font-family: var(--pl-sans); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

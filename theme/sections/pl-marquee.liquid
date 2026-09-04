@@ -1,0 +1,77 @@
+{%- liquid
+  assign items = section.settings.items | split: '|'
+-%}
+<section class="pl-marquee" style="--pl-marquee-speed: {{ section.settings.speed }}s;" aria-label="{{ section.settings.aria | escape }}">
+  <div class="pl-marquee__track" aria-hidden="false">
+    {%- for pass in (1..2) -%}
+      <ul class="pl-marquee__list" {% if pass == 2 %}aria-hidden="true"{% endif %}>
+        {%- for item in items -%}
+          <li>{{ item | strip }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-marquee {
+    background: var(--pl-ink);
+    color: var(--pl-porcelain);
+    padding-block: 16px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .pl-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: pl-marquee-scroll var(--pl-marquee-speed, 34s) linear infinite;
+  }
+  .pl-marquee:hover .pl-marquee__track { animation-play-state: paused; }
+  .pl-marquee__list {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pl-marquee__list li {
+    font-family: var(--pl-sans);
+    font-size: .85rem;
+    font-weight: 500;
+    letter-spacing: .02em;
+    white-space: nowrap;
+    padding-inline: 30px;
+    position: relative;
+  }
+  .pl-marquee__list li::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--pl-clay);
+    transform: translateY(-50%);
+  }
+  /* the strip scrolls right-to-left visually in both directions */
+  @keyframes pl-marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Ticker",
+  "tag": "section",
+  "settings": [
+    { "type": "textarea", "id": "items", "label": "Items (separate with |)", "default": "משלוח חינם מעל ₪199 | 30 יום להתנסות בבית | אחריות שנתיים על כל כלי | ללא סוללות וללא מילויים | תמיכה בעברית, אמיתית | משלוח מהיר מהמלאי בישראל" },
+    { "type": "range", "id": "speed", "label": "Loop duration (s)", "min": 15, "max": 80, "step": 5, "default": 40 },
+    { "type": "text", "id": "aria", "label": "Accessible label", "default": "יתרונות החנות" }
+  ],
+  "presets": [{ "name": "PLUMA · Ticker" }]
+}
+{% endschema %}

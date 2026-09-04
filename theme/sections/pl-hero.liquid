@@ -1,0 +1,191 @@
+{%- liquid
+  assign coll = collections[section.settings.collection]
+  assign hero_img = section.settings.image
+  if hero_img == blank and coll != blank
+    assign hero_img = coll.products.first.featured_image
+  endif
+-%}
+
+<section class="pl-hero pl-section" aria-labelledby="pl-hero-title-{{ section.id }}">
+  <div class="pl-wrap pl-hero__grid">
+    <div class="pl-hero__copy pl-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h1 class="pl-h1" id="pl-hero-title-{{ section.id }}">{{ section.settings.heading }}</h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="pl-lede">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="pl-hero__actions">
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="pl-btn pl-btn--solid">
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a href="{{ section.settings.cta2_link | default: '/collections/all' }}" class="pl-btn pl-btn--ghost">
+            {{ section.settings.cta2_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.chip_1 != blank or section.settings.chip_2 != blank or section.settings.chip_3 != blank -%}
+        <ul class="pl-hero__chips">
+          {%- if section.settings.chip_1 != blank %}<li>{{ section.settings.chip_1 }}</li>{% endif -%}
+          {%- if section.settings.chip_2 != blank %}<li>{{ section.settings.chip_2 }}</li>{% endif -%}
+          {%- if section.settings.chip_3 != blank %}<li>{{ section.settings.chip_3 }}</li>{% endif -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="pl-hero__media pl-reveal">
+      <div class="pl-hero__tile">
+        {%- if hero_img != blank -%}
+          <img
+            src="{{ hero_img | image_url: width: 1200 }}"
+            srcset="{{ hero_img | image_url: width: 600 }} 600w, {{ hero_img | image_url: width: 900 }} 900w, {{ hero_img | image_url: width: 1400 }} 1400w"
+            sizes="(max-width: 900px) 90vw, 46vw"
+            width="{{ hero_img.width }}"
+            height="{{ hero_img.height }}"
+            alt="{{ hero_img.alt | escape }}"
+            fetchpriority="high"
+            decoding="async"
+          >
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'pl-hero__placeholder' }}
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.badge_value != blank -%}
+        <div class="pl-hero__badge">
+          <span class="pl-hero__badge-value">{{ section.settings.badge_value }}</span>
+          <span class="pl-hero__badge-label">{{ section.settings.badge_label }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-hero { background: var(--pl-porcelain); overflow: clip; }
+  .pl-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(38px, 6vw, 72px);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .pl-hero__grid { grid-template-columns: 1.02fr .98fr; }
+  }
+  .pl-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-block-start: 34px;
+  }
+  .pl-hero__chips {
+    list-style: none;
+    margin: 34px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+  }
+  .pl-hero__chips li {
+    position: relative;
+    font-family: var(--pl-sans);
+    font-size: .87rem;
+    color: var(--pl-ink-soft);
+    padding-inline-start: 22px;
+  }
+  .pl-hero__chips li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: .42em;
+    width: 12px;
+    height: 7px;
+    border-inline-start: 2px solid var(--pl-clay);
+    border-block-end: 2px solid var(--pl-clay);
+    transform: rotate(-45deg);
+  }
+
+  .pl-hero__media { position: relative; }
+  .pl-hero__tile {
+    position: relative;
+    border-radius: var(--pl-r-l);
+    background: linear-gradient(150deg, var(--pl-cream) 0%, var(--pl-sand) 100%);
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    box-shadow: var(--pl-sh-m);
+  }
+  .pl-hero__tile img,
+  .pl-hero__tile .pl-hero__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+    transition: transform 1.2s var(--pl-ease);
+  }
+  .pl-hero__tile:hover img { transform: scale(1.045); }
+
+  .pl-hero__badge {
+    position: absolute;
+    inset-block-end: -22px;
+    inset-inline-start: -18px;
+    background: var(--pl-white);
+    border-radius: var(--pl-r-m);
+    padding: 18px 24px;
+    box-shadow: var(--pl-sh-l);
+    text-align: center;
+    min-width: 148px;
+  }
+  .pl-hero__badge-value {
+    display: block;
+    font-family: var(--pl-serif);
+    font-size: 1.85rem;
+    line-height: 1;
+    color: var(--pl-ink);
+  }
+  .pl-hero__badge-label {
+    display: block;
+    font-family: var(--pl-sans);
+    font-size: .78rem;
+    color: var(--pl-taupe);
+    margin-block-start: 6px;
+  }
+  @media (max-width: 899px) {
+    .pl-hero__badge { inset-inline-start: auto; inset-inline-end: -6px; inset-block-end: -18px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "השיער נשאר עליהם. לא על הספה." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "cta_label", "label": "Primary button", "default": "לקולקציית הטיפוח" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button", "default": "איך זה עובד" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary button link" },
+    { "type": "text", "id": "chip_1", "label": "Chip 1" },
+    { "type": "text", "id": "chip_2", "label": "Chip 2" },
+    { "type": "text", "id": "chip_3", "label": "Chip 3" },
+    { "type": "header", "content": "Visual" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "collection", "id": "collection", "label": "Fallback image from collection" },
+    { "type": "text", "id": "badge_value", "label": "Badge value" },
+    { "type": "text", "id": "badge_label", "label": "Badge label" }
+  ],
+  "presets": [{ "name": "PLUMA · Hero" }]
+}
+{% endschema %}

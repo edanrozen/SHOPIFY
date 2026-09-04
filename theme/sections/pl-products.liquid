@@ -1,0 +1,218 @@
+{%- liquid
+  assign coll = collections[section.settings.collection]
+  assign limit = section.settings.limit
+  assign products = coll.products
+  if coll == blank
+    assign products = collections.all.products
+  endif
+-%}
+
+<section class="pl-products pl-section" style="--pl-products-bg: {{ section.settings.background }};">
+  <div class="pl-wrap">
+    <header class="pl-products__head pl-reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="pl-h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.body != blank -%}<p class="pl-lede">{{ section.settings.body }}</p>{%- endif -%}
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a class="pl-products__all" href="{{ section.settings.link_url | default: coll.url | default: '/collections/all' }}">
+          {{ section.settings.link_label }}
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+            <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </header>
+
+    <ul class="pl-grid" role="list">
+      {%- for product in products limit: limit -%}
+        {%- liquid
+          assign media_first = product.featured_media
+          assign media_second = product.media[1]
+          assign badge = product.metafields.custom.badge | default: product.tags.first
+        -%}
+        <li class="pl-card pl-reveal" style="transition-delay: {{ forloop.index0 | times: 70 }}ms;">
+          <a class="pl-card__link" href="{{ product.url }}">
+            <div class="pl-card__media">
+              {%- if media_first != blank -%}
+                <img
+                  class="pl-card__img pl-card__img--front"
+                  src="{{ media_first | image_url: width: 800 }}"
+                  srcset="{{ media_first | image_url: width: 400 }} 400w, {{ media_first | image_url: width: 700 }} 700w, {{ media_first | image_url: width: 1000 }} 1000w"
+                  sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 30vw"
+                  width="{{ media_first.width }}" height="{{ media_first.height }}"
+                  alt="{{ media_first.alt | default: product.title | escape }}"
+                  loading="lazy" decoding="async"
+                >
+                {%- if media_second != blank -%}
+                  <img class="pl-card__img pl-card__img--back"
+                    src="{{ media_second | image_url: width: 800 }}"
+                    width="{{ media_second.width }}" height="{{ media_second.height }}"
+                    alt="" aria-hidden="true" loading="lazy" decoding="async">
+                {%- endif -%}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'pl-card__img' }}
+              {%- endif -%}
+
+              {%- if badge != blank -%}
+                <span class="pl-card__badge">{{ badge }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="pl-card__body">
+              <h3 class="pl-card__title">{{ product.title }}</h3>
+              {%- if product.type != blank -%}
+                <p class="pl-card__type">{{ product.type }}</p>
+              {%- endif -%}
+              <div class="pl-card__foot">
+                {%- if product.price > 0 -%}
+                  <span class="pl-card__price">{{ product.price | money }}</span>
+                {%- else -%}
+                  <span class="pl-price-soon">{{ section.settings.price_placeholder }}</span>
+                {%- endif -%}
+                <span class="pl-card__cta">{{ section.settings.card_cta }}</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      {%- else -%}
+        <li class="pl-body">אין עדיין מוצרים באוסף הזה.</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-products { background: var(--pl-products-bg, var(--pl-porcelain)); }
+  .pl-products__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-block-end: clamp(32px, 4vw, 52px);
+  }
+  .pl-products__head > div { max-width: 44rem; }
+  .pl-products__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--pl-sans);
+    font-size: .93rem;
+    font-weight: 600;
+    color: var(--pl-ink);
+    text-decoration: none;
+    border-block-end: 1px solid var(--pl-sand-deep);
+    padding-block-end: 6px;
+    transition: color .3s var(--pl-ease), border-color .3s var(--pl-ease);
+  }
+  .pl-products__all:hover { color: var(--pl-clay); border-color: var(--pl-clay); }
+  .pl-products__all svg { transition: transform .3s var(--pl-ease); }
+  /* arrow points toward the reading direction */
+  [dir="rtl"] .pl-products__all svg { transform: scaleX(-1); }
+  .pl-products__all:hover svg { transform: translateX(3px); }
+  [dir="rtl"] .pl-products__all:hover svg { transform: scaleX(-1) translateX(3px); }
+
+  .pl-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(18px, 2.4vw, 30px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (min-width: 760px)  { .pl-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .pl-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  .pl-card__link { display: block; text-decoration: none; color: inherit; }
+  .pl-card__media {
+    position: relative;
+    border-radius: var(--pl-r-m);
+    overflow: hidden;
+    background: linear-gradient(155deg, var(--pl-cream), var(--pl-sand));
+    aspect-ratio: 1 / 1;
+    transition: box-shadow .5s var(--pl-ease), transform .5s var(--pl-ease);
+  }
+  .pl-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity .55s var(--pl-ease), transform 1s var(--pl-ease);
+  }
+  .pl-card__img--back { opacity: 0; }
+  .pl-card__link:hover .pl-card__media { transform: translateY(-5px); box-shadow: var(--pl-sh-m); }
+  .pl-card__link:hover .pl-card__img--front { transform: scale(1.05); }
+  .pl-card__link:hover .pl-card__img--back { opacity: 1; transform: scale(1.05); }
+
+  .pl-card__badge {
+    position: absolute;
+    inset-block-start: 12px;
+    inset-inline-start: 12px;
+    background: rgba(251, 249, 245, .92);
+    backdrop-filter: blur(6px);
+    color: var(--pl-ink);
+    font-family: var(--pl-sans);
+    font-size: .72rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--pl-r-pill);
+  }
+
+  .pl-card__body { padding-block-start: 16px; }
+  .pl-card__title {
+    font-family: var(--pl-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--pl-ink);
+    margin: 0;
+  }
+  .pl-card__type {
+    font-family: var(--pl-sans);
+    font-size: .82rem;
+    color: var(--pl-taupe);
+    margin: 5px 0 0;
+  }
+  .pl-card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-block-start: 13px;
+  }
+  .pl-card__price { font-family: var(--pl-sans); font-weight: 600; color: var(--pl-ink); }
+  .pl-card__cta {
+    font-family: var(--pl-sans);
+    font-size: .82rem;
+    color: var(--pl-taupe);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .35s var(--pl-ease), transform .35s var(--pl-ease);
+  }
+  .pl-card__link:hover .pl-card__cta { opacity: 1; transform: none; }
+  @media (hover: none) { .pl-card__cta { opacity: 1; transform: none; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Product grid",
+  "tag": "section",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "הקולקציה" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "כלים שנשארים בבית שנים" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "מספר קטן של מוצרים, כל אחד נבחר כי הוא פותר בעיה אמיתית — ולא כי אפשר היה לייבא אותו בזול." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "לכל המוצרים" },
+    { "type": "url", "id": "link_url", "label": "Link URL" },
+    { "type": "text", "id": "price_placeholder", "label": "Price placeholder", "default": "המחיר יעודכן בקרוב" },
+    { "type": "text", "id": "card_cta", "label": "Card hover text", "default": "לפרטים ←" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FBF9F5" }
+  ],
+  "presets": [{ "name": "PLUMA · Product grid" }]
+}
+{% endschema %}
