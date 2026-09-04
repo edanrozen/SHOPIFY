@@ -1,0 +1,60 @@
+{%- liquid
+  assign source = collections[section.settings.collection]
+  if source == blank
+    for c in product.collections
+      if c.handle != 'frontpage' and c.products_count > 1
+        assign source = c
+        break
+      endif
+    endfor
+  endif
+  if source == blank
+    assign source = collections.all
+  endif
+-%}
+
+<section class="pl-related pl-section">
+  <div class="pl-wrap">
+    <header class="pl-rowhead pl-reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="pl-h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.body != blank -%}<p class="pl-lede">{{ section.settings.body }}</p>{%- endif -%}
+      </div>
+      <a class="pl-link" href="{{ source.url | default: '/collections/all' }}">{{ section.settings.link_label }}</a>
+    </header>
+
+    <ul class="pl-rail" role="list">
+      {%- assign count = 0 -%}
+      {%- for item in source.products -%}
+        {%- if item.id != product.id and count < section.settings.limit -%}
+          {%- assign count = count | plus: 1 -%}
+          <li class="pl-reveal" style="transition-delay: {{ forloop.index0 | times: 60 }}ms;">
+            {% render 'pl-card', product: item, price_placeholder: section.settings.price_placeholder %}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-related { background: var(--pl-porcelain); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Related products",
+  "tag": "section",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Source collection (optional)" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 10, "step": 1, "default": 6 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "משלימים את הערכה" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "לקוחות לקחו גם את אלה" },
+    { "type": "textarea", "id": "body", "label": "Body" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "לכל המוצרים" },
+    { "type": "text", "id": "price_placeholder", "label": "Price placeholder", "default": "המחיר יעודכן בקרוב" }
+  ],
+  "presets": [{ "name": "PLUMA · Related products" }]
+}
+{% endschema %}

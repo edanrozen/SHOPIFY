@@ -1,0 +1,71 @@
+{%- doc -%}
+  Product card used by every product listing in the theme.
+  @param {product} product
+  @param {string} [price_placeholder] - shown while the product has no price yet
+  @param {string} [cta] - hover label
+{%- enddoc -%}
+
+{%- liquid
+  assign media_first = product.featured_media
+  assign media_second = product.media[1]
+  assign badge = product.metafields.custom.badge.value
+  assign rating = product.metafields.custom.rating.value
+  assign rating_count = product.metafields.custom.rating_count.value
+  assign soon = price_placeholder | default: 'המחיר יעודכן בקרוב'
+  assign hover = cta | default: 'לפרטים'
+-%}
+
+<article class="pl-card">
+  <a class="pl-card__link" href="{{ product.url }}">
+    <div class="pl-card__media">
+      {%- if media_first != blank -%}
+        <img
+          class="pl-card__img pl-card__img--front"
+          src="{{ media_first | image_url: width: 800 }}"
+          srcset="{{ media_first | image_url: width: 400 }} 400w, {{ media_first | image_url: width: 700 }} 700w, {{ media_first | image_url: width: 1000 }} 1000w"
+          sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 28vw"
+          width="{{ media_first.preview_image.width }}"
+          height="{{ media_first.preview_image.height }}"
+          alt="{{ media_first.alt | default: product.title | escape }}"
+          loading="lazy" decoding="async"
+        >
+        {%- if media_second != blank -%}
+          <img class="pl-card__img pl-card__img--back"
+            src="{{ media_second | image_url: width: 800 }}"
+            width="{{ media_second.preview_image.width }}" height="{{ media_second.preview_image.height }}"
+            alt="" aria-hidden="true" loading="lazy" decoding="async">
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'pl-card__img' }}
+      {%- endif -%}
+
+      {%- if badge != blank -%}
+        <span class="pl-card__badge">{{ badge }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="pl-card__body">
+      {%- if rating != blank and rating.rating > 0 -%}
+        <span class="pl-card__rating">
+          {% render 'pl-stars', value: rating.rating, size: 13 %}
+          <span class="pl-card__rating-count">{{ rating.rating }} ({{ rating_count | default: 0 }})</span>
+        </span>
+      {%- endif -%}
+
+      <h3 class="pl-card__title">{{ product.title }}</h3>
+
+      {%- if product.type != blank -%}
+        <p class="pl-card__type">{{ product.type }}</p>
+      {%- endif -%}
+
+      <div class="pl-card__foot">
+        {%- if product.price > 0 -%}
+          <span class="pl-card__price">{{ product.price | money }}</span>
+        {%- else -%}
+          <span class="pl-price-soon">{{ soon }}</span>
+        {%- endif -%}
+        <span class="pl-card__cta">{{ hover }}</span>
+      </div>
+    </div>
+  </a>
+</article>

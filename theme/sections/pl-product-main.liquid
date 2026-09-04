@@ -1,0 +1,309 @@
+{%- liquid
+  assign rating = product.metafields.custom.rating.value
+  assign rating_count = product.metafields.custom.rating_count.value | default: 0
+  assign highlights = product.metafields.custom.highlights.value
+  assign for_pets = product.metafields.custom.for_pets.value
+  assign badge = product.metafields.custom.badge.value
+  assign has_price = false
+  if product.price > 0
+    assign has_price = true
+  endif
+
+  comment
+    The pitch falls back to the opening line of the description, which is the
+    product's hook, so every product page gets one without per product setup.
+  endcomment
+  assign pitch = section.settings.pitch
+  if pitch == blank and product.description != blank
+    assign pitch = product.description | split: '</p>' | first | strip_html | strip
+  endif
+-%}
+
+<section class="pl-pdp" id="pl-pdp-{{ section.id }}">
+  <div class="pl-wrap pl-pdp__grid">
+
+    <div class="pl-pdp__media">
+      <div class="pl-pdp__stage">
+        {%- if product.featured_media != blank -%}
+          <img
+            data-pl-stage
+            src="{{ product.featured_media | image_url: width: 1400 }}"
+            srcset="{{ product.featured_media | image_url: width: 700 }} 700w, {{ product.featured_media | image_url: width: 1100 }} 1100w, {{ product.featured_media | image_url: width: 1600 }} 1600w"
+            sizes="(max-width: 900px) 94vw, 52vw"
+            width="{{ product.featured_media.preview_image.width }}"
+            height="{{ product.featured_media.preview_image.height }}"
+            alt="{{ product.featured_media.alt | default: product.title | escape }}"
+            fetchpriority="high" decoding="async"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'pl-pdp__ph' }}
+        {%- endif -%}
+
+        {%- if badge != blank -%}<span class="pl-pdp__badge">{{ badge }}</span>{%- endif -%}
+      </div>
+
+      {%- if product.media.size > 1 -%}
+        <ul class="pl-pdp__thumbs" role="list">
+          {%- for media in product.media limit: 8 -%}
+            <li>
+              <button
+                type="button"
+                class="pl-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+                data-pl-thumb
+                data-src="{{ media | image_url: width: 1400 }}"
+                data-alt="{{ media.alt | default: product.title | escape }}"
+                aria-label="{{ 'תמונה ' | append: forloop.index }}"
+              >
+                <img src="{{ media | image_url: width: 220 }}" width="110" height="110" alt="" loading="lazy" decoding="async">
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="pl-pdp__info">
+      <nav class="pl-pdp__crumbs" aria-label="{{ 'ניווט' }}">
+        <a href="/">בית</a>
+        <span aria-hidden="true">/</span>
+        {%- if product.type != blank -%}
+          <a href="/collections/all">{{ product.type }}</a>
+          <span aria-hidden="true">/</span>
+        {%- endif -%}
+        <span>{{ product.title }}</span>
+      </nav>
+
+      <h1 class="pl-pdp__title">{{ product.title }}</h1>
+
+      {%- if rating != blank and rating.rating > 0 -%}
+        <a class="pl-pdp__rating" href="#pl-reviews">
+          {% render 'pl-stars', value: rating.rating, size: 16, label: 'דירוג ממוצע' %}
+          <span>{{ rating.rating }} מתוך 5</span>
+          <span class="pl-pdp__rating-count">{{ rating_count }} ביקורות</span>
+        </a>
+      {%- endif -%}
+
+      {%- if pitch != blank -%}
+        <p class="pl-pdp__pitch">{{ pitch }}</p>
+      {%- endif -%}
+
+      {%- if highlights != blank -%}
+        <ul class="pl-pdp__highlights">
+          {%- for item in highlights -%}<li>{{ item }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <div class="pl-pdp__buy">
+        {%- if has_price -%}
+          <p class="pl-pdp__price">{{ product.price | money }}</p>
+          {%- form 'product', product, class: 'pl-pdp__form' -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="pl-btn pl-btn--solid pl-pdp__submit" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+            </button>
+          {%- endform -%}
+        {%- else -%}
+          <p class="pl-pdp__price pl-pdp__price--soon">{{ section.settings.price_note }}</p>
+          {%- form 'customer', class: 'pl-pdp__form' -%}
+            <input type="hidden" name="contact[tags]" value="waitlist,{{ product.handle }}">
+            <label class="visually-hidden" for="pl-pdp-email-{{ section.id }}">{{ section.settings.email_placeholder }}</label>
+            <div class="pl-field">
+              <input id="pl-pdp-email-{{ section.id }}" type="email" name="contact[email]" placeholder="{{ section.settings.email_placeholder }}" autocomplete="email" required>
+              <button type="submit" class="pl-btn pl-btn--solid pl-field__btn">{{ section.settings.waitlist_label }}</button>
+            </div>
+            {%- if form.posted_successfully? -%}
+              <p class="pl-pdp__msg pl-pdp__msg--ok" role="status">{{ section.settings.success }}</p>
+            {%- elsif form.errors -%}
+              <p class="pl-pdp__msg pl-pdp__msg--err" role="alert">{{ form.errors.messages.email }}</p>
+            {%- endif -%}
+          {%- endform -%}
+        {%- endif -%}
+
+        {%- if section.settings.buy_note != blank -%}
+          <p class="pl-pdp__note">{{ section.settings.buy_note }}</p>
+        {%- endif -%}
+      </div>
+
+      <ul class="pl-pdp__trust" role="list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.text }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if for_pets != blank -%}
+        <p class="pl-pdp__pets">מתאים ל: <strong>{{ for_pets }}</strong></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('pl-pdp-{{ section.id }}');
+    if (!root) return;
+    var stage = root.querySelector('[data-pl-stage]');
+    var thumbs = root.querySelectorAll('[data-pl-thumb]');
+    if (!stage || !thumbs.length) return;
+
+    thumbs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        stage.src = btn.dataset.src;
+        stage.removeAttribute('srcset');
+        stage.alt = btn.dataset.alt || '';
+        thumbs.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+      });
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .pl-pdp { background: var(--pl-porcelain); padding-block: clamp(28px, 4vw, 60px) clamp(40px, 5vw, 76px); }
+  .pl-pdp__grid { display: grid; gap: clamp(28px, 4vw, 62px); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 900px) { .pl-pdp__grid { grid-template-columns: 1.05fr .95fr; } }
+  @media (min-width: 900px) { .pl-pdp__media { position: sticky; top: 96px; } }
+
+  .pl-pdp__stage {
+    position: relative;
+    border-radius: var(--pl-r-l);
+    overflow: hidden;
+    background: linear-gradient(155deg, var(--pl-cream), var(--pl-sand));
+    aspect-ratio: 1 / 1;
+  }
+  .pl-pdp__stage img, .pl-pdp__ph { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pl-pdp__badge {
+    position: absolute;
+    inset-block-start: 16px;
+    inset-inline-start: 16px;
+    background: rgba(251, 249, 245, .93);
+    backdrop-filter: blur(6px);
+    font-family: var(--pl-sans);
+    font-size: .75rem;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: var(--pl-r-pill);
+    color: var(--pl-ink);
+  }
+
+  .pl-pdp__thumbs { list-style: none; margin: 12px 0 0; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; }
+  .pl-pdp__thumb {
+    width: 74px; height: 74px;
+    padding: 0;
+    border: 1px solid var(--pl-line);
+    border-radius: var(--pl-r-s);
+    overflow: hidden;
+    background: var(--pl-cream);
+    cursor: pointer;
+    transition: border-color .3s var(--pl-ease), transform .3s var(--pl-ease);
+  }
+  .pl-pdp__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pl-pdp__thumb:hover { transform: translateY(-2px); }
+  .pl-pdp__thumb.is-active { border-color: var(--pl-clay); }
+
+  .pl-pdp__crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); }
+  .pl-pdp__crumbs a { color: var(--pl-taupe); text-decoration: none; }
+  .pl-pdp__crumbs a:hover { color: var(--pl-clay); }
+
+  .pl-pdp__title {
+    font-family: var(--pl-serif);
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+    line-height: 1.16;
+    color: var(--pl-ink);
+    margin: 14px 0 0;
+    text-wrap: balance;
+  }
+  .pl-pdp__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-start: 14px;
+    font-family: var(--pl-sans);
+    font-size: .88rem;
+    color: var(--pl-ink-soft);
+    text-decoration: none;
+  }
+  .pl-pdp__rating-count { color: var(--pl-taupe); border-block-end: 1px solid var(--pl-sand-deep); }
+  .pl-pdp__rating:hover .pl-pdp__rating-count { color: var(--pl-clay); border-color: var(--pl-clay); }
+
+  .pl-pdp__pitch {
+    font-family: var(--pl-sans);
+    font-size: 1.04rem;
+    line-height: 1.75;
+    color: var(--pl-ink-soft);
+    margin: 20px 0 0;
+    max-width: 48ch;
+  }
+  .pl-pdp__highlights { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
+  .pl-pdp__highlights li {
+    position: relative;
+    font-family: var(--pl-sans);
+    font-size: .95rem;
+    color: var(--pl-ink-soft);
+    padding-inline-start: 24px;
+  }
+  .pl-pdp__highlights li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: .45em;
+    width: 12px; height: 7px;
+    border-inline-start: 2px solid var(--pl-clay);
+    border-block-end: 2px solid var(--pl-clay);
+    transform: rotate(-45deg);
+  }
+
+  .pl-pdp__buy {
+    margin-block-start: 30px;
+    padding: clamp(20px, 2.4vw, 28px);
+    background: var(--pl-cream);
+    border-radius: var(--pl-r-l);
+  }
+  .pl-pdp__price { font-family: var(--pl-serif); font-size: 1.7rem; color: var(--pl-ink); margin: 0 0 16px; }
+  .pl-pdp__price--soon { font-family: var(--pl-sans); font-size: 1rem; font-weight: 600; color: var(--pl-clay); }
+  .pl-pdp__submit { width: 100%; }
+  .pl-pdp__msg { font-family: var(--pl-sans); font-size: .88rem; margin-block-start: 12px; }
+  .pl-pdp__msg--ok { color: var(--pl-moss); }
+  .pl-pdp__msg--err { color: var(--pl-clay-deep); }
+  .pl-pdp__note { font-family: var(--pl-sans); font-size: .82rem; color: var(--pl-taupe); margin: 14px 0 0; }
+
+  .pl-pdp__trust { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 14px; }
+  @media (min-width: 620px) { .pl-pdp__trust { grid-template-columns: repeat(3, 1fr); } }
+  .pl-pdp__trust li { display: grid; gap: 3px; padding-inline-start: 16px; border-inline-start: 2px solid var(--pl-sand); }
+  .pl-pdp__trust strong { font-family: var(--pl-sans); font-size: .88rem; color: var(--pl-ink); }
+  .pl-pdp__trust span { font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); line-height: 1.5; }
+  .pl-pdp__pets { font-family: var(--pl-sans); font-size: .86rem; color: var(--pl-ink-soft); margin: 22px 0 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Product main",
+  "tag": "section",
+  "settings": [
+    { "type": "textarea", "id": "pitch", "label": "Short pitch" },
+    { "type": "text", "id": "atc_label", "label": "Add to cart label", "default": "הוספה לסל" },
+    { "type": "text", "id": "price_note", "label": "Pre launch price note", "default": "המחיר יעודכן בקרוב. הצטרפו לרשימת ההמתנה וקבלו אותו ראשונים" },
+    { "type": "text", "id": "waitlist_label", "label": "Waitlist button", "default": "עדכנו אותי" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "כתובת האימייל שלכם" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "נרשמתם. נעדכן אתכם ראשונים." },
+    { "type": "text", "id": "buy_note", "label": "Note under the button", "default": "משלוח חינם מעל ₪199 · 30 יום להתנסות בבית" }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "PLUMA · Product main",
+    "blocks": [{ "type": "trust" }, { "type": "trust" }, { "type": "trust" }]
+  }]
+}
+{% endschema %}
