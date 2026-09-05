@@ -132,10 +132,12 @@
     position: absolute;
     inset-inline-start: 0;
     inset-block-start: .38em;
-    width: 12px;
-    height: 7px;
-    border-inline-start: 2.5px solid var(--pl-clay);
-    border-block-end: 2.5px solid var(--pl-clay);
+    width: 11px;
+    height: 6px;
+    /* A tick is a glyph, not a layout. Physical borders on purpose: mirroring
+       it under RTL turns the check into a chevron. */
+    border-left: 2.5px solid var(--pl-clay);
+    border-bottom: 2.5px solid var(--pl-clay);
     transform: rotate(-45deg);
   }
 {% endstylesheet %}

@@ -1,15 +1,27 @@
 {%- liquid
-  assign data = product.metafields.custom.reviews.value
-  assign items = data.items
-  assign avg = data.average | default: 0
-  assign total = data.count | default: items.size
+  comment
+    Reviews arrive in two metafields so a long list can grow without rewriting
+    the original one. The average and the total are derived from the merged
+    items rather than stored alongside them, so the summary can never drift
+    away from the reviews printed underneath it.
+  endcomment
+  assign items = product.metafields.custom.reviews.value.items
+  assign extra = product.metafields.custom.reviews_more.value.items
+  if items == blank
+    assign items = extra
+  elsif extra != blank
+    assign items = items | concat: extra
+  endif
 
+  assign total = items.size
+  assign sum = 0
   assign c5 = 0
   assign c4 = 0
   assign c3 = 0
   assign c2 = 0
   assign c1 = 0
   for r in items
+    assign sum = sum | plus: r.rating
     case r.rating
       when 5
         assign c5 = c5 | plus: 1
@@ -23,7 +35,15 @@
         assign c1 = c1 | plus: 1
     endcase
   endfor
+
+  assign avg = 0
+  if total > 0
+    assign avg = sum | times: 1.0 | divided_by: total | round: 1
+  endif
+
   assign shown = section.settings.initial | default: 6
+  assign step = section.settings.step | default: 10
+  assign remaining = total | minus: shown
 -%}
 
 {%- if items.size > 0 -%}
@@ -84,8 +104,14 @@
         {%- endfor -%}
 
         {%- if items.size > shown -%}
-          <button type="button" class="pl-btn pl-btn--ghost pl-rev__more" data-pl-more="{{ section.id }}">
-            {{ section.settings.more_label }}
+          <button
+            type="button"
+            class="pl-btn pl-btn--ghost pl-rev__more"
+            data-pl-more="{{ section.id }}"
+            data-pl-step="{{ step }}"
+            data-pl-label="{{ section.settings.more_label | escape }}"
+          >
+            {{ section.settings.more_label }} ({{ remaining }})
           </button>
         {%- endif -%}
       </div>
@@ -97,10 +123,23 @@
   (function () {
     var btn = document.querySelector('[data-pl-more="{{ section.id }}"]');
     if (!btn) return;
+    var list = document.getElementById('pl-rev-list-{{ section.id }}');
+    var step = parseInt(btn.getAttribute('data-pl-step'), 10) || 10;
+    var label = btn.getAttribute('data-pl-label');
+
+    // A long list is revealed a page at a time. Dropping sixty cards into the
+    // document at once costs a layout the phone can feel.
     btn.addEventListener('click', function () {
-      var list = document.getElementById('pl-rev-list-{{ section.id }}');
-      list.querySelectorAll('.pl-rev__item.is-hidden').forEach(function (el) { el.classList.remove('is-hidden'); });
-      btn.remove();
+      var hidden = list.querySelectorAll('.pl-rev__item.is-hidden');
+      for (var i = 0; i < step && i < hidden.length; i++) {
+        hidden[i].classList.remove('is-hidden');
+      }
+      var left = list.querySelectorAll('.pl-rev__item.is-hidden').length;
+      if (left === 0) {
+        btn.remove();
+      } else {
+        btn.textContent = label + ' (' + left + ')';
+      }
     });
   })();
 </script>
@@ -120,7 +159,7 @@
     top: 96px;
   }
   @media (max-width: 939px) { .pl-rev__summary { position: static; } }
-  .pl-rev__avg { font-family: var(--pl-serif); font-size: 3.4rem; line-height: 1; color: var(--pl-ink); margin: 0 0 10px; }
+  .pl-rev__avg { font-family: var(--pl-display); font-weight: 700; font-size: 3.4rem; line-height: 1; color: var(--pl-ink); margin: 0 0 10px; }
   .pl-rev__count { font-family: var(--pl-sans); font-size: .85rem; color: var(--pl-taupe); margin: 12px 0 0; }
   .pl-rev__bars { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 7px; }
   .pl-rev__bars li { display: grid; grid-template-columns: 14px 1fr 24px; align-items: center; gap: 10px; }
@@ -164,7 +203,8 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "מה אומרים הלקוחות" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "ביקורות על המוצר" },
     { "type": "range", "id": "initial", "label": "Reviews shown before expanding", "min": 3, "max": 12, "step": 1, "default": 6 },
-    { "type": "text", "id": "more_label", "label": "Show more label", "default": "להצגת כל הביקורות" },
+    { "type": "range", "id": "step", "label": "Reviews revealed per click", "min": 5, "max": 30, "step": 5, "default": 10 },
+    { "type": "text", "id": "more_label", "label": "Show more label", "default": "להצגת עוד ביקורות" },
     { "type": "textarea", "id": "note", "label": "Note under the summary", "default": "הביקורות מנוהלות דרך שדה מותאם במוצר. לפני ההשקה יש להחליף אותן בביקורות אמיתיות של לקוחות." }
   ],
   "presets": [{ "name": "PLUMA · Product reviews" }]

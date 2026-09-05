@@ -56,10 +56,19 @@
     background: var(--pl-clay);
     transform: translateY(-50%);
   }
-  /* the strip scrolls right-to-left visually in both directions */
+  /* The track is laid out by the page direction, so the two directions need
+     opposite translations. In LTR the copy sits to the right of the window and
+     is pulled left; in RTL it sits to the left and is pushed right. Using the
+     LTR keyframes in RTL walks the whole strip off screen and leaves an empty
+     band, which is what happened before. */
   @keyframes pl-marquee-scroll {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
+  }
+  [dir="rtl"] .pl-marquee__track { animation-name: pl-marquee-scroll-rtl; }
+  @keyframes pl-marquee-scroll-rtl {
+    from { transform: translateX(0); }
+    to   { transform: translateX(50%); }
   }
 {% endstylesheet %}
 

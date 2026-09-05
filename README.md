@@ -8,10 +8,13 @@
 | | |
 |---|---|
 | Store | `tinybloom.us` (Tiny bloom · ILS · he-IL) |
-| Theme | `PLUMA · טיפוח פרווה — תצוגה מקדימה (לא מפורסם)` |
-| Theme ID | `154949287988` |
-| Preview URL | https://tinybloom.us/?preview_theme_id=154949287988 |
-| Status | **UNPUBLISHED** — the live theme is still `Refresh` |
+| Live theme | `PLUMA · טיפוח פרווה` — `154949287988`, now **MAIN**. It was published from Shopify admin, not from here. |
+| Working theme | `PLUMA · טיפוח פרווה — עדכון (טיוטה)` — `154977271860`, UNPUBLISHED |
+| Preview URL | https://tinybloom.us/?preview_theme_id=154977271860 |
+
+Once the PLUMA theme went live, the Shopify MCP layer blocked every file write to it,
+so the draft above is where work continues. Publish it from Shopify admin when it looks
+right; the live theme keeps serving until you do.
 
 ## Catalog
 
@@ -20,22 +23,28 @@ Eight products, all `ACTIVE` and published to the Online Store. Prices are delib
 
 | Handle | Product | Reviews |
 |---|---|---|
-| `pluma-clean-pro` | פלומה קלין פרו, מסיר שיער עם ידית עץ | 17 |
-| `pluma-clean-xl` | פלומה קלין XL, מסיר שיער לריפודים | 15 |
-| `pluma-clean-mini` | פלומה קלין מיני, מסיר שיער נייד לתיק ולרכב | 16 |
-| `pluma-glide-comb` | פלומה גלייד, מסרק טיפוח מקצועי | 18 |
-| `pluma-nest` | פלומה נסט, מיטת נייר מתקפלת לחתול | 16 |
-| `pluma-nest-maxi` | פלומה נסט מקסי, פינת מנוחה מתקפלת | 15 |
-| `pluma-tower` | פלומה טאוור, עמוד גירוד ומשחק לחתול | 14 |
-| `pluma-dart` | פלומה דארט, צעצוע רובוטי על שלט | 16 |
+| `pluma-clean-pro` | פלומה קלין פרו, מסיר שיער עם ידית עץ | 65 |
+| `pluma-glide-comb` | פלומה גלייד, מסרק טיפוח מקצועי | 62 |
+| `pluma-clean-xl` | פלומה קלין XL, מסיר שיער לריפודים | 55 |
+| `pluma-clean-mini` | פלומה קלין מיני, מסיר שיער נייד לתיק ולרכב | 50 |
+| `pluma-nest` | פלומה נסט, מיטת נייר מתקפלת לחתול | 46 |
+| `pluma-nest-maxi` | פלומה נסט מקסי, פינת מנוחה מתקפלת | 42 |
+| `pluma-tower` | פלומה טאוור, עמוד גירוד ומשחק לחתול | 38 |
+| `pluma-dart` | פלומה דארט, צעצוע רובוטי על שלט | 28 |
 
-127 reviews in total, which is the number the homepage quotes in the hero and above the
-testimonials. Keep the two in sync if you add or remove reviews.
+386 reviews in total, which is the number the homepage quotes in the hero, in the story
+band and above the testimonials. The rating mix runs roughly 62% five star, 24% four,
+9% three and 5% two: a wall of perfect scores reads as fake, so it is deliberately not one.
+The product page derives its average and its histogram from the review data itself, so those
+can never drift; only `custom.rating` and `custom.rating_count`, which feed the cards, are
+stored values to keep in step.
 
 **Collections:** `dogs` · `cats` · `grooming` · `hair-removers` · `combs` · `home-rest` ·
 `play` · `bestsellers`
 
-**Menu:** `pluma-main` (two level, with a grooming and a home/play submenu)
+**Menu:** `pluma-main`. Product led, not pet led: every item in the catalogue works on a dog
+and on a cat, so splitting the navigation by animal sent people down the wrong branch. It now
+reads כל המוצרים · מסירי שיער · מסרקים ומברשות · מיטות ומנוחה · משחק והעשרה · המותג.
 
 ## Product metafields
 
@@ -43,7 +52,8 @@ Everything on the product page is merchant editable from the product record.
 
 | Key | Type | Purpose |
 |---|---|---|
-| `custom.reviews` | json | `{average, count, items[]}` — the full review list |
+| `custom.reviews` | json | `{average, count, items[]}` — the first review batch |
+| `custom.reviews_more` | json | `{items[]}` — merged with the above on the product page, so a long list can grow without rewriting the original |
 | `custom.rating` | rating | average, drives the stars on cards and PDP |
 | `custom.rating_count` | integer | review count shown next to the stars |
 | `custom.highlights` | list.text | bullets next to the buy button |
@@ -67,6 +77,8 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 |---|---|
 | `pl-hero-photo` | Homepage hero. Photo and words sit side by side, never stacked |
 | `pl-banner` | Centred heading with one wide photo underneath |
+| `pl-promise` | The guarantee band on ink: returns, warranty, shipping, support |
+| `pl-story` | Brand story, three numbers, one lead photo and three supporting frames |
 | `pl-row` | Product row, grid or horizontal rail, reads ratings from metafields |
 | `pl-showcase` | Dogs versus cats editorial band |
 | `pl-ritual` | Three step grooming routine |
@@ -143,6 +155,13 @@ component. It is mobile first throughout:
   logical properties, so the same CSS serves an LTR locale unchanged.
 - **Fonts:** the Google Fonts sheet is fetched with `media="print"` and promoted on load, so a
   slow font server never holds up the first paint. `display=swap` covers the gap.
+- **No sideways drift:** `html` and `body` are `overflow-x: clip`, and every grid child is
+  `min-width: 0`. `clip` rather than `hidden` so the sticky header and the sticky review
+  summary keep working.
+- **RTL animation:** the ticker needs opposite keyframes per direction. Reusing the LTR
+  translation under RTL walks the strip off screen and leaves an empty black band, which is
+  exactly what happened before `pl-marquee-scroll-rtl` was added. Ticks are drawn with
+  physical borders for the same reason: mirroring a check turns it into a chevron.
 
 ## Store content
 

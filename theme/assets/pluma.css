@@ -185,6 +185,15 @@
 /* --------------------------------------------------------------------------
    Theme level defaults
    -------------------------------------------------------------------------- */
+/* The page must never drift sideways on a phone. `clip` rather than `hidden`
+   so the sticky header and the sticky review summary keep working. */
+html { overflow-x: clip; }
+@supports not (overflow: clip) { html { overflow-x: hidden; } }
+body { overflow-x: clip; max-width: 100%; }
+/* Grid and flex children default to min-width:auto, which is the usual reason
+   a long word or a wide image pushes the page wider than the screen. */
+.pl-grid > *, .pl-rowhead > *, .pl-heroP__grid > *, .pl-rev__grid > * { min-width: 0; }
+
 body { background: var(--pl-porcelain); -webkit-font-smoothing: antialiased; }
 h1, h2, h3, .h1, .h2, .h3 { font-family: var(--pl-display); letter-spacing: -.01em; }
 body, button, input, select, textarea, p, li, a { font-family: var(--pl-sans); }
