@@ -30,12 +30,15 @@
   </script>
 {%- endif -%}
 
-{%- comment -%} Hebrew-capable display + text pairing. {%- endcomment -%}
+{%- comment -%}
+  Rubik for headlines, Assistant for text. Both are drawn for Hebrew, so the
+  page never falls back to a Latin face with patched Hebrew glyphs.
+{%- endcomment -%}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;600&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rubik:wght@500;600;700&display=swap"
 >
 
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
