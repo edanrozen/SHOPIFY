@@ -103,20 +103,21 @@ Hebrew webfonts), `snippets/price.liquid` (waitlist label while a price is `0`),
 
 ## Product images
 
-Eleven photos live in Shopify Files and are wired up as follows.
+Twelve photos live in Shopify Files and are wired up as follows.
 
 | File | Where it is used |
 |---|---|
-| `IMG-0629.png` | Homepage hero, the cat and dog shot that opens the site |
+| `IMG-0633.png` | Homepage hero, the cat and dog shot that opens the site |
 | `IMG-0631.png` | "הפתרונות שלנו לאהבה שלכם" banner, the whole range in one frame |
 | `IMG-0627.png` | Showcase band, image 1 |
+| `IMG-0629.png` | Showcase band, image 2 |
 | `…17.24.24-2.jpg` | `pluma-clean-pro`, `grooming` cover |
 | `…17.24.24-4.jpg` | `pluma-clean-xl`, `bestsellers` cover |
 | `…17.24.24.jpg` | `pluma-clean-mini` |
 | `…17.24.24-3.jpg` | `pluma-glide-comb`, `combs` cover |
 | `…17.24.23-2.jpg` | `pluma-nest`, `home-rest` cover |
 | `…17.24.23.jpg` | `pluma-nest-maxi` |
-| `…17.26.53.jpg` | `pluma-tower`, and showcase band image 2 |
+| `…17.26.53.jpg` | `pluma-tower` |
 | `…17.29.26.jpg` | `pluma-dart`, `play` cover |
 
 The session could not fetch `cdn.shopify.com` (blocked by the environment's egress proxy), so the
@@ -140,3 +141,11 @@ component. It is mobile first throughout:
   theme. The only thing that overlays a photo is the small solid badge pill on a product card.
 - **RTL:** direction is stamped on `<html>` in the head before first paint, and every rule uses
   logical properties, so the same CSS serves an LTR locale unchanged.
+- **Fonts:** the Google Fonts sheet is fetched with `media="print"` and promoted on load, so a
+  slow font server never holds up the first paint. `display=swap` covers the gap.
+
+## Store content
+
+The shop pages the theme links to are written in Hebrew: `contact` (דברו איתנו), `about`
+(מי אנחנו), `faq` (שאלות נפוצות) and `shipping-returns` (משלוחים והחזרות). The `pluma-main`
+menu opens with a כל המוצרים entry so the whole catalog is one tap away on a phone.

@@ -3,8 +3,8 @@
     "hero": {
       "type": "pl-hero-photo",
       "settings": {
-        "image": "shopify://shop_images/IMG-0629.png",
-        "image_alt": "כלב וחתול בבית",
+        "image": "shopify://shop_images/IMG-0633.png",
+        "image_alt": "כלב לברדור וחתול טאבי שוכבים צמודים על שטיח בכניסה לבית",
         "eyebrow": "מותג טיפוח חיות המחמד הגדול בארץ",
         "heading": "הם נשארים. השיער שלהם לא.",
         "subheading": "כלי טיפוח שמורידים את הפרווה מהכלב ומהחתול לפני שהיא מגיעה לספה, למיטה ולבגדים.",
@@ -72,7 +72,7 @@
         "body": "אורך שונה, מרקם שונה, עונות נשירה שונות. בחרנו כלים שעובדים על שתיהן.",
         "cta_label": "הכל לחתול", "cta_link": "/collections/cats",
         "image_1": "shopify://shop_images/IMG-0627.png",
-        "image_2": "shopify://shop_images/WhatsApp_Image_2026-09-04_at_17.26.53.jpg"
+        "image_2": "shopify://shop_images/IMG-0629.png"
       }
     },
     "ritual": {

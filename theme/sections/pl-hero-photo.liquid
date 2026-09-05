@@ -16,7 +16,7 @@
           <source
             media="(max-width: 749px)"
             srcset="{{ img_m | image_url: width: 700 }} 700w, {{ img_m | image_url: width: 1100 }} 1100w"
-            sizes="100vw"
+            sizes="92vw"
           >
           <img
             src="{{ img | image_url: width: 1400 }}"
@@ -79,14 +79,16 @@
   .pl-heroP__grid { display: grid; gap: clamp(22px, 4vw, 52px); align-items: center; }
   @media (min-width: 900px) { .pl-heroP__grid { grid-template-columns: 1fr 1fr; } }
 
+  /* The hero photograph is landscape, so the crop stays wide at every width
+     instead of squeezing the two animals out of frame on a phone. */
   .pl-heroP__media {
     border-radius: var(--pl-r-l);
     overflow: hidden;
     background: var(--pl-cream);
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
   }
-  @media (min-width: 600px) { .pl-heroP__media { aspect-ratio: 16 / 11; } }
-  @media (min-width: 900px) { .pl-heroP__media { aspect-ratio: 5 / 6; } }
+  @media (min-width: 600px) { .pl-heroP__media { aspect-ratio: 3 / 2; } }
+  @media (min-width: 900px) { .pl-heroP__media { aspect-ratio: 4 / 3; } }
   .pl-heroP__media img, .pl-heroP__ph { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .pl-heroP__copy { display: block; }
