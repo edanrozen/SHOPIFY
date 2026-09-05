@@ -30,7 +30,7 @@
     <ul class="{{ list_class }}" role="list">
       {%- for product in products limit: section.settings.limit -%}
         <li class="pl-reveal" style="transition-delay: {{ forloop.index0 | times: 60 }}ms;">
-          {% render 'pl-card', product: product, price_placeholder: section.settings.price_placeholder, cta: section.settings.card_cta %}
+          {% render 'pl-card', product: product, cta: section.settings.card_cta %}
         </li>
       {%- else -%}
         <li class="pl-body">האוסף הזה עדיין ריק.</li>
@@ -67,7 +67,6 @@
     { "type": "textarea", "id": "body", "label": "Body" },
     { "type": "text", "id": "link_label", "label": "Link label", "default": "לכל המוצרים" },
     { "type": "url", "id": "link_url", "label": "Link URL" },
-    { "type": "text", "id": "price_placeholder", "label": "Price placeholder", "default": "המחיר יעודכן בקרוב" },
     { "type": "text", "id": "card_cta", "label": "Card hover text", "default": "לפרטים" },
     { "type": "color", "id": "background", "label": "Background", "default": "#FBF9F5" }
   ],

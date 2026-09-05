@@ -4,11 +4,6 @@
   assign highlights = product.metafields.custom.highlights.value
   assign for_pets = product.metafields.custom.for_pets.value
   assign badge = product.metafields.custom.badge.value
-  assign has_price = false
-  if product.price > 0
-    assign has_price = true
-  endif
-
   comment
     The pitch falls back to the opening line of the description, which is the
     product's hook, so every product page gets one without per product setup.
@@ -94,30 +89,18 @@
       {%- endif -%}
 
       <div class="pl-pdp__buy">
-        {%- if has_price -%}
-          <p class="pl-pdp__price">{{ product.price | money }}</p>
-          {%- form 'product', product, class: 'pl-pdp__form' -%}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <button type="submit" class="pl-btn pl-btn--solid pl-pdp__submit" {% unless product.available %}disabled{% endunless %}>
-              {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
-            </button>
-          {%- endform -%}
-        {%- else -%}
-          <p class="pl-pdp__price pl-pdp__price--soon">{{ section.settings.price_note }}</p>
-          {%- form 'customer', class: 'pl-pdp__form' -%}
-            <input type="hidden" name="contact[tags]" value="waitlist,{{ product.handle }}">
-            <label class="visually-hidden" for="pl-pdp-email-{{ section.id }}">{{ section.settings.email_placeholder }}</label>
-            <div class="pl-field">
-              <input id="pl-pdp-email-{{ section.id }}" type="email" name="contact[email]" placeholder="{{ section.settings.email_placeholder }}" autocomplete="email" required>
-              <button type="submit" class="pl-btn pl-btn--solid pl-field__btn">{{ section.settings.waitlist_label }}</button>
-            </div>
-            {%- if form.posted_successfully? -%}
-              <p class="pl-pdp__msg pl-pdp__msg--ok" role="status">{{ section.settings.success }}</p>
-            {%- elsif form.errors -%}
-              <p class="pl-pdp__msg pl-pdp__msg--err" role="alert">{{ form.errors.messages.email }}</p>
-            {%- endif -%}
-          {%- endform -%}
-        {%- endif -%}
+        <p class="pl-pdp__price">
+          {%- if product.compare_at_price > product.price -%}
+            <s class="pl-pdp__was">{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+          {{ product.price | money }}
+        </p>
+        {%- form 'product', product, class: 'pl-pdp__form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="pl-btn pl-btn--solid pl-pdp__submit" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+          </button>
+        {%- endform -%}
 
         {%- if section.settings.buy_note != blank -%}
           <p class="pl-pdp__note">{{ section.settings.buy_note }}</p>
@@ -208,8 +191,9 @@
   .pl-pdp__crumbs a:hover { color: var(--pl-clay); }
 
   .pl-pdp__title {
-    font-family: var(--pl-serif);
-    font-weight: 500;
+    font-family: var(--pl-display);
+    font-weight: 700;
+    letter-spacing: -.01em;
     font-size: clamp(1.8rem, 3.4vw, 2.7rem);
     line-height: 1.16;
     color: var(--pl-ink);
@@ -251,8 +235,9 @@
     inset-inline-start: 0;
     inset-block-start: .45em;
     width: 12px; height: 7px;
-    border-inline-start: 2px solid var(--pl-clay);
-    border-block-end: 2px solid var(--pl-clay);
+    /* Physical borders: a tick mirrored under RTL turns into a chevron. */
+    border-left: 2px solid var(--pl-clay);
+    border-bottom: 2px solid var(--pl-clay);
     transform: rotate(-45deg);
   }
 
@@ -262,12 +247,9 @@
     background: var(--pl-cream);
     border-radius: var(--pl-r-l);
   }
-  .pl-pdp__price { font-family: var(--pl-serif); font-size: 1.7rem; color: var(--pl-ink); margin: 0 0 16px; }
-  .pl-pdp__price--soon { font-family: var(--pl-sans); font-size: 1rem; font-weight: 600; color: var(--pl-clay); }
+  .pl-pdp__price { font-family: var(--pl-display); font-weight: 700; font-size: 1.7rem; color: var(--pl-ink); margin: 0 0 16px; }
+  .pl-pdp__was { font-family: var(--pl-sans); font-size: 1.1rem; font-weight: 500; color: var(--pl-taupe); margin-inline-end: 10px; }
   .pl-pdp__submit { width: 100%; }
-  .pl-pdp__msg { font-family: var(--pl-sans); font-size: .88rem; margin-block-start: 12px; }
-  .pl-pdp__msg--ok { color: var(--pl-moss); }
-  .pl-pdp__msg--err { color: var(--pl-clay-deep); }
   .pl-pdp__note { font-family: var(--pl-sans); font-size: .82rem; color: var(--pl-taupe); margin: 14px 0 0; }
 
   .pl-pdp__trust { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 14px; }
@@ -285,10 +267,6 @@
   "settings": [
     { "type": "textarea", "id": "pitch", "label": "Short pitch" },
     { "type": "text", "id": "atc_label", "label": "Add to cart label", "default": "הוספה לסל" },
-    { "type": "text", "id": "price_note", "label": "Pre launch price note", "default": "המחיר יעודכן בקרוב. הצטרפו לרשימת ההמתנה וקבלו אותו ראשונים" },
-    { "type": "text", "id": "waitlist_label", "label": "Waitlist button", "default": "עדכנו אותי" },
-    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "כתובת האימייל שלכם" },
-    { "type": "text", "id": "success", "label": "Success message", "default": "נרשמתם. נעדכן אתכם ראשונים." },
     { "type": "text", "id": "buy_note", "label": "Note under the button", "default": "משלוח חינם מעל ₪199 · 30 יום להתנסות בבית" }
   ],
   "blocks": [

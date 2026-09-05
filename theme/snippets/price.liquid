@@ -25,16 +25,6 @@
     assign price = 1999
   endif
 
-  comment
-    PRE-LAUNCH: prices are not published yet. A ₪0.00 reads as broken, so any
-    product still priced at zero shows a waitlist label instead. Delete this
-    block (and the `pre_launch` guard below) once real prices are set.
-  endcomment
-  assign pre_launch = false
-  if product_resource != blank and product_resource.price_max == 0
-    assign pre_launch = true
-  endif
-
   # Check if variant has volume pricing
   assign has_volume_pricing = null
   assign price_min = null
@@ -84,67 +74,61 @@
   endif
 -%}
 
-{%- if pre_launch -%}
-  <div ref="priceContainer">
-    <span class="price price--coming-soon">המחיר יעודכן בקרוב</span>
-  </div>
-{%- else -%}
-  <div ref="priceContainer">
-    {% if has_volume_pricing %}
-      {% comment %} Volume pricing display {% endcomment %}
-      {% if show_compare_price %}
-        <span class="price-item__group compare-at-price">
+<div ref="priceContainer">
+  {% if has_volume_pricing %}
+    {% comment %} Volume pricing display {% endcomment %}
+    {% if show_compare_price %}
+      <span class="price-item__group compare-at-price">
+        <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+        {{- compare_at_price -}}
+      </span>
+    {% endif %}
+    <span class="price-item__group price">
+      <span class="visually-hidden">{{ 'content.price_range' | t }}&nbsp;</span>
+      {{ price_min }} - {{ price_max }}
+    </span>
+  {% else %}
+    {% comment %} Standard pricing display: render only the active branch (regular or sale) {% endcomment %}
+    {% if show_compare_price %}
+      {% if show_sale_price_first %}
+        <span class="price-item__group price">
+          <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+          {{ price | default: '&nbsp;' }}
+        </span>
+        <span class="price-item__group price-item--regular compare-at-price">
           <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
           {{- compare_at_price -}}
         </span>
-      {% endif %}
-      <span class="price-item__group price">
-        <span class="visually-hidden">{{ 'content.price_range' | t }}&nbsp;</span>
-        {{ price_min }} - {{ price_max }}
-      </span>
-    {% else %}
-      {% comment %} Standard pricing display: render only the active branch (regular or sale) {% endcomment %}
-      {% if show_compare_price %}
-        {% if show_sale_price_first %}
-          <span class="price-item__group price">
-            <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
-            {{ price | default: '&nbsp;' }}
-          </span>
-          <span class="price-item__group price-item--regular compare-at-price">
-            <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
-            {{- compare_at_price -}}
-          </span>
-        {% else %}
-          <span class="price-item__group price-item--regular compare-at-price">
-            <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
-            {{- compare_at_price -}}
-          </span>
-          <span class="price-item__group price">
-            <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
-            {{ price | default: '&nbsp;' }}
-          </span>
-        {% endif %}
       {% else %}
-        <span class="price">{{ price | default: '&nbsp;' }}</span>
+        <span class="price-item__group price-item--regular compare-at-price">
+          <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+          {{- compare_at_price -}}
+        </span>
+        <span class="price-item__group price">
+          <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+          {{ price | default: '&nbsp;' }}
+        </span>
       {% endif %}
+    {% else %}
+      <span class="price">{{ price | default: '&nbsp;' }}</span>
     {% endif %}
-    {%- if selected_variant.unit_price and show_unit_price %}
-      {%- liquid
-        if use_currency
-          assign unit_price = selected_variant.unit_price | money_with_currency
-        else
-          assign unit_price = selected_variant.unit_price | money
-        endif
-      -%}
-      {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
-    {%- endif -%}
-  </div>
-  {%- if has_volume_pricing -%}
-    <small
-      ref="volumePricingNote"
-      class="volume-pricing-note"
-    >
-      {{- 'content.volume_pricing_available' | t -}}
-    </small>
+  {% endif %}
+  {%- if selected_variant.unit_price and show_unit_price %}
+    {%- liquid
+      if use_currency
+        assign unit_price = selected_variant.unit_price | money_with_currency
+      else
+        assign unit_price = selected_variant.unit_price | money
+      endif
+    -%}
+    {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
   {%- endif -%}
+</div>
+{%- if has_volume_pricing -%}
+  <small
+    ref="volumePricingNote"
+    class="volume-pricing-note"
+  >
+    {{- 'content.volume_pricing_available' | t -}}
+  </small>
 {%- endif -%}

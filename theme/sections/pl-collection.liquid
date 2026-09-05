@@ -34,7 +34,7 @@
     <ul class="pl-grid pl-grid--4" role="list">
       {%- for item in collection.products -%}
         <li class="pl-reveal" style="transition-delay: {{ forloop.index0 | times: 45 }}ms;">
-          {% render 'pl-card', product: item, price_placeholder: section.settings.price_placeholder %}
+          {% render 'pl-card', product: item %}
         </li>
       {%- else -%}
         <li class="pl-body">{{ section.settings.empty_text }}</li>
@@ -85,7 +85,6 @@
   "tag": "section",
   "settings": [
     { "type": "checkbox", "id": "show_image", "label": "Show the collection cover photo", "default": true },
-    { "type": "text", "id": "price_placeholder", "label": "Price placeholder", "default": "המחיר יעודכן בקרוב" },
     { "type": "text", "id": "empty_text", "label": "Empty state", "default": "האוסף הזה עדיין ריק. חזרו בקרוב." }
   ]
 }

@@ -19,7 +19,7 @@
         "announcement_pl2": {
           "type": "_announcement",
           "settings": {
-            "text": "החנות בהכנה לקראת השקה. הצטרפו לרשימת ההמתנה וקבלו את מחירי ההשקה ראשונים",
+            "text": "החזרה חינם תוך 30 יום, גם אחרי שימוש",
             "font": "var(--font-subheading--family)",
             "font_size": "0.78rem",
             "letter_spacing": "normal",

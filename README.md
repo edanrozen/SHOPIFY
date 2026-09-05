@@ -18,8 +18,10 @@ right; the live theme keeps serving until you do.
 
 ## Catalog
 
-Eight products, all `ACTIVE` and published to the Online Store. Prices are deliberately left at
-`0.00`; every price slot renders a waitlist label instead.
+Eight products, all `ACTIVE`, published to the Online Store and priced. Inventory is untracked,
+so every variant stays buyable. The pre-launch scaffolding is gone: `snippets/price.liquid` no
+longer carries a `pre_launch` branch, the product page shows a real add to cart instead of a
+waitlist form, and the homepage no longer ends on a "prices coming soon" band.
 
 | Handle | Product | Reviews |
 |---|---|---|
@@ -105,13 +107,13 @@ Hebrew webfonts), `snippets/price.liquid` (waitlist label while a price is `0`),
 
 ## Before launch
 
-1. **Replace the sample reviews.** They are placeholder copy in `custom.reviews`. Publishing
-   invented reviews as genuine is illegal under Israeli consumer protection law and will get the
-   store penalised by Google. Swap them for real ones, or clear the metafield.
-2. Set real prices, then delete the `pre_launch` branch in `snippets/price.liquid`.
-3. Fill in the shipping, returns and privacy policies linked from the footer.
-4. Confirm the photo mapping below.
-5. Publish the theme.
+1. **Replace the sample reviews.** They are placeholder copy in `custom.reviews` and
+   `custom.reviews_more`. The store is live and selling, so this is no longer a pre-launch
+   chore: publishing invented reviews as genuine breaches Israeli consumer protection law and
+   is grounds for a Google penalty. Swap them for real ones, or clear both metafields.
+2. Fill in the shipping, returns and privacy policies linked from the footer.
+3. Confirm the photo mapping below, in particular the three products named from inference.
+4. Publish the draft theme so the storefront picks up this work.
 
 ## Product images
 
@@ -158,6 +160,9 @@ component. It is mobile first throughout:
 - **No sideways drift:** `html` and `body` are `overflow-x: clip`, and every grid child is
   `min-width: 0`. `clip` rather than `hidden` so the sticky header and the sticky review
   summary keep working.
+- **One display font:** `--pl-serif` was removed when the type system changed, but six sections
+  still referenced it. An undefined custom property makes the declaration invalid, so those
+  headings silently inherited the body face instead of Rubik. All of them now use `--pl-display`.
 - **RTL animation:** the ticker needs opposite keyframes per direction. Reusing the LTR
   translation under RTL walks the strip off screen and leaves an empty black band, which is
   exactly what happened before `pl-marquee-scroll-rtl` was added. Ticks are drawn with

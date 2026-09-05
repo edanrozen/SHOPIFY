@@ -30,7 +30,7 @@
         {%- if item.id != product.id and count < section.settings.limit -%}
           {%- assign count = count | plus: 1 -%}
           <li class="pl-reveal" style="transition-delay: {{ forloop.index0 | times: 60 }}ms;">
-            {% render 'pl-card', product: item, price_placeholder: section.settings.price_placeholder %}
+            {% render 'pl-card', product: item %}
           </li>
         {%- endif -%}
       {%- endfor -%}
@@ -52,8 +52,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "משלימים את הערכה" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "לקוחות לקחו גם את אלה" },
     { "type": "textarea", "id": "body", "label": "Body" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "לכל המוצרים" },
-    { "type": "text", "id": "price_placeholder", "label": "Price placeholder", "default": "המחיר יעודכן בקרוב" }
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "לכל המוצרים" }
   ],
   "presets": [{ "name": "PLUMA · Related products" }]
 }
