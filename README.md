@@ -79,7 +79,7 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 |---|---|
 | `pl-hero-photo` | Homepage hero. Photo and words sit side by side, never stacked |
 | `pl-banner` | Centred heading with one wide photo underneath |
-| `pl-promise` | The guarantee band on ink: returns, warranty, shipping, support |
+| `pl-promise` | The guarantee band on ink: returns, product vetting, shipping, support |
 | `pl-story` | Brand story, three numbers, one lead photo and three supporting frames |
 | `pl-row` | Product row, grid or horizontal rail, reads ratings from metafields |
 | `pl-showcase` | Dogs versus cats editorial band |
@@ -88,7 +88,7 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 | `pl-faq` | FAQ accordion |
 | `pl-cta` | Waitlist capture (`{% form 'customer' %}`) |
 | `pl-marquee` | Trust ticker |
-| `pl-product-main` | PDP: gallery, rating, highlights, buy box or waitlist, trust row |
+| `pl-product-main` | PDP: gallery, rating, highlights, add to cart, trust row |
 | `pl-product-tabs` | PDP: description, specs, in the box, shipping, returns |
 | `pl-product-reviews` | PDP: average, histogram, review list with show more |
 | `pl-related` | PDP: cross sell rail |
@@ -102,7 +102,7 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 ### Replaced Horizon files
 
 `snippets/stylesheets.liquid` (loads `pluma.css`/`pluma.js`, stamps `dir="rtl"`, loads the
-Hebrew webfonts), `snippets/price.liquid` (waitlist label while a price is `0`),
+Hebrew webfonts), `snippets/price.liquid` (money formatting, sale price and unit price),
 `sections/header-group.json`, `sections/footer-group.json`, `config/settings_data.json`.
 
 ## Before launch
@@ -173,3 +173,16 @@ component. It is mobile first throughout:
 The shop pages the theme links to are written in Hebrew: `contact` (דברו איתנו), `about`
 (מי אנחנו), `faq` (שאלות נפוצות) and `shipping-returns` (משלוחים והחזרות). The `pluma-main`
 menu opens with a כל המוצרים entry so the whole catalog is one tap away on a phone.
+
+### Claims the site does not make
+
+Two claims were removed everywhere, at the merchant's request: the two year warranty and the
+"secure payment" band. Neither survives in the theme, the templates, the eight `custom.specs`
+metafields or the four shop pages. Keep it that way. A warranty line is a legal undertaking and
+belongs in the policy pages only once the merchant is ready to honour it, and a PCI or "secure
+checkout" badge is a claim about Shopify's processor rather than about this shop, so it reads as
+filler and adds nothing a buyer cannot already see in the checkout.
+
+The homepage FAQ now carries five questions (`q1`, `q2`, `q3`, `q5`, `q6`); the old `q4` was the
+secure payment answer and is gone. The promise band's second tile talks about how products are
+vetted instead.
