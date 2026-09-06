@@ -87,13 +87,16 @@
   .pl-specs > div {
     display: flex;
     justify-content: space-between;
-    gap: 18px;
+    gap: 8px 18px;
+    /* A long value on a 360px screen has to be allowed onto its own line
+       instead of being crushed into a two word column against the label. */
+    flex-wrap: wrap;
     padding-block: 12px;
     border-block-end: 1px dashed var(--pl-line);
   }
   .pl-specs > div:last-child { border-block-end: 0; }
-  .pl-specs dt { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-taupe); margin: 0; }
-  .pl-specs dd { font-family: var(--pl-sans); font-size: .92rem; color: var(--pl-ink); margin: 0; text-align: end; }
+  .pl-specs dt { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-taupe); margin: 0; flex: 0 0 auto; }
+  .pl-specs dd { font-family: var(--pl-sans); font-size: .92rem; color: var(--pl-ink); margin: 0; text-align: end; flex: 1 1 auto; min-width: 0; }
   .pl-tabs__ul { margin: 0; padding-inline-start: 20px; font-family: var(--pl-sans); font-size: .95rem; color: var(--pl-ink-soft); }
   .pl-tabs__ul li { margin-block-end: 8px; }
 {% endstylesheet %}

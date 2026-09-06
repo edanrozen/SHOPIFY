@@ -27,7 +27,11 @@
     width: max-content;
     animation: pl-marquee-scroll var(--pl-marquee-speed, 34s) linear infinite;
   }
-  .pl-marquee:hover .pl-marquee__track { animation-play-state: paused; }
+  /* Pause on hover only. On touch there is no un-hover, so a stray tap
+     would stop the ticker for the rest of the visit. */
+  @media (hover: hover) and (pointer: fine) {
+    .pl-marquee:hover .pl-marquee__track { animation-play-state: paused; }
+  }
   .pl-marquee__list {
     display: flex;
     align-items: center;

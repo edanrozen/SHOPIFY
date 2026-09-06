@@ -28,8 +28,14 @@
           loading="lazy" decoding="async"
         >
         {%- if media_second != blank -%}
+          {%- comment -%}
+            The second shot is revealed on hover, so a phone can never see it.
+            It ships as data-pl-src and pluma.js promotes it to src only on a
+            pointer that can hover, which saves one image download per card
+            over mobile data. Eight cards on the homepage, eight fewer requests.
+          {%- endcomment -%}
           <img class="pl-card__img pl-card__img--back"
-            src="{{ media_second | image_url: width: 800 }}"
+            data-pl-src="{{ media_second | image_url: width: 800 }}"
             width="{{ media_second.preview_image.width }}" height="{{ media_second.preview_image.height }}"
             alt="" aria-hidden="true" loading="lazy" decoding="async">
         {%- endif -%}

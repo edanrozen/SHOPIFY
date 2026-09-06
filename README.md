@@ -186,3 +186,40 @@ filler and adds nothing a buyer cannot already see in the checkout.
 The homepage FAQ now carries five questions (`q1`, `q2`, `q3`, `q5`, `q6`); the old `q4` was the
 secure payment answer and is gone. The promise band's second tile talks about how products are
 vetted instead.
+
+## Mobile
+
+Most of the traffic arrives on a phone, so the phone is the design target and the
+desktop is the widened version of it, not the other way round.
+
+**Layout.** Every type size is a `clamp()` that starts at the phone. Product grids
+are two columns on a phone and four on a desktop; every horizontal rail bleeds to
+the screen edge by a negative gutter margin so it reads as swipeable. `html` and
+`body` carry `overflow-x: clip` (not `hidden`, which would kill `position: sticky`)
+and every grid child gets `min-width: 0`, so the page cannot be dragged sideways.
+
+**Sticky buy bar.** On a phone the buy box sits more than a screen below the fold
+and vanishes entirely once the customer reaches the reviews, which is the moment
+they are actually deciding. `sections/pl-product-main.liquid` renders a fixed bar
+with the photo, title, price and add to cart, revealed by an `IntersectionObserver`
+whenever the real buy box is off screen. The space it occupies is reserved on load
+rather than when it appears, so the reveal never shifts the page under a thumb, and
+it clears the iPhone home indicator with `env(safe-area-inset-bottom)`.
+
+**Touch, not mouse.** iOS keeps `:hover` applied to the last thing tapped until you
+tap somewhere else, so every hover lift, zoom and cross-fade in the theme is behind
+`@media (hover: hover) and (pointer: fine)`. Touch gets its own `:active` press
+instead. The hover-only second product image is not downloaded at all on a phone:
+it ships as `data-pl-src` and `pluma.js` promotes it to `src` on idle, and only on a
+pointer that can hover.
+
+**Fields.** Safari zooms the viewport when a focused input is under 16px and never
+zooms back out, stranding the customer on a page wider than the screen. `pluma.css`
+enforces a 16px floor below 900px. That rule carries the sheet's only `!important`,
+because Horizon sizes its own inputs through class selectors that would otherwise
+win; it can only raise a size, never shrink one.
+
+**Other.** `text-size-adjust: 100%` stops iOS inflating body text in landscape.
+`scroll-padding-block-start` keeps in-page anchors clear of the sticky header.
+Tap targets are extended with an invisible overlay rather than by growing the
+element, so a link's underline stays tight to its text.

@@ -123,6 +123,41 @@
   </div>
 </section>
 
+{%- comment -%}
+  Sticky buy bar, phones only. On a phone the buy box sits well over a screen
+  down and disappears entirely once the customer reaches the reviews, which is
+  exactly the moment they decide. This keeps the price and the button within
+  thumb reach for the whole page without covering anything.
+{%- endcomment -%}
+<div class="pl-buybar" id="pl-buybar-{{ section.id }}" hidden>
+  <div class="pl-buybar__inner">
+    {%- if product.featured_media != blank -%}
+      <img class="pl-buybar__thumb"
+        src="{{ product.featured_media | image_url: width: 120 }}"
+        width="60" height="60" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    {%- endif -%}
+
+    <div class="pl-buybar__text">
+      <span class="pl-buybar__title">{{ product.title }}</span>
+      <span class="pl-buybar__price">
+        {%- if product.compare_at_price > product.price -%}
+          <s>{{ product.compare_at_price | money }}</s>
+        {%- endif -%}
+        {{ product.price | money }}
+      </span>
+    </div>
+
+    {%- assign buybar_form_id = 'pl-buybar-form-' | append: section.id -%}
+    {%- comment -%} An explicit id: two product forms on one page must not collide. {%- endcomment -%}
+    {%- form 'product', product, class: 'pl-buybar__form', id: buybar_form_id -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="pl-btn pl-btn--solid pl-buybar__submit" {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל{%- endif -%}
+      </button>
+    {%- endform -%}
+  </div>
+</div>
+
 <script>
   (function () {
     var root = document.getElementById('pl-pdp-{{ section.id }}');
@@ -140,6 +175,47 @@
         btn.classList.add('is-active');
       });
     });
+  })();
+
+  (function () {
+    var root = document.getElementById('pl-pdp-{{ section.id }}');
+    var bar = document.getElementById('pl-buybar-{{ section.id }}');
+    var anchor = root && root.querySelector('.pl-pdp__buy');
+    if (!bar || !anchor) return;
+
+    var phone = window.matchMedia('(max-width: 899px)');
+    var observer = null;
+
+    function teardown() {
+      if (observer) { observer.disconnect(); observer = null; }
+      bar.hidden = true;
+      bar.classList.remove('is-up');
+      document.documentElement.classList.remove('pl-has-buybar');
+    }
+
+    function setup() {
+      if (!phone.matches) { teardown(); return; }
+      if (observer) return;
+
+      // The space is reserved as soon as the page loads rather than when the
+      // bar appears, so revealing it never shifts the page under a thumb.
+      bar.hidden = false;
+      document.documentElement.classList.add('pl-has-buybar');
+
+      // No observer support: leave the bar up for the whole page. A permanent
+      // bar is a small cost; an add to cart the customer cannot reach is not.
+      if (!('IntersectionObserver' in window)) { bar.classList.add('is-up'); return; }
+
+      observer = new IntersectionObserver(function (entries) {
+        // Up whenever the real buy box is off screen, which is most of the page.
+        bar.classList.toggle('is-up', !entries[0].isIntersecting);
+      }, { threshold: 0 });
+      observer.observe(anchor);
+    }
+
+    setup();
+    if (phone.addEventListener) phone.addEventListener('change', setup);
+    else if (phone.addListener) phone.addListener(setup);
   })();
 </script>
 
@@ -171,9 +247,29 @@
     color: var(--pl-ink);
   }
 
-  .pl-pdp__thumbs { list-style: none; margin: 12px 0 0; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; }
+  /* Eight thumbnails wrapped onto two rows cost about 90px of height directly
+     above the price, which is the last thing you want to push down a phone
+     screen. One swipeable row instead, running to the screen edge so it reads
+     as scrollable without a visible scrollbar. */
+  .pl-pdp__thumbs {
+    list-style: none;
+    margin: 12px calc(var(--pl-gutter) * -1) 0;
+    padding: 0 var(--pl-gutter);
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+  .pl-pdp__thumbs::-webkit-scrollbar { display: none; }
+  .pl-pdp__thumbs > li { scroll-snap-align: start; }
+  @media (min-width: 900px) {
+    .pl-pdp__thumbs { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
+  }
   .pl-pdp__thumb {
     width: 74px; height: 74px;
+    flex: 0 0 auto;
     padding: 0;
     border: 1px solid var(--pl-line);
     border-radius: var(--pl-r-s);
@@ -183,7 +279,10 @@
     transition: border-color .3s var(--pl-ease), transform .3s var(--pl-ease);
   }
   .pl-pdp__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .pl-pdp__thumb:hover { transform: translateY(-2px); }
+  /* Gated: on touch, :hover sticks to the last thing tapped. */
+  @media (hover: hover) and (pointer: fine) {
+    .pl-pdp__thumb:hover { transform: translateY(-2px); }
+  }
   .pl-pdp__thumb.is-active { border-color: var(--pl-clay); }
 
   .pl-pdp__crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); }
@@ -258,6 +357,74 @@
   .pl-pdp__trust strong { font-family: var(--pl-sans); font-size: .88rem; color: var(--pl-ink); }
   .pl-pdp__trust span { font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); line-height: 1.5; }
   .pl-pdp__pets { font-family: var(--pl-sans); font-size: .86rem; color: var(--pl-ink-soft); margin: 22px 0 0; }
+
+  /* ---- sticky buy bar, phones only ---------------------------------------- */
+  .pl-buybar {
+    position: fixed;
+    inset-block-end: 0;
+    inset-inline: 0;
+    z-index: 40;
+    background: rgba(251, 249, 245, .94);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+            backdrop-filter: saturate(180%) blur(14px);
+    border-block-start: 1px solid var(--pl-line);
+    box-shadow: 0 -8px 30px rgba(25, 23, 19, .09);
+    /* Out of the way and out of the tab order until it is wanted. */
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: transform .32s var(--pl-ease), visibility .32s var(--pl-ease);
+    padding-block-end: env(safe-area-inset-bottom, 0px);
+  }
+  .pl-buybar.is-up { visibility: visible; transform: none; }
+  @media (min-width: 900px) { .pl-buybar { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .pl-buybar { transition: none; } }
+
+  .pl-buybar__inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px var(--pl-gutter);
+    max-width: var(--pl-wrap);
+    margin-inline: auto;
+  }
+  .pl-buybar__thumb {
+    width: 46px; height: 46px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border-radius: var(--pl-r-s);
+    background: var(--pl-cream);
+  }
+  /* Below 380px the thumbnail is the first thing to go: the price and the
+     button matter, a 46px repeat of the photo above does not. */
+  @media (max-width: 379px) { .pl-buybar__thumb { display: none; } }
+
+  .pl-buybar__text { display: grid; gap: 1px; min-width: 0; flex: 1 1 auto; }
+  .pl-buybar__title {
+    font-family: var(--pl-sans);
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--pl-ink);
+    /* One line, clipped. A wrapping title would grow the bar under the thumb. */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pl-buybar__price { font-family: var(--pl-display); font-size: 1.02rem; font-weight: 700; color: var(--pl-ink); }
+  .pl-buybar__price s { font-family: var(--pl-sans); font-size: .82rem; font-weight: 500; color: var(--pl-taupe); margin-inline-end: 6px; }
+
+  .pl-buybar__form { flex: 0 0 auto; margin: 0; }
+  .pl-buybar__submit {
+    width: auto;
+    min-height: 46px;
+    padding: 13px 22px;
+    font-size: .92rem;
+    white-space: nowrap;
+  }
+
+  /* Reserved on the phone PDP for the whole visit, so the footer is never
+     trapped under the bar and the reveal never moves the page. */
+  html.pl-has-buybar body { padding-block-end: calc(66px + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 900px) { html.pl-has-buybar body { padding-block-end: 0; } }
 {% endstylesheet %}
 
 {% schema %}

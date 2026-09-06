@@ -62,7 +62,8 @@
     background: transparent;
     padding-inline: 20px;
     font-family: var(--pl-sans);
-    font-size: .97rem;
+    /* 16px exactly: anything smaller makes iOS zoom the page on focus. */
+    font-size: 1rem;
     color: var(--pl-ink);
   }
   .pl-field input:focus { outline: none; }
@@ -86,7 +87,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "רשימת המתנה" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "המחירים נסגרים בימים אלה" },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "השאירו מייל ותהיו הראשונים לקבל את מחירי ההשקה, לפני שהם עולים — יחד עם מדריך קצר לשגרת טיפוח שעובדת." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "השאירו מייל ותהיו הראשונים לקבל את מחירי ההשקה, לפני שהם עולים, יחד עם מדריך קצר לשגרת טיפוח שעובדת." },
     { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "כתובת האימייל שלכם" },
     { "type": "text", "id": "button", "label": "Button", "default": "לשמור לי מקום" },
     { "type": "text", "id": "tag", "label": "Customer tag", "default": "waitlist" },

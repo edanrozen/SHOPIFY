@@ -69,7 +69,7 @@
                 {%- if product.price > 0 -%}
                   <span class="pl-card__price">{{ product.price | money }}</span>
                 {%- else -%}
-                  <span class="pl-price-soon">{{ section.settings.price_placeholder }}</span>
+                  <span class="pl-card__type">{{ section.settings.price_placeholder }}</span>
                 {%- endif -%}
                 <span class="pl-card__cta">{{ section.settings.card_cta }}</span>
               </div>
@@ -111,8 +111,11 @@
   .pl-products__all svg { transition: transform .3s var(--pl-ease); }
   /* arrow points toward the reading direction */
   [dir="rtl"] .pl-products__all svg { transform: scaleX(-1); }
-  .pl-products__all:hover svg { transform: translateX(3px); }
-  [dir="rtl"] .pl-products__all:hover svg { transform: scaleX(-1) translateX(3px); }
+  /* Gated: on touch, :hover sticks to the last thing tapped. */
+  @media (hover: hover) and (pointer: fine) {
+    .pl-products__all:hover svg { transform: translateX(3px); }
+    [dir="rtl"] .pl-products__all:hover svg { transform: scaleX(-1) translateX(3px); }
+  }
 
   .pl-grid {
     list-style: none;
@@ -144,9 +147,12 @@
     transition: opacity .55s var(--pl-ease), transform 1s var(--pl-ease);
   }
   .pl-card__img--back { opacity: 0; }
-  .pl-card__link:hover .pl-card__media { transform: translateY(-5px); box-shadow: var(--pl-sh-m); }
-  .pl-card__link:hover .pl-card__img--front { transform: scale(1.05); }
-  .pl-card__link:hover .pl-card__img--back { opacity: 1; transform: scale(1.05); }
+  /* Gated: on touch, :hover sticks to the last thing tapped. */
+  @media (hover: hover) and (pointer: fine) {
+    .pl-card__link:hover .pl-card__media { transform: translateY(-5px); box-shadow: var(--pl-sh-m); }
+    .pl-card__link:hover .pl-card__img--front { transform: scale(1.05); }
+    .pl-card__link:hover .pl-card__img--back { opacity: 1; transform: scale(1.05); }
+  }
 
   .pl-card__badge {
     position: absolute;
@@ -206,7 +212,7 @@
     { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 12, "step": 1, "default": 8 },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "הקולקציה" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "כלים שנשארים בבית שנים" },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "מספר קטן של מוצרים, כל אחד נבחר כי הוא פותר בעיה אמיתית — ולא כי אפשר היה לייבא אותו בזול." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "מספר קטן של מוצרים, כל אחד נבחר כי הוא פותר בעיה אמיתית, ולא כי אפשר היה לייבא אותו בזול." },
     { "type": "text", "id": "link_label", "label": "Link label", "default": "לכל המוצרים" },
     { "type": "url", "id": "link_url", "label": "Link URL" },
     { "type": "text", "id": "price_placeholder", "label": "Price placeholder", "default": "המחיר יעודכן בקרוב" },

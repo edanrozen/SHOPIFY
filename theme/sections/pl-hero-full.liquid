@@ -136,8 +136,9 @@
     inset-block-start: .38em;
     width: 11px;
     height: 6px;
-    border-inline-start: 2px solid var(--pl-sand);
-    border-block-end: 2px solid var(--pl-sand);
+    /* Physical borders on purpose: a tick mirrored under RTL becomes a chevron. */
+    border-left: 2px solid var(--pl-sand);
+    border-bottom: 2px solid var(--pl-sand);
     transform: rotate(-45deg);
   }
 {% endstylesheet %}

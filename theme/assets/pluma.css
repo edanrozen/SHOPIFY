@@ -118,32 +118,18 @@
 @media (min-width: 560px) { .pl-btn { width: auto; } }
 .pl-btn:focus-visible { outline: 2px solid var(--pl-clay); outline-offset: 3px; }
 .pl-btn--solid { background: var(--pl-ink); color: var(--pl-porcelain); }
-.pl-btn--solid:hover { background: var(--pl-clay); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
 .pl-btn--ghost { background: transparent; color: var(--pl-ink); border-color: var(--pl-sand-deep); }
-.pl-btn--ghost:hover { border-color: var(--pl-ink); transform: translateY(-2px); }
 .pl-btn--light { background: var(--pl-porcelain); color: var(--pl-ink); }
-.pl-btn--light:hover { background: var(--pl-white); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
-
-/* Prices are intentionally unpublished; this label stands in for them. */
-.pl-price-soon,
-.price--coming-soon {
-  display: inline-block;
-  font-family: var(--pl-sans);
-  font-size: .8rem;
-  font-weight: 700;
-  color: var(--pl-clay);
-  background: rgba(181, 100, 58, .09);
-  border-radius: var(--pl-r-pill);
-  padding: 5px 12px;
-  white-space: nowrap;
-  max-width: 100%;
+/* Hover is a mouse idiom. On iOS a tap leaves :hover applied until the next tap
+   somewhere else, so an ungated lift stays frozen under the customer's thumb. */
+@media (hover: hover) and (pointer: fine) {
+  .pl-btn--solid:hover { background: var(--pl-clay); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
+  .pl-btn--ghost:hover { border-color: var(--pl-ink); transform: translateY(-2px); }
+  .pl-btn--light:hover { background: var(--pl-white); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
 }
-@media (max-width: 599px) {
-  /* Two cards per row on a phone leaves roughly 135px of usable width,
-     so the pre-launch chip has to shrink with it instead of spilling out. */
-  .pl-price-soon,
-  .price--coming-soon { font-size: .72rem; padding: 4px 9px; }
-}
+/* Touch needs its own feedback, and a press that answers instantly reads as a
+   faster site than one that waits for the next page. */
+.pl-btn:active { transform: scale(.985); }
 
 .pl-reveal { opacity: 0; transform: translateY(18px); }
 .pl-reveal.is-in { opacity: 1; transform: none; transition: opacity .7s var(--pl-ease), transform .7s var(--pl-ease); }
@@ -199,6 +185,37 @@ h1, h2, h3, .h1, .h2, .h3 { font-family: var(--pl-display); letter-spacing: -.01
 body, button, input, select, textarea, p, li, a { font-family: var(--pl-sans); }
 img { max-width: 100%; }
 
+/* iOS Safari inflates body text when a phone is turned to landscape, which
+   breaks every clamp() in this sheet. Opt out and keep our own scale. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Safari zooms the whole viewport when a focused field is under 16px, and it
+   does not zoom back out. The customer is then stuck on a page wider than the
+   screen, mid checkout.
+
+   !important is deliberate and is the only one in this sheet. Horizon sizes its
+   inputs from theme presets through class selectors that outrank a bare element
+   selector, so a polite rule here would simply lose and the trap would stay.
+   The declaration only ever raises a size to 16px; it never shrinks anything. */
+@media (max-width: 900px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea { font-size: max(16px, 1em) !important; }
+}
+
+/* Every in-page jump has to clear the sticky header, otherwise the heading the
+   customer tapped ends up hidden behind it. */
+html { scroll-behavior: smooth; scroll-padding-block-start: 96px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* The grey flash Android paints over a tapped link is nobody's brand colour.
+   The :active states above give better feedback. */
+a, button, summary, [role="button"] { -webkit-tap-highlight-color: transparent; }
+
+/* A control the thumb cannot reliably hit is a control that is not there.
+   48px is the Android and Lighthouse threshold; 44px is Apple's. */
+button, [role="button"], summary { touch-action: manipulation; }
+
 .visually-hidden {
   position: absolute !important;
   width: 1px; height: 1px;
@@ -249,9 +266,12 @@ img { max-width: 100%; }
   transition: opacity .5s var(--pl-ease), transform .8s var(--pl-ease);
 }
 .pl-card__img--back { opacity: 0; }
-.pl-card__link:hover .pl-card__media { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
-.pl-card__link:hover .pl-card__img--front { transform: scale(1.04); }
-.pl-card__link:hover .pl-card__img--back { opacity: 1; transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .pl-card__link:hover .pl-card__media { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
+  .pl-card__link:hover .pl-card__img--front { transform: scale(1.04); }
+  .pl-card__link:hover .pl-card__img--back { opacity: 1; transform: scale(1.04); }
+}
+.pl-card__link:active .pl-card__media { transform: scale(.99); }
 .pl-card__badge {
   position: absolute;
   inset-block-start: 10px;
@@ -351,4 +371,11 @@ img { max-width: 100%; }
   padding-block-end: 5px;
   transition: color .25s var(--pl-ease), border-color .25s var(--pl-ease);
 }
-.pl-link:hover { color: var(--pl-clay); border-color: var(--pl-clay); }
+@media (hover: hover) and (pointer: fine) {
+  .pl-link:hover { color: var(--pl-clay); border-color: var(--pl-clay); }
+}
+/* A text link is still a tap target. Growing the element would drag its
+   underline away from the text, so the hit area is extended by an invisible
+   overlay instead and the link keeps its exact typography. */
+.pl-link { position: relative; }
+.pl-link::after { content: ""; position: absolute; inset-block: -13px; inset-inline: -8px; }

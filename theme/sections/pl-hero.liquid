@@ -108,8 +108,9 @@
     inset-block-start: .42em;
     width: 12px;
     height: 7px;
-    border-inline-start: 2px solid var(--pl-clay);
-    border-block-end: 2px solid var(--pl-clay);
+    /* Physical borders on purpose: a tick mirrored under RTL becomes a chevron. */
+    border-left: 2px solid var(--pl-clay);
+    border-bottom: 2px solid var(--pl-clay);
     transform: rotate(-45deg);
   }
 
@@ -133,7 +134,10 @@
     transform: scale(1.01);
     transition: transform 1.2s var(--pl-ease);
   }
-  .pl-hero__tile:hover img { transform: scale(1.045); }
+  /* Gated: on touch, :hover sticks to the last thing tapped. */
+  @media (hover: hover) and (pointer: fine) {
+    .pl-hero__tile:hover img { transform: scale(1.045); }
+  }
 
   .pl-hero__badge {
     position: absolute;
@@ -148,7 +152,7 @@
   }
   .pl-hero__badge-value {
     display: block;
-    font-family: var(--pl-serif);
+    font-family: var(--pl-display);
     font-size: 1.85rem;
     line-height: 1;
     color: var(--pl-ink);

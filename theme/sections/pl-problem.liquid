@@ -35,9 +35,12 @@
     border: 1px solid var(--pl-line);
     transition: transform .5s var(--pl-ease), box-shadow .5s var(--pl-ease), opacity .85s var(--pl-ease);
   }
-  .pl-stat:hover { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
+  /* Gated: on touch, :hover sticks to the last thing tapped. */
+  @media (hover: hover) and (pointer: fine) {
+    .pl-stat:hover { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
+  }
   .pl-stat__value {
-    font-family: var(--pl-serif);
+    font-family: var(--pl-display);
     font-size: clamp(2.4rem, 4.6vw, 3.4rem);
     line-height: 1;
     color: var(--pl-clay);
@@ -54,7 +57,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "למה בכלל" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "כלב או חתול בבית = שיער בכל מקום" },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "רולר דביק נגמר. שואב לא מגיע לסיבים. הפתרון הוא לא לנקות יותר — הוא להוריד את הפרווה מהחיה לפני שהיא מתפזרת." }
+    { "type": "textarea", "id": "body", "label": "Body", "default": "רולר דביק נגמר. שואב לא מגיע לסיבים. הפתרון הוא לא לנקות יותר, אלא להוריד את הפרווה מהחיה לפני שהיא מתפזרת." }
   ],
   "blocks": [
     {
@@ -71,7 +74,7 @@
     "name": "PLUMA · Problem",
     "blocks": [
       { "type": "stat", "settings": { "value": "‎5 דק׳", "title": "סירוק יומי", "text": "חמש דקות סירוק ביום מורידות את רוב השיער הנושר לפני שהוא מגיע לספה." } },
-      { "type": "stat", "settings": { "value": "‎0", "title": "מילויים", "text": "גליל נחושת שעובד מכנית — בלי דבק, בלי חשמל, בלי הוצאה חוזרת כל חודש." } },
+      { "type": "stat", "settings": { "value": "‎0", "title": "מילויים", "text": "גליל נחושת שעובד מכנית, בלי דבק, בלי חשמל, בלי הוצאה חוזרת כל חודש." } },
       { "type": "stat", "settings": { "value": "‎2×", "title": "פחות ניקיון", "text": "לקוחות מדווחים שהם שואבים חצי מהפעמים אחרי שהכניסו שגרת טיפוח קבועה." } }
     ]
   }]
