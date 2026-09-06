@@ -194,9 +194,25 @@ desktop is the widened version of it, not the other way round.
 
 **Layout.** Every type size is a `clamp()` that starts at the phone. Product grids
 are two columns on a phone and four on a desktop; every horizontal rail bleeds to
-the screen edge by a negative gutter margin so it reads as swipeable. `html` and
-`body` carry `overflow-x: clip` (not `hidden`, which would kill `position: sticky`)
-and every grid child gets `min-width: 0`, so the page cannot be dragged sideways.
+the screen edge by a negative gutter margin so it reads as swipeable.
+
+**The page never moves sideways**, and that takes four layers rather than one:
+
+1. `overflow-x: clip` on `html` and `body`. `clip` and not `hidden`, because
+   `hidden` turns them into scroll containers and every `position: sticky` in the
+   theme then has nothing to stick to.
+2. The same clip on `main` and on every section the theme owns. A clip on the root
+   has to be propagated to the viewport by the browser and iOS does not do that
+   reliably, so the overflow is also cut off at the box that produces it.
+3. `min-width: 0` on grid and flex children, plus `overflow-wrap` on titles. A
+   child's `min-width: auto` default is the usual reason one long word widens a
+   whole page.
+4. A runtime backstop in `pluma.js`. None of the CSS above clips a
+   `position: fixed` element, whose containing block is the viewport rather than
+   body, and an off screen panel is a common cause of a page that drifts. The
+   guard snaps `scrollLeft` back to 0 and costs one comparison per scroll event
+   while the CSS is doing its job. It never fights the horizontal rails: swiping a
+   rail scrolls that element, not the window.
 
 **Sticky buy bar.** On a phone the buy box sits more than a screen below the fold
 and vanishes entirely once the customer reaches the reviews, which is the moment

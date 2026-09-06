@@ -57,6 +57,43 @@
     });
   }
 
+  /**
+   * Horizontal scroll lock, the part CSS cannot do.
+   *
+   * `overflow-x: clip` is set on the root, on body, on the main wrapper and on
+   * every section, but none of that clips a `position: fixed` element: its
+   * containing block is the viewport, not body. An off screen panel parked
+   * outside the window still widens the document, and the page can then be
+   * dragged sideways into an empty margin. This snaps it back.
+   *
+   * Zero is the resting position in both directions: RTL rests at 0 and goes
+   * negative to the left, LTR rests at 0 and goes positive to the right.
+   *
+   * It never fights the horizontal rails. Swiping a rail scrolls that element,
+   * not the window, so scrollLeft stays at 0 and nothing here runs. While the
+   * CSS is doing its job this listener costs one comparison per scroll event.
+   */
+  function lockHorizontalScroll() {
+    var page = document.scrollingElement || document.documentElement;
+
+    function snapBack() {
+      if (page.scrollLeft === 0) return;
+      // `scroll-behavior: smooth` is set globally for in page anchors, and a
+      // plain scrollLeft assignment would inherit it and animate the
+      // correction. This has to be instant to be invisible.
+      try {
+        page.scrollTo({ left: 0, top: page.scrollTop, behavior: 'instant' });
+      } catch (e) {
+        page.scrollLeft = 0;
+      }
+    }
+
+    window.addEventListener('scroll', snapBack, { passive: true });
+    window.addEventListener('resize', snapBack, { passive: true });
+    window.addEventListener('orientationchange', snapBack, { passive: true });
+    snapBack();
+  }
+
   function boot(root) {
     init(root);
     if ('requestIdleCallback' in window) {
@@ -69,9 +106,11 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       boot();
+      lockHorizontalScroll();
     });
   } else {
     boot();
+    lockHorizontalScroll();
   }
 
   // Theme editor: re-scan when a section is re-rendered.

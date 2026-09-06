@@ -169,17 +169,43 @@
 }
 
 /* --------------------------------------------------------------------------
-   Theme level defaults
+   Horizontal scroll lock. The page must never move sideways.
+
+   One rule is not enough here, and the reason matters. A clip set on the root
+   element has to be propagated to the viewport by the browser, and iOS does
+   not do that reliably. So the same clip is repeated on body, on the page
+   wrapper and on every section this theme owns, which cuts the overflow off at
+   the box that actually produces it instead of trusting propagation.
+
+   `clip` and never `hidden`: `hidden` turns an element into a scroll container,
+   and every `position: sticky` inside it then has nothing to stick to. That
+   would silently kill the sticky header, the sticky product gallery and the
+   sticky review summary. `clip` cuts the overflow without creating a scroller.
+
+   None of this reaches a `position: fixed` element, whose containing block is
+   the viewport rather than body, and an off screen panel is a common cause of
+   a page that drifts. `pluma.js` carries a runtime backstop for that case.
    -------------------------------------------------------------------------- */
-/* The page must never drift sideways on a phone. `clip` rather than `hidden`
-   so the sticky header and the sticky review summary keep working. */
 html { overflow-x: clip; }
 @supports not (overflow: clip) { html { overflow-x: hidden; } }
 body { overflow-x: clip; max-width: 100%; }
+main, #MainContent { overflow-x: clip; }
+/* Section level, so a single wide child can never push the whole document.
+   Safe for the sticky boxes inside these: each is meant to stick within its
+   own section anyway, which is exactly where a section level clip stops it. */
+.pl-section, .pl-heroP, .pl-pdp, .pl-coll, .pl-marquee { overflow-x: clip; }
+
 /* Grid and flex children default to min-width:auto, which is the usual reason
    a long word or a wide image pushes the page wider than the screen. */
 .pl-grid > *, .pl-rowhead > *, .pl-heroP__grid > *, .pl-rev__grid > * { min-width: 0; }
+/* The same trap one level down: a card title with no spaces, a long product
+   handle, a price and label that will not fit on one line together. */
+.pl-card, .pl-card__body, .pl-card__foot > *, .pl-promise__item, .pl-rev__card { min-width: 0; }
+.pl-card__title, .pl-card__type, .pl-pdp__title { overflow-wrap: anywhere; }
 
+/* --------------------------------------------------------------------------
+   Theme level defaults
+   -------------------------------------------------------------------------- */
 body { background: var(--pl-porcelain); -webkit-font-smoothing: antialiased; }
 h1, h2, h3, .h1, .h2, .h3 { font-family: var(--pl-display); letter-spacing: -.01em; }
 body, button, input, select, textarea, p, li, a { font-family: var(--pl-sans); }
