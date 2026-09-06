@@ -1,0 +1,178 @@
+{%- liquid
+  assign img = section.settings.image
+  assign img_m = section.settings.image_mobile | default: img
+-%}
+
+<section
+  class="pl-herof"
+  style="--pl-herof-h: {{ section.settings.height }}vh; --pl-herof-pos: {{ section.settings.focal }}; --pl-herof-scrim: {{ section.settings.scrim }};"
+  aria-labelledby="pl-herof-title-{{ section.id }}"
+>
+  <div class="pl-herof__media">
+    {%- if img != blank -%}
+      <picture>
+        <source
+          media="(max-width: 749px)"
+          srcset="{{ img_m | image_url: width: 750 }} 750w, {{ img_m | image_url: width: 1100 }} 1100w"
+          sizes="100vw"
+        >
+        <img
+          src="{{ img | image_url: width: 1800 }}"
+          srcset="{{ img | image_url: width: 900 }} 900w, {{ img | image_url: width: 1400 }} 1400w, {{ img | image_url: width: 2000 }} 2000w"
+          sizes="100vw"
+          width="{{ img.width }}"
+          height="{{ img.height }}"
+          alt="{{ img.alt | escape }}"
+          fetchpriority="high"
+          decoding="async"
+        >
+      </picture>
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'pl-herof__placeholder' }}
+    {%- endif -%}
+  </div>
+
+  <div class="pl-wrap pl-herof__inner">
+    <div class="pl-herof__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pl-eyebrow pl-herof__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h1 class="pl-h1 pl-herof__title" id="pl-herof-title-{{ section.id }}">{{ section.settings.heading }}</h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="pl-lede pl-herof__lede">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="pl-herof__actions">
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="pl-btn pl-btn--light">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a href="{{ section.settings.cta2_link | default: '/collections/all' }}" class="pl-btn pl-herof__ghost">{{ section.settings.cta2_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.chip_1 != blank or section.settings.chip_2 != blank or section.settings.chip_3 != blank -%}
+    <ul class="pl-herof__chips">
+      {%- if section.settings.chip_1 != blank %}<li>{{ section.settings.chip_1 }}</li>{% endif -%}
+      {%- if section.settings.chip_2 != blank %}<li>{{ section.settings.chip_2 }}</li>{% endif -%}
+      {%- if section.settings.chip_3 != blank %}<li>{{ section.settings.chip_3 }}</li>{% endif -%}
+    </ul>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .pl-herof {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(520px, var(--pl-herof-h, 85vh), 900px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    background: var(--pl-sand);
+  }
+  .pl-herof__media { position: absolute; inset: 0; z-index: -2; }
+  .pl-herof__media img,
+  .pl-herof__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--pl-herof-pos, center);
+    display: block;
+  }
+  /* Scrim: keeps the headline readable over any photo, in both directions. */
+  .pl-herof::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(to top, rgba(20, 18, 15, calc(var(--pl-herof-scrim, 60) * 1%)) 0%,
+                              rgba(20, 18, 15, calc(var(--pl-herof-scrim, 60) * 0.45%)) 46%,
+                              rgba(20, 18, 15, .10) 100%);
+  }
+
+  .pl-herof__inner { width: 100%; padding-block: clamp(40px, 6vw, 84px) clamp(24px, 3vw, 40px); }
+  .pl-herof__copy { max-width: 44rem; }
+  .pl-herof__eyebrow { color: var(--pl-sand); }
+  .pl-herof__title { color: #FFFFFF; text-shadow: 0 2px 30px rgba(20, 18, 15, .35); }
+  .pl-herof__lede { color: rgba(255, 255, 255, .9); }
+  .pl-herof__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 32px; }
+  .pl-herof__ghost {
+    background: rgba(255, 255, 255, .1);
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, .55);
+    backdrop-filter: blur(6px);
+  }
+  .pl-herof__ghost:hover { background: rgba(255, 255, 255, .2); border-color: #FFFFFF; }
+
+  .pl-herof__chips {
+    list-style: none;
+    margin: 0;
+    padding: 14px var(--pl-gutter);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 30px;
+    justify-content: center;
+    background: rgba(20, 18, 15, .42);
+    backdrop-filter: blur(10px);
+    border-block-start: 1px solid rgba(255, 255, 255, .16);
+  }
+  .pl-herof__chips li {
+    font-family: var(--pl-sans);
+    font-size: .84rem;
+    color: rgba(255, 255, 255, .92);
+    position: relative;
+    padding-inline-start: 20px;
+  }
+  .pl-herof__chips li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: .38em;
+    width: 11px;
+    height: 6px;
+    /* Physical borders on purpose: a tick mirrored under RTL becomes a chevron. */
+    border-left: 2px solid var(--pl-sand);
+    border-bottom: 2px solid var(--pl-sand);
+    transform: rotate(-45deg);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Hero (full bleed)",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (optional)" },
+    { "type": "select", "id": "focal", "label": "Focal point", "default": "center",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    { "type": "range", "id": "height", "label": "Height (vh)", "min": 50, "max": 95, "step": 5, "default": 85 },
+    { "type": "range", "id": "scrim", "label": "Overlay strength", "min": 20, "max": 85, "step": 5, "default": 60 },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "השיער נשאר עליהם. לא על הספה." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "cta_label", "label": "Primary button", "default": "לקולקציית הטיפוח" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button", "default": "איך זה עובד" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary button link" },
+    { "type": "text", "id": "chip_1", "label": "Chip 1" },
+    { "type": "text", "id": "chip_2", "label": "Chip 2" },
+    { "type": "text", "id": "chip_3", "label": "Chip 3" }
+  ],
+  "presets": [{ "name": "PLUMA · Hero (full bleed)" }]
+}
+{% endschema %}

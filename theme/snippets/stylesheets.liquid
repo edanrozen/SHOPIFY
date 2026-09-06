@@ -1,0 +1,49 @@
+{%- comment -%}
+  Horizon defaults, plus the PLUMA layer.
+  `pluma.css` is loaded after `base.css` so its tokens and overrides win.
+{%- endcomment -%}
+
+{{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
+{{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- liquid
+  assign iso = request.locale.iso_code | downcase
+  assign rtl_locales = 'he,he-il,iw,ar,fa,ur' | split: ','
+  assign is_rtl = false
+  for code in rtl_locales
+    if iso == code
+      assign is_rtl = true
+    endif
+  endfor
+-%}
+
+{%- if is_rtl -%}
+  {%- comment -%}
+    Horizon does not stamp a direction on <html>. Set it in the head, before the
+    body parses, so logical properties and the [dir="rtl"] rules resolve on first paint.
+  {%- endcomment -%}
+  <style>
+    html { direction: rtl; }
+  </style>
+  <script>
+    document.documentElement.setAttribute('dir', 'rtl');
+  </script>
+{%- endif -%}
+
+{%- comment -%}
+  Rubik for headlines, Assistant for text. Both are drawn for Hebrew, so the
+  page never falls back to a Latin face with patched Hebrew glyphs.
+
+  The sheet is fetched with media="print" and promoted on load, so a slow font
+  server cannot hold up the first paint on a phone. `display=swap` means the
+  fallback stack shows immediately and the real face replaces it in place.
+{%- endcomment -%}
+{%- assign pl_fonts = 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rubik:wght@500;600;700&display=swap' -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="{{ pl_fonts }}">
+<link rel="stylesheet" href="{{ pl_fonts }}" media="print" onload="this.media='all'; this.onload=null;">
+<noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
+
+{{ 'pluma.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pluma.js' | asset_url }}" defer></script>

@@ -1,0 +1,407 @@
+/* ==========================================================================
+   PLUMA design system
+   Hebrew first, mobile first. Rubik for display, Assistant for text: both
+   are drawn for Hebrew, so the page never falls back to a Latin face.
+   ========================================================================== */
+
+:root {
+  --pl-porcelain: #FBF9F5;
+  --pl-cream:     #F5EFE6;
+  --pl-sand:      #EADFCE;
+  --pl-sand-deep: #DCCDB4;
+  --pl-ink:       #191713;
+  --pl-ink-soft:  #554E44;
+  --pl-taupe:     #8C8175;
+  --pl-line:      #E6DCCC;
+  --pl-clay:      #B5643A;
+  --pl-clay-deep: #8E4A28;
+  --pl-moss:      #57644F;
+  --pl-white:     #FFFFFF;
+
+  --pl-display: 'Rubik', 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --pl-sans:    'Assistant', 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --pl-wrap: 1240px;
+  --pl-gutter: clamp(18px, 5vw, 56px);
+  --pl-r-s: 12px;
+  --pl-r-m: 18px;
+  --pl-r-l: 24px;
+  --pl-r-pill: 999px;
+
+  --pl-sh-s: 0 2px 10px rgba(25, 23, 19, .05);
+  --pl-sh-m: 0 12px 34px rgba(25, 23, 19, .09);
+  --pl-sh-l: 0 26px 60px rgba(25, 23, 19, .14);
+
+  --pl-ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Primitives. Every size starts at the phone and grows.
+   -------------------------------------------------------------------------- */
+.pl-section { padding-block: clamp(44px, 7vw, 96px); }
+.pl-wrap {
+  width: 100%;
+  max-width: var(--pl-wrap);
+  margin-inline: auto;
+  padding-inline: var(--pl-gutter);
+}
+
+.pl-eyebrow {
+  font-family: var(--pl-sans);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pl-clay);
+  margin: 0 0 12px;
+}
+
+.pl-h1 {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(2.05rem, 7.4vw, 3.5rem);
+  line-height: 1.14;
+  letter-spacing: -.015em;
+  color: var(--pl-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+.pl-h2 {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 5.6vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: var(--pl-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+.pl-h3 {
+  font-family: var(--pl-display);
+  font-weight: 600;
+  font-size: clamp(1.12rem, 3.4vw, 1.4rem);
+  line-height: 1.3;
+  color: var(--pl-ink);
+  margin: 0;
+}
+.pl-lede {
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 3.9vw, 1.14rem);
+  line-height: 1.72;
+  color: var(--pl-ink-soft);
+  margin: 14px 0 0;
+  max-width: 54ch;
+  text-wrap: pretty;
+}
+.pl-body { font-family: var(--pl-sans); font-size: 1rem; line-height: 1.72; color: var(--pl-ink-soft); margin: 0; }
+.pl-small { font-family: var(--pl-sans); font-size: .85rem; line-height: 1.6; color: var(--pl-taupe); margin: 0; }
+
+/* Buttons are full width on a phone, where thumbs are the input device. */
+.pl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 17px 30px;
+  min-height: 52px;
+  border-radius: var(--pl-r-pill);
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .3s var(--pl-ease), background-color .25s var(--pl-ease),
+              color .25s var(--pl-ease), border-color .25s var(--pl-ease), box-shadow .3s var(--pl-ease);
+}
+@media (min-width: 560px) { .pl-btn { width: auto; } }
+.pl-btn:focus-visible { outline: 2px solid var(--pl-clay); outline-offset: 3px; }
+.pl-btn--solid { background: var(--pl-ink); color: var(--pl-porcelain); }
+.pl-btn--ghost { background: transparent; color: var(--pl-ink); border-color: var(--pl-sand-deep); }
+.pl-btn--light { background: var(--pl-porcelain); color: var(--pl-ink); }
+/* Hover is a mouse idiom. On iOS a tap leaves :hover applied until the next tap
+   somewhere else, so an ungated lift stays frozen under the customer's thumb. */
+@media (hover: hover) and (pointer: fine) {
+  .pl-btn--solid:hover { background: var(--pl-clay); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
+  .pl-btn--ghost:hover { border-color: var(--pl-ink); transform: translateY(-2px); }
+  .pl-btn--light:hover { background: var(--pl-white); transform: translateY(-2px); box-shadow: var(--pl-sh-m); }
+}
+/* Touch needs its own feedback, and a press that answers instantly reads as a
+   faster site than one that waits for the next page. */
+.pl-btn:active { transform: scale(.985); }
+
+.pl-reveal { opacity: 0; transform: translateY(18px); }
+.pl-reveal.is-in { opacity: 1; transform: none; transition: opacity .7s var(--pl-ease), transform .7s var(--pl-ease); }
+@media (prefers-reduced-motion: reduce) {
+  .pl-reveal, .pl-reveal.is-in { opacity: 1; transform: none; transition: none; }
+  .pl-marquee__track { animation: none !important; }
+}
+
+/* Email capture, shared by the waitlist blocks. Stacks on a phone. */
+.pl-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--pl-white);
+  border-radius: var(--pl-r-m);
+  padding: 10px;
+  box-shadow: var(--pl-sh-s);
+}
+.pl-field input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 14px 16px;
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  color: var(--pl-ink);
+}
+.pl-field input:focus { outline: none; }
+.pl-field input::placeholder { color: var(--pl-taupe); }
+.pl-field:focus-within { box-shadow: 0 0 0 2px var(--pl-clay); }
+.pl-field__btn { padding: 15px 26px; white-space: nowrap; }
+@media (min-width: 560px) {
+  .pl-field { flex-direction: row; border-radius: var(--pl-r-pill); padding: 6px; align-items: center; }
+  .pl-field input { padding-inline: 20px; }
+  .pl-field__btn { width: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   Horizontal scroll lock. The page must never move sideways.
+
+   One rule is not enough here, and the reason matters. A clip set on the root
+   element has to be propagated to the viewport by the browser, and iOS does
+   not do that reliably. So the same clip is repeated on body, on the page
+   wrapper and on every section this theme owns, which cuts the overflow off at
+   the box that actually produces it instead of trusting propagation.
+
+   `clip` and never `hidden`: `hidden` turns an element into a scroll container,
+   and every `position: sticky` inside it then has nothing to stick to. That
+   would silently kill the sticky header, the sticky product gallery and the
+   sticky review summary. `clip` cuts the overflow without creating a scroller.
+
+   None of this reaches a `position: fixed` element, whose containing block is
+   the viewport rather than body, and an off screen panel is a common cause of
+   a page that drifts. `pluma.js` carries a runtime backstop for that case.
+   -------------------------------------------------------------------------- */
+html { overflow-x: clip; }
+@supports not (overflow: clip) { html { overflow-x: hidden; } }
+body { overflow-x: clip; max-width: 100%; }
+main, #MainContent { overflow-x: clip; }
+/* Section level, so a single wide child can never push the whole document.
+   Safe for the sticky boxes inside these: each is meant to stick within its
+   own section anyway, which is exactly where a section level clip stops it. */
+.pl-section, .pl-heroP, .pl-pdp, .pl-coll, .pl-marquee { overflow-x: clip; }
+
+/* Grid and flex children default to min-width:auto, which is the usual reason
+   a long word or a wide image pushes the page wider than the screen. */
+.pl-grid > *, .pl-rowhead > *, .pl-heroP__grid > *, .pl-rev__grid > * { min-width: 0; }
+/* The same trap one level down: a card title with no spaces, a long product
+   handle, a price and label that will not fit on one line together. */
+.pl-card, .pl-card__body, .pl-card__foot > *, .pl-promise__item, .pl-rev__card { min-width: 0; }
+.pl-card__title, .pl-card__type, .pl-pdp__title { overflow-wrap: anywhere; }
+
+/* --------------------------------------------------------------------------
+   Theme level defaults
+   -------------------------------------------------------------------------- */
+body { background: var(--pl-porcelain); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .h1, .h2, .h3 { font-family: var(--pl-display); letter-spacing: -.01em; }
+body, button, input, select, textarea, p, li, a { font-family: var(--pl-sans); }
+img { max-width: 100%; }
+
+/* iOS Safari inflates body text when a phone is turned to landscape, which
+   breaks every clamp() in this sheet. Opt out and keep our own scale. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Safari zooms the whole viewport when a focused field is under 16px, and it
+   does not zoom back out. The customer is then stuck on a page wider than the
+   screen, mid checkout.
+
+   !important is deliberate and is the only one in this sheet. Horizon sizes its
+   inputs from theme presets through class selectors that outrank a bare element
+   selector, so a polite rule here would simply lose and the trap would stay.
+   The declaration only ever raises a size to 16px; it never shrinks anything. */
+@media (max-width: 900px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea { font-size: max(16px, 1em) !important; }
+}
+
+/* Every in-page jump has to clear the sticky header, otherwise the heading the
+   customer tapped ends up hidden behind it. */
+html { scroll-behavior: smooth; scroll-padding-block-start: 96px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* The grey flash Android paints over a tapped link is nobody's brand colour.
+   The :active states above give better feedback. */
+a, button, summary, [role="button"] { -webkit-tap-highlight-color: transparent; }
+
+/* A control the thumb cannot reliably hit is a control that is not there.
+   48px is the Android and Lighthouse threshold; 44px is Apple's. */
+button, [role="button"], summary { touch-action: manipulation; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Star rating. Fills left to right whatever the page direction.
+   -------------------------------------------------------------------------- */
+.pl-stars { position: relative; display: inline-block; direction: ltr; line-height: 0; flex: 0 0 auto; }
+.pl-stars__row { display: inline-flex; gap: 1px; }
+.pl-stars__row svg { width: var(--pl-stars-size, 15px); height: var(--pl-stars-size, 15px); display: block; }
+.pl-stars__row--bg { color: var(--pl-sand-deep); }
+.pl-stars__row--fg {
+  position: absolute;
+  inset-block-start: 0;
+  left: 0;
+  width: var(--pl-stars-pct, 0%);
+  overflow: hidden;
+  color: var(--pl-clay);
+}
+
+/* --------------------------------------------------------------------------
+   Product card. One card, used by every listing in the theme.
+   No text ever sits on top of a photo.
+   -------------------------------------------------------------------------- */
+.pl-card__link { display: block; text-decoration: none; color: inherit; height: 100%; }
+.pl-card__media {
+  position: relative;
+  border-radius: var(--pl-r-m);
+  overflow: hidden;
+  background: var(--pl-cream);
+  aspect-ratio: 1 / 1;
+  transition: box-shadow .4s var(--pl-ease), transform .4s var(--pl-ease);
+}
+.pl-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity .5s var(--pl-ease), transform .8s var(--pl-ease);
+}
+.pl-card__img--back { opacity: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .pl-card__link:hover .pl-card__media { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
+  .pl-card__link:hover .pl-card__img--front { transform: scale(1.04); }
+  .pl-card__link:hover .pl-card__img--back { opacity: 1; transform: scale(1.04); }
+}
+.pl-card__link:active .pl-card__media { transform: scale(.99); }
+.pl-card__badge {
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-start: 10px;
+  background: var(--pl-white);
+  color: var(--pl-ink);
+  font-family: var(--pl-sans);
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: var(--pl-r-pill);
+  box-shadow: var(--pl-sh-s);
+}
+.pl-card__body { padding-block-start: 12px; display: grid; gap: 6px; }
+.pl-card__rating { display: flex; align-items: center; gap: 6px; }
+.pl-card__rating-count { font-family: var(--pl-sans); font-size: .78rem; color: var(--pl-taupe); }
+.pl-card__title {
+  font-family: var(--pl-sans);
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--pl-ink);
+  margin: 0;
+}
+.pl-card__type { font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); margin: 0; }
+.pl-card__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 10px; margin-block-start: 2px; }
+.pl-card__price { font-family: var(--pl-sans); font-weight: 700; color: var(--pl-ink); }
+.pl-card__cta { display: none; }
+@media (min-width: 900px) {
+  .pl-card__cta {
+    display: inline;
+    font-family: var(--pl-sans);
+    font-size: .8rem;
+    color: var(--pl-taupe);
+    opacity: 0;
+    transition: opacity .3s var(--pl-ease);
+  }
+  .pl-card__link:hover .pl-card__cta { opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Grids and rails. Two columns on a phone, four on a desktop.
+   -------------------------------------------------------------------------- */
+.pl-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 640px)  { .pl-grid { gap: 22px 18px; } }
+@media (min-width: 760px)  { .pl-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 760px)  { .pl-grid--4 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1080px) { .pl-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 22px; } }
+
+/* The rail runs to the screen edge on a phone so it reads as swipeable.
+   It sits inside .pl-wrap, so it pulls back out by the same gutter. */
+.pl-rail {
+  list-style: none;
+  margin: 0 calc(var(--pl-gutter) * -1);
+  padding: 0 var(--pl-gutter) 6px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 62vw;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.pl-rail::-webkit-scrollbar { display: none; }
+.pl-rail > li { scroll-snap-align: start; }
+@media (min-width: 560px)  { .pl-rail { grid-auto-columns: 40vw; gap: 16px; } }
+@media (min-width: 900px)  { .pl-rail { grid-auto-columns: 28vw; } }
+@media (min-width: 1080px) { .pl-rail { grid-auto-columns: minmax(0, 270px); margin-inline: 0; padding-inline: 0; } }
+
+.pl-rowhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-block-end: clamp(22px, 3.4vw, 40px);
+}
+.pl-rowhead > div { max-width: 44rem; }
+.pl-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--pl-sans);
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  text-decoration: none;
+  border-block-end: 1.5px solid var(--pl-sand-deep);
+  padding-block-end: 5px;
+  transition: color .25s var(--pl-ease), border-color .25s var(--pl-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .pl-link:hover { color: var(--pl-clay); border-color: var(--pl-clay); }
+}
+/* A text link is still a tap target. Growing the element would drag its
+   underline away from the text, so the hit area is extended by an invisible
+   overlay instead and the link keeps its exact typography. */
+.pl-link { position: relative; }
+.pl-link::after { content: ""; position: absolute; inset-block: -13px; inset-inline: -8px; }

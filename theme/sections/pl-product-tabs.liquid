@@ -1,0 +1,131 @@
+{%- liquid
+  assign specs = product.metafields.custom.specs.value
+  assign in_box = product.metafields.custom.in_box.value
+-%}
+
+<section class="pl-tabs pl-section">
+  <div class="pl-wrap pl-tabs__grid">
+    <div class="pl-tabs__intro pl-reveal">
+      {%- if section.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="pl-h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}<p class="pl-lede">{{ section.settings.body }}</p>{%- endif -%}
+    </div>
+
+    <div class="pl-tabs__list pl-reveal">
+      {%- if product.description != blank -%}
+        <details class="pl-tabs__item" open>
+          <summary><span>{{ section.settings.label_about }}</span>{% render 'pl-plus' %}</summary>
+          <div class="pl-tabs__body pl-rte">{{ product.description }}</div>
+        </details>
+      {%- endif -%}
+
+      {%- if specs != blank -%}
+        <details class="pl-tabs__item">
+          <summary><span>{{ section.settings.label_specs }}</span>{% render 'pl-plus' %}</summary>
+          <div class="pl-tabs__body">
+            <dl class="pl-specs">
+              {%- for row in specs -%}
+                <div><dt>{{ row.label }}</dt><dd>{{ row.value }}</dd></div>
+              {%- endfor -%}
+            </dl>
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- if in_box != blank -%}
+        <details class="pl-tabs__item">
+          <summary><span>{{ section.settings.label_box }}</span>{% render 'pl-plus' %}</summary>
+          <div class="pl-tabs__body">
+            <ul class="pl-tabs__ul">
+              {%- for item in in_box -%}<li>{{ item }}</li>{%- endfor -%}
+            </ul>
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        <details class="pl-tabs__item" {{ block.shopify_attributes }}>
+          <summary><span>{{ block.settings.title }}</span>{% render 'pl-plus' %}</summary>
+          <div class="pl-tabs__body pl-rte">{{ block.settings.text }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-tabs { background: var(--pl-cream); }
+  .pl-tabs__grid { display: grid; gap: clamp(28px, 4vw, 66px); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 940px) { .pl-tabs__grid { grid-template-columns: .8fr 1.2fr; } }
+  .pl-tabs__item { border-block-end: 1px solid var(--pl-line); }
+  .pl-tabs__item:first-child { border-block-start: 1px solid var(--pl-line); }
+  .pl-tabs__item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding-block: clamp(18px, 2.4vw, 24px);
+    font-family: var(--pl-sans);
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--pl-ink);
+  }
+  .pl-tabs__item summary::-webkit-details-marker { display: none; }
+  .pl-tabs__item summary svg { flex: 0 0 auto; color: var(--pl-clay); transition: transform .35s var(--pl-ease); }
+  .pl-tabs__item[open] summary svg { transform: rotate(45deg); }
+  .pl-tabs__body { padding-block-end: 26px; max-width: 62ch; }
+  .pl-rte { font-family: var(--pl-sans); font-size: .97rem; line-height: 1.75; color: var(--pl-ink-soft); }
+  .pl-rte h3 { font-family: var(--pl-display); font-size: 1.15rem; color: var(--pl-ink); margin: 22px 0 10px; }
+  .pl-rte ul { margin: 0 0 14px; padding-inline-start: 20px; }
+  .pl-rte li { margin-block-end: 7px; }
+  .pl-rte p { margin: 0 0 12px; }
+  .pl-rte strong { color: var(--pl-ink); }
+
+  .pl-specs { margin: 0; display: grid; gap: 0; }
+  .pl-specs > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px 18px;
+    /* A long value on a 360px screen has to be allowed onto its own line
+       instead of being crushed into a two word column against the label. */
+    flex-wrap: wrap;
+    padding-block: 12px;
+    border-block-end: 1px dashed var(--pl-line);
+  }
+  .pl-specs > div:last-child { border-block-end: 0; }
+  .pl-specs dt { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-taupe); margin: 0; flex: 0 0 auto; }
+  .pl-specs dd { font-family: var(--pl-sans); font-size: .92rem; color: var(--pl-ink); margin: 0; text-align: end; flex: 1 1 auto; min-width: 0; }
+  .pl-tabs__ul { margin: 0; padding-inline-start: 20px; font-family: var(--pl-sans); font-size: .95rem; color: var(--pl-ink-soft); }
+  .pl-tabs__ul li { margin-block-end: 8px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Product details",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "כל הפרטים" },
+    { "type": "textarea", "id": "body", "label": "Body" },
+    { "type": "text", "id": "label_about", "label": "About label", "default": "על המוצר" },
+    { "type": "text", "id": "label_specs", "label": "Specs label", "default": "מפרט טכני" },
+    { "type": "text", "id": "label_box", "label": "In the box label", "default": "מה מגיע בקופסה" }
+  ],
+  "blocks": [
+    {
+      "type": "extra",
+      "name": "Extra section",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "PLUMA · Product details",
+    "blocks": [{ "type": "extra" }, { "type": "extra" }]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+<section class="pl-reviews pl-section">
+  <div class="pl-wrap">
+    <div class="pl-reviews__head pl-reveal">
+      {%- if section.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="pl-h2">{{ section.settings.heading }}</h2>
+    </div>
+
+    <ul class="pl-reviews__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="pl-review pl-reveal" {{ block.shopify_attributes }} style="transition-delay: {{ forloop.index0 | times: 90 }}ms;">
+          <div class="pl-review__stars" aria-label="{{ block.settings.rating }} מתוך 5">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" focusable="false" class="{% if i > block.settings.rating %}is-off{% endif %}">
+                <path d="M10 1.6l2.47 5.3 5.53.66-4.1 3.9 1.1 5.7L10 14.4 4.99 17.16l1.1-5.7-4.1-3.9 5.54-.66z" fill="currentColor"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="pl-review__quote">{{ block.settings.quote }}</blockquote>
+          <footer class="pl-review__by">
+            <span class="pl-review__name">{{ block.settings.name }}</span>
+            {%- if block.settings.meta != blank -%}<span class="pl-review__meta">{{ block.settings.meta }}</span>{%- endif -%}
+          </footer>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="pl-small pl-reviews__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-reviews { background: var(--pl-cream); }
+  .pl-reviews__head { max-width: 40rem; margin-block-end: clamp(30px, 4vw, 48px); }
+  .pl-reviews__list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: 18px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) { .pl-reviews__list { grid-template-columns: repeat(3, 1fr); } }
+  .pl-review {
+    background: var(--pl-porcelain);
+    border: 1px solid var(--pl-line);
+    border-radius: var(--pl-r-l);
+    padding: clamp(24px, 3vw, 34px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .pl-review__stars { color: var(--pl-clay); display: flex; gap: 2px; }
+  .pl-review__stars .is-off { color: var(--pl-sand-deep); }
+  .pl-review__quote {
+    font-family: var(--pl-display);
+    font-weight: 500;
+    font-size: 1.09rem;
+    line-height: 1.62;
+    color: var(--pl-ink);
+    margin: 0;
+    flex: 1;
+  }
+  .pl-review__by { display: flex; flex-direction: column; gap: 3px; }
+  .pl-review__name { font-family: var(--pl-sans); font-size: .9rem; font-weight: 600; color: var(--pl-ink); }
+  .pl-review__meta { font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); }
+  .pl-reviews__disclaimer { margin-block-start: 22px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Reviews",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "מה אומרים" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "לקוחות שכבר הפסיקו לשאוב כל יום" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "טקסטים לדוגמה לצורכי תצוגה בלבד. יש להחליף אותם בביקורות אמיתיות של לקוחות." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "ציטוט." },
+        { "type": "text", "id": "name", "label": "Name", "default": "שם" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "עיר, גזע" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "PLUMA · Reviews",
+    "blocks": [
+      { "type": "review", "settings": { "rating": 5, "quote": "יש לנו גולדן ריטריבר וספה בז׳. עד היום זה היה סיפור אבוד. שני מעברים והספה נראית כמו ביום שקנינו אותה.", "name": "נועה ל׳", "meta": "תל אביב · גולדן ריטריבר" } },
+      { "type": "review", "settings": { "rating": 5, "quote": "קניתי בעיקר בשביל המסרק. החתולה בורחת מכל דבר, ואת זה היא דווקא אוהבת. כמות הפרווה שיורדת בכל סירוק מטריפה.", "name": "יונתן ר׳", "meta": "חיפה · חתול פרסי" } },
+      { "type": "review", "settings": { "rating": 5, "quote": "הפסקנו לקנות רולרים דביקים לגמרי. זה הכלי היחיד בבית שאני לא צריך למלא, להטעין או להחליף.", "name": "מיכל ב׳", "meta": "מודיעין · שני כלבים" } }
+    ]
+  }]
+}
+{% endschema %}

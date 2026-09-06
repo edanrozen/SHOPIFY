@@ -1,0 +1,91 @@
+{%- comment -%}
+  Collection page. The title sits on a plain background and the cover photo
+  runs underneath it, so nothing is read through an image.
+{%- endcomment -%}
+
+<section class="pl-coll">
+  <header class="pl-wrap pl-coll__head">
+    <nav class="pl-coll__crumbs" aria-label="ניווט">
+      <a href="/">בית</a><span aria-hidden="true">·</span><span>{{ collection.title }}</span>
+    </nav>
+    <h1 class="pl-coll__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="pl-coll__desc">{{ collection.description }}</div>
+    {%- endif -%}
+    <p class="pl-coll__count">{{ collection.products_count }} מוצרים</p>
+  </header>
+
+  {%- if collection.image != blank and section.settings.show_image -%}
+    <div class="pl-wrap">
+      <div class="pl-coll__media">
+        <img
+          src="{{ collection.image | image_url: width: 1600 }}"
+          srcset="{{ collection.image | image_url: width: 800 }} 800w, {{ collection.image | image_url: width: 1400 }} 1400w"
+          sizes="(max-width: 899px) 92vw, 1180px"
+          width="{{ collection.image.width }}" height="{{ collection.image.height }}"
+          alt="{{ collection.image.alt | default: collection.title | escape }}"
+          fetchpriority="high" decoding="async"
+        >
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="pl-wrap pl-coll__body">
+    <ul class="pl-grid pl-grid--4" role="list">
+      {%- for item in collection.products -%}
+        <li class="pl-reveal" style="transition-delay: {{ forloop.index0 | times: 45 }}ms;">
+          {% render 'pl-card', product: item %}
+        </li>
+      {%- else -%}
+        <li class="pl-body">{{ section.settings.empty_text }}</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-coll { background: var(--pl-porcelain); }
+  .pl-coll__head { padding-block: clamp(24px, 4vw, 48px) clamp(16px, 2.4vw, 24px); }
+  .pl-coll__crumbs { display: flex; gap: 8px; font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); }
+  .pl-coll__crumbs a { color: var(--pl-taupe); text-decoration: none; }
+  .pl-coll__crumbs a:hover { color: var(--pl-clay); }
+  .pl-coll__title {
+    font-family: var(--pl-display);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 6.4vw, 3rem);
+    line-height: 1.14;
+    letter-spacing: -.015em;
+    color: var(--pl-ink);
+    margin: 12px 0 0;
+  }
+  .pl-coll__desc {
+    font-family: var(--pl-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--pl-ink-soft);
+    margin-block-start: 12px;
+    max-width: 54ch;
+  }
+  .pl-coll__desc p { margin: 0; }
+  .pl-coll__count { font-family: var(--pl-sans); font-size: .82rem; color: var(--pl-taupe); margin: 14px 0 0; }
+  .pl-coll__media {
+    border-radius: var(--pl-r-l);
+    overflow: hidden;
+    background: var(--pl-cream);
+    aspect-ratio: 3 / 2;
+  }
+  @media (min-width: 900px) { .pl-coll__media { aspect-ratio: 21 / 8; } }
+  .pl-coll__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pl-coll__body { padding-block: clamp(26px, 4vw, 48px) clamp(48px, 7vw, 90px); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PLUMA · Collection",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_image", "label": "Show the collection cover photo", "default": true },
+    { "type": "text", "id": "empty_text", "label": "Empty state", "default": "האוסף הזה עדיין ריק. חזרו בקרוב." }
+  ]
+}
+{% endschema %}
