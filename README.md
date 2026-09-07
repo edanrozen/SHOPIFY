@@ -31,7 +31,7 @@ waitlist form, and the homepage no longer ends on a "prices coming soon" band.
 | `pluma-clean-mini` | פלומה קלין מיני, מסיר שיער נייד לתיק ולרכב | 50 |
 | `pluma-nest` | פלומה נסט, מיטת נייר מתקפלת לחתול | 46 |
 | `pluma-nest-maxi` | פלומה נסט מקסי, פינת מנוחה מתקפלת | 42 |
-| `pluma-tower` | פלומה טאוור, עמוד גירוד ומשחק לחתול | 38 |
+| `tinybloom-fur-glove` | כפפת הפרווה של TinyBloom | 40 |
 | `pluma-dart` | פלומה דארט, צעצוע רובוטי על שלט | 28 |
 
 386 reviews in total, which is the number the homepage quotes in the hero, in the story
@@ -131,15 +131,29 @@ Twelve photos live in Shopify Files and are wired up as follows.
 | `…17.24.24-3.jpg` | `pluma-glide-comb`, `combs` cover |
 | `…17.24.23-2.jpg` | `pluma-nest`, `home-rest` cover |
 | `…17.24.23.jpg` | `pluma-nest-maxi` |
-| `…17.26.53.jpg` | `pluma-tower` |
+| `…17.26.53.jpg` | `tinybloom-fur-glove` |
 | `…17.29.26.jpg` | `pluma-dart`, `play` cover |
 
 The session could not fetch `cdn.shopify.com` (blocked by the environment's egress proxy), so the
 mapping was inferred from each file's pixel dimensions and upload batch rather than from viewing
 the images. Three of them had never been named by the merchant, and the products built around
-them (`pluma-clean-mini`, `pluma-nest-maxi`, `pluma-tower`) carry titles, copy and specs written
-from that inference. Check those three first on the preview; renaming a product and rewriting its
-description does not touch the theme.
+them carry titles, copy and specs written from that inference. Check them on the preview;
+renaming a product and rewriting its description does not touch the theme.
+
+One of the three has since been corrected. `pluma-tower` was a guess at a cat scratching post and
+was in fact the grooming glove: it is now `tinybloom-fur-glove`, rebuilt from the merchant's own
+description. `pluma-clean-mini` and `pluma-nest-maxi` are still inferred and still unconfirmed.
+
+### `tinybloom-fur-glove`
+
+Everything on this product was rewritten from the merchant's description and nothing else. The
+specs table therefore carries no size, weight, colour, material composition or washing
+instructions, because the description does not state them and a spec invented to fill a table is
+a spec a customer can hold you to. The same rule governs the reviews: they describe collecting
+hair off fabric, never brushing the animal, because the description only claims the former.
+
+Its old URL carried a stray Hebrew character (`/products/ףpluma-tower`). The handle is now clean
+and a URL redirect from the old path is in place.
 
 ## Design system
 
