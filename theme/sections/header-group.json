@@ -8,7 +8,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "משלוח חינם בהזמנה מעל ₪199 · 30 יום להתנסות בבית",
+            "text": "משלוח חינם בהזמנה מעל ₪199 · אספקה תוך 10 עד 14 ימי עסקים",
             "font": "var(--font-subheading--family)",
             "font_size": "0.78rem",
             "letter_spacing": "normal",
@@ -19,7 +19,7 @@
         "announcement_pl2": {
           "type": "_announcement",
           "settings": {
-            "text": "החזרה חינם תוך 30 יום, גם אחרי שימוש",
+            "text": "ישירות מהיצרן, בלי יבואן ובלי מתווך",
             "font": "var(--font-subheading--family)",
             "font_size": "0.78rem",
             "letter_spacing": "normal",

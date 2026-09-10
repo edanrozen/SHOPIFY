@@ -130,6 +130,50 @@ will be wrong. Real weights in grams are needed per product.
 SKUs are `PLM-*`, left over from the old brand name, and two products have none at all.
 They appear on packing slips and on the customer's invoice.
 
+## Fulfilment
+
+The catalogue ships from the manufacturer in China. Delivery is **10 to 14 business days**
+from payment, and every delivery claim on the site now says exactly that. The site used to
+promise 1 to 3 business days from Israeli stock, which was never true of this catalogue.
+
+### Shipping zones
+
+The store shipped **only to the United States**, priced in USD, because the demo profile was
+never replaced. No Israeli customer could complete checkout. The default profile now carries
+an Israel zone:
+
+| Rate | Price | Condition |
+|---|---|---|
+| משלוח עד הבית | 29.90 ILS | order under 199 ILS |
+| משלוח חינם | 0 | order 199 ILS and over |
+
+The old North America zone is still there and still priced in USD. Nobody can reach it, since
+the only market is Israel, but it is junk and should be deleted in the admin.
+
+### Returns
+
+The site promised a 30 day home trial with free returns after use, and a return label sent by
+us. That is not survivable when the parcel came from China and the product costs 60 to 140
+shekels: reverse logistics cost more than the goods. It also contradicted the refund policy,
+which said the opposite.
+
+Every returns claim now states the statutory position instead: 14 days to cancel, unopened,
+return shipping on the customer, a cancellation fee of 5% or 100 ILS whichever is lower, and
+the refund inside 14 days. The risk reducer that replaces the trial is one the store can
+actually honour: **a faulty, wrong or missing item is replaced or refunded with no return at
+all.** That costs one unit and buys more trust than a trial nobody claims.
+
+### Policies
+
+`policies/` holds the three legal documents as paste ready HTML. The API token for this store
+lacks `write_legal_policies`, so they cannot be deployed from here. Paste each into Settings,
+Policies, replacing what is there.
+
+The shipping policy said 14 to 56 business days, the refund policy said refunds inside **90
+business days**, which is unlawful, and the contact policy contained the live placeholder
+`(להכניס כאן את שם המותג שלך)`. All three are corrected in these files. Still missing and
+still required for a distance sale in Israel: a phone number and a business address.
+
 ## Before launch
 
 1. **Replace the sample reviews.** They are placeholder copy in `custom.reviews` and
