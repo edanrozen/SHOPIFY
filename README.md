@@ -105,6 +105,31 @@ shopify theme pull --store tinybloom.us --theme 154949287988
 Hebrew webfonts), `snippets/price.liquid` (money formatting, sale price and unit price),
 `sections/header-group.json`, `sections/footer-group.json`, `config/settings_data.json`.
 
+## Inventory
+
+Every variant is configured the same way, because a catalogue that is inconsistent about
+stock reports itself differently on every surface Shopify feeds.
+
+| Setting | Value | Why |
+|---|---|---|
+| Tracked | on | Three products shipped with tracking off, which reports a sellable quantity of zero to every sales channel feed even though the storefront still sells them. |
+| Policy | continue selling when out of stock | A supplier lead time is not the same thing as no stock. The store never loses a sale to a counter. |
+| Quantity | 500 at Gid'on Street | Replaces the 0 / 10,000 / 100,000 mix the catalogue was carrying. A plausible number, and one that survives export to Meta and Google. |
+
+The storefront reads `product.available`, which is true whenever the policy is "continue",
+so the buy button is not driven by this number. The channel feeds are: Facebook & Instagram
+and Microsoft Copilot both publish `sellableOnlineQuantity`, and zero there means out of
+stock on Instagram Shopping regardless of what the site says.
+
+### Still missing
+
+Every variant weighs 0, in pounds, on a store that ships from Israel. Nothing breaks while
+shipping is flat rate, but any weight based courier rate will price at zero and the labels
+will be wrong. Real weights in grams are needed per product.
+
+SKUs are `PLM-*`, left over from the old brand name, and two products have none at all.
+They appear on packing slips and on the customer's invoice.
+
 ## Before launch
 
 1. **Replace the sample reviews.** They are placeholder copy in `custom.reviews` and
