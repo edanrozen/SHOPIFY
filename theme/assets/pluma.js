@@ -60,11 +60,16 @@
   /**
    * Horizontal scroll lock, the part CSS cannot do.
    *
-   * `overflow-x: clip` is set on the root, on body, on the main wrapper and on
-   * every section, but none of that clips a `position: fixed` element: its
-   * containing block is the viewport, not body. An off screen panel parked
-   * outside the window still widens the document, and the page can then be
-   * dragged sideways into an empty margin. This snaps it back.
+   * `overflow-x: clip` is set on the root, on body, on main and on every
+   * section, and `body { position: relative }` now makes body the containing
+   * block so that clip reaches absolutely positioned boxes too. This stays as
+   * the runtime backstop for whatever still gets through: a third party script,
+   * an app embed, a section added later. It snaps the page back to rest.
+   *
+   * An earlier version of this comment blamed `position: fixed`. That was
+   * wrong, and measuring said so: Chromium contains fixed boxes in both
+   * directions. It is `position: absolute` escaping to the left that widens an
+   * RTL document.
    *
    * Zero is the resting position in both directions: RTL rests at 0 and goes
    * negative to the left, LTR rests at 0 and goes positive to the right.
@@ -108,6 +113,83 @@
     snapBack();
   }
 
+  /**
+   * Overflow diagnostic, opt in with `?pldebug=1`.
+   *
+   * The storefront cannot be reached from the environment this theme is
+   * developed in, so when a phone shows sideways drift there is no way to
+   * inspect it remotely. This paints the answer onto the page instead: the
+   * document width, the viewport width, and the boxes that cross either edge,
+   * innermost first, skipping anything inside a scroller because a rail that
+   * scrolls is doing its job. Tap the panel to dismiss it.
+   *
+   * Inert without the parameter. Nothing below runs on a normal page load.
+   */
+  function debugOverflow() {
+    if (!/[?&]pldebug=1\b/.test(window.location.search)) return;
+
+    function label(el) {
+      var out = el.tagName.toLowerCase();
+      if (el.id) out += '#' + el.id;
+      if (typeof el.className === 'string' && el.className.trim()) {
+        out += '.' + el.className.trim().split(/\s+/).slice(0, 3).join('.');
+      }
+      return out;
+    }
+
+    function inScroller(el) {
+      for (var n = el.parentElement; n && n !== document.body; n = n.parentElement) {
+        var ox = getComputedStyle(n).overflowX;
+        if (ox === 'auto' || ox === 'scroll') return true;
+      }
+      return false;
+    }
+
+    function report() {
+      var root = document.documentElement;
+      var vw = root.clientWidth;
+      var rows = [];
+
+      document.querySelectorAll('body *').forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (!r.width && !r.height) return;
+        var over = Math.max(Math.round(r.right - vw), Math.round(-r.left));
+        if (over <= 1 || inScroller(el)) return;
+        rows.push({ el: el, over: over, w: Math.round(r.width), pos: getComputedStyle(el).position });
+      });
+
+      rows.sort(function (a, b) { return b.over - a.over; });
+
+      var panel = document.getElementById('pl-debug') || document.createElement('div');
+      panel.id = 'pl-debug';
+      panel.setAttribute('style', [
+        'position:fixed', 'inset-block-start:0', 'inset-inline:0', 'z-index:2147483647',
+        'background:#191713', 'color:#FBF9F5', 'font:12px/1.5 ui-monospace,monospace',
+        'padding:10px 12px', 'max-height:52vh', 'overflow:auto', 'direction:ltr',
+        'text-align:left', 'white-space:pre-wrap'
+      ].join(';'));
+
+      var head = 'viewport ' + vw + '  document ' + root.scrollWidth +
+        (root.scrollWidth > vw ? '  OVERFLOW +' + (root.scrollWidth - vw) : '  no overflow') +
+        '\nzoom ' + (window.visualViewport ? window.visualViewport.scale.toFixed(2) : 'n/a') +
+        '   dir ' + (root.getAttribute('dir') || 'ltr') + '\n\n';
+
+      panel.textContent = head + (rows.length
+        ? rows.slice(0, 10).map(function (r) {
+            return '+' + r.over + 'px  w=' + r.w + '  ' + r.pos + '  ' + label(r.el);
+          }).join('\n')
+        : 'no box crosses either edge');
+
+      panel.addEventListener('click', function () { panel.remove(); });
+      if (!panel.parentNode) document.body.appendChild(panel);
+    }
+
+    // After layout has settled: fonts, images and the header measuring script
+    // all move things, and a reading taken too early names the wrong element.
+    window.setTimeout(report, 600);
+    window.addEventListener('resize', function () { window.setTimeout(report, 200); });
+  }
+
   function boot(root) {
     init(root);
     if ('requestIdleCallback' in window) {
@@ -121,10 +203,12 @@
     document.addEventListener('DOMContentLoaded', function () {
       boot();
       lockHorizontalScroll();
+      debugOverflow();
     });
   } else {
     boot();
     lockHorizontalScroll();
+    debugOverflow();
   }
 
   // Theme editor: re-scan when a section is re-rendered.

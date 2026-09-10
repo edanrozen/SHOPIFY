@@ -156,6 +156,39 @@ than by editing that section, because editing it would move the desktop grid: it
 what currently supplies the 3 column layout between 1080px and 1100px, and the
 `clamp(18px, 2.4vw, 30px)` gap. Worth untangling deliberately, as a desktop change.
 
+### The RTL asymmetry
+
+A phone screenshot after the fix above still showed the whole document rendered
+narrow and pinned right, with the browser's own canvas white beside it. That is a
+zoomed out page, so something was still making the document far wider than the
+screen, in a part of the page the harness does not cover.
+
+Measured the mechanism instead of guessing at the element. At a 390px viewport,
+with `overflow-x: clip` on both `html` and `body`:
+
+| Off canvas box | RTL | LTR |
+|---|---|---|
+| `position: fixed`, any offset | 390px, contained | 390px, contained |
+| `position: absolute`, `left: -320px` | **710px, widens the page** | 390px, contained |
+
+So `position: fixed` was never the problem, and the comment in `pluma.js` that
+blamed it was wrong. The trap is `position: absolute`: when no ancestor is
+positioned, it resolves against the initial containing block and escapes every
+clip on the page. In LTR that overflow is simply unreachable. In RTL it is
+scrollable width, and the browser zooms out to show it.
+
+`body { position: relative }` makes body the containing block, so the clip already
+on body finally reaches those boxes. One declaration, and it closes the whole
+class rather than one instance.
+
+### Finding the instance
+
+`pluma.js` carries an opt in diagnostic: load any page with `?pldebug=1` and it
+paints a panel listing the viewport width, the document width, the zoom level and
+every box crossing either edge, skipping anything inside a scroller. It exists
+because the storefront cannot be reached from here, so a screenshot is the only
+channel back. It is inert without the parameter.
+
 ### Measured, not eyeballed
 
 `tools/responsive-check/` renders the theme's CSS in Chromium and measures. After

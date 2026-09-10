@@ -219,6 +219,20 @@ main, #MainContent { overflow-x: clip; }
      either. Belt and braces: min-width:0 above fixes the column, this keeps the
      rail honest if it is ever moved out of that grid. */
   .pl-pdp__thumbs, .pl-rail, .pl-story__gallery { min-width: 0; max-width: 100%; }
+
+  /* Makes body the containing block for absolutely positioned descendants, so
+     the `overflow-x: clip` on body actually reaches them.
+
+     Without it, an absolutely positioned box whose ancestors are all unpositioned
+     resolves against the initial containing block and escapes every clip on the
+     page. That is invisible in LTR, where overflow past the left edge is simply
+     unreachable, and it breaks RTL, where the same overflow is scrollable width.
+     Measured in Chromium at a 390px viewport with one absolute panel parked at
+     left:-320px: the document goes to 710px under RTL and stays 390px under LTR.
+
+     `position: fixed` is not the problem and never was: Chromium contains fixed
+     boxes in both directions. The comment in pluma.js used to claim otherwise. */
+  body { position: relative; }
 }
 /* The same trap one level down: a card title with no spaces, a long product
    handle, a price and label that will not fit on one line together. */
