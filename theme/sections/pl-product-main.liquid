@@ -1,6 +1,24 @@
 {%- liquid
-  assign rating = product.metafields.custom.rating.value
   assign rating_count = product.metafields.custom.rating_count.value | default: 0
+
+  comment
+    A rating metafield's number arrives as a string, and Liquid evaluates
+    `and` right to left, so a blank guard on the left never runs first.
+    plus: 0 makes the comparison safe for both the missing and the string case.
+  endcomment
+  assign rating_value = product.metafields.custom.rating.value.rating | plus: 0
+
+  comment
+    Off until the reviews are real. See the same switch in snippets/pl-card.
+  endcomment
+  assign show_ratings = false
+
+  comment
+    compare_at_price is nil when no variant carries one, and nil cannot be
+    compared with a price. Coerced here so the sale price markup stays a
+    plain comparison.
+  endcomment
+  assign compare_at = product.compare_at_price | plus: 0
   assign highlights = product.metafields.custom.highlights.value
   assign for_pets = product.metafields.custom.for_pets.value
   assign badge = product.metafields.custom.badge.value
@@ -70,10 +88,10 @@
 
       <h1 class="pl-pdp__title">{{ product.title }}</h1>
 
-      {%- if rating != blank and rating.rating > 0 -%}
+      {%- if show_ratings and rating_value > 0 -%}
         <a class="pl-pdp__rating" href="#pl-reviews">
-          {% render 'pl-stars', value: rating.rating, size: 16, label: 'דירוג ממוצע' %}
-          <span>{{ rating.rating }} מתוך 5</span>
+          {% render 'pl-stars', value: rating_value, size: 16, label: 'דירוג ממוצע' %}
+          <span>{{ rating_value }} מתוך 5</span>
           <span class="pl-pdp__rating-count">{{ rating_count }} ביקורות</span>
         </a>
       {%- endif -%}
@@ -90,7 +108,7 @@
 
       <div class="pl-pdp__buy">
         <p class="pl-pdp__price">
-          {%- if product.compare_at_price > product.price -%}
+          {%- if compare_at > product.price -%}
             <s class="pl-pdp__was">{{ product.compare_at_price | money }}</s>
           {%- endif -%}
           {{ product.price | money }}
@@ -140,7 +158,7 @@
     <div class="pl-buybar__text">
       <span class="pl-buybar__title">{{ product.title }}</span>
       <span class="pl-buybar__price">
-        {%- if product.compare_at_price > product.price -%}
+        {%- if compare_at > product.price -%}
           <s>{{ product.compare_at_price | money }}</s>
         {%- endif -%}
         {{ product.price | money }}

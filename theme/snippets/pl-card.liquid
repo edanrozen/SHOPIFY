@@ -8,9 +8,26 @@
   assign media_first = product.featured_media
   assign media_second = product.media[1]
   assign badge = product.metafields.custom.badge.value
-  assign rating = product.metafields.custom.rating.value
   assign rating_count = product.metafields.custom.rating_count.value
   assign hover = cta | default: 'לפרטים'
+
+  comment
+    Shopify stores a rating metafield's number as a string, and Liquid
+    evaluates `and` right to left, so the old `rating != blank and
+    rating.rating > 0` ran the comparison first and printed
+    "comparison of String with 0 failed" onto every card on the homepage.
+    plus: 0 turns both the missing metafield and the string into a number,
+    which is the only thing the comparison needs.
+  endcomment
+  assign rating_value = product.metafields.custom.rating.value.rating | plus: 0
+
+  comment
+    Off until the store has real customer reviews. The catalogue's ratings
+    are placeholders, and a star rating is a factual claim: it cannot be
+    shown without them being real. Flip to true once a reviews app fills
+    custom.rating with genuine data.
+  endcomment
+  assign show_ratings = false
 -%}
 
 <article class="pl-card">
@@ -49,10 +66,10 @@
     </div>
 
     <div class="pl-card__body">
-      {%- if rating != blank and rating.rating > 0 -%}
+      {%- if show_ratings and rating_value > 0 -%}
         <span class="pl-card__rating">
-          {% render 'pl-stars', value: rating.rating, size: 13 %}
-          <span class="pl-card__rating-count">{{ rating.rating }} ({{ rating_count | default: 0 }})</span>
+          {% render 'pl-stars', value: rating_value, size: 13 %}
+          <span class="pl-card__rating-count">{{ rating_value }} ({{ rating_count | default: 0 }})</span>
         </span>
       {%- endif -%}
 

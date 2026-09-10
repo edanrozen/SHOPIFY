@@ -130,6 +130,64 @@ will be wrong. Real weights in grams are needed per product.
 SKUs are `PLM-*`, left over from the old brand name, and two products have none at all.
 They appear on packing slips and on the customer's invoice.
 
+## Ratings and reviews
+
+The store has no customers yet, so it has no reviews. What was on the site was
+placeholder content: eight products carrying a `custom.rating` between 4.3 and 4.6,
+`custom.rating_count` totalling 332, and invented quote sets in `custom.reviews`.
+
+A star rating is a factual claim about other people's experience. Showing invented ones
+without disclosure is misleading under חוק הגנת הצרכן, breaches Shopify's acceptable use
+policy, and is the specific thing that gets a Meta ads account banned, which for a
+dropshipping store is the end of the business. The disclaimer that used to sit under the
+homepage quotes was what kept it on the right side of that line, and it read like an
+unfinished website.
+
+So the display came down rather than the disclosure:
+
+| Surface | State |
+|---|---|
+| Product cards | `show_ratings = false` in `snippets/pl-card.liquid` |
+| Product page rating row | `show_ratings = false` in `sections/pl-product-main.liquid` |
+| Homepage hero rating strip | `show_rating: false` in `templates/index.json` |
+| Homepage reviews section | removed from `templates/index.json` |
+| Product reviews section | removed from `templates/product.json` |
+| Store stat "332 ביקורות" | replaced with the 14 day cancellation window |
+
+Nothing was deleted. Every metafield still holds its data, both sections still exist in
+the theme, and the hero still carries its rating text behind the switch. Turning the
+display back on is two booleans and re adding two sections in the theme editor.
+
+### Getting real reviews
+
+Judge.me's free tier covers this catalogue, supports Hebrew and RTL, and sends the review
+request automatically a set number of days after delivery. With a 10 to 14 business day
+lead time, set that delay to about 21 days from fulfilment, not the default 7, or every
+request lands before the parcel does.
+
+## Liquid comparison guard
+
+Liquid evaluates `and` **right to left**, so a blank guard written on the left never runs
+first. `{% if rating != blank and rating.rating > 0 %}` ran the comparison before the
+guard, and a `rating` metafield hands Liquid its number as a *string*, so every product
+card on the homepage printed:
+
+```
+Liquid error (snippets/pl-card line 52): comparison of String with 0 failed
+```
+
+Fixed by coercing before comparing rather than by reordering the guard, which would have
+worked but only by accident of evaluation order:
+
+```liquid
+assign rating_value = product.metafields.custom.rating.value.rating | plus: 0
+```
+
+`plus: 0` turns both a missing metafield and a numeric string into a number. The same
+pattern was applied to `product.compare_at_price` in `sections/pl-product-main.liquid`
+(two sites) and to `selected_variant.compare_at_price` in `snippets/price.liquid`, all of
+which are nil whenever no variant carries a compare at price.
+
 ## Fulfilment
 
 The catalogue ships from the manufacturer in China. Delivery is **10 to 14 business days**

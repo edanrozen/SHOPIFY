@@ -16,8 +16,15 @@
   assign price = selected_variant.price
   assign compare_at_price = selected_variant.compare_at_price
 
+  comment
+    Coerced for the comparison only: compare_at_price stays untouched below,
+    where it is run through the money filters, but nil cannot be compared
+    with a price and would throw.
+  endcomment
+  assign compare_at_number = compare_at_price | plus: 0
+
   assign show_compare_price = false
-  if compare_at_price > price
+  if compare_at_number > price
     assign show_compare_price = true
   endif
 
