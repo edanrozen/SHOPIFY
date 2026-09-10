@@ -1,4 +1,4 @@
-# PLUMA — חנות טיפוח פרווה לחיות מחמד (Shopify)
+# TinyBloom, חנות טיפוח פרווה לחיות מחמד (Shopify)
 
 חנות Shopify בעברית (RTL) לכלבים ולחתולים, בנויה כ**תבנית תצוגה מקדימה שאינה מפורסמת**
 על גבי ערכת הנושא Horizon.
@@ -25,14 +25,14 @@ waitlist form, and the homepage no longer ends on a "prices coming soon" band.
 
 | Handle | Product | Reviews | Source |
 |---|---|---|---|
-| `pluma-clean-pro` | פלומה קלין פרו, מסיר שיער עם ידית עץ | 65 | **inferred, unconfirmed** |
-| `pluma-glide-comb` | פלומה גלייד, מסרק טיפוח מקצועי | 62 | **inferred, unconfirmed** |
-| `pluma-clean-xl` | פלומה קלין XL, מסיר שיער לריפודים | 55 | **inferred, unconfirmed** |
+| `hair-remover-wood-handle` | מסיר שיער חיות מחמד עם ידית עץ | 65 | **inferred, unconfirmed** |
+| `pro-grooming-comb` | מסרק טיפוח מקצועי לפרווה | 62 | **inferred, unconfirmed** |
+| `hair-remover-xl` | מסיר שיער XL לריפודים ולשטיחים | 55 | **inferred, unconfirmed** |
 | `tinybloom-fur-glove` | כפפת הפרווה של TinyBloom | 40 | merchant description |
-| `kadurosh-cat-ball-toy` | כדורוש, צעצוע כדור נע לחתולים | 30 | merchant description |
-| `parvatek-grooming-comb` | פרוותק, מסרק דו צדדי | 28 | merchant description |
-| `parvakal-pet-clipper` | פרווהקל, מכונת תספורת | 26 | merchant description |
-| `katora-cardboard-scratcher` | קאטורה, טבעת גירוד קרטון | 26 | merchant description |
+| `kadurosh-cat-ball-toy` | כדורוש צעצוע חכם ואינטראקטיבי לחתולים | 30 | merchant description |
+| `parvatek-grooming-comb` | פרוותק מסרק דו צדדי לטיפוח הפרווה | 28 | merchant description |
+| `parvakal-pet-clipper` | פרווהקל מכונת גילוח לחיות | 26 | merchant description |
+| `katora-cardboard-scratcher` | קאטורה טבעת גירוד קרטון לחתולים | 26 | merchant description |
 
 332 reviews in total, which is the number the homepage quotes in the hero, in the story
 band and above the testimonials. The rating mix runs roughly 62% five star, 24% four,
@@ -253,3 +253,36 @@ win; it can only raise a size, never shrink one.
 `scroll-padding-block-start` keeps in-page anchors clear of the sticky header.
 Tap targets are extended with an invisible overlay rather than by growing the
 element, so a link's underline stays tight to its text.
+
+
+## Naming
+
+The brand is **TinyBloom**. There is no sub brand: an earlier pass invented
+"פלומה" as a product line and it has been removed from every title, vendor
+field, URL, SEO tag and in-the-box list, with redirects from the old handles.
+Product titles carry no separator character. The house style is the brand or
+object name, a space, then what it is: `פרווהקל מכונת גילוח לחיות`. No pipe,
+no dash, no colon.
+
+Two things that look like the brand and are not, so do not "fix" them:
+
+- `assets/pluma.css`, `assets/pluma.js` and the `pl-` class prefix. These are
+  internal identifiers that no customer ever sees, and renaming them would
+  touch every section file for no visible gain.
+- **פלומה** in the ritual copy and in the comb's description. There it is the
+  Hebrew word for undercoat, the soft layer under the guard hairs, which is
+  exactly what a grooming comb separates.
+
+## Zoom
+
+Pinch to zoom is deliberately left working. It is WCAG 1.4.4, which Israeli
+accessibility regulations adopt through ת"י 5568, so blocking it is a legal
+exposure on an Israeli storefront and a wall in front of anyone who needs
+larger text. iOS has ignored `user-scalable=no` since iOS 10 regardless.
+
+What is blocked is the *accidental* zoom: `touch-action: manipulation` on the
+root removes the double tap that fires when someone means to tap a product.
+And the horizontal scroll lock in `pluma.js` now stands down while
+`visualViewport.scale > 1`, because a customer who has zoomed in needs to pan
+sideways to read the page. Snapping them back there does not lock the page, it
+traps them in one column.

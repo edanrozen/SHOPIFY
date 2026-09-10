@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PLUMA design system
+   TinyBloom design system
    Hebrew first, mobile first. Rubik for display, Assistant for text: both
    are drawn for Hebrew, so the page never falls back to a Latin face.
    ========================================================================== */
@@ -202,6 +202,19 @@ main, #MainContent { overflow-x: clip; }
    handle, a price and label that will not fit on one line together. */
 .pl-card, .pl-card__body, .pl-card__foot > *, .pl-promise__item, .pl-rev__card { min-width: 0; }
 .pl-card__title, .pl-card__type, .pl-pdp__title { overflow-wrap: anywhere; }
+
+/* Zoomed out, the browser paints its canvas around the shrunken page. That
+   canvas takes its colour from body only while the root has none, and a theme
+   that sets one on the root leaves a white frame around the site. Painting the
+   root explicitly means the page is never framed in white at any zoom level. */
+html { background: var(--pl-porcelain); }
+
+/* Kills the double tap that zooms the page by accident when someone is really
+   just tapping a product, and keeps the pinch that a customer performs on
+   purpose. Pinch to zoom must keep working: it is WCAG 1.4.4, which Israeli
+   accessibility regulations adopt through ת"י 5568, and blocking it is both a
+   legal exposure and a wall in front of anyone who needs larger text. */
+html { touch-action: manipulation; }
 
 /* --------------------------------------------------------------------------
    Theme level defaults

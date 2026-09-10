@@ -1,5 +1,5 @@
 /**
- * PLUMA — progressive enhancement.
+ * TinyBloom, progressive enhancement.
  * Reveals `.pl-reveal` elements once, on first intersection. No dependencies,
  * no layout thrash: everything runs off a single IntersectionObserver.
  */
@@ -75,8 +75,17 @@
    */
   function lockHorizontalScroll() {
     var page = document.scrollingElement || document.documentElement;
+    var vv = window.visualViewport;
+
+    // While someone is zoomed in, panning sideways is the only way to reach the
+    // rest of the page. Snapping them back there does not lock the page, it
+    // traps them in the left hand column. The lock only applies at rest.
+    function isZoomed() {
+      return !!vv && vv.scale > 1.01;
+    }
 
     function snapBack() {
+      if (isZoomed()) return;
       if (page.scrollLeft === 0) return;
       // `scroll-behavior: smooth` is set globally for in page anchors, and a
       // plain scrollLeft assignment would inherit it and animate the
@@ -91,6 +100,11 @@
     window.addEventListener('scroll', snapBack, { passive: true });
     window.addEventListener('resize', snapBack, { passive: true });
     window.addEventListener('orientationchange', snapBack, { passive: true });
+    // Re-engage the moment the pinch ends and the page is back at scale 1.
+    if (vv) {
+      vv.addEventListener('resize', snapBack);
+      vv.addEventListener('scroll', snapBack);
+    }
     snapBack();
   }
 
