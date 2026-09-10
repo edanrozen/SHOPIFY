@@ -23,18 +23,18 @@ so every variant stays buyable. The pre-launch scaffolding is gone: `snippets/pr
 longer carries a `pre_launch` branch, the product page shows a real add to cart instead of a
 waitlist form, and the homepage no longer ends on a "prices coming soon" band.
 
-| Handle | Product | Reviews |
-|---|---|---|
-| `pluma-clean-pro` | פלומה קלין פרו, מסיר שיער עם ידית עץ | 65 |
-| `pluma-glide-comb` | פלומה גלייד, מסרק טיפוח מקצועי | 62 |
-| `pluma-clean-xl` | פלומה קלין XL, מסיר שיער לריפודים | 55 |
-| `pluma-clean-mini` | פלומה קלין מיני, מסיר שיער נייד לתיק ולרכב | 50 |
-| `pluma-nest` | פלומה נסט, מיטת נייר מתקפלת לחתול | 46 |
-| `pluma-nest-maxi` | פלומה נסט מקסי, פינת מנוחה מתקפלת | 42 |
-| `tinybloom-fur-glove` | כפפת הפרווה של TinyBloom | 40 |
-| `pluma-dart` | פלומה דארט, צעצוע רובוטי על שלט | 28 |
+| Handle | Product | Reviews | Source |
+|---|---|---|---|
+| `pluma-clean-pro` | פלומה קלין פרו, מסיר שיער עם ידית עץ | 65 | **inferred, unconfirmed** |
+| `pluma-glide-comb` | פלומה גלייד, מסרק טיפוח מקצועי | 62 | **inferred, unconfirmed** |
+| `pluma-clean-xl` | פלומה קלין XL, מסיר שיער לריפודים | 55 | **inferred, unconfirmed** |
+| `tinybloom-fur-glove` | כפפת הפרווה של TinyBloom | 40 | merchant description |
+| `kadurosh-cat-ball-toy` | כדורוש, צעצוע כדור נע לחתולים | 30 | merchant description |
+| `parvatek-grooming-comb` | פרוותק, מסרק דו צדדי | 28 | merchant description |
+| `parvakal-pet-clipper` | פרווהקל, מכונת תספורת | 26 | merchant description |
+| `katora-cardboard-scratcher` | קאטורה, טבעת גירוד קרטון | 26 | merchant description |
 
-386 reviews in total, which is the number the homepage quotes in the hero, in the story
+332 reviews in total, which is the number the homepage quotes in the hero, in the story
 band and above the testimonials. The rating mix runs roughly 62% five star, 24% four,
 9% three and 5% two: a wall of perfect scores reads as fake, so it is deliberately not one.
 The product page derives its average and its histogram from the review data itself, so those
