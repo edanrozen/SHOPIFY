@@ -130,6 +130,50 @@ will be wrong. Real weights in grams are needed per product.
 SKUs are `PLM-*`, left over from the old brand name, and two products have none at all.
 They appear on packing slips and on the customer's invoice.
 
+## Mobile layout
+
+The theme is mobile first: one column everywhere, with `@media (min-width: 900px)`
+switching to two. Two things broke that on a phone.
+
+### The product page column was 662px wide on every phone
+
+A grid item's `min-width` defaults to `auto`, so it can never be narrower than its
+widest child. The product page's thumbnail rail is eight 74px buttons with 10px
+between them, which is `8 * 74 + 7 * 10 = 662`, and that pinned the whole column at
+662px whatever the screen. The photo, the title and the add to cart button were all
+being built to that width. Under RTL the surplus hangs off the **left** edge, which
+is the "desktop layout pushed to the right with white beside it" that phones showed.
+The section level `overflow-x: clip` only hid the scrollbar; it never made the
+column fit. Fixed with `min-width: 0` on the grid children, scoped under 900px.
+
+### A dead section controls the homepage grid
+
+`sections/pl-products.liquid` is on no template, but Shopify concatenates **every**
+section's `{% stylesheet %}` into one file that loads after `pluma.css`. Its
+`.pl-grid` rules therefore beat the ones in the design system on source order. The
+small phone rule works around it with a doubled class (`.pl-grid.pl-grid`) rather
+than by editing that section, because editing it would move the desktop grid: it is
+what currently supplies the 3 column layout between 1080px and 1100px, and the
+`clamp(18px, 2.4vw, 30px)` gap. Worth untangling deliberately, as a desktop change.
+
+### Measured, not eyeballed
+
+`tools/responsive-check/` renders the theme's CSS in Chromium and measures. After
+the fix, `document.scrollWidth` equals the viewport at 320, 375, 390 and 430 on both
+the homepage and the product page, and `desktop-diff.js` reports zero changed boxes
+at 900, 1024, 1280 and 1440.
+
+| Viewport | Product photo | Add to cart | Cards per row |
+|---|---|---|---|
+| 320px | 284px square | 244 x 52 | 1 |
+| 375px | 338px square | 298 x 52 | 2 |
+| 390px | 351px square | 311 x 52 | 2 |
+| 430px | 387px square | 347 x 52 | 2 |
+
+Below 360px the card grid drops to one column: two cards to a row left each one
+133px wide, which is not enough for a square photo, a Hebrew title, a type line and
+a price without the text collapsing into a column of single words.
+
 ## Ratings and reviews
 
 The store has no customers yet, so it has no reviews. What was on the site was

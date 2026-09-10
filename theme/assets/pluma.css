@@ -198,6 +198,28 @@ main, #MainContent { overflow-x: clip; }
 /* Grid and flex children default to min-width:auto, which is the usual reason
    a long word or a wide image pushes the page wider than the screen. */
 .pl-grid > *, .pl-rowhead > *, .pl-heroP__grid > *, .pl-rev__grid > * { min-width: 0; }
+
+/* --------------------------------------------------------------------------
+   Phones, 320px to 430px. Nothing in this block reaches the desktop layout:
+   every rule is bounded above by the 900px breakpoint the theme already uses
+   to switch from one column to two.
+   -------------------------------------------------------------------------- */
+@media (max-width: 899px) {
+  /* The product page column was 662px wide on every phone, whatever the screen.
+     A grid item's min-width defaults to auto, so it can never be narrower than
+     its widest child, and the thumbnail rail is eight 74px buttons with 10px
+     between them: 8 * 74 + 7 * 10 = 662. The photo, the title and the add to
+     cart button were all being built to that width. Under RTL the surplus hangs
+     off the left edge, which is the "desktop layout pushed to the right with
+     white beside it" that phones were showing. The section clip only hid the
+     scrollbar; it never made the column fit. */
+  .pl-pdp__grid > * { min-width: 0; }
+
+  /* The rail scrolls, so it must not be allowed to set its parent's width
+     either. Belt and braces: min-width:0 above fixes the column, this keeps the
+     rail honest if it is ever moved out of that grid. */
+  .pl-pdp__thumbs, .pl-rail, .pl-story__gallery { min-width: 0; max-width: 100%; }
+}
 /* The same trap one level down: a card title with no spaces, a long product
    handle, a price and label that will not fit on one line together. */
 .pl-card, .pl-card__body, .pl-card__foot > *, .pl-promise__item, .pl-rev__card { min-width: 0; }
@@ -366,6 +388,20 @@ button, [role="button"], summary { touch-action: manipulation; }
 @media (min-width: 760px)  { .pl-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 760px)  { .pl-grid--4 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 1080px) { .pl-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 22px; } }
+
+/* Small phones, 320px to 359px. Two cards to a row leaves each one 133px wide,
+   which is not enough for a square photo, a Hebrew title, a type line and a
+   price without the text turning into a column of single words. One card to a
+   row instead: the page gets longer, but every card stays legible and every
+   tap target stays full width. 360px and up keeps the two column grid. */
+@media (max-width: 359px) {
+  /* The class is doubled to raise specificity to (0,2,0). `sections/pl-products`
+     also declares `.pl-grid`, and Shopify concatenates every section stylesheet
+     into one file that loads after this one, so a plain `.pl-grid` here loses on
+     source order even though that section is not on any template. Doubling beats
+     it without touching the desktop rules, which stay exactly where they are. */
+  .pl-grid.pl-grid { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* The rail runs to the screen edge on a phone so it reads as swipeable.
    It sits inside .pl-wrap, so it pulls back out by the same gutter. */
