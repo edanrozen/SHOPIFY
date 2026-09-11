@@ -1,12 +1,15 @@
 {%- doc -%}
-  The long form half of a product page.
+  The long form half of a product page, as an ordered library rather than a fixed
+  sequence.
 
-  One section, shared by every product. Nothing here is written per template:
-  each part reads a metafield off the product and renders only if that metafield
-  has content, so a product with no `custom.safety` simply has no safety block
-  and the page stays tight rather than showing an empty heading.
+  Every part is a block. A template decides which parts a product gets, what order
+  they come in, and which visual treatment each one uses. That is what makes two
+  product pages different pages rather than one page with the nouns swapped: the
+  comb argues from the problem, the XL argues from the benefit, the clipper puts
+  safety where nobody can miss it.
 
-  Adding a product later means filling metafields, not editing Liquid.
+  Content still comes from the product's own metafields, so a block with nothing
+  behind it renders nothing at all and the page closes up around it.
 {%- enddoc -%}
 
 {%- liquid
@@ -19,157 +22,199 @@
   assign safety   = product.metafields.custom.safety.value
   assign faq      = product.metafields.custom.faq.value
   assign for_pets = product.metafields.custom.for_pets.value
+  assign highs    = product.metafields.custom.highlights.value
 
   comment
-    Image slots for the before and after cards. Empty today by design: the
-    merchant is shooting these separately. The cards lay out correctly with or
-    without them, so dropping a file into the metafield later is the whole job.
+    Image slots for the before and after cards, empty by design: the photography
+    is a separate job. Both cards lay out correctly with or without them.
   endcomment
   assign before_img = product.metafields.custom.before_image.value
   assign after_img  = product.metafields.custom.after_image.value
 -%}
 
-{%- if problem != blank or steps != blank or why != blank or faq != blank -%}
-<section class="pl-story2 pl-section" id="pl-story-{{ section.id }}">
+<section class="pl-story2 pl-section pl-story2--{{ section.settings.tone }}" id="pl-story-{{ section.id }}">
   <div class="pl-wrap">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
 
-    {%- if problem != blank -%}
-      <div class="pl-story2__problem pl-reveal">
-        <p class="pl-eyebrow">{{ section.settings.problem_eyebrow }}</p>
-        <p class="pl-story2__problem-text">{{ problem }}</p>
-      </div>
-    {%- endif -%}
-
-    {%- if before != blank and after != blank -%}
-      <div class="pl-story2__part pl-reveal">
-        <h2 class="pl-h2">{{ section.settings.compare_heading }}</h2>
-        <div class="pl-cmp">
-          <div class="pl-cmp__card pl-cmp__card--before">
-            <span class="pl-cmp__tag">{{ section.settings.before_label }}</span>
-            {%- if before_img != blank -%}
-              <img class="pl-cmp__img" src="{{ before_img | image_url: width: 720 }}"
-                   width="360" height="270" loading="lazy" decoding="async"
-                   alt="{{ section.settings.before_label | escape }}">
+      {%- when 'problem' -%}
+        {%- if problem != blank -%}
+          <div class="pl-story2__part pl-prob pl-prob--{{ block.settings.style }} pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="pl-eyebrow">{{ block.settings.eyebrow }}</p>
             {%- endif -%}
-            <ul class="pl-cmp__list" role="list">
-              {%- for line in before -%}<li>{{ line }}</li>{%- endfor -%}
-            </ul>
+            <p class="pl-prob__text">{{ problem }}</p>
           </div>
-          <div class="pl-cmp__card pl-cmp__card--after">
-            <span class="pl-cmp__tag">{{ section.settings.after_label }}</span>
-            {%- if after_img != blank -%}
-              <img class="pl-cmp__img" src="{{ after_img | image_url: width: 720 }}"
-                   width="360" height="270" loading="lazy" decoding="async"
-                   alt="{{ section.settings.after_label | escape }}">
-            {%- endif -%}
-            <ul class="pl-cmp__list" role="list">
-              {%- for line in after -%}<li>{{ line }}</li>{%- endfor -%}
-            </ul>
-          </div>
-        </div>
-      </div>
-    {%- endif -%}
-
-    {%- if steps != blank -%}
-      <div class="pl-story2__part pl-reveal">
-        <h2 class="pl-h2">{{ section.settings.steps_heading }}</h2>
-        <ol class="pl-steps" role="list">
-          {%- for step in steps -%}
-            <li class="pl-steps__item">
-              <span class="pl-steps__num" aria-hidden="true">{{ forloop.index }}</span>
-              <h3 class="pl-steps__title">{{ step.title }}</h3>
-              {%- if step.text != blank -%}<p class="pl-steps__text">{{ step.text }}</p>{%- endif -%}
-            </li>
-          {%- endfor -%}
-        </ol>
-      </div>
-    {%- endif -%}
-
-    {%- if why != blank -%}
-      <div class="pl-story2__part pl-reveal">
-        <h2 class="pl-h2">{{ section.settings.why_heading }}</h2>
-        {%- if section.settings.why_body != blank -%}
-          <p class="pl-lede">{{ section.settings.why_body }}</p>
         {%- endif -%}
-        <ul class="pl-why" role="list">
-          {%- for item in why -%}
-            <li class="pl-why__item">
-              <h3 class="pl-why__title">{{ item.title }}</h3>
-              <p class="pl-why__text">{{ item.text }}</p>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </div>
-    {%- endif -%}
 
-    {%- if audience != blank or for_pets != blank -%}
-      <div class="pl-story2__part pl-story2__part--split pl-reveal">
-        <div>
-          <h2 class="pl-h3">{{ section.settings.audience_heading }}</h2>
-          {%- if audience != blank -%}
-            <p class="pl-body pl-story2__note">{{ audience }}</p>
-          {%- endif -%}
-          {%- if for_pets != blank -%}
-            <p class="pl-story2__pets">{{ section.settings.pets_label }} <strong>{{ for_pets }}</strong></p>
-          {%- endif -%}
-        </div>
+      {%- when 'compare' -%}
+        {%- if before != blank and after != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <div class="pl-cmp pl-cmp--{{ block.settings.style }}">
+              <div class="pl-cmp__card pl-cmp__card--before">
+                <span class="pl-cmp__tag">{{ block.settings.before_label }}</span>
+                {%- if before_img != blank -%}
+                  <img class="pl-cmp__img" src="{{ before_img | image_url: width: 720 }}"
+                       width="360" height="270" loading="lazy" decoding="async"
+                       alt="{{ block.settings.before_label | escape }}">
+                {%- endif -%}
+                <ul class="pl-cmp__list" role="list">
+                  {%- for line in before -%}<li>{{ line }}</li>{%- endfor -%}
+                </ul>
+              </div>
+              <div class="pl-cmp__card pl-cmp__card--after">
+                <span class="pl-cmp__tag">{{ block.settings.after_label }}</span>
+                {%- if after_img != blank -%}
+                  <img class="pl-cmp__img" src="{{ after_img | image_url: width: 720 }}"
+                       width="360" height="270" loading="lazy" decoding="async"
+                       alt="{{ block.settings.after_label | escape }}">
+                {%- endif -%}
+                <ul class="pl-cmp__list" role="list">
+                  {%- for line in after -%}<li>{{ line }}</li>{%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+      {%- when 'steps' -%}
+        {%- if steps != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ol class="pl-steps pl-steps--{{ block.settings.style }}" role="list">
+              {%- for step in steps -%}
+                <li class="pl-steps__item">
+                  <span class="pl-steps__num" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                  <div class="pl-steps__body">
+                    <h3 class="pl-steps__title">{{ step.title }}</h3>
+                    {%- if step.text != blank -%}<p class="pl-steps__text">{{ step.text }}</p>{%- endif -%}
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ol>
+          </div>
+        {%- endif -%}
+
+      {%- when 'why' -%}
+        {%- if why != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-why pl-why--{{ block.settings.style }}" role="list">
+              {%- for item in why -%}
+                <li class="pl-why__item">
+                  <h3 class="pl-why__title">{{ item.title }}</h3>
+                  <p class="pl-why__text">{{ item.text }}</p>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'highlights' -%}
+        {%- if highs != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <ul class="pl-keys" role="list">
+              {%- for item in highs -%}<li>{{ item }}</li>{%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'audience' -%}
+        {%- if audience != blank or for_pets != blank -%}
+          <div class="pl-story2__part pl-aud pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h3">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if audience != blank -%}<p class="pl-body pl-story2__note">{{ audience }}</p>{%- endif -%}
+            {%- if for_pets != blank -%}
+              <p class="pl-story2__pets">{{ block.settings.pets_label }} <strong>{{ for_pets }}</strong></p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+      {%- when 'safety' -%}
         {%- if safety != blank -%}
-          <div class="pl-safety">
-            <h2 class="pl-h3">{{ section.settings.safety_heading }}</h2>
+          <div class="pl-story2__part pl-safety pl-safety--{{ block.settings.style }} pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h3">{{ block.settings.heading }}</h2>{%- endif -%}
             <p class="pl-body pl-story2__note">{{ safety }}</p>
           </div>
         {%- endif -%}
-      </div>
-    {%- endif -%}
 
-    {%- if faq != blank -%}
-      <div class="pl-story2__part pl-reveal">
-        <h2 class="pl-h2">{{ section.settings.faq_heading }}</h2>
-        <div class="pl-qa">
-          {%- for row in faq -%}
-            <details class="pl-qa__row"{% if forloop.first %} open{% endif %}>
-              <summary class="pl-qa__q">
-                <span>{{ row.q }}</span>
-                <span class="pl-qa__sign" aria-hidden="true"></span>
-              </summary>
-              <div class="pl-qa__a"><p>{{ row.a }}</p></div>
-            </details>
-          {%- endfor -%}
-        </div>
-      </div>
-    {%- endif -%}
+      {%- when 'faq' -%}
+        {%- if faq != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <div class="pl-qa">
+              {%- for row in faq -%}
+                <details class="pl-qa__row"{% if forloop.first and block.settings.open_first %} open{% endif %}>
+                  <summary class="pl-qa__q">
+                    <span>{{ row.q }}</span>
+                    <span class="pl-qa__sign" aria-hidden="true"></span>
+                  </summary>
+                  <div class="pl-qa__a"><p>{{ row.a }}</p></div>
+                </details>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
 
+      {%- endcase -%}
+    {%- endfor -%}
   </div>
 </section>
-{%- endif -%}
 
 {% stylesheet %}
-  .pl-story2 { background: var(--pl-porcelain); }
+  .pl-story2--porcelain { background: var(--pl-porcelain); }
+  .pl-story2--cream     { background: var(--pl-cream); }
   .pl-story2__part { margin-block-start: clamp(38px, 6vw, 74px); }
   .pl-story2__part:first-child { margin-block-start: 0; }
   .pl-story2 .pl-h2 { margin-block-end: clamp(16px, 2.4vw, 26px); }
+  .pl-story2 .pl-lede { margin-block: -6px 22px; }
 
-  /* The problem, stated once and given room. Tinted rather than boxed, so it
-     reads as the opening of an argument and not as a callout widget. */
-  .pl-story2__problem {
+  /* ---- the problem, three ways ------------------------------------------- */
+  .pl-prob__text {
+    font-family: var(--pl-display);
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .pl-prob--panel {
     background: var(--pl-cream);
     border-radius: var(--pl-r-l);
     padding: clamp(22px, 4vw, 44px);
   }
-  .pl-story2__problem-text {
-    font-family: var(--pl-display);
-    font-weight: 600;
-    font-size: clamp(1.24rem, 4.6vw, 1.9rem);
-    line-height: 1.45;
+  .pl-story2--cream .pl-prob--panel { background: var(--pl-white); }
+  .pl-prob--panel .pl-prob__text { font-size: clamp(1.24rem, 4.6vw, 1.9rem); color: var(--pl-ink); max-width: 40ch; }
+
+  /* No box at all: the sentence carries itself, for a product whose problem is
+     the whole argument. */
+  .pl-prob--plain .pl-prob__text {
+    font-size: clamp(1.45rem, 6vw, 2.5rem);
     color: var(--pl-ink);
-    margin: 0;
-    max-width: 40ch;
-    text-wrap: pretty;
+    max-width: 26ch;
+    letter-spacing: -.01em;
   }
+
+  /* Inverted, for a page that needs the problem to land hard before anything
+     else is offered. */
+  .pl-prob--bar {
+    background: var(--pl-ink);
+    border-radius: var(--pl-r-l);
+    padding: clamp(24px, 4.4vw, 48px);
+  }
+  .pl-prob--bar .pl-eyebrow { color: var(--pl-sand-deep); }
+  .pl-prob--bar .pl-prob__text { font-size: clamp(1.3rem, 5vw, 2.05rem); color: var(--pl-porcelain); max-width: 34ch; }
 
   /* ---- before / after ---------------------------------------------------- */
   .pl-cmp { display: grid; gap: 14px; grid-template-columns: 1fr; }
-  @media (min-width: 760px) { .pl-cmp { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+  @media (min-width: 760px) { .pl-cmp--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+  /* `rows` stays one column at every width: two full width bands read as a
+     sequence in time, which suits a product whose story is a before and an
+     after rather than a pair of options. */
+  .pl-cmp--rows { gap: 12px; }
   .pl-cmp__card {
     min-width: 0;
     border-radius: var(--pl-r-l);
@@ -180,6 +225,10 @@
   }
   .pl-cmp__card--before { background: var(--pl-white); border: 1px solid var(--pl-line); }
   .pl-cmp__card--after  { background: var(--pl-ink); color: var(--pl-porcelain); }
+  .pl-cmp--rows .pl-cmp__card { display: grid; gap: 10px; }
+  @media (min-width: 620px) {
+    .pl-cmp--rows .pl-cmp__card { grid-template-columns: 92px minmax(0, 1fr); align-items: start; gap: 20px; }
+  }
   .pl-cmp__tag {
     align-self: flex-start;
     font-family: var(--pl-sans);
@@ -192,6 +241,7 @@
   .pl-cmp__card--before .pl-cmp__tag { background: var(--pl-sand); color: var(--pl-ink-soft); }
   .pl-cmp__card--after  .pl-cmp__tag { background: var(--pl-clay); color: var(--pl-porcelain); }
   .pl-cmp__img { width: 100%; height: auto; border-radius: var(--pl-r-m); display: block; }
+  .pl-cmp--rows .pl-cmp__img { grid-column: 1 / -1; }
   .pl-cmp__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
   .pl-cmp__list li {
     position: relative;
@@ -202,9 +252,9 @@
   }
   .pl-cmp__card--before .pl-cmp__list li { color: var(--pl-ink-soft); }
   .pl-cmp__card--after  .pl-cmp__list li { color: var(--pl-porcelain); }
-  /* The cross and the tick are drawn, not typed, so they never depend on an
-     emoji font and never mirror. Physical borders on purpose: a tick built from
-     logical borders turns into a chevron the moment the page is RTL. */
+  /* The tick and the dash are drawn, never typed, so no emoji font is involved.
+     Physical borders on purpose: a tick built from logical borders becomes a
+     chevron the moment the page is RTL. */
   .pl-cmp__list li::before {
     content: "";
     position: absolute;
@@ -223,57 +273,143 @@
     border-bottom: 2px solid var(--pl-sand-deep);
   }
 
-  /* ---- steps ------------------------------------------------------------- */
-  .pl-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; counter-reset: pl-step; }
-  @media (min-width: 640px) { .pl-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
-  @media (min-width: 1024px) { .pl-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .pl-steps__item {
+  /* ---- steps, three ways -------------------------------------------------- */
+  .pl-steps { list-style: none; margin: 0; padding: 0; }
+  .pl-steps__title { font-family: var(--pl-sans); font-size: 1rem; font-weight: 700; color: var(--pl-ink); margin: 0; }
+  .pl-steps__text { font-family: var(--pl-sans); font-size: .92rem; line-height: 1.65; color: var(--pl-ink-soft); margin: 7px 0 0; }
+  .pl-steps__num {
+    font-family: var(--pl-display);
+    font-weight: 700;
+    color: var(--pl-clay);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pl-steps--cards { display: grid; gap: 16px; }
+  @media (min-width: 640px)  { .pl-steps--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+  @media (min-width: 1024px) { .pl-steps--cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .pl-steps--cards .pl-steps__item {
     min-width: 0;
     background: var(--pl-white);
     border: 1px solid var(--pl-line);
     border-radius: var(--pl-r-m);
     padding: clamp(16px, 2.6vw, 24px);
   }
-  .pl-steps__num {
+  .pl-steps--cards .pl-steps__num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px; height: 34px;
+    width: 38px; height: 38px;
     border-radius: var(--pl-r-pill);
     background: var(--pl-cream);
-    color: var(--pl-clay);
-    font-family: var(--pl-display);
-    font-weight: 700;
-    font-size: 1rem;
+    font-size: .95rem;
     margin-block-end: 12px;
   }
-  .pl-steps__title { font-family: var(--pl-sans); font-size: 1rem; font-weight: 700; color: var(--pl-ink); margin: 0; }
-  .pl-steps__text { font-family: var(--pl-sans); font-size: .92rem; line-height: 1.65; color: var(--pl-ink-soft); margin: 7px 0 0; }
 
-  /* ---- why it works ------------------------------------------------------ */
-  .pl-why { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 14px; }
-  @media (min-width: 760px) { .pl-why { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
-  .pl-why__item {
-    min-width: 0;
-    padding-inline-start: 18px;
-    border-inline-start: 2px solid var(--pl-sand);
+  /* A rail down the start edge, for a routine that is genuinely sequential. */
+  .pl-steps--timeline { display: grid; gap: 0; }
+  .pl-steps--timeline .pl-steps__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 14px;
+    padding-block: 0 26px;
   }
+  .pl-steps--timeline .pl-steps__item:last-child { padding-block-end: 0; }
+  /* The connector sits under the numbers, inset on the start edge so it mirrors
+     with the page instead of being pinned to the left. */
+  .pl-steps--timeline .pl-steps__item::before {
+    content: "";
+    position: absolute;
+    inset-block: 34px 0;
+    inset-inline-start: 22px;
+    width: 2px;
+    background: var(--pl-sand);
+  }
+  .pl-steps--timeline .pl-steps__item:last-child::before { display: none; }
+  .pl-steps--timeline .pl-steps__num {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px; height: 46px;
+    border-radius: var(--pl-r-pill);
+    background: var(--pl-cream);
+    border: 2px solid var(--pl-porcelain);
+    font-size: 1rem;
+  }
+  .pl-story2--cream .pl-steps--timeline .pl-steps__num { background: var(--pl-white); border-color: var(--pl-cream); }
+
+  /* Big quiet numerals, no boxes: for a two or three step product where cards
+     would be more furniture than the content deserves. */
+  .pl-steps--strip { display: grid; gap: 22px; }
+  /* minmax needs a real floor: `minmax(0, 1fr)` with auto-fit can never form
+     a second column, so the strip would have silently stayed one column at
+     every width. 190px is the narrowest a numbered step reads well at. */
+  @media (min-width: 760px) { .pl-steps--strip { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 28px; } }
+  .pl-steps--strip .pl-steps__item {
+    min-width: 0;
+    padding-block-start: 14px;
+    border-block-start: 2px solid var(--pl-sand-deep);
+  }
+  .pl-steps--strip .pl-steps__num { display: block; font-size: 1.5rem; margin-block-end: 8px; }
+
+  /* ---- why it works, three ways ------------------------------------------ */
+  .pl-why { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
   .pl-why__title { font-family: var(--pl-sans); font-size: 1rem; font-weight: 700; color: var(--pl-ink); margin: 0; }
   .pl-why__text { font-family: var(--pl-sans); font-size: .94rem; line-height: 1.7; color: var(--pl-ink-soft); margin: 6px 0 0; }
+  .pl-why__item { min-width: 0; }
 
-  /* ---- audience and safety ----------------------------------------------- */
-  .pl-story2__part--split { display: grid; gap: 20px; grid-template-columns: 1fr; }
-  @media (min-width: 760px) { .pl-story2__part--split { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; } }
-  .pl-story2__part--split > * { min-width: 0; }
-  .pl-story2__note { margin-block-start: 10px; max-width: 52ch; }
-  .pl-story2__pets { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-ink-soft); margin: 12px 0 0; }
-  .pl-safety {
-    background: var(--pl-cream);
+  @media (min-width: 760px) { .pl-why--rules, .pl-why--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
+  .pl-why--rules .pl-why__item { padding-inline-start: 18px; border-inline-start: 2px solid var(--pl-sand); }
+  .pl-why--cards .pl-why__item {
+    background: var(--pl-white);
+    border: 1px solid var(--pl-line);
     border-radius: var(--pl-r-m);
-    padding: clamp(16px, 2.6vw, 24px);
+    padding: clamp(16px, 2.6vw, 22px);
+  }
+  /* One column, wider measure: reads as an argument made in order rather than a
+     grid of equal claims. */
+  .pl-why--stack { gap: 0; }
+  .pl-why--stack .pl-why__item { padding-block: 18px; border-block-end: 1px solid var(--pl-line); }
+  .pl-why--stack .pl-why__item:last-child { border-block-end: 0; }
+  .pl-why--stack .pl-why__text { max-width: 62ch; }
+
+  /* ---- key points --------------------------------------------------------- */
+  .pl-keys { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  @media (min-width: 760px) { .pl-keys { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; } }
+  .pl-keys li {
+    position: relative;
+    min-width: 0;
+    font-family: var(--pl-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--pl-ink-soft);
+    padding-inline-start: 28px;
+  }
+  .pl-keys li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: .45em;
+    width: 13px; height: 7px;
+    border-left: 2.5px solid var(--pl-clay);
+    border-bottom: 2.5px solid var(--pl-clay);
+    transform: rotate(-45deg);
   }
 
-  /* ---- product FAQ ------------------------------------------------------- */
+  /* ---- audience and safety ------------------------------------------------ */
+  .pl-story2__note { margin-block-start: 10px; max-width: 56ch; }
+  .pl-story2__pets { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-ink-soft); margin: 12px 0 0; }
+  .pl-safety--note { padding-inline-start: 18px; border-inline-start: 3px solid var(--pl-clay); }
+  .pl-safety--panel {
+    background: var(--pl-cream);
+    border-radius: var(--pl-r-m);
+    padding: clamp(18px, 3vw, 28px);
+  }
+  .pl-story2--cream .pl-safety--panel { background: var(--pl-white); }
+
+  /* ---- product FAQ -------------------------------------------------------- */
   .pl-qa { border-block-start: 1px solid var(--pl-line); }
   .pl-qa__row { border-block-end: 1px solid var(--pl-line); }
   .pl-qa__q {
@@ -281,7 +417,7 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 16px;
-    /* 56px of row height, so the whole question is a thumb target. */
+    /* 56px of row, so the whole question is a thumb target. */
     padding-block: 18px;
     font-family: var(--pl-sans);
     font-size: 1rem;
@@ -292,8 +428,8 @@
   }
   .pl-qa__q::-webkit-details-marker { display: none; }
   .pl-qa__q:focus-visible { outline: 2px solid var(--pl-clay); outline-offset: 2px; }
-  /* A plus that becomes a minus. Two bars, one rotated, so there is no icon
-     font to load and nothing to mirror under RTL. */
+  /* A plus that becomes a minus: two bars, one rotated. No icon font, and
+     nothing that mirrors under RTL. */
   .pl-qa__sign { position: relative; flex: 0 0 auto; width: 14px; height: 14px; margin-block-start: 4px; }
   .pl-qa__sign::before, .pl-qa__sign::after {
     content: "";
@@ -321,19 +457,116 @@
 {
   "name": "TinyBloom · Product story",
   "tag": "section",
+  "max_blocks": 10,
   "settings": [
-    { "type": "text", "id": "problem_eyebrow", "label": "Problem eyebrow", "default": "הבעיה" },
-    { "type": "text", "id": "compare_heading", "label": "Before/after heading", "default": "לפני ואחרי" },
-    { "type": "text", "id": "before_label", "label": "Before label", "default": "לפני" },
-    { "type": "text", "id": "after_label", "label": "After label", "default": "אחרי" },
-    { "type": "text", "id": "steps_heading", "label": "Steps heading", "default": "איך משתמשים" },
-    { "type": "text", "id": "why_heading", "label": "Why heading", "default": "למה זה עובד" },
-    { "type": "textarea", "id": "why_body", "label": "Why intro" },
-    { "type": "text", "id": "audience_heading", "label": "Audience heading", "default": "למי זה מתאים" },
-    { "type": "text", "id": "pets_label", "label": "Pets label", "default": "מתאים ל:" },
-    { "type": "text", "id": "safety_heading", "label": "Safety heading", "default": "שימוש ובטיחות" },
-    { "type": "text", "id": "faq_heading", "label": "Product FAQ heading", "default": "שאלות על המוצר" }
+    {
+      "type": "select", "id": "tone", "label": "Section background", "default": "porcelain",
+      "options": [
+        { "value": "porcelain", "label": "Porcelain" },
+        { "value": "cream", "label": "Cream" }
+      ]
+    }
   ],
-  "presets": [{ "name": "TinyBloom · Product story" }]
+  "blocks": [
+    {
+      "type": "problem", "name": "הבעיה", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "הבעיה" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "panel",
+          "options": [
+            { "value": "panel", "label": "Panel" },
+            { "value": "plain", "label": "Bare statement" },
+            { "value": "bar", "label": "Inverted" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "compare", "name": "לפני ואחרי", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "לפני ואחרי" },
+        { "type": "text", "id": "before_label", "label": "Before label", "default": "לפני" },
+        { "type": "text", "id": "after_label", "label": "After label", "default": "אחרי" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "cards",
+          "options": [
+            { "value": "cards", "label": "Two cards" },
+            { "value": "rows", "label": "Two bands" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "steps", "name": "איך משתמשים", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "איך משתמשים" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "cards",
+          "options": [
+            { "value": "cards", "label": "Cards" },
+            { "value": "timeline", "label": "Timeline" },
+            { "value": "strip", "label": "Numbered strip" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "why", "name": "למה זה עובד", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "למה זה עובד" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "rules",
+          "options": [
+            { "value": "rules", "label": "Ruled pairs" },
+            { "value": "cards", "label": "Cards" },
+            { "value": "stack", "label": "Single column" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "highlights", "name": "נקודות מפתח", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "מה שחשוב לדעת" }
+      ]
+    },
+    {
+      "type": "audience", "name": "למי זה מתאים", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "למי זה מתאים" },
+        { "type": "text", "id": "pets_label", "label": "Pets label", "default": "מתאים ל:" }
+      ]
+    },
+    {
+      "type": "safety", "name": "שימוש ובטיחות", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "שימוש ובטיחות" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "note",
+          "options": [
+            { "value": "note", "label": "Ruled note" },
+            { "value": "panel", "label": "Panel" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "faq", "name": "שאלות על המוצר", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "שאלות על המוצר" },
+        { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": true }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "TinyBloom · Product story",
+    "blocks": [
+      { "type": "problem" }, { "type": "compare" }, { "type": "steps" },
+      { "type": "why" }, { "type": "audience" }, { "type": "faq" }
+    ]
+  }]
 }
 {% endschema %}
