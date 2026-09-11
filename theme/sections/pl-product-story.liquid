@@ -23,6 +23,13 @@
   assign faq      = product.metafields.custom.faq.value
   assign for_pets = product.metafields.custom.for_pets.value
   assign highs    = product.metafields.custom.highlights.value
+  assign specs    = product.metafields.custom.specs.value
+  assign in_box   = product.metafields.custom.in_box.value
+  assign versus   = product.metafields.custom.versus.value
+  assign picker   = product.metafields.custom.picker.value
+  assign surfaces = product.metafields.custom.surfaces.value
+  assign spotlight = product.metafields.custom.spotlight.value
+  assign verified = product.metafields.custom.reviews_verified.value
 
   comment
     Image slots for the before and after cards, empty by design: the photography
@@ -160,304 +167,154 @@
           </div>
         {%- endif -%}
 
+      {%- when 'versus' -%}
+        {%- if versus != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-vs pl-vs--{{ block.settings.style }}" role="list">
+              {%- for row in versus -%}
+                <li class="pl-vs__row">
+                  <div class="pl-vs__side pl-vs__side--claim">
+                    <span class="pl-vs__tag">{{ block.settings.claim_label }}</span>
+                    <p class="pl-vs__text">{{ row.claim }}</p>
+                  </div>
+                  <div class="pl-vs__side pl-vs__side--real">
+                    <span class="pl-vs__tag">{{ block.settings.reality_label }}</span>
+                    <p class="pl-vs__text">{{ row.reality }}</p>
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'picker' -%}
+        {%- if picker != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-pick" role="list">
+              {%- for row in picker -%}
+                {%- assign sibling = all_products[row.handle] -%}
+                <li class="pl-pick__item{% if row.current %} is-current{% endif %}">
+                  <div class="pl-pick__top">
+                    <h3 class="pl-pick__name">{{ row.name }}</h3>
+                    {%- if row.current -%}
+                      <span class="pl-pick__flag">{{ block.settings.current_label }}</span>
+                    {%- endif -%}
+                  </div>
+                  <p class="pl-pick__best">{{ row.best_for }}</p>
+                  {%- if row.note != blank -%}<p class="pl-pick__note">{{ row.note }}</p>{%- endif -%}
+                  {%- unless row.current -%}
+                    {%- if sibling.handle != blank -%}
+                      <a class="pl-pick__link" href="{{ sibling.url }}">
+                        {{ block.settings.link_label }}
+                        <span class="pl-pick__arrow" aria-hidden="true"></span>
+                      </a>
+                    {%- endif -%}
+                  {%- endunless -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'surfaces' -%}
+        {%- if surfaces != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-surf pl-surf--{{ block.settings.style }}" role="list">
+              {%- for item in surfaces -%}<li class="pl-surf__item">{{ item }}</li>{%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'spotlight' -%}
+        {%- if spotlight != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <ul class="pl-spot" role="list">
+              {%- for row in spotlight -%}
+                <li class="pl-spot__item">
+                  <span class="pl-spot__value">{{ row.value }}</span>
+                  <span class="pl-spot__label">{{ row.label }}</span>
+                  {%- if row.note != blank -%}<span class="pl-spot__note">{{ row.note }}</span>{%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'in_box' -%}
+        {%- if in_box != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h3">{{ block.settings.heading }}</h2>{%- endif -%}
+            <ul class="pl-box" role="list">
+              {%- for item in in_box -%}<li class="pl-box__item">{{ item }}</li>{%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- comment -%}
+        Social proof. Deliberately reads reviews_verified and nothing else: the
+        older custom.reviews field holds seeded sample copy, and a store with no
+        real reviews yet should show no reviews at all rather than borrowed ones.
+        The average is computed from the entries on screen, so the number can
+        never drift from the reviews behind it. Fill reviews_verified and the
+        whole part appears; leave it empty and the page closes up around it.
+      {%- endcomment -%}
+      {%- when 'proof' -%}
+        {%- if verified != blank -%}
+          {%- liquid
+            assign total = 0
+            assign counted = 0
+            for entry in verified
+              if entry.rating != blank
+                assign total = total | plus: entry.rating
+                assign counted = counted | plus: 1
+              endif
+            endfor
+          -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if counted > 0 -%}
+              {%- assign avg = total | times: 1.0 | divided_by: counted | round: 1 -%}
+              <div class="pl-proof__summary">
+                {% render 'pl-stars', value: avg, size: 18, label: 'דירוג ממוצע' %}
+                <span class="pl-proof__avg">{{ avg }} מתוך 5</span>
+                <span class="pl-proof__count">{{ verified.size }} ביקורות</span>
+              </div>
+            {%- endif -%}
+            <ul class="pl-proof" role="list">
+              {%- for entry in verified -%}
+                <li class="pl-proof__item">
+                  {%- if entry.rating != blank -%}
+                    {% render 'pl-stars', value: entry.rating, size: 14, label: 'דירוג' %}
+                  {%- endif -%}
+                  <p class="pl-proof__body">{{ entry.body }}</p>
+                  <p class="pl-proof__by">
+                    <span class="pl-proof__name">{{ entry.name }}</span>
+                    {%- if entry.date != blank -%}<span class="pl-proof__date">{{ entry.date }}</span>{%- endif -%}
+                  </p>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
       {%- endcase -%}
     {%- endfor -%}
   </div>
 </section>
 
-{% stylesheet %}
-  .pl-story2--porcelain { background: var(--pl-porcelain); }
-  .pl-story2--cream     { background: var(--pl-cream); }
-  .pl-story2__part { margin-block-start: clamp(38px, 6vw, 74px); }
-  .pl-story2__part:first-child { margin-block-start: 0; }
-  .pl-story2 .pl-h2 { margin-block-end: clamp(16px, 2.4vw, 26px); }
-  .pl-story2 .pl-lede { margin-block: -6px 22px; }
-
-  /* ---- the problem, three ways ------------------------------------------- */
-  .pl-prob__text {
-    font-family: var(--pl-display);
-    font-weight: 600;
-    line-height: 1.45;
-    margin: 0;
-    text-wrap: pretty;
-  }
-  .pl-prob--panel {
-    background: var(--pl-cream);
-    border-radius: var(--pl-r-l);
-    padding: clamp(22px, 4vw, 44px);
-  }
-  .pl-story2--cream .pl-prob--panel { background: var(--pl-white); }
-  .pl-prob--panel .pl-prob__text { font-size: clamp(1.24rem, 4.6vw, 1.9rem); color: var(--pl-ink); max-width: 40ch; }
-
-  /* No box at all: the sentence carries itself, for a product whose problem is
-     the whole argument. */
-  .pl-prob--plain .pl-prob__text {
-    font-size: clamp(1.45rem, 6vw, 2.5rem);
-    color: var(--pl-ink);
-    max-width: 26ch;
-    letter-spacing: -.01em;
-  }
-
-  /* Inverted, for a page that needs the problem to land hard before anything
-     else is offered. */
-  .pl-prob--bar {
-    background: var(--pl-ink);
-    border-radius: var(--pl-r-l);
-    padding: clamp(24px, 4.4vw, 48px);
-  }
-  .pl-prob--bar .pl-eyebrow { color: var(--pl-sand-deep); }
-  .pl-prob--bar .pl-prob__text { font-size: clamp(1.3rem, 5vw, 2.05rem); color: var(--pl-porcelain); max-width: 34ch; }
-
-  /* ---- before / after ---------------------------------------------------- */
-  .pl-cmp { display: grid; gap: 14px; grid-template-columns: 1fr; }
-  @media (min-width: 760px) { .pl-cmp--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
-  /* `rows` stays one column at every width: two full width bands read as a
-     sequence in time, which suits a product whose story is a before and an
-     after rather than a pair of options. */
-  .pl-cmp--rows { gap: 12px; }
-  .pl-cmp__card {
-    min-width: 0;
-    border-radius: var(--pl-r-l);
-    padding: clamp(18px, 3vw, 28px);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .pl-cmp__card--before { background: var(--pl-white); border: 1px solid var(--pl-line); }
-  .pl-cmp__card--after  { background: var(--pl-ink); color: var(--pl-porcelain); }
-  .pl-cmp--rows .pl-cmp__card { display: grid; gap: 10px; }
-  @media (min-width: 620px) {
-    .pl-cmp--rows .pl-cmp__card { grid-template-columns: 92px minmax(0, 1fr); align-items: start; gap: 20px; }
-  }
-  .pl-cmp__tag {
-    align-self: flex-start;
-    font-family: var(--pl-sans);
-    font-size: .74rem;
-    font-weight: 700;
-    letter-spacing: .04em;
-    padding: 6px 13px;
-    border-radius: var(--pl-r-pill);
-  }
-  .pl-cmp__card--before .pl-cmp__tag { background: var(--pl-sand); color: var(--pl-ink-soft); }
-  .pl-cmp__card--after  .pl-cmp__tag { background: var(--pl-clay); color: var(--pl-porcelain); }
-  .pl-cmp__img { width: 100%; height: auto; border-radius: var(--pl-r-m); display: block; }
-  .pl-cmp--rows .pl-cmp__img { grid-column: 1 / -1; }
-  .pl-cmp__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
-  .pl-cmp__list li {
-    position: relative;
-    font-family: var(--pl-sans);
-    font-size: .95rem;
-    line-height: 1.6;
-    padding-inline-start: 26px;
-  }
-  .pl-cmp__card--before .pl-cmp__list li { color: var(--pl-ink-soft); }
-  .pl-cmp__card--after  .pl-cmp__list li { color: var(--pl-porcelain); }
-  /* The tick and the dash are drawn, never typed, so no emoji font is involved.
-     Physical borders on purpose: a tick built from logical borders becomes a
-     chevron the moment the page is RTL. */
-  .pl-cmp__list li::before {
-    content: "";
-    position: absolute;
-    inset-inline-start: 0;
-    inset-block-start: .42em;
-    width: 12px; height: 7px;
-  }
-  .pl-cmp__card--after .pl-cmp__list li::before {
-    border-left: 2px solid var(--pl-clay);
-    border-bottom: 2px solid var(--pl-clay);
-    transform: rotate(-45deg);
-  }
-  .pl-cmp__card--before .pl-cmp__list li::before {
-    inset-block-start: .55em;
-    height: 0;
-    border-bottom: 2px solid var(--pl-sand-deep);
-  }
-
-  /* ---- steps, three ways -------------------------------------------------- */
-  .pl-steps { list-style: none; margin: 0; padding: 0; }
-  .pl-steps__title { font-family: var(--pl-sans); font-size: 1rem; font-weight: 700; color: var(--pl-ink); margin: 0; }
-  .pl-steps__text { font-family: var(--pl-sans); font-size: .92rem; line-height: 1.65; color: var(--pl-ink-soft); margin: 7px 0 0; }
-  .pl-steps__num {
-    font-family: var(--pl-display);
-    font-weight: 700;
-    color: var(--pl-clay);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .pl-steps--cards { display: grid; gap: 16px; }
-  @media (min-width: 640px)  { .pl-steps--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
-  @media (min-width: 1024px) { .pl-steps--cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .pl-steps--cards .pl-steps__item {
-    min-width: 0;
-    background: var(--pl-white);
-    border: 1px solid var(--pl-line);
-    border-radius: var(--pl-r-m);
-    padding: clamp(16px, 2.6vw, 24px);
-  }
-  .pl-steps--cards .pl-steps__num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px; height: 38px;
-    border-radius: var(--pl-r-pill);
-    background: var(--pl-cream);
-    font-size: .95rem;
-    margin-block-end: 12px;
-  }
-
-  /* A rail down the start edge, for a routine that is genuinely sequential. */
-  .pl-steps--timeline { display: grid; gap: 0; }
-  .pl-steps--timeline .pl-steps__item {
-    position: relative;
-    display: grid;
-    grid-template-columns: 46px minmax(0, 1fr);
-    gap: 14px;
-    padding-block: 0 26px;
-  }
-  .pl-steps--timeline .pl-steps__item:last-child { padding-block-end: 0; }
-  /* The connector sits under the numbers, inset on the start edge so it mirrors
-     with the page instead of being pinned to the left. */
-  .pl-steps--timeline .pl-steps__item::before {
-    content: "";
-    position: absolute;
-    inset-block: 34px 0;
-    inset-inline-start: 22px;
-    width: 2px;
-    background: var(--pl-sand);
-  }
-  .pl-steps--timeline .pl-steps__item:last-child::before { display: none; }
-  .pl-steps--timeline .pl-steps__num {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px; height: 46px;
-    border-radius: var(--pl-r-pill);
-    background: var(--pl-cream);
-    border: 2px solid var(--pl-porcelain);
-    font-size: 1rem;
-  }
-  .pl-story2--cream .pl-steps--timeline .pl-steps__num { background: var(--pl-white); border-color: var(--pl-cream); }
-
-  /* Big quiet numerals, no boxes: for a two or three step product where cards
-     would be more furniture than the content deserves. */
-  .pl-steps--strip { display: grid; gap: 22px; }
-  /* minmax needs a real floor: `minmax(0, 1fr)` with auto-fit can never form
-     a second column, so the strip would have silently stayed one column at
-     every width. 190px is the narrowest a numbered step reads well at. */
-  @media (min-width: 760px) { .pl-steps--strip { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 28px; } }
-  .pl-steps--strip .pl-steps__item {
-    min-width: 0;
-    padding-block-start: 14px;
-    border-block-start: 2px solid var(--pl-sand-deep);
-  }
-  .pl-steps--strip .pl-steps__num { display: block; font-size: 1.5rem; margin-block-end: 8px; }
-
-  /* ---- why it works, three ways ------------------------------------------ */
-  .pl-why { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-  .pl-why__title { font-family: var(--pl-sans); font-size: 1rem; font-weight: 700; color: var(--pl-ink); margin: 0; }
-  .pl-why__text { font-family: var(--pl-sans); font-size: .94rem; line-height: 1.7; color: var(--pl-ink-soft); margin: 6px 0 0; }
-  .pl-why__item { min-width: 0; }
-
-  @media (min-width: 760px) { .pl-why--rules, .pl-why--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
-  .pl-why--rules .pl-why__item { padding-inline-start: 18px; border-inline-start: 2px solid var(--pl-sand); }
-  .pl-why--cards .pl-why__item {
-    background: var(--pl-white);
-    border: 1px solid var(--pl-line);
-    border-radius: var(--pl-r-m);
-    padding: clamp(16px, 2.6vw, 22px);
-  }
-  /* One column, wider measure: reads as an argument made in order rather than a
-     grid of equal claims. */
-  .pl-why--stack { gap: 0; }
-  .pl-why--stack .pl-why__item { padding-block: 18px; border-block-end: 1px solid var(--pl-line); }
-  .pl-why--stack .pl-why__item:last-child { border-block-end: 0; }
-  .pl-why--stack .pl-why__text { max-width: 62ch; }
-
-  /* ---- key points --------------------------------------------------------- */
-  .pl-keys { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-  @media (min-width: 760px) { .pl-keys { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; } }
-  .pl-keys li {
-    position: relative;
-    min-width: 0;
-    font-family: var(--pl-sans);
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--pl-ink-soft);
-    padding-inline-start: 28px;
-  }
-  .pl-keys li::before {
-    content: "";
-    position: absolute;
-    inset-inline-start: 0;
-    inset-block-start: .45em;
-    width: 13px; height: 7px;
-    border-left: 2.5px solid var(--pl-clay);
-    border-bottom: 2.5px solid var(--pl-clay);
-    transform: rotate(-45deg);
-  }
-
-  /* ---- audience and safety ------------------------------------------------ */
-  .pl-story2__note { margin-block-start: 10px; max-width: 56ch; }
-  .pl-story2__pets { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-ink-soft); margin: 12px 0 0; }
-  .pl-safety--note { padding-inline-start: 18px; border-inline-start: 3px solid var(--pl-clay); }
-  .pl-safety--panel {
-    background: var(--pl-cream);
-    border-radius: var(--pl-r-m);
-    padding: clamp(18px, 3vw, 28px);
-  }
-  .pl-story2--cream .pl-safety--panel { background: var(--pl-white); }
-
-  /* ---- product FAQ -------------------------------------------------------- */
-  .pl-qa { border-block-start: 1px solid var(--pl-line); }
-  .pl-qa__row { border-block-end: 1px solid var(--pl-line); }
-  .pl-qa__q {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    /* 56px of row, so the whole question is a thumb target. */
-    padding-block: 18px;
-    font-family: var(--pl-sans);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--pl-ink);
-    cursor: pointer;
-    list-style: none;
-  }
-  .pl-qa__q::-webkit-details-marker { display: none; }
-  .pl-qa__q:focus-visible { outline: 2px solid var(--pl-clay); outline-offset: 2px; }
-  /* A plus that becomes a minus: two bars, one rotated. No icon font, and
-     nothing that mirrors under RTL. */
-  .pl-qa__sign { position: relative; flex: 0 0 auto; width: 14px; height: 14px; margin-block-start: 4px; }
-  .pl-qa__sign::before, .pl-qa__sign::after {
-    content: "";
-    position: absolute;
-    inset-block-start: 6px;
-    inset-inline-start: 0;
-    width: 14px; height: 2px;
-    background: var(--pl-clay);
-    transition: transform .25s var(--pl-ease);
-  }
-  .pl-qa__sign::after { transform: rotate(90deg); }
-  .pl-qa__row[open] .pl-qa__sign::after { transform: rotate(0deg); }
-  .pl-qa__a { padding-block-end: 20px; }
-  .pl-qa__a p {
-    font-family: var(--pl-sans);
-    font-size: .95rem;
-    line-height: 1.75;
-    color: var(--pl-ink-soft);
-    margin: 0;
-    max-width: 62ch;
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
   "name": "TinyBloom · Product story",
   "tag": "section",
-  "max_blocks": 10,
+  "max_blocks": 12,
   "settings": [
     {
       "type": "select", "id": "tone", "label": "Section background", "default": "porcelain",
@@ -558,6 +415,63 @@
       "settings": [
         { "type": "text", "id": "heading", "label": "Heading", "default": "שאלות על המוצר" },
         { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": true }
+      ]
+    },
+    {
+      "type": "versus", "name": "למה הדרך הרגילה לא מספיקה", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "למה הדרך הרגילה לא מספיקה" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        { "type": "text", "id": "claim_label", "label": "Claim label", "default": "מה שנהוג לחשוב" },
+        { "type": "text", "id": "reality_label", "label": "Reality label", "default": "מה שקורה בפועל" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "split",
+          "options": [
+            { "value": "split", "label": "Two columns" },
+            { "value": "stack", "label": "Stacked statements" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "picker", "name": "איזה מוצר מתאים לי", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "איזה מוצר מתאים לי" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        { "type": "text", "id": "current_label", "label": "Current product label", "default": "הדף הזה" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "למוצר" }
+      ]
+    },
+    {
+      "type": "surfaces", "name": "איפה זה עובד", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "איפה זה עובד" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "chips",
+          "options": [
+            { "value": "chips", "label": "Wrapped chips" },
+            { "value": "list", "label": "Ruled list" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spotlight", "name": "המספרים", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "המספרים" }
+      ]
+    },
+    {
+      "type": "in_box", "name": "מה מגיע באריזה", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "מה מגיע באריזה" }
+      ]
+    },
+    {
+      "type": "proof", "name": "ביקורות מאומתות", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "מה לקוחות מספרים" }
       ]
     }
   ],

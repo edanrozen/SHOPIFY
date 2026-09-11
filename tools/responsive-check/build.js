@@ -21,7 +21,9 @@ const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 
 // pluma.css first, then every section {% stylesheet %}, which is the order
 // Shopify serves them in: the section bundle loads after the asset.
-let css = [read('theme/assets/pluma.css')];
+// Mirrors the real load order: pluma.css, then the product story sheet that
+// the product template links, then Shopify's bundle of section stylesheets.
+let css = [read('theme/assets/pluma.css'), read('theme/assets/pl-story.css')];
 for (const f of fs.readdirSync(path.join(ROOT, 'theme/sections')).sort()) {
   if (!f.endsWith('.liquid')) continue;
   const m = read('theme/sections/' + f).match(/\{%\s*stylesheet\s*%\}([\s\S]*?)\{%\s*endstylesheet\s*%\}/);

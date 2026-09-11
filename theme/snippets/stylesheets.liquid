@@ -30,4 +30,12 @@
 <noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
 
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The product story sheet is large and is used by product pages alone, so it is
+  not paid for on the homepage or on a collection page.
+{%- endcomment -%}
+{%- if template.name == 'product' -%}
+  {{ 'pl-story.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 <script src="{{ 'pluma.js' | asset_url }}" defer></script>
