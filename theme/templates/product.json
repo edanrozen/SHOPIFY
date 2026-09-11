@@ -43,6 +43,22 @@
         "aria": "יתרונות החנות"
       }
     },
+    "story": {
+      "type": "pl-product-story",
+      "settings": {
+        "problem_eyebrow": "הבעיה",
+        "compare_heading": "לפני ואחרי",
+        "before_label": "לפני",
+        "after_label": "אחרי",
+        "steps_heading": "איך משתמשים",
+        "why_heading": "למה זה עובד",
+        "why_body": "",
+        "audience_heading": "למי זה מתאים",
+        "pets_label": "מתאים ל:",
+        "safety_heading": "שימוש ובטיחות",
+        "faq_heading": "שאלות על המוצר"
+      }
+    },
     "details": {
       "type": "pl-product-tabs",
       "blocks": {
@@ -93,6 +109,7 @@
   "order": [
     "main",
     "ticker",
+    "story",
     "details",
     "related"
   ]

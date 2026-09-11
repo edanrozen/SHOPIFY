@@ -6,29 +6,13 @@
 {{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
 
-{%- liquid
-  assign iso = request.locale.iso_code | downcase
-  assign rtl_locales = 'he,he-il,iw,ar,fa,ur' | split: ','
-  assign is_rtl = false
-  for code in rtl_locales
-    if iso == code
-      assign is_rtl = true
-    endif
-  endfor
--%}
+{%- comment -%}
+  Direction is not set here any more. `layout/theme.liquid` writes dir onto
+  <html> server side, so it is a property of the document from the first byte
+  rather than a style block plus a script that has to run before anything can
+  read it.
+{%- endcomment -%}
 
-{%- if is_rtl -%}
-  {%- comment -%}
-    Horizon does not stamp a direction on <html>. Set it in the head, before the
-    body parses, so logical properties and the [dir="rtl"] rules resolve on first paint.
-  {%- endcomment -%}
-  <style>
-    html { direction: rtl; }
-  </style>
-  <script>
-    document.documentElement.setAttribute('dir', 'rtl');
-  </script>
-{%- endif -%}
 
 {%- comment -%}
   Rubik for headlines, Assistant for text. Both are drawn for Hebrew, so the

@@ -207,6 +207,68 @@ Below 360px the card grid drops to one column: two cards to a row left each one
 133px wide, which is not enough for a square photo, a Hebrew title, a type line and
 a price without the text collapsing into a column of single words.
 
+## Product pages
+
+The long form half of a product page is one section, `sections/pl-product-story`,
+shared by every product and driven entirely by metafields. Nothing is written per
+template: each part renders only if its metafield has content, so a product with no
+`custom.safety` simply has no safety block rather than an empty heading. Adding a
+product later means filling metafields, not editing Liquid.
+
+| Part | Metafield | Type |
+|---|---|---|
+| The problem | `custom.problem` | multi_line_text_field |
+| Before / after | `custom.before`, `custom.after` | list.single_line_text_field |
+| How to use it | `custom.steps` | json, `[{title, text}]` |
+| Why it works | `custom.why` | json, `[{title, text}]` |
+| Who it suits | `custom.audience` | multi_line_text_field |
+| Use and safety | `custom.safety` | multi_line_text_field |
+| Product FAQ | `custom.faq` | json, `[{q, a}]` |
+
+### Where the copy came from
+
+Nothing was invented. All eight products already carried a merchant written
+description containing the problem, "למה זה עובד", "איך משתמשים" and, on the clipper,
+a real safety paragraph. The pages read thin because that material was one
+undifferentiated blob rendered as a single opening paragraph. This is a
+restructuring of copy that already existed, not new claims: no size, weight,
+material, power source or run time was added anywhere.
+
+`kadurosh-cat-ball-toy` deliberately has no `custom.steps`. Its description never
+says how the ball is powered or started, and inventing a sequence would have meant
+inventing a mechanism. The section skips the block and the page is shorter for it.
+
+### Image slots
+
+`custom.before_image` and `custom.after_image` are read by the before/after cards
+and are empty on purpose. The cards lay out correctly with or without them, so
+dropping a file in later is the whole job. The gallery in `pl-product-main` already
+takes up to eight images with a swipeable thumbnail rail.
+
+## Hebrew and RTL
+
+`layout/theme.liquid` writes `dir` onto `<html>` server side, from the request
+locale against a list of right to left *scripts*. It used to be a `<style>` block
+plus an inline script in `snippets/stylesheets.liquid`, which worked but left
+direction as a patch on the document rather than a property of it: anything reading
+`document.dir` or matching `[dir="rtl"]` depended on that script having run.
+
+English found and removed from the storefront: the `main-menu` items (Home,
+Catalog, Contact), the `footer` menu (Search, Your Privacy Choices), the customer
+account menu (Orders, Profile), the "Your Privacy Choices" page title, the
+"Home page" collection title, and four menu titles including "PLUMA main". The menu
+also still pointed at "מיטות ומנוחה" when no product in the catalogue is a bed.
+
+Nothing English remains in this theme's own sections: a sweep for visible Latin
+text in `theme/sections` and `theme/snippets` returns zero. Checkout and cart
+strings come from Shopify's `he` locale, which is the store's only published
+language and is set as primary.
+
+The only physical `left`/`right` in the whole stylesheet layer are deliberate: the
+tick glyph, which is two rotated borders and turns into a chevron if made logical,
+and the star rating fill, which is explicitly `direction: ltr` so it fills the same
+way in both directions.
+
 ## Ratings and reviews
 
 The store has no customers yet, so it has no reviews. What was on the site was

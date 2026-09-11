@@ -15,7 +15,7 @@ const ROOT = path.resolve(__dirname, '../..');
 const OUT = __dirname;
 
 const HOME = ['pl-hero-photo','pl-marquee','pl-banner','pl-row','pl-promise','pl-story','pl-ritual','pl-faq'];
-const PDP  = ['pl-product-main','pl-marquee','pl-product-tabs','pl-related'];
+const PDP  = ['pl-product-main','pl-marquee','pl-product-story','pl-product-tabs','pl-related'];
 
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 
