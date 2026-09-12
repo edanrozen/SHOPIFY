@@ -1,0 +1,41 @@
+{%- comment -%}
+  Horizon defaults, plus the TinyBloom layer.
+  `pluma.css` is loaded after `base.css` so its tokens and overrides win.
+{%- endcomment -%}
+
+{{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
+{{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- comment -%}
+  Direction is not set here any more. `layout/theme.liquid` writes dir onto
+  <html> server side, so it is a property of the document from the first byte
+  rather than a style block plus a script that has to run before anything can
+  read it.
+{%- endcomment -%}
+
+
+{%- comment -%}
+  Rubik for headlines, Assistant for text. Both are drawn for Hebrew, so the
+  page never falls back to a Latin face with patched Hebrew glyphs.
+
+  The sheet is fetched with media="print" and promoted on load, so a slow font
+  server cannot hold up the first paint on a phone. `display=swap` means the
+  fallback stack shows immediately and the real face replaces it in place.
+{%- endcomment -%}
+{%- assign pl_fonts = 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rubik:wght@500;600;700&display=swap' -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="{{ pl_fonts }}">
+<link rel="stylesheet" href="{{ pl_fonts }}" media="print" onload="this.media='all'; this.onload=null;">
+<noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
+
+{{ 'pluma.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The product story sheet is large and is used by product pages alone, so it is
+  not paid for on the homepage or on a collection page.
+{%- endcomment -%}
+{%- if template.name == 'product' -%}
+  {{ 'pl-story.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+<script src="{{ 'pluma.js' | asset_url }}" defer></script>
