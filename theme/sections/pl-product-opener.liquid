@@ -1,0 +1,209 @@
+{%- doc -%}
+  The opening frame of a flagship product page.
+
+  It is a section rather than a block in pl-product-story for two reasons. A
+  hero is the first thing on the page, so its image has to load eagerly and
+  claim priority, which is only correct when its position is fixed; and only a
+  product carrying the range deserves this much room, so the shared story
+  library stays the size it needs to be for the other eight.
+
+  The statement underneath is optional. It is the one place on the page allowed
+  to say something without supporting it immediately, which is what makes the
+  reader stop before the argument begins.
+{%- enddoc -%}
+
+{%- liquid
+  assign idx = section.settings.image_index | minus: 1
+  assign shot = product.images[idx]
+  unless shot
+    assign shot = product.featured_image
+  endunless
+-%}
+
+<section class="pl-open-sec pl-open-sec--{{ section.settings.tone }}" id="pl-open-{{ section.id }}">
+  <div class="pl-wrap">
+    {%- if shot != blank -%}
+      <div class="pl-open">
+        <div class="pl-open__frame">
+          <img
+            src="{{ shot | image_url: width: 1400 }}"
+            srcset="{{ shot | image_url: width: 600 }} 600w,
+                    {{ shot | image_url: width: 900 }} 900w,
+                    {{ shot | image_url: width: 1400 }} 1400w,
+                    {{ shot | image_url: width: 1800 }} 1800w"
+            sizes="(min-width: 1240px) 1100px, 100vw"
+            width="{{ shot.width }}" height="{{ shot.height }}"
+            loading="eager" fetchpriority="high" decoding="async"
+            alt="{{ shot.alt | default: product.title | escape }}">
+          <div class="pl-open__say">
+            {%- if section.settings.eyebrow != blank -%}
+              <p class="pl-open__eyebrow">{{ section.settings.eyebrow }}</p>
+            {%- endif -%}
+            {%- if section.settings.heading != blank -%}
+              <h2 class="pl-open__h">{{ section.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if section.settings.text != blank -%}
+              <p class="pl-open__text">{{ section.settings.text }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.statement != blank -%}
+      <div class="pl-pull">
+        <p class="pl-pull__text">{{ section.settings.statement }}</p>
+        {%- if section.settings.statement_note != blank -%}
+          <p class="pl-pull__note">{{ section.settings.statement_note }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .pl-open-sec {
+    padding-block: clamp(18px, 3vw, 34px) 0;
+    background: var(--pl-white);
+  }
+  .pl-open-sec--cream { background: var(--pl-cream); }
+
+  /* The frame breaks the wrapper on a phone by cancelling exactly the gutter
+     the wrapper adds, so it reaches both edges without the page ever gaining
+     scrollable width. From the tablet breakpoint up the wrapper is already
+     narrower than the viewport, so the frame comes back inside and takes a
+     radius instead of bleeding. */
+  .pl-open { margin-inline: calc(var(--pl-gutter) * -1); }
+  .pl-open__frame {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--pl-cream);
+  }
+  .pl-open-sec--cream .pl-open__frame { background: var(--pl-white); }
+  .pl-open__frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  /* The scrim belongs to the container, not the image, so it survives any
+     aspect ratio, and it is anchored to the block end because that is where
+     the copy sits. Without it the text would be at the mercy of whatever the
+     photograph happens to show underneath. */
+  .pl-open__frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top,
+      rgba(20, 16, 12, 0.86) 0%,
+      rgba(20, 16, 12, 0.55) 34%,
+      rgba(20, 16, 12, 0.08) 66%,
+      rgba(20, 16, 12, 0) 100%);
+  }
+
+  .pl-open__say {
+    position: absolute;
+    z-index: 2;
+    inset-inline: 0;
+    inset-block-end: 0;
+    padding: clamp(20px, 5vw, 44px);
+    color: #fff;
+  }
+  .pl-open__eyebrow {
+    font-family: var(--pl-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    opacity: 0.85;
+  }
+  .pl-open__h {
+    font-family: var(--pl-display);
+    font-weight: 700;
+    font-size: clamp(28px, 6.4vw, 54px);
+    line-height: 1.12;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .pl-open__text {
+    font-family: var(--pl-sans);
+    font-size: clamp(15px, 1.7vw, 18px);
+    line-height: 1.6;
+    margin: 12px 0 0;
+    max-width: 46ch;
+    opacity: 0.92;
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 760px) {
+    .pl-open { margin-inline: 0; }
+    .pl-open__frame { border-radius: var(--pl-r-l); }
+    .pl-open__frame img { aspect-ratio: 16 / 10; }
+  }
+
+  /* Deliberately the only part of the page with no supporting apparatus: no
+     card, no list, no image. It exists to make the reader stop. */
+  .pl-pull {
+    text-align: center;
+    padding-block: clamp(26px, 5vw, 52px);
+  }
+  .pl-pull__text {
+    font-family: var(--pl-display);
+    font-weight: 600;
+    font-size: clamp(23px, 4.2vw, 40px);
+    line-height: 1.3;
+    margin: 0 auto;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .pl-pull__note {
+    font-family: var(--pl-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 16px auto 0;
+    max-width: 44ch;
+    opacity: 0.72;
+    text-wrap: pretty;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "TinyBloom · Opener",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "range",
+      "id": "image_index",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "label": "תמונה מספר",
+      "info": "לפי סדר התמונות של המוצר"
+    },
+    { "type": "text", "id": "eyebrow", "label": "שורה עליונה" },
+    { "type": "text", "id": "heading", "label": "כותרת" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "header", "content": "המשפט מתחת לתמונה" },
+    { "type": "textarea", "id": "statement", "label": "המשפט" },
+    { "type": "text", "id": "statement_note", "label": "שורת לוואי" },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "רקע",
+      "default": "white",
+      "options": [
+        { "value": "white", "label": "לבן" },
+        { "value": "cream", "label": "שמנת" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "TinyBloom · Opener" }]
+}
+{% endschema %}
