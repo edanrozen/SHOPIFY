@@ -47,6 +47,17 @@
           }
         },
         "b2": {
+          "type": "shot",
+          "settings": {
+            "image_index": 2,
+            "eyebrow": "",
+            "heading": "צד לכל משימה",
+            "text": "מתחילים בהתרת קשרים ומסיימים בהברשה וסידור, בלי להחליף כלי.",
+            "style": "framed",
+            "side": "start"
+          }
+        },
+        "b3": {
           "type": "why",
           "settings": {
             "heading": "למה זה מספיק",
@@ -54,7 +65,7 @@
             "style": "rules"
           }
         },
-        "b3": {
+        "b4": {
           "type": "compare",
           "settings": {
             "heading": "מה משתנה בבית",
@@ -63,7 +74,7 @@
             "style": "rows"
           }
         },
-        "b4": {
+        "b5": {
           "type": "picker",
           "settings": {
             "heading": "פרוותק או המסרק המקצועי",
@@ -72,14 +83,14 @@
             "link_label": "למוצר"
           }
         },
-        "b5": {
+        "b6": {
           "type": "audience",
           "settings": {
             "heading": "למי זה מתאים",
             "pets_label": "מתאים ל:"
           }
         },
-        "b6": {
+        "b7": {
           "type": "faq",
           "settings": {
             "heading": "שאלות על פרוותק",
@@ -93,7 +104,8 @@
         "b3",
         "b4",
         "b5",
-        "b6"
+        "b6",
+        "b7"
       ],
       "settings": {
         "tone": "cream"

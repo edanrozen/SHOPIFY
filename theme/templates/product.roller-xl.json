@@ -52,6 +52,17 @@
           }
         },
         "b3": {
+          "type": "shot",
+          "settings": {
+            "image_index": 2,
+            "eyebrow": "הראש הרחב",
+            "heading": "שלושים סנטימטר של כיסוי",
+            "text": "כל מעבר מכסה 30 סנטימטר, אז ספה שלמה נסגרת בכמה מעברים.",
+            "style": "duo",
+            "side": "end"
+          }
+        },
+        "b4": {
           "type": "steps",
           "settings": {
             "heading": "כך עוברים על ספה שלמה",
@@ -59,7 +70,7 @@
             "style": "strip"
           }
         },
-        "b4": {
+        "b5": {
           "type": "surfaces",
           "settings": {
             "heading": "לאן הוא מיועד",
@@ -67,7 +78,7 @@
             "style": "chips"
           }
         },
-        "b5": {
+        "b6": {
           "type": "compare",
           "settings": {
             "heading": "מה משתנה לפני שאורחים מגיעים",
@@ -76,7 +87,16 @@
             "style": "rows"
           }
         },
-        "b6": {
+        "b7": {
+          "type": "gallery",
+          "settings": {
+            "heading": "עוד מבטים על המסיר",
+            "start_index": 3,
+            "count": 4,
+            "style": "grid"
+          }
+        },
+        "b8": {
           "type": "picker",
           "settings": {
             "intro": "שלושתם מורידים שיער. ההבדל הוא גודל המשטח שאתם מנקים.",
@@ -85,13 +105,13 @@
             "link_label": "למוצר"
           }
         },
-        "b7": {
+        "b9": {
           "type": "in_box",
           "settings": {
             "heading": "מה מגיע באריזה"
           }
         },
-        "b8": {
+        "b10": {
           "type": "faq",
           "settings": {
             "heading": "שאלות על המסיר הרחב",
@@ -107,7 +127,9 @@
         "b5",
         "b6",
         "b7",
-        "b8"
+        "b8",
+        "b9",
+        "b10"
       ],
       "settings": {
         "tone": "porcelain"

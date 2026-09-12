@@ -46,6 +46,17 @@
           }
         },
         "b2": {
+          "type": "shot",
+          "settings": {
+            "image_index": 2,
+            "eyebrow": "הכלי",
+            "heading": "היד היא הכלי",
+            "text": "מכניסים את היד לכפפה ומעבירים על המשטח. מגיעים לפינות, לכריות ולמושב רכב בלי להתאמץ.",
+            "style": "duo",
+            "side": "start"
+          }
+        },
+        "b3": {
           "type": "versus",
           "settings": {
             "heading": "למה רולר דביק לא סוגר את העניין",
@@ -55,7 +66,7 @@
             "style": "split"
           }
         },
-        "b3": {
+        "b4": {
           "type": "surfaces",
           "settings": {
             "heading": "איפה הכפפה עובדת",
@@ -63,7 +74,7 @@
             "style": "chips"
           }
         },
-        "b4": {
+        "b5": {
           "type": "steps",
           "settings": {
             "heading": "ארבע העברות של היד",
@@ -71,14 +82,14 @@
             "style": "timeline"
           }
         },
-        "b5": {
+        "b6": {
           "type": "safety",
           "settings": {
             "heading": "איך לשמור עליה",
             "style": "note"
           }
         },
-        "b6": {
+        "b7": {
           "type": "compare",
           "settings": {
             "heading": "מה משתנה בבית",
@@ -87,7 +98,16 @@
             "style": "rows"
           }
         },
-        "b7": {
+        "b8": {
+          "type": "gallery",
+          "settings": {
+            "heading": "עוד מבטים על הכפפה",
+            "start_index": 4,
+            "count": 4,
+            "style": "rail"
+          }
+        },
+        "b9": {
           "type": "picker",
           "settings": {
             "intro": "שלושתם מורידים שיער. ההבדל הוא איפה כל אחד מהם הכי נוח.",
@@ -96,7 +116,7 @@
             "link_label": "למוצר"
           }
         },
-        "b8": {
+        "b10": {
           "type": "faq",
           "settings": {
             "heading": "שאלות על הכפפה",
@@ -112,7 +132,9 @@
         "b5",
         "b6",
         "b7",
-        "b8"
+        "b8",
+        "b9",
+        "b10"
       ],
       "settings": {
         "tone": "cream"

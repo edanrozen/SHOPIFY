@@ -417,3 +417,51 @@
 .pl-proof__by { margin: 0; display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--pl-sans); font-size: .85rem; }
 .pl-proof__name { font-weight: 600; color: var(--pl-ink); }
 .pl-proof__date { color: var(--pl-taupe); }
+
+  /* A photograph carrying a line of the argument. The picture keeps its own
+     ratio in every treatment, so no packshot is ever cropped by the layout. */
+  .pl-shot__frame { margin: 0; border-radius: var(--pl-r-l); overflow: hidden; background: var(--pl-cream); }
+  .pl-story2--cream .pl-shot__frame { background: var(--pl-white); }
+  .pl-shot__frame img { display: block; width: 100%; height: auto; aspect-ratio: var(--pl-shot-ratio, 1); object-fit: cover; }
+  .pl-shot__say { display: grid; gap: 8px; align-content: center; }
+  .pl-shot__text { margin: 0; font-family: var(--pl-sans); font-size: 1rem; line-height: 1.7; color: var(--pl-ink-soft); max-width: 52ch; }
+  .pl-shot .pl-h2 { margin-block-end: 0; }
+
+  /* Framed: the picture sits in the column like a plate in a book. */
+  .pl-shot--framed { display: grid; gap: 18px; }
+  .pl-shot--framed .pl-shot__frame { max-width: 720px; }
+
+  /* Duo: picture and statement side by side. `side` decides which of them
+     leads, using grid order rather than a float, so it mirrors with the page. */
+  .pl-shot--duo { display: grid; gap: 20px; }
+  @media (min-width: 860px) {
+    .pl-shot--duo { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; }
+    .pl-shot--duo.pl-shot--end .pl-shot__frame { order: 2; }
+  }
+
+  /* Full: the picture breaks the measure and runs the width of the section. */
+  .pl-shot--full { display: grid; gap: 20px; }
+  .pl-shot--full .pl-shot__frame { border-radius: var(--pl-r-l); }
+  @media (min-width: 1000px) { .pl-shot--full .pl-shot__say { max-width: 62ch; } }
+
+  /* More views of the same object. Grid on wide screens, a thumb-friendly
+     rail on a phone: the rail is its own scroll container, so the page itself
+     never gains scrollable width from it. */
+  .pl-gal { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  @media (min-width: 760px) { .pl-gal--grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; } }
+  .pl-gal__item { min-width: 0; margin: 0; border-radius: var(--pl-r-m); overflow: hidden; background: var(--pl-cream); }
+  .pl-story2--cream .pl-gal__item { background: var(--pl-white); }
+  .pl-gal__item img { display: block; width: 100%; height: auto; aspect-ratio: var(--pl-shot-ratio, 1); object-fit: cover; }
+
+  .pl-gal--rail {
+    display: flex; gap: 12px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    margin-inline: calc(var(--pl-gutter) * -1); padding-inline: var(--pl-gutter);
+  }
+  .pl-gal--rail::-webkit-scrollbar { display: none; }
+  .pl-gal--rail .pl-gal__item { flex: 0 0 62%; scroll-snap-align: start; }
+  @media (min-width: 760px) {
+    .pl-gal--rail { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; overflow: visible; margin-inline: 0; padding-inline: 0; }
+    .pl-gal--rail .pl-gal__item { flex: initial; }
+  }

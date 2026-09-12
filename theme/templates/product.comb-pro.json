@@ -62,6 +62,17 @@
           }
         },
         "b4": {
+          "type": "shot",
+          "settings": {
+            "image_index": 2,
+            "eyebrow": "השיניים",
+            "heading": "שני מרווחים במסרק אחד",
+            "text": "צד צפוף לפנים ולזנב, צד פתוח לגוף ולאזורים העבותים.",
+            "style": "duo",
+            "side": "start"
+          }
+        },
+        "b5": {
           "type": "steps",
           "settings": {
             "heading": "איך לסרוק נכון",
@@ -69,7 +80,7 @@
             "style": "timeline"
           }
         },
-        "b5": {
+        "b6": {
           "type": "why",
           "settings": {
             "heading": "למה המסרק הזה",
@@ -77,7 +88,7 @@
             "style": "rules"
           }
         },
-        "b6": {
+        "b7": {
           "type": "compare",
           "settings": {
             "heading": "מה משתנה אחרי שבוע",
@@ -86,7 +97,16 @@
             "style": "cards"
           }
         },
-        "b7": {
+        "b8": {
+          "type": "gallery",
+          "settings": {
+            "heading": "עוד מבטים על המסרק",
+            "start_index": 3,
+            "count": 3,
+            "style": "grid"
+          }
+        },
+        "b9": {
           "type": "picker",
           "settings": {
             "heading": "מקצועי או פרוותק",
@@ -95,14 +115,14 @@
             "link_label": "למוצר"
           }
         },
-        "b8": {
+        "b10": {
           "type": "safety",
           "settings": {
             "heading": "טכניקה נכונה",
             "style": "note"
           }
         },
-        "b9": {
+        "b11": {
           "type": "faq",
           "settings": {
             "heading": "שאלות על המסרק",
@@ -119,7 +139,9 @@
         "b6",
         "b7",
         "b8",
-        "b9"
+        "b9",
+        "b10",
+        "b11"
       ],
       "settings": {
         "tone": "porcelain"
