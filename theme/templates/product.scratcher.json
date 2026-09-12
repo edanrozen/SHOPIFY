@@ -76,8 +76,8 @@
           "settings": {
             "heading": "מה שנהוג לחשוב על משטח גירוד",
             "intro": "",
-            "claim_label": "מה שנהוג לחשוב",
-            "reality_label": "מה שקורה בפועל",
+            "claim_label": "מה שמנסים",
+            "reality_label": "מה שעובד",
             "style": "split"
           }
         },
@@ -110,8 +110,8 @@
         "b9": {
           "type": "audience",
           "settings": {
-            "heading": "למי זה מתאים",
-            "pets_label": "מתאים ל:"
+            "heading": "לאיזה בית זה נכנס",
+            "pets_label": "בשביל:"
           }
         },
         "b10": {
@@ -170,10 +170,10 @@
       "type": "pl-related",
       "settings": {
         "limit": 6,
-        "eyebrow": "לחתול שלכם",
+        "eyebrow": "לפינה של החתול",
         "heading": "עוד דברים שחתולים אוהבים",
         "body": "גירוד הוא צורך אחד. משחק ותעסוקה הם צורך אחר.",
-        "link_label": "לכל המוצרים"
+        "link_label": "לגלות עוד"
       }
     }
   },

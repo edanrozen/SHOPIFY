@@ -418,6 +418,15 @@
 .pl-proof__name { font-weight: 600; color: var(--pl-ink); }
 .pl-proof__date { color: var(--pl-taupe); }
 
+/* Every part below is marked up as a list for screen readers, and a flex or
+   grid item keeps `display: list-item`, so the browser still paints a bullet
+   beside each card and chip. Reset the seven of them in one place. */
+.pl-vs, .pl-pick, .pl-surf, .pl-spot, .pl-box, .pl-proof, .pl-gal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
   /* A photograph carrying a line of the argument. The picture keeps its own
      ratio in every treatment, so no packshot is ever cropped by the layout. */
   .pl-shot__frame { margin: 0; border-radius: var(--pl-r-l); overflow: hidden; background: var(--pl-cream); }

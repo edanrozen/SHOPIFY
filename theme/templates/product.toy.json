@@ -61,8 +61,8 @@
           "settings": {
             "heading": "למה עוד צעצוע לא פותר את זה",
             "intro": "",
-            "claim_label": "מה שנהוג לחשוב",
-            "reality_label": "מה שקורה בפועל",
+            "claim_label": "מה שקונים",
+            "reality_label": "מה שקורה אחר כך",
             "style": "stack"
           }
         },
@@ -77,7 +77,7 @@
         "b5": {
           "type": "compare",
           "settings": {
-            "heading": "מה משתנה",
+            "heading": "מה משתנה בערב",
             "before_label": "בלי",
             "after_label": "עם",
             "style": "cards"
@@ -95,8 +95,8 @@
         "b7": {
           "type": "audience",
           "settings": {
-            "heading": "למי זה מתאים",
-            "pets_label": "מתאים ל:"
+            "heading": "לאיזה חתול זה מדבר",
+            "pets_label": "נועד ל:"
           }
         },
         "b8": {
@@ -152,7 +152,7 @@
         "e2"
       ],
       "settings": {
-        "eyebrow": "הפרטים",
+        "eyebrow": "מידע נוסף",
         "heading": "איך משחקים בו",
         "body": "אופן המשחק, מה מגיע באריזה וכל מה שקשור למשלוח ולהחזרות."
       }
@@ -161,10 +161,10 @@
       "type": "pl-related",
       "settings": {
         "limit": 6,
-        "eyebrow": "לחתול שלכם",
+        "eyebrow": "לשעות שאתם לא בבית",
         "heading": "מה עוד יעסיק אותו",
         "body": "משחק פורק אנרגיה. גירוד ומנוחה הם צורך נפרד.",
-        "link_label": "לכל המוצרים"
+        "link_label": "להמשיך לעיין"
       }
     }
   },
