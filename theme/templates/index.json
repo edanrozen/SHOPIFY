@@ -2,23 +2,47 @@
   "sections": {
     "hero": {
       "type": "pl-hero-photo",
+      "blocks": {
+        "hb1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "טיפוח בלי מאבק",
+            "text": "חוויה נעימה יותר לשניכם"
+          }
+        },
+        "hb2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "paw",
+            "title": "גישה קלה יותר",
+            "text": "לכפות ולרגליים"
+          }
+        },
+        "hb3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "title": "פחות בלגן",
+            "text": "נשאר בבית, לא על הרצפה"
+          }
+        }
+      },
+      "block_order": [
+        "hb1",
+        "hb2",
+        "hb3"
+      ],
       "settings": {
         "image": "shopify://shop_images/IMG-0633.png",
         "image_mobile": "shopify://shop_images/1CFBD4F3-2618-44A9-BD31-D101DB73E276.png",
-        "image_alt": "כלב וחתול בבית, רגע רגוע אחרי טיפוח",
+        "image_alt": "אישה שוטפת כלב וחתול בעמדת טיפוח ביתית",
+        "focal_point": "center",
         "eyebrow": "",
         "heading": "טיפוח חכם יותר.\nחיים קלים יותר.",
         "subheading": "תשעה כלים לטיפוח ולניקיון, שנבחרו כדי שהשגרה עם החיה תיקח דקות ולא ערב שלם.",
-        "show_rating": false,
-        "rating_value": "",
-        "rating_text": "",
         "cta_label": "גלו את המוצרים",
-        "cta_link": "/collections/all",
-        "cta2_label": "",
-        "cta2_link": "",
-        "chip_1": "",
-        "chip_2": "",
-        "chip_3": ""
+        "cta_link": "/collections/all"
       }
     },
     "categories": {

@@ -108,8 +108,14 @@ const engine = new Liquid({ strictFilters: false, strictVariables: false });
 // Image settings arrive as "shopify://shop_images/NAME.png" strings. They are
 // turned into image drops with plausible dimensions so aspect-ratio rules and
 // srcset attributes behave as they will in production.
+// Real dimensions, read from the Files API. They are recorded here rather than
+// guessed because a transposed pair silently makes the preview lie: a frame
+// that crops badly in production renders perfectly against a stub of the wrong
+// shape, which is exactly how the hero shipped with a landscape photograph
+// inside a portrait frame.
 const PICKED = {
-  '1CFBD4F3-2618-44A9-BD31-D101DB73E276.png': [941, 1672],
+  '1CFBD4F3-2618-44A9-BD31-D101DB73E276.png': [1672, 941],
+  'IMG-0633.png': [1672, 941],
   '6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png': [1145, 1374],
   'FFA8C7B2-763E-4709-A5AE-3D9B4D689B1A.png': [1254, 1254],
 };
