@@ -28,7 +28,16 @@
     </header>
 
     <ul class="{{ list_class }}" role="list">
-      {%- for product in products limit: section.settings.limit -%}
+      {%- comment -%}
+        `exclude` drops one handle from the row. It exists so the flagship can
+        sit in its own collection for the collection page, without being listed
+        on the homepage among the tools that are used on top of it.
+      {%- endcomment -%}
+      {%- assign shown = 0 -%}
+      {%- for product in products -%}
+        {%- if product.handle == section.settings.exclude -%}{% continue %}{%- endif -%}
+        {%- if shown >= section.settings.limit -%}{% break %}{%- endif -%}
+        {%- assign shown = shown | plus: 1 -%}
         <li class="pl-reveal" style="transition-delay: {{ forloop.index0 | times: 60 }}ms;">
           {% render 'pl-card', product: product, cta: section.settings.card_cta %}
         </li>
@@ -49,7 +58,8 @@
   "tag": "section",
   "settings": [
     { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "exclude", "label": "להשמיט מוצר", "info": "handle של מוצר שלא יוצג בשורה הזו." },
+      { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 12, "step": 1, "default": 8 },
     { "type": "select", "id": "layout", "label": "Layout", "default": "grid",
       "options": [
         { "value": "grid", "label": "Grid" },

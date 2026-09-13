@@ -32,11 +32,11 @@
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
-  The quiet layer. It redefines the palette tokens the whole storefront is
-  painted through, so it has to load after pluma.css and on every page, or the
-  site would be white in some places and beige in others.
+  The warm refinement. It keeps the palette and reduces the weight, so it has
+  to load after pluma.css and on every page, or the rhythm would be tight in
+  some places and loose in others.
 {%- endcomment -%}
-{{ 'tb.css' | asset_url | stylesheet_tag }}
+{{ 'tb-warm.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
   Product pages carry one extra sheet and never both. The rebuilt page uses

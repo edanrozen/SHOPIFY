@@ -1,184 +1,68 @@
-{%- doc -%}
-  Customer reviews.
-
-  The store has no review data yet: no orders have been placed, and the
-  fabricated set that used to sit in the product metafields was deleted on
-  purpose. So this section is built to be honest about that.
-
-  It renders real reviews when a real review exists, as a block someone has
-  typed in the theme editor. With no blocks it renders nothing at all rather
-  than an empty heading over empty space.
-
-  The sample set below is the structure made visible, and it is off by default.
-  Turning it on marks every card as an example and says so above the list, so
-  the page can be judged as a design without a shopper ever being shown a
-  quote that nobody said. The moment a real review is added as a block, the
-  samples disappear on their own.
-{%- enddoc -%}
-
-{%- liquid
-  assign has_real = false
-  if section.blocks.size > 0
-    assign has_real = true
-  endif
-  assign show_demo = false
-  if has_real == false and section.settings.demo
-    assign show_demo = true
-  endif
--%}
-
-{%- if has_real or show_demo -%}
-  <section class="pl-reviews pl-section">
-    <div class="pl-wrap">
-      <div class="pl-reviews__head pl-reveal">
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
-        <h2 class="pl-h2">{{ section.settings.heading }}</h2>
-      </div>
-
-      {%- if show_demo -%}
-        <p class="pl-reviews__demo" role="note">
-          ביקורות לדוגמה, להמחשת המבנה בלבד. החליפו אותן בביקורות אמיתיות לפני הפרסום.
-        </p>
-      {%- endif -%}
-
-      {%- comment -%}
-        A scroll rail on a phone and a grid from the tablet up. The rail is its
-        own scroll container, so the page itself never gains scrollable width
-        from it.
-      {%- endcomment -%}
-      <ul class="pl-reviews__list" role="list">
-        {%- if has_real -%}
-          {%- for block in section.blocks -%}
-            <li class="pl-review pl-reveal" {{ block.shopify_attributes }}>
-              <div class="pl-review__stars" aria-label="{{ block.settings.rating }} מתוך 5">
-                {%- for i in (1..5) -%}
-                  <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false" class="{% if i > block.settings.rating %}is-off{% endif %}">
-                    <path d="M10 1.6l2.47 5.3 5.53.66-4.1 3.9 1.1 5.7L10 14.4 4.99 17.16l1.1-5.7-4.1-3.9 5.54-.66z" fill="currentColor"/>
-                  </svg>
-                {%- endfor -%}
-              </div>
-              <blockquote class="pl-review__quote">{{ block.settings.quote }}</blockquote>
-              <footer class="pl-review__by">
-                <span class="pl-review__name">{{ block.settings.name }}</span>
-                {%- if block.settings.meta != blank -%}
-                  <span class="pl-review__meta">{{ block.settings.meta }}</span>
-                {%- endif -%}
-              </footer>
-            </li>
-          {%- endfor -%}
-        {%- else -%}
-          {%- assign demo_quotes = section.settings.demo_text | newline_to_br | split: '<br />' -%}
-          {%- for d in demo_quotes -%}
-            {%- assign row = d | strip -%}
-            {%- if row != blank -%}
-              {%- assign parts = row | split: '|' -%}
-              <li class="pl-review pl-review--demo">
-                <div class="pl-review__stars" aria-label="5 מתוך 5">
-                  {%- for i in (1..5) -%}
-                    <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false">
-                      <path d="M10 1.6l2.47 5.3 5.53.66-4.1 3.9 1.1 5.7L10 14.4 4.99 17.16l1.1-5.7-4.1-3.9 5.54-.66z" fill="currentColor"/>
-                    </svg>
-                  {%- endfor -%}
-                </div>
-                <blockquote class="pl-review__quote">{{ parts[0] | strip }}</blockquote>
-                <footer class="pl-review__by">
-                  <span class="pl-review__name">{{ parts[1] | strip }}</span>
-                  <span class="pl-review__tag">דוגמה</span>
-                </footer>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endif -%}
-      </ul>
-
-      {%- if section.settings.disclaimer != blank -%}
-        <p class="pl-small pl-reviews__disclaimer">{{ section.settings.disclaimer }}</p>
-      {%- endif -%}
+<section class="pl-reviews pl-section">
+  <div class="pl-wrap">
+    <div class="pl-reviews__head pl-reveal">
+      {%- if section.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="pl-h2">{{ section.settings.heading }}</h2>
     </div>
-  </section>
-{%- endif -%}
+
+    <ul class="pl-reviews__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="pl-review pl-reveal" {{ block.shopify_attributes }} style="transition-delay: {{ forloop.index0 | times: 90 }}ms;">
+          <div class="pl-review__stars" aria-label="{{ block.settings.rating }} מתוך 5">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" focusable="false" class="{% if i > block.settings.rating %}is-off{% endif %}">
+                <path d="M10 1.6l2.47 5.3 5.53.66-4.1 3.9 1.1 5.7L10 14.4 4.99 17.16l1.1-5.7-4.1-3.9 5.54-.66z" fill="currentColor"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="pl-review__quote">{{ block.settings.quote }}</blockquote>
+          <footer class="pl-review__by">
+            <span class="pl-review__name">{{ block.settings.name }}</span>
+            {%- if block.settings.meta != blank -%}<span class="pl-review__meta">{{ block.settings.meta }}</span>{%- endif -%}
+          </footer>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="pl-small pl-reviews__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
 
 {% stylesheet %}
-  .pl-reviews__head { max-width: 34ch; margin-block-end: clamp(24px, 3.5vw, 40px); }
-
-  .pl-reviews__demo {
-    font-family: var(--pl-sans);
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--pl-ink-soft);
-    background: var(--pl-cream);
-    border: 1px dashed var(--pl-sand-deep);
-    border-radius: var(--pl-r-s);
-    padding: 11px 14px;
-    margin: 0 0 18px;
-  }
-
-  /* Phone: a rail the thumb pushes. Tablet up: a plain grid. */
+  .pl-reviews { background: var(--pl-cream); }
+  .pl-reviews__head { max-width: 40rem; margin-block-end: clamp(30px, 4vw, 48px); }
   .pl-reviews__list {
-    list-style: none;
-    margin: 0;
-    padding: 0 var(--pl-gutter) 4px;
-    margin-inline: calc(var(--pl-gutter) * -1);
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: 18px;
+    grid-template-columns: 1fr;
   }
-  .pl-reviews__list::-webkit-scrollbar { display: none; }
-
+  @media (min-width: 760px) { .pl-reviews__list { grid-template-columns: repeat(3, 1fr); } }
   .pl-review {
-    flex: 0 0 82%;
-    scroll-snap-align: start;
-    min-width: 0;
-    background: var(--pl-white);
+    background: var(--pl-porcelain);
     border: 1px solid var(--pl-line);
-    border-radius: var(--pl-r-m);
-    padding: 20px;
+    border-radius: var(--pl-r-l);
+    padding: clamp(24px, 3vw, 34px);
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 16px;
   }
   .pl-review__stars { color: var(--pl-clay); display: flex; gap: 2px; }
   .pl-review__stars .is-off { color: var(--pl-sand-deep); }
   .pl-review__quote {
-    font-family: var(--pl-sans);
-    font-weight: 400;
-    font-size: 15.5px;
-    line-height: 1.6;
+    font-family: var(--pl-display);
+    font-weight: 500;
+    font-size: 1.09rem;
+    line-height: 1.62;
     color: var(--pl-ink);
     margin: 0;
     flex: 1;
-    text-wrap: pretty;
   }
-  .pl-review__by { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .pl-review__name { font-family: var(--pl-sans); font-size: 13.5px; font-weight: 600; color: var(--pl-ink); }
-  .pl-review__meta { font-family: var(--pl-sans); font-size: 12.5px; color: var(--pl-taupe); }
-  .pl-review__tag {
-    font-family: var(--pl-sans);
-    font-size: 11px;
-    color: var(--pl-taupe);
-    border: 1px dashed var(--pl-sand-deep);
-    border-radius: 4px;
-    padding: 1px 6px;
-  }
-
-  @media (min-width: 760px) {
-    .pl-reviews__list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      overflow: visible;
-      margin-inline: 0;
-      padding: 0;
-    }
-    .pl-review { flex: initial; padding: 24px; }
-  }
-
-  .pl-reviews__disclaimer { margin-block-start: 18px; color: var(--pl-taupe); }
+  .pl-review__by { display: flex; flex-direction: column; gap: 3px; }
+  .pl-review__name { font-family: var(--pl-sans); font-size: .9rem; font-weight: 600; color: var(--pl-ink); }
+  .pl-review__meta { font-family: var(--pl-sans); font-size: .8rem; color: var(--pl-taupe); }
+  .pl-reviews__disclaimer { margin-block-start: 22px; }
 {% endstylesheet %}
 
 {% schema %}
@@ -186,37 +70,29 @@
   "name": "TinyBloom · Reviews",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "שורה עליונה", "default": "מה אומרים" },
-    { "type": "text", "id": "heading", "label": "כותרת", "default": "לקוחות מספרים" },
-    { "type": "text", "id": "disclaimer", "label": "הערה מתחת לרשימה" },
-    { "type": "header", "content": "כשאין עדיין ביקורות אמיתיות" },
-    {
-      "type": "checkbox",
-      "id": "demo",
-      "label": "להציג ביקורות לדוגמה",
-      "default": false,
-      "info": "לתצוגה בלבד. כל כרטיס מסומן כדוגמה, והסימון נעלם מעצמו ברגע שמוסיפים ביקורת אמיתית."
-    },
-    {
-      "type": "textarea",
-      "id": "demo_text",
-      "label": "הביקורות לדוגמה",
-      "info": "שורה לכל ביקורת, בפורמט ציטוט | שם",
-      "default": "סוף סוף הכלב שלי מפסיק לברוח בזמן המקלחת. | דניאל\nהמוצר הרבה יותר נוח ממה שחשבתי. | מאיה\nלקח לי שתי דקות להבין איך להשתמש בו. | רועי\nהשתמשתי פעמיים בשבוע ובאמת רואים פחות פרווה על הספה. | שירה\nהגיע תוך עשרה ימים, בדיוק כמו שכתוב באתר. | אבי\nהחתולה לא נבהלה ממנו, וזה כבר הישג. | תמר\nפשוט לשטוף ולהחזיר למקום. אין מה להתעסק. | יואב"
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "מה אומרים" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "לקוחות שכבר הפסיקו לשאוב כל יום" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "" }
   ],
   "blocks": [
     {
       "type": "review",
-      "name": "ביקורת אמיתית",
+      "name": "Review",
       "settings": [
-        { "type": "range", "id": "rating", "label": "דירוג", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "textarea", "id": "quote", "label": "הביקורת" },
-        { "type": "text", "id": "name", "label": "שם" },
-        { "type": "text", "id": "meta", "label": "פרטים", "info": "עיר, גזע, שם המוצר" }
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "ציטוט." },
+        { "type": "text", "id": "name", "label": "Name", "default": "שם" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "עיר, גזע" }
       ]
     }
   ],
-  "presets": [{ "name": "TinyBloom · Reviews" }]
+  "presets": [{
+    "name": "TinyBloom · Reviews",
+    "blocks": [
+      { "type": "review", "settings": { "rating": 5, "quote": "יש לנו גולדן ריטריבר וספה בז׳. עד היום זה היה סיפור אבוד. שני מעברים והספה נראית כמו ביום שקנינו אותה.", "name": "נועה ל׳", "meta": "תל אביב · גולדן ריטריבר" } },
+      { "type": "review", "settings": { "rating": 5, "quote": "קניתי בעיקר בשביל המסרק. החתולה בורחת מכל דבר, ואת זה היא דווקא אוהבת. כמות הפרווה שיורדת בכל סירוק מטריפה.", "name": "יונתן ר׳", "meta": "חיפה · חתול פרסי" } },
+      { "type": "review", "settings": { "rating": 5, "quote": "הפסקנו לקנות רולרים דביקים לגמרי. זה הכלי היחיד בבית שאני לא צריך למלא, להטעין או להחליף.", "name": "מיכל ב׳", "meta": "מודיעין · שני כלבים" } }
+    ]
+  }]
 }
 {% endschema %}

@@ -67,6 +67,15 @@
           </svg>
         </a>
       {%- endif -%}
+
+      {%- comment -%}
+        The price belongs on the first screen. A homepage that hides what the
+        thing costs makes every visitor click once just to find out, and most
+        of them do not.
+      {%- endcomment -%}
+      {%- if section.settings.note != blank -%}
+        <p class="pl-heroP__note">{{ section.settings.note }}</p>
+      {%- endif -%}
     </div>
   </div>
 
@@ -175,6 +184,14 @@
   }
   [dir="rtl"] .pl-heroP__cta svg { transform: scaleX(-1); }
 
+  .pl-heroP__note {
+    margin: 12px 0 0;
+    font-family: var(--pl-sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--pl-ink-soft);
+  }
+
   @media (min-width: 900px) {
     .pl-heroP__frame { min-height: 0; aspect-ratio: 16 / 7; max-height: 76svh; align-items: center; }
     .pl-heroP__copy { padding-block: clamp(32px, 5vw, 64px); }
@@ -264,7 +281,8 @@
     { "type": "textarea", "id": "heading", "label": "Heading", "default": "טיפוח חכם יותר.\nחיים קלים יותר." },
     { "type": "textarea", "id": "subheading", "label": "Subheading" },
     { "type": "text", "id": "cta_label", "label": "Button", "default": "גלו את המוצרים" },
-    { "type": "url", "id": "cta_link", "label": "Button link" }
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "info": "מחיר, משלוח או התחייבות קצרה." }
   ],
   "blocks": [
     {

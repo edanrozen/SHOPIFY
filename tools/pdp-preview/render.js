@@ -54,15 +54,15 @@ const img = (w, h, label, alt) => ({
 // The nine real products, with the real image counts and the real handles, so
 // every grid, card and collection on the page fills exactly as it will live.
 const CATALOGUE = [
-  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 13999, 8, ['all-products']],
-  ['pro-grooming-comb', 'פורה מסרק למניעת קשרים', 6990, 6, ['grooming', 'all-products']],
-  ['parvatek-grooming-comb', 'פרוותק מסרק דו צדדי לטיפוח הפרווה', 5990, 7, ['grooming', 'all-products']],
-  ['parvakal-pet-clipper', 'פרווהקל מכונת גילוח לחיות', 12990, 6, ['grooming', 'all-products']],
-  ['hair-remover-xl', 'מסירון הדרך הקלה לניקוי שיער ופרווה מכל בד', 7990, 9, ['clean-home', 'all-products']],
-  ['hair-remover-wood-handle', 'מסיר שיער חיות מחמד עם ידית עץ', 6490, 8, ['clean-home', 'all-products']],
-  ['tinybloom-fur-glove', 'כפפת הפרווה של TinyBloom', 4990, 9, ['clean-home', 'all-products']],
-  ['katora-cardboard-scratcher', 'קאטורה טבעת גירוד קרטון לחתולים', 5490, 6, ['cats', 'all-products']],
-  ['kadurosh-cat-ball-toy', 'כדורוש צעצוע חכם ואינטראקטיבי לחתולים', 4490, 5, ['cats', 'all-products']],
+  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 13999, 8, ['grooming', 'all-products']],
+  ['pro-grooming-comb', 'פורה מסרק למניעת קשרים', 5999, 6, ['grooming', 'all-products']],
+  ['parvatek-grooming-comb', 'פרוותק מסרק דו צדדי לטיפוח הפרווה', 6990, 7, ['grooming', 'all-products']],
+  ['parvakal-pet-clipper', 'פרווהקל מכונת גילוח לחיות', 13990, 6, ['grooming', 'all-products']],
+  ['hair-remover-xl', 'מסירון הדרך הקלה לניקוי שיער ופרווה מכל בד', 8999, 9, ['clean-home', 'all-products']],
+  ['hair-remover-wood-handle', 'מסיר שיער חיות מחמד עם ידית עץ', 6990, 8, ['clean-home', 'all-products']],
+  ['tinybloom-fur-glove', 'כפפת הפרווה של TinyBloom', 6999, 9, ['clean-home', 'all-products']],
+  ['katora-cardboard-scratcher', 'קאטורה טבעת גירוד קרטון לחתולים', 7990, 6, ['cats', 'all-products']],
+  ['kadurosh-cat-ball-toy', 'כדורוש צעצוע חכם ואינטראקטיבי לחתולים', 9990, 5, ['cats', 'all-products']],
 ];
 
 const makeProduct = ([handle, title, price, nImages, colls]) => {
@@ -227,7 +227,10 @@ const body = tpl.order.map((key) => {
 }).join('\n');
 
 const reset = fs.readFileSync(path.join(ROOT, 'tools/responsive-check/reset.css'), 'utf8');
-const sheets = [reset, read('assets/pluma.css'), read('assets/tb.css')];
+// tb.css is optional: an older checkout of the theme (used to render the
+// previous design for comparison) does not have it.
+const optional = (f) => { try { return read(f); } catch { return ''; } };
+const sheets = [reset, read('assets/pluma.css'), optional('assets/tb.css'), optional('assets/tb-warm.css')];
 if (which === 'product') sheets.push(read('assets/pdp.css'));
 
 // Section stylesheets are concatenated by Shopify and served after the assets,
