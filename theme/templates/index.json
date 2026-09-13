@@ -95,57 +95,12 @@
         "layout": "grid",
         "columns": "4",
         "eyebrow": "",
-        "heading": "הכלים שעובדים עליו",
-        "body": "מסרקים, מברשת ומכונת גילוח. כל אחד מהם קל יותר כשהחיה עומדת במקום אחד.",
+        "heading": "בלום ועוד מסרק אחד, והמשלוח עלינו",
+        "body": "משלוח חינם מתחיל ב־₪199. בלום ומסרק אחד עוברים את הסכום, כך שהמשלוח לא עולה לכם דבר.",
         "link_label": "לכל כלי הטיפוח",
         "link_url": "/collections/grooming",
         "card_cta": "לפרטים",
         "background": "#FBF9F5"
-      }
-    },
-    "categories": {
-      "type": "pl-categories",
-      "blocks": {
-        "c1": {
-          "type": "category",
-          "settings": {
-            "collection": "clean-home",
-            "title": "בית נקי מפרווה",
-            "text": "מה שאוסף את מה שכבר נשר",
-            "cta": "לצפייה",
-            "feature": true
-          }
-        },
-        "c2": {
-          "type": "category",
-          "settings": {
-            "collection": "cats",
-            "title": "לחתולים",
-            "text": "גירוד, משחק ומנוחה",
-            "cta": "לצפייה",
-            "feature": false
-          }
-        },
-        "c3": {
-          "type": "category",
-          "settings": {
-            "collection": "all-products",
-            "title": "כל המוצרים",
-            "text": "תשעת הכלים במקום אחד",
-            "cta": "לצפייה",
-            "feature": false
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3"
-      ],
-      "settings": {
-        "eyebrow": "",
-        "heading": "מה עוד יש בבית",
-        "body": ""
       }
     },
     "promise": {
@@ -244,13 +199,86 @@
         "contact_label": "לדבר איתנו",
         "contact_link": "/pages/contact"
       }
+    },
+    "gallery": {
+      "type": "pl-gallery",
+      "settings": {
+        "product": "bloom-grooming-station",
+        "eyebrow": "",
+        "heading": "בלום מכל זווית",
+        "body": "שמונה תמונות של המוצר עצמו, לפני שאתם מחליטים.",
+        "hint": "החליקו הצידה לעוד תמונות",
+        "link_label": "לדף המוצר",
+        "link_url": "/products/bloom-grooming-station",
+        "background": "#FBF9F5"
+      }
+    },
+    "catalogue": {
+      "type": "pl-row",
+      "settings": {
+        "collection": "all-products",
+        "exclude": "",
+        "limit": 9,
+        "layout": "grid",
+        "columns": "4",
+        "eyebrow": "",
+        "heading": "כל מה שיש בחנות",
+        "body": "תשעה כלים. לא מאה, ולא קטלוג שאי אפשר לסיים.",
+        "link_label": "לכל המוצרים",
+        "link_url": "/collections/all-products",
+        "card_cta": "לפרטים",
+        "background": "#F5EFE6"
+      }
+    },
+    "life": {
+      "type": "pl-gallery",
+      "blocks": {
+        "g1": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/IMG-0636.png",
+            "caption": "הכלים נשארים בסלון, לא במגירה"
+          }
+        },
+        "g2": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/IMG-0637.png",
+            "caption": "שגרה של כמה דקות, לא של ערב שלם"
+          }
+        },
+        "g3": {
+          "type": "shot",
+          "settings": {
+            "image": "shopify://shop_images/IMG-0638.png",
+            "caption": "פחות פרווה על הספה, פחות זמן על הניקיון"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "settings": {
+        "product": "",
+        "eyebrow": "",
+        "heading": "איך זה נראה בבית",
+        "body": "",
+        "hint": "",
+        "link_label": "",
+        "link_url": "",
+        "background": "#FBF9F5"
+      }
     }
   },
   "order": [
     "hero",
+    "gallery",
     "flagship",
     "system",
-    "categories",
+    "catalogue",
+    "life",
     "promise",
     "faq"
   ]

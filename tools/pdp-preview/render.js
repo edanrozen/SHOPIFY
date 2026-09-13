@@ -44,11 +44,17 @@ const swatch = (w, h, label) => {
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 };
 
-const img = (w, h, label, alt) => ({
-  width: w, height: h, aspect_ratio: +(w / h).toFixed(4),
-  alt: alt || '', src: swatch(w, h, label),
-  preview_image: { width: w, height: h },
-});
+const img = (w, h, label, alt) => {
+  const o = {
+    width: w, height: h, aspect_ratio: +(w / h).toFixed(4),
+    alt: alt || '', src: swatch(w, h, label),
+  };
+  // In Liquid a media drop's preview_image is a full image drop, so it has to
+  // carry a src here too. Without it `media.preview_image | image_url` renders
+  // an empty string and a gallery screenshots as blank frames.
+  o.preview_image = o;
+  return o;
+};
 
 // ---------------------------------------------------------------- catalogue
 // The nine real products, with the real image counts and the real handles, so
@@ -128,7 +134,13 @@ const resolvePicked = (v) => {
 const deepResolve = (o) => {
   if (Array.isArray(o)) return o.map(deepResolve);
   if (o && typeof o === 'object') {
-    return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, deepResolve(v)]));
+    return Object.fromEntries(Object.entries(o).map(([k, v]) => {
+      // A `product` setting is stored as a handle and served to Liquid as a
+      // product drop. Resolving it here is what makes a section that reads
+      // `section.settings.product.media` testable at all.
+      if (k === 'product' && typeof v === 'string' && all_products[v]) return [k, all_products[v]];
+      return [k, deepResolve(v)];
+    }));
   }
   return resolvePicked(o);
 };
