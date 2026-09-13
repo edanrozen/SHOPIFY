@@ -96,7 +96,7 @@
         "columns": "4",
         "eyebrow": "",
         "heading": "בלום ועוד מסרק אחד, והמשלוח עלינו",
-        "body": "משלוח חינם מתחיל ב־₪199. בלום ומסרק אחד עוברים את הסכום, כך שהמשלוח לא עולה לכם דבר.",
+        "body": "משלוח חינם מתחיל ב־₪199. בלום עולה ₪139.99, והמסרק הזול ביותר ₪59.99. יחד ₪199.98, והמשלוח כבר לא עולה לכם דבר.",
         "link_label": "לכל כלי הטיפוח",
         "link_url": "/collections/grooming",
         "card_cta": "לפרטים",
@@ -270,6 +270,16 @@
         "link_url": "",
         "background": "#FBF9F5"
       }
+    },
+    "reviews": {
+      "type": "pl-reviews",
+      "settings": {
+        "eyebrow": "",
+        "heading": "לקוחות מספרים",
+        "disclaimer": "",
+        "demo": false,
+        "demo_text": ""
+      }
     }
   },
   "order": [
@@ -279,6 +289,7 @@
     "system",
     "catalogue",
     "life",
+    "reviews",
     "promise",
     "faq"
   ]

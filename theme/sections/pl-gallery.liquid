@@ -160,8 +160,11 @@
     }
     .pl-gal__item { flex: initial; }
   }
+  /* Eight tiles in a three column grid is three rows of desk height. A fourth
+     column on a wide screen halves that without shrinking anything below the
+     size at which a photograph is still worth looking at. */
   @media (min-width: 1100px) {
-    .pl-gal--dense .pl-gal__rail { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .pl-gal__rail { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
 {% endstylesheet %}
 

@@ -89,7 +89,10 @@
               "blocks": {}
             }
           },
-          "block_order": ["text_LWt8Pz", "text_f9CFLH"]
+          "block_order": [
+            "text_LWt8Pz",
+            "text_f9CFLH"
+          ]
         },
         "email_signup_crihX7": {
           "type": "email-signup",
@@ -118,7 +121,10 @@
           "blocks": {}
         }
       },
-      "block_order": ["group_H6VpwJ", "email_signup_crihX7"],
+      "block_order": [
+        "group_H6VpwJ",
+        "email_signup_crihX7"
+      ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
@@ -151,14 +157,18 @@
         "social_links_Ew63Kq": {
           "type": "social-links",
           "settings": {
-            "instagram_url": "https://www.instagram.com/",
-            "tiktok_url": "https://www.tiktok.com/",
-            "facebook_url": "https://www.facebook.com/"
+            "instagram_url": "",
+            "tiktok_url": "",
+            "facebook_url": ""
           },
           "blocks": {}
         }
       },
-      "block_order": ["footer_copyright_jweRK8", "footer_policy_list_VCdnpa", "social_links_Ew63Kq"],
+      "block_order": [
+        "footer_copyright_jweRK8",
+        "footer_policy_list_VCdnpa",
+        "social_links_Ew63Kq"
+      ],
       "name": "t:names.utilities",
       "settings": {
         "section_width": "page-width",
@@ -171,5 +181,8 @@
       }
     }
   },
-  "order": ["footer_m9NzUG", "footer_utilities_jLGE8U"]
+  "order": [
+    "footer_m9NzUG",
+    "footer_utilities_jLGE8U"
+  ]
 }
