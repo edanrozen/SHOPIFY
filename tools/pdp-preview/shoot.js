@@ -50,9 +50,21 @@ const FIND = () => {
   // Slices rather than one tall strip: a 9000px image is unreadable.
   const slice = 800;
   const n = Math.min(Math.ceil(height / slice), 20);
+  // `body { overflow-x: clip }` makes the body a scroll container, and a single
+  // scrollTo against the window lands short. Setting scrollTop on the real
+  // scrolling element and confirming the result is the only reliable way.
   for (let i = 0; i < n; i++) {
-    await p.evaluate((y) => window.scrollTo(0, y), i * slice);
-    await p.waitForTimeout(120);
+    const want = i * slice;
+    for (let t = 0; t < 6; t++) {
+      const at = await p.evaluate((y) => {
+        document.scrollingElement.scrollTop = y;
+        window.scrollTo(0, y);
+        return Math.round(document.scrollingElement.scrollTop || window.scrollY);
+      }, want);
+      if (Math.abs(at - want) < 4 || at >= height - 900) break;
+      await p.waitForTimeout(80);
+    }
+    await p.waitForTimeout(140);
     await p.screenshot({ path: path.join(outdir, `s${i + 1}.png`) });
   }
   console.log(`wrote ${n} slices to ${outdir}`);

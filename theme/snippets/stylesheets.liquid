@@ -32,6 +32,13 @@
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
+  The quiet layer. It redefines the palette tokens the whole storefront is
+  painted through, so it has to load after pluma.css and on every page, or the
+  site would be white in some places and beige in others.
+{%- endcomment -%}
+{{ 'tb.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
   Product pages carry one extra sheet and never both. The rebuilt page uses
   `pdp.css`; the eight pages still on the block library use `pl-story.css`.
   Neither is paid for on the homepage or on a collection page.

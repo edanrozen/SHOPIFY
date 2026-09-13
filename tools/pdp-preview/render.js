@@ -1,14 +1,16 @@
 /**
- * Renders a product template for real, so the page can be looked at rather
+ * Renders a storefront template for real, so a page can be looked at rather
  * than reasoned about.
  *
  * The storefront cannot be reached from this sandbox and neither can the image
- * CDN, so the Liquid is run locally against a stub `product` drop built from
- * the real product's shape: the same number of images, at the same aspect
- * ratios, and the same metafields. The layout that comes out is therefore the
- * real layout even though the photographs are stand-ins.
+ * CDN, so the Liquid is run locally against stub drops built from the store's
+ * real shape: the same products, the same collections, the same image aspect
+ * ratios, the same metafields. The layout that comes out is therefore the real
+ * layout even though the photographs are stand-ins.
  *
- * Usage: node tools/pdp-preview/render.js <template-suffix> > out.html
+ * Usage:
+ *   node tools/pdp-preview/render.js index        > home.html
+ *   node tools/pdp-preview/render.js product bloom > bloom.html
  */
 const fs = require('fs');
 const path = require('path');
@@ -16,63 +18,124 @@ const { Liquid } = require('liquidjs');
 
 const ROOT = path.resolve(__dirname, '../..');
 const THEME = path.join(ROOT, 'theme');
-const read = (p) => fs.readFileSync(path.join(THEME, p), 'utf8');
+// Shopify accepts `comment ... endcomment` inside a {% liquid %} tag with any
+// prose in between; liquidjs tokenises the prose and trips over quotes. The
+// comments carry no output, so they are removed before parsing. This is a
+// limitation of the preview engine, not of the theme.
+const stripLiquidComments = (src) =>
+  src.replace(/\{%-?\s*liquid\b[\s\S]*?-?%\}/g, (block) =>
+    block.replace(/^[ \t]*comment\b[\s\S]*?^[ \t]*endcomment[ \t]*$/gm, ''));
 
-// The eight real photographs of בלום, by their true pixel dimensions, so every
-// aspect-ratio-driven rule in the stylesheet behaves as it will in production.
-const DIMS = [
-  [1206, 1806], [1177, 1754], [1206, 1759], [1206, 1763],
-  [1206, 1688], [1206, 1740], [1145, 1374], [1254, 1254],
-];
+const read = (p) => stripLiquidComments(fs.readFileSync(path.join(THEME, p), 'utf8'));
 
-const swatch = (w, h, i) => {
-  const tones = ['#DDD3C4', '#CFC4B2', '#E3DACB', '#C8BCA8', '#D6CBB8', '#BFB3A0', '#E8E0D3', '#CDC2AF'];
+const TONES = ['#DDD3C4', '#CFC4B2', '#E3DACB', '#C8BCA8', '#D6CBB8', '#BFB3A0', '#E8E0D3', '#CDC2AF'];
+let swatchSeed = 0;
+const swatch = (w, h, label) => {
+  const tone = TONES[swatchSeed++ % TONES.length];
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">` +
-    `<rect width="${w}" height="${h}" fill="${tones[i % tones.length]}"/>` +
-    `<text x="50%" y="50%" font-family="sans-serif" font-size="${Math.round(w / 9)}"` +
-    ` fill="#8C8175" text-anchor="middle" dominant-baseline="middle">${i + 1}</text></svg>`;
-  return 'data:image/svg+xml;utf8,' + svg.replace(/#/g, '%23').replace(/"/g, "'");
+    `<rect width="${w}" height="${h}" fill="${tone}"/>` +
+    `<text x="50%" y="50%" font-family="sans-serif" font-size="${Math.round(Math.min(w, h) / 8)}"` +
+    ` fill="#8C8175" text-anchor="middle" dominant-baseline="middle">${label}</text></svg>`;
+  // A srcset splits on whitespace and on commas, so a data URI containing
+  // either is silently dropped and the browser falls back to <img src>. That
+  // hid every <picture> source in the preview, the mobile hero included.
+  // Full percent-encoding is the only version srcset parses.
+  return 'data:image/svg+xml,' + encodeURIComponent(svg);
 };
 
-const images = DIMS.map(([w, h], i) => ({
+const img = (w, h, label, alt) => ({
   width: w, height: h, aspect_ratio: +(w / h).toFixed(4),
-  alt: 'בלום, עמדת טיפוח ביתית לכלבים ולחתולים',
-  src: swatch(w, h, i),
+  alt: alt || '', src: swatch(w, h, label),
   preview_image: { width: w, height: h },
-}));
+});
 
-const mf = JSON.parse(fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8'));
+// ---------------------------------------------------------------- catalogue
+// The nine real products, with the real image counts and the real handles, so
+// every grid, card and collection on the page fills exactly as it will live.
+const CATALOGUE = [
+  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 13999, 8, ['all-products']],
+  ['pro-grooming-comb', 'פורה מסרק למניעת קשרים', 6990, 6, ['grooming', 'all-products']],
+  ['parvatek-grooming-comb', 'פרוותק מסרק דו צדדי לטיפוח הפרווה', 5990, 7, ['grooming', 'all-products']],
+  ['parvakal-pet-clipper', 'פרווהקל מכונת גילוח לחיות', 12990, 6, ['grooming', 'all-products']],
+  ['hair-remover-xl', 'מסירון הדרך הקלה לניקוי שיער ופרווה מכל בד', 7990, 9, ['clean-home', 'all-products']],
+  ['hair-remover-wood-handle', 'מסיר שיער חיות מחמד עם ידית עץ', 6490, 8, ['clean-home', 'all-products']],
+  ['tinybloom-fur-glove', 'כפפת הפרווה של TinyBloom', 4990, 9, ['clean-home', 'all-products']],
+  ['katora-cardboard-scratcher', 'קאטורה טבעת גירוד קרטון לחתולים', 5490, 6, ['cats', 'all-products']],
+  ['kadurosh-cat-ball-toy', 'כדורוש צעצוע חכם ואינטראקטיבי לחתולים', 4490, 5, ['cats', 'all-products']],
+];
 
-const product = {
-  title: 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים',
-  handle: 'bloom-grooming-station',
-  type: 'עמדת טיפוח',
-  url: '/products/bloom-grooming-station',
-  price: 13999,
-  compare_at_price: null,
-  available: true,
-  description: '<p>בלום היא עמדת הטיפוח הביתית של TinyBloom.</p>',
-  images,
-  media: images,
-  featured_media: images[0],
-  featured_image: images[0],
-  selected_or_first_available_variant: { id: 48333197017140 },
-  metafields: { custom: mf },
+const makeProduct = ([handle, title, price, nImages, colls]) => {
+  const images = Array.from({ length: nImages }, (_, i) => img(1206, 1760, i + 1, title));
+  return {
+    handle, title, price, compare_at_price: null, available: true,
+    url: '/products/' + handle,
+    type: 'טיפוח',
+    description: '<p>' + title + '</p>',
+    images, media: images,
+    featured_media: images[0], featured_image: images[0],
+    selected_or_first_available_variant: { id: 1000 + price },
+    metafields: { custom: {} },
+    _collections: colls,
+  };
 };
+
+const products = CATALOGUE.map(makeProduct);
+const all_products = Object.fromEntries(products.map((p) => [p.handle, p]));
+
+const COLL_META = {
+  grooming: 'טיפוח הפרווה',
+  'clean-home': 'בית נקי מפרווה',
+  cats: 'לחתולים',
+  'all-products': 'כל המוצרים',
+};
+const collections = {};
+for (const [handle, title] of Object.entries(COLL_META)) {
+  const list = products.filter((p) => p._collections.includes(handle));
+  list.first = list[0];
+  collections[handle] = {
+    handle, title, url: '/collections/' + handle,
+    // Only the grooming collection carries an image of its own, exactly as in
+    // the store; the rest exercise the first-product fallback.
+    image: handle === 'grooming' ? img(1200, 900, 'C', title) : null,
+    products: list,
+    all_products_count: list.length,
+  };
+}
 
 const engine = new Liquid({ strictFilters: false, strictVariables: false });
 
-// Shopify filters the sections actually use.
+// Image settings arrive as "shopify://shop_images/NAME.png" strings. They are
+// turned into image drops with plausible dimensions so aspect-ratio rules and
+// srcset attributes behave as they will in production.
+const PICKED = {
+  '1CFBD4F3-2618-44A9-BD31-D101DB73E276.png': [941, 1672],
+  '6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png': [1145, 1374],
+  'FFA8C7B2-763E-4709-A5AE-3D9B4D689B1A.png': [1254, 1254],
+};
+const resolvePicked = (v) => {
+  if (!v || typeof v !== 'string' || !v.startsWith('shopify://')) return v;
+  const name = v.split('/').pop();
+  const [w, h] = PICKED[name] || [1400, 1000];
+  return img(w, h, name.slice(0, 4), '');
+};
+const deepResolve = (o) => {
+  if (Array.isArray(o)) return o.map(deepResolve);
+  if (o && typeof o === 'object') {
+    return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, deepResolve(v)]));
+  }
+  return resolvePicked(o);
+};
+
 engine.registerFilter('image_url', (v) => (v && v.src) || '');
-engine.registerFilter('money', (cents) => '₪' + (Number(cents) / 100).toFixed(2));
+engine.registerFilter('img_url', (v) => (v && v.src) || '');
+engine.registerFilter('money', (c) => '₪' + (Number(c) / 100).toFixed(2));
+engine.registerFilter('money_without_trailing_zeros', (c) => '₪' + Math.round(Number(c) / 100));
 engine.registerFilter('asset_url', (v) => '/assets/' + v);
 engine.registerFilter('stylesheet_tag', (v) => `<link rel="stylesheet" href="${v}">`);
-engine.registerFilter('placeholder_svg_tag', () => '<svg viewBox="0 0 100 100"></svg>');
-engine.registerFilter('img_url', (v) => (v && v.src) || '');
+engine.registerFilter('placeholder_svg_tag', (v, cls) =>
+  `<svg class="${cls || ''}" viewBox="0 0 100 100" style="width:100%;height:auto;background:#EFEBE4"></svg>`);
 
-// Shopify tags. `form` becomes a real form so the submit button is measured at
-// its true size; the rest carry no markup into the page.
 const swallow = (name) => ({
   parse(token, remain) {
     const end = 'end' + name;
@@ -84,6 +147,7 @@ engine.registerTag('doc', swallow('doc'));
 engine.registerTag('schema', swallow('schema'));
 engine.registerTag('stylesheet', swallow('stylesheet'));
 engine.registerTag('javascript', swallow('javascript'));
+
 engine.registerTag('form', {
   parse(token, remain) {
     this.tpls = [];
@@ -103,32 +167,78 @@ engine.registerTag('form', {
   },
 });
 
-const suffix = process.argv[2] || 'bloom';
-const tpl = JSON.parse(read(`templates/product.${suffix}.json`));
+// Snippets are rendered for real, so the product card on the homepage is the
+// same markup the storefront serves.
+engine.registerTag('render', {
+  parse(token) { this.args = token.args; },
+  *render(ctx, emitter) {
+    const name = (/^\s*'([^']+)'/.exec(this.args) || [, ''])[1];
+    const scope = {};
+    const re = /(\w+)\s*:\s*([^,]+)/g;
+    let m;
+    const rest = this.args.slice(this.args.indexOf("'", this.args.indexOf("'") + 1) + 1);
+    while ((m = re.exec(rest))) {
+      const raw = m[2].trim();
+      scope[m[1]] = /^'.*'$/.test(raw) ? raw.slice(1, -1) : yield ctx.get(raw.split('.'));
+    }
+    let src;
+    try { src = read('snippets/' + name + '.liquid'); } catch { return; }
+    emitter.write(engine.parseAndRenderSync(src, { ...ctx.getAll(), ...scope }));
+  },
+});
+
+// ------------------------------------------------------------------- render
+const which = process.argv[2] || 'index';
+const suffix = process.argv[3] || '';
+const file = which === 'product' ? `templates/product.${suffix}.json` : `templates/${which}.json`;
+const tpl = JSON.parse(read(file));
+
+const product = which === 'product' ? all_products['bloom-grooming-station'] : null;
+if (product) {
+  product.metafields.custom = JSON.parse(
+    fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8'));
+}
+
+const base = {
+  collections, all_products, product,
+  routes: { root_url: '/', all_products_collection_url: '/collections/all', cart_url: '/cart' },
+  settings: {},
+  template: { name: which === 'product' ? 'product' : which, suffix },
+};
 
 const body = tpl.order.map((key) => {
   const sec = tpl.sections[key];
   const src = read(`sections/${sec.type}.liquid`);
   const blocks = (sec.block_order || []).map((bid) => ({
-    id: bid,
-    type: sec.blocks[bid].type,
-    settings: sec.blocks[bid].settings,
-    shopify_attributes: '',
+    id: bid, type: sec.blocks[bid].type,
+    settings: deepResolve(sec.blocks[bid].settings), shopify_attributes: '',
   }));
   blocks.size = blocks.length;
   return engine.parseAndRenderSync(src, {
-    product,
-    section: { id: key, settings: sec.settings || {}, blocks },
-    template: { name: 'product', suffix },
-    all_products: {},
+    ...base,
+    section: { id: key, settings: deepResolve(sec.settings || {}), blocks },
   });
 }).join('\n');
 
 const reset = fs.readFileSync(path.join(ROOT, 'tools/responsive-check/reset.css'), 'utf8');
-const css = [reset, read('assets/pluma.css'), read('assets/pdp.css')].join('\n');
+const sheets = [reset, read('assets/pluma.css'), read('assets/tb.css')];
+if (which === 'product') sheets.push(read('assets/pdp.css'));
+
+// Section stylesheets are concatenated by Shopify and served after the assets,
+// which is the order they are applied in here too.
+for (const f of fs.readdirSync(path.join(THEME, 'sections')).sort()) {
+  if (!f.endsWith('.liquid')) continue;
+  const m = read('sections/' + f).match(/\{%\s*stylesheet\s*%\}([\s\S]*?)\{%\s*endstylesheet\s*%\}/);
+  if (m) sheets.push(`/* ${f} */\n` + m[1]);
+}
+
+// pluma.js reveals `.pl-reveal` elements with an IntersectionObserver. The
+// preview does not run the theme's JavaScript, so without this every section
+// below the hero would screenshot as blank. This is the revealed end state.
+sheets.push('.pl-reveal{opacity:1 !important;transform:none !important}');
 
 process.stdout.write(
   `<!doctype html><html dir="rtl" lang="he"><head><meta charset="utf-8">` +
   `<meta name="viewport" content="width=device-width,initial-scale=1">` +
-  `<style>${css}</style></head><body>${body}</body></html>`
+  `<style>${sheets.join('\n')}</style></head><body>${body}</body></html>`
 );

@@ -79,15 +79,19 @@
   .pl-heroP__grid { display: grid; gap: clamp(22px, 4vw, 52px); align-items: center; }
   @media (min-width: 900px) { .pl-heroP__grid { grid-template-columns: 1fr 1fr; } }
 
-  /* The hero photograph is landscape, so the crop stays wide at every width
-     instead of squeezing the two animals out of frame on a phone. */
+  /* Two photographs, two shapes. The phone is served a portrait frame because
+     the mobile image is shot vertically and a wide crop would take a band out
+     of the middle of it; the desktop image is landscape and keeps a landscape
+     frame. The cap is what keeps the headline and the button on the first
+     screen: without it a 9:16 photograph fills a phone on its own. */
   .pl-heroP__media {
     border-radius: var(--pl-r-l);
     overflow: hidden;
     background: var(--pl-cream);
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
+    max-height: 56svh;
   }
-  @media (min-width: 600px) { .pl-heroP__media { aspect-ratio: 3 / 2; } }
+  @media (min-width: 600px) { .pl-heroP__media { aspect-ratio: 3 / 2; max-height: none; } }
   @media (min-width: 900px) { .pl-heroP__media { aspect-ratio: 4 / 3; } }
   .pl-heroP__media img, .pl-heroP__ph { width: 100%; height: 100%; object-fit: cover; display: block; }
 
