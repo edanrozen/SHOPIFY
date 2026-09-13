@@ -32,10 +32,15 @@
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
-  The product story sheet is large and is used by product pages alone, so it is
-  not paid for on the homepage or on a collection page.
+  Product pages carry one extra sheet and never both. The rebuilt page uses
+  `pdp.css`; the eight pages still on the block library use `pl-story.css`.
+  Neither is paid for on the homepage or on a collection page.
 {%- endcomment -%}
 {%- if template.name == 'product' -%}
-  {{ 'pl-story.css' | asset_url | stylesheet_tag }}
+  {%- if template.suffix == 'bloom' -%}
+    {{ 'pdp.css' | asset_url | stylesheet_tag }}
+  {%- else -%}
+    {{ 'pl-story.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
 {%- endif -%}
 <script src="{{ 'pluma.js' | asset_url }}" defer></script>
