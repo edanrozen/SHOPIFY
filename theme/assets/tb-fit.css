@@ -1,0 +1,41 @@
+/* ==========================================================================
+   TinyBloom · how a product photograph meets its frame
+   Loaded last, after pluma.css and after pl-story.css.
+
+   The catalogue is not one shape. Bloom is 1206x1806, a tall portrait; most
+   of the rest are square or close to it. Every listing frame in the theme was
+   a fixed square filled with `object-fit: cover`, which is correct only when
+   every photograph shares the frame's ratio. It does not. The flagship lost a
+   third of its height, top and bottom, everywhere it appeared.
+
+   `contain` keeps each frame exactly the size and shape it already was, so no
+   grid moves, and lets the product sit inside it whole. The margins fall on
+   the cream the frames already use, which is close to the ground the
+   photographs were shot on.
+
+   This lives in one file rather than as edits scattered through two large
+   stylesheets because it is one decision, and the next person changing it
+   should find all of it in one place.
+
+   The one deliberate exception is the product page opener, which carries a
+   dark scrim and white copy over the image. A contained image there would put
+   the headline over a letterbox bar, so that frame keeps `cover` and solves
+   the crop with its ratio instead. The rule lives in the section itself.
+   ========================================================================== */
+
+/* Product cards: homepage rows, collection pages, search, related products. */
+.pl-card__img { object-fit: contain; }
+
+/* The product page: the main stage and the thumbnail strip under it. Both
+   selectors carry their parent so they outrank the section's own rules
+   whatever order Shopify bundles them in. */
+.pl-pdp__media .pl-pdp__stage img,
+.pl-pdp__media .pl-pdp__stage .pl-pdp__ph,
+.pl-pdp__thumbs .pl-pdp__thumb img { object-fit: contain; }
+
+/* Story shots and the gallery on the eight non-flagship product pages. */
+.pl-shot__frame img,
+.pl-gal__item img {
+  object-fit: contain;
+  background: var(--pl-cream);
+}

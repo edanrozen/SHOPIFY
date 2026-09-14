@@ -43,4 +43,10 @@
     {{ 'pl-story.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 {%- endif -%}
+{%- comment -%}
+  Last, because it decides how a photograph meets its frame and has to win
+  against both pluma.css and pl-story.css above it.
+{%- endcomment -%}
+{{ 'tb-fit.css' | asset_url | stylesheet_tag }}
+
 <script src="{{ 'pluma.js' | asset_url }}" defer></script>

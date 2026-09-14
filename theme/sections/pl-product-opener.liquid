@@ -81,11 +81,16 @@
     background: var(--pl-cream);
   }
   .pl-open-sec--cream .pl-open__frame { background: var(--pl-white); }
+  /* This frame keeps `cover`, unlike every other product frame in the theme:
+     a dark scrim and white copy sit on top of it, and a contained image would
+     put that copy over a cream letterbox bar. The crop is fixed by the ratio
+     instead. Bloom's photographs are 1206x1806, so a 3/4 frame loses a little
+     and the 16/10 desktop frame that used to be here lost well over half. */
   .pl-open__frame img {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
   }
 
@@ -143,7 +148,7 @@
   @media (min-width: 760px) {
     .pl-open { margin-inline: 0; }
     .pl-open__frame { border-radius: var(--pl-r-l); }
-    .pl-open__frame img { aspect-ratio: 16 / 10; }
+    .pl-open__frame img { aspect-ratio: 4 / 5; }
   }
 
   /* Deliberately the only part of the page with no supporting apparatus: no
