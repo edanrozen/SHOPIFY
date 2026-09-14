@@ -12,13 +12,7 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign coll = collections[block.settings.collection]
-          comment
-            Only two of the collections carry an image of their own. Rather than
-            invent artwork for the others, a card falls back to the first
-            product in the collection, which is a photograph that already
-            exists and already shows what the category contains.
-          endcomment
-          assign img = block.settings.image | default: coll.image | default: coll.products.first.featured_image
+          assign img = block.settings.image | default: coll.image
           assign title = block.settings.title | default: coll.title
           assign url = coll.url | default: '/collections/all'
           assign feature = ''
@@ -71,74 +65,76 @@
     gap: clamp(14px, 1.8vw, 22px);
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @media (min-width: 900px) { .pl-cats__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  /* With three categories a two-column phone grid leaves an orphan, so the
-     first one takes the full width and the other two pair up under it. */
-  .pl-cat--feature { grid-column: 1 / -1; }
-  .pl-cat--feature .pl-cat__media { aspect-ratio: 16 / 10; }
-  @media (min-width: 900px) {
-    .pl-cat--feature { grid-column: auto; }
-    .pl-cat--feature .pl-cat__media { aspect-ratio: 1 / 1; }
-  }
+  @media (min-width: 900px) { .pl-cats__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (min-width: 900px) { .pl-cat--feature { grid-column: span 2; grid-row: span 2; } }
 
-  /* The card used to be a photograph with a dark gradient poured over it and
-     white type on top. It read as heavy, it fought a white page, and the words
-     were at the mercy of whatever the photograph happened to show underneath.
-     Now the photograph is a frame and the words sit under it on the page's own
-     ground, which is both quieter and legible with any image. */
   .pl-cat__link {
-    display: grid;
-    gap: 12px;
+    position: relative;
+    display: block;
     height: 100%;
-    text-decoration: none;
-    color: var(--pl-ink);
-    background: transparent;
-  }
-  .pl-cat__media {
-    border-radius: var(--pl-r-m);
+    border-radius: var(--pl-r-l);
     overflow: hidden;
-    background: var(--pl-cream);
-    aspect-ratio: 1 / 1;
+    text-decoration: none;
+    color: var(--pl-porcelain);
+    background: var(--pl-sand);
+    isolation: isolate;
   }
+  .pl-cat__media { position: absolute; inset: 0; z-index: -2; }
   .pl-cat__media img, .pl-cat__ph {
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform 1.1s var(--pl-ease);
+  }
+  .pl-cat__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgba(20, 18, 15, .74) 0%, rgba(20, 18, 15, .28) 52%, rgba(20, 18, 15, .06) 100%);
   }
   /* Gated: on touch, :hover sticks to the last thing tapped. */
   @media (hover: hover) and (pointer: fine) {
     .pl-cat__link:hover img { transform: scale(1.06); }
   }
 
-  /* No minimum height any more: the words take the room they need and the
-     photograph above them supplies the weight. */
-  .pl-cat__body { display: grid; gap: 4px; padding: 0; }
+  .pl-cat__body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 210px;
+    height: 100%;
+    padding: clamp(18px, 2.2vw, 28px);
+    gap: 6px;
+  }
+  .pl-cat--feature .pl-cat__body { min-height: 320px; }
+  @media (min-width: 900px) { .pl-cat--feature .pl-cat__body { min-height: 440px; } }
 
   .pl-cat__title {
     font-family: var(--pl-display);
-    font-weight: 600;
-    font-size: clamp(1.05rem, 3.6vw, 1.25rem);
-    line-height: 1.25;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.75rem);
+    line-height: 1.2;
     margin: 0;
-    color: var(--pl-ink);
+    color: #FFFFFF;
   }
-  .pl-cat--feature .pl-cat__title { font-size: clamp(1.2rem, 4.4vw, 1.5rem); }
+  .pl-cat--feature .pl-cat__title { font-size: clamp(1.6rem, 3vw, 2.5rem); }
   .pl-cat__text {
     font-family: var(--pl-sans);
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: var(--pl-taupe);
+    font-size: .89rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, .84);
     margin: 0;
     max-width: 34ch;
   }
   .pl-cat__cta {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     font-family: var(--pl-sans);
-    font-size: 13.5px;
+    font-size: .86rem;
     font-weight: 600;
-    color: var(--pl-ink);
-    margin-block-start: 4px;
+    color: #FFFFFF;
+    margin-block-start: 8px;
   }
   [dir="rtl"] .pl-cat__cta svg { transform: scaleX(-1); }
   /* Gated: on touch, :hover sticks to the last thing tapped. */

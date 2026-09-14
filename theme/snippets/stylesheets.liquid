@@ -32,13 +32,6 @@
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
-  The warm refinement. It keeps the palette and reduces the weight, so it has
-  to load after pluma.css and on every page, or the rhythm would be tight in
-  some places and loose in others.
-{%- endcomment -%}
-{{ 'tb-warm.css' | asset_url | stylesheet_tag }}
-
-{%- comment -%}
   Product pages carry one extra sheet and never both. The rebuilt page uses
   `pdp.css`; the eight pages still on the block library use `pl-story.css`.
   Neither is paid for on the homepage or on a collection page.

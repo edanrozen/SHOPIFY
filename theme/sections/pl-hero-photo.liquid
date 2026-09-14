@@ -1,256 +1,144 @@
 {%- comment -%}
-  Full-bleed hero: the photograph is the section, and the words sit on it.
-
-  Two things here are load-bearing and easy to undo by accident.
-
-  First, <picture> is positioned rather than left in flow. A <picture> in flow
-  has no height of its own, so `height: 100%` on the <img> inside it resolves
-  against auto and the image falls back to its intrinsic ratio. When the frame
-  is a different shape from the photograph the difference shows up as empty
-  ground under the image. Positioning the <picture> gives it the frame's real
-  height, so `cover` can actually cover.
-
-  Second, the scrim is not decoration. The headline is set over a photograph
-  that can be swapped in the editor, so legibility cannot depend on the photo
-  being pale at the top. The gradient guarantees contrast whatever is behind it
-  and fades to nothing before it reaches the subject.
+  Hero with the photo and the words kept apart. Nothing is set over the image,
+  so the headline stays legible on any photo and at any phone width.
 {%- endcomment -%}
 
 {%- liquid
   assign img = section.settings.image
   assign img_m = section.settings.image_mobile | default: img
-  assign focus = section.settings.focal_point | default: 'center'
 -%}
 
 <section class="pl-heroP">
-  <div class="pl-heroP__frame" style="--pl-hero-focus: {{ focus }};">
-    {%- if img != blank -%}
-      <picture class="pl-heroP__pic">
-        <source
-          media="(max-width: 749px)"
-          srcset="{{ img_m | image_url: width: 750 }} 750w, {{ img_m | image_url: width: 1100 }} 1100w, {{ img_m | image_url: width: 1500 }} 1500w"
-          sizes="100vw"
-        >
-        <img
-          src="{{ img | image_url: width: 1600 }}"
-          srcset="{{ img | image_url: width: 900 }} 900w, {{ img | image_url: width: 1400 }} 1400w, {{ img | image_url: width: 2000 }} 2000w"
-          sizes="100vw"
-          width="{{ img.width }}"
-          height="{{ img.height }}"
-          alt="{{ img.alt | default: section.settings.image_alt | escape }}"
-          fetchpriority="high"
-          decoding="async"
-        >
-      </picture>
-    {%- else -%}
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'pl-heroP__ph' }}
-    {%- endif -%}
-
-    <div class="pl-heroP__scrim" aria-hidden="true"></div>
+  <div class="pl-wrap pl-heroP__grid">
+    <div class="pl-heroP__media">
+      {%- if img != blank -%}
+        <picture>
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ img_m | image_url: width: 700 }} 700w, {{ img_m | image_url: width: 1100 }} 1100w"
+            sizes="92vw"
+          >
+          <img
+            src="{{ img | image_url: width: 1400 }}"
+            srcset="{{ img | image_url: width: 800 }} 800w, {{ img | image_url: width: 1200 }} 1200w, {{ img | image_url: width: 1600 }} 1600w"
+            sizes="(max-width: 899px) 92vw, 50vw"
+            width="{{ img.width }}"
+            height="{{ img.height }}"
+            alt="{{ img.alt | default: section.settings.image_alt | escape }}"
+            fetchpriority="high"
+            decoding="async"
+          >
+        </picture>
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'pl-heroP__ph' }}
+      {%- endif -%}
+    </div>
 
     <div class="pl-heroP__copy">
       {%- if section.settings.eyebrow != blank -%}
         <p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
-      <h1 class="pl-h1 pl-heroP__title">{{ section.settings.heading }}</h1>
+      <h1 class="pl-h1">{{ section.settings.heading }}</h1>
 
       {%- if section.settings.subheading != blank -%}
-        <p class="pl-lede pl-heroP__lede">{{ section.settings.subheading }}</p>
+        <p class="pl-lede">{{ section.settings.subheading }}</p>
       {%- endif -%}
 
-      {%- if section.settings.cta_label != blank -%}
-        <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="pl-btn pl-btn--solid pl-heroP__cta">
-          <span>{{ section.settings.cta_label }}</span>
-          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false">
-            <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+      {%- if section.settings.show_rating -%}
+        <div class="pl-heroP__rating">
+          {% render 'pl-stars', value: section.settings.rating_value, size: 16, label: 'דירוג ממוצע' %}
+          <span>{{ section.settings.rating_text }}</span>
+        </div>
       {%- endif -%}
 
-      {%- comment -%}
-        The price belongs on the first screen. A homepage that hides what the
-        thing costs makes every visitor click once just to find out, and most
-        of them do not.
-      {%- endcomment -%}
-      {%- if section.settings.note != blank -%}
-        <p class="pl-heroP__note">{{ section.settings.note }}</p>
-      {%- endif -%}
+      <div class="pl-heroP__actions">
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="pl-btn pl-btn--solid">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a href="{{ section.settings.cta2_link | default: '/collections/all' }}" class="pl-btn pl-btn--ghost">{{ section.settings.cta2_label }}</a>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 
-  {%- if section.blocks.size > 0 -%}
-    <ul class="pl-heroP__trust" role="list">
-      {%- for block in section.blocks -%}
-        <li class="pl-benefit" {{ block.shopify_attributes }}>
-          <span class="pl-benefit__icon" aria-hidden="true">
-            {%- case block.settings.icon -%}
-              {%- when 'drop' -%}
-                <svg viewBox="0 0 24 24" width="21" height="21"><path d="M12 3.2c3.4 4 5.4 6.6 5.4 9.2a5.4 5.4 0 0 1-10.8 0c0-2.6 2-5.2 5.4-9.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-              {%- when 'shield' -%}
-                <svg viewBox="0 0 24 24" width="21" height="21"><path d="M12 3l7 2.6v5.2c0 4.3-2.9 8-7 10.2-4.1-2.2-7-5.9-7-10.2V5.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.9 12.2l2.2 2.2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              {%- when 'clock' -%}
-                <svg viewBox="0 0 24 24" width="21" height="21"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 7.4V12l3 1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              {%- when 'heart' -%}
-                <svg viewBox="0 0 24 24" width="21" height="21"><path d="M12 20s-7-4.3-7-9a3.9 3.9 0 0 1 7-2.4A3.9 3.9 0 0 1 19 11c0 4.7-7 9-7 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-              {%- else -%}
-                <svg viewBox="0 0 24 24" width="21" height="21"><ellipse cx="12" cy="15.6" rx="4.2" ry="3.4" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="6.6" cy="10.4" rx="1.9" ry="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="17.4" cy="10.4" rx="1.9" ry="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="10.2" cy="6.6" rx="1.7" ry="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="15.4" cy="6.9" rx="1.6" ry="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-            {%- endcase -%}
-          </span>
-          <span class="pl-benefit__title">{{ block.settings.title }}</span>
-          {%- if block.settings.text != blank -%}
-            <span class="pl-benefit__text">{{ block.settings.text }}</span>
-          {%- endif -%}
-        </li>
-      {%- endfor -%}
-    </ul>
+  {%- if section.settings.chip_1 != blank or section.settings.chip_2 != blank or section.settings.chip_3 != blank -%}
+    <div class="pl-heroP__trust">
+      <ul class="pl-wrap pl-heroP__chips" role="list">
+        {%- if section.settings.chip_1 != blank %}<li>{{ section.settings.chip_1 }}</li>{% endif -%}
+        {%- if section.settings.chip_2 != blank %}<li>{{ section.settings.chip_2 }}</li>{% endif -%}
+        {%- if section.settings.chip_3 != blank %}<li>{{ section.settings.chip_3 }}</li>{% endif -%}
+      </ul>
+    </div>
   {%- endif -%}
 </section>
 
 {% stylesheet %}
-  .pl-heroP { background: var(--pl-porcelain); }
+  .pl-heroP { background: var(--pl-porcelain); padding-block-start: clamp(16px, 3vw, 34px); }
+  .pl-heroP__grid { display: grid; gap: clamp(22px, 4vw, 52px); align-items: center; }
+  @media (min-width: 900px) { .pl-heroP__grid { grid-template-columns: 1fr 1fr; } }
 
-  /* Edge to edge on a phone. The section sits inside the theme's page wrapper,
-     so the frame is pulled back out to the full viewport width. */
-  .pl-heroP__frame {
-    position: relative;
-    isolation: isolate;
+  /* The hero photograph is landscape, so the crop stays wide at every width
+     instead of squeezing the two animals out of frame on a phone. */
+  .pl-heroP__media {
+    border-radius: var(--pl-r-l);
     overflow: hidden;
     background: var(--pl-cream);
-    min-height: clamp(440px, 66svh, 580px);
+    aspect-ratio: 4 / 3;
+  }
+  @media (min-width: 600px) { .pl-heroP__media { aspect-ratio: 3 / 2; } }
+  @media (min-width: 900px) { .pl-heroP__media { aspect-ratio: 4 / 3; } }
+  .pl-heroP__media img, .pl-heroP__ph { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .pl-heroP__copy { display: block; }
+  .pl-heroP__rating {
     display: flex;
-    justify-content: center;
-  }
-
-  /* The fix: a positioned <picture> has the frame's height, so the image can
-     cover it. Left in normal flow it has no height and `cover` does nothing. */
-  .pl-heroP__pic {
-    position: absolute;
-    inset: 0;
-    display: block;
-    z-index: 0;
-  }
-  .pl-heroP__pic img, .pl-heroP__ph {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: var(--pl-hero-focus, center);
-    display: block;
-  }
-
-  /* Guarantees the headline is legible over any photograph, and is gone well
-     before the middle of the frame so it never greys out the subject. */
-  .pl-heroP__scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, .95) 0%,
-      rgba(255, 255, 255, .88) 16%,
-      rgba(255, 255, 255, .60) 36%,
-      rgba(255, 255, 255, .18) 56%,
-      rgba(255, 255, 255, 0) 72%
-    );
-  }
-
-  .pl-heroP__copy {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 640px;
-    text-align: center;
-    padding-inline: var(--pl-gutter);
-    padding-block-start: clamp(24px, 6vw, 52px);
-  }
-  .pl-heroP__title { margin: 0; text-wrap: balance; }
-  .pl-heroP__lede {
-    margin: 12px auto 0;
-    max-width: 34ch;
-    color: var(--pl-ink-soft);
-    text-wrap: pretty;
-  }
-
-  /* The one pill on the site. The hero button is the single most important
-     target on the homepage and the shape is what the design asks for. */
-  .pl-heroP__cta {
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-block-start: clamp(18px, 4vw, 26px);
-    border-radius: 999px;
-    padding-inline: 26px;
-  }
-  [dir="rtl"] .pl-heroP__cta svg { transform: scaleX(-1); }
-
-  .pl-heroP__note {
-    margin: 12px 0 0;
+    gap: 9px;
+    margin-block-start: 18px;
     font-family: var(--pl-sans);
-    font-size: 13.5px;
+    font-size: .88rem;
     font-weight: 600;
     color: var(--pl-ink-soft);
   }
-
-  @media (min-width: 900px) {
-    .pl-heroP__frame { min-height: 0; aspect-ratio: 16 / 7; max-height: 76svh; align-items: center; }
-    .pl-heroP__copy { padding-block: clamp(32px, 5vw, 64px); }
-    /* On a wide frame the photograph is mostly to the sides of the words, so
-       the scrim becomes a soft wash rather than a top band. */
-    .pl-heroP__scrim {
-      background: linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.72) 40%, rgba(255,255,255,.34) 75%, rgba(255,255,255,.12) 100%);
-    }
+  .pl-heroP__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-block-start: 26px;
   }
 
-  /* ---- benefits ---- */
-  .pl-heroP__trust {
+  .pl-heroP__trust { margin-block-start: clamp(28px, 4vw, 48px); border-block: 1px solid var(--pl-line); background: var(--pl-cream); }
+  .pl-heroP__chips {
     list-style: none;
     margin: 0;
-    padding: clamp(20px, 4vw, 30px) var(--pl-gutter);
-    /* The band spans the page, but the three items stay on the same measure as
-       every other section so they do not drift to the far corners on a wide
-       screen. */
-    --pl-trust-inline: max(var(--pl-gutter), (100% - var(--pl-wrap)) / 2);
-    padding-inline: var(--pl-trust-inline);
-    background: var(--pl-cream);
-    border-block-end: 1px solid var(--pl-line);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(8px, 2vw, 22px);
+    gap: 10px;
+    padding-block: 16px;
   }
-  .pl-benefit {
-    display: grid;
-    justify-items: center;
-    align-content: start;
-    gap: 6px;
-    text-align: center;
-    min-width: 0;
-  }
-  .pl-benefit__icon {
-    display: grid;
-    place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--pl-sand);
-    color: var(--pl-ink);
-    margin-block-end: 2px;
-  }
-  .pl-benefit__title {
+  @media (min-width: 700px) { .pl-heroP__chips { grid-template-columns: repeat(3, 1fr); text-align: center; } }
+  .pl-heroP__chips li {
+    position: relative;
     font-family: var(--pl-sans);
-    font-size: clamp(12.5px, 3.4vw, 14.5px);
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--pl-ink);
-    text-wrap: balance;
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--pl-ink-soft);
+    padding-inline-start: 24px;
   }
-  .pl-benefit__text {
-    font-family: var(--pl-sans);
-    font-size: clamp(11px, 3vw, 13px);
-    line-height: 1.4;
-    color: var(--pl-taupe);
-    max-width: 20ch;
-    text-wrap: pretty;
+  @media (min-width: 700px) { .pl-heroP__chips li { padding-inline: 24px; } }
+  .pl-heroP__chips li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: .38em;
+    width: 11px;
+    height: 6px;
+    /* A tick is a glyph, not a layout. Physical borders on purpose: mirroring
+       it under RTL turns the check into a chevron. */
+    border-left: 2.5px solid var(--pl-clay);
+    border-bottom: 2.5px solid var(--pl-clay);
+    transform: rotate(-45deg);
   }
 {% endstylesheet %}
 
@@ -259,54 +147,24 @@
   "name": "TinyBloom · Hero",
   "tag": "section",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image (desktop)" },
-    { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile)", "info": "מומלץ תמונה לאורך עם מקום פנוי בחלק העליון לכותרת." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (optional)" },
     { "type": "text", "id": "image_alt", "label": "Image alt text" },
-    {
-      "type": "select",
-      "id": "focal_point",
-      "label": "מוקד התמונה",
-      "info": "איזה חלק של התמונה נשמר כשהיא נחתכת.",
-      "default": "center",
-      "options": [
-        { "value": "center", "label": "מרכז" },
-        { "value": "top", "label": "למעלה" },
-        { "value": "bottom", "label": "למטה" },
-        { "value": "left", "label": "שמאל" },
-        { "value": "right", "label": "ימין" }
-      ]
-    },
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "textarea", "id": "heading", "label": "Heading", "default": "טיפוח חכם יותר.\nחיים קלים יותר." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "כדי שהם יישארו על השטיח, לא השיער שלהם" },
     { "type": "textarea", "id": "subheading", "label": "Subheading" },
-    { "type": "text", "id": "cta_label", "label": "Button", "default": "גלו את המוצרים" },
-    { "type": "url", "id": "cta_link", "label": "Button link" },
-    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "info": "מחיר, משלוח או התחייבות קצרה." }
-  ],
-  "blocks": [
-    {
-      "type": "benefit",
-      "name": "יתרון",
-      "limit": 3,
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "אייקון",
-          "default": "paw",
-          "options": [
-            { "value": "paw", "label": "כף רגל" },
-            { "value": "drop", "label": "טיפה" },
-            { "value": "shield", "label": "מגן" },
-            { "value": "clock", "label": "שעון" },
-            { "value": "heart", "label": "לב" }
-          ]
-        },
-        { "type": "text", "id": "title", "label": "כותרת" },
-        { "type": "text", "id": "text", "label": "שורת הסבר" }
-      ]
-    }
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating strip", "default": true },
+    { "type": "text", "id": "rating_value", "label": "Rating value", "default": "4.8" },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4.8 מתוך 5 · 82 ביקורות" },
+    { "type": "text", "id": "cta_label", "label": "Primary button", "default": "לכל המוצרים" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary button link" },
+    { "type": "header", "content": "Trust strip" },
+    { "type": "text", "id": "chip_1", "label": "Chip 1" },
+    { "type": "text", "id": "chip_2", "label": "Chip 2" },
+    { "type": "text", "id": "chip_3", "label": "Chip 3" }
   ],
   "presets": [{ "name": "TinyBloom · Hero" }]
 }
