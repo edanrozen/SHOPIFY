@@ -1,7 +1,21 @@
 {%- doc -%}
-  One product card, shared by the homepage grid, the collection page and
-  anywhere else a product is listed. Shared so the three can never drift.
+  One product card, shared by the homepage grid, the collection page and the
+  related row. Shared so the three can never drift.
+
+  The free shipping line appears only on a product whose own price clears the
+  threshold, which today is Bloom alone. It is the one blue line on a card and
+  it is checkable: buy that item by itself and the shipping really is free.
+  Chewy runs the same line on the cards that qualify and leaves it off the ones
+  that do not, which is what makes it worth reading.
 {%- enddoc -%}
+
+{%- liquid
+  assign free_from = 19900
+  assign ships_free = false
+  if product.price >= free_from
+    assign ships_free = true
+  endif
+-%}
 
 <a class="wf-card" href="{{ product.url }}">
   <div class="wf-card__frame">
@@ -20,4 +34,7 @@
   </div>
   <p class="wf-card__name">{{ product.title }}</p>
   <p class="wf-card__price">{{ product.price | money }}</p>
+  {%- if ships_free -%}
+    <p class="wf-card__ship">משלוח חינם</p>
+  {%- endif -%}
 </a>

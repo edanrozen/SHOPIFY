@@ -1,9 +1,13 @@
 # The showcase theme
 
-TinyBloom wearing the shape the pet themes in the Shopify theme store use
-(Woofy, Tender and the rest of that shelf): a photograph with a sentence on
-top, a row of facts, category cards that ask what you came for, the flagship on
-its own, then the grid.
+TinyBloom wearing chewy.com's design language over the shape the pet themes in
+the Shopify theme store use: a photograph with a sentence on top, a band of
+facts, a row of circles asking what you came for, the flagship on its own, then
+a grid of bordered product cards.
+
+chewy.com is blocked from this sandbox, so the Chewy side of this is their
+design language as known rather than as measured. The blue is a best reading,
+not a sampled value.
 
     theme   TinyBloom · בסגנון חנות התמות (טיוטה)   155253014580, unpublished
 
@@ -12,18 +16,28 @@ its own, then the grid.
 Taken: the photographic opening, the trust row under it, the "who are you
 shopping for today" cards, loud headings, round frames, pill buttons.
 
-Not taken: their colour. The theme is two colours, #FFFFFF and #000000, and
-there is no third. `wf.css` redefines pluma's warm tokens at `:root`, and
-`config/settings_data.json` carries the same two values for Horizon's own
-header, footer, cart and drawers, which read the palette from there rather than
-from CSS. To bring an accent back, `--pl-clay` and `--pl-clay-deep` in
-`wf.css` are the only two lines to change.
+## What came from Chewy
 
-Two colours cost two things, and both are paid for rather than dropped. A line
-can no longer be made quieter by fading it, so the small print keeps its place
-by size and weight instead. And the open thumbnail on a product page can no
-longer be marked with a second border colour, so the closed ones are faded to
-40% instead: less of the photograph, not another colour.
+  * The blue. `--wf-accent` is #1C49C2 and it carries every action: buttons,
+    the open thumbnail, the flagship tag, the one shipping line on a card.
+    Setting that variable to #000000 restores the black and white version
+    exactly.
+  * The "Shop by pet" circles, here as three jobs rather than eight animals.
+  * Bordered product cards with the name clamped at two lines, the price in
+    bold ink rather than in the accent, and a shipping line only where it is
+    true.
+  * The buy box: one bordered panel holding price, button and shipping, so
+    "what this is" and "buy it" are separate blocks.
+  * A compact benefit band with the icon beside the words.
+  * Less rounding. Cards take 10px; only the buttons stay full pills.
+
+## What did not come from Chewy
+
+  * Star ratings and review counts on every card. There are no reviews.
+  * Horizontally scrolling carousels. Chewy scrolls because they have
+    thousands of products; nine fit in a grid, and a carousel would hide
+    them.
+  * Autoship. There is no subscription to sell yet.
 
 Not taken, deliberately:
 

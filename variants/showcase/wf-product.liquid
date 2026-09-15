@@ -6,6 +6,10 @@
   one line about delivery. The problem and answer pair comes from the product's
   own metafields, so nothing here is written by the section.
 
+  The price, the button and the shipping line sit inside one bordered panel,
+  the way Chewy separates what a thing is from buying it. On a phone that panel
+  is what you land on after the gallery.
+
   The thumbnail strip is one swipeable row rather than two wrapped ones. Eight
   thumbnails on two rows cost about 90px of height directly above the price,
   which is the last thing worth pushing down a phone screen.
@@ -19,6 +23,16 @@
   endif
   assign problem = product.metafields.custom.problem_line.value
   assign solution = product.metafields.custom.solution_line.value
+
+  comment
+    Free shipping is a threshold on the order, so it is only claimed on a
+    product that clears it on its own. Anything cheaper says nothing here.
+  endcomment
+  assign free_from = 19900
+  assign ships_free = false
+  if product.price >= free_from
+    assign ships_free = true
+  endif
 -%}
 
 <div class="pl-wrap">
@@ -70,23 +84,29 @@
         <p class="wf-sub">{{ solution }}</p>
       {%- endif -%}
 
-      <p class="wf-pdp__price">
-        {%- if product.compare_at_price > product.price -%}
-          <s class="wf-pdp__was">{{ product.compare_at_price | money }}</s>
+      <div class="wf-buybox">
+        <p class="wf-pdp__price">
+          {%- if product.compare_at_price > product.price -%}
+            <s class="wf-pdp__was">{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+          {{ product.price | money }}
+        </p>
+
+        {%- if ships_free -%}
+          <p class="wf-pdp__ship">משלוח חינם למוצר הזה</p>
         {%- endif -%}
-        {{ product.price | money }}
-      </p>
 
-      {%- form 'product', product, class: 'wf-pdp__form' -%}
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-        <button type="submit" class="wf-btn wf-pdp__submit" {% unless product.available %}disabled{% endunless %}>
-          {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
-        </button>
-      {%- endform -%}
+        {%- form 'product', product, class: 'wf-pdp__form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="wf-btn wf-pdp__submit" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+          </button>
+        {%- endform -%}
 
-      {%- if section.settings.note != blank -%}
-        <p class="wf-pdp__note">{{ section.settings.note }}</p>
-      {%- endif -%}
+        {%- if section.settings.note != blank -%}
+          <p class="wf-pdp__note">{{ section.settings.note }}</p>
+        {%- endif -%}
+      </div>
 
       {%- if product.description != blank -%}
         <div class="wf-pdp__rte">{{ product.description }}</div>

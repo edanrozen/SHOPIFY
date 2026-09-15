@@ -1,29 +1,33 @@
 {%- doc -%}
   What did you come for?
 
-  This is the one move worth taking wholesale from those themes. They ask the
-  visitor to pick a side before showing anything, and a nine product catalogue
-  presented as nine products is a decision the visitor has to make, while the
-  same catalogue presented as three jobs is a direction they can follow.
+  Chewy's "Shop by pet" row: a circle of photograph, the label under it, and
+  nothing else. It is the most recognisable thing on their homepage, and it
+  does the same job the tall photo cards did here in a fifth of the height.
+  Nine products presented as nine products is a decision the visitor has to
+  make; presented as three jobs it is a direction they can follow.
 
-  The split here is by job rather than by animal, because that is how this
-  catalogue actually divides: grooming the coat, getting fur out of the house,
-  and the two things made for cats alone.
+  The split is by job rather than by animal, because that is how this catalogue
+  divides: grooming the coat, getting fur out of the house, and the two things
+  made for cats alone.
+
+  No product count under the label. It is real information, but on a nine
+  product shop it only tells the visitor how little there is.
 
   A collection with no image of its own falls back to its first product's
-  photograph, so a card is never an empty frame.
+  photograph, so a circle is never an empty ring.
 {%- enddoc -%}
 
 <section class="wf-section">
   <div class="pl-wrap">
     {%- if section.settings.heading != blank -%}
-      <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+      <h2 class="wf-h2" style="text-align: center;">{{ section.settings.heading }}</h2>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
-      <p class="wf-sub">{{ section.settings.text }}</p>
+      <p class="wf-sub" style="text-align: center; margin-inline: auto;">{{ section.settings.text }}</p>
     {%- endif -%}
 
-    <ul class="wf-intents" role="list">
+    <ul class="wf-circles" role="list">
       {%- for block in section.blocks -%}
         {%- liquid
           assign coll = collections[block.settings.collection]
@@ -35,13 +39,13 @@
         -%}
         {%- if coll != blank -%}
           <li {{ block.shopify_attributes }}>
-            <a class="wf-intent" href="{{ coll.url }}">
-              <div class="wf-intent__media">
+            <a class="wf-circle" href="{{ coll.url }}">
+              <span class="wf-circle__media">
                 {%- if card_img != blank -%}
                   <img
-                    src="{{ card_img | image_url: width: 800 }}"
-                    srcset="{{ card_img | image_url: width: 500 }} 500w, {{ card_img | image_url: width: 900 }} 900w"
-                    sizes="(max-width: 760px) 92vw, 30vw"
+                    src="{{ card_img | image_url: width: 400 }}"
+                    srcset="{{ card_img | image_url: width: 220 }} 220w, {{ card_img | image_url: width: 400 }} 400w"
+                    sizes="156px"
                     width="{{ card_img.width }}"
                     height="{{ card_img.height }}"
                     alt="{{ card_img.alt | default: card_title | escape }}"
@@ -49,14 +53,8 @@
                     decoding="async"
                   >
                 {%- endif -%}
-              </div>
-              <div class="wf-intent__copy">
-                <p class="wf-intent__title">{{ card_title }}</p>
-                {%- if block.settings.text != blank -%}
-                  <p class="wf-intent__text">{{ block.settings.text }}</p>
-                {%- endif -%}
-                <span class="wf-intent__link">{{ block.settings.link_label | default: 'לצפייה' }}</span>
-              </div>
+              </span>
+              <p class="wf-circle__title">{{ card_title }}</p>
             </a>
           </li>
         {%- endif -%}
@@ -76,12 +74,12 @@
   "blocks": [
     {
       "type": "intent",
-      "name": "כרטיס",
+      "name": "עיגול",
       "settings": [
         { "type": "collection", "id": "collection", "label": "אוסף" },
         { "type": "text", "id": "title", "label": "כותרת (ריק לוקח את שם האוסף)" },
-        { "type": "text", "id": "text", "label": "טקסט" },
-        { "type": "text", "id": "link_label", "label": "קישור", "default": "לצפייה" }
+        { "type": "text", "id": "text", "label": "טקסט (לא מוצג בעיצוב הזה)" },
+        { "type": "text", "id": "link_label", "label": "קישור (לא מוצג בעיצוב הזה)" }
       ]
     }
   ],
