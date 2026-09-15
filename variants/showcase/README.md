@@ -12,6 +12,13 @@ its own, then the grid.
 Taken: the photographic opening, the trust row under it, the "who are you
 shopping for today" cards, loud headings, round frames, pill buttons.
 
+Not taken: their colour. The whole theme is white, black and one grey
+hairline. `wf.css` redefines pluma's warm tokens at `:root`, and
+`config/settings_data.json` carries the same four values for Horizon's own
+header, footer, cart and drawers, which read the palette from there rather than
+from CSS. To bring an accent back, `--pl-clay` and `--pl-clay-deep` in
+`wf.css` are the only two lines to change.
+
 Not taken, deliberately:
 
   * Tender's countdown on a 30% sale. No sale is running.
@@ -32,7 +39,8 @@ house, and the two things made for cats alone.
 
 ## Files
 
-    assets/wf.css                 the posture layer, on top of pluma.css
+    assets/wf.css                 the posture and the white palette
+    config/settings_data.json     the same palette, for Horizon's own sections
     snippets/stylesheets.liquid   base, fonts, pluma, wf. No pdp.css or pl-story.css
     snippets/wf-card.liquid       one card, shared by the grid and the collection
     sections/wf-hero.liquid       photograph, scrim, headline, two pills

@@ -20,6 +20,44 @@
    ========================================================================== */
 
 :root {
+  /* White, everywhere. pluma.css defines the warm palette; this file loads
+     after it, so redefining the tokens here turns the whole design white
+     without touching a single component rule. Horizon's own header, footer,
+     cart and drawers are not styled from these: they read the color_palette in
+     config/settings_data.json, which is set to the same four values.
+
+     Two things follow from an all white page and are handled below rather than
+     here. Bands can no longer be told apart by their background, so they are
+     separated by a hairline. And a product photographed on white, inside a
+     white frame, on a white page has nothing holding it, so every frame gains
+     a border.
+
+     The muted text tone moved from #8C8175 to #767676. The old one was about
+     3.6:1 against the cream ground, which is under the contrast minimum; this
+     one is 4.5:1 against white and passes. */
+  --pl-porcelain: #FFFFFF;
+  --pl-cream:     #FFFFFF;
+  --pl-sand:      #F2F2F2;
+  --pl-sand-deep: #DEDEDE;
+  --pl-ink:       #111111;
+  --pl-ink-soft:  #4A4A4A;
+  --pl-taupe:     #767676;
+  --pl-line:      #E5E5E5;
+  --pl-white:     #FFFFFF;
+
+  /* The accent was clay. On an all white page an orange is the only colour
+     left, which makes it the loudest thing on the screen rather than an
+     accent, so it becomes ink. To bring the colour back, these two lines are
+     the only place to change. */
+  --pl-clay:      #111111;
+  --pl-clay-deep: #000000;
+
+  /* Neutral, not warm. A shadow mixed from #191713 reads faintly beige over
+     pure white. */
+  --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .04);
+  --pl-sh-m: 0 8px 24px rgba(0, 0, 0, .07);
+  --pl-sh-l: 0 20px 48px rgba(0, 0, 0, .1);
+
   --wf-r: 24px;
   --wf-r-lg: 32px;
   --wf-pill: 999px;
@@ -28,7 +66,10 @@
 
 .wf-section { padding-block: clamp(40px, 6.5vw, 88px); }
 .wf-section--tight { padding-block: clamp(28px, 4vw, 52px); }
-.wf-cream { background: var(--pl-cream); }
+.wf-cream {
+  background: var(--pl-cream);
+  border-block: 1px solid var(--pl-line);
+}
 
 /* Louder than pl-h2, because in this category a quiet heading reads as a shop
    that is not sure it wants you. */
@@ -72,8 +113,12 @@
 .wf-btn:hover { background: #000; transform: translateY(-1px); }
 .wf-btn--light { background: var(--pl-white); color: var(--pl-ink); }
 .wf-btn--light:hover { background: var(--pl-white); }
-.wf-btn--clay { background: var(--pl-clay); }
-.wf-btn--clay:hover { background: var(--pl-clay-deep); }
+.wf-btn--clay {
+  background: transparent;
+  color: var(--pl-white);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .85);
+}
+.wf-btn--clay:hover { background: rgba(255, 255, 255, .14); }
 .wf-btn[disabled] { background: var(--pl-taupe); cursor: not-allowed; transform: none; }
 
 /* ---- hero ---------------------------------------------------------------
@@ -142,7 +187,7 @@
   display: grid; place-items: center;
   border-radius: var(--wf-pill);
   background: var(--pl-white);
-  box-shadow: var(--pl-sh-s);
+  border: 1px solid var(--pl-line);
   margin-bottom: 4px;
 }
 .wf-trust__icon svg { width: 21px; height: 21px; stroke: var(--pl-clay); fill: none; stroke-width: 1.6; }
@@ -167,7 +212,7 @@
   overflow: hidden;
   text-decoration: none;
   background: var(--pl-sand);
-  box-shadow: var(--pl-sh-s);
+  border: 1px solid var(--pl-line);
   transition: transform .25s var(--pl-ease), box-shadow .25s var(--pl-ease);
 }
 .wf-intent:hover { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
@@ -208,8 +253,8 @@
   border-radius: var(--wf-r-lg);
   overflow: hidden;
   background: var(--pl-white);
+  border: 1px solid var(--pl-line);
   aspect-ratio: 4 / 5;
-  box-shadow: var(--pl-sh-m);
 }
 @media (min-width: 900px) { .wf-flag__media { aspect-ratio: 1 / 1; } }
 /* Contain: Bloom is 1206x1806 and any frame that fills with cover cuts the
@@ -262,12 +307,16 @@
   border-radius: var(--wf-r);
   overflow: hidden;
   background: var(--pl-white);
+  border: 1px solid var(--pl-line);
   aspect-ratio: 1 / 1;
   margin-bottom: 12px;
-  box-shadow: var(--pl-sh-s);
-  transition: transform .25s var(--pl-ease), box-shadow .25s var(--pl-ease);
+  transition: transform .25s var(--pl-ease), border-color .25s var(--pl-ease), box-shadow .25s var(--pl-ease);
 }
-.wf-card:hover .wf-card__frame { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
+.wf-card:hover .wf-card__frame {
+  transform: translateY(-4px);
+  border-color: #CFCFCF;
+  box-shadow: var(--pl-sh-m);
+}
 /* The catalogue runs from 768x1375 to 1254x1254. One square frame plus cover
    would crop a third off the tall ones, so every frame contains. */
 .wf-card__frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
@@ -294,8 +343,8 @@
   border-radius: var(--wf-r-lg);
   overflow: hidden;
   background: var(--pl-white);
+  border: 1px solid var(--pl-line);
   aspect-ratio: 1 / 1;
-  box-shadow: var(--pl-sh-s);
 }
 .wf-pdp__stage img { width: 100%; height: 100%; object-fit: contain; display: block; }
 /* One swipeable row rather than two wrapped ones: eight thumbnails on two rows
@@ -314,11 +363,10 @@
   flex: 0 0 auto;
   width: 64px; height: 64px;
   padding: 0;
-  border: 2px solid transparent;
+  border: 2px solid var(--pl-line);
   border-radius: 14px;
   overflow: hidden;
   background: var(--pl-white);
-  box-shadow: var(--pl-sh-s);
   cursor: pointer;
 }
 .wf-pdp__thumb[aria-current='true'] { border-color: var(--pl-clay); }
