@@ -7,9 +7,9 @@
   familiar shop uses, and the point of this version is to see the store wearing
   it before deciding whether it needs anything more.
 
-  Nothing here inherits from the main design system. System fonts, white
-  ground, black text, square frames, one hairline. No animation, no shadow, no
-  gradient, no rounded panels.
+  Nothing here inherits from the main design system. The whole theme is dressed
+  by one stylesheet, `assets/bs.css`: system fonts, white ground, black text,
+  square frames, one hairline. No animation, no shadow, no gradient.
 {%- enddoc -%}
 
 {%- liquid
@@ -20,159 +20,69 @@
   endif
 -%}
 
-<div class="bs">
-
-  {%- if section.settings.image != blank -%}
-    <div class="bs-hero">
-      <img
-        src="{{ section.settings.image | image_url: width: 1600 }}"
-        srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1600 }} 1600w"
-        sizes="100vw"
-        width="{{ section.settings.image.width }}"
-        height="{{ section.settings.image.height }}"
-        alt="{{ section.settings.image.alt | escape }}"
-        fetchpriority="high" decoding="async"
-      >
-    </div>
-  {%- endif -%}
-
-  <div class="bs-wrap bs-intro">
-    <h1>{{ section.settings.heading }}</h1>
-    {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
-    {%- if section.settings.cta != blank -%}
-      <a class="bs-btn" href="{{ section.settings.cta_link | default: '/collections/all' }}">{{ section.settings.cta }}</a>
-    {%- endif -%}
+{%- if section.settings.image != blank -%}
+  <div class="bs-hero">
+    <img
+      src="{{ section.settings.image | image_url: width: 1600 }}"
+      srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1600 }} 1600w"
+      sizes="100vw"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+      alt="{{ section.settings.image.alt | escape }}"
+      fetchpriority="high" decoding="async"
+    >
   </div>
+{%- endif -%}
 
-  <div class="bs-wrap">
-    <h2 class="bs-h2">{{ section.settings.grid_heading }}</h2>
-    <ul class="bs-grid" role="list">
-      {%- for item in items limit: section.settings.limit -%}
-        <li>
-          <a href="{{ item.url }}">
-            <div class="bs-thumb">
-              {%- if item.featured_image != blank -%}
-                <img
-                  src="{{ item.featured_image | image_url: width: 600 }}"
-                  srcset="{{ item.featured_image | image_url: width: 300 }} 300w, {{ item.featured_image | image_url: width: 600 }} 600w"
-                  sizes="(max-width: 700px) 46vw, 23vw"
-                  width="{{ item.featured_image.width }}"
-                  height="{{ item.featured_image.height }}"
-                  alt="{{ item.featured_image.alt | default: item.title | escape }}"
-                  loading="lazy" decoding="async"
-                >
-              {%- endif -%}
-            </div>
-            <span class="bs-name">{{ item.title }}</span>
-            <span class="bs-price">{{ item.price | money }}</span>
-          </a>
+<div class="bs-wrap bs-intro">
+  <h1>{{ section.settings.heading }}</h1>
+  {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+  {%- if section.settings.cta != blank -%}
+    <a class="bs-btn" href="{{ section.settings.cta_link | default: '/collections/all' }}">{{ section.settings.cta }}</a>
+  {%- endif -%}
+</div>
+
+<div class="bs-wrap">
+  <h2 class="bs-h2">{{ section.settings.grid_heading }}</h2>
+  <ul class="bs-grid" role="list">
+    {%- for item in items limit: section.settings.limit -%}
+      <li>
+        <a href="{{ item.url }}">
+          <div class="bs-thumb">
+            {%- if item.featured_image != blank -%}
+              <img
+                src="{{ item.featured_image | image_url: width: 600 }}"
+                srcset="{{ item.featured_image | image_url: width: 300 }} 300w, {{ item.featured_image | image_url: width: 600 }} 600w"
+                sizes="(max-width: 700px) 46vw, 23vw"
+                width="{{ item.featured_image.width }}"
+                height="{{ item.featured_image.height }}"
+                alt="{{ item.featured_image.alt | default: item.title | escape }}"
+                loading="lazy" decoding="async"
+              >
+            {%- endif -%}
+          </div>
+          <span class="bs-name">{{ item.title }}</span>
+          <span class="bs-price">{{ item.price | money }}</span>
+        </a>
+      </li>
+    {%- else -%}
+      <li>אין מוצרים להצגה.</li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{%- if section.blocks.size > 0 -%}
+  <div class="bs-facts">
+    <ul class="bs-wrap bs-facts__list" role="list">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>
+          <strong>{{ block.settings.title }}</strong>
+          <span>{{ block.settings.text }}</span>
         </li>
-      {%- else -%}
-        <li>אין מוצרים להצגה.</li>
       {%- endfor -%}
     </ul>
   </div>
-
-  {%- if section.blocks.size > 0 -%}
-    <div class="bs-facts">
-      <ul class="bs-wrap bs-facts__list" role="list">
-        {%- for block in section.blocks -%}
-          <li {{ block.shopify_attributes }}>
-            <strong>{{ block.settings.title }}</strong>
-            <span>{{ block.settings.text }}</span>
-          </li>
-        {%- endfor -%}
-      </ul>
-    </div>
-  {%- endif -%}
-
-</div>
-
-{% stylesheet %}
-  /* Scoped to .bs so the plain version cannot leak into the rest of the theme
-     and the rest of the theme cannot dress it up. */
-  .bs {
-    background: #fff;
-    color: #111;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  .bs * { box-sizing: border-box; }
-  .bs img { display: block; max-width: 100%; }
-
-  .bs-wrap { max-width: 1100px; margin-inline: auto; padding-inline: 16px; }
-
-  .bs-hero { background: #f4f4f4; }
-  .bs-hero img { width: 100%; height: auto; }
-
-  .bs-intro { padding-block: 32px 8px; }
-  .bs h1 {
-    font-family: inherit;
-    font-size: 28px;
-    line-height: 1.25;
-    font-weight: 700;
-    letter-spacing: 0;
-    margin: 0 0 10px;
-  }
-  .bs-intro p { margin: 0 0 18px; color: #444; max-width: 60ch; }
-
-  .bs-btn {
-    display: inline-block;
-    background: #111;
-    color: #fff;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 12px 22px;
-    border-radius: 4px;
-  }
-
-  .bs-h2 {
-    font-family: inherit;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 0;
-    margin: 36px 0 16px;
-  }
-
-  .bs-grid {
-    list-style: none;
-    margin: 0 0 40px;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 16px;
-  }
-  @media (min-width: 700px) { .bs-grid { grid-template-columns: repeat(4, 1fr); } }
-
-  .bs-grid a { text-decoration: none; color: inherit; display: block; }
-  .bs-thumb {
-    background: #f4f4f4;
-    border: 1px solid #e5e5e5;
-    aspect-ratio: 1 / 1;
-    margin-bottom: 10px;
-  }
-  /* Contain, because the catalogue is not one shape and a square frame filled
-     by cover cuts the tall photographs. */
-  .bs-thumb img { width: 100%; height: 100%; object-fit: contain; }
-
-  .bs-name { display: block; font-size: 14px; line-height: 1.4; }
-  .bs-price { display: block; font-size: 14px; font-weight: 700; margin-top: 4px; }
-
-  .bs-facts { border-top: 1px solid #e5e5e5; background: #fafafa; }
-  .bs-facts__list {
-    list-style: none;
-    margin: 0;
-    padding-block: 24px;
-    display: grid;
-    gap: 16px;
-  }
-  @media (min-width: 700px) { .bs-facts__list { grid-template-columns: repeat(3, 1fr); } }
-  .bs-facts__list li { display: grid; gap: 2px; }
-  .bs-facts__list strong { font-size: 14px; }
-  .bs-facts__list span { font-size: 13px; color: #555; }
-{% endstylesheet %}
+{%- endif -%}
 
 {% schema %}
 {

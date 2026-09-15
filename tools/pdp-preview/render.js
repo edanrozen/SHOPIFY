@@ -17,7 +17,10 @@ const path = require('path');
 const { Liquid } = require('liquidjs');
 
 const ROOT = path.resolve(__dirname, '../..');
-const THEME = path.join(ROOT, 'theme');
+// The variant themes live outside `theme/` and are staged into a directory of
+// their own before rendering, so PREVIEW_THEME points the harness at whichever
+// theme is being looked at. Default is the real one.
+const THEME = path.resolve(ROOT, process.env.PREVIEW_THEME || 'theme');
 // Shopify accepts `comment ... endcomment` inside a {% liquid %} tag with any
 // prose in between; liquidjs tokenises the prose and trips over quotes. The
 // comments carry no output, so they are removed before parsing. This is a
@@ -78,6 +81,12 @@ const CATALOGUE = [
 const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   const [w, h] = dims || [1206, 1760];
   const images = Array.from({ length: nImages }, (_, i) => img(w, h, i + 1, title));
+  // A media drop carries its media_type, and a template that filters on it
+  // (`where: 'media_type', 'image'`) gets an empty list without it. All nine
+  // products are single variant in the store, so the stub is too: a template
+  // branching on has_only_default_variant must take the branch it will live on.
+  for (const m of images) m.media_type = 'image';
+  const variant = { id: 1000 + price, title: 'Default Title', price, available: true };
   return {
     handle, title, price, compare_at_price: null, available: true,
     url: '/products/' + handle,
@@ -85,7 +94,9 @@ const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
     description: '<p>' + title + '</p>',
     images, media: images,
     featured_media: images[0], featured_image: images[0],
-    selected_or_first_available_variant: { id: 1000 + price },
+    has_only_default_variant: true,
+    variants: [variant],
+    selected_or_first_available_variant: variant,
     metafields: { custom: {} },
     _collections: colls,
   };
@@ -111,6 +122,7 @@ for (const [handle, title] of Object.entries(COLL_META)) {
     image: handle === 'grooming' ? img(1200, 900, 'C', title) : null,
     products: list,
     all_products_count: list.length,
+    products_count: list.length,
   };
 }
 
@@ -126,7 +138,7 @@ const engine = new Liquid({ strictFilters: false, strictVariables: false });
 // inside a portrait frame.
 const PICKED = {
   '1CFBD4F3-2618-44A9-BD31-D101DB73E276.png': [1672, 941],
-  'IMG-0633.png': [1672, 941],
+  'IMG-0633.png': [1536, 1024],
   '6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png': [1145, 1374],
   'FFA8C7B2-763E-4709-A5AE-3D9B4D689B1A.png': [1254, 1254],
 };
@@ -210,6 +222,25 @@ engine.registerTag('render', {
   },
 });
 
+// `paginate` has no liquidjs equivalent. Nine products never fill a page of 24,
+// so the body is rendered once with an empty pager, which is what the
+// storefront does too at this catalogue size.
+engine.registerTag('paginate', {
+  parse(token, remain) {
+    this.tpls = [];
+    const stream = this.liquid.parser.parseStream(remain)
+      .on('template', (t) => this.tpls.push(t))
+      .on('tag:endpaginate', function () { this.stop(); })
+      .on('end', () => { throw new Error('endpaginate not closed'); });
+    stream.start();
+  },
+  *render(ctx, emitter) {
+    ctx.push({ paginate: { pages: 1, current_page: 1, parts: [] } });
+    yield this.liquid.renderer.renderTemplates(this.tpls, ctx, emitter);
+    ctx.pop();
+  },
+});
+
 // ------------------------------------------------------------------- render
 const which = process.argv[2] || 'index';
 const suffix = process.argv[3] || '';
@@ -222,8 +253,14 @@ if (product) {
     fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8'));
 }
 
+// A collection template needs the drop the page is about, the same way a
+// product template needs `product`.
+const collection = which === 'collection'
+  ? collections[process.env.PREVIEW_COLLECTION || 'all-products']
+  : null;
+
 const base = {
-  collections, all_products, product,
+  collections, all_products, product, collection,
   routes: { root_url: '/', all_products_collection_url: '/collections/all', cart_url: '/cart' },
   settings: {},
   template: { name: which === 'product' ? 'product' : which, suffix },
@@ -247,8 +284,12 @@ const reset = fs.readFileSync(path.join(ROOT, 'tools/responsive-check/reset.css'
 // tb.css is optional: an older checkout of the theme (used to render the
 // previous design for comparison) does not have it.
 const optional = (f) => { try { return read(f); } catch { return ''; } };
-const sheets = [reset, read('assets/pluma.css'), optional('assets/tb.css'), optional('assets/tb-warm.css'), optional('assets/tb-fit.css')];
-if (which === 'product') sheets.push(read('assets/pdp.css'));
+// PREVIEW_SHEETS names the stylesheets a variant theme loads, in order. The
+// basic theme, for instance, loads one and none of the design system.
+const sheets = process.env.PREVIEW_SHEETS
+  ? [reset, ...process.env.PREVIEW_SHEETS.split(',').map((f) => read(f.trim()))]
+  : [reset, read('assets/pluma.css'), optional('assets/tb.css'), optional('assets/tb-warm.css'), optional('assets/tb-fit.css')];
+if (which === 'product' && !process.env.PREVIEW_SHEETS) sheets.push(read('assets/pdp.css'));
 
 // Section stylesheets are concatenated by Shopify and served after the assets,
 // which is the order they are applied in here too.
