@@ -96,7 +96,15 @@
         </a>
       {%- endif -%}
 
-      {%- if pitch != blank -%}
+      {%- liquid
+        assign has_ps = false
+        if product.metafields.custom.problem_line.value != blank and product.metafields.custom.solution_line.value != blank
+          assign has_ps = true
+        endif
+      -%}
+      {%- if has_ps -%}
+        {% render 'pl-ps', product: product %}
+      {%- elsif pitch != blank -%}
         <p class="pl-pdp__pitch">{{ pitch }}</p>
       {%- endif -%}
 
@@ -251,6 +259,37 @@
     aspect-ratio: 1 / 1;
   }
   .pl-pdp__stage img, .pl-pdp__ph { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* The problem and the sentence that answers it, directly under the title.
+     The two rows are told apart by weight and by the rule beside them, not by
+     a second colour: muted and grey for the problem, full ink and clay for the
+     answer. The rule is a layout edge rather than a glyph, so it is logical
+     and mirrors correctly. */
+  .pl-ps { display: grid; gap: 10px; margin-block-start: 18px; }
+  .pl-ps__line {
+    display: grid;
+    gap: 3px;
+    margin: 0;
+    padding-inline-start: 14px;
+    border-inline-start: 2px solid var(--pl-sand-deep);
+  }
+  .pl-ps__line--solution { border-inline-start-color: var(--pl-clay); }
+  .pl-ps__tag {
+    font-family: var(--pl-sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--pl-taupe);
+  }
+  .pl-ps__line--solution .pl-ps__tag { color: var(--pl-clay); }
+  .pl-ps__text {
+    font-family: var(--pl-sans);
+    font-size: clamp(15px, 1.7vw, 17px);
+    line-height: 1.6;
+    color: var(--pl-ink-soft);
+    text-wrap: pretty;
+  }
+  .pl-ps__line--solution .pl-ps__text { color: var(--pl-ink); font-weight: 600; }
+
   .pl-pdp__badge {
     position: absolute;
     inset-block-start: 16px;

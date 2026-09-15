@@ -2,6 +2,15 @@
   <div class="pl-wrap pl-showcase__grid">
     <div class="pl-showcase__copy pl-reveal">
       {%- if section.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- comment -%}
+        The problem is stated before the product is named, and it is set large
+        enough to be read as the section's opening line rather than as a
+        caption. The heading underneath is the answer, which is why the product
+        name lives there and not up in the eyebrow.
+      {%- endcomment -%}
+      {%- if section.settings.problem != blank -%}
+        <p class="pl-showcase__problem">{{ section.settings.problem }}</p>
+      {%- endif -%}
       <h2 class="pl-h2">{{ section.settings.heading }}</h2>
       {%- if section.settings.body != blank -%}<p class="pl-lede">{{ section.settings.body }}</p>{%- endif -%}
 
@@ -59,6 +68,18 @@
     align-items: center;
   }
   @media (min-width: 900px) { .pl-showcase__grid { grid-template-columns: 1fr 1fr; } }
+
+  .pl-showcase__problem {
+    font-family: var(--pl-sans);
+    font-size: clamp(17px, 2.1vw, 21px);
+    line-height: 1.5;
+    color: var(--pl-ink-soft);
+    margin: 0 0 14px;
+    padding-inline-start: 16px;
+    border-inline-start: 2px solid var(--pl-sand-deep);
+    max-width: 30ch;
+    text-wrap: pretty;
+  }
 
   .pl-showcase__points {
     list-style: none;
@@ -118,6 +139,7 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "textarea", "id": "problem", "label": "משפט הבעיה", "info": "מוצג לפני הכותרת. הכותרת היא התשובה עליו." },
     { "type": "text", "id": "heading", "label": "Heading", "default": "לכלבים ולחתולים כאחד" },
     { "type": "textarea", "id": "body", "label": "Body" },
     { "type": "text", "id": "cta_label", "label": "Button" },
