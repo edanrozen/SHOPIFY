@@ -1,0 +1,61 @@
+{%- doc -%}
+  The catalogue, after the visitor has been given a direction.
+
+  It comes after the intents and after Bloom on purpose. A grid is what you
+  show someone who already knows roughly what they want; leading with it asks
+  them to do the sorting themselves.
+{%- enddoc -%}
+
+{%- liquid
+  assign coll = collections[section.settings.collection]
+  if coll == blank
+    assign coll = collections.all
+  endif
+-%}
+
+<section class="wf-section">
+  <div class="pl-wrap">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="wf-sub">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    <ul class="wf-grid" role="list">
+      {%- for item in coll.products limit: section.settings.limit -%}
+        {%- unless item.handle == section.settings.exclude.handle -%}
+          <li>{% render 'wf-card', product: item %}</li>
+        {%- endunless -%}
+      {%- else -%}
+        <li>{{ section.settings.empty_text }}</li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.more_label != blank -%}
+      <div class="wf-more">
+        <a class="wf-btn" href="{{ section.settings.more_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.more_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "תמות · רשת מוצרים",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "כל הכלים" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "collection", "id": "collection", "label": "אוסף" },
+    { "type": "product", "id": "exclude", "label": "מוצר שלא יופיע" },
+    { "type": "range", "id": "limit", "label": "כמה מוצרים", "min": 4, "max": 24, "step": 1, "default": 12 },
+    { "type": "text", "id": "empty_text", "label": "טקסט לרשימה ריקה", "default": "אין מוצרים להצגה." },
+    { "type": "text", "id": "more_label", "label": "כפתור תחתון" },
+    { "type": "url", "id": "more_link", "label": "קישור הכפתור" }
+  ],
+  "presets": [{ "name": "תמות · רשת מוצרים" }]
+}
+{% endschema %}

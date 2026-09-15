@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "hero": {
+      "type": "wf-hero",
+      "settings": {
+        "image": "shopify://shop_images/1CFBD4F3-2618-44A9-BD31-D101DB73E276.png",
+        "image_mobile": "shopify://shop_images/6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png",
+        "heading": "פחות פרווה, יותר ליטופים",
+        "text": "כלי טיפוח וניקיון שעושים את העבודה מהר, כדי שיישאר לכם זמן עם החיה ולא עם המטאטא.",
+        "cta_one": "לכל המוצרים",
+        "link_one": "/collections/all",
+        "cta_two": "להכיר את בלום",
+        "link_two": "/products/bloom-grooming-station"
+      }
+    },
+    "trust": {
+      "type": "wf-trust",
+      "blocks": {
+        "t1": { "type": "fact", "settings": { "icon": "box", "title": "משלוח חינם מעל ₪199", "text": "מתחת לסכום זה דמי משלוח 29.90 ₪" } },
+        "t2": { "type": "fact", "settings": { "icon": "return", "title": "14 יום לביטול עסקה", "text": "לפי חוק הגנת הצרכן" } },
+        "t3": { "type": "fact", "settings": { "icon": "chat", "title": "תמיכה בעברית", "text": "שאלה לפני קנייה או אחריה" } },
+        "t4": { "type": "fact", "settings": { "icon": "tag", "title": "ישירות מהיצרן", "text": "בלי יבואן ובלי מתווך" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": {}
+    },
+    "intents": {
+      "type": "wf-intents",
+      "blocks": {
+        "i1": { "type": "intent", "settings": { "collection": "grooming", "title": "טיפוח הפרווה", "text": "סירוק, הברשה, התרת קשרים וקיצור פרווה.", "link_label": "לצפייה" } },
+        "i2": { "type": "intent", "settings": { "collection": "clean-home", "title": "בית נקי מפרווה", "text": "מהספה, מהבגדים, מהשטיח וממושב הרכב.", "link_label": "לצפייה" } },
+        "i3": { "type": "intent", "settings": { "collection": "cats", "title": "לחתולים", "text": "גירוד, משחק והעשרה.", "link_label": "לצפייה" } }
+      },
+      "block_order": ["i1", "i2", "i3"],
+      "settings": {
+        "heading": "מה אתם מחפשים היום?",
+        "text": "שלוש בעיות שונות, שלושה ארונות כלים."
+      }
+    },
+    "flagship": {
+      "type": "wf-flagship",
+      "settings": {
+        "product": "bloom-grooming-station",
+        "eyebrow": "מוצר הדגל",
+        "heading": "בלום™, והיא נשארת במקום",
+        "cta_label": "לגלות את בלום"
+      }
+    },
+    "grid": {
+      "type": "wf-grid",
+      "settings": {
+        "heading": "כל הכלים",
+        "text": "כל אחד מהם פותר דבר אחד, ועושה אותו מהר.",
+        "collection": "all-products",
+        "exclude": "bloom-grooming-station",
+        "limit": 12,
+        "empty_text": "אין מוצרים להצגה.",
+        "more_label": "לכל המוצרים",
+        "more_link": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero", "trust", "intents", "flagship", "grid"]
+}

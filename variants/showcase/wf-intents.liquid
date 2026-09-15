@@ -1,0 +1,90 @@
+{%- doc -%}
+  What did you come for?
+
+  This is the one move worth taking wholesale from those themes. They ask the
+  visitor to pick a side before showing anything, and a nine product catalogue
+  presented as nine products is a decision the visitor has to make, while the
+  same catalogue presented as three jobs is a direction they can follow.
+
+  The split here is by job rather than by animal, because that is how this
+  catalogue actually divides: grooming the coat, getting fur out of the house,
+  and the two things made for cats alone.
+
+  A collection with no image of its own falls back to its first product's
+  photograph, so a card is never an empty frame.
+{%- enddoc -%}
+
+<section class="wf-section">
+  <div class="pl-wrap">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="wf-sub">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    <ul class="wf-intents" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign coll = collections[block.settings.collection]
+          assign card_img = coll.image
+          if card_img == blank
+            assign card_img = coll.products.first.featured_image
+          endif
+          assign card_title = block.settings.title | default: coll.title
+        -%}
+        {%- if coll != blank -%}
+          <li {{ block.shopify_attributes }}>
+            <a class="wf-intent" href="{{ coll.url }}">
+              <div class="wf-intent__media">
+                {%- if card_img != blank -%}
+                  <img
+                    src="{{ card_img | image_url: width: 800 }}"
+                    srcset="{{ card_img | image_url: width: 500 }} 500w, {{ card_img | image_url: width: 900 }} 900w"
+                    sizes="(max-width: 760px) 92vw, 30vw"
+                    width="{{ card_img.width }}"
+                    height="{{ card_img.height }}"
+                    alt="{{ card_img.alt | default: card_title | escape }}"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                {%- endif -%}
+              </div>
+              <div class="wf-intent__copy">
+                <p class="wf-intent__title">{{ card_title }}</p>
+                {%- if block.settings.text != blank -%}
+                  <p class="wf-intent__text">{{ block.settings.text }}</p>
+                {%- endif -%}
+                <span class="wf-intent__link">{{ block.settings.link_label | default: 'לצפייה' }}</span>
+              </div>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "תמות · למה הגעתם",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "מה אתם מחפשים היום?" },
+    { "type": "textarea", "id": "text", "label": "טקסט" }
+  ],
+  "blocks": [
+    {
+      "type": "intent",
+      "name": "כרטיס",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "אוסף" },
+        { "type": "text", "id": "title", "label": "כותרת (ריק לוקח את שם האוסף)" },
+        { "type": "text", "id": "text", "label": "טקסט" },
+        { "type": "text", "id": "link_label", "label": "קישור", "default": "לצפייה" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "תמות · למה הגעתם" }]
+}
+{% endschema %}

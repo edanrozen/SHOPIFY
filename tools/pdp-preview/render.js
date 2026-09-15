@@ -78,6 +78,23 @@ const CATALOGUE = [
   ['kadurosh-cat-ball-toy', 'כדורוש צעצוע חכם ואינטראקטיבי לחתולים', 9990, 5, ['cats', 'all-products'], [1102, 976]],
 ];
 
+// The problem and solution lines every product carries in the store, as
+// custom.problem_line and custom.solution_line. They are on the stub too,
+// because a section that features one product reads them from a product drop
+// rather than from the page's `product`, and without them here the homepage
+// renders a flagship band with its two best sentences missing.
+const PS = {
+  'bloom-grooming-station': ['יד אחת מחזיקה, השנייה מנסה לסרק, ואין יד שלישית.', 'מקום קבוע ויציב לעמוד בו, וכל כלי שכבר יש לכם עובד בשתי ידיים.'],
+  'pro-grooming-comb': ['קשר קטן שלא מרגישים ביד הופך תוך שבוע למספריים או לתור אצל ספר חיות.', 'שיני נירוסטה בשני מרווחים מפרידות את הסבך בזמן שהוא עוד נפתח באצבעות.'],
+  'parvatek-grooming-comb': ['הפרווה נראית בסדר מבחוץ, ומתחתיה מצטברים קשרים ושיער שנושר לספה.', 'צד אחד מתיר את הקשר, הצד השני מבריש ואוסף את מה שכבר נשר.'],
+  'parvakal-pet-clipper': ['התור הבא אצל ספר החיות בעוד כמה שבועות, והפרווה לא מחכה.', 'מכונת קיצור ביתית שמסדרת אזור שהתארך, בלי לקבוע תור חדש.'],
+  'hair-remover-xl': ['ספה, שטיח ומזרן הם הרבה מטרים של בד, וראש צר הופך את זה לערב שלם.', 'להב ברוחב 30 סנטימטר עובר את אותו שטח בפחות מעברים ובלי כאב ביד.'],
+  'hair-remover-wood-handle': ['רולר דביק מחליק מעל השיער הקצר, ונגמר בדיוק באמצע הספה.', 'גליל נחושת מחורץ מושך את השיער מתוך סיבי הבד. בלי מילויים ובלי דבק.'],
+  'tinybloom-fur-glove': ['השיער נדבק לבגדים, למצעים ולמושב הרכב, ורולר דביק נגמר בדיוק אז.', 'הבד המרושת אוסף את השיער אל כף היד ומרכז אותו במקום אחד. רב פעמית.'],
+  'katora-cardboard-scratcher': ['חתול חייב לגרד. בלי מקום ייעודי, הוא יבחר את הספה.', 'טבעת קרטון גלי בשכבות שנותנת לו מרקם שהוא מעדיף, ומקום לנוח עליו אחרי.'],
+  'kadurosh-cat-ball-toy': ['צעצוע שלא זז מעניין חתול חמש דקות, ואז הוא חוזר לווילון.', 'כדור שנע בצורה בלתי צפויה ומזמין מרדף גם כשאתם עסוקים.'],
+};
+
 const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   const [w, h] = dims || [1206, 1760];
   const images = Array.from({ length: nImages }, (_, i) => img(w, h, i + 1, title));
@@ -97,7 +114,12 @@ const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
     has_only_default_variant: true,
     variants: [variant],
     selected_or_first_available_variant: variant,
-    metafields: { custom: {} },
+    metafields: {
+      custom: {
+        problem_line: { value: (PS[handle] || [])[0] },
+        solution_line: { value: (PS[handle] || [])[1] },
+      },
+    },
     _collections: colls,
   };
 };
@@ -153,9 +175,11 @@ const deepResolve = (o) => {
   if (o && typeof o === 'object') {
     return Object.fromEntries(Object.entries(o).map(([k, v]) => {
       // A `product` setting is stored as a handle and served to Liquid as a
-      // product drop. Resolving it here is what makes a section that reads
-      // `section.settings.product.media` testable at all.
-      if (k === 'product' && typeof v === 'string' && all_products[v]) return [k, all_products[v]];
+      // product drop, whatever the setting is called: a section that excludes
+      // one product reads `settings.exclude.handle` and needs the drop just as
+      // much as one that features it. Matching on the value being a real handle
+      // rather than on the key being `product` is what Shopify itself does.
+      if (typeof v === 'string' && all_products[v]) return [k, all_products[v]];
       return [k, deepResolve(v)];
     }));
   }
@@ -249,8 +273,9 @@ const tpl = JSON.parse(read(file));
 
 const product = which === 'product' ? all_products['bloom-grooming-station'] : null;
 if (product) {
-  product.metafields.custom = JSON.parse(
-    fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8'));
+  product.metafields.custom = Object.assign(
+    JSON.parse(fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8')),
+    product.metafields.custom);
 }
 
 // A collection template needs the drop the page is about, the same way a

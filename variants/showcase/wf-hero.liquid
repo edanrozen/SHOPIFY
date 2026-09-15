@@ -1,0 +1,92 @@
+{%- doc -%}
+  The opening photograph.
+
+  The page opens with a picture and a sentence on top of it, the way the pet
+  themes in the theme store do. Two details that decide whether it works:
+
+  The frame is portrait on a phone and wide on a desktop, and it takes two
+  photographs rather than cropping one. A 1672x941 landscape shot squeezed into
+  a 4:5 phone frame loses both its sides, which is how the last hero shipped
+  with the animals outside the frame. A second, portrait file for the phone
+  costs one setting and removes the whole class of problem.
+
+  The <picture> is positioned rather than left in flow: in normal flow it has
+  no height of its own, so `height: 100%` on the image inside it resolves to
+  auto and object-fit has nothing to fit against.
+
+  The copy is anchored to the bottom rather than centred, because over a
+  photograph centred copy lands wherever the animal happens to be.
+{%- enddoc -%}
+
+{%- liquid
+  assign img = section.settings.image
+  if img == blank
+    assign img = collections.all.products.first.featured_image
+  endif
+  assign img_m = section.settings.image_mobile | default: img
+-%}
+
+<section class="wf-hero">
+  <div class="wf-hero__media">
+    {%- if img != blank -%}
+      <picture>
+        <source
+          media="(max-width: 749px)"
+          srcset="{{ img_m | image_url: width: 600 }} 600w, {{ img_m | image_url: width: 1000 }} 1000w"
+          sizes="100vw"
+        >
+        <img
+          src="{{ img | image_url: width: 1800 }}"
+          srcset="
+            {{ img | image_url: width: 1100 }} 1100w,
+            {{ img | image_url: width: 1800 }} 1800w"
+          sizes="100vw"
+          width="{{ img.width }}"
+          height="{{ img.height }}"
+          alt="{{ img.alt | default: section.settings.heading | escape }}"
+          fetchpriority="high"
+          decoding="async"
+        >
+      </picture>
+    {%- endif -%}
+  </div>
+
+  <div class="wf-hero__copy">
+    {%- if section.settings.heading != blank -%}
+      <h1 class="wf-hero__title">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="wf-hero__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+    <div class="wf-hero__ctas">
+      {%- if section.settings.cta_one != blank -%}
+        <a class="wf-btn wf-btn--light" href="{{ section.settings.link_one | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_one }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.cta_two != blank -%}
+        <a class="wf-btn wf-btn--clay" href="{{ section.settings.link_two | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_two }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "תמות · תמונה ראשית",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "תמונה (מסך רחב)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "תמונה (טלפון, לאורך)" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "הפרווה נשארת עליהם" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "text", "id": "cta_one", "label": "כפתור ראשון", "default": "לכל המוצרים" },
+    { "type": "url", "id": "link_one", "label": "קישור ראשון" },
+    { "type": "text", "id": "cta_two", "label": "כפתור שני" },
+    { "type": "url", "id": "link_two", "label": "קישור שני" }
+  ],
+  "presets": [{ "name": "תמות · תמונה ראשית" }]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+{%- doc -%}
+  One product card, shared by the homepage grid, the collection page and
+  anywhere else a product is listed. Shared so the three can never drift.
+{%- enddoc -%}
+
+<a class="wf-card" href="{{ product.url }}">
+  <div class="wf-card__frame">
+    {%- if product.featured_image != blank -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 700 }}"
+        srcset="{{ product.featured_image | image_url: width: 380 }} 380w, {{ product.featured_image | image_url: width: 700 }} 700w"
+        sizes="(max-width: 900px) 46vw, 23vw"
+        width="{{ product.featured_image.width }}"
+        height="{{ product.featured_image.height }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        loading="lazy"
+        decoding="async"
+      >
+    {%- endif -%}
+  </div>
+  <p class="wf-card__name">{{ product.title }}</p>
+  <p class="wf-card__price">{{ product.price | money }}</p>
+</a>
