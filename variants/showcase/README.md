@@ -12,12 +12,18 @@ its own, then the grid.
 Taken: the photographic opening, the trust row under it, the "who are you
 shopping for today" cards, loud headings, round frames, pill buttons.
 
-Not taken: their colour. The whole theme is white, black and one grey
-hairline. `wf.css` redefines pluma's warm tokens at `:root`, and
-`config/settings_data.json` carries the same four values for Horizon's own
+Not taken: their colour. The theme is two colours, #FFFFFF and #000000, and
+there is no third. `wf.css` redefines pluma's warm tokens at `:root`, and
+`config/settings_data.json` carries the same two values for Horizon's own
 header, footer, cart and drawers, which read the palette from there rather than
 from CSS. To bring an accent back, `--pl-clay` and `--pl-clay-deep` in
 `wf.css` are the only two lines to change.
+
+Two colours cost two things, and both are paid for rather than dropped. A line
+can no longer be made quieter by fading it, so the small print keeps its place
+by size and weight instead. And the open thumbnail on a product page can no
+longer be marked with a second border colour, so the closed ones are faded to
+40% instead: less of the photograph, not another colour.
 
 Not taken, deliberately:
 

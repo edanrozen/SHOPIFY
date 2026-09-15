@@ -20,48 +20,45 @@
    ========================================================================== */
 
 :root {
-  /* White, everywhere. pluma.css defines the warm palette; this file loads
-     after it, so redefining the tokens here turns the whole design white
-     without touching a single component rule. Horizon's own header, footer,
-     cart and drawers are not styled from these: they read the color_palette in
-     config/settings_data.json, which is set to the same four values.
+  /* White and black, and nothing else.
 
-     Two things follow from an all white page and are handled below rather than
-     here. Bands can no longer be told apart by their background, so they are
-     separated by a hairline. And a product photographed on white, inside a
-     white frame, on a white page has nothing holding it, so every frame gains
-     a border.
+     Every grey is gone: no #F2F2F2 ground, no #E5E5E5 hairline, no #767676
+     small print. pluma.css defines the warm palette, this file loads after it,
+     so redefining the tokens here turns the whole design over without touching
+     a single component rule. Horizon's own header, footer, cart and drawers
+     read their colours from config/settings_data.json instead, which carries
+     the same two values.
 
-     The muted text tone moved from #8C8175 to #767676. The old one was about
-     3.6:1 against the cream ground, which is under the contrast minimum; this
-     one is 4.5:1 against white and passes. */
+     What a two colour page gives up is the ability to say "this line matters
+     less" by fading it. That job moves to size and weight: the small print is
+     still black, it is just smaller and lighter. It is a stricter way to build
+     and it holds, but it is worth knowing that is the trade being made.
+
+     The one place black is not flat is over a photograph. The scrim under the
+     hero and the intent cards is a black gradient, because white text on an
+     unknown photograph needs it to stay readable. */
   --pl-porcelain: #FFFFFF;
   --pl-cream:     #FFFFFF;
-  --pl-sand:      #F2F2F2;
-  --pl-sand-deep: #DEDEDE;
-  --pl-ink:       #111111;
-  --pl-ink-soft:  #4A4A4A;
-  --pl-taupe:     #767676;
-  --pl-line:      #E5E5E5;
+  --pl-sand:      #FFFFFF;
+  --pl-sand-deep: #000000;
+  --pl-ink:       #000000;
+  --pl-ink-soft:  #000000;
+  --pl-taupe:     #000000;
+  --pl-line:      #000000;
   --pl-white:     #FFFFFF;
-
-  /* The accent was clay. On an all white page an orange is the only colour
-     left, which makes it the loudest thing on the screen rather than an
-     accent, so it becomes ink. To bring the colour back, these two lines are
-     the only place to change. */
-  --pl-clay:      #111111;
+  --pl-clay:      #000000;
   --pl-clay-deep: #000000;
 
-  /* Neutral, not warm. A shadow mixed from #191713 reads faintly beige over
-     pure white. */
-  --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .04);
-  --pl-sh-m: 0 8px 24px rgba(0, 0, 0, .07);
-  --pl-sh-l: 0 20px 48px rgba(0, 0, 0, .1);
+  /* No shadows. A shadow is grey by definition, and on a page with two
+     colours the border is already doing the separating. */
+  --pl-sh-s: none;
+  --pl-sh-m: none;
+  --pl-sh-l: none;
 
   --wf-r: 24px;
   --wf-r-lg: 32px;
   --wf-pill: 999px;
-  --wf-scrim: linear-gradient(to top, rgba(18, 16, 13, .72) 0%, rgba(18, 16, 13, .34) 38%, rgba(18, 16, 13, 0) 72%);
+  --wf-scrim: linear-gradient(to top, rgba(0, 0, 0, .72) 0%, rgba(0, 0, 0, .34) 38%, rgba(0, 0, 0, 0) 72%);
 }
 
 .wf-section { padding-block: clamp(40px, 6.5vw, 88px); }
@@ -119,7 +116,7 @@
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .85);
 }
 .wf-btn--clay:hover { background: rgba(255, 255, 255, .14); }
-.wf-btn[disabled] { background: var(--pl-taupe); cursor: not-allowed; transform: none; }
+.wf-btn[disabled] { background: var(--pl-ink); opacity: .32; cursor: not-allowed; transform: none; }
 
 /* ---- hero ---------------------------------------------------------------
    Portrait on the phone and wide on the desktop, because the same photograph
@@ -192,7 +189,7 @@
 }
 .wf-trust__icon svg { width: 21px; height: 21px; stroke: var(--pl-clay); fill: none; stroke-width: 1.6; }
 .wf-trust__title { font-family: var(--pl-sans); font-size: .95rem; font-weight: 700; color: var(--pl-ink); }
-.wf-trust__text { font-family: var(--pl-sans); font-size: .82rem; line-height: 1.45; color: var(--pl-taupe); }
+.wf-trust__text { font-family: var(--pl-sans); font-size: .82rem; line-height: 1.45; font-weight: 400; color: var(--pl-taupe); }
 
 /* ---- what did you come for ----------------------------------------------
    The single move worth taking from those themes. Nine products presented as
@@ -215,7 +212,7 @@
   border: 1px solid var(--pl-line);
   transition: transform .25s var(--pl-ease), box-shadow .25s var(--pl-ease);
 }
-.wf-intent:hover { transform: translateY(-4px); box-shadow: var(--pl-sh-m); }
+.wf-intent:hover { transform: translateY(-4px); }
 .wf-intent__media { aspect-ratio: 3 / 4; }
 @media (min-width: 760px) { .wf-intent__media { aspect-ratio: 4 / 5; } }
 .wf-intent__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -275,12 +272,13 @@
 }
 .wf-flag__problem {
   font-family: var(--pl-sans);
-  font-size: clamp(1rem, 2.6vw, 1.12rem);
+  font-size: clamp(.95rem, 2.4vw, 1.04rem);
   line-height: 1.55;
+  font-weight: 400;
   color: var(--pl-taupe);
   margin: 0 0 10px;
   padding-inline-start: 14px;
-  border-inline-start: 3px solid var(--pl-sand-deep);
+  border-inline-start: 2px solid var(--pl-sand-deep);
 }
 .wf-flag__price {
   font-family: var(--pl-display);
@@ -312,11 +310,7 @@
   margin-bottom: 12px;
   transition: transform .25s var(--pl-ease), border-color .25s var(--pl-ease), box-shadow .25s var(--pl-ease);
 }
-.wf-card:hover .wf-card__frame {
-  transform: translateY(-4px);
-  border-color: #CFCFCF;
-  box-shadow: var(--pl-sh-m);
-}
+.wf-card:hover .wf-card__frame { transform: translateY(-4px); }
 /* The catalogue runs from 768x1375 to 1254x1254. One square frame plus cover
    would crop a third off the tall ones, so every frame contains. */
 .wf-card__frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
@@ -363,13 +357,20 @@
   flex: 0 0 auto;
   width: 64px; height: 64px;
   padding: 0;
-  border: 2px solid var(--pl-line);
+  border: 1px solid var(--pl-line);
   border-radius: 14px;
   overflow: hidden;
   background: var(--pl-white);
   cursor: pointer;
+  /* Which thumbnail is open used to be said with the clay border. With one ink
+     and one paper there is no second border colour left to say it with, so the
+     ones that are not open are faded instead. Fading a photograph is not a
+     third colour, it is less of the photograph. */
+  opacity: .4;
+  transition: opacity .18s var(--pl-ease);
 }
-.wf-pdp__thumb[aria-current='true'] { border-color: var(--pl-clay); }
+.wf-pdp__thumb:hover { opacity: .75; }
+.wf-pdp__thumb[aria-current='true'] { opacity: 1; border-width: 2px; }
 .wf-pdp__thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 .wf-pdp__title {
@@ -386,7 +387,7 @@
 .wf-pdp__was { font-family: var(--pl-sans); font-size: 1rem; font-weight: 400; color: var(--pl-taupe); margin-inline-end: 10px; }
 .wf-pdp__form { margin: 0 0 12px; }
 .wf-pdp__submit { width: 100%; font-size: 1.05rem; padding-block: 19px; }
-.wf-pdp__note { font-family: var(--pl-sans); font-size: .86rem; color: var(--pl-taupe); margin: 0 0 26px; text-align: center; }
+.wf-pdp__note { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; color: var(--pl-taupe); margin: 0 0 26px; text-align: center; }
 .wf-pdp__rte { font-family: var(--pl-sans); font-size: .98rem; line-height: 1.7; color: var(--pl-ink-soft); border-top: 1px solid var(--pl-line); padding-top: 22px; }
 .wf-pdp__rte h3 { font-family: var(--pl-display); font-size: 1.05rem; color: var(--pl-ink); margin: 20px 0 6px; }
 .wf-pdp__rte p, .wf-pdp__rte ul, .wf-pdp__rte ol { margin: 0 0 14px; }
@@ -394,7 +395,7 @@
 
 /* ---- collection ---------------------------------------------------------- */
 .wf-collhead { text-align: center; padding-block: clamp(28px, 4.5vw, 56px) clamp(20px, 3vw, 34px); }
-.wf-collhead__count { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-taupe); margin: 10px 0 0; }
+.wf-collhead__count { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; color: var(--pl-taupe); margin: 10px 0 0; }
 .wf-collhead__desc { font-family: var(--pl-sans); font-size: 1.02rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 12px auto 0; max-width: 56ch; }
 
 @media (prefers-reduced-motion: reduce) {
