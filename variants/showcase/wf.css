@@ -128,6 +128,41 @@
 .wf-hero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .wf-hero__media::after { content: ''; position: absolute; inset: 0; background: var(--wf-scrim); }
 
+/* Slides are stacked and cross faded rather than slid sideways. The copy on
+   top does not move, and copy sitting still over a photograph that slides
+   reads as a rendering fault rather than as a transition. */
+.wf-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .9s var(--pl-ease);
+}
+.wf-hero__slide[data-active='true'] { opacity: 1; }
+
+/* 44px targets with a 9px dot inside them. The dot is what you see; the square
+   around it is what a thumb actually hits. */
+.wf-hero__dots { display: flex; justify-content: center; gap: 2px; margin-top: 10px; }
+.wf-hero__dot {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.wf-hero__dot span {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .45);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  transition: background .2s var(--pl-ease), transform .2s var(--pl-ease);
+}
+.wf-hero__dot[aria-selected='true'] span { background: #FFFFFF; transform: scale(1.3); }
+
 .wf-hero__copy {
   position: absolute;
   inset-inline: 0;
@@ -257,7 +292,7 @@
 .wf-flag__eyebrow {
   display: inline-block;
   font-family: var(--pl-sans);
-  font-size: .78rem;
+  font-size: .84rem;
   font-weight: 700;
   letter-spacing: .05em;
   color: var(--pl-white);
@@ -479,6 +514,6 @@
 .wf-collhead__desc { font-family: var(--pl-sans); font-size: 1.02rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 12px auto 0; max-width: 56ch; }
 
 @media (prefers-reduced-motion: reduce) {
-  .wf-btn, .wf-intent, .wf-card__frame { transition: none; }
+  .wf-btn, .wf-intent, .wf-card__frame, .wf-hero__slide, .wf-hero__dot span { transition: none; }
   .wf-btn:hover, .wf-intent:hover, .wf-card:hover .wf-card__frame { transform: none; }
 }

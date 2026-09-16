@@ -1,53 +1,86 @@
 {%- doc -%}
-  The opening photograph.
+  The opening photograph, or several of them.
 
-  The page opens with a picture and a sentence on top of it, the way the pet
-  themes in the theme store do. Two details that decide whether it works:
+  Each slide is a block with its own desktop and phone image, and the copy on
+  top does not move: only the picture behind it changes. That is the only
+  version of this worth building. A slider that also swaps the headline asks
+  the visitor to re-read the page every five seconds, and the headline is the
+  one thing on a homepage that should stay still.
 
-  The frame is portrait on a phone and wide on a desktop, and it takes two
-  photographs rather than cropping one. A 1672x941 landscape shot squeezed into
-  a 4:5 phone frame loses both its sides, which is how the last hero shipped
-  with the animals outside the frame. A second, portrait file for the phone
-  costs one setting and removes the whole class of problem.
+  Cross fade rather than slide, for the same reason. Copy that sits still over
+  a photograph that slides sideways reads as a rendering bug.
+
+  Only the first slide carries a real src. The rest are data-src and are
+  promoted one ahead of where the visitor is, so a phone on 4G downloads one
+  hero image on load instead of three. With JavaScript off, the first slide is
+  the hero and nothing is broken; the dots simply never appear to do anything,
+  which is why they are not rendered at all when there is one slide.
+
+  The frame is portrait on a phone and wide on a desktop, and every slide takes
+  two photographs rather than cropping one, because a 1672x941 landscape shot
+  squeezed into a 4:5 phone frame loses both its sides.
 
   The <picture> is positioned rather than left in flow: in normal flow it has
   no height of its own, so `height: 100%` on the image inside it resolves to
   auto and object-fit has nothing to fit against.
-
-  The copy is anchored to the bottom rather than centred, because over a
-  photograph centred copy lands wherever the animal happens to be.
 {%- enddoc -%}
 
 {%- liquid
-  assign img = section.settings.image
-  if img == blank
-    assign img = collections.all.products.first.featured_image
-  endif
-  assign img_m = section.settings.image_mobile | default: img
+  assign slides = section.blocks | where: 'type', 'slide'
+  assign auto = section.settings.autoplay
+  assign gap = section.settings.interval | times: 1000
 -%}
 
 <section class="wf-hero">
-  <div class="wf-hero__media">
-    {%- if img != blank -%}
-      <picture>
-        <source
-          media="(max-width: 749px)"
-          srcset="{{ img_m | image_url: width: 600 }} 600w, {{ img_m | image_url: width: 1000 }} 1000w"
-          sizes="100vw"
-        >
-        <img
-          src="{{ img | image_url: width: 1800 }}"
-          srcset="
-            {{ img | image_url: width: 1100 }} 1100w,
-            {{ img | image_url: width: 1800 }} 1800w"
-          sizes="100vw"
-          width="{{ img.width }}"
-          height="{{ img.height }}"
-          alt="{{ img.alt | default: section.settings.heading | escape }}"
-          fetchpriority="high"
-          decoding="async"
-        >
-      </picture>
+  <div
+    class="wf-hero__media"
+    {% if slides.size > 1 and auto %}data-autoplay="{{ gap }}"{% endif %}
+  >
+    {%- if slides.size > 0 -%}
+      {%- for block in slides -%}
+        {%- liquid
+          assign img = block.settings.image
+          assign img_m = block.settings.image_mobile | default: img
+        -%}
+        {%- if img != blank -%}
+          <div class="wf-hero__slide" {% if forloop.first %}data-active="true"{% endif %} {{ block.shopify_attributes }}>
+            <picture>
+              {%- if forloop.first -%}
+                <source
+                  media="(max-width: 749px)"
+                  srcset="{{ img_m | image_url: width: 600 }} 600w, {{ img_m | image_url: width: 1000 }} 1000w"
+                  sizes="100vw"
+                >
+                <img
+                  src="{{ img | image_url: width: 1800 }}"
+                  srcset="{{ img | image_url: width: 1100 }} 1100w, {{ img | image_url: width: 1800 }} 1800w"
+                  sizes="100vw"
+                  width="{{ img.width }}"
+                  height="{{ img.height }}"
+                  alt="{{ img.alt | default: section.settings.heading | escape }}"
+                  fetchpriority="high"
+                  decoding="async"
+                >
+              {%- else -%}
+                <source
+                  media="(max-width: 749px)"
+                  data-srcset="{{ img_m | image_url: width: 600 }} 600w, {{ img_m | image_url: width: 1000 }} 1000w"
+                  sizes="100vw"
+                >
+                <img
+                  data-src="{{ img | image_url: width: 1800 }}"
+                  data-srcset="{{ img | image_url: width: 1100 }} 1100w, {{ img | image_url: width: 1800 }} 1800w"
+                  sizes="100vw"
+                  width="{{ img.width }}"
+                  height="{{ img.height }}"
+                  alt="{{ img.alt | default: section.settings.heading | escape }}"
+                  decoding="async"
+                >
+              {%- endif -%}
+            </picture>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
     {%- endif -%}
   </div>
 
@@ -70,22 +103,111 @@
         </a>
       {%- endif -%}
     </div>
+
+    {%- if slides.size > 1 -%}
+      <div class="wf-hero__dots" role="tablist" aria-label="{{ section.settings.dots_label }}">
+        {%- for block in slides -%}
+          <button
+            type="button"
+            class="wf-hero__dot"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-label="{{ section.settings.dots_label }} {{ forloop.index }}"
+          ><span aria-hidden="true"></span></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
+
+{%- if slides.size > 1 -%}
+  <script>
+    (function () {
+      var root = document.currentScript.previousElementSibling;
+      if (!root) return;
+      var media = root.querySelector('.wf-hero__media');
+      var slides = root.querySelectorAll('.wf-hero__slide');
+      var dots = root.querySelectorAll('.wf-hero__dot');
+      if (!media || slides.length < 2) return;
+
+      // A slide past the first carries its urls in data attributes, so the
+      // browser fetches one hero image on load rather than all of them. The
+      // next one is promoted as soon as the current one is showing.
+      function promote(i) {
+        var s = slides[i];
+        if (!s || s.dataset.loaded) return;
+        s.dataset.loaded = '1';
+        s.querySelectorAll('source[data-srcset]').forEach(function (el) {
+          el.srcset = el.dataset.srcset;
+        });
+        var img = s.querySelector('img[data-src]');
+        if (img) {
+          if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+          img.src = img.dataset.src;
+        }
+      }
+
+      var at = 0;
+      function show(i) {
+        at = (i + slides.length) % slides.length;
+        promote(at);
+        promote((at + 1) % slides.length);
+        slides.forEach(function (s, n) {
+          if (n === at) s.setAttribute('data-active', 'true');
+          else s.removeAttribute('data-active');
+        });
+        dots.forEach(function (d, n) { d.setAttribute('aria-selected', n === at ? 'true' : 'false'); });
+      }
+      show(0);
+
+      dots.forEach(function (d, n) {
+        d.addEventListener('click', function () { show(n); rearm(); });
+      });
+
+      // Autoplay is off for anyone who asked their system for less motion, and
+      // pauses whenever the tab is in the background rather than advancing
+      // through the whole set against a battery nobody is watching.
+      var gap = parseInt(media.dataset.autoplay || '0', 10);
+      var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var timer = null;
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function rearm() {
+        stop();
+        if (!gap || still.matches || document.hidden) return;
+        timer = setInterval(function () { show(at + 1); }, gap);
+      }
+      document.addEventListener('visibilitychange', rearm);
+      if (still.addEventListener) still.addEventListener('change', rearm);
+      rearm();
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "תמות · תמונה ראשית",
   "tag": "section",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "תמונה (מסך רחב)" },
-    { "type": "image_picker", "id": "image_mobile", "label": "תמונה (טלפון, לאורך)" },
     { "type": "text", "id": "heading", "label": "כותרת", "default": "הפרווה נשארת עליהם" },
     { "type": "textarea", "id": "text", "label": "טקסט" },
     { "type": "text", "id": "cta_one", "label": "כפתור ראשון", "default": "לכל המוצרים" },
     { "type": "url", "id": "link_one", "label": "קישור ראשון" },
     { "type": "text", "id": "cta_two", "label": "כפתור שני" },
-    { "type": "url", "id": "link_two", "label": "קישור שני" }
+    { "type": "url", "id": "link_two", "label": "קישור שני" },
+    { "type": "header", "content": "החלפת תמונות" },
+    { "type": "checkbox", "id": "autoplay", "label": "להחליף תמונות לבד", "default": true },
+    { "type": "range", "id": "interval", "label": "כל כמה שניות", "min": 3, "max": 10, "step": 1, "unit": "שנ", "default": 5 },
+    { "type": "text", "id": "dots_label", "label": "שם הנקודות לקורא מסך", "default": "תמונה" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "תמונה",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "תמונה (מסך רחב)" },
+        { "type": "image_picker", "id": "image_mobile", "label": "תמונה (טלפון, לאורך)" }
+      ]
+    }
   ],
   "presets": [{ "name": "תמות · תמונה ראשית" }]
 }

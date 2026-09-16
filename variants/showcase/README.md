@@ -76,7 +76,38 @@ house, and the two things made for cats alone.
 `custom.solution_line` off the product, so neither can put a sentence on the
 page that is not already on the product.
 
+## The hero rotates
+
+`wf-hero` takes one block per slide, each with its own desktop and phone image,
+and cross fades between them every five seconds. The copy on top does not move:
+only the picture behind it changes. A slider that also swaps the headline asks
+the visitor to re-read the page every five seconds, and the headline is the one
+thing on a homepage that should stay still.
+
+Only the first slide carries a real `src`. The rest hold their urls in data
+attributes and are promoted one ahead of where the visitor is, so a phone
+downloads one hero image on load instead of three. Verified: on load two slides
+are fetched and the third is not; it appears only once the second is showing.
+
+Autoplay stops for `prefers-reduced-motion` and while the tab is in the
+background. With JavaScript off the first slide is simply the hero, and the dots
+are not rendered at all when there is one slide.
+
+## A divergence worth knowing about
+
+`assets/wf.css` and `sections/wf-hero.liquid` in this repo are the versions on
+the showcase theme (155253014580). The landing page theme (155266482228) is one
+revision behind on both, because neither difference renders there: it has no
+`wf-hero` on any template, and the rest of the change is the slide and dot rules
+plus one font size on a flagship eyebrow it does not use. Sync them before
+editing either file for that theme, or the next md5 check will look like a
+mistake when it is only this.
+
 ## The weak spot
+
+Two of the three hero slides have no portrait image, so on a phone they are a
+landscape photograph centre cropped into a 4:5 frame. Each slide block has a
+second image picker; a portrait upload fixes it in one step.
 
 Only `grooming` has a collection cover. `clean-home` and `cats` fall back to
 their first product's photograph, so two of the three cards are a product on a

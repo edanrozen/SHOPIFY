@@ -2,9 +2,32 @@
   "sections": {
     "hero": {
       "type": "wf-hero",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/1CFBD4F3-2618-44A9-BD31-D101DB73E276.png",
+            "image_mobile": "shopify://shop_images/6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG-0633.png"
+          }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_02_38_56_PM.png"
+          }
+        }
+      },
+      "block_order": ["s1", "s2", "s3"],
       "settings": {
-        "image": "shopify://shop_images/1CFBD4F3-2618-44A9-BD31-D101DB73E276.png",
-        "image_mobile": "shopify://shop_images/6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png",
+        "autoplay": true,
+        "interval": 5,
+        "dots_label": "תמונה",
         "heading": "פחות פרווה, יותר ליטופים",
         "text": "כלי טיפוח וניקיון שעושים את העבודה מהר, כדי שיישאר לכם זמן עם החיה ולא עם המטאטא.",
         "cta_one": "לכל המוצרים",
