@@ -1,0 +1,49 @@
+{%- doc -%}
+  The problem, the answer, and the button again.
+
+  Both lines come from the product's own metafields, custom.problem_line and
+  custom.solution_line, so this section cannot say anything the product page
+  does not already say. The page it is modelled on puts a wall of persuasion
+  here; this keeps the two sentences that are already written and true.
+{%- enddoc -%}
+
+{%- liquid
+  assign p = section.settings.product
+  assign problem = p.metafields.custom.problem_line.value | default: section.settings.problem
+  assign answer = p.metafields.custom.solution_line.value | default: section.settings.answer
+-%}
+
+{%- if problem != blank or answer != blank -%}
+  <section class="wf-section wf-cream">
+    <div class="pl-wrap">
+      <div class="nv-pitch">
+        {%- if problem != blank -%}<p class="nv-pitch__problem">{{ problem }}</p>{%- endif -%}
+        {%- if answer != blank -%}<p class="nv-pitch__answer">{{ answer }}</p>{%- endif -%}
+        {%- if section.settings.cta_label != blank and p != blank -%}
+          <a class="nv-cta" href="{{ p.url }}">{{ section.settings.cta_label }}</a>
+          {%- if section.settings.under != blank -%}
+            <p class="nv-under">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.2l2.5 2.5 4.7-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>{{ section.settings.under }}</span>
+            </p>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "נובה · הבעיה והפתרון",
+  "tag": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "המוצר" },
+    { "type": "textarea", "id": "problem", "label": "הבעיה (ריק לוקח מהמוצר)" },
+    { "type": "textarea", "id": "answer", "label": "הפתרון (ריק לוקח מהמוצר)" },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "לקנות עכשיו" },
+    { "type": "text", "id": "under", "label": "שורה מתחת לכפתור" }
+  ],
+  "presets": [{ "name": "נובה · הבעיה והפתרון" }]
+}
+{% endschema %}

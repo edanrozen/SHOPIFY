@@ -1,0 +1,53 @@
+{%- doc -%}
+  The benefit list, with emoji rather than drawn icons, exactly as on the page
+  this is read from. It looks careless and it is not: an emoji renders
+  everywhere, needs no file and no sprite, and in this category reads warmer
+  than a line drawing.
+
+  Their three are a 100 day guarantee, free shipping and a customer count. Two
+  of those this shop cannot say. What it can say is what it actually offers,
+  and each line here is checkable against the policy pages.
+{%- enddoc -%}
+
+<section class="wf-section">
+  <div class="pl-wrap">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <ul class="nv-benefits" role="list">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>
+          <p class="nv-benefit__head">
+            {%- if block.settings.emoji != blank -%}
+              <span class="nv-benefit__emoji" aria-hidden="true">{{ block.settings.emoji }}</span>
+            {%- endif -%}
+            <span>{{ block.settings.title }}</span>
+          </p>
+          <p class="nv-benefit__text">{{ block.settings.text }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "נובה · יתרונות",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "יתרון",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "אימוג'י" },
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "textarea", "id": "text", "label": "טקסט" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "נובה · יתרונות" }]
+}
+{% endschema %}
