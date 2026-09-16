@@ -217,3 +217,30 @@ sees which size they picked.
 The accent survives everywhere that is not a button: the trust icons, the open
 thumbnail, the free shipping line, the circle hover and the announcement bar
 are all still the logo's olive.
+
+## Hebrew copy rules
+
+Two rules the copy has to keep, both found by proofreading the live theme.
+
+**The shekel goes after the number.** The shop's own money format is
+`{{amount}} ₪`, so every price Liquid renders reads `199.99 ₪`. Eight
+hand-written strings had it the other way round (`₪199`), which put two
+currency conventions in the same eyeful on the product page: the real price
+above, and the free-shipping line below it, disagreeing. Any new copy follows
+the shop setting, not the writer's habit.
+
+**Hebrew does not pluralise from a bare counter.** `{{ count }} מוצרים`
+prints "1 מוצרים", which is wrong, and "2 מוצרים", which is stilted. The
+collection header now spells one and two out and switches to digits from three:
+
+    0 → 0 מוצרים      1 → מוצר אחד      2 → שני מוצרים      3 → 3 מוצרים
+
+Checked against every collection in the shop: all-products 9, grooming 4,
+clean-home 3, cats 2. Only cats changes visibly today, from "2 מוצרים" to
+"שני מוצרים", but the singular case was a bug waiting for a one-product
+collection or a filtered view.
+
+Everything else in the theme proofread clean. Worth noting one phrase that is
+correct but does stumble a reader for a beat: "משלימים את הערכה" reads as
+"complete the kit" in context, but עֲרָכָה and הַעֲרָכָה are spelled the same
+without niqqud. It was left as the merchant approved it.

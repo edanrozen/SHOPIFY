@@ -10,7 +10,20 @@
     {%- if collection.description != blank -%}
       <div class="wf-collhead__desc">{{ collection.description }}</div>
     {%- endif -%}
-    <p class="wf-collhead__count">{{ collection.products_count }} מוצרים</p>
+    {%- liquid
+      # Hebrew does not pluralise the way a bare counter assumes. "1 מוצרים" is
+      # wrong, and up to two the language spells the number out rather than
+      # printing a digit. From three on, the digit reads better than the word.
+      assign n = collection.products_count
+      if n == 1
+        assign count_label = 'מוצר אחד'
+      elsif n == 2
+        assign count_label = 'שני מוצרים'
+      else
+        assign count_label = n | append: ' מוצרים'
+      endif
+    -%}
+    <p class="wf-collhead__count">{{ count_label }}</p>
   </div>
 
   <div class="pl-wrap wf-section--tight">
