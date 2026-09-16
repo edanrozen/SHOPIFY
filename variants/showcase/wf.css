@@ -168,10 +168,10 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 3vw, 28px);
 }
-@media (min-width: 900px) { .wf-trust__list { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 900px) { .wf-trust__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 /* Icon beside the words rather than above them, so four facts fit in a band
    instead of a block. On a phone they stack two by two. */
 .wf-trust__item {
@@ -184,7 +184,7 @@
 .wf-trust__icon { width: 30px; height: 30px; display: grid; place-items: center; grid-row: span 2; }
 .wf-trust__icon svg { width: 26px; height: 26px; stroke: var(--wf-accent); fill: none; stroke-width: 1.5; }
 .wf-trust__title { font-family: var(--pl-sans); font-size: .86rem; font-weight: 700; color: var(--pl-ink); }
-.wf-trust__text { font-family: var(--pl-sans); font-size: .78rem; line-height: 1.4; font-weight: 400; color: var(--pl-taupe); }
+.wf-trust__text { font-family: var(--pl-sans); font-size: .84rem; line-height: 1.4; font-weight: 400; color: var(--pl-taupe); }
 
 /* ---- what did you come for ----------------------------------------------
    Chewy's "Shop by pet" row, which is a circle of photograph with the label
@@ -241,7 +241,7 @@
    in the grid and take its chances. The problem comes first and the product
    answers it, which is the order a buyer actually thinks in. */
 .wf-flag { display: grid; gap: clamp(22px, 4vw, 48px); align-items: center; }
-@media (min-width: 900px) { .wf-flag { grid-template-columns: 1.05fr 1fr; } }
+@media (min-width: 900px) { .wf-flag { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); } }
 .wf-flag__media {
   border-radius: var(--wf-r-lg);
   overflow: hidden;
@@ -290,10 +290,10 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(14px, 2.4vw, 26px);
 }
-@media (min-width: 900px) { .wf-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 900px) { .wf-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 /* One bordered panel holding the photograph and the words, the way a Chewy
    card does, rather than a floating image with text loose underneath. The
@@ -346,7 +346,7 @@
    item clears the free shipping threshold on its own. */
 .wf-card__ship {
   font-family: var(--pl-sans);
-  font-size: .76rem;
+  font-size: .82rem;
   font-weight: 700;
   color: var(--wf-accent);
   margin: 4px 0 0;
@@ -355,8 +355,22 @@
 .wf-more { display: flex; justify-content: center; margin-top: clamp(26px, 4vw, 44px); }
 
 /* ---- product page -------------------------------------------------------- */
-.wf-pdp { display: grid; gap: clamp(22px, 3.4vw, 46px); padding-block: clamp(20px, 3vw, 44px); }
-@media (min-width: 900px) { .wf-pdp { grid-template-columns: 1.1fr 1fr; align-items: start; } }
+/* minmax(0, 1fr), not the implicit auto track.
+   A grid track sized `auto` takes its floor from the widest thing inside it. The
+   thumbnail strip is a flex row of eight 64px thumbs with 8px gaps, so its
+   max-content is 568px, and on a 390px phone the column grew to 568px and threw
+   the photograph, the title and the problem line 197px off the side of the
+   screen. It scrolled nothing, because the overflow was clipped, so it read as
+   a bad crop rather than as a broken layout. minmax(0, ...) lets the track be
+   narrower than its contents and hands the overflow to the strip, which is
+   already a scroller and is the only thing that should scroll. */
+.wf-pdp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(22px, 3.4vw, 46px);
+  padding-block: clamp(20px, 3vw, 44px);
+}
+@media (min-width: 900px) { .wf-pdp { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; } }
 
 .wf-pdp__stage {
   border-radius: var(--wf-r-lg);
@@ -422,6 +436,38 @@
 .wf-pdp__submit { width: 100%; font-size: 1.05rem; padding-block: 19px; }
 .wf-pdp__note { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; color: var(--pl-taupe); margin: 12px 0 0; text-align: center; }
 .wf-pdp__ship { font-family: var(--pl-sans); font-size: .88rem; font-weight: 700; color: var(--wf-accent); margin: 0 0 14px; }
+/* ---- the sticky buy bar --------------------------------------------------
+   On a phone the price lands about 830px down this page and the button about
+   910px, which is a screen and a bit below the fold. Every shop that sells on
+   phones answers that the same way: the button follows you. It is shown below
+   900px only, where the buy box is out of sight; above that the box is beside
+   the gallery and a bar would be noise.
+
+   The spacer is a real element rather than padding on <body>, because a section
+   cannot style the body and a fixed bar would otherwise sit on top of the
+   footer's last row. */
+.wf-buybar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--pl-white);
+  border-top: 1px solid var(--pl-line);
+  box-shadow: 0 -2px 14px rgba(0, 0, 0, .07);
+}
+.wf-buybar__price { font-family: var(--pl-display); font-size: 1.1rem; font-weight: 700; color: var(--pl-ink); white-space: nowrap; }
+.wf-buybar__form { flex: 1; margin: 0; }
+.wf-buybar__btn { width: 100%; padding-block: 15px; font-size: .98rem; }
+.wf-buybar__spacer { display: none; }
+@media (max-width: 899px) {
+  .wf-buybar { display: flex; }
+  .wf-buybar__spacer { display: block; height: 76px; }
+}
+
 .wf-pdp__rte { font-family: var(--pl-sans); font-size: .98rem; line-height: 1.7; color: var(--pl-ink-soft); border-top: 1px solid var(--pl-line); padding-top: 22px; }
 .wf-pdp__rte h3 { font-family: var(--pl-display); font-size: 1.05rem; color: var(--pl-ink); margin: 20px 0 6px; }
 .wf-pdp__rte p, .wf-pdp__rte ul, .wf-pdp__rte ol { margin: 0 0 14px; }

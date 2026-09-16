@@ -13,6 +13,11 @@
   The thumbnail strip is one swipeable row rather than two wrapped ones. Eight
   thumbnails on two rows cost about 90px of height directly above the price,
   which is the last thing worth pushing down a phone screen.
+
+  Below 900px the buy box is a screen and a bit under the fold, so the page also
+  carries a fixed bar with the price and the same button. It is the second form
+  on the page and posts the same variant; nothing about it is conditional on
+  JavaScript.
 {%- enddoc -%}
 
 {%- liquid
@@ -114,6 +119,17 @@
     </div>
   </div>
 </div>
+
+<div class="wf-buybar">
+  <span class="wf-buybar__price">{{ product.price | money }}</span>
+  {%- form 'product', product, class: 'wf-buybar__form' -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" class="wf-btn wf-buybar__btn" {% unless product.available %}disabled{% endunless %}>
+      {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+    </button>
+  {%- endform -%}
+</div>
+<div class="wf-buybar__spacer" aria-hidden="true"></div>
 
 {%- if media.size > 1 -%}
   <script>

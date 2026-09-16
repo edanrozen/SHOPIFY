@@ -80,13 +80,19 @@
    copy over the image: on that page the picture is the product on a plain
    ground and the words sit below it, which is what lets the headline be this
    large without fighting anything. */
+/* 46vh on a phone, not 62vh. Measured: at 62vh the hero button's top landed at
+   778px on an 844px screen, so the thing the whole page exists to be pressed was
+   below the fold. At 46vh the eyebrow, the headline, the line under it and the
+   button all fit on the first screen, which is the only arrangement that makes
+   a landing page a landing page. */
 .nv-hero__media { background: var(--pl-cream); }
-.nv-hero__media img { width: 100%; height: auto; display: block; max-height: 62vh; object-fit: contain; }
+.nv-hero__media img { width: 100%; height: auto; display: block; max-height: 46vh; object-fit: contain; }
+@media (min-width: 750px) { .nv-hero__media img { max-height: 62vh; } }
 
 .nv-hero__copy { text-align: center; padding-block: clamp(26px, 4.5vw, 44px) clamp(30px, 5vw, 56px); }
 .nv-eyebrow {
   font-family: var(--pl-sans);
-  font-size: .78rem;
+  font-size: .84rem;
   font-weight: 600;
   letter-spacing: .08em;
   color: var(--pl-taupe);
@@ -147,11 +153,13 @@
   font-weight: 600;
   color: var(--pl-ink);
   text-decoration: none;
-  margin-top: 20px;
-  border-bottom: 1px solid var(--pl-line);
-  padding-bottom: 3px;
+  margin-top: 12px;
+  /* Padded to a 44px box rather than sized up: a thumb needs the target, the
+     layout does not need a bigger link. The rule under it stays on the text. */
+  padding-block: 13px;
+  box-shadow: inset 0 -1px 0 var(--pl-line);
 }
-.nv-more:hover { border-bottom-color: var(--pl-ink); }
+.nv-more:hover { box-shadow: inset 0 -1px 0 var(--pl-ink); }
 /* The arrow is a glyph, so it points the wrong way the moment the page is in
    Hebrew. Physical transform, not a logical property: there is nothing logical
    about a rotated triangle. */
