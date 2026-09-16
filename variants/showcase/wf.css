@@ -57,6 +57,10 @@
   --pl-clay:      var(--wf-accent);
   --pl-clay-deep: var(--wf-accent-deep);
 
+  /* Every button is white with this rule around it. One line changes them
+     all, including the label inside. */
+  --wf-rule:      #000000;
+
   --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);
   --pl-sh-m: 0 4px 14px rgba(0, 0, 0, .09);
   --pl-sh-l: 0 12px 32px rgba(0, 0, 0, .12);
@@ -97,6 +101,32 @@
   max-width: 56ch;
 }
 
+/* ---- buttons -------------------------------------------------------------
+   Every button in the shop is white with a black rule around it, by the
+   merchant's decision. One shape, no primary and secondary, on the hero, in
+   the buy box, in the sticky bar and in the grid alike.
+
+   Two things this costs, recorded here so nobody has to rediscover them:
+
+   A filled button repaints 100% of its own area in a colour the page does not
+   have. An outlined one repaints the 1px ring, which on a 190x50 button is 5%
+   of it. The olive fill stood 6.64:1 clear of the page behind it; a white fill
+   on a white page stands at 1.00:1 and the rule alone does the work. The
+   button is not less legible, it is less loud, and loudness is what makes a
+   visitor find the one thing to press.
+
+   It also removes hierarchy by construction. Two buttons side by side in the
+   hero are now the same object, so the order they are read in is the order
+   they are written in, not a designed emphasis.
+
+   The compensation is the hover: the button inverts to solid black rather than
+   tinting, so pressing intent is still answered clearly. And padding drops
+   from 17px to 16px because the 1px rule now contributes to the height, which
+   keeps every button the same box it was and keeps the sticky bar's 76px
+   spacer honest.
+
+   Contrast is not the issue and did not get worse: black on white is 21:1 for
+   the label and 21:1 for the rule, against a 3:1 floor for a UI edge. */
 .wf-btn {
   display: inline-flex;
   align-items: center;
@@ -106,21 +136,33 @@
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
-  padding: 17px 32px;
-  border: 0;
+  padding: 16px 32px;
+  border: 1px solid var(--wf-rule);
   border-radius: var(--wf-pill);
-  background: var(--wf-accent);
-  color: var(--pl-white);
+  background: var(--pl-white);
+  color: var(--wf-rule);
   text-decoration: none;
   cursor: pointer;
-  transition: transform .18s var(--pl-ease), background .18s var(--pl-ease);
+  transition: background .18s var(--pl-ease), color .18s var(--pl-ease), transform .18s var(--pl-ease);
 }
-.wf-btn:hover { background: var(--wf-accent-deep); transform: translateY(-1px); }
-.wf-btn--light { background: var(--pl-white); color: var(--wf-accent); }
-.wf-btn--light:hover { background: #EFF1E9; }
-.wf-btn--clay { background: var(--wf-accent); }
-.wf-btn--clay:hover { background: var(--wf-accent-deep); }
-.wf-btn[disabled] { background: var(--pl-taupe); opacity: .55; cursor: not-allowed; transform: none; }
+.wf-btn:hover { background: var(--wf-rule); color: var(--pl-white); transform: translateY(-1px); }
+/* Kept as aliases so the templates that already name them keep working. They
+   are deliberately identical to the base: there is one button now. */
+.wf-btn--light,
+.wf-btn--clay { background: var(--pl-white); color: var(--wf-rule); }
+.wf-btn--light:hover,
+.wf-btn--clay:hover { background: var(--wf-rule); color: var(--pl-white); }
+/* Unavailable reads as a drawn-back rule rather than a faded black one, so it
+   never looks like a button that failed to load. */
+.wf-btn[disabled] {
+  background: var(--pl-white);
+  border-color: var(--pl-line);
+  color: var(--pl-taupe);
+  opacity: 1;
+  cursor: not-allowed;
+  transform: none;
+}
+.wf-btn[disabled]:hover { background: var(--pl-white); color: var(--pl-taupe); }
 
 /* ---- hero ---------------------------------------------------------------
    Portrait on the phone and wide on the desktop, because the same photograph
@@ -484,7 +526,7 @@
 .wf-pdp__price { font-family: var(--pl-display); font-size: 1.75rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 16px; }
 .wf-pdp__was { font-family: var(--pl-sans); font-size: 1rem; font-weight: 400; color: var(--pl-taupe); margin-inline-end: 10px; }
 .wf-pdp__form { margin: 0 0 12px; }
-.wf-pdp__submit { width: 100%; font-size: 1.05rem; padding-block: 19px; }
+.wf-pdp__submit { width: 100%; font-size: 1.05rem; padding-block: 18px; }
 .wf-pdp__note { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; color: var(--pl-taupe); margin: 12px 0 0; text-align: center; }
 .wf-pdp__ship { font-family: var(--pl-sans); font-size: .88rem; font-weight: 700; color: var(--wf-accent); margin: 0 0 14px; }
 /* ---- the sticky buy bar --------------------------------------------------
@@ -512,7 +554,7 @@
 }
 .wf-buybar__price { font-family: var(--pl-display); font-size: 1.1rem; font-weight: 700; color: var(--pl-ink); white-space: nowrap; }
 .wf-buybar__form { flex: 1; margin: 0; }
-.wf-buybar__btn { width: 100%; padding-block: 15px; font-size: .98rem; }
+.wf-buybar__btn { width: 100%; padding-block: 14px; font-size: .98rem; }
 .wf-buybar__spacer { display: none; }
 @media (max-width: 899px) {
   .wf-buybar { display: flex; }

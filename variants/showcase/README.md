@@ -174,3 +174,46 @@ change.
 There is still no favicon, and this file cannot become one. At 32px the whole
 stacked mark is mush. The flower with the paw print inside it, cropped square
 on its own, is already the right icon and only needs exporting.
+
+## Buttons
+
+Every button in the shop is white with a 1px black rule around it and a black
+label. There is no primary and no secondary: the hero pair, the add to cart,
+the sticky bar button and the "all products" link are one object. This is the
+merchant's decision, taken after the trade-off below was put to him.
+
+What it costs, recorded so nobody re-derives it:
+
+  * A filled button repaints 100% of its own area in a colour the page does
+    not have. An outlined one repaints the ring, which on a 190x50 button is
+    5% of it. The olive fill stood 6.64:1 clear of the page; a white fill on a
+    white page stands at 1.00:1 and the rule alone carries the shape.
+  * Hierarchy is gone by construction. Two buttons beside each other are the
+    same object, so reading order is the only emphasis left.
+  * The sticky buy bar is the sharpest case: a white button on a white bar on
+    a white page, and it is the one control that earns the money on a phone.
+
+What was done about it:
+
+  * Hover inverts to solid black rather than tinting, so intent is answered.
+  * Padding went 17px to 16px, and the two overrides 19 to 18 and 15 to 14,
+    because the rule now contributes to the height. Measured afterwards: the
+    buttons are 50px, 55px and 46px, exactly what they were, so the sticky
+    bar's 76px spacer is still correct.
+  * Disabled is a drawn-back rule in --pl-line with taupe text rather than a
+    faded black one, so it cannot be mistaken for a button that failed to load.
+  * `--wf-rule` is a single token. Changing that one line changes every button
+    in the shop, label included.
+
+Contrast did not get worse. Black on white is 21:1 for the label against a 4.5
+floor, and 21:1 for the rule against the 3:1 floor for a UI edge.
+
+Horizon's own buttons, which CSS here cannot reach, were moved to match in
+`config/settings_data.json`: primary and secondary both #FFFFFF with #000000
+text and a 1px #000000 border, and quick add the same. Variant selectors were
+deliberately left alone, since inverting the selected one is how a customer
+sees which size they picked.
+
+The accent survives everywhere that is not a button: the trust icons, the open
+thumbnail, the free shipping line, the circle hover and the announcement bar
+are all still the logo's olive.
