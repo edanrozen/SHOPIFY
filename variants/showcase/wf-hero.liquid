@@ -4,8 +4,8 @@
   Each slide is a block with its own desktop and phone image, and the copy on
   top does not move: only the picture behind it changes. That is the only
   version of this worth building. A slider that also swaps the headline asks
-  the visitor to re-read the page every five seconds, and the headline is the
-  one thing on a homepage that should stay still.
+  the visitor to re-read the page every couple of seconds, and the headline is
+  the one thing on a homepage that should stay still.
 
   Cross fade rather than slide, for the same reason. Copy that sits still over
   a photograph that slides sideways reads as a rendering bug.
@@ -28,7 +28,7 @@
 {%- liquid
   assign slides = section.blocks | where: 'type', 'slide'
   assign auto = section.settings.autoplay
-  assign gap = section.settings.interval | times: 1000
+  assign gap = section.settings.interval | times: 1000 | round
 -%}
 
 <section class="wf-hero">
@@ -196,7 +196,7 @@
     { "type": "url", "id": "link_two", "label": "קישור שני" },
     { "type": "header", "content": "החלפת תמונות" },
     { "type": "checkbox", "id": "autoplay", "label": "להחליף תמונות לבד", "default": true },
-    { "type": "range", "id": "interval", "label": "כל כמה שניות", "min": 3, "max": 10, "step": 1, "unit": "שנ", "default": 5 },
+    { "type": "range", "id": "interval", "label": "כל כמה שניות", "min": 2, "max": 10, "step": 0.5, "unit": "שנ", "default": 2.5 },
     { "type": "text", "id": "dots_label", "label": "שם הנקודות לקורא מסך", "default": "תמונה" }
   ],
   "blocks": [

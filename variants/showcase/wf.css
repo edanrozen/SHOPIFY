@@ -130,12 +130,18 @@
 
 /* Slides are stacked and cross faded rather than slid sideways. The copy on
    top does not move, and copy sitting still over a photograph that slides
-   reads as a rendering fault rather than as a transition. */
+   reads as a rendering fault rather than as a transition.
+
+   The fade is deliberately a small fraction of the hold. At a 2.5s cycle the
+   old .9s fade left both photographs part transparent for 36% of the time,
+   which reads as a screen that cannot decide what it is showing rather than as
+   a sequence of pictures. .55s keeps roughly two full seconds of a settled,
+   fully opaque image, which is the part that actually sells anything. */
 .wf-hero__slide {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity .9s var(--pl-ease);
+  transition: opacity .55s var(--pl-ease);
 }
 .wf-hero__slide[data-active='true'] { opacity: 1; }
 
