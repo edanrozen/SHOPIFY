@@ -6,20 +6,21 @@
         "s1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/1CFBD4F3-2618-44A9-BD31-D101DB73E276.png",
+            "image": "shopify://shop_images/D4DDFEF6-53B4-4EE2-BB3F-4663F1D734C4.png",
             "image_mobile": "shopify://shop_images/6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png"
           }
         },
         "s2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/IMG-0633.png"
+            "image": "shopify://shop_images/133A3A18-9C1A-4A78-BF33-13B3E1AE6778.png"
           }
         },
         "s3": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_02_38_56_PM.png"
+            "image": "shopify://shop_images/1CFBD4F3-2618-44A9-BD31-D101DB73E276.png",
+            "image_mobile": "shopify://shop_images/45E6A11A-1224-4047-90AD-D019260B1046.png"
           }
         }
       },
