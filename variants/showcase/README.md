@@ -18,10 +18,8 @@ shopping for today" cards, loud headings, round frames, pill buttons.
 
 ## What came from Chewy
 
-  * The blue. `--wf-accent` is #1C49C2 and it carries every action: buttons,
-    the open thumbnail, the flagship tag, the one shipping line on a card.
-    Setting that variable to #000000 restores the black and white version
-    exactly.
+  * The layout habits, not the colours. The palette is now the shop's own,
+    sampled straight out of the logo. See "The palette" below.
   * The "Shop by pet" circles, here as three jobs rather than eight animals.
   * Bordered product cards with the name clamped at two lines, the price in
     bold ink rather than in the accent, and a shipping line only where it is
@@ -118,3 +116,61 @@ do more for this page than any further code.
 
     PREVIEW_THEME=<staged dir> PREVIEW_SHEETS=assets/pluma.css,assets/wf.css \
       node tools/pdp-preview/render.js index > home.html
+
+## The palette
+
+Every colour in `wf.css` was sampled out of the logo artwork and then checked
+for contrast. The shop and the mark are literally the same colours.
+
+The logo writes "Tiny" in olive and "bloom" in dusty pink, and that split is
+the whole system: olive carries every action, pink carries none.
+
+That is a measurement, not a preference. White text on the olive is 6.64:1 and
+clears WCAG AA comfortably. White text on the pink as drawn is 2.98:1, which
+fails AA for body text and fails even the 3:1 floor for large text and UI
+components. A pink button is therefore not available at any price, so pink is
+a surface and a flourish and never carries words.
+
+    --wf-accent      #586040   buttons, links, icons, the open thumbnail   6.64:1 on white
+    --wf-accent-deep #4C5337   hover                                       8.08:1
+    --wf-pink        #D08078   surfaces only, never text
+    --wf-pink-ink    #C0554A   the one pink dark enough to set text in     4.53:1 on white
+    --wf-pink-soft   #FBF2F0   the band behind Bloom
+    --pl-cream       #F7F4EC   section bands, and the footer
+    --pl-line        #E2DCCF   every hairline
+    --pl-ink         #2A2722   headings and prices                        14.88:1
+    --pl-ink-soft    #4A443C   body                                        9.62:1
+    --pl-taupe       #6B6357   small print       5.92:1 on white, 5.39:1 on cream
+
+Greys are gone on purpose. Cold grey under a warm cream logo is what made the
+old footer look like it belonged to a different shop.
+
+The same values are mirrored in two places Liquid cannot reach from CSS:
+
+  * `config/settings_data.json` sets `color_palette.color2` to #E2DCCF. That
+    one key draws the border of every input, the cart drawer, every popover
+    and the secondary button. It was #000000, which is why the cart and the
+    contact form had hard black outlines.
+  * `sections/header-group.json` sets the announcement bar to #586040 and
+    `sections/footer-group.json` sets the footer to #F7F4EC.
+
+## The logo
+
+`config/settings_data.json` points `logo` at
+`shopify://shop_images/ChatGPT_Image_Aug_29_2026_03_54_54_PM.png`, at 64px on
+desktop and 48px on a phone rather than Horizon's 34 and 26.
+
+The larger size is forced by the artwork. The mark is a stacked emblem: the
+illustration, then the wordmark, then a Hebrew tagline, then a rule. Its ink
+measures 1342x980, a ratio of 1.369, so it is nearly square, and Shopify sets
+a logo by height. At Horizon's 34px the whole mark is 47px wide and the tagline
+renders about two pixels tall. At 64px the wordmark is readable and the tagline
+is decorative rather than illegible.
+
+The real fix is a horizontal lockup: the animals beside the name, no tagline,
+roughly twice as wide as it is tall. That is an artwork change, not a theme
+change.
+
+There is still no favicon, and this file cannot become one. At 32px the whole
+stacked mark is mush. The flower with the paw print inside it, cropped square
+on its own, is already the right icon and only needs exporting.

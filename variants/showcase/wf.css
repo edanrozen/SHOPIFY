@@ -17,35 +17,42 @@
    Two things they do that are not copied: a countdown on a sale that is not
    running, and a review count for reviews that do not exist. Both are the
    fastest way to lose a customer who checks.
+
+   The colours are the shop's own, taken from the logo. See :root below.
    ========================================================================== */
 
 :root {
-  /* Chewy's palette, as far as it can be read off the shop rather than off a
-     brand book: a strong royal blue carrying every action, near black text, a
-     light grey for the bands and the borders, and white doing most of the
-     work. chewy.com itself is blocked from this sandbox, so this is their
-     design language as known rather than as measured. Anything below that
-     claims to be an exact value is a best reading, not a sample.
+  /* The palette is taken from the logo, not from a mood board. Every value
+     below was sampled out of the artwork and then checked for contrast, so
+     the shop and the mark are literally the same colours.
 
-     This reverses the two colour version. Chewy is not a black and white shop:
-     the blue is the whole point of it, it is what makes a button look like a
-     button there. --wf-accent is the one line that decides. Setting it to
-     #000000 puts the previous version back exactly.
+     The logo writes "Tiny" in olive and "bloom" in dusty pink. That split is
+     the whole system: olive carries every action, pink carries none.
 
-     Grey comes back too, and it has to. Chewy leans on grey for small print,
-     for card borders and for the bands that separate one row of products from
-     the next. #6B6F76 is 4.9:1 on white, so it passes. */
-  --wf-accent:      #1C49C2;
-  --wf-accent-deep: #14378F;
+     The reason is measured, not aesthetic. White text on the olive is 6.64:1
+     and clears AA with room to spare. White text on the pink as drawn is
+     2.98:1, which fails AA for body text and fails even the 3:1 floor for
+     large text and UI. A pink button is therefore not an option, whatever it
+     looks like in a mockup, so pink stays a surface and a flourish and never
+     a thing that carries words a customer has to read.
+
+     Greys are gone. Cold grey under a warm cream logo is what made the old
+     footer look like it belonged to a different shop. The neutrals here are
+     warm and derived from the paper tone inside the mark. */
+  --wf-accent:      #586040;  /* sampled from the word "Tiny", 6.64:1 on white  */
+  --wf-accent-deep: #4C5337;  /* hover, 8.08:1                                  */
+  --wf-pink:        #D08078;  /* sampled from "bloom". Surfaces only.           */
+  --wf-pink-ink:    #C0554A;  /* the one pink dark enough for text, 4.53:1      */
+  --wf-pink-soft:   #FBF2F0;  /* the pink as a band you can put ink on          */
 
   --pl-porcelain: #FFFFFF;
-  --pl-cream:     #F6F7F9;
-  --pl-sand:      #F6F7F9;
-  --pl-sand-deep: #D9DCE1;
-  --pl-ink:       #121212;
-  --pl-ink-soft:  #46484D;
-  --pl-taupe:     #6B6F76;
-  --pl-line:      #D9DCE1;
+  --pl-cream:     #F7F4EC;
+  --pl-sand:      #F7F4EC;
+  --pl-sand-deep: #E2DCCF;
+  --pl-ink:       #2A2722;  /* 14.88:1 on white                                 */
+  --pl-ink-soft:  #4A443C;  /*  9.62:1                                          */
+  --pl-taupe:     #6B6357;  /*  5.92:1 on white, 5.39:1 on the cream band       */
+  --pl-line:      #E2DCCF;
   --pl-white:     #FFFFFF;
   --pl-clay:      var(--wf-accent);
   --pl-clay-deep: var(--wf-accent-deep);
@@ -65,6 +72,9 @@
 .wf-section { padding-block: clamp(40px, 6.5vw, 88px); }
 .wf-section--tight { padding-block: clamp(28px, 4vw, 52px); }
 .wf-cream { background: var(--pl-cream); }
+/* The single place the pink appears as a surface. Bloom is the one section
+   that is not a row of products, and a warm band says so without a label. */
+.wf-blush { background: var(--wf-pink-soft); }
 
 /* Louder than pl-h2, because in this category a quiet heading reads as a shop
    that is not sure it wants you. */
@@ -107,7 +117,7 @@
 }
 .wf-btn:hover { background: var(--wf-accent-deep); transform: translateY(-1px); }
 .wf-btn--light { background: var(--pl-white); color: var(--wf-accent); }
-.wf-btn--light:hover { background: #F0F3FB; }
+.wf-btn--light:hover { background: #EFF1E9; }
 .wf-btn--clay { background: var(--wf-accent); }
 .wf-btn--clay:hover { background: var(--wf-accent-deep); }
 .wf-btn[disabled] { background: var(--pl-taupe); opacity: .55; cursor: not-allowed; transform: none; }
@@ -383,7 +393,7 @@
   color: var(--pl-ink);
   margin: 8px 0 0;
 }
-/* The one blue line on a card, and only where it is true: at this price the
+/* The one accent line on a card, and only where it is true: at this price the
    item clears the free shipping threshold on its own. */
 .wf-card__ship {
   font-family: var(--pl-sans);
@@ -445,9 +455,9 @@
   transition: border-color .18s var(--pl-ease);
 }
 .wf-pdp__thumb:hover { border-color: var(--pl-taupe); }
-/* With an accent back in the palette, the open thumbnail is marked the way
-   Chewy marks it: a border in the brand colour. The fade the two colour
-   version had to use is gone. */
+/* With an accent in the palette, the open thumbnail is marked the way Chewy
+   marks it: a border in the brand colour. The fade the two colour version had
+   to use is gone. */
 .wf-pdp__thumb[aria-current='true'] { border-color: var(--wf-accent); border-width: 2px; }
 .wf-pdp__thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
