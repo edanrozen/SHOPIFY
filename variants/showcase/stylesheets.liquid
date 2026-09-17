@@ -28,4 +28,15 @@
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
 {{ 'wf.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%}
+  The long product page carries about 10KB of rules nothing else uses: the
+  before and after pair, the numbered rails, the comparison table and the
+  questions. Shipping that on the homepage and the collection pages would be
+  pure weight on the two templates that decide whether a visitor stays at
+  all, so it is requested on the product template and nowhere else.
+{%- endcomment -%}
+{%- if template.name == 'product' -%}
+  {{ 'wf-pdp.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
 <script src="{{ 'pluma.js' | asset_url }}" defer></script>

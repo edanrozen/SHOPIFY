@@ -18,6 +18,38 @@
       "block_order": ["t1", "t2", "t3", "t4"],
       "settings": {}
     },
+    "story": {
+      "type": "wf-pdp-story",
+      "settings": {
+        "heading": "המצב היום, והמצב אחרי",
+        "before_label": "לפני",
+        "after_label": "אחרי"
+      }
+    },
+    "why": {
+      "type": "wf-pdp-why",
+      "settings": { "heading": "סיבות שזה עובד" }
+    },
+    "how": {
+      "type": "wf-pdp-how",
+      "settings": { "heading": "איך משתמשים בזה" }
+    },
+    "versus": {
+      "type": "wf-pdp-versus",
+      "settings": {
+        "heading": "מה שחושבים, ומה שקורה בפועל",
+        "myth_label": "מה שחושבים",
+        "real_label": "מה שקורה בפועל"
+      }
+    },
+    "facts": {
+      "type": "wf-pdp-faq",
+      "settings": {
+        "specs_heading": "המפרט",
+        "for_label": "מתאים ל",
+        "faq_heading": "שאלות שחוזרות"
+      }
+    },
     "related": {
       "type": "wf-grid",
       "settings": {
@@ -32,5 +64,5 @@
       }
     }
   },
-  "order": ["main", "trust", "related"]
+  "order": ["main", "trust", "story", "why", "how", "versus", "facts", "related"]
 }

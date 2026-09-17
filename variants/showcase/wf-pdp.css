@@ -1,0 +1,295 @@
+/* ==========================================================================
+   The long product page.
+
+   Structure borrowed from ortofix.co.il, which the merchant pointed at: the
+   problem stated in the customer's words, a before and after pair, the
+   reasons it works as numbered cards, a how-to, a myth versus reality table
+   and an FAQ, with the buy button following you the whole way down.
+
+   Everything in it is driven by the product's own metafields, so no page
+   invents a claim. A product missing a field simply does not render that
+   band rather than showing an empty one.
+
+   One deliberate departure from the reference. Its comparison table is
+   "us ✓ / everyone else ✗", which asserts things about competitors nobody
+   here has measured. The shop already holds `custom.versus`, which is what
+   people assume against what actually happens, so the table keeps the ✗/✓
+   shape and fills it with something true instead.
+   ========================================================================== */
+
+:root {
+  /* The connector drawn down the numbered steps. --pl-line is 1.24:1 against
+     the blush band, which is invisible; this is 3.08:1 there and 3.39:1 on
+     white, so the sequence reads as a sequence on every band it crosses. */
+  --wf-rail: #878F70;
+}
+
+.wf-band { padding-block: clamp(36px, 6vw, 76px); }
+.wf-band--cream { background: var(--pl-cream); }
+.wf-band--blush { background: var(--wf-pink-soft); }
+.wf-band__head { max-width: 62ch; margin-inline: auto; text-align: center; margin-bottom: clamp(22px, 3.6vw, 40px); }
+.wf-band__head .wf-sub { margin-inline: auto; }
+
+/* Long prose set narrower than the band. A measure past about 70 characters
+   loses the reader's place on the return sweep, and Hebrew is no exception. */
+.wf-prose {
+  max-width: 62ch;
+  margin-inline: auto;
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--pl-ink-soft);
+}
+.wf-prose p { margin: 0 0 14px; }
+.wf-prose p:last-child { margin-bottom: 0; }
+
+/* ---- before and after ----------------------------------------------------
+   Two columns on every width, including a phone. Stacking them would put the
+   two halves of one comparison on two different screens, which is the one
+   thing this block cannot afford: the whole point is seeing them together. */
+.wf-ba {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 22px);
+  max-width: 900px;
+  margin-inline: auto;
+}
+.wf-ba__col {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  padding: clamp(14px, 2.4vw, 22px);
+}
+.wf-ba__tag {
+  display: inline-block;
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-white);
+  padding: 8px 16px;
+  border-radius: var(--wf-pill);
+  margin-bottom: 14px;
+}
+/* #A8483E over white is 5.74:1 and #586040 is 6.64:1, so both badges clear AA
+   for small bold text. The reference uses a saturated red; a muted brick sits
+   inside this palette instead of shouting over it. */
+.wf-ba__tag--before { background: #A8483E; }
+.wf-ba__tag--after  { background: var(--wf-accent); }
+.wf-ba__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.wf-ba__list li {
+  position: relative;
+  font-family: var(--pl-sans);
+  font-size: clamp(.86rem, 2.2vw, .96rem);
+  line-height: 1.5;
+  color: var(--pl-ink-soft);
+  padding-inline-start: 22px;
+}
+.wf-ba__list li::before {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.wf-ba__col--before .wf-ba__list li::before { content: '\00D7'; color: #A8483E; font-size: 1.05em; }
+.wf-ba__col--after  .wf-ba__list li::before { content: '\2713'; color: var(--wf-accent); }
+
+/* ---- highlights, the icon rows ------------------------------------------ */
+.wf-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 62ch; margin-inline: auto; }
+.wf-points li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.05rem);
+  line-height: 1.55;
+  color: var(--pl-ink);
+}
+.wf-points__mark {
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--wf-accent);
+  color: var(--pl-white);
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---- numbered reason cards ---------------------------------------------- */
+.wf-reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(12px, 2.2vw, 20px);
+}
+@media (min-width: 750px) { .wf-reasons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.wf-reason {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  padding: clamp(16px, 2.4vw, 24px);
+}
+.wf-reason__n {
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--wf-accent);
+  color: var(--pl-white);
+  font-family: var(--pl-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.wf-reason__t { font-family: var(--pl-display); font-size: 1.1rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 6px; }
+.wf-reason__x { font-family: var(--pl-sans); font-size: .95rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
+
+/* ---- the steps rail ------------------------------------------------------
+   A single column with a rule running down the numbers, so the eye is told
+   this is a sequence rather than a set of unrelated tips. */
+.wf-steps { list-style: none; margin: 0; padding: 0; max-width: 62ch; margin-inline: auto; display: grid; gap: 0; }
+.wf-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 14px;
+  padding-bottom: 22px;
+}
+.wf-step:last-child { padding-bottom: 0; }
+.wf-step__n {
+  position: relative;
+  z-index: 1;
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--pl-white);
+  border: 2px solid var(--wf-accent);
+  color: var(--wf-accent);
+  font-family: var(--pl-display);
+  font-size: .9rem;
+  font-weight: 700;
+}
+/* The rule is drawn from the number down, and the last step does not draw it,
+   so the sequence ends rather than trailing into whitespace. */
+.wf-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  inset-block: 32px 0;
+  inset-inline-start: 15px;
+  width: 2px;
+  background: var(--wf-rail);
+}
+.wf-step__t { font-family: var(--pl-display); font-size: 1.02rem; font-weight: 700; color: var(--pl-ink); margin: 5px 0 4px; }
+.wf-step__x { font-family: var(--pl-sans); font-size: .93rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
+
+/* ---- myth versus reality ------------------------------------------------- */
+.wf-vs { max-width: 760px; margin-inline: auto; display: grid; gap: 12px; }
+.wf-vs__row {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+}
+.wf-vs__side {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  padding: 14px clamp(14px, 2.2vw, 20px);
+}
+.wf-vs__side + .wf-vs__side { border-top: 1px solid var(--pl-line); }
+.wf-vs__side--myth { background: var(--pl-cream); }
+.wf-vs__mark {
+  width: 24px; height: 24px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-white);
+}
+.wf-vs__side--myth .wf-vs__mark { background: #A8483E; }
+.wf-vs__side--real .wf-vs__mark { background: var(--wf-accent); }
+.wf-vs__label {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pl-taupe);
+  display: block;
+  margin-bottom: 3px;
+}
+.wf-vs__text { font-family: var(--pl-sans); font-size: clamp(.9rem, 2.3vw, 1rem); line-height: 1.55; color: var(--pl-ink); margin: 0; }
+.wf-vs__side--real .wf-vs__text { color: var(--pl-ink-soft); }
+
+/* ---- faq and specs ------------------------------------------------------- */
+.wf-faq { max-width: 760px; margin-inline: auto; display: grid; gap: 10px; }
+.wf-faq__item {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+}
+/* <details> keeps the answers in the document for a crawler and for a visitor
+   with JavaScript off, which an accordion built out of divs and a click
+   handler does not. */
+.wf-faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+  padding: 16px clamp(14px, 2.2vw, 20px);
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.02rem);
+  font-weight: 700;
+  color: var(--pl-ink);
+  min-height: 44px;
+}
+.wf-faq__q::-webkit-details-marker { display: none; }
+.wf-faq__q::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 9px; height: 9px;
+  border-inline-end: 2px solid var(--pl-taupe);
+  border-block-end: 2px solid var(--pl-taupe);
+  transform: rotate(45deg);
+  transition: transform .18s var(--pl-ease);
+  margin-block-start: -4px;
+}
+.wf-faq__item[open] .wf-faq__q::after { transform: rotate(-135deg); margin-block-start: 4px; }
+.wf-faq__a {
+  padding: 0 clamp(14px, 2.2vw, 20px) 16px;
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0;
+}
+
+.wf-specs { max-width: 620px; margin-inline: auto; border: 1px solid var(--pl-line); border-radius: var(--wf-r-lg); overflow: hidden; background: var(--pl-white); }
+.wf-specs__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px; padding: 12px clamp(14px, 2.2vw, 18px); font-family: var(--pl-sans); font-size: .92rem; line-height: 1.5; }
+.wf-specs__row + .wf-specs__row { border-top: 1px solid var(--pl-line); }
+.wf-specs__row:nth-child(odd) { background: var(--pl-cream); }
+.wf-specs__k { font-weight: 700; color: var(--pl-ink); }
+.wf-specs__v { color: var(--pl-ink-soft); }
+
+.wf-chips { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.wf-chips li {
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  color: var(--pl-ink);
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-pill);
+  padding: 7px 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-faq__q::after { transition: none; }
+}

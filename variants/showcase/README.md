@@ -244,3 +244,52 @@ Everything else in the theme proofread clean. Worth noting one phrase that is
 correct but does stumble a reader for a beat: "משלימים את הערכה" reads as
 "complete the kit" in context, but עֲרָכָה and הַעֲרָכָה are spelled the same
 without niqqud. It was left as the merchant approved it.
+
+## The long product page
+
+Structure taken from ortofix.co.il, which the merchant pointed at. Brand, palette
+and buttons stay ours; what is borrowed is the order a page argues in.
+
+    wf-product        gallery, title, price, one button, sticky bar
+    wf-trust          the four facts
+    wf-pdp-story      custom.problem, then custom.before / custom.after,
+                      then custom.highlights
+    wf-pdp-why        custom.why as numbered cards
+    wf-pdp-how        custom.steps as a numbered rail
+    wf-pdp-versus     custom.versus as cross and tick
+    wf-pdp-faq        custom.specs, custom.in_box, custom.faq
+    wf-grid           what else completes the kit
+
+Nothing on this page is written in the template. Every band reads the product's
+own metafields, so a page cannot claim something the product record does not
+already say, and a product that lacks a field drops that band instead of
+rendering an empty one. Coverage across the nine products today:
+
+    problem 9/9   before 9/9   after 9/9   highlights 9/9   why 9/9
+    steps 8/9     versus 7/9   faq 9/9     specs 8/9        in_box 8/9
+
+Three decisions worth keeping.
+
+**The comparison table does not talk about competitors.** The reference runs
+"us ✓ / other solutions ✗" down a list of features, which asserts things about
+products nobody here has tested and which the first customer who owns one will
+catch. `custom.versus` already holds what people assume against what actually
+happens, so the block keeps the cross and the tick and fills them with something
+true. It is also the more persuasive of the two, because the reader recognises
+the assumption as their own.
+
+**The reason heading counts itself.** `{{ why.size }} סיבות שזה עובד` rather than
+a number typed into the title, so a product with three reasons never announces
+four after somebody edits the metafield.
+
+**The questions are real `<details>` elements.** Every answer is in the document
+for a crawler and for a visitor whose JavaScript did not load, and the arrow is
+drawn from the element's own `[open]` state, so the section ships no script.
+
+`wf-pdp.css` is about 10KB and is requested on the product template only, from
+`snippets/stylesheets.liquid`. The homepage and the collection pages decide
+whether a visitor stays at all and should not carry rules they never use.
+
+Measured at 390px on the Bloom page with every band rendering: no horizontal
+overflow, no tap target under 44px, no text under 13px, and the page runs about
+7.8 screens with the buy bar fixed to the bottom throughout.
