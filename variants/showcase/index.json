@@ -41,7 +41,7 @@
       "type": "wf-trust",
       "blocks": {
         "t1": { "type": "fact", "settings": { "icon": "box", "title": "משלוח חינם מעל 199 ₪", "text": "מתחת לסכום זה דמי משלוח 29.90 ₪" } },
-        "t2": { "type": "fact", "settings": { "icon": "return", "title": "14 יום לביטול עסקה", "text": "לפי חוק הגנת הצרכן" } },
+        "t2": { "type": "fact", "settings": { "icon": "return", "title": "30 יום ניסיון", "text": "מנסים בבית, ואם לא התאים מחזירים" } },
         "t3": { "type": "fact", "settings": { "icon": "chat", "title": "תמיכה בעברית", "text": "שאלה לפני קנייה או אחריה" } },
         "t4": { "type": "fact", "settings": { "icon": "tag", "title": "ישירות מהיצרן", "text": "בלי יבואן ובלי מתווך" } }
       },
