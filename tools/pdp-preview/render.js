@@ -67,7 +67,7 @@ const img = (w, h, label, alt) => {
 // that crops a tall photograph looks perfect against a stub of the wrong
 // shape, which is how cropping shipped unnoticed in the first place.
 const CATALOGUE = [
-  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 19999, 8, ['grooming', 'all-products'], [1206, 1806]],
+  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 24999, 8, ['grooming', 'all-products'], [1206, 1806]],
   ['pro-grooming-comb', 'פורה מסרק למניעת קשרים', 5999, 6, ['grooming', 'all-products'], [1254, 1254]],
   ['parvatek-grooming-comb', 'פרוותק מסרק דו צדדי לטיפוח הפרווה', 6990, 7, ['grooming', 'all-products'], [1055, 1024]],
   ['parvakal-pet-clipper', 'פרווהקל מכונת גילוח לחיות', 13990, 6, ['grooming', 'all-products'], [1101, 960]],
@@ -95,6 +95,21 @@ const PS = {
   'kadurosh-cat-ball-toy': ['צעצוע שלא זז מעניין חתול חמש דקות, ואז הוא חוזר לווילון.', 'כדור שנע בצורה בלתי צפויה ומזמין מרדף גם כשאתם עסוקים.'],
 };
 
+// Real compare_at prices from the shop, in agorot. Without these the preview
+// renders every product at full price and the sale markup never appears, which
+// is how a sale badge ships untested.
+const COMPARE = {
+  'bloom-grooming-station': 29999,
+  'parvakal-pet-clipper': 19999,
+  'kadurosh-cat-ball-toy': 12999,
+  'hair-remover-xl': 10999,
+  'katora-cardboard-scratcher': 9999,
+  'tinybloom-fur-glove': 8999,
+  'hair-remover-wood-handle': 9999,
+  'parvatek-grooming-comb': 8999,
+  'pro-grooming-comb': 7999,
+};
+
 const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   const [w, h] = dims || [1206, 1760];
   const images = Array.from({ length: nImages }, (_, i) => img(w, h, i + 1, title));
@@ -105,7 +120,7 @@ const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   for (const m of images) m.media_type = 'image';
   const variant = { id: 1000 + price, title: 'Default Title', price, available: true };
   return {
-    handle, title, price, compare_at_price: null, available: true,
+    handle, title, price, compare_at_price: COMPARE[handle] || null, available: true,
     url: '/products/' + handle,
     type: 'טיפוח',
     description: '<p>' + title + '</p>',
@@ -268,10 +283,20 @@ engine.registerTag('paginate', {
 // ------------------------------------------------------------------- render
 const which = process.argv[2] || 'index';
 const suffix = process.argv[3] || '';
-const file = which === 'product' ? `templates/product.${suffix}.json` : `templates/${which}.json`;
+// An empty suffix means the generic product template, not `product..json`.
+const file = which === 'product'
+  ? (suffix ? `templates/product.${suffix}.json` : 'templates/product.json')
+  : `templates/${which}.json`;
 const tpl = JSON.parse(read(file));
 
-const product = which === 'product' ? all_products['bloom-grooming-station'] : null;
+// Which product the page is about. Bloom is the default because it is the one
+// with every metafield filled, but the generic product template has to be
+// checked against a product that is not Bloom too: it is the template that
+// nine of the ten pages use, and the only one where "goes well with" can
+// recommend the page it is already on.
+const product = which === 'product'
+  ? all_products[process.env.PREVIEW_PRODUCT || 'bloom-grooming-station']
+  : null;
 if (product) {
   product.metafields.custom = Object.assign(
     JSON.parse(fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8')),

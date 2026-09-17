@@ -1,12 +1,18 @@
 {%- doc -%}
-  One product card, shared by the homepage grid, the collection page and the
-  related row. Shared so the three can never drift.
+  One product card, shared by the homepage grid, the collection page, the
+  related row and the launch band. Shared so they can never drift.
 
   The free shipping line appears only on a product whose own price clears the
-  threshold, which today is Bloom alone. It is the one blue line on a card and
-  it is checkable: buy that item by itself and the shipping really is free.
-  Chewy runs the same line on the cards that qualify and leaves it off the ones
-  that do not, which is what makes it worth reading.
+  threshold. It is the one accent line on a card and it is checkable: buy that
+  item by itself and the shipping really is free. Chewy runs the same line on
+  the cards that qualify and leaves it off the ones that do not, which is what
+  makes it worth reading.
+
+  The struck price and the percentage are drawn from compare_at_price, so they
+  appear only while a real discount exists on the product and disappear by
+  themselves the day it is removed. Nothing here is typed by hand, which is the
+  only way a sale price stays honest without somebody remembering to take it
+  down.
 {%- enddoc -%}
 
 {%- liquid
@@ -15,10 +21,26 @@
   if product.price >= free_from
     assign ships_free = true
   endif
+
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+    comment
+      Floored on purpose: a product at 30.04% off is shown as 30, never as 31.
+      The floor is explicit rather than relying on integer division, because
+      Shopify's divided_by floors two integers and other Liquid engines do not,
+      and a percentage that renders as 30.093009 is how that difference shows
+      up in public.
+    endcomment
+    assign off_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | floor
+  endif
 -%}
 
 <a class="wf-card" href="{{ product.url }}">
   <div class="wf-card__frame">
+    {%- if on_sale and off_pct > 0 -%}
+      <span class="wf-card__off">-{{ off_pct }}%</span>
+    {%- endif -%}
     {%- if product.featured_image != blank -%}
       <img
         src="{{ product.featured_image | image_url: width: 700 }}"
@@ -33,7 +55,12 @@
     {%- endif -%}
   </div>
   <p class="wf-card__name">{{ product.title }}</p>
-  <p class="wf-card__price">{{ product.price | money }}</p>
+  <p class="wf-card__price">
+    {{ product.price | money }}
+    {%- if on_sale -%}
+      <s class="wf-card__was">{{ product.compare_at_price | money }}</s>
+    {%- endif -%}
+  </p>
   {%- if ships_free -%}
     <p class="wf-card__ship">משלוח חינם</p>
   {%- endif -%}

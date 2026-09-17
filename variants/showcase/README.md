@@ -58,16 +58,19 @@ house, and the two things made for cats alone.
 ## Files
 
     assets/wf.css                 the posture and the white palette
+    assets/wf-pdp.css             the long product page only
     config/settings_data.json     the same palette, for Horizon's own sections
     snippets/stylesheets.liquid   base, fonts, pluma, wf. No pdp.css or pl-story.css
     snippets/wf-card.liquid       one card, shared by the grid and the collection
     sections/wf-hero.liquid       photograph, scrim, headline, two pills
     sections/wf-trust.liquid      four facts, four symmetrical icons
+    sections/wf-launch.liquid     whatever is genuinely discounted, and by how much
     sections/wf-intents.liquid    the category cards
     sections/wf-flagship.liquid   Bloom, problem then answer, from its metafields
     sections/wf-grid.liquid       the catalogue
     sections/wf-product.liquid    gallery, problem, answer, price, one button
     sections/wf-collection.liquid title, count, the same grid, paginated at 24
+    sections/wf-pdp-*.liquid      the long product page bands
     templates/                    index, collection, product and nine suffixes
 
 `wf-flagship` and `wf-product` both read `custom.problem_line` and
@@ -293,3 +296,20 @@ whether a visitor stays at all and should not carry rules they never use.
 Measured at 390px on the Bloom page with every band rendering: no horizontal
 overflow, no tap target under 44px, no text under 13px, and the page runs about
 7.8 screens with the buy bar fixed to the bottom throughout.
+
+## The launch band, and why it computes its own number
+
+`wf-launch` does not take a percentage as a setting. It walks the products it
+is about to render, works out each one's discount from `compare_at_price`, and
+puts the largest of them in the headline. A band that says "עד 30%" therefore
+cannot say it once a product's compare-at price is edited, and the whole
+section stops rendering the day nothing is discounted any more.
+
+The alternative, a number typed into the theme editor, is a claim that goes
+stale silently. In Israel an overstated was-price is a consumer-protection
+matter and not a design one, which is the reason this is worth the extra work.
+
+The band is capped at four products even though all nine are discounted,
+because the catalogue grid is on the same page. Four is a strip that says
+"everything is at launch price, here is a taste"; eight would be the same eight
+cards twice on one screen.

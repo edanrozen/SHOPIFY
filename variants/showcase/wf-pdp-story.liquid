@@ -9,25 +9,27 @@
     custom.problem     the situation, in prose
     custom.before      a list of what it is like now
     custom.after       a list of what it is like with the product
-    custom.highlights  what the product actually is
 
   A product missing any one of these drops that piece rather than rendering an
   empty frame. A product missing all of them renders nothing at all, so the
   section can sit in the template for every product without being checked.
+
+  custom.highlights used to render here too. It now sits above the buy box in
+  wf-product, where it answers "what am I buying" before the price is reached,
+  so it is deliberately absent from this band rather than forgotten.
 {%- enddoc -%}
 
 {%- liquid
   assign problem = product.metafields.custom.problem.value
   assign before = product.metafields.custom.before.value
   assign after = product.metafields.custom.after.value
-  assign highlights = product.metafields.custom.highlights.value
   assign has_ba = false
   if before.size > 0 and after.size > 0
     assign has_ba = true
   endif
 -%}
 
-{%- if problem != blank or has_ba or highlights.size > 0 -%}
+{%- if problem != blank or has_ba -%}
   <section class="wf-band wf-band--cream">
     <div class="pl-wrap">
       {%- if section.settings.heading != blank -%}
@@ -62,13 +64,6 @@
         </div>
       {%- endif -%}
 
-      {%- if highlights.size > 0 -%}
-        <ul class="wf-points" role="list" style="margin-top: clamp(24px, 4vw, 44px);">
-          {%- for line in highlights -%}
-            <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
     </div>
   </section>
 {%- endif -%}

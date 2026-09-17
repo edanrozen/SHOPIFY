@@ -4,7 +4,8 @@
       "type": "wf-product",
       "settings": {
         "atc_label": "הוספה לסל",
-        "note": "משלוח חינם מעל 199 ₪ · 30 יום ניסיון"
+        "note": "משלוח חינם מעל 199 ₪ · 30 יום ניסיון",
+        "points_above": true
       }
     },
     "trust": {

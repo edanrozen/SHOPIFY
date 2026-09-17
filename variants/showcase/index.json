@@ -48,6 +48,19 @@
       "block_order": ["t1", "t2", "t3", "t4"],
       "settings": {}
     },
+    "launch": {
+      "type": "wf-launch",
+      "settings": {
+        "eyebrow": "מחירי השקה",
+        "heading": "מחירי ההשקה של TinyBloom",
+        "text": "פתחנו את החנות, וכל הקטלוג יצא במחיר השקה. המחיר המחוק הוא המחיר שהמוצר חוזר אליו.",
+        "upto_prefix": "עד",
+        "collection": "all-products",
+        "limit": 4,
+        "more_label": "לכל המוצרים",
+        "more_link": "/collections/all"
+      }
+    },
     "intents": {
       "type": "wf-intents",
       "blocks": {
@@ -83,5 +96,5 @@
       }
     }
   },
-  "order": ["hero", "trust", "intents", "flagship", "grid"]
+  "order": ["hero", "trust", "launch", "intents", "flagship", "grid"]
 }

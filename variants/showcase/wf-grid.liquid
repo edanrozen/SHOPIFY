@@ -11,6 +11,18 @@
   if coll == blank
     assign coll = collections.all
   endif
+
+  comment
+    Two handles are skipped: the one the merchant picked, and whatever product
+    the page is already showing. The second matters because this same section
+    is the "goes well with" row on a product page, and a row that recommends
+    the item you are looking at spends a slot saying nothing.
+
+    `product` is only bound on a product template, so on the homepage it is
+    nil, its handle is blank, and no real handle ever equals blank.
+  endcomment
+  assign skip_picked = section.settings.exclude.handle
+  assign skip_current = product.handle
 -%}
 
 <section class="wf-section">
@@ -22,14 +34,24 @@
       <p class="wf-sub">{{ section.settings.text }}</p>
     {%- endif -%}
 
+    {%- comment -%}
+      Counted rather than limited, because a `limit` on the loop counts the
+      products it walked past and not the cards it drew. With the skipped item
+      inside the window that renders one card short, so an eight-up row quietly
+      became seven whenever the excluded product happened to sort early.
+    {%- endcomment -%}
+    {%- assign shown = 0 -%}
     <ul class="wf-grid" role="list">
-      {%- for item in coll.products limit: section.settings.limit -%}
-        {%- unless item.handle == section.settings.exclude.handle -%}
+      {%- for item in coll.products -%}
+        {%- if shown >= section.settings.limit -%}{%- break -%}{%- endif -%}
+        {%- unless item.handle == skip_picked or item.handle == skip_current -%}
           <li>{% render 'wf-card', product: item %}</li>
+          {%- assign shown = shown | plus: 1 -%}
         {%- endunless -%}
-      {%- else -%}
-        <li>{{ section.settings.empty_text }}</li>
       {%- endfor -%}
+      {%- if shown == 0 -%}
+        <li>{{ section.settings.empty_text }}</li>
+      {%- endif -%}
     </ul>
 
     {%- if section.settings.more_label != blank -%}

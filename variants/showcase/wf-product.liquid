@@ -28,6 +28,7 @@
   endif
   assign problem = product.metafields.custom.problem_line.value
   assign solution = product.metafields.custom.solution_line.value
+  assign highlights = product.metafields.custom.highlights.value
 
   comment
     Free shipping is a threshold on the order, so it is only claimed on a
@@ -89,12 +90,29 @@
         <p class="wf-sub">{{ solution }}</p>
       {%- endif -%}
 
+      {%- comment -%}
+        The selling points sit above the buy box, not below it.
+
+        A price and a button reached before the reader knows what the thing is
+        asks for a decision that has not been earned yet. These four or five
+        lines are the shortest honest answer to "what am I buying", so they go
+        in front of the money and the long argument stays behind it. The band
+        further down no longer repeats them.
+      {%- endcomment -%}
+      {%- if section.settings.points_above and highlights.size > 0 -%}
+        <ul class="wf-points wf-points--lede" role="list">
+          {%- for line in highlights -%}
+            <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
       <div class="wf-buybox">
         <p class="wf-pdp__price">
+          {{ product.price | money }}
           {%- if product.compare_at_price > product.price -%}
             <s class="wf-pdp__was">{{ product.compare_at_price | money }}</s>
           {%- endif -%}
-          {{ product.price | money }}
         </p>
 
         {%- if ships_free -%}
@@ -154,7 +172,8 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
-    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם מעל 199 ₪ · 30 יום ניסיון" }
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם מעל 199 ₪ · 30 יום ניסיון" },
+    { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true }
   ],
   "presets": [{ "name": "תמות · דף מוצר" }]
 }

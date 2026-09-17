@@ -434,6 +434,39 @@
   font-weight: 700;
   color: var(--pl-ink);
   margin: 8px 0 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* The old price is set smaller and in the muted ink, so the eye lands on what
+   the thing costs now and only then on what it cost before. Reversing that
+   weighting is the classic way to make a discount read as a price rise. */
+.wf-card__was {
+  font-size: .86rem;
+  font-weight: 400;
+  color: var(--pl-taupe);
+  text-decoration-thickness: 1px;
+}
+/* The percentage sits on the photograph rather than in the text column,
+   because in a two-up grid on a phone the text column is the narrowest thing
+   on the page and a badge in it pushes the name onto a third line. */
+.wf-card__off {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-start: 8px;
+  z-index: 1;
+  font-family: var(--pl-sans);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-white);
+  background: #A8483E;
+  padding: 6px 10px;
+  border-radius: var(--wf-pill);
+  font-size: .85rem;
+  /* Hebrew is right to left but a signed number is not, so the minus is
+     forced to stay on the correct side of the digits. */
+  direction: ltr;
 }
 /* The one accent line on a card, and only where it is true: at this price the
    item clears the free shipping threshold on its own. */
@@ -523,8 +556,8 @@
   margin-bottom: 22px;
   background: var(--pl-white);
 }
-.wf-pdp__price { font-family: var(--pl-display); font-size: 1.75rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 16px; }
-.wf-pdp__was { font-family: var(--pl-sans); font-size: 1rem; font-weight: 400; color: var(--pl-taupe); margin-inline-end: 10px; }
+.wf-pdp__price { font-family: var(--pl-display); font-size: 1.75rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 16px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+.wf-pdp__was { font-family: var(--pl-sans); font-size: 1rem; font-weight: 400; color: var(--pl-taupe); text-decoration-thickness: 1px; }
 .wf-pdp__form { margin: 0 0 12px; }
 .wf-pdp__submit { width: 100%; font-size: 1.05rem; padding-block: 18px; }
 .wf-pdp__note { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; color: var(--pl-taupe); margin: 12px 0 0; text-align: center; }
@@ -574,4 +607,38 @@
 @media (prefers-reduced-motion: reduce) {
   .wf-btn, .wf-intent, .wf-card__frame, .wf-hero__slide, .wf-hero__dot span { transition: none; }
   .wf-btn:hover, .wf-intent:hover, .wf-card:hover .wf-card__frame { transform: none; }
+}
+
+/* ---- launch prices -------------------------------------------------------
+   A band of whatever is genuinely discounted right now. The section computes
+   its own headline percentage from the products it renders, so the claim
+   cannot drift away from the prices, and it renders nothing when no product
+   carries a compare_at price. */
+.wf-launch { background: var(--wf-pink-soft); }
+.wf-launch__eyebrow {
+  display: inline-block;
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pl-white);
+  background: #A8483E;
+  padding: 7px 14px;
+  border-radius: var(--wf-pill);
+  margin-bottom: 14px;
+}
+/* No direction override here. The line is Hebrew words plus a percentage
+   ("עד 30%"), and forcing it LTR puts the word on the left of the number,
+   which a Hebrew reader scans in the wrong order. The percentage survives on
+   its own: "%" is a European terminator and binds to the digits before it, so
+   "30%" stays intact inside an RTL line without any help. The badge on a card
+   is the opposite case and does need the override, because a leading minus is
+   a separator, not part of the number, and would otherwise jump to the far
+   side of the digits. */
+.wf-launch__upto {
+  font-family: var(--pl-display);
+  font-size: clamp(1.1rem, 3.4vw, 1.4rem);
+  font-weight: 700;
+  color: #A8483E;
+  margin: 10px 0 0;
 }

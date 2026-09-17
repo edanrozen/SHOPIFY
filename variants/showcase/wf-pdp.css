@@ -293,3 +293,15 @@
 @media (prefers-reduced-motion: reduce) {
   .wf-faq__q::after { transition: none; }
 }
+
+/* The same points, set as a lede above the buy box: aligned to the column
+   rather than centred in the band, and tighter, because here they are read on
+   the way to a price rather than as a section of their own. */
+.wf-points--lede {
+  max-width: none;
+  margin-inline: 0;
+  gap: 9px;
+  margin-bottom: 20px;
+}
+.wf-points--lede li { font-size: clamp(.9rem, 2.3vw, .98rem); }
+.wf-points--lede .wf-points__mark { width: 22px; height: 22px; font-size: .85rem; }
