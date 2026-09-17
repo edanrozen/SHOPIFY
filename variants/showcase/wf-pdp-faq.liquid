@@ -1,0 +1,76 @@
+{%- doc -%}
+  The specification table, what is in the box, and the questions.
+
+  The questions are real <details> elements rather than divs with a click
+  handler, so every answer is in the document for a crawler and for a visitor
+  whose JavaScript did not load. The open and close arrow is drawn in CSS from
+  the element's own [open] state, so there is no script on this section at all.
+{%- enddoc -%}
+
+{%- liquid
+  assign specs = product.metafields.custom.specs.value
+  assign in_box = product.metafields.custom.in_box.value
+  assign faq = product.metafields.custom.faq.value
+  assign for_pets = product.metafields.custom.for_pets.value
+-%}
+
+{%- if specs.size > 0 or faq.size > 0 or in_box.size > 0 -%}
+  <section class="wf-band">
+    <div class="pl-wrap">
+
+      {%- if specs.size > 0 or for_pets != blank -%}
+        <div class="wf-band__head">
+          <h2 class="wf-h2">{{ section.settings.specs_heading }}</h2>
+        </div>
+        <div class="wf-specs">
+          {%- if for_pets != blank -%}
+            <div class="wf-specs__row">
+              <span class="wf-specs__k">{{ section.settings.for_label }}</span>
+              <span class="wf-specs__v">{{ for_pets }}</span>
+            </div>
+          {%- endif -%}
+          {%- for row in specs -%}
+            <div class="wf-specs__row">
+              <span class="wf-specs__k">{{ row.label }}</span>
+              <span class="wf-specs__v">{{ row.value }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if in_box.size > 0 -%}
+        <ul class="wf-chips" role="list">
+          {%- for line in in_box -%}<li>{{ line }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if faq.size > 0 -%}
+        <div class="wf-band__head" style="margin-top: clamp(32px, 5vw, 60px);">
+          <h2 class="wf-h2">{{ section.settings.faq_heading }}</h2>
+        </div>
+        <div class="wf-faq">
+          {%- for item in faq -%}
+            <details class="wf-faq__item"{% if forloop.first %} open{% endif %}>
+              <summary class="wf-faq__q">{{ item.q }}</summary>
+              <p class="wf-faq__a">{{ item.a }}</p>
+            </details>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מוצר · מפרט ושאלות",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "specs_heading", "label": "כותרת המפרט", "default": "המפרט" },
+    { "type": "text", "id": "for_label", "label": "שם השורה של מתאים ל", "default": "מתאים ל" },
+    { "type": "text", "id": "faq_heading", "label": "כותרת השאלות", "default": "שאלות שחוזרות" }
+  ],
+  "presets": [{ "name": "מוצר · מפרט ושאלות" }]
+}
+{% endschema %}

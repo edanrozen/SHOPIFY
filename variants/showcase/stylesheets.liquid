@@ -1,0 +1,42 @@
+{%- comment -%}
+  The showcase theme's style layer.
+
+  `wf.css` sits on top of `pluma.css` rather than replacing it: the palette,
+  the two Hebrew faces and the wrapper are already right, and rebuilding them
+  would only risk getting them wrong. `wf.css` loads last so its posture wins.
+
+  `pdp.css` and `pl-story.css` are gone. The product page here is `wf-product`,
+  which carries its own rules in `wf.css`, so neither sheet has anything left
+  to style and both were pure weight on the heaviest page in the shop.
+{%- endcomment -%}
+
+{{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
+{{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- comment -%}
+  Rubik for headlines, Assistant for text. Both are drawn for Hebrew, so the
+  page never falls back to a Latin face with patched Hebrew glyphs. Fetched as
+  print and promoted on load, so a slow font server cannot hold up first paint.
+{%- endcomment -%}
+{%- assign pl_fonts = 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rubik:wght@500;600;700&display=swap' -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="{{ pl_fonts }}">
+<link rel="stylesheet" href="{{ pl_fonts }}" media="print" onload="this.media='all'; this.onload=null;">
+<noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
+
+{{ 'pluma.css' | asset_url | stylesheet_tag }}
+{{ 'wf.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The long product page carries about 10KB of rules nothing else uses: the
+  before and after pair, the numbered rails, the comparison table and the
+  questions. Shipping that on the homepage and the collection pages would be
+  pure weight on the two templates that decide whether a visitor stays at
+  all, so it is requested on the product template and nowhere else.
+{%- endcomment -%}
+{%- if template.name == 'product' -%}
+  {{ 'wf-pdp.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+<script src="{{ 'pluma.js' | asset_url }}" defer></script>

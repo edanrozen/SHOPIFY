@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "main": {
+      "type": "wf-product",
+      "settings": {
+        "atc_label": "הוספה לסל",
+        "note": "משלוח חינם מעל 199 ₪ · 14 יום לביטול עסקה"
+      }
+    },
+    "trust": {
+      "type": "wf-trust",
+      "blocks": {
+        "t1": { "type": "fact", "settings": { "icon": "box", "title": "משלוח חינם מעל 199 ₪", "text": "מתחת לסכום זה דמי משלוח 29.90 ₪" } },
+        "t2": { "type": "fact", "settings": { "icon": "return", "title": "14 יום לביטול עסקה", "text": "לפי חוק הגנת הצרכן" } },
+        "t3": { "type": "fact", "settings": { "icon": "chat", "title": "תמיכה בעברית", "text": "שאלה לפני קנייה או אחריה" } },
+        "t4": { "type": "fact", "settings": { "icon": "tag", "title": "ישירות מהיצרן", "text": "בלי יבואן ובלי מתווך" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": {}
+    },
+    "story": {
+      "type": "wf-pdp-story",
+      "settings": {
+        "heading": "המצב היום, והמצב אחרי",
+        "before_label": "לפני",
+        "after_label": "אחרי"
+      }
+    },
+    "why": {
+      "type": "wf-pdp-why",
+      "settings": { "heading": "סיבות שזה עובד" }
+    },
+    "how": {
+      "type": "wf-pdp-how",
+      "settings": { "heading": "איך משתמשים בזה" }
+    },
+    "versus": {
+      "type": "wf-pdp-versus",
+      "settings": {
+        "heading": "מה שחושבים, ומה שקורה בפועל",
+        "myth_label": "מה שחושבים",
+        "real_label": "מה שקורה בפועל"
+      }
+    },
+    "facts": {
+      "type": "wf-pdp-faq",
+      "settings": {
+        "specs_heading": "המפרט",
+        "for_label": "מתאים ל",
+        "faq_heading": "שאלות שחוזרות"
+      }
+    },
+    "related": {
+      "type": "wf-grid",
+      "settings": {
+        "heading": "משלימים את הערכה",
+        "text": "כלי אחד פותר בעיה אחת. שניים או שלושה יחד הופכים את הבית למשהו אחר.",
+        "collection": "all-products",
+        "limit": 8,
+        "empty_text": "אין מוצרים להצגה.",
+        "more_label": "לכל המוצרים",
+        "more_link": "/collections/all"
+      }
+    }
+  },
+  "order": ["main", "trust", "story", "why", "how", "versus", "facts", "related"]
+}

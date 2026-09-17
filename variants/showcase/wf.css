@@ -1,0 +1,577 @@
+/* ==========================================================================
+   TinyBloom, in the shape the pet themes in the Shopify theme store use.
+
+   This sits on top of pluma.css rather than replacing it: the palette, the two
+   Hebrew faces and the wrapper are already right, and rebuilding them would
+   only risk getting them wrong. What changes is the posture.
+
+   Three things those themes do that this store was not doing:
+
+   1. The page opens with a photograph and a sentence on top of it, not with a
+      layout. Feeling first, catalogue second.
+   2. The visitor is asked what they came for before being shown anything, so a
+      nine product catalogue arrives as three intents instead of nine choices.
+   3. Headings are loud and frames are round. In this category that reads as
+      friendly; restraint reads as cold.
+
+   Two things they do that are not copied: a countdown on a sale that is not
+   running, and a review count for reviews that do not exist. Both are the
+   fastest way to lose a customer who checks.
+
+   The colours are the shop's own, taken from the logo. See :root below.
+   ========================================================================== */
+
+:root {
+  /* The palette is taken from the logo, not from a mood board. Every value
+     below was sampled out of the artwork and then checked for contrast, so
+     the shop and the mark are literally the same colours.
+
+     The logo writes "Tiny" in olive and "bloom" in dusty pink. That split is
+     the whole system: olive carries every action, pink carries none.
+
+     The reason is measured, not aesthetic. White text on the olive is 6.64:1
+     and clears AA with room to spare. White text on the pink as drawn is
+     2.98:1, which fails AA for body text and fails even the 3:1 floor for
+     large text and UI. A pink button is therefore not an option, whatever it
+     looks like in a mockup, so pink stays a surface and a flourish and never
+     a thing that carries words a customer has to read.
+
+     Greys are gone. Cold grey under a warm cream logo is what made the old
+     footer look like it belonged to a different shop. The neutrals here are
+     warm and derived from the paper tone inside the mark. */
+  --wf-accent:      #586040;  /* sampled from the word "Tiny", 6.64:1 on white  */
+  --wf-accent-deep: #4C5337;  /* hover, 8.08:1                                  */
+  --wf-pink:        #D08078;  /* sampled from "bloom". Surfaces only.           */
+  --wf-pink-ink:    #C0554A;  /* the one pink dark enough for text, 4.53:1      */
+  --wf-pink-soft:   #FBF2F0;  /* the pink as a band you can put ink on          */
+
+  --pl-porcelain: #FFFFFF;
+  --pl-cream:     #F7F4EC;
+  --pl-sand:      #F7F4EC;
+  --pl-sand-deep: #E2DCCF;
+  --pl-ink:       #2A2722;  /* 14.88:1 on white                                 */
+  --pl-ink-soft:  #4A443C;  /*  9.62:1                                          */
+  --pl-taupe:     #6B6357;  /*  5.92:1 on white, 5.39:1 on the cream band       */
+  --pl-line:      #E2DCCF;
+  --pl-white:     #FFFFFF;
+  --pl-clay:      var(--wf-accent);
+  --pl-clay-deep: var(--wf-accent-deep);
+
+  /* Every button is white with this rule around it. One line changes them
+     all, including the label inside. */
+  --wf-rule:      #000000;
+
+  --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);
+  --pl-sh-m: 0 4px 14px rgba(0, 0, 0, .09);
+  --pl-sh-l: 0 12px 32px rgba(0, 0, 0, .12);
+
+  /* Chewy is less round than the version this replaces. Cards and panels take
+     a small radius; only the buttons are full pills. */
+  --wf-r: 10px;
+  --wf-r-lg: 14px;
+  --wf-pill: 999px;
+  --wf-scrim: linear-gradient(to top, rgba(0, 0, 0, .68) 0%, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, 0) 74%);
+}
+
+.wf-section { padding-block: clamp(40px, 6.5vw, 88px); }
+.wf-section--tight { padding-block: clamp(28px, 4vw, 52px); }
+.wf-cream { background: var(--pl-cream); }
+/* The single place the pink appears as a surface. Bloom is the one section
+   that is not a row of products, and a warm band says so without a label. */
+.wf-blush { background: var(--wf-pink-soft); }
+
+/* Louder than pl-h2, because in this category a quiet heading reads as a shop
+   that is not sure it wants you. */
+.wf-h2 {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 6.4vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  color: var(--pl-ink);
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.wf-sub {
+  font-family: var(--pl-sans);
+  font-size: clamp(.98rem, 2.4vw, 1.08rem);
+  line-height: 1.6;
+  color: var(--pl-ink-soft);
+  margin: 0 0 clamp(20px, 3.4vw, 34px);
+  max-width: 56ch;
+}
+
+/* ---- buttons -------------------------------------------------------------
+   Every button in the shop is white with a black rule around it, by the
+   merchant's decision. One shape, no primary and secondary, on the hero, in
+   the buy box, in the sticky bar and in the grid alike.
+
+   Two things this costs, recorded here so nobody has to rediscover them:
+
+   A filled button repaints 100% of its own area in a colour the page does not
+   have. An outlined one repaints the 1px ring, which on a 190x50 button is 5%
+   of it. The olive fill stood 6.64:1 clear of the page behind it; a white fill
+   on a white page stands at 1.00:1 and the rule alone does the work. The
+   button is not less legible, it is less loud, and loudness is what makes a
+   visitor find the one thing to press.
+
+   It also removes hierarchy by construction. Two buttons side by side in the
+   hero are now the same object, so the order they are read in is the order
+   they are written in, not a designed emphasis.
+
+   The compensation is the hover: the button inverts to solid black rather than
+   tinting, so pressing intent is still answered clearly. And padding drops
+   from 17px to 16px because the 1px rule now contributes to the height, which
+   keeps every button the same box it was and keeps the sticky bar's 76px
+   spacer honest.
+
+   Contrast is not the issue and did not get worse: black on white is 21:1 for
+   the label and 21:1 for the rule, against a 3:1 floor for a UI edge. */
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 16px 32px;
+  border: 1px solid var(--wf-rule);
+  border-radius: var(--wf-pill);
+  background: var(--pl-white);
+  color: var(--wf-rule);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s var(--pl-ease), color .18s var(--pl-ease), transform .18s var(--pl-ease);
+}
+.wf-btn:hover { background: var(--wf-rule); color: var(--pl-white); transform: translateY(-1px); }
+/* Kept as aliases so the templates that already name them keep working. They
+   are deliberately identical to the base: there is one button now. */
+.wf-btn--light,
+.wf-btn--clay { background: var(--pl-white); color: var(--wf-rule); }
+.wf-btn--light:hover,
+.wf-btn--clay:hover { background: var(--wf-rule); color: var(--pl-white); }
+/* Unavailable reads as a drawn-back rule rather than a faded black one, so it
+   never looks like a button that failed to load. */
+.wf-btn[disabled] {
+  background: var(--pl-white);
+  border-color: var(--pl-line);
+  color: var(--pl-taupe);
+  opacity: 1;
+  cursor: not-allowed;
+  transform: none;
+}
+.wf-btn[disabled]:hover { background: var(--pl-white); color: var(--pl-taupe); }
+
+/* ---- hero ---------------------------------------------------------------
+   Portrait on the phone and wide on the desktop, because the same photograph
+   has to hold a face at 390px and a room at 1440px. The copy is anchored to
+   the bottom under a scrim: over a photograph, centred copy lands wherever the
+   subject happens to be, and in this catalogue the subject is an animal. */
+.wf-hero { position: relative; isolation: isolate; }
+.wf-hero__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--pl-sand); }
+@media (min-width: 750px) { .wf-hero__media { aspect-ratio: 16 / 8; } }
+@media (min-width: 1100px) { .wf-hero__media { aspect-ratio: 16 / 6.6; } }
+/* The <picture> is positioned, not left in flow. In flow it has no height of
+   its own, so height:100% on the image resolves to auto and cover has nothing
+   to fit against, which leaves the frame half empty. */
+.wf-hero__media picture { position: absolute; inset: 0; display: block; }
+.wf-hero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wf-hero__media::after { content: ''; position: absolute; inset: 0; background: var(--wf-scrim); }
+
+/* Slides are stacked and cross faded rather than slid sideways. The copy on
+   top does not move, and copy sitting still over a photograph that slides
+   reads as a rendering fault rather than as a transition.
+
+   The fade is deliberately a small fraction of the hold. At a 2.5s cycle the
+   old .9s fade left both photographs part transparent for 36% of the time,
+   which reads as a screen that cannot decide what it is showing rather than as
+   a sequence of pictures. .55s keeps roughly two full seconds of a settled,
+   fully opaque image, which is the part that actually sells anything. */
+.wf-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .55s var(--pl-ease);
+}
+.wf-hero__slide[data-active='true'] { opacity: 1; }
+
+/* 44px targets with a 9px dot inside them. The dot is what you see; the square
+   around it is what a thumb actually hits. */
+.wf-hero__dots { display: flex; justify-content: center; gap: 2px; margin-top: 10px; }
+.wf-hero__dot {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.wf-hero__dot span {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .45);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  transition: background .2s var(--pl-ease), transform .2s var(--pl-ease);
+}
+.wf-hero__dot[aria-selected='true'] span { background: #FFFFFF; transform: scale(1.3); }
+
+.wf-hero__copy {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1;
+  text-align: center;
+  padding: var(--pl-gutter);
+  padding-bottom: clamp(28px, 5vw, 64px);
+}
+.wf-hero__title {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 8.6vw, 4.2rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  color: var(--pl-white);
+  margin: 0 0 12px;
+  text-wrap: balance;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, .3);
+}
+.wf-hero__text {
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.6vw, 1.15rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, .93);
+  margin: 0 auto clamp(18px, 3vw, 26px);
+  max-width: 46ch;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .34);
+}
+.wf-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+/* ---- trust row ----------------------------------------------------------
+   Four facts, every one of them checkable. Directly under the hero, because
+   the questions it answers are the ones asked before the first click. */
+.wf-trust { background: var(--pl-cream); border-block: 1px solid var(--pl-line); }
+.wf-trust__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 28px);
+}
+@media (min-width: 900px) { .wf-trust__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* Icon beside the words rather than above them, so four facts fit in a band
+   instead of a block. On a phone they stack two by two. */
+.wf-trust__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 10px;
+  text-align: start;
+}
+.wf-trust__icon { width: 30px; height: 30px; display: grid; place-items: center; grid-row: span 2; }
+.wf-trust__icon svg { width: 26px; height: 26px; stroke: var(--wf-accent); fill: none; stroke-width: 1.5; }
+.wf-trust__title { font-family: var(--pl-sans); font-size: .86rem; font-weight: 700; color: var(--pl-ink); }
+.wf-trust__text { font-family: var(--pl-sans); font-size: .84rem; line-height: 1.4; font-weight: 400; color: var(--pl-taupe); }
+
+/* ---- what did you come for ----------------------------------------------
+   Chewy's "Shop by pet" row, which is a circle of photograph with the label
+   under it and nothing else. It is the most recognisable thing on their
+   homepage and it does the same job here that the tall photo cards did, in a
+   fifth of the height: nine products arrive as three jobs rather than as nine
+   choices.
+
+   Three circles is fewer than the eight Chewy runs, so the row is centred
+   rather than scrolled. It still scrolls if more collections are added. */
+.wf-circles {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 6px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 44px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.wf-circles::-webkit-scrollbar { display: none; }
+.wf-circle {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: clamp(104px, 26vw, 156px);
+  text-decoration: none;
+}
+.wf-circle__media {
+  width: clamp(104px, 26vw, 156px);
+  height: clamp(104px, 26vw, 156px);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--pl-cream);
+  border: 1px solid var(--pl-line);
+  transition: border-color .2s var(--pl-ease), transform .2s var(--pl-ease);
+}
+.wf-circle:hover .wf-circle__media { border-color: var(--wf-accent); transform: translateY(-3px); }
+.wf-circle__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wf-circle__title {
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--pl-ink);
+  text-align: center;
+  margin: 0;
+}
+.wf-circle:hover .wf-circle__title { color: var(--wf-accent); text-decoration: underline; }
+
+/* ---- flagship -----------------------------------------------------------
+   Bloom is twice the price of anything else in the shop, so it does not sit
+   in the grid and take its chances. The problem comes first and the product
+   answers it, which is the order a buyer actually thinks in. */
+.wf-flag { display: grid; gap: clamp(22px, 4vw, 48px); align-items: center; }
+@media (min-width: 900px) { .wf-flag { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); } }
+.wf-flag__media {
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  aspect-ratio: 4 / 5;
+}
+@media (min-width: 900px) { .wf-flag__media { aspect-ratio: 1 / 1; } }
+/* Contain: Bloom is 1206x1806 and any frame that fills with cover cuts the
+   stand off it. */
+.wf-flag__media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.wf-flag__eyebrow {
+  display: inline-block;
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: var(--pl-white);
+  background: var(--pl-clay);
+  padding: 7px 14px;
+  border-radius: var(--wf-pill);
+  margin-bottom: 16px;
+}
+.wf-flag__problem {
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.04rem);
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--pl-taupe);
+  margin: 0 0 10px;
+  padding-inline-start: 14px;
+  border-inline-start: 2px solid var(--pl-sand-deep);
+}
+.wf-flag__price {
+  font-family: var(--pl-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  margin: 0 0 20px;
+}
+
+/* ---- product grid -------------------------------------------------------- */
+.wf-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2.4vw, 26px);
+}
+@media (min-width: 900px) { .wf-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* One bordered panel holding the photograph and the words, the way a Chewy
+   card does, rather than a floating image with text loose underneath. The
+   border is what makes a row of them read as a row of products. */
+.wf-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  height: 100%;
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+  padding: 12px 12px 14px;
+  transition: border-color .2s var(--pl-ease), box-shadow .2s var(--pl-ease);
+}
+.wf-card:hover { border-color: var(--wf-accent); box-shadow: var(--pl-sh-m); }
+.wf-card__frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--pl-white);
+  aspect-ratio: 1 / 1;
+  margin-bottom: 10px;
+}
+/* The catalogue runs from 768x1375 to 1254x1254. One square frame plus cover
+   would crop a third off the tall ones, so every frame contains. */
+.wf-card__frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.wf-card__name {
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--pl-ink);
+  /* Clamped at two lines and reserving both, so every price in a row sits on
+     the same line instead of stepping down under the longer names. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.8em;
+  margin: 0;
+}
+.wf-card__price {
+  font-family: var(--pl-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  margin: 8px 0 0;
+}
+/* The one accent line on a card, and only where it is true: at this price the
+   item clears the free shipping threshold on its own. */
+.wf-card__ship {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--wf-accent);
+  margin: 4px 0 0;
+}
+
+.wf-more { display: flex; justify-content: center; margin-top: clamp(26px, 4vw, 44px); }
+
+/* ---- product page -------------------------------------------------------- */
+/* minmax(0, 1fr), not the implicit auto track.
+   A grid track sized `auto` takes its floor from the widest thing inside it. The
+   thumbnail strip is a flex row of eight 64px thumbs with 8px gaps, so its
+   max-content is 568px, and on a 390px phone the column grew to 568px and threw
+   the photograph, the title and the problem line 197px off the side of the
+   screen. It scrolled nothing, because the overflow was clipped, so it read as
+   a bad crop rather than as a broken layout. minmax(0, ...) lets the track be
+   narrower than its contents and hands the overflow to the strip, which is
+   already a scroller and is the only thing that should scroll. */
+.wf-pdp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(22px, 3.4vw, 46px);
+  padding-block: clamp(20px, 3vw, 44px);
+}
+@media (min-width: 900px) { .wf-pdp { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; } }
+
+.wf-pdp__stage {
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  aspect-ratio: 1 / 1;
+}
+.wf-pdp__stage img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* One swipeable row rather than two wrapped ones: eight thumbnails on two rows
+   cost about 90px of height directly above the price on a phone. */
+.wf-pdp__thumbs {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0 0 4px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.wf-pdp__thumbs::-webkit-scrollbar { display: none; }
+.wf-pdp__thumb {
+  flex: 0 0 auto;
+  width: 64px; height: 64px;
+  padding: 0;
+  border: 1px solid var(--pl-line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--pl-white);
+  cursor: pointer;
+  transition: border-color .18s var(--pl-ease);
+}
+.wf-pdp__thumb:hover { border-color: var(--pl-taupe); }
+/* With an accent in the palette, the open thumbnail is marked the way Chewy
+   marks it: a border in the brand colour. The fade the two colour version had
+   to use is gone. */
+.wf-pdp__thumb[aria-current='true'] { border-color: var(--wf-accent); border-width: 2px; }
+.wf-pdp__thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.wf-pdp__title {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(1.55rem, 5.2vw, 2.3rem);
+  line-height: 1.16;
+  letter-spacing: -.015em;
+  color: var(--pl-ink);
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+/* Everything the decision needs inside one bordered panel, which is how Chewy
+   separates "what this is" from "buy it". On a phone it is the block you land
+   on after the gallery. */
+.wf-buybox {
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  padding: clamp(16px, 2.4vw, 22px);
+  margin-bottom: 22px;
+  background: var(--pl-white);
+}
+.wf-pdp__price { font-family: var(--pl-display); font-size: 1.75rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 16px; }
+.wf-pdp__was { font-family: var(--pl-sans); font-size: 1rem; font-weight: 400; color: var(--pl-taupe); margin-inline-end: 10px; }
+.wf-pdp__form { margin: 0 0 12px; }
+.wf-pdp__submit { width: 100%; font-size: 1.05rem; padding-block: 18px; }
+.wf-pdp__note { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; color: var(--pl-taupe); margin: 12px 0 0; text-align: center; }
+.wf-pdp__ship { font-family: var(--pl-sans); font-size: .88rem; font-weight: 700; color: var(--wf-accent); margin: 0 0 14px; }
+/* ---- the sticky buy bar --------------------------------------------------
+   On a phone the price lands about 830px down this page and the button about
+   910px, which is a screen and a bit below the fold. Every shop that sells on
+   phones answers that the same way: the button follows you. It is shown below
+   900px only, where the buy box is out of sight; above that the box is beside
+   the gallery and a bar would be noise.
+
+   The spacer is a real element rather than padding on <body>, because a section
+   cannot style the body and a fixed bar would otherwise sit on top of the
+   footer's last row. */
+.wf-buybar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--pl-white);
+  border-top: 1px solid var(--pl-line);
+  box-shadow: 0 -2px 14px rgba(0, 0, 0, .07);
+}
+.wf-buybar__price { font-family: var(--pl-display); font-size: 1.1rem; font-weight: 700; color: var(--pl-ink); white-space: nowrap; }
+.wf-buybar__form { flex: 1; margin: 0; }
+.wf-buybar__btn { width: 100%; padding-block: 14px; font-size: .98rem; }
+.wf-buybar__spacer { display: none; }
+@media (max-width: 899px) {
+  .wf-buybar { display: flex; }
+  .wf-buybar__spacer { display: block; height: 76px; }
+}
+
+.wf-pdp__rte { font-family: var(--pl-sans); font-size: .98rem; line-height: 1.7; color: var(--pl-ink-soft); border-top: 1px solid var(--pl-line); padding-top: 22px; }
+.wf-pdp__rte h3 { font-family: var(--pl-display); font-size: 1.05rem; color: var(--pl-ink); margin: 20px 0 6px; }
+.wf-pdp__rte p, .wf-pdp__rte ul, .wf-pdp__rte ol { margin: 0 0 14px; }
+.wf-pdp__rte ul, .wf-pdp__rte ol { padding-inline-start: 22px; }
+
+/* ---- collection ---------------------------------------------------------- */
+.wf-collhead { text-align: center; padding-block: clamp(28px, 4.5vw, 56px) clamp(20px, 3vw, 34px); }
+.wf-collhead__count { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; color: var(--pl-taupe); margin: 10px 0 0; }
+.wf-collhead__desc { font-family: var(--pl-sans); font-size: 1.02rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 12px auto 0; max-width: 56ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-btn, .wf-intent, .wf-card__frame, .wf-hero__slide, .wf-hero__dot span { transition: none; }
+  .wf-btn:hover, .wf-intent:hover, .wf-card:hover .wf-card__frame { transform: none; }
+}
