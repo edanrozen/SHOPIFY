@@ -71,6 +71,7 @@ house, and the two things made for cats alone.
     sections/wf-product.liquid    gallery, problem, answer, price, one button
     sections/wf-collection.liquid title, count, the same grid, paginated at 24
     sections/wf-pdp-*.liquid      the long product page bands
+    sections/wf-pdp-shots.liquid  the product's own photographs, set large
     templates/                    index, collection, product and nine suffixes
 
 `wf-flagship` and `wf-product` both read `custom.problem_line` and
@@ -313,3 +314,28 @@ The band is capped at four products even though all nine are discounted,
 because the catalogue grid is on the same page. Four is a strip that says
 "everything is at launch price, here is a taste"; eight would be the same eight
 cards twice on one screen.
+
+## Photographs below the fold
+
+`wf-pdp-shots` is the band that puts the product's own pictures into the copy
+rather than leaving them in a strip of 64px thumbs nobody taps. It holds no
+images of its own: it walks `product.media`, skips the ones the gallery already
+leads with and renders the next few, so adding a photograph to a product is the
+whole job and a product with one picture renders nothing.
+
+Bloom runs it twice, because the two placements do different work. Two pictures
+at full column width after the trust row, where the page is still being decided
+on, then four in a pair-wise grid after the reasons, where the question has
+become "what does it actually look like".
+
+The pair takes a fixed frame and the single column does not. A single picture
+has nothing beside it to line up with, so a frame would only letterbox it;
+a pair read side by side is a comparison and wants the same box twice. Which box
+is a setting, because Bloom is shot at 2:3 and the rest of the catalogue is
+nearer a square, and the wrong one puts white bars down four photographs at once.
+
+Captions come from alt text and from nowhere else. Six of Bloom's eight images
+have no alt, so they arrive with no caption, which is correct: a caption written
+by the theme would be a sentence about a photograph the theme cannot see. Filling
+those in is worth doing for search and for screen readers as much as for the
+captions.

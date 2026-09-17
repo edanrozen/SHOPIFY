@@ -305,3 +305,39 @@
 }
 .wf-points--lede li { font-size: clamp(.9rem, 2.3vw, .98rem); }
 .wf-points--lede .wf-points__mark { width: 22px; height: 22px; font-size: .85rem; }
+
+/* ---- the photographs, set large ------------------------------------------
+   One column lets each picture keep its own proportions. There is nothing
+   beside it to line up with, so a fixed frame would only letterbox: Bloom is
+   shot at 2:3 and a 4:5 box leaves a white margin down both sides of every
+   photograph for no gain. The width and height attributes on the <img> hold
+   the space while it loads, so nothing shifts.
+
+   Two columns do take a fixed box, because a pair read side by side is a
+   comparison and a comparison wants the same box twice. Which box is a section
+   setting, arriving as --wf-shot-ratio, so the frame can be told the shape the
+   product was actually photographed in. Contained rather than cropped, since
+   this catalogue runs from 1145x1374 to 1254x1254 to 1206x1806 inside a single
+   product, and cover would take a third off the tall ones and nothing off the
+   square ones. */
+.wf-shots { display: grid; gap: clamp(14px, 2.6vw, 28px); }
+.wf-shots--one { max-width: 620px; margin-inline: auto; }
+.wf-shots--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin-inline: auto; }
+.wf-shot { margin: 0; }
+.wf-shot__frame {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+}
+.wf-shot__frame img { width: 100%; height: auto; display: block; }
+.wf-shots--two .wf-shot__frame { aspect-ratio: var(--wf-shot-ratio, 1 / 1); }
+.wf-shots--two .wf-shot__frame img { height: 100%; object-fit: contain; }
+.wf-shot__cap {
+  font-family: var(--pl-sans);
+  font-size: .86rem;
+  line-height: 1.5;
+  color: var(--pl-taupe);
+  margin: 10px 0 0;
+  text-align: center;
+}

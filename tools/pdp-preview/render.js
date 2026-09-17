@@ -112,7 +112,11 @@ const COMPARE = {
 
 const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   const [w, h] = dims || [1206, 1760];
-  const images = Array.from({ length: nImages }, (_, i) => img(w, h, i + 1, title));
+  // Alt text on the first image only. That is the shape the real catalogue is
+  // in for most of its products, and a stub that gave every photograph a
+  // caption would hide the fact that the bands which caption from alt text
+  // will render bare on the live store.
+  const images = Array.from({ length: nImages }, (_, i) => img(w, h, i + 1, i === 0 ? title : ''));
   // A media drop carries its media_type, and a template that filters on it
   // (`where: 'media_type', 'image'`) gets an empty list without it. All nine
   // products are single variant in the store, so the stub is too: a template

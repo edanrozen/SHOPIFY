@@ -1,0 +1,136 @@
+{%- doc -%}
+  The product's own photographs, set large, in among the bands of copy.
+
+  The gallery at the top of the page is a stage plus a strip of 64px thumbs.
+  A thumb that size is a way to move the stage, not a photograph anybody
+  looks at, so on a phone seven of the eight pictures are effectively never
+  seen. This band shows them at the width of the page, where they are read
+  rather than navigated.
+
+  It takes no images of its own. It walks `product.media`, skips the ones the
+  gallery already leads with and renders the next few, so a photograph added
+  to the product appears here without anybody opening the theme editor, and a
+  product with only its hero shot renders nothing at all.
+
+  Two layouts, because the two jobs are different: `one` is a single column
+  for pictures that carry a scene, `two` is a pair for detail shots where the
+  comparison between them is the point.
+
+  Only the pair takes a fixed shape, and it is a setting rather than a
+  constant, because the right box is the one the product was photographed in.
+  Bloom is shot at 2:3 and every other product in this catalogue is nearer a
+  square; forcing one of those two into the other's box adds white bars down
+  the sides of four photographs at once.
+
+  Captions come from each image's alt text and from nowhere else. An image
+  with no alt gets no caption, which is the honest outcome: a caption written
+  by the theme would be a sentence about a photograph the theme cannot see.
+{%- enddoc -%}
+
+{%- liquid
+  assign pool = product.media | where: 'media_type', 'image'
+  assign skip = section.settings.skip
+  assign take = section.settings.limit
+
+  if section.settings.layout == 'two'
+    assign sizes = '(max-width: 900px) 46vw, 300px'
+  else
+    assign sizes = '(max-width: 700px) 92vw, 620px'
+  endif
+
+  assign band = ''
+  if section.settings.band == 'cream'
+    assign band = ' wf-band--cream'
+  elsif section.settings.band == 'blush'
+    assign band = ' wf-band--blush'
+  endif
+-%}
+
+{%- if pool.size > skip -%}
+  <section class="wf-band{{ band }}">
+    <div class="pl-wrap">
+      {%- if section.settings.heading != blank or section.settings.text != blank -%}
+        <div class="wf-band__head">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p class="wf-sub">{{ section.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="wf-shots wf-shots--{{ section.settings.layout }}" style="--wf-shot-ratio: {{ section.settings.ratio }};">
+        {%- assign shown = 0 -%}
+        {%- for item in pool -%}
+          {%- if forloop.index0 < skip -%}{%- continue -%}{%- endif -%}
+          {%- if shown >= take -%}{%- break -%}{%- endif -%}
+          <figure class="wf-shot">
+            <div class="wf-shot__frame">
+              <img
+                src="{{ item | image_url: width: 1100 }}"
+                srcset="{{ item | image_url: width: 600 }} 600w, {{ item | image_url: width: 1100 }} 1100w"
+                sizes="{{ sizes }}"
+                width="{{ item.preview_image.width }}"
+                height="{{ item.preview_image.height }}"
+                alt="{{ item.alt | default: product.title | escape }}"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            {%- if item.alt != blank -%}
+              <figcaption class="wf-shot__cap">{{ item.alt }}</figcaption>
+            {%- endif -%}
+          </figure>
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מוצר · תמונות גדולות",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת" },
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "פריסה",
+      "options": [
+        { "value": "one", "label": "תמונה אחת בשורה" },
+        { "value": "two", "label": "שתיים בשורה" }
+      ],
+      "default": "one"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "צורת המסגרת (בפריסת שתיים בשורה)",
+      "options": [
+        { "value": "1 / 1", "label": "ריבוע" },
+        { "value": "4 / 5", "label": "מלבן לגובה" },
+        { "value": "2 / 3", "label": "גבוה" }
+      ],
+      "default": "1 / 1"
+    },
+    { "type": "range", "id": "skip", "label": "כמה תמונות לדלג מההתחלה", "min": 0, "max": 12, "step": 1, "default": 1 },
+    { "type": "range", "id": "limit", "label": "כמה תמונות להציג", "min": 1, "max": 12, "step": 1, "default": 3 },
+    {
+      "type": "select",
+      "id": "band",
+      "label": "רקע",
+      "options": [
+        { "value": "white", "label": "לבן" },
+        { "value": "cream", "label": "שמנת" },
+        { "value": "blush", "label": "ורוד בהיר" }
+      ],
+      "default": "white"
+    }
+  ],
+  "presets": [{ "name": "מוצר · תמונות גדולות" }]
+}
+{% endschema %}

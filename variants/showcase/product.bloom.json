@@ -19,6 +19,16 @@
       "block_order": ["t1", "t2", "t3", "t4"],
       "settings": {}
     },
+    "shots": {
+      "type": "wf-pdp-shots",
+      "settings": {
+        "heading": "בלום מקרוב",
+        "layout": "one",
+        "skip": 1,
+        "limit": 2,
+        "band": "white"
+      }
+    },
     "story": {
       "type": "wf-pdp-story",
       "settings": {
@@ -30,6 +40,17 @@
     "why": {
       "type": "wf-pdp-why",
       "settings": { "heading": "סיבות שזה עובד" }
+    },
+    "details": {
+      "type": "wf-pdp-shots",
+      "settings": {
+        "heading": "עוד זוויות",
+        "layout": "two",
+        "ratio": "2 / 3",
+        "skip": 3,
+        "limit": 4,
+        "band": "cream"
+      }
     },
     "how": {
       "type": "wf-pdp-how",
@@ -65,5 +86,5 @@
       }
     }
   },
-  "order": ["main", "trust", "story", "why", "how", "versus", "facts", "related"]
+  "order": ["main", "trust", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
 }
