@@ -1,0 +1,80 @@
+{%- doc -%}
+  Bloom, on its own.
+
+  Bloom is 199.99 against a catalogue whose next most expensive item is 139.90,
+  so it does not go in the grid and take its chances against eight cheaper
+  things. It gets a band of its own, and the band opens with the problem before
+  it names the product, which is the order a buyer thinks in.
+
+  The tag above the problem is empty by default and should usually stay that
+  way. A shop that labels its own product "our flagship" is talking in its
+  internal vocabulary out loud; the position on the page is what says the
+  product matters, not a badge claiming it does.
+
+  The two lines come from the product's own metafields, custom.problem_line and
+  custom.solution_line, so this section never invents a claim: whatever is on
+  the product page is what appears here.
+{%- enddoc -%}
+
+{%- liquid
+  assign p = section.settings.product
+  assign problem = p.metafields.custom.problem_line.value | default: section.settings.problem
+  assign solution = p.metafields.custom.solution_line.value | default: section.settings.body
+-%}
+
+{%- if p != blank -%}
+  <section class="wf-section wf-blush">
+    <div class="pl-wrap">
+      <div class="wf-flag">
+        <div class="wf-flag__media">
+          {%- if p.featured_image != blank -%}
+            <img
+              src="{{ p.featured_image | image_url: width: 900 }}"
+              srcset="{{ p.featured_image | image_url: width: 600 }} 600w, {{ p.featured_image | image_url: width: 1100 }} 1100w"
+              sizes="(max-width: 900px) 92vw, 46vw"
+              width="{{ p.featured_image.width }}"
+              height="{{ p.featured_image.height }}"
+              alt="{{ p.featured_image.alt | default: p.title | escape }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {%- endif -%}
+        </div>
+
+        <div>
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="wf-flag__eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+
+          {%- if problem != blank -%}
+            <p class="wf-flag__problem">{{ problem }}</p>
+          {%- endif -%}
+
+          <h2 class="wf-h2">{{ section.settings.heading | default: p.title }}</h2>
+          {%- if solution != blank -%}
+            <p class="wf-sub">{{ solution }}</p>
+          {%- endif -%}
+
+          <p class="wf-flag__price">{{ p.price | money }}</p>
+          <a class="wf-btn" href="{{ p.url }}">{{ section.settings.cta_label | default: 'לעמוד המוצר' }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "תמות · הצגת מוצר",
+  "tag": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "מוצר" },
+    { "type": "text", "id": "eyebrow", "label": "תווית (אפשר להשאיר ריק)" },
+    { "type": "textarea", "id": "problem", "label": "הבעיה (ריק לוקח מהמוצר)" },
+    { "type": "text", "id": "heading", "label": "כותרת (ריק לוקח את שם המוצר)" },
+    { "type": "textarea", "id": "body", "label": "הפתרון (ריק לוקח מהמוצר)" },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "לעמוד המוצר" }
+  ],
+  "presets": [{ "name": "תמות · הצגת מוצר" }]
+}
+{% endschema %}

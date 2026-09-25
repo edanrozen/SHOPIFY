@@ -1,0 +1,593 @@
+{%- doc -%}
+  The long form half of a product page, as an ordered library rather than a fixed
+  sequence.
+
+  Every part is a block. A template decides which parts a product gets, what order
+  they come in, and which visual treatment each one uses. That is what makes two
+  product pages different pages rather than one page with the nouns swapped: the
+  comb argues from the problem, the XL argues from the benefit, the clipper puts
+  safety where nobody can miss it.
+
+  Content still comes from the product's own metafields, so a block with nothing
+  behind it renders nothing at all and the page closes up around it.
+{%- enddoc -%}
+
+{%- liquid
+  assign problem  = product.metafields.custom.problem.value
+  assign before   = product.metafields.custom.before.value
+  assign after    = product.metafields.custom.after.value
+  assign steps    = product.metafields.custom.steps.value
+  assign why      = product.metafields.custom.why.value
+  assign audience = product.metafields.custom.audience.value
+  assign safety   = product.metafields.custom.safety.value
+  assign faq      = product.metafields.custom.faq.value
+  assign for_pets = product.metafields.custom.for_pets.value
+  assign highs    = product.metafields.custom.highlights.value
+  assign specs    = product.metafields.custom.specs.value
+  assign in_box   = product.metafields.custom.in_box.value
+  assign versus   = product.metafields.custom.versus.value
+  assign picker   = product.metafields.custom.picker.value
+  assign surfaces = product.metafields.custom.surfaces.value
+  assign spotlight = product.metafields.custom.spotlight.value
+  assign verified = product.metafields.custom.reviews_verified.value
+
+  comment
+    Image slots for the before and after cards, empty by design: the photography
+    is a separate job. Both cards lay out correctly with or without them.
+  endcomment
+  assign before_img = product.metafields.custom.before_image.value
+  assign after_img  = product.metafields.custom.after_image.value
+-%}
+
+<section class="pl-story2 pl-section pl-story2--{{ section.settings.tone }}" id="pl-story-{{ section.id }}">
+  <div class="pl-wrap">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+
+      {%- when 'problem' -%}
+        {%- if problem != blank -%}
+          <div class="pl-story2__part pl-prob pl-prob--{{ block.settings.style }} pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="pl-eyebrow">{{ block.settings.eyebrow }}</p>
+            {%- endif -%}
+            <p class="pl-prob__text">{{ problem }}</p>
+          </div>
+        {%- endif -%}
+
+      {%- when 'compare' -%}
+        {%- if before != blank and after != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <div class="pl-cmp pl-cmp--{{ block.settings.style }}">
+              <div class="pl-cmp__card pl-cmp__card--before">
+                <span class="pl-cmp__tag">{{ block.settings.before_label }}</span>
+                {%- if before_img != blank -%}
+                  <img class="pl-cmp__img" src="{{ before_img | image_url: width: 720 }}"
+                       width="360" height="270" loading="lazy" decoding="async"
+                       alt="{{ block.settings.before_label | escape }}">
+                {%- endif -%}
+                <ul class="pl-cmp__list" role="list">
+                  {%- for line in before -%}<li>{{ line }}</li>{%- endfor -%}
+                </ul>
+              </div>
+              <div class="pl-cmp__card pl-cmp__card--after">
+                <span class="pl-cmp__tag">{{ block.settings.after_label }}</span>
+                {%- if after_img != blank -%}
+                  <img class="pl-cmp__img" src="{{ after_img | image_url: width: 720 }}"
+                       width="360" height="270" loading="lazy" decoding="async"
+                       alt="{{ block.settings.after_label | escape }}">
+                {%- endif -%}
+                <ul class="pl-cmp__list" role="list">
+                  {%- for line in after -%}<li>{{ line }}</li>{%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+      {%- when 'steps' -%}
+        {%- if steps != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ol class="pl-steps pl-steps--{{ block.settings.style }}" role="list">
+              {%- for step in steps -%}
+                <li class="pl-steps__item">
+                  <span class="pl-steps__num" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                  <div class="pl-steps__body">
+                    <h3 class="pl-steps__title">{{ step.title }}</h3>
+                    {%- if step.text != blank -%}<p class="pl-steps__text">{{ step.text }}</p>{%- endif -%}
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ol>
+          </div>
+        {%- endif -%}
+
+      {%- when 'why' -%}
+        {%- if why != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-why pl-why--{{ block.settings.style }}" role="list">
+              {%- for item in why -%}
+                <li class="pl-why__item">
+                  <h3 class="pl-why__title">{{ item.title }}</h3>
+                  <p class="pl-why__text">{{ item.text }}</p>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'highlights' -%}
+        {%- if highs != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <ul class="pl-keys" role="list">
+              {%- for item in highs -%}<li>{{ item }}</li>{%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'audience' -%}
+        {%- if audience != blank or for_pets != blank -%}
+          <div class="pl-story2__part pl-aud pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h3">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if audience != blank -%}<p class="pl-body pl-story2__note">{{ audience }}</p>{%- endif -%}
+            {%- if for_pets != blank -%}
+              <p class="pl-story2__pets">{{ block.settings.pets_label }} <strong>{{ for_pets }}</strong></p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+      {%- when 'safety' -%}
+        {%- if safety != blank -%}
+          <div class="pl-story2__part pl-safety pl-safety--{{ block.settings.style }} pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h3">{{ block.settings.heading }}</h2>{%- endif -%}
+            <p class="pl-body pl-story2__note">{{ safety }}</p>
+          </div>
+        {%- endif -%}
+
+      {%- when 'faq' -%}
+        {%- if faq != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <div class="pl-qa">
+              {%- for row in faq -%}
+                <details class="pl-qa__row"{% if forloop.first and block.settings.open_first %} open{% endif %}>
+                  <summary class="pl-qa__q">
+                    <span>{{ row.q }}</span>
+                    <span class="pl-qa__sign" aria-hidden="true"></span>
+                  </summary>
+                  <div class="pl-qa__a"><p>{{ row.a }}</p></div>
+                </details>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+      {%- when 'versus' -%}
+        {%- if versus != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-vs pl-vs--{{ block.settings.style }}" role="list">
+              {%- for row in versus -%}
+                <li class="pl-vs__row">
+                  <div class="pl-vs__side pl-vs__side--claim">
+                    <span class="pl-vs__tag">{{ block.settings.claim_label }}</span>
+                    <p class="pl-vs__text">{{ row.claim }}</p>
+                  </div>
+                  <div class="pl-vs__side pl-vs__side--real">
+                    <span class="pl-vs__tag">{{ block.settings.reality_label }}</span>
+                    <p class="pl-vs__text">{{ row.reality }}</p>
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'picker' -%}
+        {%- if picker != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-pick" role="list">
+              {%- for row in picker -%}
+                {%- assign sibling = all_products[row.handle] -%}
+                <li class="pl-pick__item{% if row.current %} is-current{% endif %}">
+                  <div class="pl-pick__top">
+                    <h3 class="pl-pick__name">{{ row.name }}</h3>
+                    {%- if row.current -%}
+                      <span class="pl-pick__flag">{{ block.settings.current_label }}</span>
+                    {%- endif -%}
+                  </div>
+                  <p class="pl-pick__best">{{ row.best_for }}</p>
+                  {%- if row.note != blank -%}<p class="pl-pick__note">{{ row.note }}</p>{%- endif -%}
+                  {%- unless row.current -%}
+                    {%- if sibling.handle != blank -%}
+                      <a class="pl-pick__link" href="{{ sibling.url }}">
+                        {{ block.settings.link_label }}
+                        <span class="pl-pick__arrow" aria-hidden="true"></span>
+                      </a>
+                    {%- endif -%}
+                  {%- endunless -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'surfaces' -%}
+        {%- if surfaces != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.intro != blank -%}<p class="pl-lede">{{ block.settings.intro }}</p>{%- endif -%}
+            <ul class="pl-surf pl-surf--{{ block.settings.style }}" role="list">
+              {%- for item in surfaces -%}<li class="pl-surf__item">{{ item }}</li>{%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'spotlight' -%}
+        {%- if spotlight != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            <ul class="pl-spot" role="list">
+              {%- for row in spotlight -%}
+                <li class="pl-spot__item">
+                  <span class="pl-spot__value">{{ row.value }}</span>
+                  <span class="pl-spot__label">{{ row.label }}</span>
+                  {%- if row.note != blank -%}<span class="pl-spot__note">{{ row.note }}</span>{%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- when 'in_box' -%}
+        {%- if in_box != blank -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h3">{{ block.settings.heading }}</h2>{%- endif -%}
+            <ul class="pl-box" role="list">
+              {%- for item in in_box -%}<li class="pl-box__item">{{ item }}</li>{%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- comment -%}
+        Social proof. Deliberately reads reviews_verified and nothing else: the
+        older custom.reviews field holds seeded sample copy, and a store with no
+        real reviews yet should show no reviews at all rather than borrowed ones.
+        The average is computed from the entries on screen, so the number can
+        never drift from the reviews behind it. Fill reviews_verified and the
+        whole part appears; leave it empty and the page closes up around it.
+      {%- endcomment -%}
+      {%- when 'proof' -%}
+        {%- if verified != blank -%}
+          {%- liquid
+            assign total = 0
+            assign counted = 0
+            for entry in verified
+              if entry.rating != blank
+                assign total = total | plus: entry.rating
+                assign counted = counted | plus: 1
+              endif
+            endfor
+          -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if counted > 0 -%}
+              {%- assign avg = total | times: 1.0 | divided_by: counted | round: 1 -%}
+              <div class="pl-proof__summary">
+                {% render 'pl-stars', value: avg, size: 18, label: 'דירוג ממוצע' %}
+                <span class="pl-proof__avg">{{ avg }} מתוך 5</span>
+                <span class="pl-proof__count">{{ verified.size }} ביקורות</span>
+              </div>
+            {%- endif -%}
+            <ul class="pl-proof" role="list">
+              {%- for entry in verified -%}
+                <li class="pl-proof__item">
+                  {%- if entry.rating != blank -%}
+                    {% render 'pl-stars', value: entry.rating, size: 14, label: 'דירוג' %}
+                  {%- endif -%}
+                  <p class="pl-proof__body">{{ entry.body }}</p>
+                  <p class="pl-proof__by">
+                    <span class="pl-proof__name">{{ entry.name }}</span>
+                    {%- if entry.date != blank -%}<span class="pl-proof__date">{{ entry.date }}</span>{%- endif -%}
+                  </p>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- comment -%}
+        Photography already on the product, placed into the story. Nothing here
+        creates, edits or reorders a picture: it reads product.images by
+        position, so the merchant stays in control from the product page.
+
+        Every shot keeps its own aspect ratio. The catalogue mixes square
+        packshots with tall portraits, and a fixed ratio would crop one of them
+        somewhere nobody would notice until a customer did.
+      {%- endcomment -%}
+      {%- when 'shot' -%}
+        {%- liquid
+          assign shot_i = block.settings.image_index | minus: 1
+          assign shot = product.images[shot_i]
+          unless shot
+            assign shot = product.featured_image
+          endunless
+        -%}
+        {%- if shot != blank -%}
+          <div class="pl-story2__part pl-shot pl-shot--{{ block.settings.style }} pl-shot--{{ block.settings.side }} pl-reveal" {{ block.shopify_attributes }}>
+            <figure class="pl-shot__frame" style="--pl-shot-ratio: {{ shot.aspect_ratio }};">
+              <img
+                src="{{ shot | image_url: width: 1200 }}"
+                srcset="{{ shot | image_url: width: 500 }} 500w,
+                        {{ shot | image_url: width: 800 }} 800w,
+                        {{ shot | image_url: width: 1200 }} 1200w,
+                        {{ shot | image_url: width: 1600 }} 1600w"
+                sizes="{% if block.settings.style == 'duo' %}(min-width: 860px) 46vw, 92vw{% else %}(min-width: 1240px) 1100px, 92vw{% endif %}"
+                width="{{ shot.width }}" height="{{ shot.height }}"
+                loading="lazy" decoding="async"
+                alt="{{ shot.alt | default: product.title | escape }}">
+            </figure>
+            {%- if block.settings.heading != blank or block.settings.text != blank -%}
+              <div class="pl-shot__say">
+                {%- if block.settings.eyebrow != blank -%}<p class="pl-eyebrow">{{ block.settings.eyebrow }}</p>{%- endif -%}
+                {%- if block.settings.heading != blank -%}<h2 class="pl-h2">{{ block.settings.heading }}</h2>{%- endif -%}
+                {%- if block.settings.text != blank -%}<p class="pl-shot__text">{{ block.settings.text }}</p>{%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+      {%- when 'gallery' -%}
+        {%- liquid
+          assign gal_from = block.settings.start_index | minus: 1
+          assign gal = product.images | slice: gal_from, block.settings.count
+        -%}
+        {%- if gal != blank and gal.size > 0 -%}
+          <div class="pl-story2__part pl-reveal" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="pl-h3">{{ block.settings.heading }}</h2>{%- endif -%}
+            <ul class="pl-gal pl-gal--{{ block.settings.style }}" role="list">
+              {%- for g in gal -%}
+                <li class="pl-gal__item" style="--pl-shot-ratio: {{ g.aspect_ratio }};">
+                  <img
+                    src="{{ g | image_url: width: 700 }}"
+                    srcset="{{ g | image_url: width: 350 }} 350w,
+                            {{ g | image_url: width: 700 }} 700w,
+                            {{ g | image_url: width: 1000 }} 1000w"
+                    sizes="(min-width: 860px) 30vw, 62vw"
+                    width="{{ g.width }}" height="{{ g.height }}"
+                    loading="lazy" decoding="async"
+                    alt="{{ g.alt | default: product.title | escape }}">
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "TinyBloom · Product story",
+  "tag": "section",
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "select", "id": "tone", "label": "Section background", "default": "porcelain",
+      "options": [
+        { "value": "porcelain", "label": "Porcelain" },
+        { "value": "cream", "label": "Cream" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "problem", "name": "הבעיה", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "הבעיה" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "panel",
+          "options": [
+            { "value": "panel", "label": "Panel" },
+            { "value": "plain", "label": "Bare statement" },
+            { "value": "bar", "label": "Inverted" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "compare", "name": "לפני ואחרי", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "לפני ואחרי" },
+        { "type": "text", "id": "before_label", "label": "Before label", "default": "לפני" },
+        { "type": "text", "id": "after_label", "label": "After label", "default": "אחרי" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "cards",
+          "options": [
+            { "value": "cards", "label": "Two cards" },
+            { "value": "rows", "label": "Two bands" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "steps", "name": "איך משתמשים", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "איך משתמשים" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "cards",
+          "options": [
+            { "value": "cards", "label": "Cards" },
+            { "value": "timeline", "label": "Timeline" },
+            { "value": "strip", "label": "Numbered strip" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "why", "name": "למה זה עובד", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "למה זה עובד" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "rules",
+          "options": [
+            { "value": "rules", "label": "Ruled pairs" },
+            { "value": "cards", "label": "Cards" },
+            { "value": "stack", "label": "Single column" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "highlights", "name": "נקודות מפתח", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "מה שחשוב לדעת" }
+      ]
+    },
+    {
+      "type": "audience", "name": "למי זה מתאים", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "למי זה מתאים" },
+        { "type": "text", "id": "pets_label", "label": "Pets label", "default": "מתאים ל:" }
+      ]
+    },
+    {
+      "type": "safety", "name": "שימוש ובטיחות", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "שימוש ובטיחות" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "note",
+          "options": [
+            { "value": "note", "label": "Ruled note" },
+            { "value": "panel", "label": "Panel" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "faq", "name": "שאלות על המוצר", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "שאלות על המוצר" },
+        { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": true }
+      ]
+    },
+    {
+      "type": "versus", "name": "למה הדרך הרגילה לא מספיקה", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "למה הדרך הרגילה לא מספיקה" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        { "type": "text", "id": "claim_label", "label": "Claim label", "default": "מה שנהוג לחשוב" },
+        { "type": "text", "id": "reality_label", "label": "Reality label", "default": "מה שקורה בפועל" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "split",
+          "options": [
+            { "value": "split", "label": "Two columns" },
+            { "value": "stack", "label": "Stacked statements" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "picker", "name": "איזה מוצר מתאים לי", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "איזה מוצר מתאים לי" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        { "type": "text", "id": "current_label", "label": "Current product label", "default": "הדף הזה" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "למוצר" }
+      ]
+    },
+    {
+      "type": "surfaces", "name": "איפה זה עובד", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "איפה זה עובד" },
+        { "type": "textarea", "id": "intro", "label": "Intro" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "chips",
+          "options": [
+            { "value": "chips", "label": "Wrapped chips" },
+            { "value": "list", "label": "Ruled list" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spotlight", "name": "המספרים", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "המספרים" }
+      ]
+    },
+    {
+      "type": "in_box", "name": "מה מגיע באריזה", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "מה מגיע באריזה" }
+      ]
+    },
+    {
+      "type": "proof", "name": "ביקורות מאומתות", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "מה לקוחות מספרים" }
+      ]
+    },
+    {
+      "type": "shot", "name": "תמונה בתוך הסיפור", "limit": 3,
+      "settings": [
+        { "type": "range", "id": "image_index", "label": "Which product image", "min": 1, "max": 12, "step": 1, "default": 2,
+          "info": "Position in the product's own media. Nothing is uploaded or changed here." },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "framed",
+          "options": [
+            { "value": "framed", "label": "Framed plate" },
+            { "value": "duo", "label": "Picture beside text" },
+            { "value": "full", "label": "Full width" }
+          ]
+        },
+        {
+          "type": "select", "id": "side", "label": "Picture side (duo only)", "default": "start",
+          "options": [
+            { "value": "start", "label": "Picture first" },
+            { "value": "end", "label": "Text first" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "gallery", "name": "עוד מבטים", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "עוד מבטים" },
+        { "type": "range", "id": "start_index", "label": "First image", "min": 1, "max": 12, "step": 1, "default": 3 },
+        { "type": "range", "id": "count", "label": "How many", "min": 2, "max": 6, "step": 1, "default": 3 },
+        {
+          "type": "select", "id": "style", "label": "Treatment", "default": "grid",
+          "options": [
+            { "value": "grid", "label": "Grid" },
+            { "value": "rail", "label": "Rail on phones" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "TinyBloom · Product story",
+    "blocks": [
+      { "type": "problem" }, { "type": "compare" }, { "type": "steps" },
+      { "type": "why" }, { "type": "audience" }, { "type": "faq" }
+    ]
+  }]
+}
+{% endschema %}

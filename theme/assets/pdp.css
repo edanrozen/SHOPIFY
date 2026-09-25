@@ -1,0 +1,503 @@
+/* ==========================================================================
+   TinyBloom product page
+   A narrower design language than the rest of the site, on purpose.
+
+   Three rules hold it together, and every choice below follows from them:
+
+   1. One surface. The page is porcelain from top to bottom. Sections are
+      separated by space and by a single hairline, never by tinted blocks,
+      because a page of coloured panels reads as a template and a page of
+      quiet space reads as a brand.
+   2. One accent. Clay appears on the button and on the benefit numerals and
+      nowhere else. Anything that needs emphasis gets it from weight, size or
+      space instead of from a second colour.
+   3. One radius per job. 10px on controls, 16px on photography, nothing else.
+      No shadows except under the sticky bar, which is the only element that
+      genuinely floats.
+
+   Everything is written with logical properties so the Hebrew reading order
+   is the layout's own order rather than a right-aligned Latin layout.
+   ========================================================================== */
+
+.pdp {
+  --pdp-ink: var(--pl-ink);
+  --pdp-soft: var(--pl-ink-soft);
+  --pdp-mute: var(--pl-taupe);
+  --pdp-line: #E7E0D4;
+  --pdp-hair: #EFE9DE;
+  --pdp-accent: var(--pl-clay);
+  --pdp-accent-deep: var(--pl-clay-deep);
+  --pdp-r-ctl: 10px;
+  --pdp-r-img: 16px;
+
+  color: var(--pdp-ink);
+  background: var(--pl-porcelain);
+}
+
+/* The type scale. Four steps with real distance between them, so the eye can
+   rank a screen without reading it. Nothing on the page is allowed to sit
+   between two steps. */
+.pdp h1,
+.pdp h2,
+.pdp h3 {
+  font-family: var(--pl-display);
+  margin: 0;
+  text-wrap: balance;
+}
+.pdp__h1 {
+  font-size: clamp(29px, 7.2vw, 50px);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.pdp__h2 {
+  font-size: clamp(23px, 5.4vw, 36px);
+  line-height: 1.16;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.pdp__h3 {
+  font-size: clamp(17px, 2.4vw, 19px);
+  line-height: 1.3;
+  font-weight: 600;
+}
+.pdp__lede {
+  font-size: clamp(16px, 4.1vw, 19px);
+  line-height: 1.6;
+  color: var(--pdp-soft);
+  margin: 0;
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+.pdp__eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--pdp-mute);
+  margin: 0;
+}
+
+/* Section rhythm. One value, used everywhere, so the scroll has a beat the
+   reader stops noticing. */
+.pdp__band { padding-block: clamp(52px, 9vw, 104px); }
+.pdp__band + .pdp__band { border-block-start: 1px solid var(--pdp-hair); }
+.pdp__head { max-width: 34ch; }
+.pdp__head .pdp__lede { margin-block-start: 14px; }
+
+/* --------------------------------------------------------------------------
+   HERO
+   On a phone: photograph, then the claim, then the proof, then the price,
+   then the button. That is the order a buyer actually asks the questions in.
+   -------------------------------------------------------------------------- */
+.pdp-hero { padding-block: 0 clamp(44px, 7vw, 80px); }
+.pdp-hero__grid {
+  display: grid;
+  gap: clamp(26px, 4vw, 56px);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.pdp-hero__media { display: grid; gap: 10px; }
+.pdp-hero__stage {
+  position: relative;
+  margin-inline: calc(var(--pl-gutter) * -1);
+  background: var(--pl-cream);
+  overflow: hidden;
+}
+.pdp-hero__stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  /* Caps the photograph so the headline is never pushed off the first screen
+     on a tall phone. The buyer meets the claim, not an endless image. */
+  max-height: 62svh;
+}
+
+/* Thumbnails read as a filmstrip, not as buttons: no borders, no cards. The
+   active one is marked by a rule under it, which is the smallest signal that
+   still reads. */
+.pdp-hero__thumbs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.pdp-hero__thumbs::-webkit-scrollbar { display: none; }
+.pdp-hero__thumbs li { flex: 0 0 auto; scroll-snap-align: start; }
+.pdp-hero__thumb {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--pdp-r-ctl);
+  overflow: hidden;
+  opacity: .48;
+  transition: opacity .25s var(--pl-ease);
+}
+.pdp-hero__thumb img {
+  display: block;
+  width: 56px;
+  height: 68px;
+  object-fit: cover;
+  background: var(--pl-cream);
+}
+.pdp-hero__thumb.is-active { opacity: 1; }
+.pdp-hero__thumbs li { position: relative; }
+.pdp-hero__thumbs li:has(.is-active)::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: -6px;
+  height: 2px;
+  background: var(--pdp-ink);
+  border-radius: 2px;
+}
+.pdp-hero__thumbs { padding-block-end: 8px; }
+.pdp-hero__thumb:focus-visible { outline: 2px solid var(--pdp-ink); outline-offset: 2px; }
+
+.pdp-hero__say { display: grid; gap: 18px; }
+.pdp-hero__claim { display: grid; gap: 12px; }
+
+/* The three proofs. Ticks drawn in CSS rather than shipped as glyphs, so they
+   sit on the text baseline and inherit the ink colour. */
+.pdp-hero__ticks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 11px;
+}
+.pdp-hero__ticks li {
+  position: relative;
+  padding-inline-start: 27px;
+  font-size: clamp(15px, 3.9vw, 16px);
+  line-height: 1.45;
+  color: var(--pdp-ink);
+}
+.pdp-hero__ticks li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 2px;
+  inset-block-start: .38em;
+  width: 11px;
+  height: 6px;
+  /* A tick is a rotated corner, so these two borders are the glyph's own shape
+     rather than a reading direction. Logical properties would mirror them under
+     RTL and draw a chevron instead of a check, so they stay physical. */
+  border-left: 1.8px solid var(--pdp-accent);
+  border-bottom: 1.8px solid var(--pdp-accent);
+  transform: rotate(-45deg);
+}
+
+/* Price and button. The only place on the page with this much contrast. */
+.pdp-hero__buy {
+  display: grid;
+  gap: 14px;
+  padding-block-start: 4px;
+}
+.pdp-hero__price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--pl-display);
+  font-size: clamp(27px, 6vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.pdp-hero__was {
+  font-size: .55em;
+  font-weight: 500;
+  color: var(--pdp-mute);
+  text-decoration: line-through;
+}
+.pdp-hero__form { margin: 0; }
+.pdp-hero__submit {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--pdp-r-ctl);
+  background: var(--pdp-ink);
+  color: var(--pl-porcelain);
+  font-family: var(--pl-sans);
+  font-size: 17px;
+  font-weight: 600;
+  padding-block: 17px;
+  cursor: pointer;
+  transition: background-color .25s var(--pl-ease);
+}
+.pdp-hero__submit:hover { background: var(--pdp-accent-deep); }
+.pdp-hero__submit:focus-visible { outline: 2px solid var(--pdp-accent); outline-offset: 3px; }
+.pdp-hero__submit[disabled] { background: var(--pdp-mute); cursor: not-allowed; }
+.pdp-hero__note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--pdp-mute);
+  text-align: center;
+}
+
+/* Trust is three short facts on one hairline, not three cards. */
+.pdp-hero__trust {
+  list-style: none;
+  margin: 0;
+  padding-block-start: 18px;
+  padding-inline: 0;
+  border-block-start: 1px solid var(--pdp-hair);
+  display: grid;
+  gap: 10px;
+}
+.pdp-hero__trust li {
+  display: grid;
+  gap: 2px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--pdp-mute);
+}
+.pdp-hero__trust strong { color: var(--pdp-ink); font-weight: 600; font-size: 13.5px; }
+
+@media (min-width: 760px) {
+  .pdp-hero__stage { margin-inline: 0; border-radius: var(--pdp-r-img); }
+  .pdp-hero__stage img { aspect-ratio: 1 / 1; max-height: none; }
+  .pdp-hero__thumb img { width: 68px; height: 82px; }
+  .pdp-hero__trust { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+@media (min-width: 1000px) {
+  .pdp-hero { padding-block-start: clamp(20px, 3vw, 40px); }
+  .pdp-hero__grid { grid-template-columns: 1.08fr .92fr; gap: 64px; }
+  .pdp-hero__media { position: sticky; top: 92px; }
+  .pdp-hero__submit { width: auto; min-width: 260px; padding-inline: 46px; }
+  .pdp-hero__note { text-align: start; }
+}
+
+/* --------------------------------------------------------------------------
+   FLOW: the editorial middle
+   One section owns the whole middle of the page, which is what keeps the
+   rhythm even. Each part is a block with one job.
+   -------------------------------------------------------------------------- */
+
+/* The problem, as four short lines under a rule. No cards, no icons: the
+   point is that each line is read in under a second. */
+.pdp-pain__list {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  max-width: 52ch;
+}
+.pdp-pain__list li {
+  padding-block: 15px;
+  border-block-start: 1px solid var(--pdp-hair);
+  font-size: clamp(16px, 4.1vw, 18px);
+  line-height: 1.45;
+  color: var(--pdp-soft);
+}
+.pdp-pain__list li:last-child { border-block-end: 1px solid var(--pdp-hair); }
+
+/* How it works: numbered, tight, with the photograph carrying the weight. */
+.pdp-move { display: grid; gap: clamp(26px, 4vw, 48px); }
+.pdp-move__fig { margin: 0; border-radius: var(--pdp-r-img); overflow: hidden; background: var(--pl-cream); }
+.pdp-move__fig img { display: block; width: 100%; height: auto; aspect-ratio: var(--pdp-ratio, 4 / 5); object-fit: cover; }
+.pdp-move__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; counter-reset: pdpmove; }
+.pdp-move__steps li { display: grid; gap: 5px; counter-increment: pdpmove; }
+.pdp-move__steps li::before {
+  content: counter(pdpmove);
+  font-family: var(--pl-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pdp-accent);
+  letter-spacing: .08em;
+}
+.pdp-move__steps strong { font-family: var(--pl-display); font-size: clamp(17px, 4.3vw, 19px); font-weight: 600; }
+.pdp-move__steps span { font-size: 15.5px; line-height: 1.55; color: var(--pdp-soft); max-width: 46ch; }
+@media (min-width: 860px) {
+  .pdp-move { grid-template-columns: 1fr 1fr; align-items: center; }
+  .pdp-move--flip .pdp-move__fig { order: 2; }
+}
+
+/* Benefits. The numeral is the only decoration, and it is the accent's second
+   and last appearance on the page. */
+.pdp-ben {
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.pdp-ben li {
+  display: grid;
+  gap: 6px;
+  padding-block: clamp(22px, 4vw, 30px);
+  border-block-start: 1px solid var(--pdp-hair);
+}
+.pdp-ben li:last-child { border-block-end: 1px solid var(--pdp-hair); }
+.pdp-ben__num {
+  font-family: var(--pl-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--pdp-accent);
+}
+.pdp-ben__t { font-family: var(--pl-display); font-size: clamp(18px, 4.6vw, 22px); font-weight: 600; line-height: 1.25; }
+.pdp-ben__d { font-size: 15.5px; line-height: 1.6; color: var(--pdp-soft); margin: 0; max-width: 54ch; }
+@media (min-width: 860px) {
+  .pdp-ben { grid-template-columns: 1fr 1fr; column-gap: 56px; }
+  .pdp-ben li:nth-child(2) { border-block-start: 1px solid var(--pdp-hair); }
+  .pdp-ben li:nth-last-child(2) { border-block-end: 1px solid var(--pdp-hair); }
+}
+
+/* Photography with nothing written on it. */
+.pdp-figure { margin: 0; display: grid; gap: 12px; }
+.pdp-figure__frame { border-radius: var(--pdp-r-img); overflow: hidden; background: var(--pl-cream); }
+.pdp-figure__frame img { display: block; width: 100%; height: auto; aspect-ratio: var(--pdp-ratio, 1); object-fit: cover; }
+.pdp-figure figcaption { font-size: 13px; line-height: 1.5; color: var(--pdp-mute); }
+
+.pdp-strip { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+.pdp-strip li { margin: 0; border-radius: var(--pdp-r-img); overflow: hidden; background: var(--pl-cream); min-width: 0; }
+.pdp-strip img { display: block; width: 100%; height: auto; aspect-ratio: var(--pdp-ratio, 1); object-fit: cover; }
+@media (min-width: 860px) { .pdp-strip { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+
+/* --------------------------------------------------------------------------
+   PRODUCT INFO and FAQ
+   Every fact on the page lives here, in one column of disclosures. Closed by
+   default so the page ends short; open in one tap for whoever wants depth.
+   -------------------------------------------------------------------------- */
+.pdp-acc { margin-block-start: 30px; border-block-start: 1px solid var(--pdp-line); }
+.pdp-acc__item { border-block-end: 1px solid var(--pdp-line); }
+.pdp-acc__sum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 19px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--pl-display);
+  font-size: clamp(16px, 4.2vw, 18px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pdp-acc__sum::-webkit-details-marker { display: none; }
+.pdp-acc__sum:focus-visible { outline: 2px solid var(--pdp-ink); outline-offset: -2px; }
+.pdp-acc__sign {
+  position: relative;
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+}
+.pdp-acc__sign::before,
+.pdp-acc__sign::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
+  width: 13px;
+  height: 1.5px;
+  background: var(--pdp-ink);
+  transition: transform .28s var(--pl-ease), opacity .28s var(--pl-ease);
+}
+.pdp-acc__sign::after { transform: rotate(90deg); }
+[open] > .pdp-acc__sum .pdp-acc__sign::after { transform: rotate(0); opacity: 0; }
+.pdp-acc__body { padding-block-end: 24px; max-width: 58ch; }
+.pdp-acc__body > :first-child { margin-block-start: 0; }
+.pdp-acc__body p { font-size: 15.5px; line-height: 1.65; color: var(--pdp-soft); margin-block: 0 12px; }
+.pdp-acc__body p:last-child { margin-block-end: 0; }
+
+.pdp-acc__ol { margin: 0; padding-inline-start: 1.25em; display: grid; gap: 9px; }
+.pdp-acc__ol li { font-size: 15.5px; line-height: 1.55; color: var(--pdp-soft); }
+.pdp-acc__ol li strong { color: var(--pdp-ink); font-weight: 600; }
+.pdp-acc__ol li strong + span { margin-inline-start: .4em; }
+
+.pdp-acc__ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.pdp-acc__ul li {
+  position: relative;
+  padding-inline-start: 20px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--pdp-soft);
+}
+.pdp-acc__ul li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 2px;
+  inset-block-start: .62em;
+  width: 6px;
+  height: 1.5px;
+  background: var(--pdp-mute);
+}
+
+/* Specification rows read as a table without being one, so a missing value
+   simply removes its row instead of leaving a hole. */
+.pdp-spec { margin: 0; display: grid; gap: 0; }
+.pdp-spec__row {
+  display: grid;
+  grid-template-columns: minmax(9ch, 12ch) 1fr;
+  gap: 14px;
+  padding-block: 11px;
+  border-block-start: 1px solid var(--pdp-hair);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.pdp-spec__row:first-child { border-block-start: 0; padding-block-start: 0; }
+.pdp-spec dt { color: var(--pdp-mute); }
+.pdp-spec dd { margin: 0; color: var(--pdp-ink); }
+
+/* --------------------------------------------------------------------------
+   STICKY BUY BAR, phones only
+   -------------------------------------------------------------------------- */
+.pdp-bar {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 60;
+  background: rgba(251, 249, 245, .94);
+  backdrop-filter: blur(12px);
+  border-block-start: 1px solid var(--pdp-line);
+  padding: 10px var(--pl-gutter) calc(10px + env(safe-area-inset-bottom));
+  visibility: hidden;
+  transform: translateY(100%);
+  transition: transform .3s var(--pl-ease), visibility .3s var(--pl-ease);
+}
+.pdp-bar.is-up { visibility: visible; transform: none; }
+/* Reserved as soon as the bar exists rather than when it rises, so revealing
+   it never shifts the page under a thumb. */
+.pdp-has-bar body { padding-block-end: 80px; }
+.pdp-bar__inner { display: flex; align-items: center; gap: 14px; }
+.pdp-bar__price {
+  font-family: var(--pl-display);
+  font-size: 19px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.pdp-bar__form { margin: 0; margin-inline-start: auto; flex: 1 1 auto; }
+.pdp-bar__submit {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--pdp-r-ctl);
+  background: var(--pdp-ink);
+  color: var(--pl-porcelain);
+  font-family: var(--pl-sans);
+  font-size: 16px;
+  font-weight: 600;
+  padding-block: 14px;
+  cursor: pointer;
+}
+.pdp-bar__submit[disabled] { background: var(--pdp-mute); cursor: not-allowed; }
+@media (min-width: 1000px) { .pdp-bar { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pdp-bar,
+  .pdp-acc__sign::before,
+  .pdp-acc__sign::after,
+  .pdp-hero__thumb { transition: none; }
+}

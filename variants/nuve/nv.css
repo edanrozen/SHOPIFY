@@ -1,0 +1,218 @@
+/* ==========================================================================
+   TinyBloom in the shape of a single product landing page, read off the
+   screenshots of nuvebrand.com.
+
+   nuvebrand.com is blocked from this sandbox, so this is built from the four
+   screenshots rather than from the live page. Anything below that looks like a
+   sampled value is a reading off a phone screenshot, not a measurement.
+
+   This sheet loads after wf.css and overrides it. What it changes is not the
+   colour, it is the argument the page makes. wf.css lays out a shop: here is
+   the catalogue, pick something. This lays out a pitch: here is one problem,
+   here is the one thing that solves it, here is the button, and the button
+   comes back four times on the way down.
+
+   That shape suits this store better than it looks. Bloom is 199.99 against a
+   catalogue whose next most expensive item is 139.90. A page that sells Bloom
+   and mentions the rest is worth more than a page that shows nine things and
+   argues for none of them.
+   ========================================================================== */
+
+:root {
+  /* One accent, and it is loud on purpose. On that page the pink is the only
+     colour, and every pill is the same pink, so a pill always means "this is
+     the thing to press". --nv-pink is the single line that decides. */
+  --nv-pink:      #E51E8C;
+  --nv-pink-deep: #C2156F;
+
+  --wf-accent:      var(--nv-pink);
+  --wf-accent-deep: var(--nv-pink-deep);
+
+  --pl-cream:     #F4F4F4;
+  --pl-sand:      #F4F4F4;
+  --pl-ink:       #111111;
+  --pl-ink-soft:  #4A4A4A;
+  --pl-taupe:     #616161;
+  --pl-line:      #E4E4E4;
+}
+
+/* Full width and fully round, and it says what happens rather than "buy". On
+   that page every button is this button. */
+.nv-cta {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
+  text-align: center;
+  font-family: var(--pl-sans);
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 21px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--nv-pink);
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s var(--pl-ease);
+}
+.nv-cta:hover { background: var(--nv-pink-deep); }
+.nv-cta[disabled] { background: var(--pl-taupe); cursor: not-allowed; }
+
+/* The reassurance line that sits under every button on that page, small and
+   centred with a mark beside it. Theirs says 100 days. This one says what the
+   shop actually offers. */
+.nv-under {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--pl-sans);
+  font-size: .88rem;
+  color: var(--pl-ink-soft);
+  margin: 14px 0 0;
+}
+.nv-under svg { width: 18px; height: 18px; stroke: var(--pl-ink-soft); fill: none; stroke-width: 1.6; flex: none; }
+
+/* ---- hero ----------------------------------------------------------------
+   Photograph first at full width, then everything else centred under it. Not
+   copy over the image: on that page the picture is the product on a plain
+   ground and the words sit below it, which is what lets the headline be this
+   large without fighting anything. */
+/* 46vh on a phone, not 62vh. Measured: at 62vh the hero button's top landed at
+   778px on an 844px screen, so the thing the whole page exists to be pressed was
+   below the fold. At 46vh the eyebrow, the headline, the line under it and the
+   button all fit on the first screen, which is the only arrangement that makes
+   a landing page a landing page. */
+.nv-hero__media { background: var(--pl-cream); }
+.nv-hero__media img { width: 100%; height: auto; display: block; max-height: 46vh; object-fit: contain; }
+@media (min-width: 750px) { .nv-hero__media img { max-height: 62vh; } }
+
+.nv-hero__copy { text-align: center; padding-block: clamp(26px, 4.5vw, 44px) clamp(30px, 5vw, 56px); }
+.nv-eyebrow {
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--pl-taupe);
+  margin: 0 0 16px;
+}
+/* The headline is the page. Three short sentences, each ending in a full stop,
+   which is the rhythm that makes theirs read as a promise rather than a slogan. */
+.nv-h1 {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 8vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -.022em;
+  color: var(--pl-ink);
+  margin: 0 auto 16px;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.nv-lede {
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.6vw, 1.14rem);
+  line-height: 1.55;
+  color: var(--pl-taupe);
+  margin: 0 auto clamp(22px, 3.4vw, 32px);
+  max-width: 38ch;
+}
+
+/* ---- the buy block -------------------------------------------------------
+   The same product again, lower down, this time with the button that adds it
+   to the cart rather than one that scrolls. On that page it is the second ask,
+   after the argument has been made. */
+.nv-buy { text-align: center; }
+.nv-buy__media { background: var(--pl-cream); border-radius: 14px; overflow: hidden; margin-bottom: clamp(20px, 3vw, 30px); }
+.nv-buy__media img { width: 100%; height: auto; display: block; aspect-ratio: 1 / 1; object-fit: contain; }
+.nv-buy__title {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
+  line-height: 1.18;
+  color: var(--pl-ink);
+  margin: 0 0 12px;
+}
+.nv-buy__text {
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.4vw, 1.08rem);
+  line-height: 1.6;
+  color: var(--pl-taupe);
+  margin: 0 auto clamp(20px, 3vw, 28px);
+  max-width: 42ch;
+}
+.nv-buy__price { font-family: var(--pl-display); font-size: 1.5rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 20px; }
+.nv-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--pl-sans);
+  font-size: .98rem;
+  font-weight: 600;
+  color: var(--pl-ink);
+  text-decoration: none;
+  margin-top: 12px;
+  /* Padded to a 44px box rather than sized up: a thumb needs the target, the
+     layout does not need a bigger link. The rule under it stays on the text. */
+  padding-block: 13px;
+  box-shadow: inset 0 -1px 0 var(--pl-line);
+}
+.nv-more:hover { box-shadow: inset 0 -1px 0 var(--pl-ink); }
+/* The arrow is a glyph, so it points the wrong way the moment the page is in
+   Hebrew. Physical transform, not a logical property: there is nothing logical
+   about a rotated triangle. */
+.nv-more svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+[dir="rtl"] .nv-more svg { transform: scaleX(-1); }
+
+/* ---- problem and answer --------------------------------------------------
+   Their version is a wall of copy between the hero and the second button.
+   This one keeps the pair the product already carries in its metafields, so
+   the section cannot say anything the product page does not. */
+.nv-pitch { text-align: center; max-width: 46ch; margin-inline: auto; }
+.nv-pitch__problem {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.6vw, 1.9rem);
+  line-height: 1.25;
+  color: var(--pl-ink);
+  margin: 0 0 14px;
+}
+.nv-pitch__answer {
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  line-height: 1.65;
+  color: var(--pl-taupe);
+  margin: 0 0 clamp(24px, 3.6vw, 34px);
+}
+
+/* ---- the benefit list ----------------------------------------------------
+   Emoji rather than drawn icons, exactly as on that page. It looks careless
+   and it is not: an emoji renders the same everywhere, needs no file, and in
+   this category reads warmer than a line drawing. Left aligned, heading then
+   a grey paragraph. */
+.nv-benefits { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(22px, 3.4vw, 30px); max-width: 52ch; }
+.nv-benefit__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(1.12rem, 3.4vw, 1.3rem);
+  color: var(--pl-ink);
+  margin: 0 0 8px;
+}
+.nv-benefit__emoji { font-size: 1.35em; line-height: 1; flex: none; }
+.nv-benefit__text { font-family: var(--pl-sans); font-size: clamp(.98rem, 2.4vw, 1.05rem); line-height: 1.65; color: var(--pl-taupe); margin: 0; }
+
+/* ---- the rest of the shop ------------------------------------------------
+   That page has one product and nothing else. This shop has nine, and hiding
+   eight of them would cost more than the focus is worth, so they sit below the
+   argument rather than above it. */
+.nv-rest { text-align: center; }
+.nv-rest .wf-grid { text-align: start; margin-top: clamp(22px, 3vw, 32px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nv-cta { transition: none; }
+}

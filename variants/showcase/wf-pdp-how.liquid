@@ -1,0 +1,48 @@
+{%- doc -%}
+  How it is used, as a numbered rail, from custom.steps.
+
+  A rule is drawn between the numbers so the block reads as an order of
+  operations rather than as a pile of tips. The last step does not draw it, so
+  the sequence visibly ends.
+{%- enddoc -%}
+
+{%- liquid
+  assign steps = product.metafields.custom.steps.value
+-%}
+
+{%- if steps.size > 0 -%}
+  <section class="wf-band wf-band--blush">
+    <div class="pl-wrap">
+      <div class="wf-band__head">
+        <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="wf-sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <ol class="wf-steps">
+        {%- for item in steps -%}
+          <li class="wf-step">
+            <div class="wf-step__n" aria-hidden="true">{{ forloop.index }}</div>
+            <div>
+              <h3 class="wf-step__t">{{ item.title }}</h3>
+              <p class="wf-step__x">{{ item.text }}</p>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מוצר · איך משתמשים",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "איך משתמשים בזה" },
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" }
+  ],
+  "presets": [{ "name": "מוצר · איך משתמשים" }]
+}
+{% endschema %}

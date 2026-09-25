@@ -1,0 +1,180 @@
+{%- doc -%}
+  The product page, in the same posture as the homepage.
+
+  Gallery on one side, and on the other the five things a decision is made
+  with: the name, the problem the product answers, the price, one button and
+  one line about delivery. The problem and answer pair comes from the product's
+  own metafields, so nothing here is written by the section.
+
+  The price, the button and the shipping line sit inside one bordered panel,
+  the way Chewy separates what a thing is from buying it. On a phone that panel
+  is what you land on after the gallery.
+
+  The thumbnail strip is one swipeable row rather than two wrapped ones. Eight
+  thumbnails on two rows cost about 90px of height directly above the price,
+  which is the last thing worth pushing down a phone screen.
+
+  Below 900px the buy box is a screen and a bit under the fold, so the page also
+  carries a fixed bar with the price and the same button. It is the second form
+  on the page and posts the same variant; nothing about it is conditional on
+  JavaScript.
+{%- enddoc -%}
+
+{%- liquid
+  assign media = product.media | where: 'media_type', 'image'
+  assign hero = product.featured_media
+  if hero == blank and media.size > 0
+    assign hero = media.first
+  endif
+  assign problem = product.metafields.custom.problem_line.value
+  assign solution = product.metafields.custom.solution_line.value
+  assign highlights = product.metafields.custom.highlights.value
+
+  comment
+    Free shipping is a threshold on the order, so it is only claimed on a
+    product that clears it on its own. Anything cheaper says nothing here.
+  endcomment
+  assign free_from = 19900
+  assign ships_free = false
+  if product.price >= free_from
+    assign ships_free = true
+  endif
+-%}
+
+<div class="pl-wrap">
+  <div class="wf-pdp">
+    <div>
+      <div class="wf-pdp__stage">
+        {%- if hero != blank -%}
+          <img
+            id="wf-stage"
+            src="{{ hero | image_url: width: 1100 }}"
+            srcset="{{ hero | image_url: width: 600 }} 600w, {{ hero | image_url: width: 1100 }} 1100w"
+            sizes="(max-width: 900px) 92vw, 52vw"
+            width="{{ hero.preview_image.width }}"
+            height="{{ hero.preview_image.height }}"
+            alt="{{ hero.alt | default: product.title | escape }}"
+            fetchpriority="high"
+            decoding="async"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- if media.size > 1 -%}
+        <ul class="wf-pdp__thumbs" role="list">
+          {%- for item in media -%}
+            <li>
+              <button
+                type="button"
+                class="wf-pdp__thumb"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="תמונה {{ forloop.index }} מתוך {{ media.size }}"
+                data-src="{{ item | image_url: width: 1100 }}"
+                data-srcset="{{ item | image_url: width: 600 }} 600w, {{ item | image_url: width: 1100 }} 1100w"
+              >
+                <img src="{{ item | image_url: width: 180 }}" width="{{ item.preview_image.width }}" height="{{ item.preview_image.height }}" alt="" loading="lazy" decoding="async">
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div>
+      <h1 class="wf-pdp__title">{{ product.title }}</h1>
+
+      {%- if problem != blank -%}
+        <p class="wf-flag__problem">{{ problem }}</p>
+      {%- endif -%}
+      {%- if solution != blank -%}
+        <p class="wf-sub">{{ solution }}</p>
+      {%- endif -%}
+
+      {%- comment -%}
+        The selling points sit above the buy box, not below it.
+
+        A price and a button reached before the reader knows what the thing is
+        asks for a decision that has not been earned yet. These four or five
+        lines are the shortest honest answer to "what am I buying", so they go
+        in front of the money and the long argument stays behind it. The band
+        further down no longer repeats them.
+      {%- endcomment -%}
+      {%- if section.settings.points_above and highlights.size > 0 -%}
+        <ul class="wf-points wf-points--lede" role="list">
+          {%- for line in highlights -%}
+            <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <div class="wf-buybox">
+        <p class="wf-pdp__price">
+          {{ product.price | money }}
+          {%- if product.compare_at_price > product.price -%}
+            <s class="wf-pdp__was">{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+        </p>
+
+        {%- if ships_free -%}
+          <p class="wf-pdp__ship">משלוח חינם למוצר הזה</p>
+        {%- endif -%}
+
+        {%- form 'product', product, class: 'wf-pdp__form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="wf-btn wf-pdp__submit" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if section.settings.note != blank -%}
+          <p class="wf-pdp__note">{{ section.settings.note }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if product.description != blank -%}
+        <div class="wf-pdp__rte">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="wf-buybar">
+  <span class="wf-buybar__price">{{ product.price | money }}</span>
+  {%- form 'product', product, class: 'wf-buybar__form' -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" class="wf-btn wf-buybar__btn" {% unless product.available %}disabled{% endunless %}>
+      {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+    </button>
+  {%- endform -%}
+</div>
+<div class="wf-buybar__spacer" aria-hidden="true"></div>
+
+{%- if media.size > 1 -%}
+  <script>
+    (function () {
+      var stage = document.getElementById('wf-stage');
+      var thumbs = document.querySelectorAll('.wf-pdp__thumb');
+      if (!stage || !thumbs.length) return;
+      thumbs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          stage.srcset = btn.dataset.srcset;
+          stage.src = btn.dataset.src;
+          thumbs.forEach(function (other) { other.setAttribute('aria-current', other === btn ? 'true' : 'false'); });
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "תמות · דף מוצר",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם מעל 199 ₪ · 30 יום ניסיון" },
+    { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true }
+  ],
+  "presets": [{ "name": "תמות · דף מוצר" }]
+}
+{% endschema %}

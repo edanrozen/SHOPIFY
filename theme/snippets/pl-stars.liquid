@@ -1,0 +1,28 @@
+{%- doc -%}
+  Star rating.
+  @param {number} value - rating out of 5
+  @param {number} [size] - star size in px
+  @param {string} [label] - accessible label; omit inside an already-labelled block
+{%- enddoc -%}
+
+{%- liquid
+  assign v = value | default: 0 | times: 1.0
+  assign pct = v | times: 20
+  assign px = size | default: 15
+-%}
+<span
+  class="pl-stars"
+  style="--pl-stars-pct: {{ pct }}%; --pl-stars-size: {{ px }}px;"
+  {% if label %}role="img" aria-label="{{ label }}"{% else %}aria-hidden="true"{% endif %}
+>
+  <span class="pl-stars__row pl-stars__row--bg">
+    {%- for i in (1..5) -%}
+      <svg viewBox="0 0 20 20" fill="currentColor" focusable="false"><path d="M10 1.6l2.47 5.3 5.53.66-4.1 3.9 1.1 5.7L10 14.4 4.99 17.16l1.1-5.7-4.1-3.9 5.54-.66z"/></svg>
+    {%- endfor -%}
+  </span>
+  <span class="pl-stars__row pl-stars__row--fg">
+    {%- for i in (1..5) -%}
+      <svg viewBox="0 0 20 20" fill="currentColor" focusable="false"><path d="M10 1.6l2.47 5.3 5.53.66-4.1 3.9 1.1 5.7L10 14.4 4.99 17.16l1.1-5.7-4.1-3.9 5.54-.66z"/></svg>
+    {%- endfor -%}
+  </span>
+</span>

@@ -1,0 +1,476 @@
+/*
+ * TinyBloom · product story
+ *
+ * Lifted out of the section's {% stylesheet %} block on purpose. Shopify
+ * concatenates every section stylesheet into one file and serves it on every
+ * page, so this sheet was being downloaded on the homepage and on collection
+ * pages that never render a single one of these classes. As an asset it is
+ * linked only from the product template.
+ *
+ * It loads after pluma.css. The three names it shares with that sheet
+ * (pl-h2, pl-lede, pl-eyebrow) are overridden here through `.pl-story2 x`,
+ * which wins on specificity rather than on order, so the split is safe.
+ */
+.pl-story2--porcelain { background: var(--pl-porcelain); }
+.pl-story2--cream     { background: var(--pl-cream); }
+.pl-story2__part { margin-block-start: clamp(38px, 6vw, 74px); }
+.pl-story2__part:first-child { margin-block-start: 0; }
+.pl-story2 .pl-h2 { margin-block-end: clamp(16px, 2.4vw, 26px); }
+.pl-story2 .pl-lede { margin-block: -6px 22px; }
+
+/* ---- the problem, three ways ------------------------------------------- */
+.pl-prob__text {
+  font-family: var(--pl-display);
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0;
+  text-wrap: pretty;
+}
+.pl-prob--panel {
+  background: var(--pl-cream);
+  border-radius: var(--pl-r-l);
+  padding: clamp(22px, 4vw, 44px);
+}
+.pl-story2--cream .pl-prob--panel { background: var(--pl-white); }
+.pl-prob--panel .pl-prob__text { font-size: clamp(1.24rem, 4.6vw, 1.9rem); color: var(--pl-ink); max-width: 40ch; }
+
+/* No box at all: the sentence carries itself, for a product whose problem is
+   the whole argument. */
+.pl-prob--plain .pl-prob__text {
+  font-size: clamp(1.45rem, 6vw, 2.5rem);
+  color: var(--pl-ink);
+  max-width: 26ch;
+  letter-spacing: -.01em;
+}
+
+/* Inverted, for a page that needs the problem to land hard before anything
+   else is offered. */
+.pl-prob--bar {
+  background: var(--pl-ink);
+  border-radius: var(--pl-r-l);
+  padding: clamp(24px, 4.4vw, 48px);
+}
+.pl-prob--bar .pl-eyebrow { color: var(--pl-sand-deep); }
+.pl-prob--bar .pl-prob__text { font-size: clamp(1.3rem, 5vw, 2.05rem); color: var(--pl-porcelain); max-width: 34ch; }
+
+/* ---- before / after ---------------------------------------------------- */
+.pl-cmp { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .pl-cmp--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+/* `rows` stays one column at every width: two full width bands read as a
+   sequence in time, which suits a product whose story is a before and an
+   after rather than a pair of options. */
+.pl-cmp--rows { gap: 12px; }
+.pl-cmp__card {
+  min-width: 0;
+  border-radius: var(--pl-r-l);
+  padding: clamp(18px, 3vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pl-cmp__card--before { background: var(--pl-white); border: 1px solid var(--pl-line); }
+.pl-cmp__card--after  { background: var(--pl-ink); color: var(--pl-porcelain); }
+.pl-cmp--rows .pl-cmp__card { display: grid; gap: 10px; }
+@media (min-width: 620px) {
+  .pl-cmp--rows .pl-cmp__card { grid-template-columns: 92px minmax(0, 1fr); align-items: start; gap: 20px; }
+}
+.pl-cmp__tag {
+  align-self: flex-start;
+  font-family: var(--pl-sans);
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 6px 13px;
+  border-radius: var(--pl-r-pill);
+}
+.pl-cmp__card--before .pl-cmp__tag { background: var(--pl-sand); color: var(--pl-ink-soft); }
+.pl-cmp__card--after  .pl-cmp__tag { background: var(--pl-clay); color: var(--pl-porcelain); }
+.pl-cmp__img { width: 100%; height: auto; border-radius: var(--pl-r-m); display: block; }
+.pl-cmp--rows .pl-cmp__img { grid-column: 1 / -1; }
+.pl-cmp__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+.pl-cmp__list li {
+  position: relative;
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  line-height: 1.6;
+  padding-inline-start: 26px;
+}
+.pl-cmp__card--before .pl-cmp__list li { color: var(--pl-ink-soft); }
+.pl-cmp__card--after  .pl-cmp__list li { color: var(--pl-porcelain); }
+/* The tick and the dash are drawn, never typed, so no emoji font is involved.
+   Physical borders on purpose: a tick built from logical borders becomes a
+   chevron the moment the page is RTL. */
+.pl-cmp__list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: .42em;
+  width: 12px; height: 7px;
+}
+.pl-cmp__card--after .pl-cmp__list li::before {
+  border-left: 2px solid var(--pl-clay);
+  border-bottom: 2px solid var(--pl-clay);
+  transform: rotate(-45deg);
+}
+.pl-cmp__card--before .pl-cmp__list li::before {
+  inset-block-start: .55em;
+  height: 0;
+  border-bottom: 2px solid var(--pl-sand-deep);
+}
+
+/* ---- steps, three ways -------------------------------------------------- */
+.pl-steps { list-style: none; margin: 0; padding: 0; }
+.pl-steps__title { font-family: var(--pl-sans); font-size: 1rem; font-weight: 700; color: var(--pl-ink); margin: 0; }
+.pl-steps__text { font-family: var(--pl-sans); font-size: .92rem; line-height: 1.65; color: var(--pl-ink-soft); margin: 7px 0 0; }
+.pl-steps__num {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  color: var(--pl-clay);
+  font-variant-numeric: tabular-nums;
+}
+
+.pl-steps--cards { display: grid; gap: 16px; }
+@media (min-width: 640px)  { .pl-steps--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+@media (min-width: 1024px) { .pl-steps--cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.pl-steps--cards .pl-steps__item {
+  min-width: 0;
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--pl-r-m);
+  padding: clamp(16px, 2.6vw, 24px);
+}
+.pl-steps--cards .pl-steps__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: var(--pl-r-pill);
+  background: var(--pl-cream);
+  font-size: .95rem;
+  margin-block-end: 12px;
+}
+
+/* A rail down the start edge, for a routine that is genuinely sequential. */
+.pl-steps--timeline { display: grid; gap: 0; }
+.pl-steps--timeline .pl-steps__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 14px;
+  padding-block: 0 26px;
+}
+.pl-steps--timeline .pl-steps__item:last-child { padding-block-end: 0; }
+/* The connector sits under the numbers, inset on the start edge so it mirrors
+   with the page instead of being pinned to the left. */
+.pl-steps--timeline .pl-steps__item::before {
+  content: "";
+  position: absolute;
+  inset-block: 34px 0;
+  inset-inline-start: 22px;
+  width: 2px;
+  background: var(--pl-sand);
+}
+.pl-steps--timeline .pl-steps__item:last-child::before { display: none; }
+.pl-steps--timeline .pl-steps__num {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px; height: 46px;
+  border-radius: var(--pl-r-pill);
+  background: var(--pl-cream);
+  border: 2px solid var(--pl-porcelain);
+  font-size: 1rem;
+}
+.pl-story2--cream .pl-steps--timeline .pl-steps__num { background: var(--pl-white); border-color: var(--pl-cream); }
+
+/* Big quiet numerals, no boxes: for a two or three step product where cards
+   would be more furniture than the content deserves. */
+.pl-steps--strip { display: grid; gap: 22px; }
+/* minmax needs a real floor: `minmax(0, 1fr)` with auto-fit can never form
+   a second column, so the strip would have silently stayed one column at
+   every width. 190px is the narrowest a numbered step reads well at. */
+@media (min-width: 760px) { .pl-steps--strip { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 28px; } }
+.pl-steps--strip .pl-steps__item {
+  min-width: 0;
+  padding-block-start: 14px;
+  border-block-start: 2px solid var(--pl-sand-deep);
+}
+.pl-steps--strip .pl-steps__num { display: block; font-size: 1.5rem; margin-block-end: 8px; }
+
+/* ---- why it works, three ways ------------------------------------------ */
+.pl-why { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.pl-why__title { font-family: var(--pl-sans); font-size: 1rem; font-weight: 700; color: var(--pl-ink); margin: 0; }
+.pl-why__text { font-family: var(--pl-sans); font-size: .94rem; line-height: 1.7; color: var(--pl-ink-soft); margin: 6px 0 0; }
+.pl-why__item { min-width: 0; }
+
+@media (min-width: 760px) { .pl-why--rules, .pl-why--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
+.pl-why--rules .pl-why__item { padding-inline-start: 18px; border-inline-start: 2px solid var(--pl-sand); }
+.pl-why--cards .pl-why__item {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--pl-r-m);
+  padding: clamp(16px, 2.6vw, 22px);
+}
+/* One column, wider measure: reads as an argument made in order rather than a
+   grid of equal claims. */
+.pl-why--stack { gap: 0; }
+.pl-why--stack .pl-why__item { padding-block: 18px; border-block-end: 1px solid var(--pl-line); }
+.pl-why--stack .pl-why__item:last-child { border-block-end: 0; }
+.pl-why--stack .pl-why__text { max-width: 62ch; }
+
+/* ---- key points --------------------------------------------------------- */
+.pl-keys { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 760px) { .pl-keys { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; } }
+.pl-keys li {
+  position: relative;
+  min-width: 0;
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--pl-ink-soft);
+  padding-inline-start: 28px;
+}
+.pl-keys li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: .45em;
+  width: 13px; height: 7px;
+  border-left: 2.5px solid var(--pl-clay);
+  border-bottom: 2.5px solid var(--pl-clay);
+  transform: rotate(-45deg);
+}
+
+/* ---- audience and safety ------------------------------------------------ */
+.pl-story2__note { margin-block-start: 10px; max-width: 56ch; }
+.pl-story2__pets { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-ink-soft); margin: 12px 0 0; }
+.pl-safety--note { padding-inline-start: 18px; border-inline-start: 3px solid var(--pl-clay); }
+.pl-safety--panel {
+  background: var(--pl-cream);
+  border-radius: var(--pl-r-m);
+  padding: clamp(18px, 3vw, 28px);
+}
+.pl-story2--cream .pl-safety--panel { background: var(--pl-white); }
+
+/* ---- product FAQ -------------------------------------------------------- */
+.pl-qa { border-block-start: 1px solid var(--pl-line); }
+.pl-qa__row { border-block-end: 1px solid var(--pl-line); }
+.pl-qa__q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  /* 56px of row, so the whole question is a thumb target. */
+  padding-block: 18px;
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  cursor: pointer;
+  list-style: none;
+}
+.pl-qa__q::-webkit-details-marker { display: none; }
+.pl-qa__q:focus-visible { outline: 2px solid var(--pl-clay); outline-offset: 2px; }
+/* A plus that becomes a minus: two bars, one rotated. No icon font, and
+   nothing that mirrors under RTL. */
+.pl-qa__sign { position: relative; flex: 0 0 auto; width: 14px; height: 14px; margin-block-start: 4px; }
+.pl-qa__sign::before, .pl-qa__sign::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 6px;
+  inset-inline-start: 0;
+  width: 14px; height: 2px;
+  background: var(--pl-clay);
+  transition: transform .25s var(--pl-ease);
+}
+.pl-qa__sign::after { transform: rotate(90deg); }
+.pl-qa__row[open] .pl-qa__sign::after { transform: rotate(0deg); }
+.pl-qa__a { padding-block-end: 20px; }
+.pl-qa__a p {
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  line-height: 1.75;
+  color: var(--pl-ink-soft);
+  margin: 0;
+  max-width: 62ch;
+}
+/* Why the usual approach falls short. The claim is set back and muted, the
+   reality carries the weight, so the eye lands on the answer and not the myth. */
+.pl-vs { display: grid; gap: 12px; }
+.pl-vs__row {
+  display: grid; gap: 10px;
+  padding: clamp(16px, 3.4vw, 24px);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--pl-r-m);
+  background: var(--pl-white);
+}
+.pl-story2--cream .pl-vs__row { background: var(--pl-porcelain); }
+@media (min-width: 760px) {
+  .pl-vs--split .pl-vs__row { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(18px, 3vw, 34px); align-items: start; }
+  .pl-vs--split .pl-vs__side--real { border-inline-start: 1px solid var(--pl-line); padding-inline-start: clamp(18px, 3vw, 34px); }
+}
+.pl-vs__side { min-width: 0; display: grid; gap: 7px; align-content: start; }
+.pl-vs__tag {
+  font-family: var(--pl-sans); font-size: .72rem; font-weight: 700;
+  letter-spacing: .04em; text-transform: none; color: var(--pl-taupe);
+}
+.pl-vs__side--real .pl-vs__tag { color: var(--pl-clay); }
+.pl-vs__text { margin: 0; font-family: var(--pl-sans); font-size: .97rem; line-height: 1.62; color: var(--pl-ink-soft); }
+.pl-vs__side--claim .pl-vs__text { color: var(--pl-taupe); }
+.pl-vs__side--real .pl-vs__text { color: var(--pl-ink); font-weight: 500; }
+/* Stacked variant: the reality is pulled out as the statement, the claim sits above it as a quiet aside. */
+.pl-vs--stack .pl-vs__row { border: 0; border-radius: 0; background: none; padding: 0 0 clamp(16px, 3vw, 22px); border-block-end: 1px solid var(--pl-line); }
+.pl-story2--cream .pl-vs--stack .pl-vs__row { background: none; }
+.pl-vs--stack .pl-vs__row:last-child { border-block-end: 0; padding-block-end: 0; }
+.pl-vs--stack .pl-vs__side--real .pl-vs__text { font-family: var(--pl-display); font-size: clamp(1.02rem, 3.2vw, 1.24rem); line-height: 1.48; font-weight: 500; }
+
+/* Which one is right for me. The product being viewed stays in the row but is
+   marked and un-clickable, so the customer places it against its siblings
+   rather than wondering whether they are on the right page. */
+.pl-pick { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .pl-pick { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; } }
+.pl-pick__item {
+  min-width: 0; display: grid; gap: 8px; align-content: start;
+  padding: clamp(16px, 3.4vw, 22px);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--pl-r-m);
+  background: var(--pl-white);
+}
+.pl-story2--cream .pl-pick__item { background: var(--pl-porcelain); }
+.pl-pick__item.is-current { border-color: var(--pl-clay); box-shadow: var(--pl-sh-s); }
+.pl-pick__top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.pl-pick__name { margin: 0; font-family: var(--pl-display); font-size: 1.02rem; font-weight: 600; color: var(--pl-ink); }
+.pl-pick__flag {
+  font-family: var(--pl-sans); font-size: .68rem; font-weight: 700; color: var(--pl-white);
+  background: var(--pl-clay); border-radius: var(--pl-r-pill); padding: 3px 10px;
+}
+.pl-pick__best { margin: 0; font-family: var(--pl-sans); font-size: .93rem; font-weight: 600; color: var(--pl-clay); }
+.pl-pick__note { margin: 0; font-family: var(--pl-sans); font-size: .88rem; line-height: 1.6; color: var(--pl-ink-soft); }
+.pl-pick__link {
+  margin-block-start: 2px; display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--pl-sans); font-size: .87rem; font-weight: 600;
+  color: var(--pl-ink); text-decoration: none;
+  border-block-end: 1px solid var(--pl-line); padding-block-end: 3px; justify-self: start;
+}
+.pl-pick__link:hover { color: var(--pl-clay); border-block-end-color: var(--pl-clay); }
+/* Physical borders on purpose: the arrowhead is a rotated square, so logical
+   sides would swing it to the wrong corner once the page flips to RTL. */
+.pl-pick__arrow { width: 7px; height: 7px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); }
+
+/* Where it works. A plain wrap of surfaces, no icons to invent. */
+.pl-surf { display: flex; flex-wrap: wrap; gap: 9px; }
+.pl-surf__item {
+  font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-ink);
+  background: var(--pl-white); border: 1px solid var(--pl-line);
+  border-radius: var(--pl-r-pill); padding: 8px 15px;
+}
+.pl-story2--cream .pl-surf__item { background: var(--pl-porcelain); }
+.pl-surf--list { display: grid; gap: 0; grid-template-columns: 1fr; }
+@media (min-width: 620px) { .pl-surf--list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(20px, 4vw, 48px); } }
+.pl-surf--list .pl-surf__item {
+  background: none; border: 0; border-block-end: 1px solid var(--pl-line);
+  border-radius: 0; padding: 13px 0; font-size: .95rem;
+}
+
+/* The numbers. Only for products whose specification is genuinely the argument. */
+.pl-spot { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 620px) { .pl-spot { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
+.pl-spot__item {
+  min-width: 0; display: grid; gap: 4px; align-content: start;
+  padding: clamp(18px, 3.4vw, 26px);
+  background: var(--pl-white); border: 1px solid var(--pl-line); border-radius: var(--pl-r-m);
+}
+.pl-story2--cream .pl-spot__item { background: var(--pl-porcelain); }
+.pl-spot__value { font-family: var(--pl-display); font-size: clamp(2.1rem, 8vw, 2.8rem); font-weight: 700; line-height: 1; color: var(--pl-clay); }
+.pl-spot__label { font-family: var(--pl-sans); font-size: .95rem; font-weight: 600; color: var(--pl-ink); }
+.pl-spot__note { font-family: var(--pl-sans); font-size: .85rem; line-height: 1.55; color: var(--pl-taupe); }
+
+/* What arrives in the box. */
+.pl-box { display: grid; gap: 0; grid-template-columns: 1fr; max-width: 46ch; }
+.pl-box__item {
+  position: relative; font-family: var(--pl-sans); font-size: .96rem; color: var(--pl-ink);
+  padding: 13px 0 13px 0; padding-inline-start: 26px; border-block-end: 1px solid var(--pl-line);
+}
+.pl-box__item:last-child { border-block-end: 0; }
+/* Physical borders again: this is a rotated tick, not a box edge. */
+.pl-box__item::before {
+  content: ''; position: absolute; inset-inline-start: 2px; inset-block-start: 19px;
+  width: 9px; height: 5px; border-left: 1.6px solid var(--pl-clay); border-bottom: 1.6px solid var(--pl-clay);
+  transform: rotate(-45deg);
+}
+
+/* Real reviews only. Nothing here renders until reviews_verified is filled. */
+.pl-proof__summary { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-block-end: 20px; }
+.pl-proof__avg { font-family: var(--pl-sans); font-size: .95rem; font-weight: 600; color: var(--pl-ink); }
+.pl-proof__count { font-family: var(--pl-sans); font-size: .88rem; color: var(--pl-taupe); }
+.pl-proof { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .pl-proof { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
+.pl-proof__item {
+  min-width: 0; display: grid; gap: 9px; align-content: start;
+  padding: clamp(16px, 3.4vw, 24px);
+  background: var(--pl-white); border: 1px solid var(--pl-line); border-radius: var(--pl-r-m);
+}
+.pl-story2--cream .pl-proof__item { background: var(--pl-porcelain); }
+.pl-proof__body { margin: 0; font-family: var(--pl-sans); font-size: .95rem; line-height: 1.65; color: var(--pl-ink-soft); }
+.pl-proof__by { margin: 0; display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--pl-sans); font-size: .85rem; }
+.pl-proof__name { font-weight: 600; color: var(--pl-ink); }
+.pl-proof__date { color: var(--pl-taupe); }
+
+/* Every part below is marked up as a list for screen readers, and a flex or
+   grid item keeps `display: list-item`, so the browser still paints a bullet
+   beside each card and chip. Reset the seven of them in one place. */
+.pl-vs, .pl-pick, .pl-surf, .pl-spot, .pl-box, .pl-proof, .pl-gal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+  /* A photograph carrying a line of the argument. The picture keeps its own
+     ratio in every treatment, so no packshot is ever cropped by the layout. */
+  .pl-shot__frame { margin: 0; border-radius: var(--pl-r-l); overflow: hidden; background: var(--pl-cream); }
+  .pl-story2--cream .pl-shot__frame { background: var(--pl-white); }
+  .pl-shot__frame img { display: block; width: 100%; height: auto; aspect-ratio: var(--pl-shot-ratio, 1); object-fit: cover; }
+  .pl-shot__say { display: grid; gap: 8px; align-content: center; }
+  .pl-shot__text { margin: 0; font-family: var(--pl-sans); font-size: 1rem; line-height: 1.7; color: var(--pl-ink-soft); max-width: 52ch; }
+  .pl-shot .pl-h2 { margin-block-end: 0; }
+
+  /* Framed: the picture sits in the column like a plate in a book. */
+  .pl-shot--framed { display: grid; gap: 18px; }
+  .pl-shot--framed .pl-shot__frame { max-width: 720px; }
+
+  /* Duo: picture and statement side by side. `side` decides which of them
+     leads, using grid order rather than a float, so it mirrors with the page. */
+  .pl-shot--duo { display: grid; gap: 20px; }
+  @media (min-width: 860px) {
+    .pl-shot--duo { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; }
+    .pl-shot--duo.pl-shot--end .pl-shot__frame { order: 2; }
+  }
+
+  /* Full: the picture breaks the measure and runs the width of the section. */
+  .pl-shot--full { display: grid; gap: 20px; }
+  .pl-shot--full .pl-shot__frame { border-radius: var(--pl-r-l); }
+  @media (min-width: 1000px) { .pl-shot--full .pl-shot__say { max-width: 62ch; } }
+
+  /* More views of the same object. Grid on wide screens, a thumb-friendly
+     rail on a phone: the rail is its own scroll container, so the page itself
+     never gains scrollable width from it. */
+  .pl-gal { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  @media (min-width: 760px) { .pl-gal--grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; } }
+  .pl-gal__item { min-width: 0; margin: 0; border-radius: var(--pl-r-m); overflow: hidden; background: var(--pl-cream); }
+  .pl-story2--cream .pl-gal__item { background: var(--pl-white); }
+  .pl-gal__item img { display: block; width: 100%; height: auto; aspect-ratio: var(--pl-shot-ratio, 1); object-fit: cover; }
+
+  .pl-gal--rail {
+    display: flex; gap: 12px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    margin-inline: calc(var(--pl-gutter) * -1); padding-inline: var(--pl-gutter);
+  }
+  .pl-gal--rail::-webkit-scrollbar { display: none; }
+  .pl-gal--rail .pl-gal__item { flex: 0 0 62%; scroll-snap-align: start; }
+  @media (min-width: 760px) {
+    .pl-gal--rail { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; overflow: visible; margin-inline: 0; padding-inline: 0; }
+    .pl-gal--rail .pl-gal__item { flex: initial; }
+  }
