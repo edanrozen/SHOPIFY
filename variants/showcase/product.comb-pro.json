@@ -58,7 +58,7 @@
         "heading": "מקרוב",
         "layout": "one",
         "skip": 1,
-        "limit": 2,
+        "limit": 3,
         "band": "white"
       }
     },
@@ -80,10 +80,9 @@
       "type": "wf-pdp-shots",
       "settings": {
         "heading": "עוד זוויות",
-        "layout": "two",
-        "ratio": "1 / 1",
-        "skip": 3,
-        "limit": 4,
+        "layout": "one",
+        "skip": 4,
+        "limit": 2,
         "band": "cream"
       }
     },

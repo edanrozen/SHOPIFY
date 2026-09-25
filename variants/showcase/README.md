@@ -339,3 +339,43 @@ have no alt, so they arrive with no caption, which is correct: a caption written
 by the theme would be a sentence about a photograph the theme cannot see. Filling
 those in is worth doing for search and for screen readers as much as for the
 captions.
+
+## The eight suffixed product templates
+
+Every product in the shop carries a `templateSuffix`, so `templates/product.json`
+is a fallback that nothing currently uses. That mattered more than it sounds:
+the eight non-Bloom suffixes were still the stub from an earlier theme, holding
+only `main`, `trust` and `related`. Eight product pages were therefore a
+gallery, a buy box and a grid, while the content for the long page sat unused in
+their metafields, and their trust rows still read "14 יום לביטול עסקה" months
+after the rest of the store moved to thirty days.
+
+They now carry the same page Bloom does. Six of them are byte for byte
+identical, which is the honest signal that those six suffixes buy nothing:
+clearing `templateSuffix` on those products in admin would collapse six files
+into `product.json`. That is a change to product data rather than to the theme,
+so it takes effect on the live store the moment it is made and is left for the
+merchant to decide.
+
+The three that differ, differ because of how the product was photographed:
+
+    comb-pro    six photographs at four different aspect ratios, one of them
+                16:9, so both bands are single column and nothing goes in a box
+    glove       detail shots are 1145x1374, so the pair takes the 4:5 frame
+    toy         no `steps` metafield, so the how band renders nothing; the pair
+                takes the blush that band would have carried, which keeps the
+                page alternating
+
+## Three gaps in the metafields
+
+Read off the Admin API rather than assumed, and mirrored in the preview harness
+so a band that will be empty on the live store is empty in the preview too:
+
+    hair-remover-xl           no `versus`
+    parvatek-grooming-comb    no `versus`
+    kadurosh-cat-ball-toy     no `steps`
+    bloom-grooming-station    no `specs`
+
+Nothing breaks: each band guards on its own metafield and simply does not
+render. They are listed here because filling them is content work worth doing,
+not a code change.

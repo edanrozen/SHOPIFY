@@ -32,7 +32,23 @@
   assign skip = section.settings.skip
   assign take = section.settings.limit
 
+  comment
+    The count is clamped to what is actually there, and in the two column
+    layout rounded down to a pair, so the grid never ends on a single card
+    stranded beside a gap. The catalogue makes this real rather than
+    theoretical: image counts run from five to nine, so the same skip and limit
+    that fill four cards on one product leave three on another.
+
+    The floor is explicit. Shopify's divided_by floors two integers and other
+    Liquid engines divide them as floats, and relying on that difference is how
+    a percentage renders as 30.093009 in public.
+  endcomment
+  assign available = pool.size | minus: skip
+  if take > available
+    assign take = available
+  endif
   if section.settings.layout == 'two'
+    assign take = take | divided_by: 2.0 | floor | times: 2
     assign sizes = '(max-width: 900px) 46vw, 300px'
   else
     assign sizes = '(max-width: 700px) 92vw, 620px'
@@ -46,7 +62,7 @@
   endif
 -%}
 
-{%- if pool.size > skip -%}
+{%- if take > 0 -%}
   <section class="wf-band{{ band }}">
     <div class="pl-wrap">
       {%- if section.settings.heading != blank or section.settings.text != blank -%}

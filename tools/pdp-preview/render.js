@@ -59,23 +59,57 @@ const img = (w, h, label, alt) => {
   return o;
 };
 
+// Which `custom` keys each product actually carries in the shop, read off the
+// Admin API rather than assumed. The stub text in metafields.json stands in
+// for all of them, but presence is real, because presence is what decides
+// whether a band renders at all. Three products are missing something today
+// and the preview has to show that rather than paper over it:
+// hair-remover-xl and parvatek-grooming-comb have no `versus`, and
+// kadurosh-cat-ball-toy has no `steps`.
+const MF_PRESENT = {
+  'bloom-grooming-station': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'pro-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'parvatek-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'parvakal-pet-clipper': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'hair-remover-xl': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'hair-remover-wood-handle': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'tinybloom-fur-glove': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'katora-cardboard-scratcher': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'kadurosh-cat-ball-toy': ['problem', 'before', 'after', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+};
+
 // ---------------------------------------------------------------- catalogue
 // The nine real products, with the real image counts and the real handles, so
 // every grid, card and collection on the page fills exactly as it will live.
-// handle, title, price (agorot), image count, collections, [w, h]
+// handle, title, price (agorot), image count, collections, dims
 // The dimensions are the real ones from the Files API. They matter: a frame
 // that crops a tall photograph looks perfect against a stub of the wrong
 // shape, which is how cropping shipped unnoticed in the first place.
+//
+// dims is either one [w, h] for the whole set, or one [w, h] per image where
+// the product's shoot is not uniform. Per image matters for the bands that put
+// photographs into the page: a product whose hero is square and whose detail
+// shots are 2:3 looks fine in a stub that pretends they are all square, and
+// then letterboxes four pictures on the live store.
 const CATALOGUE = [
-  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 24999, 8, ['grooming', 'all-products'], [1206, 1806]],
-  ['pro-grooming-comb', 'פורה מסרק למניעת קשרים', 5999, 6, ['grooming', 'all-products'], [1254, 1254]],
-  ['parvatek-grooming-comb', 'פרוותק מסרק דו צדדי לטיפוח הפרווה', 6990, 7, ['grooming', 'all-products'], [1055, 1024]],
-  ['parvakal-pet-clipper', 'פרווהקל מכונת גילוח לחיות', 13990, 6, ['grooming', 'all-products'], [1101, 960]],
-  ['hair-remover-xl', 'מסירון הדרך הקלה לניקוי שיער ופרווה מכל בד', 8999, 9, ['clean-home', 'all-products'], [1024, 1025]],
-  ['hair-remover-wood-handle', 'מסיר שיער חיות מחמד עם ידית עץ', 6990, 8, ['clean-home', 'all-products'], [974, 1104]],
-  ['tinybloom-fur-glove', 'כפפת הפרווה של TinyBloom', 6999, 9, ['clean-home', 'all-products'], [768, 1375]],
-  ['katora-cardboard-scratcher', 'קאטורה טבעת גירוד קרטון לחתולים', 7990, 6, ['cats', 'all-products'], [976, 1094]],
-  ['kadurosh-cat-ball-toy', 'כדורוש צעצוע חכם ואינטראקטיבי לחתולים', 9990, 5, ['cats', 'all-products'], [1102, 976]],
+  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 24999, 8, ['grooming', 'all-products'],
+    [[1206, 1806], [1177, 1754], [1206, 1759], [1206, 1763], [1206, 1688], [1206, 1740], [1145, 1374], [1254, 1254]]],
+  ['pro-grooming-comb', 'פורה מסרק למניעת קשרים', 5999, 6, ['grooming', 'all-products'],
+    [[1254, 1254], [1312, 1199], [1312, 1199], [1672, 941], [1145, 1374], [1312, 1199]]],
+  ['parvatek-grooming-comb', 'פרוותק מסרק דו צדדי לטיפוח הפרווה', 6990, 7, ['grooming', 'all-products'],
+    [[1055, 1024], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254]]],
+  ['parvakal-pet-clipper', 'פרווהקל מכונת גילוח לחיות', 13990, 6, ['grooming', 'all-products'],
+    [[1101, 960], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254]]],
+  ['hair-remover-xl', 'מסירון הדרך הקלה לניקוי שיער ופרווה מכל בד', 8999, 9, ['clean-home', 'all-products'],
+    [[1024, 1025], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254]]],
+  ['hair-remover-wood-handle', 'מסיר שיער חיות מחמד עם ידית עץ', 6990, 8, ['clean-home', 'all-products'],
+    [[974, 1104], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254]]],
+  ['tinybloom-fur-glove', 'כפפת הפרווה של TinyBloom', 6999, 9, ['clean-home', 'all-products'],
+    [[768, 1375], [938, 1677], [1145, 1374], [1145, 1374], [1145, 1374], [1145, 1374], [1145, 1374], [1145, 1374], [1145, 1374]]],
+  ['katora-cardboard-scratcher', 'קאטורה טבעת גירוד קרטון לחתולים', 7990, 6, ['cats', 'all-products'],
+    [[976, 1094], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254]]],
+  ['kadurosh-cat-ball-toy', 'כדורוש צעצוע חכם ואינטראקטיבי לחתולים', 9990, 5, ['cats', 'all-products'],
+    [[1102, 976], [1333, 1180], [1333, 1180], [1254, 1254], [1254, 1254]]],
 ];
 
 // The problem and solution lines every product carries in the store, as
@@ -111,12 +145,17 @@ const COMPARE = {
 };
 
 const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
-  const [w, h] = dims || [1206, 1760];
+  const perImage = Array.isArray(dims && dims[0]);
+  const sizeOf = (i) => (perImage ? dims[Math.min(i, dims.length - 1)] : dims) || [1206, 1760];
+  const [w, h] = sizeOf(0);
   // Alt text on the first image only. That is the shape the real catalogue is
   // in for most of its products, and a stub that gave every photograph a
   // caption would hide the fact that the bands which caption from alt text
   // will render bare on the live store.
-  const images = Array.from({ length: nImages }, (_, i) => img(w, h, i + 1, i === 0 ? title : ''));
+  const images = Array.from({ length: nImages }, (_, i) => {
+    const [iw, ih] = sizeOf(i);
+    return img(iw, ih, i + 1, i === 0 ? title : '');
+  });
   // A media drop carries its media_type, and a template that filters on it
   // (`where: 'media_type', 'image'`) gets an empty list without it. All nine
   // products are single variant in the store, so the stub is too: a template
@@ -302,9 +341,14 @@ const product = which === 'product'
   ? all_products[process.env.PREVIEW_PRODUCT || 'bloom-grooming-station']
   : null;
 if (product) {
-  product.metafields.custom = Object.assign(
-    JSON.parse(fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8')),
-    product.metafields.custom);
+  const body = JSON.parse(fs.readFileSync(path.join(__dirname, 'metafields.json'), 'utf8'));
+  const present = MF_PRESENT[product.handle];
+  if (present) {
+    for (const key of Object.keys(body)) {
+      if (!present.includes(key)) delete body[key];
+    }
+  }
+  product.metafields.custom = Object.assign(body, product.metafields.custom);
 }
 
 // A collection template needs the drop the page is about, the same way a
