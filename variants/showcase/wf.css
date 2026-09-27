@@ -468,16 +468,6 @@
      forced to stay on the correct side of the digits. */
   direction: ltr;
 }
-/* The one accent line on a card, and only where it is true: at this price the
-   item clears the free shipping threshold on its own. */
-.wf-card__ship {
-  font-family: var(--pl-sans);
-  font-size: .82rem;
-  font-weight: 700;
-  color: var(--wf-accent);
-  margin: 4px 0 0;
-}
-
 .wf-more { display: flex; justify-content: center; margin-top: clamp(26px, 4vw, 44px); }
 
 /* ---- product page -------------------------------------------------------- */

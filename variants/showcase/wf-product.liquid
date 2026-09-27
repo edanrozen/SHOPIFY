@@ -29,16 +29,6 @@
   assign problem = product.metafields.custom.problem_line.value
   assign solution = product.metafields.custom.solution_line.value
   assign highlights = product.metafields.custom.highlights.value
-
-  comment
-    Free shipping is a threshold on the order, so it is only claimed on a
-    product that clears it on its own. Anything cheaper says nothing here.
-  endcomment
-  assign free_from = 19900
-  assign ships_free = false
-  if product.price >= free_from
-    assign ships_free = true
-  endif
 -%}
 
 <div class="pl-wrap">
@@ -115,9 +105,14 @@
           {%- endif -%}
         </p>
 
-        {%- if ships_free -%}
-          <p class="wf-pdp__ship">משלוח חינם למוצר הזה</p>
-        {%- endif -%}
+        {%- comment -%}
+          Unconditional, because the rate behind it is. Shipping is free on
+          every order in the Israel zone at any cart total, so this line is not
+          a claim about this product clearing a threshold, it is a fact about
+          the shop. It sits inside the buy box rather than above it, so it is
+          read in the same glance as the price.
+        {%- endcomment -%}
+        <p class="wf-pdp__ship">משלוח חינם, בכל הזמנה</p>
 
         {%- form 'product', product, class: 'wf-pdp__form' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
@@ -172,7 +167,7 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
-    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם מעל 199 ₪ · 14 יום לביטול עסקה" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם · 14 יום לביטול עסקה" },
     { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true }
   ],
   "presets": [{ "name": "תמות · דף מוצר" }]

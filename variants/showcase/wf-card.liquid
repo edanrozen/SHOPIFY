@@ -2,11 +2,12 @@
   One product card, shared by the homepage grid, the collection page, the
   related row and the launch band. Shared so they can never drift.
 
-  The free shipping line appears only on a product whose own price clears the
-  threshold. It is the one accent line on a card and it is checkable: buy that
-  item by itself and the shipping really is free. Chewy runs the same line on
-  the cards that qualify and leaves it off the ones that do not, which is what
-  makes it worth reading.
+  There is no free shipping line on the card any more. Shipping is now free on
+  every order, so the line was true on all nine cards at once, and a sentence
+  that appears identically under every product in a grid stops being read after
+  the first one. It moved to the announcement bar, which is on every page and
+  stays in view, and to the buy box, where it is read at the moment the
+  decision is made. Both places say it once instead of nine times.
 
   The struck price and the percentage are drawn from compare_at_price, so they
   appear only while a real discount exists on the product and disappear by
@@ -16,12 +17,6 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign free_from = 19900
-  assign ships_free = false
-  if product.price >= free_from
-    assign ships_free = true
-  endif
-
   assign on_sale = false
   if product.compare_at_price > product.price
     assign on_sale = true
@@ -61,7 +56,4 @@
       <s class="wf-card__was">{{ product.compare_at_price | money }}</s>
     {%- endif -%}
   </p>
-  {%- if ships_free -%}
-    <p class="wf-card__ship">משלוח חינם</p>
-  {%- endif -%}
 </a>
