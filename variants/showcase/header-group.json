@@ -8,9 +8,20 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "משלוח חינם לכל הארץ, בכל הזמנה",
+            "text": "משלוח חינם, בלי סכום מינימום",
             "font": "var(--font-subheading--family)",
-            "font_size": "0.78rem",
+            "font_size": "0.82rem",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "announcement_ret14": {
+          "type": "_announcement",
+          "settings": {
+            "text": "14 יום לביטול עסקה, לפי חוק",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.82rem",
             "letter_spacing": "normal",
             "case": "none"
           },
@@ -19,9 +30,20 @@
         "announcement_pl2": {
           "type": "_announcement",
           "settings": {
-            "text": "ישירות מהיצרן, בלי יבואן ובלי מתווך",
+            "text": "ישירות מהיצרן, בלי מתווכים",
             "font": "var(--font-subheading--family)",
-            "font_size": "0.78rem",
+            "font_size": "0.82rem",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "announcement_tax": {
+          "type": "_announcement",
+          "settings": {
+            "text": "המחיר סופי, המיסים כלולים",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.82rem",
             "letter_spacing": "normal",
             "case": "none"
           },
@@ -30,11 +52,13 @@
       },
       "block_order": [
         "announcement_BxgCk9",
-        "announcement_pl2"
+        "announcement_ret14",
+        "announcement_pl2",
+        "announcement_tax"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
-        "speed": 6,
+        "speed": 5,
         "section_width": "page-width",
         "background_color": "#586040",
         "divider_width": 0,
