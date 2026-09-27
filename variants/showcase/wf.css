@@ -41,6 +41,19 @@
      warm and derived from the paper tone inside the mark. */
   --wf-accent:      #586040;  /* sampled from the word "Tiny", 6.64:1 on white  */
   --wf-accent-deep: #4C5337;  /* hover, 8.08:1                                  */
+  /* The announcement bar's green, promoted to a token because it is now used
+     in three places and a hex repeated three times is a hex that drifts.
+
+     It is not a new colour. Measured in HSL, the accent is hue 75 and this is
+     hue 78: the same hue at a different lightness, which is why it reads as
+     the shop rather than as a second brand. Against the page it is a real
+     surface, not a tint, at brightness 207.
+
+     The catch is text. Ink on it is 10.0:1 and ink-soft 6.47:1, both clear.
+     Taupe, which every secondary line in this sheet uses, is 3.98:1 and does
+     not clear 4.5. So anything painted with this has to remap the muted token
+     rather than inherit it. See .wf-trust. */
+  --pl-olive-pale:  #C9DBA0;
   /* The pink is in the mark and stays in the mark. Two accents on one page is
      how a shop stops reading as one shop, and the measured reason from before
      still stands: white on the pink as drawn is 2.98:1, so it could never
@@ -308,7 +321,19 @@
 /* ---- trust row ----------------------------------------------------------
    Four facts, every one of them checkable. Directly under the hero, because
    the questions it answers are the ones asked before the first click. */
-.wf-trust { background: var(--pl-cream); border-block: 1px solid var(--pl-line); }
+/* The pale olive rather than the cream. It puts the shop's colour on the four
+   facts a visitor checks before the first click, and it bookends the page with
+   the announcement bar above it and the footer below.
+
+   --pl-taupe is redefined for this subtree rather than each muted line being
+   rewritten. Every secondary line in here reads var(--pl-taupe), and taupe on
+   this green is 3.98:1, under the floor. Pointing the token at ink-soft inside
+   the band takes them all to 6.47:1 in one declaration, and the token keeps
+   meaning "the muted text on this surface", which is what it was ever for.
+
+   The rules are gone with it. A cream hairline on a green band is a seam from
+   the surface it used to be; the colour change is the edge now. */
+.wf-trust { background: var(--pl-olive-pale); --pl-taupe: var(--pl-ink-soft); }
 .wf-trust__list {
   list-style: none;
   margin: 0;

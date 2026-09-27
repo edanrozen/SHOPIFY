@@ -129,7 +129,7 @@
       "settings": {
         "section_width": "page-width",
         "gap": 20,
-        "background_color": "#F7F4EC",
+        "background_color": "#C9DBA0",
         "padding-block-start": 48,
         "padding-block-end": 36
       }
@@ -141,7 +141,7 @@
           "type": "footer-copyright",
           "settings": {
             "show_powered_by": false,
-            "font_size": "0.75rem",
+            "font_size": "0.875rem",
             "case": "none"
           },
           "blocks": {}
@@ -149,7 +149,7 @@
         "footer_policy_list_VCdnpa": {
           "type": "footer-policy-list",
           "settings": {
-            "font_size": "0.75rem",
+            "font_size": "0.875rem",
             "case": "none"
           },
           "blocks": {}
@@ -174,8 +174,8 @@
         "section_width": "page-width",
         "gap": 24,
         "divider_thickness": 1,
-        "divider_color": "#E2DCCF",
-        "background_color": "#F7F4EC",
+        "divider_color": "#586040",
+        "background_color": "#C9DBA0",
         "padding-block-start": 20,
         "padding-block-end": 48
       }
