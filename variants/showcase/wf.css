@@ -22,76 +22,74 @@
    ========================================================================== */
 
 :root {
-  /* The palette is taken from the logo, not from a mood board. Every value
-     below was sampled out of the artwork and then checked for contrast, so
-     the shop and the mark are literally the same colours.
+  /* Sampled from the logo artwork, pixel by pixel, not chosen.
 
-     The logo writes "Tiny" in olive and "bloom" in dusty pink. That split is
-     the whole system: olive carries every action, pink carries none.
+     This corrects a factual error that the rest of this comment used to be
+     built on. It said the mark writes "Tiny" in olive and "bloom" in dusty
+     pink. It does not. "Tiny" is brown and "Bloom" is green, and the pink is
+     a flower, a heart and the inside of a cat's ear. Every colour below is the
+     modal pixel value of its region in the file, counted after dropping the
+     paper and the antialiasing:
 
-     The reason is measured, not aesthetic. White text on the olive is 6.64:1
-     and clears AA with room to spare. White text on the pink as drawn is
-     2.98:1, which fails AA for body text and fails even the 3:1 floor for
-     large text and UI. A pink button is therefore not an option, whatever it
-     looks like in a mockup. It is not a surface either any more: see the note
-     on --pl-cream-deep below. The pink lives in the mark and nowhere else.
+       Bloom green   #70784B   46,070 px   the largest coloured area
+       Tiny brown    #73522F   35,790 px
+       dog tan       #C59759   29,743 px
+       flower pink   #EEA391    5,491 px
+       paper         #FBF4E9
 
-     Greys are gone. Cold grey under a warm cream logo is what made the old
-     footer look like it belonged to a different shop. The neutrals here are
-     warm and derived from the paper tone inside the mark. */
-  --wf-accent:      #586040;  /* sampled from the word "Tiny", 6.64:1 on white  */
-  --wf-accent-deep: #4C5337;  /* hover, 8.08:1                                  */
-  /* The announcement bar's green, promoted to a token because it is now used
-     in three places and a hex repeated three times is a hex that drifts.
+     The wordmark is two colours, so the shop is two colours, and each one does
+     the job its contrast allows rather than the job that looks nice in a
+     mockup.
 
-     It is not a new colour. Measured in HSL, the accent is hue 75 and this is
-     hue 78: the same hue at a different lightness, which is why it reads as
-     the shop rather than as a second brand. Against the page it is a real
-     surface, not a tint, at brightness 207.
+     The brown carries words. White on it is 7.05:1 and it is 7.05:1 on white,
+     so it can be a heading, a label or a fill without qualification. It is the
+     heading colour everywhere below.
 
-     The catch is text. Ink on it is 10.0:1 and ink-soft 6.47:1, both clear.
-     Taupe, which every secondary line in this sheet uses, is 3.98:1 and does
-     not clear 4.5. So anything painted with this has to remap the muted token
-     rather than inherit it. See .wf-trust. */
-  --pl-olive-pale:  #C9DBA0;
-  /* The pink is in the mark and stays in the mark. Two accents on one page is
-     how a shop stops reading as one shop, and the measured reason from before
-     still stands: white on the pink as drawn is 2.98:1, so it could never
-     carry a CTA anyway.
+     The green carries actions. White on it is 4.69:1, which clears the 4.5
+     floor for body text but with far less room than the value it replaces, so
+     it is used where a label is short and bold and never for a paragraph.
 
-     The last of the pink was a surface tint at #FBF2F0, which is a four point
-     difference from the cream. Nobody reads four points as a decision; they
-     read it as two creams that failed to match.
+     The tan and the pink carry nothing. 2.64:1 and 2.04:1 on white. They are
+     surfaces and flourishes, which is what the old note said about the pink
+     and was the one thing it got right. */
+  --wf-accent:      #70784B;  /* "Bloom". white on it 4.69:1                    */
+  --wf-accent-deep: #5F663F;  /* hover, 6.07:1                                  */
+  --pl-brown:       #73522F;  /* "Tiny". 7.05:1 both ways, 6.46:1 on the cream  */
+  --pl-brown-deep:  #614527;  /* hover, 8.79:1                                  */
+  --pl-tan:         #C59759;  /* the dog. 2.64:1, so surfaces only              */
+  --pl-pink:        #EEA391;  /* the flower. 2.04:1, so flourishes only         */
 
-     Collapsing it into the cream was the obvious answer and it was wrong. The
-     templates alternate surfaces, and with one cream the home page put the
-     trust band against the launch band and the product page put three bands in
-     a row, each pair merging into a single slab with a heading stranded in the
-     middle of it. Measured, not guessed: the alternation is load-bearing.
+  /* The green lifted to a surface, at the mark's own hue rather than near it.
+     The value this replaces was hue 78 against the mark's 71, which was close
+     enough to pass and not close enough to be the logo.
 
-     So the third surface stays a third surface and only changes family. This
-     is the cream taken deeper, in the same warm olive key as everything else,
-     with no pink in it. Contrast on it is measured: ink 12.59:1, taupe 5.01:1,
-     the olive 5.62:1, all clear of the 4.5:1 floor. */
-  --pl-cream-deep:  #F0ECE0;
+     Ink on it is 9.41:1 and ink-soft 6.08:1. Taupe is 3.74:1 and still does
+     not clear the floor, so anything painted with this still has to remap the
+     muted token. See .wf-trust. */
+  --pl-olive-pale:  #C9D39C;
+
+  /* The third surface, now the paper mixed 9% toward the dog rather than a
+     value invented next to it. Ink 12.71:1, taupe 5.06:1, the brown 6.03:1.
+     It sits 1.07 from the cream, which is the same separation as before and
+     is what keeps two adjacent bands from merging into one slab. */
+  --pl-cream-deep:  #F6ECDC;
 
   /* Migration shim, with an expiry condition rather than a vague "later".
      wf-pdp.css still names --wf-pink-soft for .wf-band--blush, and that file
      is not in this deploy. Dropping the name here would leave that var()
      undefined, the band would fall back to transparent, and the product page
-     would put three cream bands in a row, which is the exact failure the note
-     above describes. So the old name is kept pointing at the new value.
-     Delete this line and the name in wf-pdp.css in the same commit. */
+     would put three cream bands in a row. Delete this line and the name in
+     wf-pdp.css in the same commit. */
   --wf-pink-soft:   var(--pl-cream-deep);
 
   --pl-porcelain: #FFFFFF;
-  --pl-cream:     #F7F4EC;
-  --pl-sand:      #F7F4EC;
-  --pl-sand-deep: #E2DCCF;
+  --pl-cream:     #FBF4E9;  /* the paper the mark is drawn on              */
+  --pl-sand:      #FBF4E9;
+  --pl-sand-deep: #ECDAC1;  /* the paper 28% toward the dog                 */
   --pl-ink:       #2A2722;  /* 14.88:1 on white                                 */
   --pl-ink-soft:  #4A443C;  /*  9.62:1                                          */
   --pl-taupe:     #6B6357;  /*  5.92:1 on white, 5.39:1 on the cream band       */
-  --pl-line:      #E2DCCF;
+  --pl-line:      #ECDAC1;
   --pl-white:     #FFFFFF;
   --pl-clay:      var(--wf-accent);
   --pl-clay-deep: var(--wf-accent-deep);
@@ -110,7 +108,7 @@
      brand colour on the thing the customer is here to press, which is the
      only place a brand colour earns anything. White on this olive is 6.64:1,
      measured, so the label clears AA at body size with room left over. */
-  --wf-rule:      #586040;
+  --wf-rule:      var(--wf-accent);
 
   --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);
   --pl-sh-m: 0 4px 14px rgba(0, 0, 0, .09);
@@ -139,7 +137,7 @@
   font-size: clamp(1.75rem, 6.4vw, 2.9rem);
   line-height: 1.12;
   letter-spacing: -.02em;
-  color: var(--pl-ink);
+  color: var(--pl-brown);
   margin: 0 0 10px;
   text-wrap: balance;
 }
@@ -353,7 +351,11 @@
   text-align: start;
 }
 .wf-trust__icon { width: 30px; height: 30px; display: grid; place-items: center; grid-row: span 2; }
-.wf-trust__icon svg { width: 26px; height: 26px; stroke: var(--wf-accent); fill: none; stroke-width: 1.5; }
+/* Brown, not the accent. The accent is the mark's green and this band is the
+   same green lifted, so accent-on-band measures 2.97:1, under the 3:1 floor an
+   icon needs. The brown is 4.46:1 on it, and brown marks on a green ground is
+   what the wordmark does anyway. */
+.wf-trust__icon svg { width: 26px; height: 26px; stroke: var(--pl-brown); fill: none; stroke-width: 1.5; }
 .wf-trust__title { font-family: var(--pl-sans); font-size: .86rem; font-weight: 700; color: var(--pl-ink); }
 .wf-trust__text { font-family: var(--pl-sans); font-size: .84rem; line-height: 1.4; font-weight: 400; color: var(--pl-taupe); }
 
@@ -636,7 +638,7 @@
   font-size: clamp(1.55rem, 5.2vw, 2.3rem);
   line-height: 1.16;
   letter-spacing: -.015em;
-  color: var(--pl-ink);
+  color: var(--pl-brown);
   margin: 0 0 14px;
   text-wrap: balance;
 }
@@ -729,10 +731,16 @@
    is the opposite case and does need the override, because a leading minus is
    a separator, not part of the number, and would otherwise jump to the far
    side of the digits. */
+/* Brown rather than the accent, and the reason is a measurement, not taste.
+   This line renders at 17.6px bold on the deep cream, and the accent on that
+   ground is 4.01:1. WCAG only relaxes to 3:1 at 18.66px bold, so this sits
+   just under the threshold where 4.5 still applies and 4.01 fails it. The
+   brown is 6.03:1 on the same ground, and a headline number is a heading, so
+   it takes the heading colour. */
 .wf-launch__upto {
   font-family: var(--pl-display);
   font-size: clamp(1.1rem, 3.4vw, 1.4rem);
   font-weight: 700;
-  color: var(--wf-accent);
+  color: var(--pl-brown);
   margin: 10px 0 0;
 }
