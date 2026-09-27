@@ -71,7 +71,10 @@
   /* The third surface, now the paper mixed 9% toward the dog rather than a
      value invented next to it. Ink 12.71:1, taupe 5.06:1, the brown 6.03:1.
      It sits 1.07 from the cream, which is the same separation as before and
-     is what keeps two adjacent bands from merging into one slab. */
+     is what keeps two adjacent bands from merging into one slab.
+
+     It is also, by measurement rather than by luck, the ground the catalogue
+     is photographed on. See .wf-card__frame. */
   --pl-cream-deep:  #F6ECDC;
 
   /* Migration shim, with an expiry condition rather than a vague "later".
@@ -392,7 +395,7 @@
   height: clamp(104px, 26vw, 156px);
   border-radius: 50%;
   overflow: hidden;
-  background: var(--pl-cream);
+  background: var(--pl-cream-deep);
   border: 1px solid var(--pl-line);
   transition: border-color .2s var(--pl-ease), transform .2s var(--pl-ease);
 }
@@ -418,7 +421,7 @@
 .wf-flag__media {
   border-radius: var(--wf-r-lg);
   overflow: hidden;
-  background: var(--pl-white);
+  background: var(--pl-cream-deep);
   border: 1px solid var(--pl-line);
   aspect-ratio: 4 / 5;
 }
@@ -483,10 +486,17 @@
   transition: border-color .2s var(--pl-ease), box-shadow .2s var(--pl-ease);
 }
 .wf-card:hover { border-color: var(--wf-accent); box-shadow: var(--pl-sh-m); }
+/* The frame is the deep cream, not white, and the reason is a measurement off
+   the live page. The catalogue's photographs are shot on #F0ECE0. Against a
+   white frame that is a 1.18 step, which is larger than the 1.07 this sheet
+   uses on purpose to tell two sections apart, so every photograph was sitting
+   in a visible white box. Against the deep cream it is 1.01, which is nothing.
+   The photograph now ends where the card ends instead of announcing its own
+   rectangle. */
 .wf-card__frame {
   position: relative;
   overflow: hidden;
-  background: var(--pl-white);
+  background: var(--pl-cream-deep);
   aspect-ratio: 1 / 1;
   margin-bottom: 10px;
 }
@@ -597,7 +607,7 @@
 .wf-pdp__stage {
   border-radius: var(--wf-r-lg);
   overflow: hidden;
-  background: var(--pl-white);
+  background: var(--pl-cream-deep);
   border: 1px solid var(--pl-line);
   aspect-ratio: 1 / 1;
 }
@@ -621,7 +631,7 @@
   border: 1px solid var(--pl-line);
   border-radius: 14px;
   overflow: hidden;
-  background: var(--pl-white);
+  background: var(--pl-cream-deep);
   cursor: pointer;
   transition: border-color .18s var(--pl-ease);
 }
@@ -743,4 +753,25 @@
   font-weight: 700;
   color: var(--pl-brown);
   margin: 10px 0 0;
+}
+
+/* ---- the announcement bar ------------------------------------------------
+   The bar's colour is a section setting and Horizon paints a section's
+   background on a separate absolutely positioned .section-background element,
+   because base.css forces `background: transparent` on anything carrying the
+   .section class and that shorthand beats the .color-custom-{id} rule the
+   setting writes.
+
+   Sampled off a photograph of the live page, the bar renders #FFFFFF at 88%
+   of its area rather than the green the setting holds, so that mechanism is
+   not arriving here. I cannot reproduce it from this environment: the local
+   harness does not render section groups and the storefront is not reachable,
+   so this is a fix for a measured symptom rather than a diagnosed cause.
+
+   Stating the colour on the element costs nothing if the section-background
+   does work and fixes it if it does not. The id raises specificity past the
+   base.css rule that is clearing it. */
+#header-group .announcement-bar,
+#header-group .announcement-bar .section-background {
+  background-color: var(--pl-olive-pale);
 }

@@ -8,6 +8,11 @@ OUT=${1:?usage: stage.sh <out-dir>}
 rm -rf "$OUT"
 cp -r theme "$OUT"
 cp "$SRC"/wf-*.liquid          "$OUT/sections/"
+# wf-card.liquid is rendered with {% render %}, so it is a snippet even though
+# it sits next to the sections in the variant directory. It was only being
+# copied into sections/, which is why every local preview came back with an
+# empty product grid and no card was ever measured here.
+cp "$SRC"/wf-card.liquid       "$OUT/snippets/"
 cp "$SRC"/wf.css "$SRC"/wf-pdp.css "$OUT/assets/"
 cp "$SRC"/stylesheets.liquid   "$OUT/snippets/"
 cp "$SRC"/header-group.json "$SRC"/footer-group.json "$OUT/sections/"

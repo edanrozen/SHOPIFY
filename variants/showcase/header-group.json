@@ -129,7 +129,7 @@
         "divider_width": 1,
         "divider_size": "full-width",
         "border_width": 0,
-        "background_color_top": "#FFFFFF",
+        "background_color_top": "#FBF4E9",
         "enable_transparent_header_home": false,
         "enable_transparent_header_product": false,
         "enable_transparent_header_collection": false
