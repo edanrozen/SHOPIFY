@@ -33,17 +33,43 @@
      and clears AA with room to spare. White text on the pink as drawn is
      2.98:1, which fails AA for body text and fails even the 3:1 floor for
      large text and UI. A pink button is therefore not an option, whatever it
-     looks like in a mockup, so pink stays a surface and a flourish and never
-     a thing that carries words a customer has to read.
+     looks like in a mockup. It is not a surface either any more: see the note
+     on --pl-cream-deep below. The pink lives in the mark and nowhere else.
 
      Greys are gone. Cold grey under a warm cream logo is what made the old
      footer look like it belonged to a different shop. The neutrals here are
      warm and derived from the paper tone inside the mark. */
   --wf-accent:      #586040;  /* sampled from the word "Tiny", 6.64:1 on white  */
   --wf-accent-deep: #4C5337;  /* hover, 8.08:1                                  */
-  --wf-pink:        #D08078;  /* sampled from "bloom". Surfaces only.           */
-  --wf-pink-ink:    #C0554A;  /* the one pink dark enough for text, 4.53:1      */
-  --wf-pink-soft:   #FBF2F0;  /* the pink as a band you can put ink on          */
+  /* The pink is in the mark and stays in the mark. Two accents on one page is
+     how a shop stops reading as one shop, and the measured reason from before
+     still stands: white on the pink as drawn is 2.98:1, so it could never
+     carry a CTA anyway.
+
+     The last of the pink was a surface tint at #FBF2F0, which is a four point
+     difference from the cream. Nobody reads four points as a decision; they
+     read it as two creams that failed to match.
+
+     Collapsing it into the cream was the obvious answer and it was wrong. The
+     templates alternate surfaces, and with one cream the home page put the
+     trust band against the launch band and the product page put three bands in
+     a row, each pair merging into a single slab with a heading stranded in the
+     middle of it. Measured, not guessed: the alternation is load-bearing.
+
+     So the third surface stays a third surface and only changes family. This
+     is the cream taken deeper, in the same warm olive key as everything else,
+     with no pink in it. Contrast on it is measured: ink 12.59:1, taupe 5.01:1,
+     the olive 5.62:1, all clear of the 4.5:1 floor. */
+  --pl-cream-deep:  #F0ECE0;
+
+  /* Migration shim, with an expiry condition rather than a vague "later".
+     wf-pdp.css still names --wf-pink-soft for .wf-band--blush, and that file
+     is not in this deploy. Dropping the name here would leave that var()
+     undefined, the band would fall back to transparent, and the product page
+     would put three cream bands in a row, which is the exact failure the note
+     above describes. So the old name is kept pointing at the new value.
+     Delete this line and the name in wf-pdp.css in the same commit. */
+  --wf-pink-soft:   var(--pl-cream-deep);
 
   --pl-porcelain: #FFFFFF;
   --pl-cream:     #F7F4EC;
@@ -57,9 +83,21 @@
   --pl-clay:      var(--wf-accent);
   --pl-clay-deep: var(--wf-accent-deep);
 
-  /* Every button is white with this rule around it. One line changes them
-     all, including the label inside. */
-  --wf-rule:      #000000;
+  /* Every button is filled with this. One line changes them all, including the
+     label inside.
+
+     It used to be #000000, and pure black was the single cold value in a
+     palette whose whole premise, four comments up, is that cold under a warm
+     cream mark is what made the old footer look like it belonged to a
+     different shop. Black on the CTAs was that same mistake in the one place
+     a customer actually looks.
+
+     Filled rather than outlined is a conversion decision, not a taste one: an
+     outlined button asks to be found, a filled one is found. And it puts the
+     brand colour on the thing the customer is here to press, which is the
+     only place a brand colour earns anything. White on this olive is 6.64:1,
+     measured, so the label clears AA at body size with room left over. */
+  --wf-rule:      #586040;
 
   --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);
   --pl-sh-m: 0 4px 14px rgba(0, 0, 0, .09);
@@ -76,9 +114,9 @@
 .wf-section { padding-block: clamp(40px, 6.5vw, 88px); }
 .wf-section--tight { padding-block: clamp(28px, 4vw, 52px); }
 .wf-cream { background: var(--pl-cream); }
-/* The single place the pink appears as a surface. Bloom is the one section
+/* The deeper cream as a surface. Bloom is the one section
    that is not a row of products, and a warm band says so without a label. */
-.wf-blush { background: var(--wf-pink-soft); }
+.wf-blush { background: var(--pl-cream-deep); }
 
 /* Louder than pl-h2, because in this category a quiet heading reads as a shop
    that is not sure it wants you. */
@@ -102,31 +140,46 @@
 }
 
 /* ---- buttons -------------------------------------------------------------
-   Every button in the shop is white with a black rule around it, by the
-   merchant's decision. One shape, no primary and secondary, on the hero, in
-   the buy box, in the sticky bar and in the grid alike.
+   One shape, no primary and secondary, on the hero, in the buy box, in the
+   sticky bar and in the grid alike. That part has not changed.
 
-   Two things this costs, recorded here so nobody has to rediscover them:
+   What changed is the fill, and this reverses an earlier decision of the
+   merchant's, so the reasoning on both sides is kept rather than overwritten.
 
-   A filled button repaints 100% of its own area in a colour the page does not
-   have. An outlined one repaints the 1px ring, which on a 190x50 button is 5%
-   of it. The olive fill stood 6.64:1 clear of the page behind it; a white fill
-   on a white page stands at 1.00:1 and the rule alone does the work. The
-   button is not less legible, it is less loud, and loudness is what makes a
-   visitor find the one thing to press.
+   The button used to be white with a black rule around it. The case for it was
+   restraint: an outlined button repaints the 1px ring rather than 100% of its
+   own area, so it sits quieter on the page. That case was argued here and it
+   is not wrong.
 
-   It also removes hierarchy by construction. Two buttons side by side in the
-   hero are now the same object, so the order they are read in is the order
-   they are written in, not a designed emphasis.
+   The case against it is that quiet is not free. A white fill on a white page
+   stands at 1.00:1 against the page; the rule alone carries the whole signal.
+   The button is not less legible, it is less findable, and on a shop with no
+   orders yet the scarcest thing is a visitor who finds the one thing to press.
+   Filled is therefore a conversion decision, not a taste one.
 
-   The compensation is the hover: the button inverts to solid black rather than
-   tinting, so pressing intent is still answered clearly. And padding drops
-   from 17px to 16px because the 1px rule now contributes to the height, which
-   keeps every button the same box it was and keeps the sticky bar's 76px
-   spacer honest.
+   The second reason is the one the palette note above already makes. #000000
+   was the single cold value in a system built entirely out of warm neutrals
+   sampled from the mark, and it sat on every call to action, which is the one
+   element a customer actually looks at. Black CTAs on a cream shop are the
+   same mistake as the cold grey footer that note describes.
 
-   Contrast is not the issue and did not get worse: black on white is 21:1 for
-   the label and 21:1 for the rule, against a 3:1 floor for a UI edge. */
+   So the button is now the olive, filled, white label. It puts the brand
+   colour on the thing the customer came to press, which is the only place a
+   brand colour earns anything.
+
+   Two consequences, recorded so nobody rediscovers them. Hierarchy is still
+   absent by construction: two buttons side by side in the hero are the same
+   object, so reading order is writing order, not designed emphasis. And the
+   hover no longer inverts, it deepens to --wf-accent-deep, because an inverted
+   fill on a filled button reads as the button switching off.
+
+   Padding stays 16px rather than 17px. The 1px rule still contributes to the
+   height, so every button is the same box it was and the sticky bar's 76px
+   spacer stays honest.
+
+   Contrast is measured, not assumed: white on the olive is 6.64:1 for the
+   label, and the olive against the white page is 6.64:1 for the edge, against
+   a 4.5:1 floor for body text and a 3:1 floor for a UI edge. */
 .wf-btn {
   display: inline-flex;
   align-items: center;
@@ -139,19 +192,19 @@
   padding: 16px 32px;
   border: 1px solid var(--wf-rule);
   border-radius: var(--wf-pill);
-  background: var(--pl-white);
-  color: var(--wf-rule);
+  background: var(--wf-rule);
+  color: var(--pl-white);
   text-decoration: none;
   cursor: pointer;
   transition: background .18s var(--pl-ease), color .18s var(--pl-ease), transform .18s var(--pl-ease);
 }
-.wf-btn:hover { background: var(--wf-rule); color: var(--pl-white); transform: translateY(-1px); }
+.wf-btn:hover { background: var(--wf-accent-deep); border-color: var(--wf-accent-deep); color: var(--pl-white); transform: translateY(-1px); }
 /* Kept as aliases so the templates that already name them keep working. They
    are deliberately identical to the base: there is one button now. */
 .wf-btn--light,
-.wf-btn--clay { background: var(--pl-white); color: var(--wf-rule); }
+.wf-btn--clay { background: var(--wf-rule); color: var(--pl-white); }
 .wf-btn--light:hover,
-.wf-btn--clay:hover { background: var(--wf-rule); color: var(--pl-white); }
+.wf-btn--clay:hover { background: var(--wf-accent-deep); border-color: var(--wf-accent-deep); color: var(--pl-white); }
 /* Unavailable reads as a drawn-back rule rather than a faded black one, so it
    never looks like a button that failed to load. */
 .wf-btn[disabled] {
@@ -460,7 +513,7 @@
   font-weight: 700;
   line-height: 1;
   color: var(--pl-white);
-  background: #A8483E;
+  background: var(--wf-accent);
   padding: 6px 10px;
   border-radius: var(--wf-pill);
   font-size: .85rem;
@@ -630,7 +683,7 @@
    its own headline percentage from the products it renders, so the claim
    cannot drift away from the prices, and it renders nothing when no product
    carries a compare_at price. */
-.wf-launch { background: var(--wf-pink-soft); }
+.wf-launch { background: var(--pl-cream-deep); }
 .wf-launch__eyebrow {
   display: inline-block;
   font-family: var(--pl-sans);
@@ -638,7 +691,7 @@
   font-weight: 700;
   letter-spacing: .04em;
   color: var(--pl-white);
-  background: #A8483E;
+  background: var(--wf-accent);
   padding: 7px 14px;
   border-radius: var(--wf-pill);
   margin-bottom: 14px;
@@ -655,6 +708,6 @@
   font-family: var(--pl-display);
   font-size: clamp(1.1rem, 3.4vw, 1.4rem);
   font-weight: 700;
-  color: #A8483E;
+  color: var(--wf-accent);
   margin: 10px 0 0;
 }
