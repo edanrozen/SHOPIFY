@@ -468,6 +468,32 @@
      forced to stay on the correct side of the digits. */
   direction: ltr;
 }
+/* The product's own `custom.badge`, in the opposite corner from the discount.
+   Bottom rather than top on purpose: at 390px a card frame is about 146px wide,
+   and the longest badge in the catalogue ("ידית עץ אשור") plus a "-30%" on the
+   same row needs about 164px. They would collide on every phone.
+
+   Olive on white is 6.64:1 and the label is .82rem, which is 13.1px, just over
+   the floor the rest of the site holds. */
+.wf-card__tag {
+  position: absolute;
+  inset-block-end: 8px;
+  inset-inline-start: 8px;
+  z-index: 1;
+  max-width: calc(100% - 16px);
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-white);
+  background: var(--wf-accent);
+  padding: 6px 10px;
+  border-radius: var(--wf-pill);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .wf-more { display: flex; justify-content: center; margin-top: clamp(26px, 4vw, 44px); }
 
 /* ---- product page -------------------------------------------------------- */

@@ -78,6 +78,22 @@ const MF_PRESENT = {
   'kadurosh-cat-ball-toy': ['problem', 'before', 'after', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
 };
 
+// The real `custom.badge` of each product, read off the Admin API. The card
+// renders it for every product in a grid, not just the one a product page is
+// about, so it has to live on the stub itself rather than in the per-page
+// metafield merge.
+const BADGES = {
+  'bloom-grooming-station': 'עמדת טיפוח',
+  'hair-remover-wood-handle': 'ידית עץ אשור',
+  'hair-remover-xl': 'הכי מהיר',
+  'pro-grooming-comb': 'לשימוש יומי',
+  'katora-cardboard-scratcher': 'גירוד ומנוחה',
+  'parvakal-pet-clipper': 'טיפוח בבית',
+  'parvatek-grooming-comb': 'דו צדדי',
+  'kadurosh-cat-ball-toy': 'משחק עצמאי',
+  'tinybloom-fur-glove': 'בלי מילויים',
+};
+
 // ---------------------------------------------------------------- catalogue
 // The nine real products, with the real image counts and the real handles, so
 // every grid, card and collection on the page fills exactly as it will live.
@@ -92,7 +108,7 @@ const MF_PRESENT = {
 // shots are 2:3 looks fine in a stub that pretends they are all square, and
 // then letterboxes four pictures on the live store.
 const CATALOGUE = [
-  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 24999, 8, ['grooming', 'all-products'],
+  ['bloom-grooming-station', 'בלום™ תחנת הטיפוח הביתית לכלבים וחתולים', 19999, 8, ['grooming', 'all-products'],
     [[1206, 1806], [1177, 1754], [1206, 1759], [1206, 1763], [1206, 1688], [1206, 1740], [1145, 1374], [1254, 1254]]],
   ['pro-grooming-comb', 'פורה מסרק למניעת קשרים', 5999, 6, ['grooming', 'all-products'],
     [[1254, 1254], [1312, 1199], [1312, 1199], [1672, 941], [1145, 1374], [1312, 1199]]],
@@ -133,7 +149,7 @@ const PS = {
 // renders every product at full price and the sale markup never appears, which
 // is how a sale badge ships untested.
 const COMPARE = {
-  'bloom-grooming-station': 29999,
+  'bloom-grooming-station': 24999,
   'parvakal-pet-clipper': 19999,
   'kadurosh-cat-ball-toy': 12999,
   'hair-remover-xl': 10999,
@@ -176,6 +192,7 @@ const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
       custom: {
         problem_line: { value: (PS[handle] || [])[0] },
         solution_line: { value: (PS[handle] || [])[1] },
+        badge: { value: BADGES[handle] },
       },
     },
     _collections: colls,

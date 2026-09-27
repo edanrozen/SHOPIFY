@@ -9,6 +9,13 @@
   stays in view, and to the buy box, where it is read at the moment the
   decision is made. Both places say it once instead of nine times.
 
+  The badge in the lower corner is the product's own `custom.badge`, which was
+  written months ago and rendered nowhere. It is what the reference sites put
+  in a card corner, except theirs says "best seller" on a shop with no orders
+  and these say what the product is: a double-sided comb, a wooden handle, no
+  refills. It sits at the bottom so it never collides with the discount badge
+  at the top, which on a 146px card frame it otherwise would.
+
   The struck price and the percentage are drawn from compare_at_price, so they
   appear only while a real discount exists on the product and disappear by
   themselves the day it is removed. Nothing here is typed by hand, which is the
@@ -29,6 +36,8 @@
     endcomment
     assign off_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | floor
   endif
+
+  assign badge = product.metafields.custom.badge.value
 -%}
 
 <a class="wf-card" href="{{ product.url }}">
@@ -47,6 +56,9 @@
         loading="lazy"
         decoding="async"
       >
+    {%- endif -%}
+    {%- if badge != blank -%}
+      <span class="wf-card__tag">{{ badge }}</span>
     {%- endif -%}
   </div>
   <p class="wf-card__name">{{ product.title }}</p>
