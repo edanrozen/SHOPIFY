@@ -1,0 +1,514 @@
+/* ==========================================================================
+   The long product page.
+
+   Structure borrowed from ortofix.co.il, which the merchant pointed at: the
+   problem stated in the customer's words, a before and after pair, the
+   reasons it works as numbered cards, a how-to, a myth versus reality table
+   and an FAQ, with the buy button following you the whole way down.
+
+   Everything in it is driven by the product's own metafields, so no page
+   invents a claim. A product missing a field simply does not render that
+   band rather than showing an empty one.
+
+   One deliberate departure from the reference. Its comparison table is
+   "us ✓ / everyone else ✗", which asserts things about competitors nobody
+   here has measured. The shop already holds `custom.versus`, which is what
+   people assume against what actually happens, so the table keeps the ✗/✓
+   shape and fills it with something true instead.
+   ========================================================================== */
+
+:root {
+  /* The connector drawn down the numbered steps. --pl-line is 1.24:1 against
+     the deep cream, which is invisible; this is 3.08:1 there and 3.39:1 on
+     white, so the sequence reads as a sequence on every band it crosses. On
+     the bark band it is remapped, because a mid olive on the brown is not a
+     line, it is a smudge. */
+  --wf-rail: #878F70;
+}
+
+.wf-band { padding-block: clamp(36px, 6vw, 76px); }
+/* Inverted, and the inversion is the point rather than an accident.
+   The page used to be white and this band was the cream. The page is the
+   paper now, so a cream band would be the same value as the page it sits on
+   and the band would stop existing. White is the surface that lifts off the
+   paper instead, at the same 1.08 step the two always had between them. */
+.wf-band--cream { background: var(--pl-porcelain); }
+.wf-band--blush { background: var(--wf-pink-soft); }
+
+/* The one dark band on the product page, and it is the brown rather than the
+   green because of what each can carry.
+
+   Measured: the paper on the brown is 6.46:1 and the sand 5.16:1, so a
+   heading, a paragraph and a muted line all clear 4.5 on it. The paper on the
+   green is 4.29:1, under the floor, which would have left white as the only
+   legal text colour on a green band and at 4.69:1 even then. A band you are
+   allowed to write exactly one colour on is not a band.
+
+   The tokens are remapped for the subtree rather than every rule inside being
+   rewritten, the same technique .wf-trust uses. --pl-brown is the heading
+   colour site-wide, so in here it points at the paper; without that the
+   headings would be brown on brown. */
+.wf-band--bark { background: var(--pl-brown); }
+
+/* The remaps sit on the wrapper, not on the band, and that split is load
+   bearing rather than tidiness. Written as one rule, `background:
+   var(--pl-brown)` and `--pl-brown: var(--pl-cream)` land on the same element,
+   the background resolves against the element's own redefined value, and the
+   band renders cream on cream. It did exactly that until it was measured. */
+.wf-band--bark > .pl-wrap {
+  --pl-brown:    var(--pl-cream);      /* headings,  6.46:1 */
+  --pl-ink:      var(--pl-cream);      /* step titles, 6.46:1 */
+  --pl-ink-soft: var(--pl-sand-deep);  /* body and sub, 5.16:1 */
+  --pl-taupe:    var(--pl-sand-deep);  /* muted, 5.16:1 */
+  --pl-line:     rgba(255, 255, 255, .22);
+  --wf-rail:     var(--pl-olive-pale); /* 4.46:1, past the 3:1 a rule needs */
+}
+.wf-band__head { max-width: 62ch; margin-inline: auto; text-align: center; margin-bottom: clamp(22px, 3.6vw, 40px); }
+.wf-band__head .wf-sub { margin-inline: auto; }
+
+/* Long prose set narrower than the band. A measure past about 70 characters
+   loses the reader's place on the return sweep, and Hebrew is no exception. */
+.wf-prose {
+  max-width: 62ch;
+  margin-inline: auto;
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--pl-ink-soft);
+}
+.wf-prose p { margin: 0 0 14px; }
+.wf-prose p:last-child { margin-bottom: 0; }
+
+/* A sub-block inside a band: a short label and a paragraph, set apart from the
+   band's own prose without being promoted to a section of its own.
+
+   It exists because two pieces of copy were already written for every product
+   and rendered nowhere. custom.audience says who the problem happens to, which
+   is the part of a problem a reader checks themselves against, and custom.safety
+   says how to use the thing without hurting the animal. Both were sitting in
+   the product record unread.
+
+   Contrast on the deep cream: the brown label 6.03:1, the body 8.22:1. The
+   label is .82rem, 13.1px, which is the floor the rest of the site holds. */
+.wf-aside {
+  max-width: 62ch;
+  margin: clamp(20px, 3vw, 32px) auto 0;
+  padding: clamp(14px, 2.2vw, 20px);
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+}
+.wf-aside__t {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pl-brown);
+  margin: 0 0 8px;
+}
+.wf-aside__x {
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.02rem);
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0;
+}
+
+/* ---- the three numbers, above the buy box --------------------------------
+   Rendered by wf-product from custom.spotlight. It lives in this sheet rather
+   than in wf.css with the older buy box rules because it is product page only
+   and this is the product page's sheet; the rules in wf.css predate it.
+
+   Contrast on the deep cream: the brown figure 6.03:1, the label 12.71:1, the
+   note 5.06:1. The note is .82rem, 13.1px, which is the floor this site holds,
+   and at three columns on a 390px screen each cell is about 118px, so a note
+   of four or five words wraps to two lines by design rather than by accident. */
+.wf-spot {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.wf-spot__i {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 3px;
+  padding: 12px 8px;
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+}
+.wf-spot__v {
+  font-family: var(--pl-display);
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-brown);
+}
+.wf-spot__l { font-family: var(--pl-sans); font-size: .82rem; font-weight: 700; line-height: 1.3; color: var(--pl-ink); }
+.wf-spot__n { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; line-height: 1.35; color: var(--pl-taupe); }
+
+/* ---- which one of ours ---------------------------------------------------
+   Rendered by wf-pdp-faq from custom.picker.
+
+   The current product is a card without a link, marked rather than removed.
+   Dropping it would leave the reader comparing the two they did not open
+   against nothing, and the whole point is to place this one among them. */
+.wf-pick {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+  margin-inline: auto;
+}
+@media (min-width: 750px) { .wf-pick { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.wf-pick__i {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  padding: clamp(14px, 2.2vw, 18px);
+}
+.wf-pick__i--now { background: var(--pl-cream-deep); border-color: var(--wf-accent); }
+.wf-pick__head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.wf-pick__n { font-family: var(--pl-display); font-size: 1.05rem; font-weight: 700; line-height: 1.3; color: var(--pl-brown); }
+.wf-pick__p { font-family: var(--pl-sans); font-size: .95rem; font-weight: 700; color: var(--pl-ink); white-space: nowrap; }
+.wf-pick__now {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--pl-white);
+  background: var(--wf-accent);
+  border-radius: var(--wf-pill);
+  padding: 6px 10px;
+}
+.wf-pick__b { font-family: var(--pl-sans); font-size: .95rem; line-height: 1.5; font-weight: 700; color: var(--pl-ink); margin: 0 0 4px; }
+.wf-pick__x { font-family: var(--pl-sans); font-size: .9rem; line-height: 1.55; color: var(--pl-taupe); margin: 0; }
+/* 44px of height on the link itself, because this is the one element in the
+   block a thumb is meant to hit. */
+.wf-pick__a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 4px;
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--wf-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- before and after ----------------------------------------------------
+   Two columns on every width, including a phone. Stacking them would put the
+   two halves of one comparison on two different screens, which is the one
+   thing this block cannot afford: the whole point is seeing them together. */
+.wf-ba {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 22px);
+  max-width: 900px;
+  margin-inline: auto;
+}
+.wf-ba__col {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  padding: clamp(14px, 2.4vw, 22px);
+}
+.wf-ba__tag {
+  display: inline-block;
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-white);
+  padding: 8px 16px;
+  border-radius: var(--wf-pill);
+  margin-bottom: 14px;
+}
+/* The negative side is the taupe, not a red. #A8483E was the last of three
+   places carrying a brick that is in no part of the mark, and a saturated red
+   on a product page raises an alarm where the section only means "this is the
+   version we are dismissing". Muted reads as dismissed; red reads as danger.
+
+   White on the taupe is 5.92:1 and white on the accent 4.69:1, so both badges
+   clear AA for small bold text, and the pair now says brand-green for the
+   thing that is true and a warm grey for the thing that is not. */
+.wf-ba__tag--before { background: var(--pl-taupe); }
+.wf-ba__tag--after  { background: var(--wf-accent); }
+.wf-ba__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.wf-ba__list li {
+  position: relative;
+  font-family: var(--pl-sans);
+  font-size: clamp(.86rem, 2.2vw, .96rem);
+  line-height: 1.5;
+  color: var(--pl-ink-soft);
+  padding-inline-start: 22px;
+}
+.wf-ba__list li::before {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.wf-ba__col--before .wf-ba__list li::before { content: '\00D7'; color: var(--pl-taupe); font-size: 1.05em; }
+.wf-ba__col--after  .wf-ba__list li::before { content: '\2713'; color: var(--wf-accent); }
+
+/* ---- highlights, the icon rows ------------------------------------------ */
+.wf-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 62ch; margin-inline: auto; }
+.wf-points li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.05rem);
+  line-height: 1.55;
+  color: var(--pl-ink);
+}
+.wf-points__mark {
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--wf-accent);
+  color: var(--pl-white);
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---- numbered reason cards ---------------------------------------------- */
+.wf-reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(12px, 2.2vw, 20px);
+}
+@media (min-width: 750px) { .wf-reasons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.wf-reason {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  padding: clamp(16px, 2.4vw, 24px);
+}
+.wf-reason__n {
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--wf-accent);
+  color: var(--pl-white);
+  font-family: var(--pl-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.wf-reason__t { font-family: var(--pl-display); font-size: 1.1rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 6px; }
+.wf-reason__x { font-family: var(--pl-sans); font-size: .95rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
+
+/* ---- the steps rail ------------------------------------------------------
+   A single column with a rule running down the numbers, so the eye is told
+   this is a sequence rather than a set of unrelated tips. */
+.wf-steps { list-style: none; margin: 0; padding: 0; max-width: 62ch; margin-inline: auto; display: grid; gap: 0; }
+.wf-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 14px;
+  padding-bottom: 22px;
+}
+.wf-step:last-child { padding-bottom: 0; }
+.wf-step__n {
+  position: relative;
+  z-index: 1;
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--pl-white);
+  border: 2px solid var(--wf-accent);
+  color: var(--wf-accent);
+  font-family: var(--pl-display);
+  font-size: .9rem;
+  font-weight: 700;
+}
+/* The rule is drawn from the number down, and the last step does not draw it,
+   so the sequence ends rather than trailing into whitespace. */
+.wf-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  inset-block: 32px 0;
+  inset-inline-start: 15px;
+  width: 2px;
+  background: var(--wf-rail);
+}
+.wf-step__t { font-family: var(--pl-display); font-size: 1.02rem; font-weight: 700; color: var(--pl-ink); margin: 5px 0 4px; }
+.wf-step__x { font-family: var(--pl-sans); font-size: .93rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
+
+/* ---- myth versus reality ------------------------------------------------- */
+.wf-vs { max-width: 760px; margin-inline: auto; display: grid; gap: 12px; }
+.wf-vs__row {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+}
+.wf-vs__side {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  padding: 14px clamp(14px, 2.2vw, 20px);
+}
+.wf-vs__side + .wf-vs__side { border-top: 1px solid var(--pl-line); }
+.wf-vs__side--myth { background: var(--pl-cream); }
+.wf-vs__mark {
+  width: 24px; height: 24px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-white);
+}
+.wf-vs__side--myth .wf-vs__mark { background: var(--pl-taupe); }
+.wf-vs__side--real .wf-vs__mark { background: var(--wf-accent); }
+.wf-vs__label {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pl-taupe);
+  display: block;
+  margin-bottom: 3px;
+}
+.wf-vs__text { font-family: var(--pl-sans); font-size: clamp(.9rem, 2.3vw, 1rem); line-height: 1.55; color: var(--pl-ink); margin: 0; }
+.wf-vs__side--real .wf-vs__text { color: var(--pl-ink-soft); }
+
+/* ---- faq and specs ------------------------------------------------------- */
+.wf-faq { max-width: 760px; margin-inline: auto; display: grid; gap: 10px; }
+.wf-faq__item {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+}
+/* <details> keeps the answers in the document for a crawler and for a visitor
+   with JavaScript off, which an accordion built out of divs and a click
+   handler does not. */
+.wf-faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+  padding: 16px clamp(14px, 2.2vw, 20px);
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.02rem);
+  font-weight: 700;
+  color: var(--pl-ink);
+  min-height: 44px;
+}
+.wf-faq__q::-webkit-details-marker { display: none; }
+.wf-faq__q::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 9px; height: 9px;
+  border-inline-end: 2px solid var(--pl-taupe);
+  border-block-end: 2px solid var(--pl-taupe);
+  transform: rotate(45deg);
+  transition: transform .18s var(--pl-ease);
+  margin-block-start: -4px;
+}
+.wf-faq__item[open] .wf-faq__q::after { transform: rotate(-135deg); margin-block-start: 4px; }
+.wf-faq__a {
+  padding: 0 clamp(14px, 2.2vw, 20px) 16px;
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0;
+}
+
+.wf-specs { max-width: 620px; margin-inline: auto; border: 1px solid var(--pl-line); border-radius: var(--wf-r-lg); overflow: hidden; background: var(--pl-white); }
+.wf-specs__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px; padding: 12px clamp(14px, 2.2vw, 18px); font-family: var(--pl-sans); font-size: .92rem; line-height: 1.5; }
+.wf-specs__row + .wf-specs__row { border-top: 1px solid var(--pl-line); }
+.wf-specs__row:nth-child(odd) { background: var(--pl-cream); }
+.wf-specs__k { font-weight: 700; color: var(--pl-ink); }
+.wf-specs__v { color: var(--pl-ink-soft); }
+
+.wf-chips { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.wf-chips li {
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  color: var(--pl-ink);
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-pill);
+  padding: 7px 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-faq__q::after { transition: none; }
+}
+
+/* The same points, set as a lede above the buy box: aligned to the column
+   rather than centred in the band, and tighter, because here they are read on
+   the way to a price rather than as a section of their own. */
+.wf-points--lede {
+  max-width: none;
+  margin-inline: 0;
+  gap: 9px;
+  margin-bottom: 20px;
+}
+.wf-points--lede li { font-size: clamp(.9rem, 2.3vw, .98rem); }
+.wf-points--lede .wf-points__mark { width: 22px; height: 22px; font-size: .85rem; }
+
+/* ---- the photographs, set large ------------------------------------------
+   One column lets each picture keep its own proportions. There is nothing
+   beside it to line up with, so a fixed frame would only letterbox: Bloom is
+   shot at 2:3 and a 4:5 box leaves a white margin down both sides of every
+   photograph for no gain. The width and height attributes on the <img> hold
+   the space while it loads, so nothing shifts.
+
+   Two columns do take a fixed box, because a pair read side by side is a
+   comparison and a comparison wants the same box twice. Which box is a section
+   setting, arriving as --wf-shot-ratio, so the frame can be told the shape the
+   product was actually photographed in. Contained rather than cropped, since
+   this catalogue runs from 1145x1374 to 1254x1254 to 1206x1806 inside a single
+   product, and cover would take a third off the tall ones and nothing off the
+   square ones. */
+.wf-shots { display: grid; gap: clamp(14px, 2.6vw, 28px); }
+.wf-shots--one { max-width: 620px; margin-inline: auto; }
+.wf-shots--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin-inline: auto; }
+.wf-shot { margin: 0; }
+/* The deep cream for the same reason .wf-card__frame takes it: the catalogue
+   is photographed on #F0ECE0, which is 1.18 against white and 1.01 against
+   this. These are the largest pictures on the page, so the white box was
+   largest here too. */
+.wf-shot__frame {
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+}
+.wf-shot__frame img { width: 100%; height: auto; display: block; }
+.wf-shots--two .wf-shot__frame { aspect-ratio: var(--wf-shot-ratio, 1 / 1); }
+.wf-shots--two .wf-shot__frame img { height: 100%; object-fit: contain; }
+.wf-shot__cap {
+  font-family: var(--pl-sans);
+  font-size: .86rem;
+  line-height: 1.5;
+  color: var(--pl-taupe);
+  margin: 10px 0 0;
+  text-align: center;
+}

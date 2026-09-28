@@ -1,0 +1,138 @@
+{%- doc -%}
+  The plain product page.
+
+  Picture on one side, the things a buyer decides with on the other: name,
+  price, quantity, one button, one line about delivery, then the description.
+  Nothing above the button that is not needed to press it.
+
+  The nine products all have a single variant today, so the picker below only
+  appears if that ever changes. It is a plain <select name="id"> inside the
+  form, which means choosing a variant and buying works with no JavaScript at
+  all. The only script on the page swaps the large photograph, and the page is
+  complete without it.
+{%- enddoc -%}
+
+{%- liquid
+  assign media = product.media | where: 'media_type', 'image'
+  assign hero = product.featured_media
+  if hero == blank and media.size > 0
+    assign hero = media.first
+  endif
+-%}
+
+<div class="bs-wrap bs-pdp">
+
+  <div class="bs-pdp__media">
+    <div class="bs-stage">
+      {%- if hero != blank -%}
+        <img
+          id="bs-stage-img"
+          src="{{ hero | image_url: width: 1000 }}"
+          srcset="{{ hero | image_url: width: 500 }} 500w, {{ hero | image_url: width: 1000 }} 1000w"
+          sizes="(max-width: 800px) 92vw, 520px"
+          width="{{ hero.preview_image.width }}"
+          height="{{ hero.preview_image.height }}"
+          alt="{{ hero.alt | default: product.title | escape }}"
+          fetchpriority="high" decoding="async"
+        >
+      {%- endif -%}
+    </div>
+
+    {%- if media.size > 1 -%}
+      <ul class="bs-strip" role="list">
+        {%- for item in media -%}
+          <li>
+            <button
+              type="button"
+              class="bs-strip__btn"
+              data-src="{{ item | image_url: width: 1000 }}"
+              data-srcset="{{ item | image_url: width: 500 }} 500w, {{ item | image_url: width: 1000 }} 1000w"
+              aria-label="תמונה {{ forloop.index }} מתוך {{ media.size }}"
+            >
+              <img
+                src="{{ item | image_url: width: 160 }}"
+                width="{{ item.preview_image.width }}"
+                height="{{ item.preview_image.height }}"
+                alt=""
+                loading="lazy" decoding="async"
+              >
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+
+  <div class="bs-pdp__info">
+    <h1>{{ product.title }}</h1>
+
+    <p class="bs-pdp__price">
+      {%- if product.compare_at_price > product.price -%}
+        <s class="bs-pdp__was">{{ product.compare_at_price | money }}</s>
+      {%- endif -%}
+      {{ product.price | money }}
+    </p>
+
+    {%- form 'product', product, class: 'bs-pdp__form' -%}
+      {%- if product.has_only_default_variant -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      {%- else -%}
+        <label class="bs-label" for="bs-variant">בחירה</label>
+        <select id="bs-variant" name="id">
+          {%- for variant in product.variants -%}
+            <option
+              value="{{ variant.id }}"
+              {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+              {% unless variant.available %}disabled{% endunless %}
+            >
+              {{ variant.title }} · {{ variant.price | money }}{% unless variant.available %} · אזל{% endunless %}
+            </option>
+          {%- endfor -%}
+        </select>
+      {%- endif -%}
+
+      <label class="bs-label" for="bs-qty">כמות</label>
+      <input class="bs-qty" id="bs-qty" type="number" name="quantity" value="1" min="1" inputmode="numeric">
+
+      <button type="submit" class="bs-btn" {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+      </button>
+    {%- endform -%}
+
+    {%- if section.settings.note != blank -%}
+      <p class="bs-pdp__note">{{ section.settings.note }}</p>
+    {%- endif -%}
+
+    {%- if product.description != blank -%}
+      <div class="bs-rte">{{ product.description }}</div>
+    {%- endif -%}
+  </div>
+
+</div>
+
+{%- if media.size > 1 -%}
+  <script>
+    (function () {
+      var stage = document.getElementById('bs-stage-img');
+      if (!stage) return;
+      document.querySelectorAll('.bs-strip__btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          stage.srcset = btn.dataset.srcset;
+          stage.src = btn.dataset.src;
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "בייסיק · דף מוצר",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם מעל ₪199" }
+  ],
+  "presets": [{ "name": "בייסיק · דף מוצר" }]
+}
+{% endschema %}

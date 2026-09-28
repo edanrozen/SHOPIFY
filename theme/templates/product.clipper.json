@@ -1,0 +1,195 @@
+{
+  "sections": {
+    "main": {
+      "type": "pl-product-main",
+      "blocks": {
+        "t1": {
+          "type": "trust",
+          "settings": {
+            "title": "משלוח חינם מעל ₪199",
+            "text": "אספקה תוך 10 עד 14 ימי עסקים, עם קישור מעקב"
+          }
+        },
+        "t2": {
+          "type": "trust",
+          "settings": {
+            "title": "14 יום לביטול",
+            "text": "לא נפתח, מחזירים ומקבלים את הכסף בחזרה"
+          }
+        },
+        "t3": {
+          "type": "trust",
+          "settings": {
+            "title": "תמיכה בעברית",
+            "text": "שאלה לפני קנייה או אחריה, נחזור אליכם באותו יום עסקים"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "atc_label": "הוספה לסל",
+        "buy_note": "משלוח חינם מעל ₪199 · אספקה תוך 10 עד 14 ימי עסקים"
+      }
+    },
+    "story": {
+      "type": "pl-product-story",
+      "blocks": {
+        "b1": {
+          "type": "problem",
+          "settings": {
+            "eyebrow": "בין ביקור לביקור",
+            "style": "panel"
+          }
+        },
+        "b2": {
+          "type": "shot",
+          "settings": {
+            "image_index": 2,
+            "eyebrow": "המכשיר",
+            "heading": "קיצור אחיד בתנועה חלקה",
+            "text": "הלהבים והמנגנון מאפשרים קיצור אחיד ומדויק של הפרווה בתנועה חלקה.",
+            "style": "duo",
+            "side": "end"
+          }
+        },
+        "b3": {
+          "type": "safety",
+          "settings": {
+            "heading": "בטיחות לפני הכל",
+            "style": "panel"
+          }
+        },
+        "b4": {
+          "type": "steps",
+          "settings": {
+            "heading": "חמישה שלבים לתספורת בבית",
+            "intro": "",
+            "style": "timeline"
+          }
+        },
+        "b5": {
+          "type": "versus",
+          "settings": {
+            "heading": "מה שנהוג לחשוב על תספורת בבית",
+            "intro": "",
+            "claim_label": "החשש",
+            "reality_label": "התשובה",
+            "style": "split"
+          }
+        },
+        "b6": {
+          "type": "why",
+          "settings": {
+            "heading": "למה זה עובד בבית",
+            "intro": "",
+            "style": "cards"
+          }
+        },
+        "b7": {
+          "type": "compare",
+          "settings": {
+            "heading": "מה משתנה בלוח הזמנים",
+            "before_label": "מחכים לתור",
+            "after_label": "מסדרים בבית",
+            "style": "rows"
+          }
+        },
+        "b8": {
+          "type": "gallery",
+          "settings": {
+            "heading": "עוד מבטים על פרווהקל",
+            "start_index": 3,
+            "count": 3,
+            "style": "rail"
+          }
+        },
+        "b9": {
+          "type": "audience",
+          "settings": {
+            "heading": "למי המכשיר מתאים",
+            "pets_label": "מיועד ל:"
+          }
+        },
+        "b10": {
+          "type": "faq",
+          "settings": {
+            "heading": "שאלות על פרווהקל",
+            "open_first": true
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10"
+      ],
+      "settings": {
+        "tone": "porcelain"
+      }
+    },
+    "details": {
+      "type": "pl-product-tabs",
+      "blocks": {
+        "e1": {
+          "type": "extra",
+          "settings": {
+            "title": "משלוח ואספקה",
+            "text": "<p>המוצר נשלח ישירות מהיצרן, בלי יבואן ובלי מתווך. זמן האספקה הוא 10 עד 14 ימי עסקים מרגע אישור התשלום, וקישור מעקב נשלח לאימייל ברגע שהחבילה יוצאת.</p><p>משלוח חינם בהזמנה מעל ₪199. מתחת לסכום זה דמי משלוח 29.90 ₪. המחיר כולל את כל המיסים, ולא תידרשו לשלם דבר נוסף בקבלת החבילה.</p>"
+          }
+        },
+        "e2": {
+          "type": "extra",
+          "settings": {
+            "title": "החזרות",
+            "text": "<p>מוצר שלא נפתח אפשר להחזיר תוך 14 יום מקבלתו ולקבל החזר כספי, בהתאם לחוק הגנת הצרכן. עלות משלוח ההחזרה חלה על הלקוח.</p><p>אם המוצר הגיע פגום, לא תקין או שאינו מה שהזמנתם, שלחו לנו תמונה ומספר הזמנה. נשלח מוצר חלופי או נחזיר את הכסף במלואו, בלי שתצטרכו להחזיר את המוצר.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2"
+      ],
+      "settings": {
+        "eyebrow": "לפני שמתחילים",
+        "heading": "המכשיר והטיפול בו",
+        "body": "מה המכשיר עושה, איך מנקים אותו וכל מה שקשור למשלוח ולהחזרות."
+      }
+    },
+    "related": {
+      "type": "pl-related",
+      "settings": {
+        "limit": 6,
+        "eyebrow": "לפני ואחרי התספורת",
+        "heading": "מה שעוזר סביב הגילוח",
+        "body": "מברישים לפני, אוספים את מה שנשר אחרי. אלה הכלים שמשלימים את העבודה.",
+        "link_label": "לעיון נוסף"
+      }
+    },
+    "ticker": {
+      "type": "pl-marquee",
+      "settings": {
+        "items": "תמיכה בעברית לפני הקנייה ואחריה | 14 יום לביטול עסקה | אספקה תוך 10 עד 14 ימי עסקים",
+        "speed": 45,
+        "aria": "מה מובטח לכם"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ticker",
+    "story",
+    "details",
+    "related"
+  ]
+}

@@ -1,0 +1,16 @@
+{%- comment -%}
+  The plain theme's whole style layer.
+
+  Horizon's `base.css` stays, because the header, the footer, the cart and the
+  search page are still Horizon's own sections and they are unreadable without
+  it. Everything after it is gone: no Rubik, no Assistant, no `pluma.css`, no
+  `pl-story.css`, no `pdp.css`, no `pluma.js`. `bs.css` is loaded last and is
+  the only thing deciding how this store looks.
+
+  Three requests instead of seven, and the two font requests that used to sit
+  on the critical path are two fewer round trips before first paint.
+{%- endcomment -%}
+
+{{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
+{{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'bs.css' | asset_url | stylesheet_tag }}

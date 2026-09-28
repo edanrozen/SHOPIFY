@@ -1,0 +1,303 @@
+/* ── The guarantee ─────────────────────────────────────────────────────────
+   One sheet for both shapes of wf-vow, because the band and the modal say the
+   same sentence and only the frame differs.
+
+   It is a sheet of its own rather than more of wf.css because the guarantee is
+   a commercial promise the merchant will change, and a promise that moves is
+   easier to find in a 5KB file named after it than inside 33KB of everything
+   else. It loads on every template rather than only on the two that carry the
+   section today, so a band dropped onto a third template in the editor is
+   styled the moment it lands instead of rendering raw.
+
+   Every pair here is one already measured on this palette: cream on the brown
+   is 6.46:1, the deep sand is 5.16:1, white on the green is 4.69:1 and the
+   taupe on the cream is 5.39:1. The pale olive is deliberately not used for
+   text on the brown; at 4.46:1 it clears the 3:1 a rule needs and misses the
+   4.5:1 a small label needs, which is exactly the kind of near miss only a
+   measurement catches. */
+
+.wf-vow--band {
+  background: var(--pl-brown);
+  padding-block: clamp(30px, 5vw, 60px);
+}
+
+.wf-vow__inner { display: grid; gap: clamp(22px, 4vw, 34px); }
+
+.wf-vow__eyebrow {
+  font-family: var(--pl-sans);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.3;
+  margin: 0 0 10px;
+}
+
+.wf-vow__h {
+  font-family: var(--pl-display);
+  font-size: clamp(1.35rem, 5.2vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+
+.wf-vow__x {
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 54ch;
+}
+
+.wf-vow__fine {
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  line-height: 1.55;
+  margin: 12px 0 0;
+  max-width: 54ch;
+}
+
+.wf-vow--band .wf-vow__eyebrow { color: var(--pl-sand-deep); }
+.wf-vow--band .wf-vow__h { color: var(--pl-cream); }
+.wf-vow--band .wf-vow__x,
+.wf-vow--band .wf-vow__fine { color: var(--pl-sand-deep); }
+
+/* Stacked on a phone, side by side once there is room. Side by side at 390px
+   left the button and the link sharing about 337px of a 358px column, which
+   squeezed the link onto two cramped lines beside a pill. A button and a
+   secondary link are not a row until the row fits. */
+.wf-vow__acts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: clamp(18px, 3vw, 24px);
+}
+
+@media (min-width: 560px) {
+  .wf-vow__acts {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+  }
+}
+
+.wf-vow__go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding-inline: 26px;
+  border: 0;
+  border-radius: var(--wf-pill);
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .16s ease, transform .16s ease;
+}
+
+.wf-vow--band .wf-vow__go { background: var(--pl-cream); color: var(--pl-brown); }
+.wf-vow--band .wf-vow__go:hover { background: var(--pl-sand-deep); }
+
+/* 44px tall, not just the 20px the text occupies. In the actions row this is a
+   target rather than a word inside a sentence, so the inline exception does
+   not cover it; it measured 20px before the min-height. */
+.wf-vow__pol {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wf-vow--band .wf-vow__pol { color: var(--pl-cream); }
+
+.wf-vow__pts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wf-vow__pt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: var(--wf-r);
+}
+
+.wf-vow__pt-t {
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.wf-vow__pt-x {
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  line-height: 1.45;
+}
+
+/* The panel darkens the brown rather than lightening it, and that is a measured
+   decision rather than a taste one. At white 9% the surface lifts to about
+   #7E6144, and the deep sand on it falls to 4.13:1: the panel that was added to
+   give the three points definition was eating the contrast of the line inside
+   it. Darkening instead sends both lines the other way, and the white border
+   still draws the edge. */
+.wf-vow--band .wf-vow__pt {
+  background: rgba(0, 0, 0, .13);
+  border: 1px solid rgba(255, 255, 255, .22);
+}
+.wf-vow--band .wf-vow__pt-t { color: var(--pl-cream); }
+.wf-vow--band .wf-vow__pt-x { color: var(--pl-sand-deep); }
+
+/* The copy and the three points sit one under the other on a phone and beside
+   each other once there is room for the points to stay on one line each. */
+@media (min-width: 900px) {
+  .wf-vow__inner {
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+    align-items: center;
+    gap: clamp(34px, 5vw, 64px);
+  }
+}
+
+/* ── The same promise as a modal ───────────────────────────────────────────
+   The element is a real <dialog>, so the focus trap, the Escape key and the
+   top layer are the browser's. Nothing below styles a state the browser does
+   not already manage. */
+
+.wf-vow__pop {
+  width: min(92vw, 420px);
+  max-width: none;
+  max-height: 88dvh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--wf-r-lg);
+  background: transparent;
+  overflow: visible;
+}
+
+.wf-vow__pop::backdrop { background: rgba(42, 39, 34, .62); }
+
+.wf-vow__card {
+  position: relative;
+  display: block;
+  max-height: 88dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(26px, 6vw, 34px) clamp(20px, 5vw, 30px) clamp(20px, 4vw, 26px);
+  border-radius: var(--wf-r-lg);
+  background: var(--pl-cream);
+  box-shadow: var(--pl-sh-l);
+  text-align: center;
+}
+
+.wf-vow__close {
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--minimum-touch-target, 44px);
+  height: var(--minimum-touch-target, 44px);
+  padding: 0;
+  border: 0;
+  border-radius: var(--wf-pill);
+  background: transparent;
+  color: var(--pl-ink-soft);
+  cursor: pointer;
+}
+
+.wf-vow__close:hover { background: var(--pl-sand-deep); }
+
+.wf-vow__badge {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 6px 14px;
+  border-radius: var(--wf-pill);
+  background: var(--wf-accent);
+  color: var(--pl-white);
+  font-family: var(--pl-sans);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  line-height: 1.3;
+}
+
+.wf-vow__pop .wf-vow__h { color: var(--pl-brown); }
+.wf-vow__pop .wf-vow__x { color: var(--pl-ink-soft); margin-inline: auto; }
+.wf-vow__pop .wf-vow__fine { color: var(--pl-taupe); margin-inline: auto; }
+
+/* Flat rows in the modal, not the cards the band uses, and the reason is a
+   measurement. As cards the three points made the modal 653px tall, and an
+   iPhone SE is 667px: at 88dvh the button that the whole interruption exists
+   for sat below an internal scroll. Stripping the boxes and running each point
+   on one line takes about 90px out and puts the button back on screen.
+
+   The rows carry a tick rather than a bullet, because each one is a thing the
+   reader is being given, not an item in a list. */
+.wf-vow__pop .wf-vow__pts {
+  margin: clamp(14px, 3vw, 18px) 0 0;
+  gap: 7px;
+  text-align: start;
+}
+
+.wf-vow__pop .wf-vow__pt {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 6px;
+  padding: 0;
+  border-radius: 0;
+}
+
+.wf-vow__pop .wf-vow__pt::before {
+  content: '\2713';
+  flex: 0 0 auto;
+  align-self: start;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--wf-accent);
+}
+
+.wf-vow__pop .wf-vow__pt-t { color: var(--pl-ink); }
+.wf-vow__pop .wf-vow__pt-x { color: var(--pl-taupe); }
+
+.wf-vow__pop .wf-vow__go {
+  width: 100%;
+  margin-top: clamp(18px, 4vw, 24px);
+  background: var(--wf-accent);
+  color: var(--pl-white);
+}
+.wf-vow__pop .wf-vow__go:hover { background: var(--wf-accent-deep); }
+
+.wf-vow__pop .wf-vow__pol {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--pl-brown);
+}
+
+.wf-vow__pop[open] { animation: wf-vow-in .22s ease-out both; }
+
+@keyframes wf-vow-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-vow__pop[open] { animation: none; }
+  .wf-vow__go { transition: none; }
+}

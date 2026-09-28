@@ -1,0 +1,218 @@
+{%- doc -%}
+  Every fact about the product, in one place.
+
+  The brief this answers was that product information was scattered down the
+  page, so a buyer looking for one detail had to read all of it. Here the
+  whole of it is one column of disclosures: closed, the section is a short
+  contents list a thumb can scan in two seconds; open, each answer is a few
+  lines rather than an essay.
+
+  A panel with nothing behind it renders nothing at all, which matters for the
+  specification block in particular. Rather than print an empty table or a
+  placeholder, a missing measurement simply removes its own row, and a
+  specification with no rows at all removes its own panel. The page stays
+  honest about what the store actually knows.
+
+  The questions come from the product's own custom.faq metafield, so they stay
+  with the product rather than with the template.
+{%- enddoc -%}
+
+{%- assign faq = product.metafields.custom.faq.value -%}
+
+<div class="pdp pdp-info">
+  <div class="pdp__band">
+    <div class="pl-wrap">
+      <div class="pdp__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pdp__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="pdp__h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.intro != blank -%}
+          <p class="pdp__lede">{{ section.settings.intro }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="pdp-acc">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+          {%- when 'panel' -%}
+            {%- if block.settings.body != blank -%}
+              <details class="pdp-acc__item" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
+                <summary class="pdp-acc__sum">
+                  {{ block.settings.title }}
+                  <span class="pdp-acc__sign" aria-hidden="true"></span>
+                </summary>
+                <div class="pdp-acc__body">{{ block.settings.body }}</div>
+              </details>
+            {%- endif -%}
+
+          {%- when 'steps' -%}
+            {%- assign rows = block.settings.steps | newline_to_br | split: '<br />' -%}
+            {%- if block.settings.steps != blank -%}
+              <details class="pdp-acc__item" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
+                <summary class="pdp-acc__sum">
+                  {{ block.settings.title }}
+                  <span class="pdp-acc__sign" aria-hidden="true"></span>
+                </summary>
+                <div class="pdp-acc__body">
+                  <ol class="pdp-acc__ol">
+                    {%- for r in rows -%}
+                      {%- assign row = r | strip -%}
+                      {%- if row != blank -%}
+                        {%- assign parts = row | split: '|' -%}
+                        {%- comment -%}
+                          The explanation is its own element rather than a bare
+                          text node: Liquid's whitespace control would eat a
+                          separating space and run the two together.
+                        {%- endcomment -%}
+                        <li>
+                          <strong>{{ parts[0] | strip }}</strong>
+                          {%- if parts.size > 1 -%}<span>{{ parts[1] | strip }}</span>{%- endif -%}
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ol>
+                </div>
+              </details>
+            {%- endif -%}
+
+          {%- when 'list' -%}
+            {%- assign rows = block.settings.items | newline_to_br | split: '<br />' -%}
+            {%- if block.settings.items != blank -%}
+              <details class="pdp-acc__item" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
+                <summary class="pdp-acc__sum">
+                  {{ block.settings.title }}
+                  <span class="pdp-acc__sign" aria-hidden="true"></span>
+                </summary>
+                <div class="pdp-acc__body">
+                  <ul class="pdp-acc__ul" role="list">
+                    {%- for r in rows -%}
+                      {%- assign row = r | strip -%}
+                      {%- if row != blank -%}<li>{{ row }}</li>{%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </details>
+            {%- endif -%}
+
+          {%- when 'spec' -%}
+            {%- comment -%}
+              Rows are written label | value, one per line. A line with no
+              value is dropped rather than printed empty, and a block whose
+              lines are all empty never opens a panel at all.
+            {%- endcomment -%}
+            {%- assign rows = block.settings.rows | newline_to_br | split: '<br />' -%}
+            {%- assign kept = 0 -%}
+            {%- for r in rows -%}
+              {%- assign parts = r | strip | split: '|' -%}
+              {%- if parts.size > 1 and parts[1] != blank -%}{%- assign kept = kept | plus: 1 -%}{%- endif -%}
+            {%- endfor -%}
+            {%- if kept > 0 -%}
+              <details class="pdp-acc__item" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
+                <summary class="pdp-acc__sum">
+                  {{ block.settings.title }}
+                  <span class="pdp-acc__sign" aria-hidden="true"></span>
+                </summary>
+                <div class="pdp-acc__body">
+                  <dl class="pdp-spec">
+                    {%- for r in rows -%}
+                      {%- assign parts = r | strip | split: '|' -%}
+                      {%- if parts.size > 1 and parts[1] != blank -%}
+                        <div class="pdp-spec__row">
+                          <dt>{{ parts[0] | strip }}</dt>
+                          <dd>{{ parts[1] | strip }}</dd>
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </dl>
+                </div>
+              </details>
+            {%- endif -%}
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if faq != blank -%}
+    <div class="pdp__band">
+      <div class="pl-wrap">
+        <div class="pdp__head">
+          {%- if section.settings.faq_eyebrow != blank -%}
+            <p class="pdp__eyebrow">{{ section.settings.faq_eyebrow }}</p>
+          {%- endif -%}
+          <h2 class="pdp__h2">{{ section.settings.faq_heading }}</h2>
+        </div>
+
+        <div class="pdp-acc">
+          {%- for row in faq -%}
+            <details class="pdp-acc__item">
+              <summary class="pdp-acc__sum">
+                {{ row.q }}
+                <span class="pdp-acc__sign" aria-hidden="true"></span>
+              </summary>
+              <div class="pdp-acc__body"><p>{{ row.a }}</p></div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "TinyBloom · PDP info",
+  "tag": "div",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "שורה עליונה" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "כל הפרטים" },
+    { "type": "textarea", "id": "intro", "label": "משפט הסבר" },
+    { "type": "header", "content": "שאלות ותשובות" },
+    { "type": "text", "id": "faq_eyebrow", "label": "שורה עליונה" },
+    { "type": "text", "id": "faq_heading", "label": "כותרת", "default": "שאלות נפוצות" }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "טקסט",
+      "settings": [
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "richtext", "id": "body", "label": "תוכן" },
+        { "type": "checkbox", "id": "open", "label": "פתוח כברירת מחדל", "default": false }
+      ]
+    },
+    {
+      "type": "steps",
+      "name": "שלבים",
+      "settings": [
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "textarea", "id": "steps", "label": "שלבים", "info": "שורה לכל שלב, בפורמט כותרת | הסבר" },
+        { "type": "checkbox", "id": "open", "label": "פתוח כברירת מחדל", "default": false }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "רשימה",
+      "settings": [
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "textarea", "id": "items", "label": "פריטים", "info": "שורה לכל פריט" },
+        { "type": "checkbox", "id": "open", "label": "פתוח כברירת מחדל", "default": false }
+      ]
+    },
+    {
+      "type": "spec",
+      "name": "מפרט",
+      "settings": [
+        { "type": "text", "id": "title", "label": "כותרת", "default": "מפרט" },
+        { "type": "textarea", "id": "rows", "label": "שורות", "info": "שורה לכל נתון, בפורמט שם | ערך. שורה בלי ערך לא מוצגת" },
+        { "type": "checkbox", "id": "open", "label": "פתוח כברירת מחדל", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "TinyBloom · PDP info" }]
+}
+{% endschema %}

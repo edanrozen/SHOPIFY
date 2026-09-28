@@ -1,0 +1,87 @@
+{%- doc -%}
+  Launch prices.
+
+  Shows only products that carry a real compare_at_price above their price, and
+  the headline percentage is computed from those products rather than typed in.
+  Two consequences worth keeping:
+
+  The band cannot overstate the offer. If the deepest discount in the shop is
+  22%, the heading says 22, even if somebody wrote 40 into the settings, because
+  there is no setting to write it into.
+
+  The band retires itself. Remove the compare_at prices and this renders
+  nothing at all, so a finished sale cannot be left advertised on the homepage
+  because nobody remembered to delete the section.
+{%- enddoc -%}
+
+{%- liquid
+  assign coll = collections[section.settings.collection]
+  assign pool = coll.products
+
+  assign sale_count = 0
+  assign max_pct = 0
+  for item in pool
+    if item.compare_at_price > item.price
+      assign sale_count = sale_count | plus: 1
+      assign pct = item.compare_at_price | minus: item.price | times: 100.0 | divided_by: item.compare_at_price | floor
+      if pct > max_pct
+        assign max_pct = pct
+      endif
+    endif
+  endfor
+-%}
+
+{%- if sale_count > 0 -%}
+  <section class="wf-section wf-launch">
+    <div class="pl-wrap">
+      <div class="wf-band__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="wf-launch__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="wf-sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+        {%- if max_pct > 0 -%}
+          <p class="wf-launch__upto">{{ section.settings.upto_prefix }} {{ max_pct }}%</p>
+        {%- endif -%}
+      </div>
+
+      <ul class="wf-grid" role="list">
+        {%- for item in pool -%}
+          {%- if item.compare_at_price > item.price -%}
+            {%- if forloop.index0 < section.settings.limit -%}
+              <li>{% render 'wf-card', product: item %}</li>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      {%- if section.settings.more_label != blank -%}
+        <div class="wf-more">
+          <a class="wf-btn" href="{{ section.settings.more_link | default: routes.all_products_collection_url }}">
+            {{ section.settings.more_label }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "תמות · מחירי השקה",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "תווית קטנה", "default": "מחירי השקה" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "מחירי ההשקה של TinyBloom" },
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" },
+    { "type": "text", "id": "upto_prefix", "label": "לפני האחוז", "default": "עד" },
+    { "type": "collection", "id": "collection", "label": "אוסף" },
+    { "type": "range", "id": "limit", "label": "כמה מוצרים", "min": 3, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "more_label", "label": "כפתור תחתון" },
+    { "type": "url", "id": "more_link", "label": "קישור הכפתור" }
+  ],
+  "presets": [{ "name": "תמות · מחירי השקה" }]
+}
+{% endschema %}

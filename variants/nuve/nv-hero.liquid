@@ -1,0 +1,84 @@
+{%- doc -%}
+  The opening of a single product landing page.
+
+  Photograph at full width first, then everything centred under it. Not copy
+  over the image: on the page this is read from, the picture is the product on
+  a plain ground and the words sit below it, which is what lets the headline be
+  this large without fighting anything behind it.
+
+  The eyebrow above the headline is where that page puts "250,000+ CUSTOMERS ·
+  4.9 stars". This shop has no orders and no reviews, so there is nothing
+  honest to put there and the setting is free text: fill it when a number is
+  true, leave it as a plain description until then.
+
+  The line under the button is theirs too. Theirs promises 100 days. This one
+  is set to the 14 days the shop actually gives, which is the statutory right
+  in Israel, and it is a setting so it can never drift from the policy page
+  without someone deciding to change it.
+{%- enddoc -%}
+
+{%- liquid
+  assign p = section.settings.product
+  assign img = section.settings.image | default: p.featured_image
+  assign link = section.settings.cta_link | default: p.url
+-%}
+
+<section class="nv-hero">
+  {%- if img != blank -%}
+    <div class="nv-hero__media">
+      <img
+        src="{{ img | image_url: width: 1400 }}"
+        srcset="{{ img | image_url: width: 700 }} 700w, {{ img | image_url: width: 1400 }} 1400w"
+        sizes="100vw"
+        width="{{ img.width }}"
+        height="{{ img.height }}"
+        alt="{{ img.alt | default: p.title | default: section.settings.heading | escape }}"
+        fetchpriority="high"
+        decoding="async"
+      >
+    </div>
+  {%- endif -%}
+
+  <div class="pl-wrap nv-hero__copy">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="nv-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1 class="nv-h1">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="nv-lede">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank -%}
+      <a class="nv-cta" href="{{ link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+
+    {%- if section.settings.under != blank -%}
+      <p class="nv-under">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.2l2.5 2.5 4.7-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>{{ section.settings.under }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "נובה · פתיחה",
+  "tag": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "המוצר שהדף מוכר" },
+    { "type": "image_picker", "id": "image", "label": "תמונה (ריק לוקח את תמונת המוצר)" },
+    { "type": "text", "id": "eyebrow", "label": "שורה מעל הכותרת" },
+    { "type": "textarea", "id": "heading", "label": "כותרת" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "לקנות עכשיו" },
+    { "type": "url", "id": "cta_link", "label": "קישור (ריק לוקח את עמוד המוצר)" },
+    { "type": "text", "id": "under", "label": "שורה מתחת לכפתור" }
+  ],
+  "presets": [{ "name": "נובה · פתיחה" }]
+}
+{% endschema %}

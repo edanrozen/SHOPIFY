@@ -1,0 +1,53 @@
+{%- doc -%}
+  The collection page. The title sits on the page rather than on a photograph,
+  because the collection cover is already the thing the visitor clicked to get
+  here and showing it twice tells them nothing new.
+{%- enddoc -%}
+
+{%- paginate collection.products by 24 -%}
+  <div class="pl-wrap wf-collhead">
+    <h1 class="wf-h2">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="wf-collhead__desc">{{ collection.description }}</div>
+    {%- endif -%}
+    {%- liquid
+      # Hebrew does not pluralise the way a bare counter assumes. "1 מוצרים" is
+      # wrong, and up to two the language spells the number out rather than
+      # printing a digit. From three on, the digit reads better than the word.
+      assign n = collection.products_count
+      if n == 1
+        assign count_label = 'מוצר אחד'
+      elsif n == 2
+        assign count_label = 'שני מוצרים'
+      else
+        assign count_label = n | append: ' מוצרים'
+      endif
+    -%}
+    <p class="wf-collhead__count">{{ count_label }}</p>
+  </div>
+
+  <div class="pl-wrap wf-section--tight">
+    <ul class="wf-grid" role="list">
+      {%- for item in collection.products -%}
+        <li>{% render 'wf-card', product: item %}</li>
+      {%- else -%}
+        <li>{{ section.settings.empty_text }}</li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="wf-more" aria-label="עמודים">{{ paginate | default_pagination }}</nav>
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "תמות · אוסף",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "empty_text", "label": "טקסט לאוסף ריק", "default": "האוסף הזה עדיין ריק. חזרו בקרוב." }
+  ],
+  "presets": [{ "name": "תמות · אוסף" }]
+}
+{% endschema %}

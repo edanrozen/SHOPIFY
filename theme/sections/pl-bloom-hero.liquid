@@ -1,0 +1,229 @@
+{%- doc -%}
+  The first screen of the product page.
+
+  The headline is a claim, not the product's name. A buyer arriving here can
+  already see the object in the photograph above it; what they cannot see is
+  what it changes, so that is what the largest text on the page says. The
+  product's own title is carried by the eyebrow and by the document title,
+  which is where a name belongs.
+
+  The order on a phone is photograph, claim, proof, price, button, in that
+  order and no other, because that is the order the questions arrive in.
+
+  The cart mechanics are the theme's existing ones, unchanged: a product form
+  with the selected variant id, and a second form in the sticky bar carrying
+  an explicit id so the two never collide.
+{%- enddoc -%}
+
+{%- liquid
+  assign compare_at = product.compare_at_price | plus: 0
+  assign v = product.selected_or_first_available_variant
+-%}
+
+<section class="pdp pdp-hero" id="pdp-hero-{{ section.id }}">
+  <div class="pl-wrap pdp-hero__grid">
+
+    <div class="pdp-hero__media">
+      <div class="pdp-hero__stage">
+        {%- if product.featured_media != blank -%}
+          <img
+            data-pdp-stage
+            src="{{ product.featured_media | image_url: width: 1200 }}"
+            srcset="{{ product.featured_media | image_url: width: 600 }} 600w,
+                    {{ product.featured_media | image_url: width: 900 }} 900w,
+                    {{ product.featured_media | image_url: width: 1200 }} 1200w,
+                    {{ product.featured_media | image_url: width: 1600 }} 1600w"
+            sizes="(min-width: 1000px) 620px, 100vw"
+            width="{{ product.featured_media.preview_image.width }}"
+            height="{{ product.featured_media.preview_image.height }}"
+            alt="{{ product.featured_media.alt | default: product.title | escape }}"
+            loading="eager" fetchpriority="high" decoding="async">
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'pdp-hero__ph' }}
+        {%- endif -%}
+      </div>
+
+      {%- if product.media.size > 1 -%}
+        <ul class="pdp-hero__thumbs" role="list">
+          {%- for media in product.media limit: 10 -%}
+            <li>
+              <button
+                type="button"
+                class="pdp-hero__thumb{% if forloop.first %} is-active{% endif %}"
+                data-pdp-thumb
+                data-src="{{ media | image_url: width: 1200 }}"
+                data-alt="{{ media.alt | default: product.title | escape }}"
+                aria-label="תמונה {{ forloop.index }} מתוך {{ product.media.size }}">
+                <img src="{{ media | image_url: width: 200 }}" width="68" height="82"
+                     alt="" loading="lazy" decoding="async">
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="pdp-hero__say">
+      <div class="pdp-hero__claim">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pdp__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        {%- comment -%}
+          The h1 is the claim. The product's name still reaches assistive
+          technology and search through the eyebrow above and the page title,
+          so nothing is lost by refusing to shout the category here.
+        {%- endcomment -%}
+        <h1 class="pdp__h1">{{ section.settings.headline | default: product.title }}</h1>
+
+        {%- if section.settings.sub != blank -%}
+          <p class="pdp__lede">{{ section.settings.sub }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- assign ticks = section.settings.ticks | newline_to_br | split: '<br />' -%}
+      {%- if section.settings.ticks != blank -%}
+        <ul class="pdp-hero__ticks" role="list">
+          {%- for tick in ticks -%}
+            {%- assign line = tick | strip -%}
+            {%- if line != blank -%}<li>{{ line }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <div class="pdp-hero__buy" data-pdp-buy>
+        <p class="pdp-hero__price">
+          {%- if compare_at > product.price -%}
+            <s class="pdp-hero__was">{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+          <span>{{ product.price | money }}</span>
+        </p>
+
+        {%- form 'product', product, class: 'pdp-hero__form' -%}
+          <input type="hidden" name="id" value="{{ v.id }}">
+          <button type="submit" class="pdp-hero__submit"
+                  {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if section.settings.buy_note != blank -%}
+          <p class="pdp-hero__note">{{ section.settings.buy_note }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="pdp-hero__trust" role="list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <strong>{{ block.settings.title }}</strong>
+              <span>{{ block.settings.text }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  The bar carries only what a decision needs: the price and the button. The
+  thumbnail and title other themes put here repeat what the customer has just
+  scrolled past and cost the button its width on a narrow phone.
+{%- endcomment -%}
+<div class="pdp pdp-bar" id="pdp-bar-{{ section.id }}" hidden>
+  <div class="pdp-bar__inner">
+    <span class="pdp-bar__price">{{ product.price | money }}</span>
+    {%- assign bar_form_id = 'pdp-bar-form-' | append: section.id -%}
+    {%- form 'product', product, class: 'pdp-bar__form', id: bar_form_id -%}
+      <input type="hidden" name="id" value="{{ v.id }}">
+      <button type="submit" class="pdp-bar__submit"
+              {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+      </button>
+    {%- endform -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('pdp-hero-{{ section.id }}');
+    if (!root) return;
+
+    var stage = root.querySelector('[data-pdp-stage]');
+    var thumbs = root.querySelectorAll('[data-pdp-thumb]');
+    if (stage && thumbs.length) {
+      thumbs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          stage.src = btn.dataset.src;
+          stage.removeAttribute('srcset');
+          stage.alt = btn.dataset.alt || '';
+          thumbs.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+        });
+      });
+    }
+
+    var bar = document.getElementById('pdp-bar-{{ section.id }}');
+    var anchor = root.querySelector('[data-pdp-buy]');
+    if (!bar || !anchor) return;
+
+    var phone = window.matchMedia('(max-width: 999px)');
+    var observer = null;
+
+    function teardown() {
+      if (observer) { observer.disconnect(); observer = null; }
+      bar.hidden = true;
+      bar.classList.remove('is-up');
+      document.documentElement.classList.remove('pdp-has-bar');
+    }
+
+    function setup() {
+      if (!phone.matches) { teardown(); return; }
+      if (observer) return;
+      bar.hidden = false;
+      document.documentElement.classList.add('pdp-has-bar');
+
+      // Without observer support the bar simply stays up. A permanent bar is a
+      // small cost; an add to cart the customer cannot reach is not.
+      if (!('IntersectionObserver' in window)) { bar.classList.add('is-up'); return; }
+
+      observer = new IntersectionObserver(function (entries) {
+        bar.classList.toggle('is-up', !entries[0].isIntersecting);
+      }, { threshold: 0 });
+      observer.observe(anchor);
+    }
+
+    setup();
+    if (phone.addEventListener) phone.addEventListener('change', setup);
+    else if (phone.addListener) phone.addListener(setup);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TinyBloom · PDP hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "שורה עליונה" },
+    { "type": "textarea", "id": "headline", "label": "כותרת ראשית", "info": "טענה, לא שם המוצר" },
+    { "type": "textarea", "id": "sub", "label": "משפט הסבר" },
+    { "type": "textarea", "id": "ticks", "label": "שלוש נקודות", "info": "שורה לכל נקודה" },
+    { "type": "header", "content": "קנייה" },
+    { "type": "text", "id": "atc_label", "label": "כפתור", "default": "הוספה לסל" },
+    { "type": "text", "id": "buy_note", "label": "שורה מתחת לכפתור" }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "שורת אמון",
+      "limit": 3,
+      "settings": [
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "text", "id": "text", "label": "טקסט" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "TinyBloom · PDP hero" }]
+}
+{% endschema %}

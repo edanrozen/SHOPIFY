@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "hero": {
+      "type": "nv-hero",
+      "settings": {
+        "product": "bloom-grooming-station",
+        "heading": "היא נשארת במקום. שתי הידיים שלכם פנויות.",
+        "text": "נמאס להחזיק ביד אחת ולסרק בשנייה? זה בדיוק מה שבלום פותרת.",
+        "cta_label": "לקנות את בלום™",
+        "under": "14 יום לביטול עסקה, לפי חוק הגנת הצרכן"
+      }
+    },
+    "pitch": {
+      "type": "nv-pitch",
+      "settings": {
+        "product": "bloom-grooming-station",
+        "cta_label": "לקנות את בלום™",
+        "under": "משלוח חינם למוצר הזה"
+      }
+    },
+    "buy": {
+      "type": "nv-buy",
+      "settings": {
+        "product": "bloom-grooming-station",
+        "eyebrow": "עמדת טיפוח ביתית לכלבים ולחתולים",
+        "heading": "בלום™",
+        "atc_label": "הוספה לסל",
+        "under": "משלוח חינם למוצר הזה",
+        "link_label": "לפרטים המלאים"
+      }
+    },
+    "benefits": {
+      "type": "nv-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "emoji": "🚚", "title": "משלוח חינם מעל ₪199", "text": "מתחת לסכום זה דמי משלוח 29.90 ₪, וקישור מעקב נשלח לאימייל ברגע שהחבילה יוצאת." } },
+        "b2": { "type": "benefit", "settings": { "emoji": "↩️", "title": "14 יום לביטול עסקה", "text": "מוצר שלא נפתח אפשר להחזיר תוך 14 יום מקבלתו ולקבל החזר כספי, בהתאם לחוק הגנת הצרכן." } },
+        "b3": { "type": "benefit", "settings": { "emoji": "💬", "title": "תמיכה בעברית", "text": "שאלה לפני קנייה או אחריה, ואנחנו עונים באותו יום עסקים." } },
+        "b4": { "type": "benefit", "settings": { "emoji": "🏭", "title": "ישירות מהיצרן", "text": "בלי יבואן ובלי מתווך, ולכן גם המחיר נראה אחרת." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {
+        "heading": "למה לקנות מאיתנו"
+      }
+    },
+    "rest": {
+      "type": "wf-grid",
+      "settings": {
+        "heading": "עוד מהחנות",
+        "text": "כלים נוספים לטיפוח ולניקיון. כל אחד מהם עובד טוב יותר כשהחיה עומדת במקום אחד.",
+        "collection": "all-products",
+        "exclude": "bloom-grooming-station",
+        "limit": 8,
+        "empty_text": "אין מוצרים להצגה.",
+        "more_label": "לכל המוצרים",
+        "more_link": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero", "pitch", "buy", "benefits", "rest"]
+}

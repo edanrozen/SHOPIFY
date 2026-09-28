@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "bs-product",
+      "settings": {
+        "atc_label": "הוספה לסל",
+        "note": "משלוח חינם מעל ₪199 · 14 יום לביטול עסקה"
+      }
+    }
+  },
+  "order": ["main"]
+}

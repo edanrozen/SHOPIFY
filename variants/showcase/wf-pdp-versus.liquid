@@ -1,0 +1,68 @@
+{%- doc -%}
+  The comparison table, from custom.versus.
+
+  The reference page this is modelled on runs a table of features with a tick
+  in our column and a cross in "other solutions". That shape asserts things
+  about products nobody here has tested, and a customer who owns one of them
+  catches it immediately.
+
+  The shop already holds something both honest and more persuasive: what people
+  assume, against what actually happens. So the block keeps the cross and tick
+  the reference uses, and puts the assumption on the cross and the reality on
+  the tick. Nothing is claimed about anyone else's product.
+
+  Seven of the nine products carry `versus` today. The two that do not simply
+  skip the band.
+{%- enddoc -%}
+
+{%- liquid
+  assign rows = product.metafields.custom.versus.value
+-%}
+
+{%- if rows.size > 0 -%}
+  <section class="wf-band wf-band--cream">
+    <div class="pl-wrap">
+      <div class="wf-band__head">
+        <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="wf-sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="wf-vs">
+        {%- for row in rows -%}
+          <div class="wf-vs__row">
+            <div class="wf-vs__side wf-vs__side--myth">
+              <span class="wf-vs__mark" aria-hidden="true">&#10005;</span>
+              <div>
+                <span class="wf-vs__label">{{ section.settings.myth_label }}</span>
+                <p class="wf-vs__text">{{ row.claim }}</p>
+              </div>
+            </div>
+            <div class="wf-vs__side wf-vs__side--real">
+              <span class="wf-vs__mark" aria-hidden="true">&#10003;</span>
+              <div>
+                <span class="wf-vs__label">{{ section.settings.real_label }}</span>
+                <p class="wf-vs__text">{{ row.reality }}</p>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מוצר · אמונות מול מציאות",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "מה שחושבים, ומה שקורה בפועל" },
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" },
+    { "type": "text", "id": "myth_label", "label": "תווית השורה העליונה", "default": "מה שחושבים" },
+    { "type": "text", "id": "real_label", "label": "תווית השורה התחתונה", "default": "מה שקורה בפועל" }
+  ],
+  "presets": [{ "name": "מוצר · אמונות מול מציאות" }]
+}
+{% endschema %}

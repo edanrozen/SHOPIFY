@@ -1,0 +1,204 @@
+{%- doc -%}
+  The product page, in the same posture as the homepage.
+
+  Gallery on one side, and on the other the five things a decision is made
+  with: the name, the problem the product answers, the price, one button and
+  one line about delivery. The problem and answer pair comes from the product's
+  own metafields, so nothing here is written by the section.
+
+  The price, the button and the shipping line sit inside one bordered panel,
+  the way Chewy separates what a thing is from buying it. On a phone that panel
+  is what you land on after the gallery.
+
+  The thumbnail strip is one swipeable row rather than two wrapped ones. Eight
+  thumbnails on two rows cost about 90px of height directly above the price,
+  which is the last thing worth pushing down a phone screen.
+
+  Below 900px the buy box is a screen and a bit under the fold, so the page also
+  carries a fixed bar with the price and the same button. It is the second form
+  on the page and posts the same variant; nothing about it is conditional on
+  JavaScript.
+{%- enddoc -%}
+
+{%- liquid
+  assign media = product.media | where: 'media_type', 'image'
+  assign hero = product.featured_media
+  if hero == blank and media.size > 0
+    assign hero = media.first
+  endif
+  assign problem = product.metafields.custom.problem_line.value
+  assign solution = product.metafields.custom.solution_line.value
+  assign highlights = product.metafields.custom.highlights.value
+  assign spotlight = product.metafields.custom.spotlight.value
+-%}
+
+<div class="pl-wrap">
+  <div class="wf-pdp">
+    <div>
+      <div class="wf-pdp__stage">
+        {%- if hero != blank -%}
+          <img
+            id="wf-stage"
+            src="{{ hero | image_url: width: 1100 }}"
+            srcset="{{ hero | image_url: width: 600 }} 600w, {{ hero | image_url: width: 1100 }} 1100w"
+            sizes="(max-width: 900px) 92vw, 52vw"
+            width="{{ hero.preview_image.width }}"
+            height="{{ hero.preview_image.height }}"
+            alt="{{ hero.alt | default: product.title | escape }}"
+            fetchpriority="high"
+            decoding="async"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- if media.size > 1 -%}
+        <ul class="wf-pdp__thumbs" role="list">
+          {%- for item in media -%}
+            <li>
+              <button
+                type="button"
+                class="wf-pdp__thumb"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="תמונה {{ forloop.index }} מתוך {{ media.size }}"
+                data-src="{{ item | image_url: width: 1100 }}"
+                data-srcset="{{ item | image_url: width: 600 }} 600w, {{ item | image_url: width: 1100 }} 1100w"
+              >
+                <img src="{{ item | image_url: width: 180 }}" width="{{ item.preview_image.width }}" height="{{ item.preview_image.height }}" alt="" loading="lazy" decoding="async">
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div>
+      <h1 class="wf-pdp__title">{{ product.title }}</h1>
+
+      {%- if problem != blank -%}
+        <p class="wf-flag__problem">{{ problem }}</p>
+      {%- endif -%}
+      {%- if solution != blank -%}
+        <p class="wf-sub">{{ solution }}</p>
+      {%- endif -%}
+
+      {%- comment -%}
+        The selling points sit above the buy box, not below it.
+
+        A price and a button reached before the reader knows what the thing is
+        asks for a decision that has not been earned yet. These four or five
+        lines are the shortest honest answer to "what am I buying", so they go
+        in front of the money and the long argument stays behind it. The band
+        further down no longer repeats them.
+      {%- endcomment -%}
+      {%- if section.settings.points_above and highlights.size > 0 -%}
+        <ul class="wf-points wf-points--lede" role="list">
+          {%- for line in highlights -%}
+            <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- comment -%}
+        The three numbers, directly above the price.
+
+        custom.spotlight was written for three products and rendered nowhere.
+        It is the only place in the record that states a figure a shopper can
+        compare: a 30 centimetre head against a 12, 2.5 times the coverage,
+        zero refills. Those are the lines that separate three fur removers that
+        otherwise read as the same product at three prices, and a shopper who
+        cannot tell them apart does not pick one, they leave.
+
+        It sits immediately above the buy box for the same reason the
+        highlights do: it answers "why this one" in the glance before the
+        price, not in a band below it.
+      {%- endcomment -%}
+      {%- if spotlight.size > 0 -%}
+        <ul class="wf-spot" role="list">
+          {%- for item in spotlight -%}
+            <li class="wf-spot__i">
+              <span class="wf-spot__v">{{ item.value }}</span>
+              <span class="wf-spot__l">{{ item.label }}</span>
+              {%- if item.note != blank -%}
+                <span class="wf-spot__n">{{ item.note }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <div class="wf-buybox">
+        <p class="wf-pdp__price">
+          {{ product.price | money }}
+          {%- if product.compare_at_price > product.price -%}
+            <s class="wf-pdp__was">{{ product.compare_at_price | money }}</s>
+          {%- endif -%}
+        </p>
+
+        {%- comment -%}
+          Unconditional, because the rate behind it is. Shipping is free on
+          every order in the Israel zone at any cart total, so this line is not
+          a claim about this product clearing a threshold, it is a fact about
+          the shop. It sits inside the buy box rather than above it, so it is
+          read in the same glance as the price.
+        {%- endcomment -%}
+        <p class="wf-pdp__ship">משלוח חינם, בכל הזמנה</p>
+
+        {%- form 'product', product, class: 'wf-pdp__form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="wf-btn wf-pdp__submit" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if section.settings.note != blank -%}
+          <p class="wf-pdp__note">{{ section.settings.note }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if product.description != blank -%}
+        <div class="wf-pdp__rte">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="wf-buybar">
+  <span class="wf-buybar__price">{{ product.price | money }}</span>
+  {%- form 'product', product, class: 'wf-buybar__form' -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" class="wf-btn wf-buybar__btn" {% unless product.available %}disabled{% endunless %}>
+      {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+    </button>
+  {%- endform -%}
+</div>
+<div class="wf-buybar__spacer" aria-hidden="true"></div>
+
+{%- if media.size > 1 -%}
+  <script>
+    (function () {
+      var stage = document.getElementById('wf-stage');
+      var thumbs = document.querySelectorAll('.wf-pdp__thumb');
+      if (!stage || !thumbs.length) return;
+      thumbs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          stage.srcset = btn.dataset.srcset;
+          stage.src = btn.dataset.src;
+          thumbs.forEach(function (other) { other.setAttribute('aria-current', other === btn ? 'true' : 'false'); });
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "תמות · דף מוצר",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם · 14 יום לביטול עסקה" },
+    { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true }
+  ],
+  "presets": [{ "name": "תמות · דף מוצר" }]
+}
+{% endschema %}
