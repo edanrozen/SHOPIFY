@@ -1,5 +1,11 @@
 {%- doc -%}
-  The specification table, what is in the box, and the questions.
+  The specification table, what is in the box, the safety note, and the
+  questions.
+
+  custom.safety was written for all nine products and rendered nowhere. It is
+  how to use the thing without hurting the animal, which on a grooming
+  catalogue is not a footnote, so it sits with the specification rather than
+  being folded into an FAQ answer nobody opens.
 
   The questions are real <details> elements rather than divs with a click
   handler, so every answer is in the document for a crawler and for a visitor
@@ -12,9 +18,11 @@
   assign in_box = product.metafields.custom.in_box.value
   assign faq = product.metafields.custom.faq.value
   assign for_pets = product.metafields.custom.for_pets.value
+  assign safety = product.metafields.custom.safety.value
+  assign surfaces = product.metafields.custom.surfaces.value
 -%}
 
-{%- if specs.size > 0 or faq.size > 0 or in_box.size > 0 -%}
+{%- if specs.size > 0 or faq.size > 0 or in_box.size > 0 or safety != blank -%}
   <section class="wf-band">
     <div class="pl-wrap">
 
@@ -35,6 +43,19 @@
               <span class="wf-specs__v">{{ row.value }}</span>
             </div>
           {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if surfaces.size > 0 -%}
+        <ul class="wf-chips" role="list">
+          {%- for line in surfaces -%}<li>{{ line }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if safety != blank -%}
+        <div class="wf-aside">
+          <p class="wf-aside__t">{{ section.settings.safety_label }}</p>
+          <p class="wf-aside__x">{{ safety | newline_to_br }}</p>
         </div>
       {%- endif -%}
 
@@ -68,6 +89,7 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "specs_heading", "label": "כותרת המפרט", "default": "המפרט" },
+    { "type": "text", "id": "safety_label", "label": "כותרת פסקת הבטיחות", "default": "בטיחות ושימוש נכון" },
     { "type": "text", "id": "for_label", "label": "שם השורה של מתאים ל", "default": "מתאים ל" },
     { "type": "text", "id": "faq_heading", "label": "כותרת השאלות", "default": "שאלות שחוזרות" }
   ],

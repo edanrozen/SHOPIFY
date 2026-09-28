@@ -79,6 +79,41 @@
 .wf-prose p { margin: 0 0 14px; }
 .wf-prose p:last-child { margin-bottom: 0; }
 
+/* A sub-block inside a band: a short label and a paragraph, set apart from the
+   band's own prose without being promoted to a section of its own.
+
+   It exists because two pieces of copy were already written for every product
+   and rendered nowhere. custom.audience says who the problem happens to, which
+   is the part of a problem a reader checks themselves against, and custom.safety
+   says how to use the thing without hurting the animal. Both were sitting in
+   the product record unread.
+
+   Contrast on the deep cream: the brown label 6.03:1, the body 8.22:1. The
+   label is .82rem, 13.1px, which is the floor the rest of the site holds. */
+.wf-aside {
+  max-width: 62ch;
+  margin: clamp(20px, 3vw, 32px) auto 0;
+  padding: clamp(14px, 2.2vw, 20px);
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+}
+.wf-aside__t {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pl-brown);
+  margin: 0 0 8px;
+}
+.wf-aside__x {
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.02rem);
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0;
+}
+
 /* ---- before and after ----------------------------------------------------
    Two columns on every width, including a phone. Stacking them would put the
    two halves of one comparison on two different screens, which is the one

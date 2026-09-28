@@ -7,8 +7,13 @@
   already committed to in the product record:
 
     custom.problem     the situation, in prose
+    custom.audience    who it happens to
     custom.before      a list of what it is like now
     custom.after       a list of what it is like with the product
+
+  custom.audience was written for all nine products and rendered nowhere until
+  now. It is the part of a problem a reader measures themselves against, so it
+  belongs directly under the problem and not in a specification table.
 
   A product missing any one of these drops that piece rather than rendering an
   empty frame. A product missing all of them renders nothing at all, so the
@@ -21,6 +26,7 @@
 
 {%- liquid
   assign problem = product.metafields.custom.problem.value
+  assign audience = product.metafields.custom.audience.value
   assign before = product.metafields.custom.before.value
   assign after = product.metafields.custom.after.value
   assign has_ba = false
@@ -29,7 +35,7 @@
   endif
 -%}
 
-{%- if problem != blank or has_ba -%}
+{%- if problem != blank or audience != blank or has_ba -%}
   <section class="wf-band wf-band--cream">
     <div class="pl-wrap">
       {%- if section.settings.heading != blank -%}
@@ -44,6 +50,13 @@
       {%- if problem != blank -%}
         <div class="wf-prose">
           {{ problem | newline_to_br }}
+        </div>
+      {%- endif -%}
+
+      {%- if audience != blank -%}
+        <div class="wf-aside">
+          <p class="wf-aside__t">{{ section.settings.audience_label }}</p>
+          <p class="wf-aside__x">{{ audience | newline_to_br }}</p>
         </div>
       {%- endif -%}
 
@@ -75,6 +88,7 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "כותרת", "default": "המצב היום, והמצב אחרי" },
     { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" },
+    { "type": "text", "id": "audience_label", "label": "כותרת פסקת הקהל", "default": "למי זה קורה" },
     { "type": "text", "id": "before_label", "label": "תווית הצד הימני", "default": "לפני" },
     { "type": "text", "id": "after_label", "label": "תווית הצד השמאלי", "default": "אחרי" }
   ],

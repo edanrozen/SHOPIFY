@@ -67,15 +67,15 @@ const img = (w, h, label, alt) => {
 // hair-remover-xl and parvatek-grooming-comb have no `versus`, and
 // kadurosh-cat-ball-toy has no `steps`.
 const MF_PRESENT = {
-  'bloom-grooming-station': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'pro-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'parvatek-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'parvakal-pet-clipper': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'hair-remover-xl': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'hair-remover-wood-handle': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'tinybloom-fur-glove': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'katora-cardboard-scratcher': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
-  'kadurosh-cat-ball-toy': ['problem', 'before', 'after', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line'],
+  'bloom-grooming-station': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
+  'pro-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
+  'parvatek-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
+  'parvakal-pet-clipper': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
+  'hair-remover-xl': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces'],
+  'hair-remover-wood-handle': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces'],
+  'tinybloom-fur-glove': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces'],
+  'katora-cardboard-scratcher': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
+  'kadurosh-cat-ball-toy': ['problem', 'before', 'after', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
 };
 
 // The real `custom.badge` of each product, read off the Admin API. The card
@@ -381,6 +381,23 @@ const base = {
   template: { name: which === 'product' ? 'product' : which, suffix },
 };
 
+// Shopify fills a section setting from its schema `default` when the template
+// does not carry the key. The harness did not, so any setting left to its
+// default rendered empty here and looked like a bug in the section. It hid a
+// real one: two new labels rendered as empty strings and the only reason that
+// was visible at all is that they were being measured.
+function schemaDefaults(src) {
+  const m = src.match(/\{%\s*schema\s*%\}([\s\S]*?)\{%\s*endschema\s*%\}/);
+  if (!m) return {};
+  let parsed;
+  try { parsed = JSON.parse(m[1]); } catch { return {}; }
+  const out = {};
+  for (const s of parsed.settings || []) {
+    if (s && s.id && s.default !== undefined) out[s.id] = s.default;
+  }
+  return out;
+}
+
 const body = tpl.order.map((key) => {
   const sec = tpl.sections[key];
   const src = read(`sections/${sec.type}.liquid`);
@@ -391,7 +408,7 @@ const body = tpl.order.map((key) => {
   blocks.size = blocks.length;
   return engine.parseAndRenderSync(src, {
     ...base,
-    section: { id: key, settings: deepResolve(sec.settings || {}), blocks },
+    section: { id: key, settings: { ...schemaDefaults(src), ...deepResolve(sec.settings || {}) }, blocks },
   });
 }).join('\n');
 
