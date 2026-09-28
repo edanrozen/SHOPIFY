@@ -1,13 +1,14 @@
-/* ── The guarantee ─────────────────────────────────────────────────────────
-   One sheet for both shapes of wf-vow, because the band and the modal say the
-   same sentence and only the frame differs.
+/* ── The promises ────────────────────────────────────────────────────────
+   Every rule in this sheet draws something the shop promises the customer: the
+   guarantee as a band, the same guarantee as a modal, and the strip of perks
+   above the product page. They share a file because they share a job, and
+   because the merchant edits all three when the offer changes.
 
-   It is a sheet of its own rather than more of wf.css because the guarantee is
-   a commercial promise the merchant will change, and a promise that moves is
-   easier to find in a 5KB file named after it than inside 33KB of everything
-   else. It loads on every template rather than only on the two that carry the
-   section today, so a band dropped onto a third template in the editor is
-   styled the moment it lands instead of rendering raw.
+   It is a sheet of its own rather than more of wf.css because a promise moves,
+   and a promise that moves is easier to find in a small file named after it
+   than inside 33KB of everything else. It loads on every template rather than
+   only on the ones carrying these sections today, so a band dropped onto a
+   third template in the editor is styled the moment it lands.
 
    Every pair here is one already measured on this palette: cream on the brown
    is 6.46:1, the deep sand is 5.16:1, white on the green is 4.69:1 and the
@@ -300,4 +301,49 @@
 @media (prefers-reduced-motion: reduce) {
   .wf-vow__pop[open] { animation: none; }
   .wf-vow__go { transition: none; }
+}
+
+/* ── The perks strip, above the product page ────────────────────────────────
+   The sand under the header, dark brown and bold on it, the way the merchant
+   drew it. Measured: #73522F on #ECDAC1 is 5.16:1, which clears the 4.5:1 a
+   small bold line needs without going to black.
+
+   Fixed columns rather than a flex row with pipe separators, and that is the
+   whole trick. A wrapped flex row puts a separator at the start of the second
+   line, and a row that scrolls hides a perk on exactly the screen most of the
+   traffic arrives on. With one row of equal columns the divider is a border on
+   the cell, the text wraps inside its own column on a phone, and every perk
+   stays on screen at every width.
+
+   --wf-perks-n is written by the section from the number of non blank perks,
+   so dropping one in the editor gives two real columns instead of an empty
+   third. */
+.wf-perks {
+  background: var(--pl-sand-deep);
+  padding-block: 11px;
+}
+
+.wf-perks__list {
+  display: grid;
+  grid-template-columns: repeat(var(--wf-perks-n, 3), minmax(0, 1fr));
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wf-perks__i {
+  padding-inline: clamp(6px, 2vw, 18px);
+  text-align: center;
+  font-family: var(--pl-sans);
+  font-size: clamp(.75rem, 2.5vw, .95rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--pl-brown);
+}
+
+/* The divider is the cell's own edge, so it can never land at the start of a
+   line: there is only ever one line of cells. */
+.wf-perks__i + .wf-perks__i {
+  border-inline-start: 1px solid rgba(115, 82, 47, .38);
 }

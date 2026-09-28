@@ -30,7 +30,52 @@
   assign solution = product.metafields.custom.solution_line.value
   assign highlights = product.metafields.custom.highlights.value
   assign spotlight = product.metafields.custom.spotlight.value
+
+  assign perk_n = 0
+  if section.settings.perk_1 != blank
+    assign perk_n = perk_n | plus: 1
+  endif
+  if section.settings.perk_2 != blank
+    assign perk_n = perk_n | plus: 1
+  endif
+  if section.settings.perk_3 != blank
+    assign perk_n = perk_n | plus: 1
+  endif
 -%}
+
+{%- comment -%}
+  The perks strip, the first thing under the header on a product page.
+
+  It lives inside this section rather than in a section of its own for one
+  reason: the catalogue has ten product templates, and three text settings with
+  schema defaults reach all ten without editing a single template file. A
+  separate section would have meant adding a block to each of the ten and
+  remembering the tenth.
+
+  The defaults are therefore what is true of every product in the shop. The
+  30 day guarantee is not: it covers Bloom alone, so Bloom's template overrides
+  these three and no other page claims it.
+
+  Three settings written out rather than a loop over an array built from them,
+  because building that array starts from splitting an empty string and the two
+  Liquid engines in play do not have to agree on whether that is an empty array
+  or an array holding one empty string. Three ifs cannot be wrong.
+{%- endcomment -%}
+{%- if perk_n > 0 -%}
+  <section class="wf-perks">
+    <ul class="wf-perks__list" role="list" style="--wf-perks-n: {{ perk_n }};">
+      {%- if section.settings.perk_1 != blank -%}
+        <li class="wf-perks__i">{{ section.settings.perk_1 }}</li>
+      {%- endif -%}
+      {%- if section.settings.perk_2 != blank -%}
+        <li class="wf-perks__i">{{ section.settings.perk_2 }}</li>
+      {%- endif -%}
+      {%- if section.settings.perk_3 != blank -%}
+        <li class="wf-perks__i">{{ section.settings.perk_3 }}</li>
+      {%- endif -%}
+    </ul>
+  </section>
+{%- endif -%}
 
 <div class="pl-wrap">
   <div class="wf-pdp">
@@ -197,7 +242,11 @@
   "settings": [
     { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
     { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם · 14 יום לביטול עסקה" },
-    { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true }
+    { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true },
+    { "type": "header", "content": "רצועת היתרונות שמעל העמוד" },
+    { "type": "text", "id": "perk_1", "label": "יתרון ראשון", "default": "משלוח חינם לכל הארץ" },
+    { "type": "text", "id": "perk_2", "label": "יתרון שני", "default": "14 יום לביטול עסקה" },
+    { "type": "text", "id": "perk_3", "label": "יתרון שלישי", "default": "ישירות מהיצרן, בלי מתווך" }
   ],
   "presets": [{ "name": "תמות · דף מוצר" }]
 }
