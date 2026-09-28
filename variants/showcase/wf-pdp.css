@@ -19,14 +19,50 @@
 
 :root {
   /* The connector drawn down the numbered steps. --pl-line is 1.24:1 against
-     the blush band, which is invisible; this is 3.08:1 there and 3.39:1 on
-     white, so the sequence reads as a sequence on every band it crosses. */
+     the deep cream, which is invisible; this is 3.08:1 there and 3.39:1 on
+     white, so the sequence reads as a sequence on every band it crosses. On
+     the bark band it is remapped, because a mid olive on the brown is not a
+     line, it is a smudge. */
   --wf-rail: #878F70;
 }
 
 .wf-band { padding-block: clamp(36px, 6vw, 76px); }
-.wf-band--cream { background: var(--pl-cream); }
+/* Inverted, and the inversion is the point rather than an accident.
+   The page used to be white and this band was the cream. The page is the
+   paper now, so a cream band would be the same value as the page it sits on
+   and the band would stop existing. White is the surface that lifts off the
+   paper instead, at the same 1.08 step the two always had between them. */
+.wf-band--cream { background: var(--pl-porcelain); }
 .wf-band--blush { background: var(--wf-pink-soft); }
+
+/* The one dark band on the product page, and it is the brown rather than the
+   green because of what each can carry.
+
+   Measured: the paper on the brown is 6.46:1 and the sand 5.16:1, so a
+   heading, a paragraph and a muted line all clear 4.5 on it. The paper on the
+   green is 4.29:1, under the floor, which would have left white as the only
+   legal text colour on a green band and at 4.69:1 even then. A band you are
+   allowed to write exactly one colour on is not a band.
+
+   The tokens are remapped for the subtree rather than every rule inside being
+   rewritten, the same technique .wf-trust uses. --pl-brown is the heading
+   colour site-wide, so in here it points at the paper; without that the
+   headings would be brown on brown. */
+.wf-band--bark { background: var(--pl-brown); }
+
+/* The remaps sit on the wrapper, not on the band, and that split is load
+   bearing rather than tidiness. Written as one rule, `background:
+   var(--pl-brown)` and `--pl-brown: var(--pl-cream)` land on the same element,
+   the background resolves against the element's own redefined value, and the
+   band renders cream on cream. It did exactly that until it was measured. */
+.wf-band--bark > .pl-wrap {
+  --pl-brown:    var(--pl-cream);      /* headings,  6.46:1 */
+  --pl-ink:      var(--pl-cream);      /* step titles, 6.46:1 */
+  --pl-ink-soft: var(--pl-sand-deep);  /* body and sub, 5.16:1 */
+  --pl-taupe:    var(--pl-sand-deep);  /* muted, 5.16:1 */
+  --pl-line:     rgba(255, 255, 255, .22);
+  --wf-rail:     var(--pl-olive-pale); /* 4.46:1, past the 3:1 a rule needs */
+}
 .wf-band__head { max-width: 62ch; margin-inline: auto; text-align: center; margin-bottom: clamp(22px, 3.6vw, 40px); }
 .wf-band__head .wf-sub { margin-inline: auto; }
 
@@ -71,10 +107,15 @@
   border-radius: var(--wf-pill);
   margin-bottom: 14px;
 }
-/* #A8483E over white is 5.74:1 and #586040 is 6.64:1, so both badges clear AA
-   for small bold text. The reference uses a saturated red; a muted brick sits
-   inside this palette instead of shouting over it. */
-.wf-ba__tag--before { background: #A8483E; }
+/* The negative side is the taupe, not a red. #A8483E was the last of three
+   places carrying a brick that is in no part of the mark, and a saturated red
+   on a product page raises an alarm where the section only means "this is the
+   version we are dismissing". Muted reads as dismissed; red reads as danger.
+
+   White on the taupe is 5.92:1 and white on the accent 4.69:1, so both badges
+   clear AA for small bold text, and the pair now says brand-green for the
+   thing that is true and a warm grey for the thing that is not. */
+.wf-ba__tag--before { background: var(--pl-taupe); }
 .wf-ba__tag--after  { background: var(--wf-accent); }
 .wf-ba__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .wf-ba__list li {
@@ -92,7 +133,7 @@
   font-weight: 700;
   line-height: 1.5;
 }
-.wf-ba__col--before .wf-ba__list li::before { content: '\00D7'; color: #A8483E; font-size: 1.05em; }
+.wf-ba__col--before .wf-ba__list li::before { content: '\00D7'; color: var(--pl-taupe); font-size: 1.05em; }
 .wf-ba__col--after  .wf-ba__list li::before { content: '\2713'; color: var(--wf-accent); }
 
 /* ---- highlights, the icon rows ------------------------------------------ */
@@ -213,7 +254,7 @@
   line-height: 1;
   color: var(--pl-white);
 }
-.wf-vs__side--myth .wf-vs__mark { background: #A8483E; }
+.wf-vs__side--myth .wf-vs__mark { background: var(--pl-taupe); }
 .wf-vs__side--real .wf-vs__mark { background: var(--wf-accent); }
 .wf-vs__label {
   font-family: var(--pl-sans);
@@ -324,8 +365,12 @@
 .wf-shots--one { max-width: 620px; margin-inline: auto; }
 .wf-shots--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin-inline: auto; }
 .wf-shot { margin: 0; }
+/* The deep cream for the same reason .wf-card__frame takes it: the catalogue
+   is photographed on #F0ECE0, which is 1.18 against white and 1.01 against
+   this. These are the largest pictures on the page, so the white box was
+   largest here too. */
 .wf-shot__frame {
-  background: var(--pl-white);
+  background: var(--pl-cream-deep);
   border: 1px solid var(--pl-line);
   border-radius: var(--wf-r-lg);
   overflow: hidden;
