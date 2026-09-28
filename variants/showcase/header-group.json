@@ -44,10 +44,10 @@
           },
           "blocks": {}
         },
-        "announcement_tax": {
+        "announcement_vow": {
           "type": "_announcement",
           "settings": {
-            "text": "המחיר סופי, המיסים כלולים",
+            "text": "בלום, אחריות 30 יום מהקבלה",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
             "weight": "700",
@@ -62,7 +62,7 @@
         "announcement_BxgCk9",
         "announcement_ret14",
         "announcement_pl2",
-        "announcement_tax"
+        "announcement_vow"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
