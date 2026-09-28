@@ -29,6 +29,13 @@
 {{ 'wf.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
+  The guarantee, in its own sheet. It is the one block of rules that states a
+  commercial promise rather than a layout, the merchant will edit it when the
+  promise changes, and a named 5KB file is where they will find it.
+{%- endcomment -%}
+{{ 'wf-vow.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
   The long product page carries about 10KB of rules nothing else uses: the
   before and after pair, the numbered rails, the comparison table and the
   questions. Shipping that on the homepage and the collection pages would be

@@ -37,6 +37,26 @@
         "link_two": "/products/bloom-grooming-station"
       }
     },
+    "vow": {
+      "type": "wf-vow",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "title": "30 יום לנסות את בלום", "text": "מהיום שהחבילה מגיעה אליכם" } },
+        "p2": { "type": "point", "settings": { "title": "החזר מלא", "text": "בלי דמי ביטול ובלי אחוזים" } },
+        "p3": { "type": "point", "settings": { "title": "משלוח חינם לכל הארץ", "text": "בכל הזמנה, בלי סכום מינימום" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "mode": "band",
+        "eyebrow": "אחריות 30 יום על בלום",
+        "heading": "לא ראיתם תוצאות תוך 30 יום, תקבלו החזר מלא",
+        "body": "TinyBloom היא חנות של כלי טיפוח וניקיון לכלבים ולחתולים, ובלום היא עמדת הטיפוח שהכל מתחיל בה. קחו אותה הביתה, השתמשו בה חודש שלם, ואם החיה לא נשארת במקום ולא ראיתם שינוי, כתבו לנו ותקבלו את הכסף בחזרה.",
+        "condition": "ההחזר המלא בתוקף בתנאי שהמוצר לא נפגע. בלאי שנובע משימוש רגיל אינו נזק.",
+        "cta_label": "להכיר את בלום",
+        "cta_link": "/products/bloom-grooming-station",
+        "policy_label": "לתנאי האחריות המלאים",
+        "policy_link": "/policies/refund-policy"
+      }
+    },
     "trust": {
       "type": "wf-trust",
       "blocks": {
@@ -96,5 +116,5 @@
       }
     }
   },
-  "order": ["hero", "trust", "launch", "intents", "flagship", "grid"]
+  "order": ["hero", "vow", "flagship", "trust", "launch", "intents", "grid"]
 }

@@ -13,7 +13,7 @@ cp "$SRC"/wf-*.liquid          "$OUT/sections/"
 # copied into sections/, which is why every local preview came back with an
 # empty product grid and no card was ever measured here.
 cp "$SRC"/wf-card.liquid       "$OUT/snippets/"
-cp "$SRC"/wf.css "$SRC"/wf-pdp.css "$OUT/assets/"
+cp "$SRC"/wf.css "$SRC"/wf-pdp.css "$SRC"/wf-vow.css "$OUT/assets/"
 cp "$SRC"/stylesheets.liquid   "$OUT/snippets/"
 cp "$SRC"/header-group.json "$SRC"/footer-group.json "$OUT/sections/"
 cp "$SRC"/settings_data.json   "$OUT/config/"

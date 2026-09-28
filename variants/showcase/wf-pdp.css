@@ -114,6 +114,97 @@
   margin: 0;
 }
 
+/* ---- the three numbers, above the buy box --------------------------------
+   Rendered by wf-product from custom.spotlight. It lives in this sheet rather
+   than in wf.css with the older buy box rules because it is product page only
+   and this is the product page's sheet; the rules in wf.css predate it.
+
+   Contrast on the deep cream: the brown figure 6.03:1, the label 12.71:1, the
+   note 5.06:1. The note is .82rem, 13.1px, which is the floor this site holds,
+   and at three columns on a 390px screen each cell is about 118px, so a note
+   of four or five words wraps to two lines by design rather than by accident. */
+.wf-spot {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.wf-spot__i {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 3px;
+  padding: 12px 8px;
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+}
+.wf-spot__v {
+  font-family: var(--pl-display);
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-brown);
+}
+.wf-spot__l { font-family: var(--pl-sans); font-size: .82rem; font-weight: 700; line-height: 1.3; color: var(--pl-ink); }
+.wf-spot__n { font-family: var(--pl-sans); font-size: .82rem; font-weight: 400; line-height: 1.35; color: var(--pl-taupe); }
+
+/* ---- which one of ours ---------------------------------------------------
+   Rendered by wf-pdp-faq from custom.picker.
+
+   The current product is a card without a link, marked rather than removed.
+   Dropping it would leave the reader comparing the two they did not open
+   against nothing, and the whole point is to place this one among them. */
+.wf-pick {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+  margin-inline: auto;
+}
+@media (min-width: 750px) { .wf-pick { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.wf-pick__i {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  padding: clamp(14px, 2.2vw, 18px);
+}
+.wf-pick__i--now { background: var(--pl-cream-deep); border-color: var(--wf-accent); }
+.wf-pick__head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.wf-pick__n { font-family: var(--pl-display); font-size: 1.05rem; font-weight: 700; line-height: 1.3; color: var(--pl-brown); }
+.wf-pick__p { font-family: var(--pl-sans); font-size: .95rem; font-weight: 700; color: var(--pl-ink); white-space: nowrap; }
+.wf-pick__now {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--pl-white);
+  background: var(--wf-accent);
+  border-radius: var(--wf-pill);
+  padding: 6px 10px;
+}
+.wf-pick__b { font-family: var(--pl-sans); font-size: .95rem; line-height: 1.5; font-weight: 700; color: var(--pl-ink); margin: 0 0 4px; }
+.wf-pick__x { font-family: var(--pl-sans); font-size: .9rem; line-height: 1.55; color: var(--pl-taupe); margin: 0; }
+/* 44px of height on the link itself, because this is the one element in the
+   block a thumb is meant to hit. */
+.wf-pick__a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 4px;
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--wf-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ---- before and after ----------------------------------------------------
    Two columns on every width, including a phone. Stacking them would put the
    two halves of one comparison on two different screens, which is the one

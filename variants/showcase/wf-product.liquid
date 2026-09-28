@@ -29,6 +29,7 @@
   assign problem = product.metafields.custom.problem_line.value
   assign solution = product.metafields.custom.solution_line.value
   assign highlights = product.metafields.custom.highlights.value
+  assign spotlight = product.metafields.custom.spotlight.value
 -%}
 
 <div class="pl-wrap">
@@ -93,6 +94,34 @@
         <ul class="wf-points wf-points--lede" role="list">
           {%- for line in highlights -%}
             <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- comment -%}
+        The three numbers, directly above the price.
+
+        custom.spotlight was written for three products and rendered nowhere.
+        It is the only place in the record that states a figure a shopper can
+        compare: a 30 centimetre head against a 12, 2.5 times the coverage,
+        zero refills. Those are the lines that separate three fur removers that
+        otherwise read as the same product at three prices, and a shopper who
+        cannot tell them apart does not pick one, they leave.
+
+        It sits immediately above the buy box for the same reason the
+        highlights do: it answers "why this one" in the glance before the
+        price, not in a band below it.
+      {%- endcomment -%}
+      {%- if spotlight.size > 0 -%}
+        <ul class="wf-spot" role="list">
+          {%- for item in spotlight -%}
+            <li class="wf-spot__i">
+              <span class="wf-spot__v">{{ item.value }}</span>
+              <span class="wf-spot__l">{{ item.label }}</span>
+              {%- if item.note != blank -%}
+                <span class="wf-spot__n">{{ item.note }}</span>
+              {%- endif -%}
+            </li>
           {%- endfor -%}
         </ul>
       {%- endif -%}

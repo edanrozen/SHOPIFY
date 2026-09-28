@@ -20,11 +20,60 @@
   assign for_pets = product.metafields.custom.for_pets.value
   assign safety = product.metafields.custom.safety.value
   assign surfaces = product.metafields.custom.surfaces.value
+  assign picker = product.metafields.custom.picker.value
 -%}
 
-{%- if specs.size > 0 or faq.size > 0 or in_box.size > 0 or safety != blank -%}
+{%- if specs.size > 0 or faq.size > 0 or in_box.size > 0 or safety != blank or picker.size > 0 -%}
   <section class="wf-band">
     <div class="pl-wrap">
+
+      {%- comment -%}
+        Which one of ours, before the specification of this one.
+
+        custom.picker was written for six products and rendered nowhere. The
+        catalogue has three fur removers and two combs, and a shopper who
+        cannot tell which one is theirs does not buy the closest guess, they
+        close the tab. This is the only content in the record that answers
+        that, and it answers it in the shop's own words: the glove for corners
+        and car seats, the 30cm head for sofas and carpets, the fine comb for
+        knots, the double comb for the daily routine.
+
+        The price comes from all_products rather than from the metafield, so a
+        row can never quote a price the product no longer has. Lookups are
+        capped at twenty per page by Liquid and no picker here holds more than
+        four rows.
+      {%- endcomment -%}
+      {%- if picker.size > 0 -%}
+        <div class="wf-band__head">
+          <h2 class="wf-h2">{{ section.settings.picker_heading }}</h2>
+        </div>
+        <ul class="wf-pick" role="list">
+          {%- for row in picker -%}
+            {%- assign other = all_products[row.handle] -%}
+            <li class="wf-pick__i{% if row.current %} wf-pick__i--now{% endif %}">
+              <div class="wf-pick__head">
+                <span class="wf-pick__n">{{ row.name }}</span>
+                {%- if row.current -%}
+                  <span class="wf-pick__now">{{ section.settings.picker_current }}</span>
+                {%- elsif other != blank and other.price > 0 -%}
+                  <span class="wf-pick__p">{{ other.price | money }}</span>
+                {%- endif -%}
+              </div>
+              {%- if row.best_for != blank -%}
+                <p class="wf-pick__b">{{ row.best_for }}</p>
+              {%- endif -%}
+              {%- if row.note != blank -%}
+                <p class="wf-pick__x">{{ row.note }}</p>
+              {%- endif -%}
+              {%- unless row.current -%}
+                {%- if other != blank -%}
+                  <a class="wf-pick__a" href="{{ other.url }}">{{ section.settings.picker_cta }}</a>
+                {%- endif -%}
+              {%- endunless -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
 
       {%- if specs.size > 0 or for_pets != blank -%}
         <div class="wf-band__head">
@@ -88,6 +137,9 @@
   "name": "מוצר · מפרט ושאלות",
   "tag": "section",
   "settings": [
+    { "type": "text", "id": "picker_heading", "label": "כותרת ההשוואה", "default": "איזה מהם מתאים לכם" },
+    { "type": "text", "id": "picker_current", "label": "סימון המוצר הנוכחי", "default": "זה העמוד שאתם בו" },
+    { "type": "text", "id": "picker_cta", "label": "קישור למוצר אחר", "default": "לעמוד המוצר" },
     { "type": "text", "id": "specs_heading", "label": "כותרת המפרט", "default": "המפרט" },
     { "type": "text", "id": "safety_label", "label": "כותרת פסקת הבטיחות", "default": "בטיחות ושימוש נכון" },
     { "type": "text", "id": "for_label", "label": "שם השורה של מתאים ל", "default": "מתאים ל" },

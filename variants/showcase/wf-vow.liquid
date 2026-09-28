@@ -1,0 +1,251 @@
+{%- doc -%}
+  The guarantee, in two shapes from one section.
+
+  `band` is a full width slab for the homepage. It is the first thing under the
+  hero, and it answers the four questions a visitor arrives with in one screen:
+  what this shop is, why it is worth more than the price says, why we can be
+  believed, and what to press. 359 of 364 sessions landed on the homepage and
+  none reached a product page, so the homepage's job is not to be admired, it
+  is to route, and this band is the ramp.
+
+  `pop` is the same promise as a modal on the Bloom page. It uses a real
+  <dialog> with showModal(), so the focus trap, the Escape key, the top layer
+  and the backdrop are the browser's rather than ours, and a browser without
+  showModal simply never opens it instead of rendering a broken half state.
+
+  The confirm button returns "buy", and the close handler scrolls the buy box
+  into view. A popup that interrupts and then leaves the reader where they were
+  has only cost them time; this one ends with the price on screen.
+
+  Nothing here states a fact about the shop that the refund policy does not
+  carry. The promise is the merchant's, the condition that the product must be
+  undamaged is stated in the same breath as the promise rather than buried, and
+  both link to the policy page itself.
+
+  IMPORTANT: the refund policy must carry the 30 day clause before this theme
+  is published. As written the policy voids a refund on any used product, and a
+  30 day trial requires use, so publishing this before the policy is updated
+  would advertise a promise the fine print takes back.
+{%- enddoc -%}
+
+{%- liquid
+  assign mode = section.settings.mode
+  assign points = section.blocks
+-%}
+
+{%- if section.settings.heading == blank and section.settings.body == blank -%}
+  {%- comment -%} An empty section renders nothing rather than an empty slab. {%- endcomment -%}
+{%- elsif mode == 'band' -%}
+
+  <section class="wf-vow wf-vow--band">
+    <div class="pl-wrap">
+      <div class="wf-vow__inner">
+        <div class="wf-vow__copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="wf-vow__eyebrow">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="wf-vow__h">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.body != blank -%}
+            <p class="wf-vow__x">{{ section.settings.body }}</p>
+          {%- endif -%}
+          {%- if section.settings.condition != blank -%}
+            <p class="wf-vow__fine">{{ section.settings.condition }}</p>
+          {%- endif -%}
+
+          <div class="wf-vow__acts">
+            {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+              <a class="wf-vow__go" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+            {%- endif -%}
+            {%- if section.settings.policy_label != blank and section.settings.policy_link != blank -%}
+              <a class="wf-vow__pol" href="{{ section.settings.policy_link }}">{{ section.settings.policy_label }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- if points.size > 0 -%}
+          <ul class="wf-vow__pts" role="list">
+            {%- for block in points -%}
+              <li class="wf-vow__pt" {{ block.shopify_attributes }}>
+                <span class="wf-vow__pt-t">{{ block.settings.title }}</span>
+                {%- if block.settings.text != blank -%}
+                  <span class="wf-vow__pt-x">{{ block.settings.text }}</span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+{%- else -%}
+
+  <dialog class="wf-vow__pop" id="wf-vow-{{ section.id }}" aria-labelledby="wf-vow-h-{{ section.id }}">
+    <form method="dialog" class="wf-vow__card">
+      <button class="wf-vow__close" value="close" aria-label="{{ section.settings.close_label | escape }}">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </button>
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="wf-vow__badge">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="wf-vow__h" id="wf-vow-h-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="wf-vow__x">{{ section.settings.body }}</p>
+      {%- endif -%}
+
+      {%- if points.size > 0 -%}
+        <ul class="wf-vow__pts" role="list">
+          {%- for block in points -%}
+            <li class="wf-vow__pt" {{ block.shopify_attributes }}>
+              <span class="wf-vow__pt-t">{{ block.settings.title }}</span>
+              {%- if block.settings.text != blank -%}
+                <span class="wf-vow__pt-x">{{ block.settings.text }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- comment -%}
+        showModal() moves focus to the first focusable child, which is the
+        close button, so a keyboard visitor was handed the dismiss control and
+        Enter in the form would have submitted it. autofocus puts the caret on
+        the action instead, and the close button stays one Escape away.
+      {%- endcomment -%}
+      <button class="wf-vow__go" value="buy" autofocus>{{ section.settings.pop_cta }}</button>
+
+      {%- if section.settings.condition != blank -%}
+        <p class="wf-vow__fine">{{ section.settings.condition }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.policy_label != blank and section.settings.policy_link != blank -%}
+        <a class="wf-vow__pol" href="{{ section.settings.policy_link }}">{{ section.settings.policy_label }}</a>
+      {%- endif -%}
+    </form>
+  </dialog>
+
+  <script>
+    (function () {
+      var d = document.getElementById('wf-vow-{{ section.id }}');
+      if (!d || typeof d.showModal !== 'function') return;
+
+      var freq = {{ section.settings.pop_frequency | json }};
+      var key = 'wf-vow-seen';
+      var store = null;
+
+      /* localStorage throws outright in a locked down browser, so every touch
+         of it is guarded and a failure degrades to showing the message. */
+      if (freq !== 'always') {
+        try { store = freq === 'week' ? window.localStorage : window.sessionStorage; } catch (e) { store = null; }
+      }
+
+      if (store) {
+        try {
+          var seen = parseInt(store.getItem(key), 10);
+          if (seen) {
+            if (freq === 'session') return;
+            if (freq === 'week' && Date.now() - seen < 604800000) return;
+          }
+        } catch (e) {}
+      }
+
+      /* The buy box is the point of the interruption, so the confirm button
+         leaves the reader at the price rather than back where they started. */
+      d.addEventListener('close', function () {
+        if (d.returnValue !== 'buy') return;
+        var box = document.querySelector('.wf-buybox');
+        if (!box) return;
+        var soft = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        box.scrollIntoView({ behavior: soft, block: 'center' });
+      });
+
+      /* A click on the dialog element itself is a click on the backdrop: the
+         card is a child, so it stops there on its own. */
+      d.addEventListener('click', function (event) {
+        if (event.target === d) d.close('close');
+      });
+
+      window.setTimeout(function () {
+        if (d.open) return;
+        try { d.showModal(); } catch (e) { return; }
+        if (store) { try { store.setItem(key, String(Date.now())); } catch (e) {} }
+      }, {{ section.settings.pop_delay | times: 1000 }});
+    })();
+  </script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מותג · ההבטחה",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "צורת ההצגה",
+      "options": [
+        { "value": "band", "label": "רצועה בתוך העמוד" },
+        { "value": "pop", "label": "חלון שנפתח בכניסה" }
+      ],
+      "default": "band"
+    },
+    { "type": "text", "id": "eyebrow", "label": "כיתוב קטן מעל", "default": "אחריות 30 יום על בלום" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "לא ראיתם תוצאות תוך 30 יום, תקבלו החזר מלא" },
+    { "type": "textarea", "id": "body", "label": "טקסט", "default": "TinyBloom היא חנות של כלי טיפוח וניקיון לכלבים ולחתולים, ובלום היא עמדת הטיפוח שהכל מתחיל בה. קחו אותה הביתה, השתמשו בה חודש שלם, ואם החיה לא נשארת במקום ולא ראיתם שינוי, כתבו לנו ותקבלו את הכסף בחזרה." },
+    { "type": "textarea", "id": "condition", "label": "שורת התנאי", "default": "ההחזר המלא בתוקף בתנאי שהמוצר לא נפגע. בלאי שנובע משימוש רגיל אינו נזק." },
+    { "type": "text", "id": "policy_label", "label": "כיתוב הקישור לתקנון", "default": "לתנאי האחריות המלאים" },
+    { "type": "url", "id": "policy_link", "label": "קישור לתקנון" },
+    { "type": "header", "content": "רצועה" },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "להכיר את בלום" },
+    { "type": "url", "id": "cta_link", "label": "קישור הכפתור" },
+    { "type": "header", "content": "חלון שנפתח בכניסה" },
+    { "type": "text", "id": "pop_cta", "label": "כפתור בחלון", "default": "אני רוצה לנסות" },
+    { "type": "text", "id": "close_label", "label": "תיאור כפתור הסגירה", "default": "סגירה" },
+    {
+      "type": "range",
+      "id": "pop_delay",
+      "label": "השהיה לפני הפתיחה",
+      "unit": "שנ",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "pop_frequency",
+      "label": "כל כמה זמן להציג",
+      "info": "הצגה בכל כניסה היא הבקשה המקורית. פעם בביקור מטרידה פחות ובדרך כלל ממירה יותר.",
+      "options": [
+        { "value": "always", "label": "בכל כניסה לעמוד" },
+        { "value": "session", "label": "פעם אחת בביקור" },
+        { "value": "week", "label": "פעם בשבוע" }
+      ],
+      "default": "always"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "נקודה",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "text", "id": "text", "label": "שורת הסבר" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "מותג · ההבטחה" }]
+}
+{% endschema %}

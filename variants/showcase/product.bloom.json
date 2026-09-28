@@ -1,5 +1,27 @@
 {
   "sections": {
+    "vow": {
+      "type": "wf-vow",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "title": "30 יום לנסות", "text": "מהיום שהחבילה מגיעה אליכם" } },
+        "p2": { "type": "point", "settings": { "title": "החזר מלא", "text": "בלי דמי ביטול ובלי אחוזים" } },
+        "p3": { "type": "point", "settings": { "title": "משלוח חינם", "text": "בכל הזמנה, בלי סכום מינימום" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "mode": "pop",
+        "eyebrow": "אחריות 30 יום על בלום",
+        "heading": "לא ראיתם תוצאות תוך 30 יום, תקבלו החזר מלא",
+        "body": "קחו את בלום הביתה והשתמשו בה חודש שלם. אם החיה לא נשארת במקום ולא ראיתם שינוי בטיפוח, כתבו לנו ותקבלו את הכסף בחזרה.",
+        "condition": "ההחזר המלא בתוקף בתנאי שהמוצר לא נפגע. בלאי שנובע משימוש רגיל אינו נזק.",
+        "pop_cta": "אני רוצה לנסות",
+        "close_label": "סגירה",
+        "pop_delay": 3,
+        "pop_frequency": "always",
+        "policy_label": "לתנאי האחריות המלאים",
+        "policy_link": "/policies/refund-policy"
+      }
+    },
     "main": {
       "type": "wf-product",
       "settings": {
@@ -86,5 +108,5 @@
       }
     }
   },
-  "order": ["main", "trust", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
+  "order": ["vow", "main", "trust", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
 }

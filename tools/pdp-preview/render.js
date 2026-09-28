@@ -67,13 +67,13 @@ const img = (w, h, label, alt) => {
 // hair-remover-xl and parvatek-grooming-comb have no `versus`, and
 // kadurosh-cat-ball-toy has no `steps`.
 const MF_PRESENT = {
-  'bloom-grooming-station': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
-  'pro-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
-  'parvatek-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
+  'bloom-grooming-station': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'picker'],
+  'pro-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'picker', 'spotlight'],
+  'parvatek-grooming-comb': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'picker'],
   'parvakal-pet-clipper': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
-  'hair-remover-xl': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces'],
-  'hair-remover-wood-handle': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces'],
-  'tinybloom-fur-glove': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces'],
+  'hair-remover-xl': ['problem', 'before', 'after', 'steps', 'why', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces', 'picker', 'spotlight'],
+  'hair-remover-wood-handle': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces', 'picker', 'spotlight'],
+  'tinybloom-fur-glove': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety', 'surfaces', 'picker'],
   'katora-cardboard-scratcher': ['problem', 'before', 'after', 'steps', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
   'kadurosh-cat-ball-toy': ['problem', 'before', 'after', 'why', 'versus', 'faq', 'specs', 'highlights', 'for_pets', 'problem_line', 'solution_line', 'audience', 'safety'],
 };
