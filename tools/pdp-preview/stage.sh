@@ -15,6 +15,9 @@ cp "$SRC"/wf-*.liquid          "$OUT/sections/"
 cp "$SRC"/wf-card.liquid       "$OUT/snippets/"
 cp "$SRC"/wf.css "$SRC"/wf-pdp.css "$SRC"/wf-vow.css "$OUT/assets/"
 cp "$SRC"/stylesheets.liquid   "$OUT/snippets/"
+# The four header icons TinyBloom draws itself. Horizon's originals are kept
+# in variants/showcase/icons-horizon/ so the swap can be undone.
+cp "$SRC"/icon-cart.svg "$SRC"/icon-account.svg "$SRC"/icon-search.svg "$SRC"/icon-menu.svg "$OUT/assets/"
 cp "$SRC"/header-group.json "$SRC"/footer-group.json "$OUT/sections/"
 cp "$SRC"/settings_data.json   "$OUT/config/"
 for f in "$SRC"/index.json "$SRC"/collection.json "$SRC"/product*.json; do
