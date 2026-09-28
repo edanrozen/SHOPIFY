@@ -175,8 +175,11 @@
       });
 
       window.setTimeout(function () {
-        if (d.open) return;
+        /* One modal per page view. wf-optin sets the same flag, so a template
+           carrying both never stacks the reader two deep. */
+        if (window.__wfModalOpen || d.open) return;
         try { d.showModal(); } catch (e) { return; }
+        window.__wfModalOpen = true;
         if (store) { try { store.setItem(key, String(Date.now())); } catch (e) {} }
       }, {{ section.settings.pop_delay | times: 1000 }});
     })();

@@ -1,4 +1,4 @@
-/* ── The promises ────────────────────────────────────────────────────────
+/* ── The promises ──────────────────────────────────────────────────────
    Every rule in this sheet draws something the shop promises the customer: the
    guarantee as a band, the same guarantee as a modal, and the strip of perks
    above the product page. They share a file because they share a job, and
@@ -347,3 +347,97 @@
 .wf-perks__i + .wf-perks__i {
   border-inline-start: 1px solid rgba(115, 82, 47, .38);
 }
+
+/* ── The email capture ──────────────────────────────────────────────────
+   It borrows the modal chrome from the guarantee popup, .wf-vow__pop and
+   .wf-vow__card, so only the form parts are new. Two modals on one site that
+   look like two different products of two different shops is a worse problem
+   than a slightly generic one.
+
+   Contrast on the cream card: the label is the ink at 8.80:1, the consent line
+   the taupe at 5.42:1, the code chip is the paper on the brown at 6.46:1. */
+.wf-optin__form { display: block; }
+
+.wf-optin__label {
+  display: block;
+  margin: clamp(12px, 3vw, 16px) 0 5px;
+  text-align: start;
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--pl-ink-soft);
+}
+
+/* 16px is not a taste decision. Below it iOS Safari zooms the whole page on
+   focus and the visitor lands mid-field with the modal off screen. */
+.wf-optin__field {
+  display: block;
+  width: 100%;
+  min-height: var(--minimum-touch-target, 44px);
+  padding: 10px 14px;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+  background: var(--pl-white);
+  font-family: var(--pl-sans);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--pl-ink);
+}
+
+.wf-optin__field:focus-visible {
+  outline: 2px solid var(--wf-accent);
+  outline-offset: 1px;
+  border-color: var(--wf-accent);
+}
+
+.wf-optin__err {
+  margin: 8px 0 0;
+  text-align: start;
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--pl-brown-deep);
+}
+
+/* The whole row is the target, not the 16px box, so the tick is reachable
+   with a thumb without aiming. */
+.wf-optin__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 12px;
+  padding-block: 6px;
+  min-height: var(--minimum-touch-target, 44px);
+  text-align: start;
+  cursor: pointer;
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--pl-taupe);
+}
+
+.wf-optin__consent input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  accent-color: var(--wf-accent);
+}
+
+.wf-optin__code {
+  margin: clamp(16px, 4vw, 20px) 0 0;
+  padding: 12px 18px;
+  border-radius: var(--wf-r);
+  background: var(--pl-brown);
+  color: var(--pl-cream);
+  font-family: var(--pl-display);
+  font-size: clamp(1.3rem, 6vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.2;
+  user-select: all;
+}
+
+.wf-vow__card:focus-visible { outline: 2px solid var(--wf-accent); outline-offset: -4px; }

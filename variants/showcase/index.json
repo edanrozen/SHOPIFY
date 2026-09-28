@@ -37,6 +37,31 @@
         "link_two": "/products/bloom-grooming-station"
       }
     },
+    "optin": {
+      "type": "wf-optin",
+      "settings": {
+        "eyebrow": "10% הנחה על ההזמנה הראשונה",
+        "heading": "רוצים 10% הנחה?",
+        "text": "השאירו מייל והקוד יופיע כאן מיד. נעדכן אתכם גם כשיוצא מוצר חדש, ולא יותר מזה.",
+        "email_label": "כתובת המייל שלכם",
+        "email_placeholder": "name@example.com",
+        "consent_text": "אני מאשר/ת קבלת דיוור שיווקי במייל מ TinyBloom. אפשר להסיר בכל רגע בלחיצה אחת.",
+        "submit_label": "קבלו את הקוד",
+        "error_text": "המייל לא התקבל. בדקו את הכתובת ונסו שוב.",
+        "close_label": "סגירה",
+        "policy_label": "מה אנחנו עושים עם המייל",
+        "policy_link": "/policies/privacy-policy",
+        "code": "BLOOM10",
+        "success_eyebrow": "הקוד שלכם",
+        "success_heading": "נרשמתם, הנה 10% הנחה",
+        "success_text": "שמרו את הקוד. הוא תקף להזמנה אחת ואין לו תאריך תפוגה.",
+        "cta_label": "להפעיל את הקוד ולראות את בלום",
+        "cta_link": "/products/bloom-grooming-station",
+        "success_fine": "הקוד נכנס לעגלה אוטומטית בלחיצה על הכפתור.",
+        "delay": 6,
+        "frequency": "session"
+      }
+    },
     "vow": {
       "type": "wf-vow",
       "blocks": {
@@ -116,5 +141,5 @@
       }
     }
   },
-  "order": ["hero", "vow", "flagship", "trust", "launch", "intents", "grid"]
+  "order": ["optin", "hero", "vow", "flagship", "trust", "launch", "intents", "grid"]
 }

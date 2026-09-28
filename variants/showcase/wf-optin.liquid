@@ -1,0 +1,239 @@
+{%- doc -%}
+  The email capture, as a modal on entry.
+
+  It posts to Shopify's own customer form rather than to an app. The address
+  lands in Customers with the newsletter tag, which is the list Shopify Email
+  and every marketing app reads, so nothing here has to be migrated later and
+  no third party sees the address first.
+
+  The success state is rendered by Liquid from form.posted_successfully?, not
+  by JavaScript, so the code survives the page reload the form causes and a
+  visitor whose script failed still gets what they were promised.
+
+  The code is shown on screen and the button behind it is /discount/CODE with
+  a redirect. That link applies the discount to the session and lands them on
+  the product, which matters more than it sounds: 359 of 364 sessions reached
+  the homepage and none reached a product page, so the reward for signing up
+  is also the route out of the homepage.
+
+  Nothing here says the code was emailed. No automation sends it, and a popup
+  that promises an email nobody sent is the first broken promise a new visitor
+  gets. Turn on a Shopify Email welcome automation and that sentence can be
+  added; until then the code is on screen and the copy says to keep it.
+
+  The consent tick is required rather than pre-ticked. An address that cannot
+  legally be mailed is worth nothing, and in Israel a commercial message
+  without consent carries statutory damages per message.
+{%- enddoc -%}
+
+{%- liquid
+  assign code = section.settings.code | strip | upcase
+  assign target = section.settings.cta_link | default: '/collections/all'
+  assign apply = '/discount/' | append: code | append: '?redirect=' | append: target
+-%}
+
+{%- if section.settings.heading != blank -%}
+  <dialog
+    class="wf-vow__pop wf-optin"
+    id="wf-optin-{{ section.id }}"
+    aria-labelledby="wf-optin-h-{{ section.id }}"
+  >
+    {%- comment -%}
+      showModal() hands focus to the first focusable child, which is the close
+      button. autofocus on the card itself moves it to the top of the dialog
+      instead, so a screen reader starts at the heading and a keyboard visitor
+      is not offered the dismiss control first. Not on the email field: that
+      opens the keyboard on a phone before the reader has read why.
+    {%- endcomment -%}
+    <div class="wf-vow__card" tabindex="-1" autofocus>
+      {%- comment -%}
+        A plain button rather than a form[method=dialog] submit, because the
+        card already holds a real POST form and forms cannot nest. The dialog
+        only ever opens from script, so a button that needs script to close it
+        can never strand anyone.
+      {%- endcomment -%}
+      <button
+        type="button"
+        class="wf-vow__close"
+        data-wf-close
+        aria-label="{{ section.settings.close_label | escape }}"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </button>
+
+      {%- form 'customer', class: 'wf-optin__form', id: 'wf-optin-form' -%}
+        {%- if form.posted_successfully? -%}
+
+          <p class="wf-vow__badge">{{ section.settings.success_eyebrow }}</p>
+          <h2 class="wf-vow__h" id="wf-optin-h-{{ section.id }}">{{ section.settings.success_heading }}</h2>
+          {%- if section.settings.success_text != blank -%}
+            <p class="wf-vow__x">{{ section.settings.success_text }}</p>
+          {%- endif -%}
+
+          <p class="wf-optin__code" data-wf-code>{{ code }}</p>
+
+          <a class="wf-vow__go" href="{{ apply }}">{{ section.settings.cta_label }}</a>
+
+          {%- if section.settings.success_fine != blank -%}
+            <p class="wf-vow__fine">{{ section.settings.success_fine }}</p>
+          {%- endif -%}
+
+        {%- else -%}
+
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="wf-vow__badge">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          <h2 class="wf-vow__h" id="wf-optin-h-{{ section.id }}">{{ section.settings.heading }}</h2>
+          {%- if section.settings.text != blank -%}
+            <p class="wf-vow__x">{{ section.settings.text }}</p>
+          {%- endif -%}
+
+          {%- comment -%}
+            The tag is what actually subscribes the address on Shopify's side.
+            The tick beside it is the consent record a person can see, and it
+            is required, so the two never disagree.
+          {%- endcomment -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <label class="wf-optin__label" for="wf-optin-email-{{ section.id }}">
+            {{ section.settings.email_label }}
+          </label>
+          <input
+            class="wf-optin__field"
+            id="wf-optin-email-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            inputmode="email"
+            autocomplete="email"
+            dir="ltr"
+            required
+            placeholder="{{ section.settings.email_placeholder | escape }}"
+          >
+
+          {%- if form.errors -%}
+            <p class="wf-optin__err" role="alert">{{ section.settings.error_text }}</p>
+          {%- endif -%}
+
+          <label class="wf-optin__consent">
+            <input type="checkbox" name="contact[accepts_marketing]" value="true" required>
+            <span>{{ section.settings.consent_text }}</span>
+          </label>
+
+          <button type="submit" class="wf-vow__go">{{ section.settings.submit_label }}</button>
+
+          {%- if section.settings.policy_label != blank and section.settings.policy_link != blank -%}
+            <a class="wf-vow__pol" href="{{ section.settings.policy_link }}">{{ section.settings.policy_label }}</a>
+          {%- endif -%}
+
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      var d = document.getElementById('wf-optin-{{ section.id }}');
+      if (!d || typeof d.showModal !== 'function') return;
+
+      var DONE = 'wf-optin-done';
+      var SEEN = 'wf-optin-seen';
+      var freq = {{ section.settings.frequency | json }};
+      var solved = !!d.querySelector('[data-wf-code]');
+
+      var store = function (which) {
+        try { return which === 'local' ? window.localStorage : window.sessionStorage; } catch (e) { return null; }
+      };
+      var get = function (s, k) { try { return s && s.getItem(k); } catch (e) { return null; } };
+      var set = function (s, k, v) { try { if (s) s.setItem(k, v); } catch (e) {} };
+
+      var ls = store('local');
+
+      d.querySelector('[data-wf-close]').addEventListener('click', function () { d.close(); });
+      d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+
+      var open = function () {
+        /* One modal per page view. The guarantee popup sets the same flag, so
+           on a page carrying both the reader is never stacked two deep. */
+        if (window.__wfModalOpen || d.open) return;
+        try { d.showModal(); } catch (e) { return; }
+        window.__wfModalOpen = true;
+      };
+
+      if (solved) {
+        /* They just submitted: the reload is the only reason this page is
+           here, so the code goes up at once rather than after a delay. */
+        set(ls, DONE, '1');
+        open();
+        return;
+      }
+
+      if (get(ls, DONE)) return;
+
+      if (freq !== 'always') {
+        var s = freq === 'week' ? ls : store('session');
+        var seen = parseInt(get(s, SEEN), 10);
+        if (seen) {
+          if (freq === 'session') return;
+          if (freq === 'week' && Date.now() - seen < 604800000) return;
+        }
+        d.addEventListener('close', function () { set(s, SEEN, String(Date.now())); }, { once: true });
+      }
+
+      window.setTimeout(open, {{ section.settings.delay | times: 1000 }});
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מותג · הרשמה לדיוור",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "כיתוב קטן מעל", "default": "10% הנחה על ההזמנה הראשונה" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "רוצים 10% הנחה?" },
+    { "type": "textarea", "id": "text", "label": "טקסט", "default": "השאירו מייל והקוד יופיע כאן מיד. נעדכן אתכם גם כשיוצא מוצר חדש, ולא יותר מזה." },
+    { "type": "text", "id": "email_label", "label": "תווית שדה המייל", "default": "כתובת המייל שלכם" },
+    { "type": "text", "id": "email_placeholder", "label": "טקסט לדוגמה בשדה", "default": "name@example.com" },
+    { "type": "textarea", "id": "consent_text", "label": "שורת ההסכמה", "default": "אני מאשר/ת קבלת דיוור שיווקי במייל מ TinyBloom. אפשר להסיר בכל רגע בלחיצה אחת." },
+    { "type": "text", "id": "submit_label", "label": "כפתור", "default": "קבלו את הקוד" },
+    { "type": "text", "id": "error_text", "label": "הודעת שגיאה", "default": "המייל לא התקבל. בדקו את הכתובת ונסו שוב." },
+    { "type": "text", "id": "close_label", "label": "תיאור כפתור הסגירה", "default": "סגירה" },
+    { "type": "text", "id": "policy_label", "label": "כיתוב הקישור לפרטיות", "default": "מה אנחנו עושים עם המייל" },
+    { "type": "url", "id": "policy_link", "label": "קישור למדיניות הפרטיות" },
+    { "type": "header", "content": "אחרי ההרשמה" },
+    { "type": "text", "id": "code", "label": "קוד ההנחה", "default": "BLOOM10", "info": "חייב להיות קוד קיים ופעיל בהנחות של שופיי." },
+    { "type": "text", "id": "success_eyebrow", "label": "כיתוב קטן מעל", "default": "הקוד שלכם" },
+    { "type": "text", "id": "success_heading", "label": "כותרת", "default": "נרשמתם, הנה 10% הנחה" },
+    { "type": "textarea", "id": "success_text", "label": "טקסט", "default": "שמרו את הקוד. הוא תקף להזמנה אחת ואין לו תאריך תפוגה." },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "להפעיל את הקוד ולראות את בלום" },
+    { "type": "url", "id": "cta_link", "label": "לאן הכפתור מוביל" },
+    { "type": "textarea", "id": "success_fine", "label": "שורה קטנה בסוף", "default": "הקוד נכנס לעגלה אוטומטית בלחיצה על הכפתור." },
+    { "type": "header", "content": "מתי להציג" },
+    {
+      "type": "range",
+      "id": "delay",
+      "label": "השהיה לפני הפתיחה",
+      "unit": "שנ",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "frequency",
+      "label": "כל כמה זמן להציג",
+      "info": "מי שכבר נרשם לא יראה את החלון שוב בשום מצב.",
+      "options": [
+        { "value": "session", "label": "פעם אחת בביקור" },
+        { "value": "week", "label": "פעם בשבוע" },
+        { "value": "always", "label": "בכל כניסה לעמוד" }
+      ],
+      "default": "session"
+    }
+  ],
+  "presets": [{ "name": "מותג · הרשמה לדיוור" }]
+}
+{% endschema %}
