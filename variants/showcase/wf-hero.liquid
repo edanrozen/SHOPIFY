@@ -16,9 +16,14 @@
   the hero and nothing is broken; the dots simply never appear to do anything,
   which is why they are not rendered at all when there is one slide.
 
-  The frame is portrait on a phone and wide on a desktop, and every slide takes
-  two photographs rather than cropping one, because a 1672x941 landscape shot
-  squeezed into a 4:5 phone frame loses both its sides.
+  Every slide takes two photographs rather than cropping one, because a
+  1672x941 landscape shot squeezed into a phone frame loses both its sides.
+
+  Two layouts. `overlay` puts the copy on the photograph under a scrim, in a
+  4:5 phone frame. `panel` puts it on a slab of brand colour under a 4:3 one,
+  which is what the homepage runs: the product is black mesh and chrome, so the
+  brand's brown and olive cannot come out of any photograph of it, and the
+  words stop depending on whatever the camera happened to find behind them.
 
   The <picture> is positioned rather than left in flow: in normal flow it has
   no height of its own, so `height: 100%` on the image inside it resolves to
@@ -29,9 +34,36 @@
   assign slides = section.blocks | where: 'type', 'slide'
   assign auto = section.settings.autoplay
   assign gap = section.settings.interval | times: 1000 | round
+  assign panel = false
+  if section.settings.layout == 'panel'
+    assign panel = true
+  endif
 -%}
 
-<section class="wf-hero">
+{%- comment -%}
+  The dots are the same markup in both layouts and only the place changes, so
+  they are captured once rather than written twice. In `overlay` they sit under
+  the buttons inside the copy; in `panel` they sit over the bottom of the
+  photograph, because in that layout the copy is a solid slab and a white dot
+  on it would be invisible.
+{%- endcomment -%}
+{%- capture dots -%}
+  {%- if slides.size > 1 -%}
+    <div class="wf-hero__dots" role="tablist" aria-label="{{ section.settings.dots_label }}">
+      {%- for block in slides -%}
+        <button
+          type="button"
+          class="wf-hero__dot"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-label="{{ section.settings.dots_label }} {{ forloop.index }}"
+        ><span aria-hidden="true"></span></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="wf-hero{% if panel %} wf-hero--panel{% endif %}">
   <div
     class="wf-hero__media"
     {% if slides.size > 1 and auto %}data-autoplay="{{ gap }}"{% endif %}
@@ -82,41 +114,47 @@
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
+    {%- if panel -%}{{ dots }}{%- endif -%}
   </div>
 
   <div class="wf-hero__copy">
+    {%- if panel and section.settings.eyebrow != blank -%}
+      <p class="wf-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
     {%- if section.settings.heading != blank -%}
       <h1 class="wf-hero__title">{{ section.settings.heading }}</h1>
     {%- endif -%}
     {%- if section.settings.text != blank -%}
       <p class="wf-hero__text">{{ section.settings.text }}</p>
     {%- endif -%}
+
+    {%- comment -%}
+      One primary action, and in `panel` the second is a text link rather than
+      a second button. Two pills of identical weight ask the visitor to choose
+      between two equal things, which is the same as asking them to choose
+      nothing, and the one read first in Hebrew was the catalogue: the harder
+      of the two roads.
+    {%- endcomment -%}
     <div class="wf-hero__ctas">
       {%- if section.settings.cta_one != blank -%}
-        <a class="wf-btn wf-btn--light" href="{{ section.settings.link_one | default: routes.all_products_collection_url }}">
+        <a class="wf-btn wf-hero__go" href="{{ section.settings.link_one | default: routes.all_products_collection_url }}">
           {{ section.settings.cta_one }}
         </a>
       {%- endif -%}
       {%- if section.settings.cta_two != blank -%}
-        <a class="wf-btn wf-btn--clay" href="{{ section.settings.link_two | default: routes.all_products_collection_url }}">
-          {{ section.settings.cta_two }}
-        </a>
+        {%- if panel -%}
+          <a class="wf-hero__second" href="{{ section.settings.link_two | default: routes.all_products_collection_url }}">
+            {{ section.settings.cta_two }}
+          </a>
+        {%- else -%}
+          <a class="wf-btn wf-btn--clay" href="{{ section.settings.link_two | default: routes.all_products_collection_url }}">
+            {{ section.settings.cta_two }}
+          </a>
+        {%- endif -%}
       {%- endif -%}
     </div>
 
-    {%- if slides.size > 1 -%}
-      <div class="wf-hero__dots" role="tablist" aria-label="{{ section.settings.dots_label }}">
-        {%- for block in slides -%}
-          <button
-            type="button"
-            class="wf-hero__dot"
-            role="tab"
-            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-            aria-label="{{ section.settings.dots_label }} {{ forloop.index }}"
-          ><span aria-hidden="true"></span></button>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+    {%- unless panel -%}{{ dots }}{%- endunless -%}
   </div>
 </section>
 
@@ -183,20 +221,169 @@
   </script>
 {%- endif -%}
 
+{% stylesheet %}
+/* The panel layout. The words come off the photograph and sit on a slab of
+   brand colour underneath it.
+
+   Three reasons, all of them measured rather than felt. The product is black
+   mesh and chrome, so no photograph of it can carry a brown and olive palette;
+   the colour has to come from the frame. A quarter of the area behind the
+   subheading in the overlay layout measured under 4.5:1, worst point 3.80:1,
+   where white crossed a cream sweater and a pale rug; on flat colour that
+   cannot happen. And the guarantee had nothing to sit in above the fold.
+
+   Cream on this brown is 6.46:1, the deep sand 5.16:1, and the brown back on
+   the cream button 6.46:1. The dark green alternative was dropped because its
+   small label landed at 3.84:1.
+
+   It lives in the section rather than in wf.css because wf.css is 33KB that
+   has to be retyped in full to deploy one rule, and that has drifted twice. */
+
+.wf-hero--panel .wf-hero__media { aspect-ratio: 4 / 3; }
+@media (min-width: 750px) { .wf-hero--panel .wf-hero__media { aspect-ratio: 16 / 9; } }
+
+/* Only enough darkening at the very bottom to keep the white dots visible.
+   The full scrim exists to make text readable and there is no text here. */
+.wf-hero--panel .wf-hero__media::after {
+  background: linear-gradient(to top, rgba(0, 0, 0, .3) 0%, rgba(0, 0, 0, 0) 20%);
+}
+
+.wf-hero--panel .wf-hero__dots {
+  position: absolute;
+  inset-inline: 0;
+  /* Clear of the slab, not under it. The dots are positioned and the slab is
+     not, so by paint order the dots land on top of it: parked at 0 they sat
+     over the brown edge rather than on the photograph. 24px is the overlap. */
+  bottom: 24px;
+  margin: 0;
+  z-index: 2;
+}
+
+.wf-hero--panel .wf-hero__copy {
+  position: static;
+  z-index: auto;
+  background: var(--pl-brown);
+  margin-top: -24px;
+  border-radius: 18px 18px 0 0;
+  padding: clamp(20px, 6vw, 34px) var(--pl-gutter) clamp(26px, 5vw, 38px);
+}
+
+.wf-hero--panel .wf-hero__eyebrow {
+  font-family: var(--pl-sans);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.3;
+  color: var(--pl-sand-deep);
+  margin: 0 0 9px;
+}
+
+/* Smaller than the overlay title. At 8.6vw a headline that had a whole
+   photograph behind it now has a slab sized to the words, and the two are not
+   the same problem. */
+.wf-hero--panel .wf-hero__title {
+  font-size: clamp(1.6rem, 6.4vw, 2.6rem);
+  line-height: 1.18;
+  letter-spacing: -.015em;
+  color: var(--pl-cream);
+  text-shadow: none;
+  margin-block-end: 10px;
+}
+
+.wf-hero--panel .wf-hero__text {
+  color: var(--pl-sand-deep);
+  text-shadow: none;
+  max-width: 44ch;
+  /* Tighter than the overlay's 18px floor. On a 320px screen those few pixels
+     are the difference between the button landing above the fold and below
+     it, which was measured rather than guessed. */
+  margin-block-end: clamp(14px, 3vw, 26px);
+}
+
+.wf-hero--panel .wf-hero__ctas {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.wf-hero--panel .wf-hero__go {
+  width: 100%;
+  max-width: 420px;
+  background: var(--pl-cream);
+  border-color: var(--pl-cream);
+  color: var(--pl-brown);
+}
+.wf-hero--panel .wf-hero__go:hover {
+  background: var(--pl-sand-deep);
+  border-color: var(--pl-sand-deep);
+  color: var(--pl-brown-deep);
+}
+
+.wf-hero--panel .wf-hero__second {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--pl-cream);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Side by side once there is room for the slab to be a column rather than a
+   band. The photograph stops being a fixed ratio and fills the row instead,
+   so the two halves end level however long the copy runs. */
+@media (min-width: 1000px) {
+  .wf-hero--panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr);
+  }
+  .wf-hero--panel .wf-hero__media {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 520px;
+  }
+  .wf-hero--panel .wf-hero__copy {
+    margin-top: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+    padding-inline: clamp(32px, 4vw, 64px);
+  }
+  .wf-hero--panel .wf-hero__text { margin-inline: 0; }
+  .wf-hero--panel .wf-hero__ctas { align-items: flex-start; }
+  .wf-hero--panel .wf-hero__go { width: auto; }
+}
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "תמות · תמונה ראשית",
   "tag": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "סגנון",
+      "options": [
+        { "value": "panel", "label": "פאנל צבע מתחת לתמונה" },
+        { "value": "overlay", "label": "טקסט על גבי התמונה" }
+      ],
+      "default": "panel"
+    },
+    { "type": "text", "id": "eyebrow", "label": "כיתוב קטן מעל הכותרת", "default": "אחריות 30 יום, החזר מלא" },
     { "type": "text", "id": "heading", "label": "כותרת", "default": "הפרווה נשארת עליהם" },
     { "type": "textarea", "id": "text", "label": "טקסט" },
-    { "type": "text", "id": "cta_one", "label": "כפתור ראשון", "default": "לכל המוצרים" },
-    { "type": "url", "id": "link_one", "label": "קישור ראשון" },
-    { "type": "text", "id": "cta_two", "label": "כפתור שני" },
-    { "type": "url", "id": "link_two", "label": "קישור שני" },
+    { "type": "text", "id": "cta_one", "label": "כפתור ראשי", "default": "לכל המוצרים" },
+    { "type": "url", "id": "link_one", "label": "קישור הכפתור הראשי" },
+    { "type": "text", "id": "cta_two", "label": "קישור משני" },
+    { "type": "url", "id": "link_two", "label": "יעד הקישור המשני" },
     { "type": "header", "content": "החלפת תמונות" },
     { "type": "checkbox", "id": "autoplay", "label": "להחליף תמונות לבד", "default": true },
-    { "type": "range", "id": "interval", "label": "כל כמה שניות", "min": 2, "max": 10, "step": 0.5, "unit": "שנ", "default": 2.5 },
+    { "type": "range", "id": "interval", "label": "כל כמה שניות", "min": 2, "max": 10, "step": 0.5, "unit": "שנ", "default": 7 },
     { "type": "text", "id": "dots_label", "label": "שם הנקודות לקורא מסך", "default": "תמונה" }
   ],
   "blocks": [
@@ -205,7 +392,7 @@
       "name": "תמונה",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "תמונה (מסך רחב)" },
-        { "type": "image_picker", "id": "image_mobile", "label": "תמונה (טלפון, לאורך)" }
+        { "type": "image_picker", "id": "image_mobile", "label": "תמונה (טלפון)", "info": "בסגנון הפאנל מסגרת הטלפון היא 4:3 לרוחב, לא לאורך." }
       ]
     }
   ],
