@@ -16,8 +16,8 @@
         "condition": "ההחזר המלא בתוקף בתנאי שהמוצר לא נפגע. בלאי שנובע משימוש רגיל אינו נזק.",
         "pop_cta": "אני רוצה לנסות",
         "close_label": "סגירה",
-        "pop_delay": 3,
-        "pop_frequency": "always",
+        "pop_delay": 8,
+        "pop_frequency": "session",
         "policy_label": "לתנאי האחריות המלאים",
         "policy_link": "/policies/refund-policy"
       }
