@@ -120,6 +120,26 @@
                       {%- endif -%}
                     </span>
                   </span>
+
+                  {%- if block.settings.image != blank -%}
+                    {%- comment -%}
+                      Decorative: the tier already names every product it holds
+                      in wf-kit__items, so an alt here would read the same list
+                      twice to a screen reader.
+                    {%- endcomment -%}
+                    <span class="wf-kit__thumb">
+                      <img
+                        src="{{ block.settings.image | image_url: width: 220 }}"
+                        srcset="{{ block.settings.image | image_url: width: 160 }} 160w, {{ block.settings.image | image_url: width: 320 }} 320w"
+                        sizes="110px"
+                        width="{{ block.settings.image.width }}"
+                        height="{{ block.settings.image.height }}"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      >
+                    </span>
+                  {%- endif -%}
                 </label>
 
                 {%- comment -%}
@@ -306,6 +326,24 @@
   color: var(--wf-accent-deep, #5F663F);
 }
 
+/* Square, and cropped rather than letterboxed, so three tiers whose pictures
+   were not shot to the same ratio still line up down the column. */
+.wf-kit__thumb {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--pl-cream, #FBF4E9);
+}
+
+.wf-kit__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .wf-kit__go { margin-top: 18px; width: 100%; }
 
 .wf-kit__note {
@@ -315,6 +353,7 @@
 }
 
 @media (min-width: 750px) {
+  .wf-kit__thumb { width: 110px; height: 110px; }
   .wf-kit__go { width: auto; min-width: 280px; }
 }
 {% endstylesheet %}
@@ -353,7 +392,8 @@
         { "type": "checkbox", "id": "preselect", "label": "מסומן כברירת מחדל", "default": false },
         { "type": "product", "id": "product_1", "label": "המוצר הראשי", "info": "לא מקבל הנחה." },
         { "type": "product", "id": "product_2", "label": "כלי נלווה ראשון" },
-        { "type": "product", "id": "product_3", "label": "כלי נלווה שני" }
+        { "type": "product", "id": "product_3", "label": "כלי נלווה שני" },
+        { "type": "image_picker", "id": "image", "label": "תמונת הדרגה", "info": "ריבועית. תמונה שמראה בדיוק את מה שהדרגה כוללת, לא יותר ולא פחות." }
       ]
     }
   ],
