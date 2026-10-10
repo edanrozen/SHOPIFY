@@ -33,6 +33,24 @@
         "perk_3": "משלוח חינם לכל הארץ"
       }
     },
+    "kit": {
+      "type": "wf-kit",
+      "blocks": {
+        "k1": { "type": "tier", "settings": { "title": "בלום לבד", "preselect": true, "product_1": "bloom-grooming-station" } },
+        "k2": { "type": "tier", "settings": { "title": "ערכת הטיפוח", "badge": "מומלץ", "product_1": "bloom-grooming-station", "product_2": "parvatek-grooming-comb" } },
+        "k3": { "type": "tier", "settings": { "title": "הערכה המלאה", "product_1": "bloom-grooming-station", "product_2": "parvatek-grooming-comb", "product_3": "pro-grooming-comb" } }
+      },
+      "block_order": ["k1", "k2", "k3"],
+      "settings": {
+        "eyebrow": "הערכה",
+        "heading": "בלום לבד, או בלום עם הכלים שעובדים עליה",
+        "text": "המסרקים האלה דורשים שהחיה תישאר במקום, ולכן הם שווים הרבה יותר עם העמדה מאשר בלעדיה. מי שלוקח אותם יחד מקבל אותם בהנחה.",
+        "legend": "מה לקחת",
+        "cta_label": "להוסיף לסל",
+        "note": "משלוח חינם בכל הזמנה · ההנחה נכנסת אוטומטית בעגלה",
+        "addon_discount": 45
+      }
+    },
     "trust": {
       "type": "wf-trust",
       "blocks": {
@@ -111,5 +129,5 @@
       }
     }
   },
-  "order": ["vow", "main", "trust", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
+  "order": ["vow", "main", "kit", "trust", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
 }

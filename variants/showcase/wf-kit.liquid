@@ -1,0 +1,363 @@
+{%- doc -%}
+  The kit, sold from inside the product page.
+
+  Bloom carries a 2.7x markup and free shipping comes out of it, which leaves
+  about 120 shekels of contribution per sale against a market cost per click
+  that is nowhere near low enough for that to be comfortable. The cheapest way
+  to fix the arithmetic is not a cheaper click, it is a larger order: the same
+  visitor, the same ad spend, more revenue behind it.
+
+  The two combs are the right companions and not an arbitrary pair. Bloom's own
+  custom.picker metafield already says why: one is the daily brushing, one is
+  detangling, and both of them need the animal to hold still, so each is worth
+  more with the station than without it. The clipper was left out because 139.90
+  moves the kit past the price where the decision stays easy, and the cat toys
+  are not what someone buying a grooming station came for.
+
+  Every tier posts straight to /cart/add with items[]. The chosen tier's inputs
+  are the enabled ones and the rest are disabled, because a disabled input is not
+  submitted, which means the selection needs no JavaScript to be correct, only to
+  be changed. The tier marked as the default ships enabled in the markup, so a
+  reader whose script never ran still has a working buy button rather than a form
+  that silently posts nothing.
+
+  IMPORTANT: the discount shown here is arithmetic, not a promise. The money is
+  taken off by a Shopify automatic discount, and addon_discount below has to hold
+  the same number as that discount or the page and the cart will disagree. The
+  two can still differ by an agora on a price that does not halve cleanly, which
+  is the rounding and not a bug.
+{%- enddoc -%}
+
+{%- liquid
+  assign keep = 100 | minus: section.settings.addon_discount
+  assign tiers = section.blocks
+-%}
+
+{%- if tiers.size > 0 -%}
+  <section class="wf-kit">
+    <div class="pl-wrap">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="wf-kit__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="wf-kit__h">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="wf-kit__x">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      <form method="post" action="/cart/add" class="wf-kit__form" data-wf-kit>
+        <input type="hidden" name="return_to" value="/cart">
+
+        <fieldset class="wf-kit__set">
+          <legend class="wf-kit__legend">{{ section.settings.legend }}</legend>
+
+          {%- for block in tiers -%}
+            {%- liquid
+              assign base = block.settings.product_1
+              assign a2 = block.settings.product_2
+              assign a3 = block.settings.product_3
+
+              assign full = 0
+              assign now = 0
+              assign n = 0
+
+              if base != blank
+                assign full = full | plus: base.price
+                assign now = now | plus: base.price
+                assign n = n | plus: 1
+              endif
+              if a2 != blank
+                assign full = full | plus: a2.price
+                assign cut = a2.price | times: keep | plus: 50 | divided_by: 100
+                assign now = now | plus: cut
+                assign n = n | plus: 1
+              endif
+              if a3 != blank
+                assign full = full | plus: a3.price
+                assign cut = a3.price | times: keep | plus: 50 | divided_by: 100
+                assign now = now | plus: cut
+                assign n = n | plus: 1
+              endif
+
+              assign saved = full | minus: now
+              assign pick = false
+              if block.settings.preselect
+                assign pick = true
+              endif
+            -%}
+
+            {%- if base != blank -%}
+              <div class="wf-kit__row" {{ block.shopify_attributes }}>
+                <label class="wf-kit__opt{% if pick %} is-on{% endif %}" data-wf-kit-opt>
+                  <input
+                    class="wf-kit__radio"
+                    type="radio"
+                    name="wf-kit-pick"
+                    value="{{ block.id }}"
+                    {% if pick %}checked{% endif %}
+                  >
+
+                  <span class="wf-kit__body">
+                    <span class="wf-kit__top">
+                      <span class="wf-kit__name">{{ block.settings.title }}</span>
+                      {%- if block.settings.badge != blank -%}
+                        <span class="wf-kit__badge">{{ block.settings.badge }}</span>
+                      {%- endif -%}
+                    </span>
+
+                    <span class="wf-kit__items">
+                      {{- base.title -}}
+                      {%- if a2 != blank %} + {{ a2.title }}{% endif -%}
+                      {%- if a3 != blank %} + {{ a3.title }}{% endif -%}
+                    </span>
+
+                    <span class="wf-kit__money">
+                      <span class="wf-kit__now">{{ now | money }}</span>
+                      {%- if saved > 0 -%}
+                        <s class="wf-kit__was">{{ full | money }}</s>
+                        <span class="wf-kit__save">חוסכים {{ saved | money }}</span>
+                      {%- endif -%}
+                    </span>
+                  </span>
+                </label>
+
+                {%- comment -%}
+                  The line items for this tier. Only the preselected tier ships
+                  enabled, so the form is correct before any script runs.
+                {%- endcomment -%}
+                <div class="wf-kit__load" data-wf-kit-load="{{ block.id }}" hidden>
+                  <input type="hidden" name="items[0][id]" value="{{ base.selected_or_first_available_variant.id }}" {% unless pick %}disabled{% endunless %}>
+                  <input type="hidden" name="items[0][quantity]" value="1" {% unless pick %}disabled{% endunless %}>
+                  {%- if a2 != blank -%}
+                    <input type="hidden" name="items[1][id]" value="{{ a2.selected_or_first_available_variant.id }}" {% unless pick %}disabled{% endunless %}>
+                    <input type="hidden" name="items[1][quantity]" value="1" {% unless pick %}disabled{% endunless %}>
+                  {%- endif -%}
+                  {%- if a3 != blank -%}
+                    <input type="hidden" name="items[2][id]" value="{{ a3.selected_or_first_available_variant.id }}" {% unless pick %}disabled{% endunless %}>
+                    <input type="hidden" name="items[2][quantity]" value="1" {% unless pick %}disabled{% endunless %}>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </fieldset>
+
+        <button type="submit" class="wf-btn wf-kit__go">{{ section.settings.cta_label }}</button>
+
+        {%- if section.settings.note != blank -%}
+          <p class="wf-kit__note">{{ section.settings.note }}</p>
+        {%- endif -%}
+      </form>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var form = document.querySelector('[data-wf-kit]');
+      if (!form) return;
+
+      var radios = form.querySelectorAll('input[name="wf-kit-pick"]');
+      if (!radios.length) return;
+
+      var apply = function () {
+        radios.forEach(function (radio) {
+          var on = radio.checked;
+          var load = form.querySelector('[data-wf-kit-load="' + radio.value + '"]');
+          if (load) {
+            /* A disabled input is never submitted, so toggling disabled is the
+               whole selection mechanism. Nothing is added or removed. */
+            load.querySelectorAll('input').forEach(function (field) { field.disabled = !on; });
+          }
+          var opt = radio.closest('[data-wf-kit-opt]');
+          if (opt) opt.classList.toggle('is-on', on);
+        });
+      };
+
+      radios.forEach(function (radio) { radio.addEventListener('change', apply); });
+      apply();
+    })();
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+.wf-kit {
+  background: var(--pl-cream-deep, #F6ECDC);
+  padding: clamp(32px, 7vw, 64px) 0;
+}
+
+.wf-kit__eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--wf-accent-deep, #5F663F);
+}
+
+.wf-kit__h {
+  margin: 0 0 10px;
+  font-size: clamp(22px, 5vw, 32px);
+  line-height: 1.2;
+  color: var(--pl-ink, #2A2722);
+}
+
+.wf-kit__x {
+  margin: 0 0 24px;
+  max-width: 60ch;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--pl-ink-soft, #4A443C);
+}
+
+.wf-kit__set { margin: 0; padding: 0; border: 0; }
+
+.wf-kit__legend {
+  padding: 0;
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pl-taupe, #6B6357);
+}
+
+.wf-kit__row + .wf-kit__row { margin-top: 10px; }
+
+/* The whole card is the label, so the tap target is the card and not the dot. */
+.wf-kit__opt {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-height: 44px;
+  padding: 16px;
+  border: 2px solid var(--pl-sand-deep, #ECDAC1);
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.wf-kit__opt:hover { border-color: var(--wf-accent, #70784B); }
+
+.wf-kit__opt.is-on {
+  border-color: var(--wf-accent-deep, #5F663F);
+  box-shadow: 0 0 0 1px var(--wf-accent-deep, #5F663F);
+}
+
+/* The native control, kept visible and operable rather than replaced, so the
+   keyboard, the focus ring and the screen reader are the browser's own. */
+.wf-kit__radio {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 0;
+  accent-color: var(--wf-accent-deep, #5F663F);
+}
+
+.wf-kit__body { display: block; flex: 1 1 auto; min-width: 0; }
+
+.wf-kit__top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.wf-kit__name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--pl-ink, #2A2722);
+}
+
+.wf-kit__badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--wf-accent-deep, #5F663F);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wf-kit__items {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--pl-taupe, #6B6357);
+}
+
+.wf-kit__money {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.wf-kit__now {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--pl-ink, #2A2722);
+}
+
+.wf-kit__was { color: var(--pl-taupe, #6B6357); font-size: 15px; }
+
+.wf-kit__save {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--wf-accent-deep, #5F663F);
+}
+
+.wf-kit__go { margin-top: 18px; width: 100%; }
+
+.wf-kit__note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--pl-taupe, #6B6357);
+}
+
+@media (min-width: 750px) {
+  .wf-kit__go { width: auto; min-width: 280px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "מותג · הערכה",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "כיתוב קטן מעל", "default": "הערכה" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "בלום לבד, או בלום עם הכלים שעובדים עליה" },
+    { "type": "textarea", "id": "text", "label": "טקסט", "default": "המסרקים האלה דורשים שהחיה תישאר במקום, ולכן הם שווים הרבה יותר עם העמדה מאשר בלעדיה. מי שלוקח אותם יחד מקבל אותם בהנחה." },
+    { "type": "text", "id": "legend", "label": "כותרת הבחירה", "default": "מה לקחת" },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "להוסיף לסל" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם בכל הזמנה · ההנחה נכנסת אוטומטית בעגלה" },
+    {
+      "type": "range",
+      "id": "addon_discount",
+      "label": "ההנחה על הכלים הנלווים",
+      "info": "חייב להיות זהה למספר שבהנחה האוטומטית בשופיי, אחרת העמוד והעגלה יגידו מחירים שונים.",
+      "unit": "%",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 45
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "דרגה",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "שם הדרגה" },
+        { "type": "text", "id": "badge", "label": "תג", "info": "למשל: מומלץ. אפשר להשאיר ריק." },
+        { "type": "checkbox", "id": "preselect", "label": "מסומן כברירת מחדל", "default": false },
+        { "type": "product", "id": "product_1", "label": "המוצר הראשי", "info": "לא מקבל הנחה." },
+        { "type": "product", "id": "product_2", "label": "כלי נלווה ראשון" },
+        { "type": "product", "id": "product_3", "label": "כלי נלווה שני" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "מותג · הערכה" }]
+}
+{% endschema %}
