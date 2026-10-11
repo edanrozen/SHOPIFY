@@ -127,50 +127,31 @@
       {%- endif -%}
 
       {%- comment -%}
-        The selling points sit above the buy box, not below it.
+        The price and the button come before the argument, not after it.
 
-        A price and a button reached before the reader knows what the thing is
-        asks for a decision that has not been earned yet. These four or five
-        lines are the shortest honest answer to "what am I buying", so they go
-        in front of the money and the long argument stays behind it. The band
-        further down no longer repeats them.
+        They used to sit the other way round, on the reasoning that a price
+        reached before the reader knows what the thing is asks for a decision
+        that has not been earned. The reasoning was sound and this shop is the
+        case it does not fit: 55 paid visitors reached the Bloom page over five
+        days at 1.38 pages apiece and not one of them added to the cart. Nobody
+        is scrolling far enough to be argued with, and a button three screens
+        down is a button nobody found.
+
+        What stays above the money is the pair of one line hooks, the problem
+        and the answer to it. Those two lines are the whole of "what am I
+        buying" and they cost almost no height. Everything longer moved below,
+        where it can work on whoever is still reading.
+
+        custom.spotlight travels with them. It is the only place in the record
+        that states a figure a shopper can compare, a 30 centimetre head
+        against a 12, and it earns its place in front of someone weighing the
+        price rather than someone still deciding whether to look.
+
+        There is no setting for the order any more. The toggle existed so this
+        could be argued either way per template, and ten templates all set it
+        the same, so it was a way for the ten to drift rather than a choice
+        anyone was making.
       {%- endcomment -%}
-      {%- if section.settings.points_above and highlights.size > 0 -%}
-        <ul class="wf-points wf-points--lede" role="list">
-          {%- for line in highlights -%}
-            <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
-
-      {%- comment -%}
-        The three numbers, directly above the price.
-
-        custom.spotlight was written for three products and rendered nowhere.
-        It is the only place in the record that states a figure a shopper can
-        compare: a 30 centimetre head against a 12, 2.5 times the coverage,
-        zero refills. Those are the lines that separate three fur removers that
-        otherwise read as the same product at three prices, and a shopper who
-        cannot tell them apart does not pick one, they leave.
-
-        It sits immediately above the buy box for the same reason the
-        highlights do: it answers "why this one" in the glance before the
-        price, not in a band below it.
-      {%- endcomment -%}
-      {%- if spotlight.size > 0 -%}
-        <ul class="wf-spot" role="list">
-          {%- for item in spotlight -%}
-            <li class="wf-spot__i">
-              <span class="wf-spot__v">{{ item.value }}</span>
-              <span class="wf-spot__l">{{ item.label }}</span>
-              {%- if item.note != blank -%}
-                <span class="wf-spot__n">{{ item.note }}</span>
-              {%- endif -%}
-            </li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
-
       <div class="wf-buybox">
         <p class="wf-pdp__price">
           {{ product.price | money }}
@@ -199,6 +180,28 @@
           <p class="wf-pdp__note">{{ section.settings.note }}</p>
         {%- endif -%}
       </div>
+
+      {%- if highlights.size > 0 -%}
+        <ul class="wf-points wf-points--lede" role="list">
+          {%- for line in highlights -%}
+            <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if spotlight.size > 0 -%}
+        <ul class="wf-spot" role="list">
+          {%- for item in spotlight -%}
+            <li class="wf-spot__i">
+              <span class="wf-spot__v">{{ item.value }}</span>
+              <span class="wf-spot__l">{{ item.label }}</span>
+              {%- if item.note != blank -%}
+                <span class="wf-spot__n">{{ item.note }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
 
       {%- if product.description != blank -%}
         <div class="wf-pdp__rte">{{ product.description }}</div>
@@ -242,7 +245,6 @@
   "settings": [
     { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
     { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם · 14 יום לביטול עסקה" },
-    { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true },
     { "type": "header", "content": "רצועת היתרונות שמעל העמוד" },
     { "type": "text", "id": "perk_1", "label": "יתרון ראשון", "default": "משלוח חינם לכל הארץ" },
     { "type": "text", "id": "perk_2", "label": "יתרון שני", "default": "14 יום לביטול עסקה" },
