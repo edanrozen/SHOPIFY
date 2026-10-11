@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "home": {
+      "type": "bs-home",
+      "blocks": {
+        "f1": { "type": "fact", "settings": { "title": "משלוח חינם מעל ₪199", "text": "מתחת לסכום זה 29.90 ₪" } },
+        "f2": { "type": "fact", "settings": { "title": "14 יום לביטול עסקה", "text": "לפי חוק הגנת הצרכן" } },
+        "f3": { "type": "fact", "settings": { "title": "תמיכה בעברית", "text": "ראשון עד חמישי, 9:00 עד 18:00" } }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {
+        "image": "shopify://shop_images/IMG-0633.png",
+        "heading": "TinyBloom",
+        "text": "כלים לטיפוח חיות מחמד ולניקיון הבית.",
+        "cta": "לכל המוצרים",
+        "cta_link": "/collections/all",
+        "grid_heading": "המוצרים שלנו",
+        "collection": "all-products",
+        "limit": 12
+      }
+    }
+  },
+  "order": ["home"]
+}

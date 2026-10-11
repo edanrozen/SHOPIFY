@@ -1,0 +1,68 @@
+{%- doc -%}
+  Four facts, directly under the hero.
+
+  The themes this borrows from put a review count here. This store has no
+  orders yet, so there is nothing honest to count and the row carries the four
+  things a first time buyer actually asks instead: what shipping costs, how
+  long they have to change their mind, who answers, and where it comes from.
+
+  Every icon is symmetrical or circular on purpose. An arrow or a truck would
+  point the wrong way the moment the page is in Hebrew.
+{%- enddoc -%}
+
+<section class="wf-trust wf-section--tight">
+  <div class="pl-wrap">
+    <ul class="wf-trust__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="wf-trust__item" {{ block.shopify_attributes }}>
+          <span class="wf-trust__icon" aria-hidden="true">
+            {%- case block.settings.icon -%}
+              {%- when 'box' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 3l8 4.2v9.6L12 21l-8-4.2V7.2z" stroke-linejoin="round"/><path d="M4 7.2l8 4.2 8-4.2M12 11.4V21" stroke-linejoin="round"/></svg>
+              {%- when 'return' -%}
+                <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9" stroke-linecap="round"/><path d="M20 4v4.4h-4.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- when 'chat' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 4c4.4 0 8 2.9 8 6.5S16.4 17 12 17c-.9 0-1.8-.1-2.6-.4L5 18l1-3.2A6.6 6.6 0 0 1 4 10.5C4 6.9 7.6 4 12 4z" stroke-linejoin="round"/></svg>
+              {%- when 'tag' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 3.2l7 2.9v5.6c0 4.1-2.9 6.9-7 8.3-4.1-1.4-7-4.2-7-8.3V6.1z" stroke-linejoin="round"/><path d="M9 12.1l2.1 2.1 4-4.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+            {%- endcase -%}
+          </span>
+          <span class="wf-trust__title">{{ block.settings.title }}</span>
+          <span class="wf-trust__text">{{ block.settings.text }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "תמות · שורת עובדות",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "עובדה",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "אייקון",
+          "options": [
+            { "value": "box", "label": "חבילה" },
+            { "value": "return", "label": "החזרה" },
+            { "value": "chat", "label": "תמיכה" },
+            { "value": "tag", "label": "מחיר" }
+          ],
+          "default": "box"
+        },
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "text", "id": "text", "label": "טקסט" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "תמות · שורת עובדות" }]
+}
+{% endschema %}

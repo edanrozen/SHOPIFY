@@ -1,0 +1,239 @@
+{%- doc -%}
+  The middle of the product page: problem, solution, benefits, photography.
+
+  It is one section rather than four because the complaint it answers was
+  rhythm. When four sections each own their vertical padding they drift apart
+  and the page reads as a stack of unrelated blocks; here a single band rule
+  sets the spacing once and every part inherits it, so the scroll has a beat.
+
+  Four block types, each with exactly one job, and none of them invents a
+  layout of its own:
+    pain     the customer's problem as short lines
+    move     how it works, numbered, beside a photograph
+    benefits outcomes, numbered, no photograph
+    figure   photography with nothing written on it
+
+  Images come from the product's own media by index, so the page cannot show a
+  photograph the product does not have, and a missing one simply drops out.
+{%- enddoc -%}
+
+<div class="pdp pdp-flow">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+
+    {%- when 'pain' -%}
+      {%- assign lines = block.settings.points | newline_to_br | split: '<br />' -%}
+      <div class="pdp__band" {{ block.shopify_attributes }}>
+        <div class="pl-wrap">
+          <div class="pdp__head">
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="pdp__eyebrow">{{ block.settings.eyebrow }}</p>
+            {%- endif -%}
+            <h2 class="pdp__h2">{{ block.settings.heading }}</h2>
+          </div>
+          {%- if block.settings.points != blank -%}
+            <ul class="pdp-pain__list" role="list">
+              {%- for line in lines -%}
+                {%- assign p = line | strip -%}
+                {%- if p != blank -%}<li>{{ p }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </div>
+
+    {%- when 'move' -%}
+      {%- liquid
+        assign mi = block.settings.image_index | minus: 1
+        assign mshot = product.images[mi]
+        assign steps = block.settings.steps | newline_to_br | split: '<br />'
+      -%}
+      <div class="pdp__band" {{ block.shopify_attributes }}>
+        <div class="pl-wrap">
+          <div class="pdp__head">
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="pdp__eyebrow">{{ block.settings.eyebrow }}</p>
+            {%- endif -%}
+            <h2 class="pdp__h2">{{ block.settings.heading }}</h2>
+            {%- if block.settings.text != blank -%}
+              <p class="pdp__lede">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+
+          <div class="pdp-move{% if block.settings.flip %} pdp-move--flip{% endif %}"
+               style="margin-block-start: clamp(26px, 4vw, 44px);">
+            {%- if mshot != blank -%}
+              <figure class="pdp-move__fig" style="--pdp-ratio: {{ mshot.aspect_ratio }};">
+                <img
+                  src="{{ mshot | image_url: width: 900 }}"
+                  srcset="{{ mshot | image_url: width: 500 }} 500w,
+                          {{ mshot | image_url: width: 900 }} 900w,
+                          {{ mshot | image_url: width: 1300 }} 1300w"
+                  sizes="(min-width: 860px) 46vw, 92vw"
+                  width="{{ mshot.width }}" height="{{ mshot.height }}"
+                  alt="{{ mshot.alt | default: product.title | escape }}"
+                  loading="lazy" decoding="async">
+              </figure>
+            {%- endif -%}
+
+            {%- if block.settings.steps != blank -%}
+              <ol class="pdp-move__steps" role="list">
+                {%- for s in steps -%}
+                  {%- assign row = s | strip -%}
+                  {%- if row != blank -%}
+                    {%- assign parts = row | split: '|' -%}
+                    <li>
+                      <strong>{{ parts[0] | strip }}</strong>
+                      {%- if parts.size > 1 -%}<span>{{ parts[1] | strip }}</span>{%- endif -%}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ol>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+    {%- when 'benefits' -%}
+      {%- assign rows = block.settings.items | newline_to_br | split: '<br />' -%}
+      <div class="pdp__band" {{ block.shopify_attributes }}>
+        <div class="pl-wrap">
+          <div class="pdp__head">
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="pdp__eyebrow">{{ block.settings.eyebrow }}</p>
+            {%- endif -%}
+            <h2 class="pdp__h2">{{ block.settings.heading }}</h2>
+          </div>
+          {%- if block.settings.items != blank -%}
+            <ul class="pdp-ben" role="list">
+              {%- assign n = 0 -%}
+              {%- for r in rows -%}
+                {%- assign row = r | strip -%}
+                {%- if row != blank -%}
+                  {%- assign n = n | plus: 1 -%}
+                  {%- assign parts = row | split: '|' -%}
+                  <li>
+                    <span class="pdp-ben__num">{{ n | prepend: '0' | slice: -2, 2 }}</span>
+                    <h3 class="pdp-ben__t">{{ parts[0] | strip }}</h3>
+                    {%- if parts.size > 1 -%}
+                      <p class="pdp-ben__d">{{ parts[1] | strip }}</p>
+                    {%- endif -%}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </div>
+
+    {%- when 'figure' -%}
+      {%- liquid
+        assign from = block.settings.start_index | minus: 1
+        assign shots = product.images | slice: from, block.settings.count
+      -%}
+      {%- if shots.size > 0 -%}
+        <div class="pdp__band" {{ block.shopify_attributes }}>
+          <div class="pl-wrap">
+            {%- if block.settings.heading != blank -%}
+              <div class="pdp__head" style="margin-block-end: clamp(22px, 3.5vw, 34px);">
+                {%- if block.settings.eyebrow != blank -%}
+                  <p class="pdp__eyebrow">{{ block.settings.eyebrow }}</p>
+                {%- endif -%}
+                <h2 class="pdp__h2">{{ block.settings.heading }}</h2>
+              </div>
+            {%- endif -%}
+
+            {%- if shots.size == 1 -%}
+              {%- assign one = shots[0] -%}
+              <figure class="pdp-figure" style="--pdp-ratio: {{ one.aspect_ratio }};">
+                <div class="pdp-figure__frame">
+                  <img
+                    src="{{ one | image_url: width: 1300 }}"
+                    srcset="{{ one | image_url: width: 600 }} 600w,
+                            {{ one | image_url: width: 900 }} 900w,
+                            {{ one | image_url: width: 1300 }} 1300w,
+                            {{ one | image_url: width: 1700 }} 1700w"
+                    sizes="(min-width: 1240px) 1120px, 92vw"
+                    width="{{ one.width }}" height="{{ one.height }}"
+                    alt="{{ one.alt | default: product.title | escape }}"
+                    loading="lazy" decoding="async">
+                </div>
+                {%- if block.settings.caption != blank -%}
+                  <figcaption>{{ block.settings.caption }}</figcaption>
+                {%- endif -%}
+              </figure>
+            {%- else -%}
+              <ul class="pdp-strip" role="list">
+                {%- for shot in shots -%}
+                  <li style="--pdp-ratio: {{ shot.aspect_ratio }};">
+                    <img
+                      src="{{ shot | image_url: width: 700 }}"
+                      srcset="{{ shot | image_url: width: 400 }} 400w,
+                              {{ shot | image_url: width: 700 }} 700w"
+                      sizes="(min-width: 860px) 24vw, 45vw"
+                      width="{{ shot.width }}" height="{{ shot.height }}"
+                      alt="{{ shot.alt | default: product.title | escape }}"
+                      loading="lazy" decoding="async">
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "TinyBloom · PDP flow",
+  "tag": "div",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "pain",
+      "name": "הבעיה",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "שורה עליונה" },
+        { "type": "text", "id": "heading", "label": "כותרת" },
+        { "type": "textarea", "id": "points", "label": "נקודות", "info": "שורה לכל נקודה" }
+      ]
+    },
+    {
+      "type": "move",
+      "name": "איך זה עובד",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "שורה עליונה" },
+        { "type": "text", "id": "heading", "label": "כותרת" },
+        { "type": "textarea", "id": "text", "label": "משפט הסבר" },
+        { "type": "textarea", "id": "steps", "label": "שלבים", "info": "שורה לכל שלב, בפורמט כותרת | הסבר" },
+        { "type": "range", "id": "image_index", "min": 1, "max": 12, "step": 1, "default": 2, "label": "תמונה מספר" },
+        { "type": "checkbox", "id": "flip", "label": "תמונה בצד השני", "default": false }
+      ]
+    },
+    {
+      "type": "benefits",
+      "name": "יתרונות",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "שורה עליונה" },
+        { "type": "text", "id": "heading", "label": "כותרת" },
+        { "type": "textarea", "id": "items", "label": "יתרונות", "info": "שורה לכל יתרון, בפורמט כותרת | הסבר" }
+      ]
+    },
+    {
+      "type": "figure",
+      "name": "תמונות",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "שורה עליונה" },
+        { "type": "text", "id": "heading", "label": "כותרת" },
+        { "type": "range", "id": "start_index", "min": 1, "max": 12, "step": 1, "default": 3, "label": "מתמונה מספר" },
+        { "type": "range", "id": "count", "min": 1, "max": 6, "step": 1, "default": 4, "label": "כמה תמונות" },
+        { "type": "text", "id": "caption", "label": "כיתוב", "info": "רק כשמוצגת תמונה אחת" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "TinyBloom · PDP flow" }]
+}
+{% endschema %}

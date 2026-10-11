@@ -1,0 +1,155 @@
+/* ==========================================================================
+   The plain theme.
+
+   This replaces the whole design layer rather than sitting on top of it. The
+   basic theme loads base.css for the header and footer Shopify provides, then
+   this, and nothing else: no pluma.css, no custom fonts, no token system.
+
+   System fonts, white ground, black text, square frames, one grey hairline.
+   No animation, no shadow, no gradient, no rounded panels. Every rule here is
+   one a person would write on the first afternoon of building a shop, which
+   is the point.
+   ========================================================================== */
+
+/* One typeface for the whole document, header and footer included.
+
+   Those two are still Horizon's own sections and they read their face from
+   --font-heading--family and friends, which `theme-styles-variables` writes in
+   a <style> block after this file loads. Redefining them here in a doubled
+   :root beats that block on specificity, so the header does not end up in one
+   face and the shop in another. Without this the page wears two typefaces and
+   stops looking deliberate. */
+:root:root {
+  --font-body--family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --font-subheading--family: var(--font-body--family);
+  --font-heading--family: var(--font-body--family);
+  --font-accent--family: var(--font-body--family);
+}
+
+body {
+  background: #fff;
+  color: #111;
+  font-family: var(--font-body--family);
+  font-size: 16px;
+  line-height: 1.6;
+}
+*, *::before, *::after { box-sizing: border-box; }
+img { display: block; max-width: 100%; }
+
+.bs-wrap { max-width: 1100px; margin-inline: auto; padding-inline: 16px; }
+
+h1, h2, h3 { font-weight: 700; letter-spacing: 0; margin: 0; }
+
+.bs-btn {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.bs-btn[disabled] { background: #999; cursor: not-allowed; }
+
+/* ---- the shared product grid -------------------------------------------- */
+.bs-grid {
+  list-style: none;
+  margin: 0 0 40px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 16px;
+}
+@media (min-width: 700px) { .bs-grid { grid-template-columns: repeat(4, 1fr); } }
+.bs-grid a { text-decoration: none; color: inherit; display: block; }
+
+.bs-thumb {
+  background: #f4f4f4;
+  border: 1px solid #e5e5e5;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 10px;
+}
+/* Contain, because the catalogue is not one shape: Bloom is 1206x1806 and a
+   square frame filled by cover cuts a third off it. */
+.bs-thumb img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Two lines' worth of room whether the name needs it or not, so the prices in
+   a row sit on one line instead of stepping down under the longer names. */
+.bs-name { display: block; font-size: 14px; line-height: 1.4; min-height: 2.8em; }
+.bs-price { display: block; font-size: 14px; font-weight: 700; margin-top: 4px; }
+
+.bs-h2 { font-size: 20px; margin: 36px 0 16px; }
+
+/* ---- home ---------------------------------------------------------------- */
+.bs-hero { background: #f4f4f4; }
+/* A banner, not a wall. The hero photograph is 1536x1024, which at desktop
+   width would stand 850px tall and push the whole shop below the fold, so its
+   height is capped and it crops from the centre. On a phone the natural height
+   is well under the cap and nothing is cropped at all. */
+.bs-hero img { width: 100%; height: auto; max-height: 460px; object-fit: cover; }
+
+.bs-intro { padding-block: 32px 8px; }
+.bs-intro h1 { font-size: 28px; line-height: 1.25; margin-bottom: 10px; }
+.bs-intro p { margin: 0 0 18px; color: #444; max-width: 60ch; }
+
+.bs-facts { border-top: 1px solid #e5e5e5; background: #fafafa; }
+.bs-facts__list {
+  list-style: none;
+  margin: 0;
+  padding-block: 24px;
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 700px) { .bs-facts__list { grid-template-columns: repeat(3, 1fr); } }
+.bs-facts__list li { display: grid; gap: 2px; }
+.bs-facts__list strong { font-size: 14px; }
+.bs-facts__list span { font-size: 13px; color: #555; }
+
+/* ---- product ------------------------------------------------------------- */
+.bs-pdp { padding-block: 24px 40px; display: grid; gap: 28px; }
+@media (min-width: 800px) { .bs-pdp { grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; } }
+
+.bs-stage { background: #f4f4f4; border: 1px solid #e5e5e5; aspect-ratio: 1 / 1; }
+.bs-stage img { width: 100%; height: 100%; object-fit: contain; }
+
+.bs-strip { list-style: none; margin: 10px 0 0; padding: 0; display: flex; gap: 8px; overflow-x: auto; }
+.bs-strip__btn { padding: 0; border: 0; background: none; cursor: pointer; display: block; }
+.bs-strip img {
+  width: 64px; height: 64px;
+  object-fit: contain;
+  background: #f4f4f4;
+  border: 1px solid #e5e5e5;
+}
+
+.bs-pdp h1 { font-size: 24px; line-height: 1.3; }
+.bs-pdp__price { font-size: 22px; font-weight: 700; margin: 12px 0 18px; }
+.bs-pdp__was { font-size: 15px; font-weight: 400; color: #777; text-decoration: line-through; margin-inline-end: 8px; }
+/* Capped, because a black button 520px wide reads as a banner rather than as
+   the thing you press. */
+.bs-pdp__form { margin: 0 0 18px; display: grid; gap: 10px; max-width: 320px; }
+.bs-pdp__form select,
+.bs-qty { font: inherit; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background: #fff; }
+.bs-qty { width: 80px; }
+.bs-label { font-size: 13px; color: #555; margin-bottom: -6px; }
+.bs-pdp__note { font-size: 13px; color: #555; margin: 0 0 22px; }
+
+.bs-rte { font-size: 15px; color: #333; }
+.bs-pdp .bs-rte { border-top: 1px solid #e5e5e5; padding-top: 20px; }
+.bs-rte h3 { font-size: 16px; margin: 20px 0 6px; }
+.bs-rte p, .bs-rte ul, .bs-rte ol { margin: 0 0 12px; }
+.bs-rte ul, .bs-rte ol { padding-inline-start: 20px; }
+.bs-rte li { margin-bottom: 4px; }
+
+/* ---- collection ---------------------------------------------------------- */
+.bs-coll { padding-block: 28px 0; }
+.bs-coll h1 { font-size: 24px; margin-bottom: 6px; }
+.bs-coll__count { font-size: 14px; color: #666; margin: 0 0 20px; }
+.bs-coll__desc { margin-bottom: 20px; }
+
+.bs-pages { padding-block: 8px 40px; font-size: 14px; }
+.bs-pages a { color: #111; }
