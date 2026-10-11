@@ -62,7 +62,7 @@
         "cta_label": "להפעיל את הקוד ולראות את בלום",
         "cta_link": "/products/bloom-grooming-station",
         "success_fine": "הקוד נכנס לעגלה אוטומטית בלחיצה על הכפתור.",
-        "delay": 6,
+        "delay": 40,
         "frequency": "session"
       }
     },

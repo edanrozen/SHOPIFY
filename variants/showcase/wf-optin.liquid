@@ -132,6 +132,8 @@
     </div>
   </dialog>
 
+  {% render 'wf-clock' %}
+
   <script>
     (function () {
       var d = document.getElementById('wf-optin-{{ section.id }}');
@@ -181,7 +183,15 @@
         d.addEventListener('close', function () { set(s, SEEN, String(Date.now())); }, { once: true });
       }
 
-      window.setTimeout(open, {{ section.settings.delay | times: 1000 }});
+      var wait = {{ section.settings.delay | times: 1000 }};
+      if (window.wfClock) {
+        window.wfClock.after(wait, open);
+      } else {
+        /* The clock snippet failed to define itself. Falling back to this
+           page's own timer keeps the window working, just counted per page
+           rather than across the visit. */
+        window.setTimeout(open, wait);
+      }
     })();
   </script>
 {%- endif -%}
@@ -215,11 +225,12 @@
       "type": "range",
       "id": "delay",
       "label": "השהיה לפני הפתיחה",
+      "info": "נספר על פני כל הביקור באתר ולא בעמוד אחד, וזמן שבו הלשונית מוסתרת לא נספר.",
       "unit": "שנ",
       "min": 0,
-      "max": 20,
-      "step": 1,
-      "default": 6
+      "max": 120,
+      "step": 5,
+      "default": 40
     },
     {
       "type": "select",

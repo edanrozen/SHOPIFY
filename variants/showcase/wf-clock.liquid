@@ -1,0 +1,75 @@
+{%- doc -%}
+  Time spent on the shop, not on the page.
+
+  Both modals used to count from the moment their own page loaded, which asks
+  the wrong question. A reader who gives the homepage fifteen seconds, the
+  catalogue fifteen and a product page fifteen has spent three quarters of a
+  minute deciding, and under a per page timer set to forty seconds they were
+  never once close to it. This clock carries the total across the visit in
+  sessionStorage, so the delay means what a person would assume it means.
+
+  Hidden time is not counted. A tab left open behind another app is not someone
+  reading, and counting it would pop a window at whoever came back to the phone
+  an hour later.
+
+  There is a floor of three seconds on the current page, always. Without it a
+  reader who already passed the threshold earlier in the visit gets a modal in
+  the face at the instant the next page paints, which reads as a malfunction
+  rather than an offer.
+
+  Everything touching sessionStorage is wrapped, because it throws outright in a
+  locked down browser rather than returning null, and a storage failure should
+  cost the counter its memory, not cost the page its script.
+{%- enddoc -%}
+
+{%- comment -%}
+  Guarded so the two sections can both render it on a page that carries both
+  without the second definition resetting the first one's start time.
+{%- endcomment -%}
+<script>
+  window.wfClock = window.wfClock || (function () {
+    var KEY = 'wf-site-ms';
+    var FLOOR = 3000;
+
+    var carried = 0;
+    try { carried = parseInt(window.sessionStorage.getItem(KEY), 10) || 0; } catch (e) {}
+
+    var banked = 0;
+    var since = document.visibilityState === 'hidden' ? null : Date.now();
+
+    var onPage = function () {
+      return banked + (since === null ? 0 : Date.now() - since);
+    };
+    var total = function () { return carried + onPage(); };
+    var save = function () {
+      try { window.sessionStorage.setItem(KEY, String(total())); } catch (e) {}
+    };
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') {
+        if (since !== null) { banked += Date.now() - since; since = null; }
+        save();
+      } else if (since === null) {
+        since = Date.now();
+      }
+    });
+
+    /* pagehide fires on a phone where unload does not, including the swipe back
+       out of an in app browser, which is how most of this traffic leaves. */
+    window.addEventListener('pagehide', save);
+    window.setInterval(save, 5000);
+
+    return {
+      total: total,
+      /* Polled rather than scheduled, because a single long timeout would keep
+         running while the tab is hidden and fire on time that was never spent. */
+      after: function (ms, done) {
+        var tick = window.setInterval(function () {
+          if (total() < ms || onPage() < FLOOR) return;
+          window.clearInterval(tick);
+          done();
+        }, 500);
+      }
+    };
+  })();
+</script>

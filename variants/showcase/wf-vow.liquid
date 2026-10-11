@@ -133,6 +133,8 @@
     </form>
   </dialog>
 
+  {% render 'wf-clock' %}
+
   <script>
     (function () {
       var d = document.getElementById('wf-vow-{{ section.id }}');
@@ -174,14 +176,24 @@
         if (event.target === d) d.close('close');
       });
 
-      window.setTimeout(function () {
+      var open = function () {
         /* One modal per page view. wf-optin sets the same flag, so a template
            carrying both never stacks the reader two deep. */
         if (window.__wfModalOpen || d.open) return;
         try { d.showModal(); } catch (e) { return; }
         window.__wfModalOpen = true;
         if (store) { try { store.setItem(key, String(Date.now())); } catch (e) {} }
-      }, {{ section.settings.pop_delay | times: 1000 }});
+      };
+
+      var wait = {{ section.settings.pop_delay | times: 1000 }};
+      if (window.wfClock) {
+        window.wfClock.after(wait, open);
+      } else {
+        /* The clock snippet failed to define itself. Falling back to this
+           page's own timer keeps the window working, just counted per page
+           rather than across the visit. */
+        window.setTimeout(open, wait);
+      }
     })();
   </script>
 
@@ -218,11 +230,12 @@
       "type": "range",
       "id": "pop_delay",
       "label": "השהיה לפני הפתיחה",
+      "info": "נספר על פני כל הביקור באתר ולא בעמוד אחד, וזמן שבו הלשונית מוסתרת לא נספר.",
       "unit": "שנ",
       "min": 0,
-      "max": 10,
-      "step": 1,
-      "default": 3
+      "max": 120,
+      "step": 5,
+      "default": 40
     },
     {
       "type": "select",
