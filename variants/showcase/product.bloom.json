@@ -62,6 +62,18 @@
       "block_order": ["t1", "t2", "t3", "t4"],
       "settings": {}
     },
+    "reviews": {
+      "type": "wf-reviews",
+      "settings": {
+        "heading": "מה אומרים מי שכבר קיבלו את בלום",
+        "count_word": "ביקורות",
+        "out_of": "מתוך 5 כוכבים",
+        "more_label": "להציג את שאר הביקורות",
+        "fold": 6,
+        "band": "page",
+        "schema_data": true
+      }
+    },
     "shots": {
       "type": "wf-pdp-shots",
       "settings": {
@@ -129,5 +141,5 @@
       }
     }
   },
-  "order": ["vow", "main", "kit", "trust", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
+  "order": ["vow", "main", "kit", "trust", "reviews", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
 }
