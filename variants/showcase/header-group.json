@@ -34,7 +34,7 @@
         "announcement_pl2": {
           "type": "_announcement",
           "settings": {
-            "text": "ישירות מהיצרן, בלי מתווכים",
+            "text": "תמיכה בעברית, לפני הקנייה ואחריה",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
             "weight": "700",
