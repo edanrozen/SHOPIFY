@@ -266,36 +266,92 @@
         </ul>
       {%- endif -%}
 
-      <div class="wf-buybox">
-        <p class="wf-pdp__price">
-          {{ product.price | money }}
-          {%- if product.compare_at_price > product.price -%}
-            <s class="wf-pdp__was">{{ product.compare_at_price | money }}</s>
+      {%- comment -%}
+        The picker and the buy box share one form, which is the whole trick.
+
+        Each swatch is a radio named "id" carrying a variant id, so the
+        selected radio *is* the value the cart receives. No script computes
+        it, no hidden field has to be kept in step, and the form posts the
+        right variant with JavaScript switched off. The hidden input survives
+        only for a product that has no options to choose between.
+
+        A variant with a picture gets the picture. One without gets its name
+        in a pill, so the row is useful the day the options are created and
+        upgrades by itself the day the photographs are assigned, with nothing
+        here to change in between.
+
+        Sold-out variants stay in the row, disabled and struck through,
+        because a colour that silently disappears reads as a page that is
+        broken rather than as a colour that is gone.
+      {%- endcomment -%}
+      {%- form 'product', product, class: 'wf-pdp__form' -%}
+        {%- unless product.has_only_default_variant -%}
+          <fieldset class="wf-sw">
+            <legend class="wf-sw__legend">{{ section.settings.swatch_label }}</legend>
+            <div class="wf-sw__row">
+              {%- for v in product.variants -%}
+                {%- assign checked = false -%}
+                {%- if v.id == product.selected_or_first_available_variant.id -%}
+                  {%- assign checked = true -%}
+                {%- endif -%}
+                <label class="wf-sw__i{% unless v.available %} wf-sw__i--out{% endunless %}">
+                  <input
+                    class="wf-sw__in"
+                    type="radio"
+                    name="id"
+                    value="{{ v.id }}"
+                    {% if checked %}checked{% endif %}
+                    {% unless v.available %}disabled{% endunless %}
+                  >
+                  {%- if v.image -%}
+                    <img
+                      class="wf-sw__img"
+                      src="{{ v.image | image_url: width: 220 }}"
+                      width="88"
+                      height="88"
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  {%- endif -%}
+                  <span class="wf-sw__t">{{ v.title }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- endunless -%}
+
+        <div class="wf-buybox">
+          <p class="wf-pdp__price">
+            {{ product.price | money }}
+            {%- if product.compare_at_price > product.price -%}
+              <s class="wf-pdp__was">{{ product.compare_at_price | money }}</s>
+            {%- endif -%}
+          </p>
+
+          {%- comment -%}
+            Unconditional, because the rate behind it is. Shipping is free on
+            every order in the Israel zone at any cart total, so this line is
+            not a claim about this product clearing a threshold, it is a fact
+            about the shop. It sits inside the buy box rather than above it,
+            so it is read in the same glance as the price.
+          {%- endcomment -%}
+          {%- if section.settings.price_note != blank -%}
+            <p class="wf-pdp__ship">{{ section.settings.price_note }}</p>
           {%- endif -%}
-        </p>
 
-        {%- comment -%}
-          Unconditional, because the rate behind it is. Shipping is free on
-          every order in the Israel zone at any cart total, so this line is not
-          a claim about this product clearing a threshold, it is a fact about
-          the shop. It sits inside the buy box rather than above it, so it is
-          read in the same glance as the price.
-        {%- endcomment -%}
-        {%- if section.settings.price_note != blank -%}
-          <p class="wf-pdp__ship">{{ section.settings.price_note }}</p>
-        {%- endif -%}
-
-        {%- form 'product', product, class: 'wf-pdp__form' -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- if product.has_only_default_variant -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- endif -%}
           <button type="submit" class="wf-btn wf-pdp__submit" {% unless product.available %}disabled{% endunless %}>
             {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
           </button>
-        {%- endform -%}
 
-        {%- if section.settings.note != blank -%}
-          <p class="wf-pdp__note">{{ section.settings.note }}</p>
-        {%- endif -%}
-      </div>
+          {%- if section.settings.note != blank -%}
+            <p class="wf-pdp__note">{{ section.settings.note }}</p>
+          {%- endif -%}
+        </div>
+      {%- endform -%}
 
       {%- if product.description != blank -%}
         <div class="wf-pdp__rte">{{ product.description }}</div>
@@ -406,6 +462,57 @@
     text-wrap: balance;
   }
 
+  /* The picker. The input is hidden from sight but not from the keyboard or
+     from a screen reader, so the card is selected by tabbing and by space in
+     exactly the way a radio is, and :has on the label carries the selected
+     ring. Chosen state is a 2px accent ring rather than a colour change,
+     because the cards carry photographs and a tint over a photograph of a
+     purple frame tells the reader nothing. */
+  .wf-sw { border: 0; margin: 20px 0 0; padding: 0; }
+  .wf-sw__legend {
+    font-family: var(--pl-sans);
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--pl-ink);
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  .wf-sw__row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .wf-sw__i {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    min-width: 72px;
+    border: 1px solid var(--pl-line);
+    border-radius: 12px;
+    background: var(--pl-white);
+    cursor: pointer;
+  }
+  .wf-sw__in {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .wf-sw__i:has(.wf-sw__in:checked) {
+    border-color: var(--wf-accent);
+    box-shadow: inset 0 0 0 1px var(--wf-accent);
+  }
+  .wf-sw__i:has(.wf-sw__in:focus-visible) { outline: 2px solid var(--pl-brown); outline-offset: 2px; }
+  .wf-sw__img { width: 88px; height: 88px; object-fit: cover; border-radius: 8px; display: block; }
+  .wf-sw__t { font-family: var(--pl-sans); font-size: .84rem; font-weight: 700; color: var(--pl-ink); }
+  /* Struck through rather than removed: a colour that silently disappears
+     reads as a broken page, not as a colour that is gone. */
+  .wf-sw__i--out { opacity: .55; cursor: not-allowed; }
+  .wf-sw__i--out .wf-sw__t { text-decoration: line-through; }
+  .wf-sw__i--out .wf-sw__in { cursor: not-allowed; }
+
   .wf-buybar__img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; flex: none; }
   .wf-buybar__meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .wf-buybar__name {
@@ -428,6 +535,7 @@
     { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
     { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם · 14 יום לביטול עסקה" },
     { "type": "text", "id": "price_note", "label": "שורה ליד המחיר", "default": "משלוח חינם, בכל הזמנה" },
+    { "type": "text", "id": "swatch_label", "label": "כותרת בורר הצבעים", "default": "בחרו צבע" },
     { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true },
     { "type": "select", "id": "points_style", "label": "צורת נקודות המכירה", "default": "check",
       "options": [
