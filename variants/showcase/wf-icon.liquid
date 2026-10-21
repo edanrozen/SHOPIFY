@@ -15,11 +15,19 @@
 <svg class="wf-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
   {%- case name -%}
     {%- when 'paw' -%}
-      <circle cx="6.4" cy="10" r="2.1" fill="currentColor"/>
-      <circle cx="10.4" cy="7.3" r="2.2" fill="currentColor"/>
-      <circle cx="15" cy="7.8" r="2.1" fill="currentColor"/>
-      <circle cx="18.4" cy="11.4" r="1.9" fill="currentColor"/>
-      <path d="M12.3 12.2c2.8 0 5 2.2 5 4.6 0 1.6-1.2 2.6-2.7 2.6-1 0-1.6-.4-2.3-.4s-1.3.4-2.3.4c-1.5 0-2.7-1-2.7-2.6 0-2.4 2.2-4.6 5-4.6z" fill="currentColor"/>
+      {%- comment -%}
+        The fill is an inline style, not a fill attribute. This is the one
+        solid glyph in the set, and a presentation attribute loses to any
+        stylesheet rule: wf-trust declares `fill: none` on every svg inside
+        its icon slot, which would blank the paw entirely while the stroked
+        glyphs beside it carried on drawing. An inline style outranks the
+        selector, so the paw survives wherever it is placed.
+      {%- endcomment -%}
+      <circle cx="6.4" cy="10" r="2.1" style="fill:currentColor;stroke:none"/>
+      <circle cx="10.4" cy="7.3" r="2.2" style="fill:currentColor;stroke:none"/>
+      <circle cx="15" cy="7.8" r="2.1" style="fill:currentColor;stroke:none"/>
+      <circle cx="18.4" cy="11.4" r="1.9" style="fill:currentColor;stroke:none"/>
+      <path d="M12.3 12.2c2.8 0 5 2.2 5 4.6 0 1.6-1.2 2.6-2.7 2.6-1 0-1.6-.4-2.3-.4s-1.3.4-2.3.4c-1.5 0-2.7-1-2.7-2.6 0-2.4 2.2-4.6 5-4.6z" style="fill:currentColor;stroke:none"/>
     {%- when 'shield' -%}
       <path d="M12 3l7 2.8v5.4c0 4.3-2.9 7.9-7 9.3-4.1-1.4-7-5-7-9.3V5.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
       <path d="M9 11.9l2.1 2.2 3.9-4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -30,10 +38,18 @@
     {%- when 'heart' -%}
       <path d="M12 20.3C9.8 18.8 4.6 15.1 4.6 11a4 4 0 017.4-2.2A4 4 0 0119.4 11c0 4.1-5.2 7.8-7.4 9.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
     {%- when 'truck' -%}
-      <path d="M2.8 6.6h10.4v9.2H2.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-      <path d="M13.2 9.8h3.6l2.9 3.3v2.7h-6.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-      <circle cx="7.2" cy="17.6" r="1.8" stroke="currentColor" stroke-width="1.6"/>
-      <circle cx="16.4" cy="17.6" r="1.8" stroke="currentColor" stroke-width="1.6"/>
+      {%- comment -%}
+        Mirrored in the path data rather than in CSS, because the shop is
+        Hebrew and a cab drawn on the right drives backwards on a page that
+        reads right to left. Doing it here means no stylesheet has to be
+        present for the icon to face the right way.
+      {%- endcomment -%}
+      <g transform="translate(24,0) scale(-1,1)">
+        <path d="M2.8 6.6h10.4v9.2H2.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M13.2 9.8h3.6l2.9 3.3v2.7h-6.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <circle cx="7.2" cy="17.6" r="1.8" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="16.4" cy="17.6" r="1.8" stroke="currentColor" stroke-width="1.6"/>
+      </g>
     {%- when 'ruler' -%}
       <path d="M3.6 14.2L14.2 3.6l6.2 6.2L9.8 20.4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
       <path d="M11.4 6.4l1.9 1.9M8.8 9l1.9 1.9M6.2 11.6l1.9 1.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>

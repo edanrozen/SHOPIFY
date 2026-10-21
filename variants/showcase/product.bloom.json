@@ -54,10 +54,10 @@
     "trust": {
       "type": "wf-trust",
       "blocks": {
-        "t1": { "type": "fact", "settings": { "icon": "box", "title": "משלוח חינם לכל הארץ", "text": "בכל הזמנה, בלי סכום מינימום" } },
-        "t2": { "type": "fact", "settings": { "icon": "return", "title": "14 יום לביטול עסקה", "text": "לפי חוק הגנת הצרכן, מיום קבלת המוצר" } },
-        "t3": { "type": "fact", "settings": { "icon": "chat", "title": "תמיכה בעברית", "text": "שאלה לפני קנייה או אחריה" } },
-        "t4": { "type": "fact", "settings": { "icon": "tag", "title": "ישירות מהיצרן", "text": "בלי יבואן ובלי מתווך" } }
+        "t1": { "type": "fact", "settings": { "icon": "truck", "title": "משלוח חינם", "text": "בכל הזמנה, בלי סכום מינימום" } },
+        "t2": { "type": "fact", "settings": { "icon": "tag", "title": "תשלום מאובטח", "text": "כל התשלומים עוברים דרך שופיי" } },
+        "t3": { "type": "fact", "settings": { "icon": "return", "title": "14 יום לביטול עסקה", "text": "לפי חוק הגנת הצרכן, מיום קבלת המוצר" } },
+        "t4": { "type": "fact", "settings": { "icon": "heart", "title": "מעל 1,000 לקוחות מרוצים", "text": "שקנו מאיתנו עד היום" } }
       },
       "block_order": ["t1", "t2", "t3", "t4"],
       "settings": {}
