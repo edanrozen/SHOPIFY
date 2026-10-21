@@ -187,10 +187,30 @@
         rewrites its highlights never silently keeps an icon that no longer
         matches.
       {%- endcomment -%}
-      {%- if section.settings.points_above and highlights.size > 0 -%}
+      {%- liquid
+        comment
+          The tiles carry their own four labels rather than reusing the
+          highlights. Those are sentences, and a sentence in an 85 pixel tile
+          on a phone runs to three cramped lines: rendered against the current
+          four it is worse than the tick list it replaces. A tile wants two or
+          three words, which is a different piece of copy about the same
+          product, not the same piece of copy in a different shape.
+
+          The labels fall back to the highlights when none are set, so a
+          product switched to tiles before anyone writes them shows something
+          rather than an empty row.
+        endcomment
+        assign tiles = ''
+        if section.settings.tile_1 != blank
+          assign tiles = section.settings.tile_1 | append: '|' | append: section.settings.tile_2 | append: '|' | append: section.settings.tile_3 | append: '|' | append: section.settings.tile_4 | split: '|'
+        else
+          assign tiles = highlights
+        endif
+      -%}
+      {%- if section.settings.points_above and tiles.size > 0 -%}
         {%- if section.settings.points_style == 'tiles' -%}
           <ul class="wf-tiles" role="list">
-            {%- for line in highlights -%}
+            {%- for line in tiles -%}
               {%- liquid
                 case forloop.index
                   when 1
@@ -414,7 +434,11 @@
         { "value": "check", "label": "רשימת וי" },
         { "value": "tiles", "label": "ארבעה אייקונים בשורה" }
       ] },
-    { "type": "header", "content": "האייקונים, לפי סדר נקודות המכירה" },
+    { "type": "header", "content": "ארבעת האריחים" },
+    { "type": "text", "id": "tile_1", "label": "תווית ראשונה" },
+    { "type": "text", "id": "tile_2", "label": "תווית שנייה" },
+    { "type": "text", "id": "tile_3", "label": "תווית שלישית" },
+    { "type": "text", "id": "tile_4", "label": "תווית רביעית" },
     { "type": "select", "id": "icon_1", "label": "אייקון ראשון", "default": "paw",
       "options": [
         { "value": "paw", "label": "כפה" },
