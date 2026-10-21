@@ -68,7 +68,7 @@
       "type": "wf-trust",
       "blocks": {
         "t1": { "type": "fact", "settings": { "icon": "truck", "title": "משלוח חינם", "text": "בכל הזמנה, בלי סכום מינימום" } },
-        "t2": { "type": "fact", "settings": { "icon": "tag", "title": "תשלום מאובטח", "text": "כל התשלומים עוברים דרך שופיי" } },
+        "t2": { "type": "fact", "settings": { "icon": "tag", "title": "תשלום מאובטח", "text": "" } },
         "t3": { "type": "fact", "settings": { "icon": "return", "title": "14 יום לביטול עסקה", "text": "לפי חוק הגנת הצרכן, מיום קבלת המוצר" } },
         "t4": { "type": "fact", "settings": { "icon": "heart", "title": "מעל 1,000 לקוחות מרוצים", "text": "שקנו מאיתנו עד היום" } }
       },

@@ -33,7 +33,14 @@
             {%- endcase -%}
           </span>
           <span class="wf-trust__title">{{ block.settings.title }}</span>
-          <span class="wf-trust__text">{{ block.settings.text }}</span>
+          {%- comment -%}
+            A fact with no second line gets no second element. The icon spans
+            two grid rows, and an empty span would keep that second row in the
+            layout, leaving one badge taller than the three beside it.
+          {%- endcomment -%}
+          {%- if block.settings.text != blank -%}
+            <span class="wf-trust__text">{{ block.settings.text }}</span>
+          {%- endif -%}
         </li>
       {%- endfor -%}
     </ul>
