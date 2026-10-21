@@ -1,0 +1,54 @@
+{%- doc -%}
+  The star rating beside the product title.
+
+  Split out of wf-product so that section fits inside the Admin API's 16,384
+  character limit for one GraphQL document. Nothing else changed.
+
+  @param {object} product - the product whose custom.reviews is read
+  @param {object} settings - the section settings, for the labels and the link
+{%- enddoc -%}
+
+{%- assign reviews = product.metafields.custom.reviews.value -%}
+{%- comment -%}
+  The rating, read from the same array the reviews section reads.
+
+  There is no stored average and no stored count anywhere: both are
+  computed here from custom.reviews on every render, exactly as the
+  reviews section computes them. That is the only arrangement in which
+  the number beside the title and the number above the cards cannot
+  drift apart, and drift is what a hand-typed rating always does.
+
+  The star path is declared again here under its own id rather than
+  reused from the reviews section. A <use> pointing at a symbol that
+  appears later in the document resolves eventually, but not reliably
+  at first paint, and this sits above the fold.
+{%- endcomment -%}
+{%- if reviews.size > 0 -%}
+  {%- liquid
+    assign rv_total = 0
+    for r in reviews
+      assign rv_total = rv_total | plus: r.rating
+    endfor
+    assign rv_avg = rv_total | times: 1.0 | divided_by: reviews.size
+    assign rv_label = rv_avg | round: 1
+    assign rv_pct = rv_avg | times: 20 | round
+  -%}
+  <svg class="wf-pdp__stardef" aria-hidden="true" focusable="false">
+    <symbol id="wf-star-p" viewBox="0 0 20 19">
+      <path d="M10 0l2.9 6.2 6.6.9-4.8 4.8 1.2 6.8L10 15.5 4.1 18.7l1.2-6.8L.5 7.1l6.6-.9z"/>
+    </symbol>
+  </svg>
+  <a class="wf-rate" href="{{ settings.reviews_anchor }}">
+    <span class="wf-rate__stars" role="img" aria-label="{{ rv_label }} {{ settings.out_of }}">
+      <span class="wf-rate__row wf-rate__row--track" aria-hidden="true">
+        {%- for i in (1..5) -%}<svg class="wf-rate__s"><use href="#wf-star-p"/></svg>{%- endfor -%}
+      </span>
+      <span class="wf-rate__row wf-rate__row--fill" style="width: {{ rv_pct }}%" aria-hidden="true">
+        {%- for i in (1..5) -%}<svg class="wf-rate__s"><use href="#wf-star-p"/></svg>{%- endfor -%}
+      </span>
+    </span>
+    <span class="wf-rate__n">({{ reviews.size }})</span>
+    <span class="wf-rate__t">{{ settings.reviews_label }}</span>
+  </a>
+{%- endif -%}
+
