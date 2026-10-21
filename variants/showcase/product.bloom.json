@@ -87,6 +87,21 @@
         "schema_data": true
       }
     },
+    "sizes": {
+      "type": "wf-sizes",
+      "blocks": {
+        "s1": { "type": "size", "settings": { "label": "כלבים קטנים" } },
+        "s2": { "type": "size", "settings": { "label": "כלבים בינוניים" } },
+        "s3": { "type": "size", "settings": { "label": "כלבים גדולים עד 25 קילו" } },
+        "s4": { "type": "size", "settings": { "label": "חתולים" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "heading": "מתאים לכלבים ולחתולים",
+        "note": "המשקל המקסימלי הוא 25 קילוגרם. אם החיה שלכם על הגבול, כתבו לנו לפני הקנייה.",
+        "band": "white"
+      }
+    },
     "shots": {
       "type": "wf-pdp-shots",
       "settings": {
@@ -154,5 +169,5 @@
       }
     }
   },
-  "order": ["vow", "main", "kit", "trust", "reviews", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
+  "order": ["vow", "main", "kit", "trust", "reviews", "sizes", "shots", "story", "why", "details", "how", "versus", "facts", "related"]
 }

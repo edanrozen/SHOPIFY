@@ -128,3 +128,59 @@
   text-overflow: ellipsis;
 }
 .wf-buybar__btn { margin-inline-start: auto; }
+
+/* Four across at every width, because the row is read as one statement about
+   who the product is for and a 2 by 2 block reads as two. At 320px that is
+   about 66px of picture each, which is enough for an animal shot full body on
+   white; the label is allowed two lines under it. */
+.wf-sizes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  gap: clamp(8px, 2vw, 20px);
+}
+/* Subgrid, because the labels are not the same height: "large dogs up to
+   25kg" runs to two lines where "cats" runs to one. Aligning the items
+   instead of their rows pushed that whole column up and left one animal
+   standing higher than the other three, with its feet out of line. The two
+   rows now span every column, so the pictures share a baseline whatever the
+   labels do. */
+.wf-size {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
+  justify-items: center;
+  gap: 8px;
+}
+/* contain, not cover: these are cut-out animals on white and cropping one
+   would cut its paws off. The white of the image and the white of the band
+   are the same colour, so the box edge never shows. */
+.wf-size__img {
+  align-self: end;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+}
+.wf-size__t {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--pl-ink);
+  text-align: center;
+  text-wrap: balance;
+}
+.wf-sizes__note {
+  font-family: var(--pl-sans);
+  font-size: .86rem;
+  line-height: 1.5;
+  color: var(--pl-taupe);
+  text-align: center;
+  margin: clamp(16px, 2.5vw, 24px) auto 0;
+  max-width: 52ch;
+}
