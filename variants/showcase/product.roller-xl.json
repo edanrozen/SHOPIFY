@@ -55,7 +55,7 @@
     "shots": {
       "type": "wf-pdp-shots",
       "settings": {
-        "heading": "מקרוב",
+        "heading": "🔍 מקרוב",
         "layout": "one",
         "skip": 1,
         "limit": 2,
@@ -65,7 +65,7 @@
     "story": {
       "type": "wf-pdp-story",
       "settings": {
-        "heading": "המצב היום, והמצב אחרי",
+        "heading": "✨ המצב היום, והמצב אחרי",
         "before_label": "לפני",
         "after_label": "אחרי"
       }
@@ -73,13 +73,13 @@
     "why": {
       "type": "wf-pdp-why",
       "settings": {
-        "heading": "סיבות שזה עובד"
+        "heading": "💡 סיבות שזה עובד"
       }
     },
     "details": {
       "type": "wf-pdp-shots",
       "settings": {
-        "heading": "עוד זוויות",
+        "heading": "📸 עוד זוויות",
         "layout": "two",
         "ratio": "1 / 1",
         "skip": 3,
@@ -90,13 +90,13 @@
     "how": {
       "type": "wf-pdp-how",
       "settings": {
-        "heading": "איך משתמשים בזה"
+        "heading": "📖 איך משתמשים בזה"
       }
     },
     "versus": {
       "type": "wf-pdp-versus",
       "settings": {
-        "heading": "מה שחושבים, ומה שקורה בפועל",
+        "heading": "🤔 מה שחושבים, ומה שקורה בפועל",
         "myth_label": "מה שחושבים",
         "real_label": "מה שקורה בפועל"
       }
@@ -104,15 +104,15 @@
     "facts": {
       "type": "wf-pdp-faq",
       "settings": {
-        "specs_heading": "המפרט",
+        "specs_heading": "📋 המפרט",
         "for_label": "מתאים ל",
-        "faq_heading": "שאלות שחוזרות"
+        "faq_heading": "❓ שאלות שחוזרות"
       }
     },
     "related": {
       "type": "wf-grid",
       "settings": {
-        "heading": "משלימים את הערכה",
+        "heading": "🧺 משלימים את הערכה",
         "text": "כלי אחד פותר בעיה אחת. שניים או שלושה יחד הופכים את הבית למשהו אחר.",
         "collection": "all-products",
         "limit": 8,

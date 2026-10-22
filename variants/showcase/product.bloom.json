@@ -3,14 +3,14 @@
     "vow": {
       "type": "wf-vow",
       "blocks": {
-        "p1": { "type": "point", "settings": { "title": "30 יום לנסות", "text": "מהיום שהחבילה מגיעה אליכם" } },
-        "p2": { "type": "point", "settings": { "title": "החזר מלא", "text": "בלי דמי ביטול ובלי אחוזים" } },
-        "p3": { "type": "point", "settings": { "title": "משלוח חינם", "text": "בכל הזמנה, בלי סכום מינימום" } }
+        "p1": { "type": "point", "settings": { "title": "📅 30 יום לנסות", "text": "מהיום שהחבילה מגיעה אליכם" } },
+        "p2": { "type": "point", "settings": { "title": "💰 החזר מלא", "text": "בלי דמי ביטול ובלי אחוזים" } },
+        "p3": { "type": "point", "settings": { "title": "🚚 משלוח חינם", "text": "בכל הזמנה, בלי סכום מינימום" } }
       },
       "block_order": ["p1", "p2", "p3"],
       "settings": {
         "mode": "pop",
-        "eyebrow": "אחריות 30 יום על בלום",
+        "eyebrow": "🛡️ אחריות 30 יום על בלום",
         "heading": "לא ראיתם תוצאות תוך 30 יום, תקבלו החזר מלא",
         "body": "קחו את בלום הביתה והשתמשו בה חודש שלם. אם החיה לא נשארת במקום ולא ראיתם שינוי בטיפוח, כתבו לנו ותקבלו את הכסף בחזרה.",
         "condition": "ההחזר המלא בתוקף בתנאי שהמוצר לא נפגע. בלאי שנובע משימוש רגיל אינו נזק.",
@@ -41,9 +41,9 @@
         "reviews_label": "ביקורות לקוחות",
         "out_of": "מתוך 5 כוכבים",
         "reviews_anchor": "#shopify-section-reviews",
-        "perk_1": "30 יום אחריות, החזר מלא",
-        "perk_2": "תמיכה בעברית",
-        "perk_3": "משלוח חינם לכל הארץ"
+        "perk_1": "🛡️ 30 יום אחריות, החזר מלא",
+        "perk_2": "💬 תמיכה בעברית",
+        "perk_3": "🚚 משלוח חינם לכל הארץ"
       }
     },
     "kit": {
@@ -55,8 +55,8 @@
       },
       "block_order": ["k1", "k2", "k3"],
       "settings": {
-        "eyebrow": "הערכה",
-        "heading": "בלום לבד, או בלום עם הכלים שעובדים עליה",
+        "eyebrow": "🎁 הערכה",
+        "heading": "🎁 בלום לבד, או בלום עם הכלים שעובדים עליה",
         "text": "המסרקים האלה דורשים שהחיה תישאר במקום, ולכן הם שווים הרבה יותר עם העמדה מאשר בלעדיה. מי שלוקח אותם יחד מקבל אותם בהנחה.",
         "legend": "מה לקחת",
         "cta_label": "להוסיף לסל",
@@ -78,7 +78,7 @@
     "reviews": {
       "type": "wf-reviews",
       "settings": {
-        "heading": "מה אומרים מי שכבר קיבלו את בלום",
+        "heading": "⭐ מה אומרים מי שכבר קיבלו את בלום",
         "count_word": "ביקורות",
         "out_of": "מתוך 5 כוכבים",
         "more_label": "להציג את שאר הביקורות",
@@ -97,7 +97,7 @@
       },
       "block_order": ["s1", "s2", "s3", "s4"],
       "settings": {
-        "heading": "מתאים לכלבים ולחתולים",
+        "heading": "🐕 מתאים לכלבים ולחתולים",
         "note": "המשקל המקסימלי הוא 25 קילוגרם. אם החיה שלכם על הגבול, כתבו לנו לפני הקנייה.",
         "band": "white"
       }
@@ -105,7 +105,7 @@
     "shots": {
       "type": "wf-pdp-shots",
       "settings": {
-        "heading": "בלום מקרוב",
+        "heading": "🔍 בלום מקרוב",
         "layout": "one",
         "skip": 1,
         "limit": 2,
@@ -115,19 +115,19 @@
     "story": {
       "type": "wf-pdp-story",
       "settings": {
-        "heading": "המצב היום, והמצב אחרי",
+        "heading": "✨ המצב היום, והמצב אחרי",
         "before_label": "לפני",
         "after_label": "אחרי"
       }
     },
     "why": {
       "type": "wf-pdp-why",
-      "settings": { "heading": "סיבות שזה עובד" }
+      "settings": { "heading": "💡 סיבות שזה עובד" }
     },
     "details": {
       "type": "wf-pdp-shots",
       "settings": {
-        "heading": "עוד זוויות",
+        "heading": "📸 עוד זוויות",
         "layout": "two",
         "ratio": "2 / 3",
         "skip": 3,
@@ -138,7 +138,7 @@
     "how": {
       "type": "wf-pdp-how",
       "settings": {
-        "heading": "איך משתמשים בזה",
+        "heading": "📖 איך משתמשים בזה",
         "demo_caption": "ארבע הרגליים עוברות דרך הפתחים והכפות נשארות באוויר. השימוש הוא תמיד בהשגחה מלאה.",
         "autoplay": true
       }
@@ -146,7 +146,7 @@
     "versus": {
       "type": "wf-pdp-versus",
       "settings": {
-        "heading": "מה שחושבים, ומה שקורה בפועל",
+        "heading": "🤔 מה שחושבים, ומה שקורה בפועל",
         "myth_label": "מה שחושבים",
         "real_label": "מה שקורה בפועל"
       }
@@ -154,15 +154,15 @@
     "facts": {
       "type": "wf-pdp-faq",
       "settings": {
-        "specs_heading": "המפרט",
+        "specs_heading": "📋 המפרט",
         "for_label": "מתאים ל",
-        "faq_heading": "שאלות שחוזרות"
+        "faq_heading": "❓ שאלות שחוזרות"
       }
     },
     "related": {
       "type": "wf-grid",
       "settings": {
-        "heading": "משלימים את הערכה",
+        "heading": "🧺 משלימים את הערכה",
         "text": "כלי אחד פותר בעיה אחת. שניים או שלושה יחד הופכים את הבית למשהו אחר.",
         "collection": "all-products",
         "exclude": "bloom-grooming-station",
