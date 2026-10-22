@@ -1,0 +1,31 @@
+{%- doc -%}
+  The problem, and the sentence that answers it.
+
+  Two lines, always in that order, because a product page that opens with what
+  the thing is asks the reader to work out why they should care. A page that
+  opens with the reader's own problem has already earned the next sentence.
+
+  Both lines come from the product, so every page gets its own pair and none of
+  it is written into the theme. A product missing either line renders nothing
+  rather than half a pair, which would read as a mistake.
+
+  @param {product} product
+{%- enddoc -%}
+
+{%- liquid
+  assign ps_problem = product.metafields.custom.problem_line.value
+  assign ps_solution = product.metafields.custom.solution_line.value
+-%}
+
+{%- if ps_problem != blank and ps_solution != blank -%}
+  <div class="pl-ps">
+    <p class="pl-ps__line pl-ps__line--problem">
+      <span class="pl-ps__tag">הבעיה</span>
+      <span class="pl-ps__text">{{ ps_problem }}</span>
+    </p>
+    <p class="pl-ps__line pl-ps__line--solution">
+      <span class="pl-ps__tag">הפתרון</span>
+      <span class="pl-ps__text">{{ ps_solution }}</span>
+    </p>
+  </div>
+{%- endif -%}

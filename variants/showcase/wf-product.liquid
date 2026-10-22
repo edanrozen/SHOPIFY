@@ -1,0 +1,354 @@
+{%- doc -%}
+  The product page, in the same posture as the homepage.
+
+  Gallery on one side, and on the other the five things a decision is made
+  with: the name, the problem the product answers, the price, one button and
+  one line about delivery. The problem and answer pair comes from the product's
+  own metafields, so nothing here is written by the section.
+
+  The price, the button and the shipping line sit inside one bordered panel,
+  the way Chewy separates what a thing is from buying it. On a phone that panel
+  is what you land on after the gallery.
+
+  The thumbnail strip is one swipeable row rather than two wrapped ones. Eight
+  thumbnails on two rows cost about 90px of height directly above the price,
+  which is the last thing worth pushing down a phone screen.
+
+  Below 900px the buy box is a screen and a bit under the fold, so the page also
+  carries a fixed bar with the price and the same button. It is the second form
+  on the page and posts the same variant; nothing about it is conditional on
+  JavaScript.
+{%- enddoc -%}
+
+{%- liquid
+  assign media = product.media | where: 'media_type', 'image'
+  assign hero = product.featured_media
+  if hero == blank and media.size > 0
+    assign hero = media.first
+  endif
+  assign problem = product.metafields.custom.problem_line.value
+  assign solution = product.metafields.custom.solution_line.value
+  assign highlights = product.metafields.custom.highlights.value
+  assign spotlight = product.metafields.custom.spotlight.value
+
+  assign perk_n = 0
+  if section.settings.perk_1 != blank
+    assign perk_n = perk_n | plus: 1
+  endif
+  if section.settings.perk_2 != blank
+    assign perk_n = perk_n | plus: 1
+  endif
+  if section.settings.perk_3 != blank
+    assign perk_n = perk_n | plus: 1
+  endif
+-%}
+
+{%- comment -%}
+  The perks strip, the first thing under the header on a product page.
+
+  It lives inside this section rather than in a section of its own for one
+  reason: the catalogue has ten product templates, and three text settings with
+  schema defaults reach all ten without editing a single template file. A
+  separate section would have meant adding a block to each of the ten and
+  remembering the tenth.
+
+  The defaults are therefore what is true of every product in the shop. The
+  30 day guarantee is not: it covers Bloom alone, so Bloom's template overrides
+  these three and no other page claims it.
+
+  Three settings written out rather than a loop over an array built from them,
+  because building that array starts from splitting an empty string and the two
+  Liquid engines in play do not have to agree on whether that is an empty array
+  or an array holding one empty string. Three ifs cannot be wrong.
+{%- endcomment -%}
+{%- if perk_n > 0 -%}
+  <section class="wf-perks">
+    <ul class="wf-perks__list" role="list" style="--wf-perks-n: {{ perk_n }};">
+      {%- if section.settings.perk_1 != blank -%}
+        <li class="wf-perks__i">{{ section.settings.perk_1 }}</li>
+      {%- endif -%}
+      {%- if section.settings.perk_2 != blank -%}
+        <li class="wf-perks__i">{{ section.settings.perk_2 }}</li>
+      {%- endif -%}
+      {%- if section.settings.perk_3 != blank -%}
+        <li class="wf-perks__i">{{ section.settings.perk_3 }}</li>
+      {%- endif -%}
+    </ul>
+  </section>
+{%- endif -%}
+
+<div class="pl-wrap">
+  <div class="wf-pdp">
+    <div>
+      <div class="wf-pdp__stage">
+        {%- if hero != blank -%}
+          <img
+            id="wf-stage"
+            src="{{ hero | image_url: width: 1100 }}"
+            srcset="{{ hero | image_url: width: 600 }} 600w, {{ hero | image_url: width: 1100 }} 1100w"
+            sizes="(max-width: 900px) 92vw, 52vw"
+            width="{{ hero.preview_image.width }}"
+            height="{{ hero.preview_image.height }}"
+            alt="{{ hero.alt | default: product.title | escape }}"
+            fetchpriority="high"
+            decoding="async"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- if media.size > 1 -%}
+        <ul class="wf-pdp__thumbs" role="list">
+          {%- for item in media -%}
+            <li>
+              <button
+                type="button"
+                class="wf-pdp__thumb"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="תמונה {{ forloop.index }} מתוך {{ media.size }}"
+                data-src="{{ item | image_url: width: 1100 }}"
+                data-srcset="{{ item | image_url: width: 600 }} 600w, {{ item | image_url: width: 1100 }} 1100w"
+              >
+                <img src="{{ item | image_url: width: 180 }}" width="{{ item.preview_image.width }}" height="{{ item.preview_image.height }}" alt="" loading="lazy" decoding="async">
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div>
+      <h1 class="wf-pdp__title">{{ product.title }}</h1>
+
+      {%- if problem != blank -%}
+        <p class="wf-flag__problem">{{ problem }}</p>
+      {%- endif -%}
+      {%- if solution != blank -%}
+        <p class="wf-sub">{{ solution }}</p>
+      {%- endif -%}
+
+      {%- render 'wf-rating', product: product, settings: section.settings -%}
+
+      {%- comment -%}
+        The selling points sit above the buy box, not below it.
+
+        A price and a button reached before the reader knows what the thing is
+        asks for a decision that has not been earned yet. These four or five
+        lines are the shortest honest answer to "what am I buying", so they go
+        in front of the money and the long argument stays behind it. The band
+        further down no longer repeats them.
+
+        Two shapes, because one list serves two jobs. The tick list is the
+        default and reads as prose. The tiles are for a product whose points
+        are four short attributes rather than four sentences: they are scanned
+        rather than read, which is the whole reason to spend an icon on them.
+        The icon per row comes from the section settings, so a product that
+        rewrites its highlights never silently keeps an icon that no longer
+        matches.
+      {%- endcomment -%}
+      {%- liquid
+        comment
+          The tiles carry their own four labels rather than reusing the
+          highlights. Those are sentences, and a sentence in an 85 pixel tile
+          on a phone runs to three cramped lines: rendered against the current
+          four it is worse than the tick list it replaces. A tile wants two or
+          three words, which is a different piece of copy about the same
+          product, not the same piece of copy in a different shape.
+
+          The labels fall back to the highlights when none are set, so a
+          product switched to tiles before anyone writes them shows something
+          rather than an empty row.
+        endcomment
+        assign tiles = ''
+        if section.settings.tile_1 != blank
+          assign tiles = section.settings.tile_1 | append: '|' | append: section.settings.tile_2 | append: '|' | append: section.settings.tile_3 | append: '|' | append: section.settings.tile_4 | split: '|'
+        else
+          assign tiles = highlights
+        endif
+      -%}
+      {%- if section.settings.points_above and tiles.size > 0 -%}
+        {%- if section.settings.points_style == 'tiles' -%}
+          <ul class="wf-tiles" role="list">
+            {%- for line in tiles -%}
+              {%- liquid
+                case forloop.index
+                  when 1
+                    assign ic = section.settings.icon_1
+                  when 2
+                    assign ic = section.settings.icon_2
+                  when 3
+                    assign ic = section.settings.icon_3
+                  else
+                    assign ic = section.settings.icon_4
+                endcase
+              -%}
+              <li class="wf-tile">
+                <span class="wf-tile__i" aria-hidden="true">{%- render 'wf-icon', name: ic -%}</span>
+                <span class="wf-tile__t">{{ line }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- else -%}
+          <ul class="wf-points wf-points--lede" role="list">
+            {%- for line in highlights -%}
+              <li><span class="wf-points__mark" aria-hidden="true">&#10003;</span><span>{{ line }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- comment -%}
+        The three numbers, directly above the price.
+
+        custom.spotlight was written for three products and rendered nowhere.
+        It is the only place in the record that states a figure a shopper can
+        compare: a 30 centimetre head against a 12, 2.5 times the coverage,
+        zero refills. Those are the lines that separate three fur removers that
+        otherwise read as the same product at three prices, and a shopper who
+        cannot tell them apart does not pick one, they leave.
+
+        It sits immediately above the buy box for the same reason the
+        highlights do: it answers "why this one" in the glance before the
+        price, not in a band below it.
+      {%- endcomment -%}
+      {%- if spotlight.size > 0 -%}
+        <ul class="wf-spot" role="list">
+          {%- for item in spotlight -%}
+            <li class="wf-spot__i">
+              <span class="wf-spot__v">{{ item.value }}</span>
+              <span class="wf-spot__l">{{ item.label }}</span>
+              {%- if item.note != blank -%}
+                <span class="wf-spot__n">{{ item.note }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- render 'wf-buybox', product: product, settings: section.settings -%}
+
+      {%- if product.description != blank -%}
+        <div class="wf-pdp__rte">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="wf-buybar">
+  {%- comment -%}
+    The bar carries the thumbnail and the name because it is the only part of
+    the page still on screen after a long scroll, and a lone price with a
+    button is a price for something the reader has to remember.
+  {%- endcomment -%}
+  {%- if product.featured_image -%}
+    <img
+      class="wf-buybar__img"
+      src="{{ product.featured_image | image_url: width: 140 }}"
+      width="56"
+      height="56"
+      alt=""
+      loading="lazy"
+      decoding="async"
+    >
+  {%- endif -%}
+  <span class="wf-buybar__meta">
+    <span class="wf-buybar__name">{{ product.title | truncate: 28 }}</span>
+    <span class="wf-buybar__price">{{ product.price | money }}</span>
+  </span>
+  {%- form 'product', product, class: 'wf-buybar__form' -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" class="wf-btn wf-buybar__btn" {% unless product.available %}disabled{% endunless %}>
+      {%- if product.available -%}{{ section.settings.atc_label }}{%- else -%}אזל מהמלאי{%- endif -%}
+    </button>
+  {%- endform -%}
+</div>
+<div class="wf-buybar__spacer" aria-hidden="true"></div>
+
+{%- if media.size > 1 -%}
+  <script>
+    (function () {
+      var stage = document.getElementById('wf-stage');
+      var thumbs = document.querySelectorAll('.wf-pdp__thumb');
+      if (!stage || !thumbs.length) return;
+      thumbs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          stage.srcset = btn.dataset.srcset;
+          stage.src = btn.dataset.src;
+          thumbs.forEach(function (other) { other.setAttribute('aria-current', other === btn ? 'true' : 'false'); });
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "תמות · דף מוצר",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "atc_label", "label": "כפתור הקנייה", "default": "הוספה לסל" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לכפתור", "default": "משלוח חינם · 14 יום לביטול עסקה" },
+    { "type": "text", "id": "price_note", "label": "שורה ליד המחיר", "default": "משלוח חינם, בכל הזמנה" },
+    { "type": "text", "id": "swatch_label", "label": "כותרת בורר הצבעים", "default": "בחרו צבע" },
+    { "type": "checkbox", "id": "points_above", "label": "נקודות המכירה מעל הכפתור", "default": true },
+    { "type": "select", "id": "points_style", "label": "צורת נקודות המכירה", "default": "check",
+      "options": [
+        { "value": "check", "label": "רשימת וי" },
+        { "value": "tiles", "label": "ארבעה אייקונים בשורה" }
+      ] },
+    { "type": "header", "content": "ארבעת האריחים" },
+    { "type": "text", "id": "tile_1", "label": "תווית ראשונה" },
+    { "type": "text", "id": "tile_2", "label": "תווית שנייה" },
+    { "type": "text", "id": "tile_3", "label": "תווית שלישית" },
+    { "type": "text", "id": "tile_4", "label": "תווית רביעית" },
+    { "type": "select", "id": "icon_1", "label": "אייקון ראשון", "default": "paw",
+      "options": [
+        { "value": "paw", "label": "כפה" },
+        { "value": "shield", "label": "מגן" },
+        { "value": "fold", "label": "קיפול" },
+        { "value": "heart", "label": "לב" },
+        { "value": "truck", "label": "משלוח" },
+        { "value": "ruler", "label": "מידות" },
+        { "value": "sparkle", "label": "ניקיון" }
+      ] },
+    { "type": "select", "id": "icon_2", "label": "אייקון שני", "default": "shield",
+      "options": [
+        { "value": "paw", "label": "כפה" },
+        { "value": "shield", "label": "מגן" },
+        { "value": "fold", "label": "קיפול" },
+        { "value": "heart", "label": "לב" },
+        { "value": "truck", "label": "משלוח" },
+        { "value": "ruler", "label": "מידות" },
+        { "value": "sparkle", "label": "ניקיון" }
+      ] },
+    { "type": "select", "id": "icon_3", "label": "אייקון שלישי", "default": "fold",
+      "options": [
+        { "value": "paw", "label": "כפה" },
+        { "value": "shield", "label": "מגן" },
+        { "value": "fold", "label": "קיפול" },
+        { "value": "heart", "label": "לב" },
+        { "value": "truck", "label": "משלוח" },
+        { "value": "ruler", "label": "מידות" },
+        { "value": "sparkle", "label": "ניקיון" }
+      ] },
+    { "type": "select", "id": "icon_4", "label": "אייקון רביעי", "default": "heart",
+      "options": [
+        { "value": "paw", "label": "כפה" },
+        { "value": "shield", "label": "מגן" },
+        { "value": "fold", "label": "קיפול" },
+        { "value": "heart", "label": "לב" },
+        { "value": "truck", "label": "משלוח" },
+        { "value": "ruler", "label": "מידות" },
+        { "value": "sparkle", "label": "ניקיון" }
+      ] },
+    { "type": "header", "content": "הדירוג מתחת לכותרת" },
+    { "type": "text", "id": "reviews_label", "label": "הטקסט שאחרי המספר", "default": "ביקורות לקוחות" },
+    { "type": "text", "id": "out_of", "label": "תיאור הדירוג לקוראי מסך", "default": "מתוך 5 כוכבים" },
+    { "type": "text", "id": "reviews_anchor", "label": "קישור לסקשן הביקורות", "default": "#shopify-section-reviews" },
+    { "type": "header", "content": "רצועת היתרונות שמעל העמוד" },
+    { "type": "text", "id": "perk_1", "label": "יתרון ראשון", "default": "משלוח חינם לכל הארץ" },
+    { "type": "text", "id": "perk_2", "label": "יתרון שני", "default": "14 יום לביטול עסקה" },
+    { "type": "text", "id": "perk_3", "label": "יתרון שלישי", "default": "תמיכה בעברית, לפני ואחרי" }
+  ],
+  "presets": [{ "name": "תמות · דף מוצר" }]
+}
+{% endschema %}

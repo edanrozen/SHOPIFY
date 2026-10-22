@@ -1,0 +1,93 @@
+{%- doc -%}
+  Who the product fits, as four pictures with a word under each.
+
+  The pictures carry no product on purpose. A photograph of an animal on a
+  white ground is an illustration and claims nothing; the moment the product
+  appears beside it the row starts promising that this animal and this product
+  go together, and that promise has a number attached to it.
+
+  Which is why the label matters more than the picture here. Bloom carries
+  25kg. A Golden Retriever is 25 to 34 and a Labrador 25 to 36, so a row that
+  says only "large" tells the owner of a 32kg dog that the product is for
+  them. The weight belongs in the label, not in a footnote below it.
+
+  A block with no image is skipped and the section hides itself when none has
+  one, so the row can be built before the photographs exist and fills in as
+  they arrive, one at a time if that is how they come.
+{%- enddoc -%}
+
+{%- liquid
+  assign shown = 0
+  for block in section.blocks
+    if block.settings.image != blank
+      assign shown = shown | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if shown > 0 -%}
+  <section class="wf-band {% if section.settings.band == 'white' %}wf-band--cream{% endif %}">
+    <div class="pl-wrap">
+      <div class="wf-band__head">
+        <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="wf-sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <ul class="wf-sizes" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.image != blank -%}
+            <li class="wf-size" {{ block.shopify_attributes }}>
+              <img
+                class="wf-size__img"
+                src="{{ block.settings.image | image_url: width: 420 }}"
+                srcset="{{ block.settings.image | image_url: width: 260 }} 260w, {{ block.settings.image | image_url: width: 420 }} 420w"
+                sizes="(max-width: 749px) 22vw, 220px"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+                loading="lazy"
+                decoding="async"
+              >
+              <span class="wf-size__t">{{ block.settings.label }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      {%- if section.settings.note != blank -%}
+        <p class="wf-sizes__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מוצר · מתאים ל",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "מתאים לכלבים ולחתולים" },
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" },
+    { "type": "text", "id": "note", "label": "שורה מתחת לתמונות" },
+    { "type": "select", "id": "band", "label": "רקע", "default": "white",
+      "options": [
+        { "value": "page", "label": "נייר (רקע העמוד)" },
+        { "value": "white", "label": "לבן" }
+      ] }
+  ],
+  "blocks": [
+    {
+      "type": "size",
+      "name": "גודל",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "תמונה (חיה בלבד, בלי המוצר)" },
+        { "type": "text", "id": "label", "label": "תווית" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "מוצר · מתאים ל" }]
+}
+{% endschema %}

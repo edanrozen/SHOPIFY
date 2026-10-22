@@ -1,0 +1,356 @@
+{%- doc -%}
+  Customer reviews, from custom.reviews.
+
+  The shape is the same json array the rest of this product's content uses, so
+  it is editable in the Shopify panel without touching the theme:
+
+    [{ "name": "", "pet": "", "rating": 5, "title": "", "text": "" }]
+
+  rating is a whole number from 1 to 5. pet, title and date are optional and
+  the card drops the line rather than printing an empty one.
+
+  The average, the count and the five distribution bars are all computed from
+  the array, never typed into a setting, so a review added or removed in the
+  panel can never leave a headline number that disagrees with the cards under
+  it. That is the one thing a hand-maintained rating always gets wrong.
+
+  The star widget is one <symbol> plus two rows of <use>: a grey track and a
+  gold row clipped to a percentage width. That is why a 4.5 average and a
+  whole-number card rating draw through identical code, and why fifteen
+  widgets cost one star path rather than a hundred and fifty. The row is
+  forced to direction: ltr inside an rtl page because a rating fills from the
+  same side everywhere, it is a quantity and not a sentence. The value itself
+  is carried by the element's accessible name, so nothing depends on the
+  stars being seen.
+
+  Past the sixth card the rest sit inside a <details>. It is a real disclosure
+  element, so every word is in the document for a crawler and for a visitor
+  whose JavaScript did not load, and there is no script on this section.
+
+  The structured data block is the only one in this theme, checked against
+  layout/theme.liquid and snippets/meta-tags.liquid, so it cannot collide with
+  a second Product node. It is what puts the stars in a Google result.
+{%- enddoc -%}
+
+{%- liquid
+  assign reviews = product.metafields.custom.reviews.value
+  assign cnt = reviews.size
+-%}
+
+{%- if cnt > 0 -%}
+  {%- liquid
+    assign total = 0
+    assign c5 = 0
+    assign c4 = 0
+    assign c3 = 0
+    assign c2 = 0
+    assign c1 = 0
+    for r in reviews
+      assign total = total | plus: r.rating
+      case r.rating
+        when 5
+          assign c5 = c5 | plus: 1
+        when 4
+          assign c4 = c4 | plus: 1
+        when 3
+          assign c3 = c3 | plus: 1
+        when 2
+          assign c2 = c2 | plus: 1
+        else
+          assign c1 = c1 | plus: 1
+      endcase
+    endfor
+    assign avg = total | times: 1.0 | divided_by: cnt
+    assign avg_label = avg | round: 1
+    assign avg_pct = avg | times: 20 | round
+    assign fold = section.settings.fold
+  -%}
+
+  {%- comment -%}
+    .wf-band--cream paints white, not cream: the page itself is the paper, so
+    the modifier is the surface that lifts off it. The cards here are white,
+    so the default has to be the bare band, over the cream page. Choosing the
+    white surface would put white cards on a white band and the only thing
+    left holding them apart would be --pl-line, which measures 1.37:1.
+  {%- endcomment -%}
+  <section class="wf-band {% if section.settings.band == 'white' %}wf-band--cream{% endif %}">
+    <div class="pl-wrap">
+
+      <svg class="wf-star-def" aria-hidden="true" focusable="false">
+        <symbol id="wf-star-g" viewBox="0 0 20 19">
+          <path d="M10 0l2.9 6.2 6.6.9-4.8 4.8 1.2 6.8L10 15.5 4.1 18.7l1.2-6.8L.5 7.1l6.6-.9z"/>
+        </symbol>
+      </svg>
+
+      <div class="wf-band__head">
+        <h2 class="wf-h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="wf-sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="wf-rev__top">
+        <div class="wf-rev__score">
+          <p class="wf-rev__avg">{{ avg_label }}</p>
+          <span class="wf-stars wf-stars--lg" role="img" aria-label="{{ avg_label }} {{ section.settings.out_of }}">
+            <span class="wf-stars__row wf-stars__row--track" aria-hidden="true">
+              {%- for i in (1..5) -%}<svg class="wf-star"><use href="#wf-star-g"/></svg>{%- endfor -%}
+            </span>
+            <span class="wf-stars__row wf-stars__row--fill" style="width: {{ avg_pct }}%" aria-hidden="true">
+              {%- for i in (1..5) -%}<svg class="wf-star"><use href="#wf-star-g"/></svg>{%- endfor -%}
+            </span>
+          </span>
+          <p class="wf-rev__cnt">{{ cnt }} {{ section.settings.count_word }}</p>
+        </div>
+
+        <ul class="wf-rev__bars" role="list">
+          {%- assign tally = c5 | append: ',' | append: c4 | append: ',' | append: c3 | append: ',' | append: c2 | append: ',' | append: c1 | split: ',' -%}
+          {%- for n in tally -%}
+            {%- liquid
+              assign stars = 5 | minus: forloop.index0
+              assign num = n | times: 1
+              assign w = num | times: 100 | divided_by: cnt
+            -%}
+            <li class="wf-rev__bar">
+              <span class="wf-rev__bark">{{ stars }}</span>
+              <svg class="wf-star wf-star--mini" aria-hidden="true"><use href="#wf-star-g"/></svg>
+              <span class="wf-rev__track"><span class="wf-rev__fill" style="width: {{ w }}%"></span></span>
+              <span class="wf-rev__barn">{{ num }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <ul class="wf-rev__list" role="list">
+        {%- for r in reviews limit: fold -%}
+          {%- render 'wf-review-card', r: r, out_of: section.settings.out_of -%}
+        {%- endfor -%}
+      </ul>
+
+      {%- if cnt > fold -%}
+        {%- assign rest = cnt | minus: fold -%}
+        <details class="wf-rev__more">
+          <summary class="wf-rev__moreb">
+            {{ section.settings.more_label }} ({{ rest }})
+          </summary>
+          <ul class="wf-rev__list wf-rev__list--rest" role="list">
+            {%- for r in reviews offset: fold -%}
+              {%- render 'wf-review-card', r: r, out_of: section.settings.out_of -%}
+            {%- endfor -%}
+          </ul>
+        </details>
+      {%- endif -%}
+
+    </div>
+  </section>
+
+  {%- if section.settings.schema_data and request.page_type == 'product' -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "description": {{ product.description | strip_html | truncate: 320 | json }},
+        {%- if product.featured_image -%}
+          "image": [{{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }}],
+        {%- endif -%}
+        "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+        "offers": {
+          "@type": "Offer",
+          "url": {{ shop.url | append: product.url | json }},
+          "priceCurrency": {{ cart.currency.iso_code | json }},
+          "price": "{{ product.price | divided_by: 100.0 }}",
+          "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "{{ avg_label }}",
+          "reviewCount": {{ cnt }},
+          "bestRating": 5,
+          "worstRating": 1
+        },
+        "review": [
+          {%- for r in reviews -%}
+            {
+              "@type": "Review",
+              "author": { "@type": "Person", "name": {{ r.name | json }} },
+              "name": {{ r.title | json }},
+              "reviewBody": {{ r.text | json }},
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": {{ r.rating }},
+                "bestRating": 5,
+                "worstRating": 1
+              }
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  /* The gold is #A9741A rather than a brighter amber because a rating is a
+     graphic that carries meaning: it measures 4.04:1 on white, 3.70:1 on
+     --pl-cream and 3.45:1 on --pl-cream-deep, all past the 3:1 that
+     non-text contrast asks for. #C9972B, the obvious choice, sits at 2.4:1
+     on cream and fails on every band this section can be placed in. */
+  .wf-star-def { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  /* width: max-content is load bearing, not tidiness. The card is a column
+     flex container, so a plain inline-block widget is blockified and
+     stretched to the card's full width, and the fill row's percentage then
+     resolves against that width instead of against five stars: measured at
+     339px against an 83px row, which drew every card as five gold stars no
+     matter what it was rated. A definite width also opts the item out of
+     the stretch, so the widget is intrinsic wherever it is placed. */
+  .wf-stars {
+    position: relative;
+    display: inline-block;
+    width: max-content;
+    direction: ltr;
+    line-height: 0;
+  }
+  .wf-stars__row { display: inline-flex; gap: 2px; white-space: nowrap; }
+  .wf-stars__row--track { color: #E0D2BA; }
+  .wf-stars__row--fill {
+    position: absolute;
+    inset-block-start: 0;
+    left: 0;
+    overflow: hidden;
+    color: #A9741A;
+  }
+  .wf-star { width: 15px; height: 14px; flex: none; fill: currentColor; }
+  .wf-stars--lg .wf-star { width: 21px; height: 20px; }
+  .wf-star--mini { width: 11px; height: 11px; color: #A9741A; }
+
+  .wf-rev__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(20px, 4vw, 48px);
+    justify-content: center;
+    padding: clamp(18px, 3vw, 26px) clamp(18px, 3vw, 30px);
+    background: var(--pl-white);
+    border: 1px solid var(--pl-line);
+    border-radius: var(--wf-r-lg);
+    margin-bottom: clamp(22px, 3.4vw, 36px);
+  }
+
+  .wf-rev__score { text-align: center; flex: none; }
+  .wf-rev__avg {
+    font-family: var(--pl-display);
+    font-size: clamp(2.4rem, 7vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--pl-brown);
+    margin: 0 0 8px;
+  }
+  .wf-rev__cnt {
+    font-family: var(--pl-sans);
+    font-size: .88rem;
+    color: var(--pl-taupe);
+    margin: 8px 0 0;
+  }
+
+  .wf-rev__bars { list-style: none; margin: 0; padding: 0; flex: 1 1 220px; max-width: 340px; }
+  .wf-rev__bar { display: flex; align-items: center; gap: 7px; margin-block: 5px; }
+  .wf-rev__bark { font-family: var(--pl-sans); font-size: .82rem; font-weight: 700; color: var(--pl-ink); }
+  .wf-rev__barn {
+    font-family: var(--pl-sans);
+    font-size: .82rem;
+    color: var(--pl-taupe);
+    min-width: 2ch;
+    text-align: start;
+  }
+  .wf-rev__track {
+    flex: 1;
+    height: 7px;
+    border-radius: 99px;
+    background: var(--pl-cream-deep);
+    overflow: hidden;
+  }
+  .wf-rev__fill { display: block; height: 100%; border-radius: 99px; background: #A9741A; }
+
+  .wf-rev__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(12px, 2vw, 18px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 750px) {
+    .wf-rev__list { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .wf-rev__list { grid-template-columns: repeat(3, 1fr); }
+  }
+  .wf-rev__list--rest { margin-top: clamp(12px, 2vw, 18px); }
+
+  .wf-rev__c {
+    background: var(--pl-white);
+    border: 1px solid var(--pl-line);
+    border-radius: var(--wf-r-lg);
+    padding: clamp(16px, 2.4vw, 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .wf-rev__who { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .wf-rev__name { font-family: var(--pl-display); font-size: 1rem; font-weight: 700; color: var(--pl-brown); }
+  .wf-rev__pet { font-family: var(--pl-sans); font-size: .82rem; color: var(--pl-taupe); }
+  .wf-rev__t { font-family: var(--pl-sans); font-size: .98rem; font-weight: 700; line-height: 1.4; color: var(--pl-ink); margin: 2px 0 0; }
+  .wf-rev__x { font-family: var(--pl-sans); font-size: .93rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
+
+  .wf-rev__more { margin-top: clamp(14px, 2.2vw, 20px); text-align: center; }
+  .wf-rev__moreb {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--pl-sans);
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--pl-white);
+    background: var(--wf-accent);
+    border-radius: var(--wf-pill);
+    padding: 11px 22px;
+  }
+  .wf-rev__moreb::-webkit-details-marker { display: none; }
+  .wf-rev__moreb::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+  .wf-rev__more[open] .wf-rev__moreb::after { transform: rotate(-135deg) translate(-1px, -1px); }
+  .wf-rev__moreb:focus-visible { outline: 2px solid var(--pl-brown); outline-offset: 3px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "מוצר · ביקורות",
+  "tag": "section",
+  "class": "wf-rev",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "מה אומרים מי שכבר קיבלו את בלום" },
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" },
+    { "type": "text", "id": "count_word", "label": "המילה שאחרי המספר", "default": "ביקורות" },
+    { "type": "text", "id": "out_of", "label": "תיאור הדירוג לקוראי מסך", "default": "מתוך 5 כוכבים" },
+    { "type": "text", "id": "more_label", "label": "כפתור הצגת השאר", "default": "להציג את שאר הביקורות" },
+    { "type": "range", "id": "fold", "label": "כמה ביקורות מוצגות לפני הכפתור", "min": 3, "max": 15, "step": 1, "default": 6 },
+    { "type": "select", "id": "band", "label": "רקע", "default": "page",
+      "options": [
+        { "value": "page", "label": "נייר (רקע העמוד)" },
+        { "value": "white", "label": "לבן" }
+      ] },
+    { "type": "checkbox", "id": "schema_data", "label": "לשלוח דירוג לגוגל (כוכבים בתוצאות החיפוש)", "default": true }
+  ],
+  "presets": [{ "name": "מוצר · ביקורות" }]
+}
+{% endschema %}
