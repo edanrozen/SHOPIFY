@@ -184,3 +184,28 @@
   margin: clamp(16px, 2.5vw, 24px) auto 0;
   max-width: 52ch;
 }
+
+/* The demonstration film, on the dark band above the numbered steps. 16:9 is
+   what it was shot in and cropping it to a squarer box would cut the hanging
+   paws out of frame, which are the whole point of the shot. Capped at 62ch to
+   sit on the same measure as the steps below it rather than running wider
+   than the text it introduces. */
+.wf-demo { max-width: 62ch; margin: 0 auto clamp(26px, 4vw, 44px); }
+.wf-demo__v,
+.wf-demo video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--wf-r-lg);
+  background: #000;
+}
+.wf-demo__c {
+  font-family: var(--pl-sans);
+  font-size: .86rem;
+  line-height: 1.5;
+  color: var(--pl-taupe);
+  text-align: center;
+  margin: 10px 0 0;
+}

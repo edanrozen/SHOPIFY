@@ -137,7 +137,11 @@
     },
     "how": {
       "type": "wf-pdp-how",
-      "settings": { "heading": "איך משתמשים בזה" }
+      "settings": {
+        "heading": "איך משתמשים בזה",
+        "demo_caption": "ארבע הרגליים עוברות דרך הפתחים והכפות נשארות באוויר. השימוש הוא תמיד בהשגחה מלאה.",
+        "autoplay": true
+      }
     },
     "versus": {
       "type": "wf-pdp-versus",

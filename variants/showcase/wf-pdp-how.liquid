@@ -4,13 +4,25 @@
   A rule is drawn between the numbers so the block reads as an order of
   operations rather than as a pile of tips. The last step does not draw it, so
   the sequence visibly ends.
+
+  A demonstration film can sit above the rail. For this product it is worth
+  more than the eight steps under it: the single hardest thing to explain
+  about Bloom is that the animal goes through the mesh rather than standing on
+  it, and eight seconds of footage settles that without a word. The steps stay
+  because they carry what film cannot: the order, the acclimatisation, and
+  when to stop.
+
+  It plays muted and looping like an animation, with controls, so it explains
+  itself to someone who never touches it and can still be paused and scrubbed
+  by someone who wants to look closely. Autoplay is a setting rather than a
+  given, because a looping film is not what everyone wants on a page.
 {%- enddoc -%}
 
 {%- liquid
   assign steps = product.metafields.custom.steps.value
 -%}
 
-{%- if steps.size > 0 -%}
+{%- if steps.size > 0 or section.settings.demo != blank -%}
   <section class="wf-band wf-band--bark">
     <div class="pl-wrap">
       <div class="wf-band__head">
@@ -20,6 +32,27 @@
         {%- endif -%}
       </div>
 
+      {%- if section.settings.demo != blank -%}
+        <div class="wf-demo">
+          {{
+            section.settings.demo
+            | video_tag:
+              image_size: '1200x',
+              controls: true,
+              muted: true,
+              loop: section.settings.autoplay,
+              autoplay: section.settings.autoplay,
+              playsinline: true,
+              preload: 'metadata',
+              class: 'wf-demo__v'
+          }}
+          {%- if section.settings.demo_caption != blank -%}
+            <p class="wf-demo__c">{{ section.settings.demo_caption }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if steps.size > 0 -%}
       <ol class="wf-steps">
         {%- for item in steps -%}
           <li class="wf-step">
@@ -31,8 +64,32 @@
           </li>
         {%- endfor -%}
       </ol>
+      {%- endif -%}
     </div>
   </section>
+
+  {%- if section.settings.autoplay -%}
+    {%- comment -%}
+      A film that plays itself is motion nobody asked for, and CSS cannot stop
+      it: prefers-reduced-motion can turn off an animation or a transition,
+      but autoplay on a video element is not either of those. So the check is
+      made here and the film is paused and rewound. The controls are already
+      on it, so anyone who wants it still has it, which is the whole point of
+      the preference rather than hiding the thing.
+    {%- endcomment -%}
+    <script>
+      (function () {
+        if (!window.matchMedia) return;
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        document.querySelectorAll('.wf-demo video').forEach(function (v) {
+          v.autoplay = false;
+          v.loop = false;
+          v.pause();
+          v.currentTime = 0;
+        });
+      })();
+    </script>
+  {%- endif -%}
 {%- endif -%}
 
 {% schema %}
@@ -41,7 +98,11 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "heading", "label": "כותרת", "default": "איך משתמשים בזה" },
-    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" }
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" },
+    { "type": "header", "content": "סרטון הדגמה" },
+    { "type": "video", "id": "demo", "label": "סרטון (מהקבצים של החנות)" },
+    { "type": "text", "id": "demo_caption", "label": "כיתוב מתחת לסרטון" },
+    { "type": "checkbox", "id": "autoplay", "label": "להפעיל אוטומטית בלולאה, בלי קול", "default": true }
   ],
   "presets": [{ "name": "מוצר · איך משתמשים" }]
 }
