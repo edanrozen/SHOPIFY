@@ -8,13 +8,13 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "משלוח חינם בכל הזמנה",
+            "text": "🚚 משלוחים לכל הארץ",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
             "weight": "700",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#2A2722"
+            "text_color": "#FFFFFF"
           },
           "blocks": {}
         },
@@ -27,7 +27,7 @@
             "weight": "700",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#2A2722"
+            "text_color": "#FFFFFF"
           },
           "blocks": {}
         },
@@ -40,7 +40,7 @@
             "weight": "700",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#2A2722"
+            "text_color": "#FFFFFF"
           },
           "blocks": {}
         },
@@ -53,7 +53,7 @@
             "weight": "700",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#2A2722"
+            "text_color": "#FFFFFF"
           },
           "blocks": {}
         }
@@ -68,7 +68,7 @@
       "settings": {
         "speed": 3,
         "section_width": "page-width",
-        "background_color": "#C9D39C",
+        "background_color": "#70784B",
         "divider_width": 0,
         "divider_color": "{{ settings.color_palette.color2 }}",
         "padding-block-start": 12,
@@ -129,7 +129,7 @@
         "divider_width": 1,
         "divider_size": "full-width",
         "border_width": 0,
-        "background_color_top": "#FBF4E9",
+        "background_color_top": "#FFFFFF",
         "enable_transparent_header_home": false,
         "enable_transparent_header_product": false,
         "enable_transparent_header_collection": false

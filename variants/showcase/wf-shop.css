@@ -320,15 +320,20 @@
    setting writes.
 
    Sampled off a photograph of the live page, the bar renders #FFFFFF at 88%
-   of its area rather than the green the setting holds, so that mechanism is
+   of its area rather than the colour the setting holds, so that mechanism is
    not arriving here. I cannot reproduce it from this environment: the local
    harness does not render section groups and the storefront is not reachable,
    so this is a fix for a measured symptom rather than a diagnosed cause.
 
    Stating the colour on the element costs nothing if the section-background
    does work and fixes it if it does not. The id raises specificity past the
-   base.css rule that is clearing it. */
+   base.css rule that is clearing it.
+
+   It is the green, filled, with white on it at 4.69:1. On a white shop this
+   strip is the one place a flat brand colour runs edge to edge, and it is a
+   strip rather than a band: four short lines a visitor reads once. */
 #header-group .announcement-bar,
 #header-group .announcement-bar .section-background {
-  background-color: var(--pl-olive-pale);
+  background-color: var(--wf-accent);
 }
+#header-group .announcement-bar { color: var(--pl-white); }

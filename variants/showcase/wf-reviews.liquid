@@ -68,11 +68,10 @@
   -%}
 
   {%- comment -%}
-    .wf-band--cream paints white, not cream: the page itself is the paper, so
-    the modifier is the surface that lifts off it. The cards here are white,
-    so the default has to be the bare band, over the cream page. Choosing the
-    white surface would put white cards on a white band and the only thing
-    left holding them apart would be --pl-line, which measures 1.56:1.
+    The page is white and the cards are white, so the default is the bare
+    band and the modifier is the one tinted surface. Choosing it is what
+    makes the cards read as cards: on the plain page the only thing holding
+    them apart from the ground is --pl-line at 1.40:1.
   {%- endcomment -%}
   <section class="wf-band {% if section.settings.band == 'white' %}wf-band--cream{% endif %}">
     <div class="pl-wrap">
@@ -355,8 +354,8 @@
     { "type": "range", "id": "fold", "label": "כמה ביקורות מוצגות לפני הכפתור", "min": 3, "max": 15, "step": 1, "default": 6 },
     { "type": "select", "id": "band", "label": "רקע", "default": "page",
       "options": [
-        { "value": "page", "label": "נייר (רקע העמוד)" },
-        { "value": "white", "label": "לבן" }
+        { "value": "page", "label": "לבן (רקע העמוד)" },
+        { "value": "white", "label": "רקע מודגש" }
       ] },
     { "type": "checkbox", "id": "schema_data", "label": "לשלוח דירוג לגוגל (כוכבים בתוצאות החיפוש)", "default": true }
   ],

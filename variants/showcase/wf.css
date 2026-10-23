@@ -223,19 +223,16 @@
 /* ---- trust row ----------------------------------------------------------
    Four facts, every one of them checkable. Directly under the hero, because
    the questions it answers are the ones asked before the first click. */
-/* The pale olive rather than the cream. It puts the shop's colour on the four
-   facts a visitor checks before the first click, and it bookends the page with
-   the announcement bar above it and the footer below.
+/* The tinted surface, not a colour of its own. This band used to be a pale
+   olive, which put a third large coloured area on a page that already had a
+   brown hero and a green button, and on a white shop that reads as decoration
+   rather than as the four facts it is.
 
-   --pl-taupe is redefined for this subtree rather than each muted line being
-   rewritten. Every secondary line in here reads var(--pl-taupe), and taupe on
-   this green is 3.45:1, under the floor. Pointing the token at ink-soft inside
-   the band takes them all to 6.08:1 in one declaration, and the token keeps
-   meaning "the muted text on this surface", which is what it was ever for.
-
-   The rules are gone with it. A cream hairline on a green band is a seam from
-   the surface it used to be; the colour change is the edge now. */
-.wf-trust { background: var(--pl-olive-pale); --pl-taupe: var(--pl-ink-soft); }
+   It also carried a token remap: the taupe measured 3.45:1 on the olive, so
+   every muted line in here had to be pointed at ink-soft to clear the floor.
+   On the tinted white the taupe is 5.06:1 and the remap is gone with it, one
+   fewer thing to know about this band. The icons are 6.55:1. */
+.wf-trust { background: var(--pl-cream-deep); }
 .wf-trust__list {
   list-style: none;
   margin: 0;

@@ -10,15 +10,18 @@
    only on the ones carrying these sections today, so a band dropped onto a
    third template in the editor is styled the moment it lands.
 
-   Every pair here is one already measured on this palette: cream on the brown
-   is 6.46:1, the deep sand is 4.98:1, white on the green is 4.69:1 and the
-   taupe on the cream is 4.99:1. The pale olive is deliberately not used for
-   text on the brown; at 4.46:1 it clears the 3:1 a rule needs and misses the
-   4.5:1 a small label needs, which is exactly the kind of near miss only a
-   measurement catches. */
+   The band is the tinted surface, not a brown slab, and that is a decision
+   about how much colour a page can carry rather than about this section. On
+   the homepage it lands directly under the hero, which is already a brown
+   panel: two full width brown blocks in a row read as a page built out of
+   colour, and on a white shop the colour is supposed to be on the button and
+   the heading. One brown block per page, and this is not it.
+
+   Measured on the tint: the brown heading 6.55:1, ink-soft 8.93:1, the taupe
+   5.06:1, the green link 5.64:1 and white on the green button 4.69:1. */
 
 .wf-vow--band {
-  background: var(--pl-brown);
+  background: var(--pl-cream-deep);
   padding-block: clamp(30px, 5vw, 60px);
 }
 
@@ -58,10 +61,10 @@
   max-width: 54ch;
 }
 
-.wf-vow--band .wf-vow__eyebrow { color: var(--pl-sand-deep); }
-.wf-vow--band .wf-vow__h { color: var(--pl-cream); }
-.wf-vow--band .wf-vow__x,
-.wf-vow--band .wf-vow__fine { color: var(--pl-sand-deep); }
+.wf-vow--band .wf-vow__eyebrow { color: var(--pl-taupe); }
+.wf-vow--band .wf-vow__h { color: var(--pl-brown); }
+.wf-vow--band .wf-vow__x { color: var(--pl-ink-soft); }
+.wf-vow--band .wf-vow__fine { color: var(--pl-taupe); }
 
 /* Stacked on a phone, side by side once there is room. Side by side at 390px
    left the button and the link sharing about 337px of a 358px column, which
@@ -101,8 +104,11 @@
   transition: background-color .16s ease, transform .16s ease;
 }
 
-.wf-vow--band .wf-vow__go { background: var(--pl-cream); color: var(--pl-brown); }
-.wf-vow--band .wf-vow__go:hover { background: var(--pl-sand-deep); }
+/* The same button as every other button in the shop. It used to be inverted,
+   a cream pill on brown, because the band was dark; on the tint there is no
+   reason for this one call to action to look like a different product. */
+.wf-vow--band .wf-vow__go { background: var(--wf-accent); color: var(--pl-white); }
+.wf-vow--band .wf-vow__go:hover { background: var(--wf-accent-deep); }
 
 /* 44px tall, not just the 20px the text occupies. In the actions row this is a
    target rather than a word inside a sentence, so the inline exception does
@@ -119,7 +125,7 @@
   text-underline-offset: 3px;
 }
 
-.wf-vow--band .wf-vow__pol { color: var(--pl-cream); }
+.wf-vow--band .wf-vow__pol { color: var(--wf-accent-deep); }
 
 .wf-vow__pts {
   display: grid;
@@ -150,18 +156,15 @@
   line-height: 1.45;
 }
 
-/* The panel darkens the brown rather than lightening it, and that is a measured
-   decision rather than a taste one. At white 9% the surface lifts to about
-   #806242, and the deep sand on it falls to 3.96:1: the panel that was added to
-   give the three points definition was eating the contrast of the line inside
-   it. Darkening instead sends both lines the other way, to 5.99:1 for the sand
-   and 7.76:1 for the cream, and the white border still draws the edge. */
+/* White cards on the tint, which is the same pair the catalogue cards use, so
+   the three points are read the same way as everything else on the page. The
+   darkened brown panel these replace existed only because the band was dark. */
 .wf-vow--band .wf-vow__pt {
-  background: rgba(0, 0, 0, .13);
-  border: 1px solid rgba(255, 255, 255, .22);
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
 }
-.wf-vow--band .wf-vow__pt-t { color: var(--pl-cream); }
-.wf-vow--band .wf-vow__pt-x { color: var(--pl-sand-deep); }
+.wf-vow--band .wf-vow__pt-t { color: var(--pl-ink); }
+.wf-vow--band .wf-vow__pt-x { color: var(--pl-taupe); }
 
 /* The copy and the three points sit one under the other on a phone and beside
    each other once there is room for the points to stay on one line each. */

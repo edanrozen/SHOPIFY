@@ -54,11 +54,14 @@
     assign sizes = '(max-width: 700px) 92vw, 620px'
   endif
 
+  comment
+    Two surfaces, the page and the one tint. `blush` is still read because a
+    template saved before the palette went white can still hold it, and both
+    class names paint the same thing now.
+  endcomment
   assign band = ''
-  if section.settings.band == 'cream'
+  if section.settings.band == 'cream' or section.settings.band == 'blush'
     assign band = ' wf-band--cream'
-  elsif section.settings.band == 'blush'
-    assign band = ' wf-band--warm'
   endif
 -%}
 
@@ -140,9 +143,8 @@
       "id": "band",
       "label": "רקע",
       "options": [
-        { "value": "white", "label": "לבן" },
-        { "value": "cream", "label": "שמנת" },
-        { "value": "blush", "label": "שמנת כהה" }
+        { "value": "white", "label": "לבן (רקע העמוד)" },
+        { "value": "cream", "label": "רקע מודגש" }
       ],
       "default": "white"
     }

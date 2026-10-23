@@ -78,48 +78,50 @@
      and 6.07:1 on white. The six rules in this theme that used to print the
      accent as text now print the deep one. */
 
-  /* The green lifted to a surface, at the mark's own hue rather than near it.
-     Hue 70.9 against the mark's 70.7. The value this replaced sat at 78,
-     close enough to pass and not close enough to be the logo.
+  /* The paper is white.
 
-     Ink on it is 9.41:1 and ink-soft 6.08:1. Taupe is 3.45:1 and does not
-     clear the floor, so anything painted with this still has to remap the
-     muted token. See .wf-trust. */
-  --pl-olive-pale:  #C9D39C;
+     It was the cream sampled out of the logo, and the merchant asked for
+     white: a mostly white shop where the two colours appear on the things
+     that are meant to be noticed rather than on every surface. That is also
+     the stronger commercial read. A cream page tints every photograph on it
+     and leaves a button competing with a coloured ground; on white the only
+     saturated things on a screen are the button, the heading and the rating,
+     which is exactly the list a buyer should be looking at.
 
-  /* The three warm neutrals, each the paper mixed toward the brown.
+     Three names resolve to it, because callers across the theme ask for the
+     paper by three different words and a rename would be churn for nothing. */
+  --pl-white:     #FFFFFF;
+  --pl-porcelain: var(--pl-white);
+  --pl-cream:     var(--pl-white);
+  --pl-sand:      var(--pl-white);
 
-     --pl-cream-deep   the paper 5% toward the brown. It sits 1.072 from the
-                       cream, the same separation the value it replaces had,
-                       which is what keeps two adjacent bands from merging
-                       into one slab. Ink 12.69:1, ink-soft 8.21:1, taupe
-                       4.65:1, the brown 6.03:1. It is also, by measurement
-                       rather than by luck, close to the ground the catalogue
-                       is photographed on. See .wf-card__frame.
+  /* The three warm neutrals, each white mixed toward the brown by a stated
+     percentage. They are the only greys in the shop and none of them is a
+     grey: a cold neutral under a warm mark is what made the old footer look
+     like it belonged to a different shop.
 
-     --pl-sand-deep    the paper 18% toward the brown. This is the one warm
-                       neutral that is read as text, on the brown panel in
-                       wf-hero and on the brown band in wf-vow, where it is
-                       4.98:1. 30% and 24% were measured first and came in at
-                       4.09:1 and 4.51:1, so 18% is the shallowest mix that
-                       leaves a body paragraph a margin rather than a pass.
+     --pl-cream-deep   white 5% toward the brown. 1.077 from the page, the
+                       same separation the cream pair had, which is what
+                       keeps two adjacent bands from merging into one slab.
+                       Ink 13.81:1, taupe 5.06:1, the brown 6.55:1. It is the
+                       one tinted surface in the theme: every band that is
+                       not white is this.
 
-     --pl-line         the paper 24% toward the brown. 1.563 on white against
-                       the 1.37 of the value it replaces, so a card edge in
-                       this shop is now faint rather than nearly absent. It
-                       is also the empty half of a rating star, where the
-                       brown on it is 4.51:1. */
-  --pl-cream-deep:  #F4ECE0;
-  --pl-sand-deep:   #E3D7C8;
-  --pl-line:        #DACDBC;
+     --pl-sand-deep    white 16%. The one neutral that is read as text, on
+                       the brown panel in wf-hero and the brown band in
+                       wf-vow, where it is 5.55:1.
 
-  --pl-porcelain: #FFFFFF;
-  --pl-cream:     #FBF4E9;  /* the paper the mark is drawn on                   */
-  --pl-sand:      var(--pl-cream);  /* one paper, two names, kept for callers   */
+     --pl-line         white 22%. 1.399 against the page, so a card edge is
+                       faint and present rather than absent. It is also the
+                       empty half of a rating star, where the brown on it is
+                       5.04:1. */
+  --pl-cream-deep:  #F8F6F5;
+  --pl-sand-deep:   #E9E3DE;
+  --pl-line:        #E0D9D1;
+
   --pl-ink:       #2A2722;  /* 14.88:1 on white                                 */
   --pl-ink-soft:  #4A443C;  /*  9.62:1                                          */
-  --pl-taupe:     #826443;  /* the brown at 89%. 5.45 white, 4.99 cream         */
-  --pl-white:     #FFFFFF;
+  --pl-taupe:     #826443;  /* the brown at 89%. 5.45 on the page               */
   --pl-clay:      var(--wf-accent);
   --pl-clay-deep: var(--wf-accent-deep);
 

@@ -160,22 +160,30 @@ green word fails on the one background it is most likely to land on. Hence two
 greens: the accent fills and borders, the deep one is the only one allowed to
 set `color`.
 
-    --wf-accent      #70784B   fills, borders, the open thumbnail   white on it 4.69:1
-    --wf-accent-deep #5F663F   the green as a word                  6.07:1 on white
-    --pl-brown       #73522F   headings, prices, rating stars       7.05:1 both ways
-    --pl-brown-deep  #614527   hover                                8.79:1
-    --pl-olive-pale  #C9D39C   the trust band, the footer           the green as a surface
-    --pl-cream       #FBF4E9   the paper the whole shop sits on
-    --pl-cream-deep  #F4ECE0   the band that lifts off the paper    the brown at 5%
-    --pl-sand-deep   #E3D7C8   text on the brown band               the brown at 18%, 4.98:1
-    --pl-line        #DACDBC   every hairline, every empty star     the brown at 24%
-    --pl-ink         #2A2722   body headings                        14.88:1
-    --pl-ink-soft    #4A443C   body                                  9.62:1
-    --pl-taupe       #826443   small print        the brown at 89%, 5.45 white, 4.99 cream
+The paper is white. It was the cream sampled out of the logo, and the merchant
+asked for a mostly white shop with the two colours on the things meant to be
+noticed. That is also the stronger commercial read: a cream page tints every
+photograph on it and leaves the button competing with a coloured ground.
 
-Greys are gone on purpose, and that now includes the taupe, which used to be a
-near neutral at saturation 0.10. Cold grey under a warm cream logo is what made
-the old footer look like it belonged to a different shop.
+    --wf-accent      #70784B   fills, borders, the announcement strip  white on it 4.69:1
+    --wf-accent-deep #5F663F   the green as a word                     6.07:1 on white
+    --pl-brown       #73522F   headings, prices, rating stars          7.05:1 both ways
+    --pl-brown-deep  #614527   hover                                   8.79:1
+    --pl-white       #FFFFFF   the page. --pl-cream, --pl-sand and --pl-porcelain alias it
+    --pl-cream-deep  #F8F6F5   the one tinted surface                  white at 5% brown
+    --pl-sand-deep   #E9E3DE   text on the brown panel                 white at 16%, 5.55:1
+    --pl-line        #E0D9D1   every hairline, every empty star        white at 22%
+    --pl-ink         #2A2722   body headings                           14.88:1
+    --pl-ink-soft    #4A443C   body                                     8.93:1 on the tint
+    --pl-taupe       #826443   small print        the brown at 89%, 5.45 white, 5.06 tint
+
+One brown block per page: the hero panel on the homepage, the how-to band on
+the product page. The guarantee band was a second brown slab directly under
+the hero and is the tinted surface now.
+
+Greys are gone on purpose, and that includes the taupe, which used to be a near
+neutral at saturation 0.10, and the pale olive, which used to paint the trust
+band, the footer and the announcement bar and is deleted.
 
 Measured in a browser on the homepage and the Bloom product page, at 390 and
 1280: every computed colour on every visible element in both pages is in that
@@ -184,16 +192,16 @@ first.
 
 The same values are mirrored in three places Liquid cannot reach from CSS:
 
-  * `config/settings_data.json` sets `color_palette.color2` to #DACDBC. That
-    one key draws the border of every input, the cart drawer, every popover
-    and the secondary button. It was #000000, which is why the cart and the
-    contact form had hard black outlines.
+  * `config/settings_data.json` sets `color_palette.background` to #FFFFFF and
+    `color2` to #E0D9D1. That one key draws the border of every input, the cart
+    drawer, every popover and the secondary button. It was #000000, which is
+    why the cart and the contact form had hard black outlines.
   * The same file's `presets.Horizon` block holds Horizon's factory black,
     white and two greys. Clicking that preset in the theme editor would undo
     the palette in one move, so it now holds the same four brand values.
-  * `sections/header-group.json` sets the announcement bar to #C9D39C and
-    `sections/footer-group.json` sets the footer to the same, with #70784B
-    dividers and a #73522F26 scrim where Horizon shipped a black one.
+  * `sections/header-group.json` paints the announcement bar #70784B with
+    white text, and `sections/footer-group.json` gives the footer the tinted
+    surface so the page ends rather than dissolving into it.
 
 ## The logo
 

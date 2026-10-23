@@ -28,12 +28,11 @@
 }
 
 .wf-band { padding-block: clamp(36px, 6vw, 76px); }
-/* Inverted, and the inversion is the point rather than an accident.
-   The page used to be white and this band was the cream. The page is the
-   paper now, so a cream band would be the same value as the page it sits on
-   and the band would stop existing. White is the surface that lifts off the
-   paper instead, at the same 1.08 step the two always had between them. */
-.wf-band--cream { background: var(--pl-porcelain); }
+/* One tinted surface, two names. The page is white, so a band that lifts off
+   it is the tint and there is nothing for a second one to do. The two class
+   names are both still here because templates saved in the editor name both,
+   and a rename would break a merchant's saved choice for no gain. */
+.wf-band--cream,
 .wf-band--warm { background: var(--pl-cream-deep); }
 
 /* The one dark band on the product page, and it is the brown rather than the
@@ -62,7 +61,7 @@
   --pl-ink-soft: var(--pl-sand-deep);  /* body and sub, 4.98:1 */
   --pl-taupe:    var(--pl-sand-deep);  /* muted, 4.98:1 */
   --pl-line:     rgba(255, 255, 255, .22);
-  --wf-rail:     var(--pl-olive-pale); /* 4.46:1, past the 3:1 a rule needs */
+  --wf-rail:     var(--pl-sand-deep);  /* 5.55:1, past the 3:1 a rule needs */
 }
 .wf-band__head { max-width: 62ch; margin-inline: auto; text-align: center; margin-bottom: clamp(22px, 3.6vw, 40px); }
 .wf-band__head .wf-sub { margin-inline: auto; }
