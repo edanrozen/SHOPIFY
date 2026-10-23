@@ -252,10 +252,10 @@
   text-align: start;
 }
 .wf-trust__icon { width: 30px; height: 30px; display: grid; place-items: center; grid-row: span 2; }
-/* Brown, not the accent. The accent is the mark's green and this band is the
-   same green lifted, so accent-on-band measures 2.97:1, under the 3:1 floor an
-   icon needs. The brown is 4.46:1 on it, and brown marks on a green ground is
-   what the wordmark does anyway. */
+/* Brown, not the accent. It was already the brown while this band was a pale
+   olive, where the accent measured 2.97:1 against the 3:1 an icon needs. On
+   the tint the accent would pass at 4.35:1, and the brown is kept anyway: it
+   is 6.55:1, and a brown mark on a light ground is what the wordmark does. */
 .wf-trust__icon svg { width: 26px; height: 26px; stroke: var(--pl-brown); fill: none; stroke-width: 1.5; }
 .wf-trust__title { font-family: var(--pl-sans); font-size: .86rem; font-weight: 700; color: var(--pl-ink); }
 .wf-trust__text { font-family: var(--pl-sans); font-size: .84rem; line-height: 1.4; font-weight: 400; color: var(--pl-taupe); }

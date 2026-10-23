@@ -60,7 +60,7 @@
      shop in two colours without an asterisk is. */
   --wf-accent:      #70784B;  /* "Bloom". white on it 4.69:1. fills and edges    */
   --wf-accent-deep: #5F663F;  /* the same green as a word. 6.07:1 on white       */
-  --pl-brown:       #73522F;  /* "Tiny". 7.05:1 both ways, 6.46:1 on the cream   */
+  --pl-brown:       #73522F;  /* "Tiny". 7.05:1 both ways on the page            */
   --pl-brown-deep:  #614527;  /* hover, 8.79:1                                   */
 
   /* Why there are two greens and only one of them may be written with.
@@ -70,13 +70,16 @@
      a fill. It is the heading colour everywhere below.
 
      The green carries actions, and as a surface or an edge it needs no
-     caveat: white on the green is 4.69:1. But the green itself on the cream
-     paper is 4.29:1, and the cream paper is what most of this shop is
-     painted with, so green words fail on the one background they are most
-     likely to land on. Hence the split: --wf-accent fills and borders,
-     --wf-accent-deep is the one that may set `color`, at 5.56:1 on the cream
-     and 6.07:1 on white. The six rules in this theme that used to print the
-     accent as text now print the deep one. */
+     caveat: white on the green is 4.69:1. As a word it is the one value in
+     the palette with no margin. On the white page it is 4.69:1, which clears
+     the floor by two hundredths, and on the tinted surface it is 4.35:1,
+     which does not. A token that passes on one of the shop's two grounds and
+     fails on the other is not a text colour.
+
+     Hence the split: --wf-accent fills and borders, --wf-accent-deep is the
+     one that may set `color`, at 6.07:1 on the page and 5.64:1 on the tint.
+     The six rules in this theme that used to print the accent as text print
+     the deep one. */
 
   /* The paper is white.
 
