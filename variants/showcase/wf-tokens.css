@@ -135,8 +135,9 @@
      Filled rather than outlined is a conversion decision, not a taste one: an
      outlined button asks to be found, a filled one is found. And it puts the
      brand colour on the thing the customer is here to press, which is the
-     only place a brand colour earns anything. White on this olive is 6.64:1,
-     measured, so the label clears AA at body size with room left over. */
+     only place a brand colour earns anything. White on the green is 4.69:1,
+     measured, which clears AA at body size. The 6.64:1 this note used to
+     quote belonged to a darker olive that is not in the mark. */
   --wf-rule:      var(--wf-accent);
 
   --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);

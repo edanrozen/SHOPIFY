@@ -11,11 +11,8 @@
    Loaded from snippets/stylesheets.liquid next to wf-pdp.css, on the product
    template only. */
 
-/* The gold is the one measured in the reviews section: 4.04:1 on white and
-   3.70:1 on the cream page, both past the 3:1 that a graphic carrying
-   meaning has to clear. The row is forced to ltr inside an rtl page because
-   a rating fills from the same side everywhere; it is a quantity, not a
-   sentence. */
+/* The row is forced to ltr inside an rtl page because a rating fills from
+   the same side everywhere; it is a quantity, not a sentence. */
 .wf-pdp__stardef { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 /* `color` is set because this is a bare <a> and an unstyled link is painted

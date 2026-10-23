@@ -6,13 +6,13 @@
 
    It is a sheet of its own rather than more of wf.css because a promise moves,
    and a promise that moves is easier to find in a small file named after it
-   than inside 33KB of everything else. It loads on every template rather than
+   than inside the shop's own sheets. It loads on every template rather than
    only on the ones carrying these sections today, so a band dropped onto a
    third template in the editor is styled the moment it lands.
 
    Every pair here is one already measured on this palette: cream on the brown
-   is 6.46:1, the deep sand is 5.16:1, white on the green is 4.69:1 and the
-   taupe on the cream is 5.39:1. The pale olive is deliberately not used for
+   is 6.46:1, the deep sand is 4.98:1, white on the green is 4.69:1 and the
+   taupe on the cream is 4.99:1. The pale olive is deliberately not used for
    text on the brown; at 4.46:1 it clears the 3:1 a rule needs and misses the
    4.5:1 a small label needs, which is exactly the kind of near miss only a
    measurement catches. */
@@ -152,10 +152,10 @@
 
 /* The panel darkens the brown rather than lightening it, and that is a measured
    decision rather than a taste one. At white 9% the surface lifts to about
-   #7E6144, and the deep sand on it falls to 4.13:1: the panel that was added to
+   #806242, and the deep sand on it falls to 3.96:1: the panel that was added to
    give the three points definition was eating the contrast of the line inside
-   it. Darkening instead sends both lines the other way, and the white border
-   still draws the edge. */
+   it. Darkening instead sends both lines the other way, to 5.99:1 for the sand
+   and 7.76:1 for the cream, and the white border still draws the edge. */
 .wf-vow--band .wf-vow__pt {
   background: rgba(0, 0, 0, .13);
   border: 1px solid rgba(255, 255, 255, .22);
@@ -357,7 +357,7 @@
    than a slightly generic one.
 
    Contrast on the cream card: the label is the ink at 8.80:1, the consent line
-   the taupe at 5.42:1, the code chip is the paper on the brown at 6.46:1. */
+   the taupe at 4.99:1, the code chip is the paper on the brown at 6.46:1. */
 .wf-optin__form { display: block; }
 
 .wf-optin__label {

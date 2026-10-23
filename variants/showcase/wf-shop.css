@@ -5,8 +5,8 @@
    Loaded after wf.css on every template. The colours live in wf-tokens.css.
 
    The sheet is in three files for a transport limit rather than a design
-   one: wf-tokens.css, this one, and wf-shop.css. wf-tokens.css carries the
-   reason and the division.
+   one: wf-tokens.css, wf.css and this one. wf-tokens.css carries the reason
+   and the division.
    ========================================================================== */
 
 /* ---- product grid -------------------------------------------------------- */
@@ -27,9 +27,9 @@
    unstyled link #0000EE. Nothing shows it today, but only because every
    descendant that carries text happens to set a colour of its own, which is
    a coincidence and not a rule: a span added inside a card would arrive
-   blue. The same line is on .wf-circle, the other bare anchor in the theme.
-   Measured on a rendered page, these two were the only elements left whose
-   computed colour was outside the palette. */
+   blue. The same line is on .wf-circle and on .wf-rate, the other two bare
+   anchors in the theme. Measured on a rendered page, those three were the
+   only elements left whose computed colour was outside the palette. */
 .wf-card {
   display: flex;
   flex-direction: column;
@@ -120,8 +120,8 @@
    and the longest badge in the catalogue ("ידית עץ אשור") plus a "-30%" on the
    same row needs about 164px. They would collide on every phone.
 
-   Olive on white is 6.64:1 and the label is .82rem, which is 13.1px, just over
-   the floor the rest of the site holds. */
+   The green on white is 4.69:1 and the label is .82rem, which is 13.1px, just
+   over the floor the rest of the site holds. */
 .wf-card__tag {
   position: absolute;
   inset-block-end: 8px;
@@ -300,8 +300,8 @@
    side of the digits. */
 /* Brown rather than the accent, and the reason is a measurement, not taste.
    This line renders at 17.6px bold on the deep cream, and the accent on that
-   ground is 4.01:1. WCAG only relaxes to 3:1 at 18.66px bold, so this sits
-   just under the threshold where 4.5 still applies and 4.01 fails it. The
+   ground is 4.00:1. WCAG only relaxes to 3:1 at 18.66px bold, so this sits
+   just under the threshold where 4.5 still applies and 4.00 fails it. The
    brown is 6.03:1 on the same ground, and a headline number is a heading, so
    it takes the heading colour. */
 .wf-launch__upto {

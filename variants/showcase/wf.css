@@ -77,7 +77,7 @@
    element a customer actually looks at. Black CTAs on a cream shop are the
    same mistake as the cold grey footer that note describes.
 
-   So the button is now the olive, filled, white label. It puts the brand
+   So the button is now the green, filled, white label. It puts the brand
    colour on the thing the customer came to press, which is the only place a
    brand colour earns anything.
 
@@ -91,9 +91,10 @@
    height, so every button is the same box it was and the sticky bar's 76px
    spacer stays honest.
 
-   Contrast is measured, not assumed: white on the olive is 6.64:1 for the
-   label, and the olive against the white page is 6.64:1 for the edge, against
-   a 4.5:1 floor for body text and a 3:1 floor for a UI edge. */
+   Contrast is measured, not assumed: white on the green is 4.69:1 for the
+   label and the green on the white page is 4.69:1 for the edge, against a
+   4.5:1 floor for body text and a 3:1 floor for a UI edge. The 6.64:1 this
+   note used to quote was a darker olive that is not in the mark. */
 .wf-btn {
   display: inline-flex;
   align-items: center;
@@ -228,8 +229,8 @@
 
    --pl-taupe is redefined for this subtree rather than each muted line being
    rewritten. Every secondary line in here reads var(--pl-taupe), and taupe on
-   this green is 3.98:1, under the floor. Pointing the token at ink-soft inside
-   the band takes them all to 6.47:1 in one declaration, and the token keeps
+   this green is 3.45:1, under the floor. Pointing the token at ink-soft inside
+   the band takes them all to 6.08:1 in one declaration, and the token keeps
    meaning "the muted text on this surface", which is what it was ever for.
 
    The rules are gone with it. A cream hairline on a green band is a seam from
