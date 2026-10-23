@@ -18,18 +18,29 @@
    sentence. */
 .wf-pdp__stardef { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+/* `color` is set because this is a bare <a> and an unstyled link is painted
+   #0000EE by the user agent. Nothing inside it shows that today, but only
+   because every descendant sets a colour of its own. See .wf-card. */
 .wf-rate {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin: 10px 0 0;
+  color: var(--pl-ink);
   text-decoration: none;
 }
 .wf-rate:hover .wf-rate__t { text-decoration: underline; }
 .wf-rate__stars { position: relative; display: inline-block; width: max-content; direction: ltr; line-height: 0; }
 .wf-rate__row { display: inline-flex; gap: 2px; white-space: nowrap; }
-.wf-rate__row--track { color: #E0D2BA; }
-.wf-rate__row--fill { position: absolute; inset-block-start: 0; left: 0; overflow: hidden; color: #A9741A; }
+/* The rating is drawn in the brand brown on the brand line, not in a gold.
+   A gold was a third colour the logo does not contain, and the brown is the
+   stronger of the two reads anyway: 6.46:1 on the paper against the gold's
+   3.70:1. It also fixes a failure rather than only a brand problem. A rating
+   is understood by telling the filled half from the empty one, which WCAG
+   1.4.11 puts at 3:1, and the gold on the old track measured 2.71:1. The
+   brown on the line is 4.51:1. */
+.wf-rate__row--track { color: var(--pl-line); }
+.wf-rate__row--fill { position: absolute; inset-block-start: 0; left: 0; overflow: hidden; color: var(--pl-brown); }
 .wf-rate__s { width: 16px; height: 15px; flex: none; fill: currentColor; }
 .wf-rate__n { font-family: var(--pl-sans); font-size: .9rem; font-weight: 700; color: var(--pl-ink); }
 .wf-rate__t { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-taupe); }

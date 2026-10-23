@@ -1,0 +1,208 @@
+/* ==========================================================================
+   The long product page, second half.
+
+   Split from wf-pdp.css for a transport limit rather than a design one: a
+   theme file has to cross the Admin API in one piece, that piece tops out at
+   about 16KB, and the single sheet had grown past it. Nothing in here
+   references anything in the first half except the shared tokens, so the two
+   can be read apart.
+
+   Loaded immediately after wf-pdp.css on the product template only.
+   ========================================================================== */
+
+/* ---- the steps rail ------------------------------------------------------
+   A single column with a rule running down the numbers, so the eye is told
+   this is a sequence rather than a set of unrelated tips. */
+.wf-steps { list-style: none; margin: 0; padding: 0; max-width: 62ch; margin-inline: auto; display: grid; gap: 0; }
+.wf-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 14px;
+  padding-bottom: 22px;
+}
+.wf-step:last-child { padding-bottom: 0; }
+.wf-step__n {
+  position: relative;
+  z-index: 1;
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--pl-white);
+  border: 2px solid var(--wf-accent);
+  color: var(--wf-accent-deep);
+  font-family: var(--pl-display);
+  font-size: .9rem;
+  font-weight: 700;
+}
+/* The rule is drawn from the number down, and the last step does not draw it,
+   so the sequence ends rather than trailing into whitespace. */
+.wf-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  inset-block: 32px 0;
+  inset-inline-start: 15px;
+  width: 2px;
+  background: var(--wf-rail);
+}
+.wf-step__t { font-family: var(--pl-display); font-size: 1.02rem; font-weight: 700; color: var(--pl-ink); margin: 5px 0 4px; }
+.wf-step__x { font-family: var(--pl-sans); font-size: .93rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
+
+/* ---- myth versus reality ------------------------------------------------- */
+.wf-vs { max-width: 760px; margin-inline: auto; display: grid; gap: 12px; }
+.wf-vs__row {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+}
+.wf-vs__side {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  padding: 14px clamp(14px, 2.2vw, 20px);
+}
+.wf-vs__side + .wf-vs__side { border-top: 1px solid var(--pl-line); }
+.wf-vs__side--myth { background: var(--pl-cream); }
+.wf-vs__mark {
+  width: 24px; height: 24px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pl-white);
+}
+.wf-vs__side--myth .wf-vs__mark { background: var(--pl-taupe); }
+.wf-vs__side--real .wf-vs__mark { background: var(--wf-accent); }
+.wf-vs__label {
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pl-taupe);
+  display: block;
+  margin-bottom: 3px;
+}
+.wf-vs__text { font-family: var(--pl-sans); font-size: clamp(.9rem, 2.3vw, 1rem); line-height: 1.55; color: var(--pl-ink); margin: 0; }
+.wf-vs__side--real .wf-vs__text { color: var(--pl-ink-soft); }
+
+/* ---- faq and specs ------------------------------------------------------- */
+.wf-faq { max-width: 760px; margin-inline: auto; display: grid; gap: 10px; }
+.wf-faq__item {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+}
+/* <details> keeps the answers in the document for a crawler and for a visitor
+   with JavaScript off, which an accordion built out of divs and a click
+   handler does not. */
+.wf-faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+  padding: 16px clamp(14px, 2.2vw, 20px);
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.02rem);
+  font-weight: 700;
+  color: var(--pl-ink);
+  min-height: 44px;
+}
+.wf-faq__q::-webkit-details-marker { display: none; }
+.wf-faq__q::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 9px; height: 9px;
+  border-inline-end: 2px solid var(--pl-taupe);
+  border-block-end: 2px solid var(--pl-taupe);
+  transform: rotate(45deg);
+  transition: transform .18s var(--pl-ease);
+  margin-block-start: -4px;
+}
+.wf-faq__item[open] .wf-faq__q::after { transform: rotate(-135deg); margin-block-start: 4px; }
+.wf-faq__a {
+  padding: 0 clamp(14px, 2.2vw, 20px) 16px;
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0;
+}
+
+.wf-specs { max-width: 620px; margin-inline: auto; border: 1px solid var(--pl-line); border-radius: var(--wf-r-lg); overflow: hidden; background: var(--pl-white); }
+.wf-specs__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px; padding: 12px clamp(14px, 2.2vw, 18px); font-family: var(--pl-sans); font-size: .92rem; line-height: 1.5; }
+.wf-specs__row + .wf-specs__row { border-top: 1px solid var(--pl-line); }
+.wf-specs__row:nth-child(odd) { background: var(--pl-cream); }
+.wf-specs__k { font-weight: 700; color: var(--pl-ink); }
+.wf-specs__v { color: var(--pl-ink-soft); }
+
+.wf-chips { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.wf-chips li {
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  color: var(--pl-ink);
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-pill);
+  padding: 7px 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-faq__q::after { transition: none; }
+}
+
+/* The same points, set as a lede above the buy box: aligned to the column
+   rather than centred in the band, and tighter, because here they are read on
+   the way to a price rather than as a section of their own. */
+.wf-points--lede {
+  max-width: none;
+  margin-inline: 0;
+  gap: 9px;
+  margin-bottom: 20px;
+}
+.wf-points--lede li { font-size: clamp(.9rem, 2.3vw, .98rem); }
+.wf-points--lede .wf-points__mark { width: 22px; height: 22px; font-size: .85rem; }
+
+/* ---- the photographs, set large ------------------------------------------
+   One column lets each picture keep its own proportions. There is nothing
+   beside it to line up with, so a fixed frame would only letterbox: Bloom is
+   shot at 2:3 and a 4:5 box leaves a white margin down both sides of every
+   photograph for no gain. The width and height attributes on the <img> hold
+   the space while it loads, so nothing shifts.
+
+   Two columns do take a fixed box, because a pair read side by side is a
+   comparison and a comparison wants the same box twice. Which box is a section
+   setting, arriving as --wf-shot-ratio, so the frame can be told the shape the
+   product was actually photographed in. Contained rather than cropped, since
+   this catalogue runs from 1145x1374 to 1254x1254 to 1206x1806 inside a single
+   product, and cover would take a third off the tall ones and nothing off the
+   square ones. */
+.wf-shots { display: grid; gap: clamp(14px, 2.6vw, 28px); }
+.wf-shots--one { max-width: 620px; margin-inline: auto; }
+.wf-shots--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin-inline: auto; }
+.wf-shot { margin: 0; }
+/* The deep cream for the same reason .wf-card__frame takes it: the catalogue
+   is photographed on #F0ECE0, which is 1.18 against white and 1.01 against
+   this. These are the largest pictures on the page, so the white box was
+   largest here too. */
+.wf-shot__frame {
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+}
+.wf-shot__frame img { width: 100%; height: auto; display: block; }
+.wf-shots--two .wf-shot__frame { aspect-ratio: var(--wf-shot-ratio, 1 / 1); }
+.wf-shots--two .wf-shot__frame img { height: 100%; object-fit: contain; }
+.wf-shot__cap {
+  font-family: var(--pl-sans);
+  font-size: .86rem;
+  line-height: 1.5;
+  color: var(--pl-taupe);
+  margin: 10px 0 0;
+  text-align: center;
+}

@@ -271,7 +271,7 @@
   font-size: .8rem;
   font-weight: 700;
   line-height: 1.5;
-  color: var(--wf-accent);
+  color: var(--wf-accent-deep);
 }
 
 .wf-vow__pop .wf-vow__pt-t { color: var(--pl-ink); }
@@ -305,8 +305,10 @@
 
 /* ── The perks strip, above the product page ────────────────────────────────
    The sand under the header, dark brown and bold on it, the way the merchant
-   drew it. Measured: #73522F on #ECDAC1 is 5.16:1, which clears the 4.5:1 a
-   small bold line needs without going to black.
+   drew it. Measured: --pl-brown on --pl-sand-deep is 4.98:1, which clears the
+   4.5:1 a small bold line needs without going to black. It was 5.16:1 while
+   the sand was mixed toward the dog tan; the brown-derived sand gives up that
+   much and buys a palette with nothing in it but the two logo colours.
 
    Fixed columns rather than a flex row with pipe separators, and that is the
    whole trick. A wrapped flex row puts a separator at the start of the second

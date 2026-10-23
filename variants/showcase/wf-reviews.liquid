@@ -191,11 +191,19 @@
 {%- endif -%}
 
 {% stylesheet %}
-  /* The gold is #A9741A rather than a brighter amber because a rating is a
-     graphic that carries meaning: it measures 4.04:1 on white, 3.70:1 on
-     --pl-cream and 3.45:1 on --pl-cream-deep, all past the 3:1 that
-     non-text contrast asks for. #C9972B, the obvious choice, sits at 2.4:1
-     on cream and fails on every band this section can be placed in. */
+  /* The stars are the brand brown on the brand line, and the gold they
+     replace is gone from the shop. Two reasons, in the order that matters.
+
+     The gold failed. A rating is understood by telling the filled half from
+     the empty one, and WCAG 1.4.11 puts that at 3:1. #A9741A on the #E0D2BA
+     track measured 2.71:1. Every figure the old note here quoted was the
+     gold against the band behind the widget, which is the wrong pair: a
+     customer does not compare a star to the paper, they compare it to the
+     star next to it. The brown on --pl-line is 4.51:1.
+
+     The gold was also a third colour the logo does not contain. The brown
+     carries it better anyway: 7.05:1 on white, 6.46:1 on --pl-cream and
+     6.03:1 on --pl-cream-deep, against the gold's 4.04, 3.70 and 3.45. */
   .wf-star-def { position: absolute; width: 0; height: 0; overflow: hidden; }
 
   /* width: max-content is load bearing, not tidiness. The card is a column
@@ -213,17 +221,17 @@
     line-height: 0;
   }
   .wf-stars__row { display: inline-flex; gap: 2px; white-space: nowrap; }
-  .wf-stars__row--track { color: #E0D2BA; }
+  .wf-stars__row--track { color: var(--pl-line); }
   .wf-stars__row--fill {
     position: absolute;
     inset-block-start: 0;
     left: 0;
     overflow: hidden;
-    color: #A9741A;
+    color: var(--pl-brown);
   }
   .wf-star { width: 15px; height: 14px; flex: none; fill: currentColor; }
   .wf-stars--lg .wf-star { width: 21px; height: 20px; }
-  .wf-star--mini { width: 11px; height: 11px; color: #A9741A; }
+  .wf-star--mini { width: 11px; height: 11px; color: var(--pl-brown); }
 
   .wf-rev__top {
     display: flex;
@@ -271,7 +279,7 @@
     background: var(--pl-cream-deep);
     overflow: hidden;
   }
-  .wf-rev__fill { display: block; height: 100%; border-radius: 99px; background: #A9741A; }
+  .wf-rev__fill { display: block; height: 100%; border-radius: 99px; background: var(--pl-brown); }
 
   .wf-rev__list {
     list-style: none;

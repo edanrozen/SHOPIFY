@@ -236,8 +236,10 @@
    the cream button 6.46:1. The dark green alternative was dropped because its
    small label landed at 3.84:1.
 
-   It lives in the section rather than in wf.css because wf.css is 33KB that
-   has to be retyped in full to deploy one rule, and that has drifted twice. */
+   It lives in the section rather than in a shared sheet because wf.css was
+   33KB that had to be retyped in full to deploy one rule, and that drifted
+   twice. The sheet is three files under the limit now, so a new rule like
+   this one belongs in wf.css again. */
 
 .wf-hero--panel .wf-hero__media { aspect-ratio: 4 / 3; }
 @media (min-width: 750px) { .wf-hero--panel .wf-hero__media { aspect-ratio: 16 / 9; } }

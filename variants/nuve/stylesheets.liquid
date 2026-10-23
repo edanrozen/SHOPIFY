@@ -26,7 +26,17 @@
 <noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
 
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  wf.css is three files. The showcase theme split it because a theme file has
+  to cross the Admin API in one piece and that piece tops out at about 16KB;
+  this variant loads the same three, in the same order, or it would come up
+  with no palette and no catalogue rules.
+{%- endcomment -%}
+{{ 'wf-tokens.css' | asset_url | stylesheet_tag }}
 {{ 'wf.css' | asset_url | stylesheet_tag }}
+{{ 'wf-shop.css' | asset_url | stylesheet_tag }}
+
 {{ 'nv.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'pluma.js' | asset_url }}" defer></script>

@@ -1,12 +1,14 @@
 {%- comment -%}
   The showcase theme's style layer.
 
-  `wf.css` sits on top of `pluma.css` rather than replacing it: the palette,
-  the two Hebrew faces and the wrapper are already right, and rebuilding them
-  would only risk getting them wrong. `wf.css` loads last so its posture wins.
+  The showcase sheets sit on top of `pluma.css` rather than replacing it: the
+  two Hebrew faces and the wrapper are already right, and rebuilding them
+  would only risk getting them wrong. They load after it so their posture
+  wins, and `wf-tokens.css` restates the palette, which is the one file to
+  open to change a colour.
 
   `pdp.css` and `pl-story.css` are gone. The product page here is `wf-product`,
-  which carries its own rules in `wf.css`, so neither sheet has anything left
+  which carries its own rules in these sheets, so neither has anything left
   to style and both were pure weight on the heaviest page in the shop.
 {%- endcomment -%}
 
@@ -26,7 +28,15 @@
 <noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
 
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  wf.css is three files. The division is a transport limit rather than a
+  design one, and wf-tokens.css carries the reason. Order matters only in
+  that the tokens come first; nothing in wf-shop.css is overridden by wf.css.
+{%- endcomment -%}
+{{ 'wf-tokens.css' | asset_url | stylesheet_tag }}
 {{ 'wf.css' | asset_url | stylesheet_tag }}
+{{ 'wf-shop.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
   The guarantee, in its own sheet. It is the one block of rules that states a
@@ -44,6 +54,7 @@
 {%- endcomment -%}
 {%- if template.name == 'product' -%}
   {{ 'wf-pdp.css' | asset_url | stylesheet_tag }}
+  {{ 'wf-pdp-long.css' | asset_url | stylesheet_tag }}
   {{ 'wf-pdp2.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 

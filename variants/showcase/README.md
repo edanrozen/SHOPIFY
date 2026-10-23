@@ -57,8 +57,12 @@ house, and the two things made for cats alone.
 
 ## Files
 
-    assets/wf.css                 the posture and the white palette
-    assets/wf-pdp.css             the long product page only
+    assets/wf-tokens.css          the palette and the shared tokens
+    assets/wf.css                 the posture: sections, buttons, hero, trust
+    assets/wf-shop.css            the catalogue: grid, card, product page, bar
+    assets/wf-pdp.css             the long product page, first half
+    assets/wf-pdp-long.css        the long product page, second half
+    assets/wf-pdp2.css            the newer product page blocks
     config/settings_data.json     the same palette, for Horizon's own sections
     snippets/stylesheets.liquid   base, fonts, pluma, wf. No pdp.css or pl-story.css
     snippets/wf-card.liquid       one card, shared by the grid and the collection
@@ -97,7 +101,7 @@ are not rendered at all when there is one slide.
 
 ## A divergence worth knowing about
 
-`assets/wf.css` and `sections/wf-hero.liquid` in this repo are the versions on
+`assets/wf.css` and its two companions, and `sections/wf-hero.liquid`, in this repo are the versions on
 the showcase theme (155253014580). The landing page theme (155266482228) is one
 revision behind on both, because neither difference renders there: it has no
 `wf-hero` on any template, and the rest of the change is the slide and dot rules
@@ -118,45 +122,78 @@ do more for this page than any further code.
 
 ## Rendering it locally
 
-    PREVIEW_THEME=<staged dir> PREVIEW_SHEETS=assets/pluma.css,assets/wf.css \
+    PREVIEW_THEME=<staged dir> \
+    PREVIEW_SHEETS=assets/pluma.css,assets/wf-tokens.css,assets/wf.css,assets/wf-shop.css \
       node tools/pdp-preview/render.js index > home.html
+
+The product page needs the rest of the chain:
+
+    PREVIEW_SHEETS=assets/pluma.css,assets/wf-tokens.css,assets/wf.css,assets/wf-shop.css,\
+    assets/wf-vow.css,assets/wf-pdp.css,assets/wf-pdp-long.css,assets/wf-pdp2.css \
+      node tools/pdp-preview/render.js product bloom > bloom.html
+
+`base.css` is Horizon's and is not in this repo, so a local render has no body
+text colour and everything that does not set one comes out pure black. On the
+live page it is `settings.color_palette.foreground`. Add
+`<style>body{color:#2A2722}</style>` before measuring contrast locally.
 
 ## The palette
 
-Every colour in `wf.css` was sampled out of the logo artwork and then checked
+Every colour in `wf-tokens.css` was sampled out of the logo artwork and then checked
 for contrast. The shop and the mark are literally the same colours.
 
-The logo writes "Tiny" in olive and "bloom" in dusty pink, and that split is
-the whole system: olive carries every action, pink carries none.
+The logo writes "Tiny" in brown and "Bloom" in green. It is two colours, so
+the shop is two colours, and every other value in the theme is one of those
+two mixed toward the paper by a stated percentage. The dog tan and the flower
+pink are measurements off the artwork, not tokens: they sat in the palette for
+the whole life of the file and were used by nothing, and they are gone.
 
-That is a measurement, not a preference. White text on the olive is 6.64:1 and
-clears WCAG AA comfortably. White text on the pink as drawn is 2.98:1, which
-fails AA for body text and fails even the 3:1 floor for large text and UI
-components. A pink button is therefore not available at any price, so pink is
-a surface and a flourish and never carries words.
+The split between the two is a measurement, not a preference.
 
-    --wf-accent      #586040   buttons, links, icons, the open thumbnail   6.64:1 on white
-    --wf-accent-deep #4C5337   hover                                       8.08:1
-    --wf-pink        #D08078   surfaces only, never text
-    --wf-pink-ink    #C0554A   the one pink dark enough to set text in     4.53:1 on white
-    --wf-pink-soft   #FBF2F0   the band behind Bloom
-    --pl-cream       #F7F4EC   section bands, and the footer
-    --pl-line        #E2DCCF   every hairline
-    --pl-ink         #2A2722   headings and prices                        14.88:1
-    --pl-ink-soft    #4A443C   body                                        9.62:1
-    --pl-taupe       #6B6357   small print       5.92:1 on white, 5.39:1 on cream
+The brown carries words. White on it is 7.05:1 and it is 7.05:1 on white, so
+it can be a heading, a label, a rating star or a fill without qualification.
 
-Greys are gone on purpose. Cold grey under a warm cream logo is what made the
-old footer look like it belonged to a different shop.
+The green carries actions, as a fill or an edge. White on the green is 4.69:1,
+which is fine for a filled button. But the green itself on the cream paper is
+4.29:1, and the cream paper is what most of this shop is painted with, so a
+green word fails on the one background it is most likely to land on. Hence two
+greens: the accent fills and borders, the deep one is the only one allowed to
+set `color`.
 
-The same values are mirrored in two places Liquid cannot reach from CSS:
+    --wf-accent      #70784B   fills, borders, the open thumbnail   white on it 4.69:1
+    --wf-accent-deep #5F663F   the green as a word                  6.07:1 on white
+    --pl-brown       #73522F   headings, prices, rating stars       7.05:1 both ways
+    --pl-brown-deep  #614527   hover                                8.79:1
+    --pl-olive-pale  #C9D39C   the trust band, the footer           the green as a surface
+    --pl-cream       #FBF4E9   the paper the whole shop sits on
+    --pl-cream-deep  #F4ECE0   the band that lifts off the paper    the brown at 5%
+    --pl-sand-deep   #E3D7C8   text on the brown band               the brown at 18%, 4.98:1
+    --pl-line        #DACDBC   every hairline, every empty star     the brown at 24%
+    --pl-ink         #2A2722   body headings                        14.88:1
+    --pl-ink-soft    #4A443C   body                                  9.62:1
+    --pl-taupe       #826443   small print        the brown at 89%, 5.45 white, 4.99 cream
 
-  * `config/settings_data.json` sets `color_palette.color2` to #E2DCCF. That
+Greys are gone on purpose, and that now includes the taupe, which used to be a
+near neutral at saturation 0.10. Cold grey under a warm cream logo is what made
+the old footer look like it belonged to a different shop.
+
+Measured in a browser on the homepage and the Bloom product page, at 390 and
+1280: every computed colour on every visible element in both pages is in that
+list. See PALETTE.md for how each mix was chosen and what each one failed at
+first.
+
+The same values are mirrored in three places Liquid cannot reach from CSS:
+
+  * `config/settings_data.json` sets `color_palette.color2` to #DACDBC. That
     one key draws the border of every input, the cart drawer, every popover
     and the secondary button. It was #000000, which is why the cart and the
     contact form had hard black outlines.
-  * `sections/header-group.json` sets the announcement bar to #586040 and
-    `sections/footer-group.json` sets the footer to #F7F4EC.
+  * The same file's `presets.Horizon` block holds Horizon's factory black,
+    white and two greys. Clicking that preset in the theme editor would undo
+    the palette in one move, so it now holds the same four brand values.
+  * `sections/header-group.json` sets the announcement bar to #C9D39C and
+    `sections/footer-group.json` sets the footer to the same, with #70784B
+    dividers and a #73522F26 scrim where Horizon shipped a black one.
 
 ## The logo
 
@@ -290,7 +327,7 @@ four after somebody edits the metafield.
 for a crawler and for a visitor whose JavaScript did not load, and the arrow is
 drawn from the element's own `[open]` state, so the section ships no script.
 
-`wf-pdp.css` is about 10KB and is requested on the product template only, from
+`wf-pdp.css` and `wf-pdp-long.css` are about 21KB together and are requested on the product template only, from
 `snippets/stylesheets.liquid`. The homepage and the collection pages decide
 whether a visitor stays at all and should not carry rules they never use.
 

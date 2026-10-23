@@ -1,0 +1,152 @@
+/* ==========================================================================
+   TinyBloom, the palette and the shared tokens.
+
+   This is the file to open to change a colour. Every other sheet in the theme
+   reads these names and none of them defines one, so a value changed here
+   changes the whole shop, including the parts of Horizon that read the same
+   tokens through config/settings_data.json.
+
+   The sheet is in three files, and the division is a transport limit rather
+   than a design one. A theme file has to cross the Admin API in one piece,
+   that piece tops out at about 16KB, and the single sheet had grown past
+   twice that, which meant no line in it could be changed at all. The seams
+   were put between blocks that do not reference each other:
+
+     wf-tokens.css   the palette and the shared tokens. Everything else in
+                     the theme reads these and nothing here reads anything
+                     else, so it loads first and is the one file to open to
+                     change a colour.
+     wf.css          the posture: sections, buttons, the hero, the trust row,
+                     the category circles and the flagship.
+     wf-shop.css     the catalogue: the product grid and card, the product
+                     page, the sticky buy bar, the collection header, the
+                     launch prices and the announcement bar.
+
+   Three requests rather than one, which HTTP/2 multiplexes, against a sheet
+   that can be edited again.
+   ========================================================================== */
+
+:root {
+  /* Sampled from the logo artwork, pixel by pixel, not chosen.
+
+     This corrects a factual error that the rest of this comment used to be
+     built on. It said the mark writes "Tiny" in olive and "bloom" in dusty
+     pink. It does not. "Tiny" is brown and "Bloom" is green, and the pink is
+     a flower, a heart and the inside of a cat's ear. Every colour below is the
+     modal pixel value of its region in the file, counted after dropping the
+     paper and the antialiasing:
+
+       Bloom green   #70784B   46,070 px   the largest coloured area
+       Tiny brown    #73522F   35,790 px
+       dog tan       #C59759   29,743 px
+       flower pink   #EEA391    5,491 px
+       paper         #FBF4E9
+
+     The wordmark is two colours, so the shop is two colours, and each one does
+     the job its contrast allows rather than the job that looks nice in a
+     mockup.
+
+     The tan and the pink are measurements, not tokens. They were named here
+     for the whole life of this file and used by nothing, at 2.64:1 and
+     2.04:1, and a palette carrying two dead entries is a palette that reads
+     as four colours to whoever opens it next. They are gone.
+
+     What replaces them is a rule rather than two more values. Every neutral
+     below is one of the two brand colours mixed toward the paper by a stated
+     percentage, so there is no colour anywhere in this theme that cannot be
+     named as "the brown at x%" or "the green at x%". The warm neutrals used
+     to be mixed toward the dog tan instead, which put them at hue 35 against
+     the brown's 31. Four degrees is not visible; being able to describe the
+     shop in two colours without an asterisk is. */
+  --wf-accent:      #70784B;  /* "Bloom". white on it 4.69:1. fills and edges    */
+  --wf-accent-deep: #5F663F;  /* the same green as a word. 6.07:1 on white       */
+  --pl-brown:       #73522F;  /* "Tiny". 7.05:1 both ways, 6.46:1 on the cream   */
+  --pl-brown-deep:  #614527;  /* hover, 8.79:1                                   */
+
+  /* Why there are two greens and only one of them may be written with.
+
+     The brown carries words without qualification. White on it is 7.05:1 and
+     it is 7.05:1 on white, so it can be a heading, a label, a rating star or
+     a fill. It is the heading colour everywhere below.
+
+     The green carries actions, and as a surface or an edge it needs no
+     caveat: white on the green is 4.69:1. But the green itself on the cream
+     paper is 4.29:1, and the cream paper is what most of this shop is
+     painted with, so green words fail on the one background they are most
+     likely to land on. Hence the split: --wf-accent fills and borders,
+     --wf-accent-deep is the one that may set `color`, at 5.56:1 on the cream
+     and 6.07:1 on white. The six rules in this theme that used to print the
+     accent as text now print the deep one. */
+
+  /* The green lifted to a surface, at the mark's own hue rather than near it.
+     Hue 70.9 against the mark's 70.7. The value this replaced sat at 78,
+     close enough to pass and not close enough to be the logo.
+
+     Ink on it is 9.41:1 and ink-soft 6.08:1. Taupe is 3.45:1 and does not
+     clear the floor, so anything painted with this still has to remap the
+     muted token. See .wf-trust. */
+  --pl-olive-pale:  #C9D39C;
+
+  /* The three warm neutrals, each the paper mixed toward the brown.
+
+     --pl-cream-deep   the paper 5% toward the brown. It sits 1.072 from the
+                       cream, the same separation the value it replaces had,
+                       which is what keeps two adjacent bands from merging
+                       into one slab. Ink 12.69:1, ink-soft 8.21:1, taupe
+                       4.65:1, the brown 6.03:1. It is also, by measurement
+                       rather than by luck, close to the ground the catalogue
+                       is photographed on. See .wf-card__frame.
+
+     --pl-sand-deep    the paper 18% toward the brown. This is the one warm
+                       neutral that is read as text, on the brown panel in
+                       wf-hero and on the brown band in wf-vow, where it is
+                       4.98:1. 30% and 24% were measured first and came in at
+                       4.09:1 and 4.51:1, so 18% is the shallowest mix that
+                       leaves a body paragraph a margin rather than a pass.
+
+     --pl-line         the paper 24% toward the brown. 1.563 on white against
+                       the 1.37 of the value it replaces, so a card edge in
+                       this shop is now faint rather than nearly absent. It
+                       is also the empty half of a rating star, where the
+                       brown on it is 4.51:1. */
+  --pl-cream-deep:  #F4ECE0;
+  --pl-sand-deep:   #E3D7C8;
+  --pl-line:        #DACDBC;
+
+  --pl-porcelain: #FFFFFF;
+  --pl-cream:     #FBF4E9;  /* the paper the mark is drawn on                   */
+  --pl-sand:      var(--pl-cream);  /* one paper, two names, kept for callers   */
+  --pl-ink:       #2A2722;  /* 14.88:1 on white                                 */
+  --pl-ink-soft:  #4A443C;  /*  9.62:1                                          */
+  --pl-taupe:     #826443;  /* the brown at 89%. 5.45 white, 4.99 cream         */
+  --pl-white:     #FFFFFF;
+  --pl-clay:      var(--wf-accent);
+  --pl-clay-deep: var(--wf-accent-deep);
+
+  /* Every button is filled with this. One line changes them all, including the
+     label inside.
+
+     It used to be #000000, and pure black was the single cold value in a
+     palette whose whole premise, four comments up, is that cold under a warm
+     cream mark is what made the old footer look like it belonged to a
+     different shop. Black on the CTAs was that same mistake in the one place
+     a customer actually looks.
+
+     Filled rather than outlined is a conversion decision, not a taste one: an
+     outlined button asks to be found, a filled one is found. And it puts the
+     brand colour on the thing the customer is here to press, which is the
+     only place a brand colour earns anything. White on this olive is 6.64:1,
+     measured, so the label clears AA at body size with room left over. */
+  --wf-rule:      var(--wf-accent);
+
+  --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);
+  --pl-sh-m: 0 4px 14px rgba(0, 0, 0, .09);
+  --pl-sh-l: 0 12px 32px rgba(0, 0, 0, .12);
+
+  /* Chewy is less round than the version this replaces. Cards and panels take
+     a small radius; only the buttons are full pills. */
+  --wf-r: 10px;
+  --wf-r-lg: 14px;
+  --wf-pill: 999px;
+  --wf-scrim: linear-gradient(to top, rgba(0, 0, 0, .68) 0%, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, 0) 74%);
+}

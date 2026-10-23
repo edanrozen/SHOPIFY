@@ -18,12 +18,13 @@
    ========================================================================== */
 
 :root {
-  /* The connector drawn down the numbered steps. --pl-line is 1.24:1 against
-     the deep cream, which is invisible; this is 3.08:1 there and 3.39:1 on
-     white, so the sequence reads as a sequence on every band it crosses. On
-     the bark band it is remapped, because a mid olive on the brown is not a
-     line, it is a smudge. */
-  --wf-rail: #878F70;
+  /* The connector drawn down the numbered steps, and it is now the brand
+     green itself rather than a lighter olive invented next to it. --pl-line
+     is 1.33:1 against the deep cream, which is invisible; the green is 4.00:1
+     there and 4.69:1 on white, so the sequence reads as a sequence on every
+     band it crosses. On the bark band it is remapped, because a mid olive on
+     the brown is not a line, it is a smudge. */
+  --wf-rail: var(--wf-accent);
 }
 
 .wf-band { padding-block: clamp(36px, 6vw, 76px); }
@@ -33,12 +34,12 @@
    and the band would stop existing. White is the surface that lifts off the
    paper instead, at the same 1.08 step the two always had between them. */
 .wf-band--cream { background: var(--pl-porcelain); }
-.wf-band--blush { background: var(--wf-pink-soft); }
+.wf-band--warm { background: var(--pl-cream-deep); }
 
 /* The one dark band on the product page, and it is the brown rather than the
    green because of what each can carry.
 
-   Measured: the paper on the brown is 6.46:1 and the sand 5.16:1, so a
+   Measured: the paper on the brown is 6.46:1 and the sand 4.98:1, so a
    heading, a paragraph and a muted line all clear 4.5 on it. The paper on the
    green is 4.29:1, under the floor, which would have left white as the only
    legal text colour on a green band and at 4.69:1 even then. A band you are
@@ -58,8 +59,8 @@
 .wf-band--bark > .pl-wrap {
   --pl-brown:    var(--pl-cream);      /* headings,  6.46:1 */
   --pl-ink:      var(--pl-cream);      /* step titles, 6.46:1 */
-  --pl-ink-soft: var(--pl-sand-deep);  /* body and sub, 5.16:1 */
-  --pl-taupe:    var(--pl-sand-deep);  /* muted, 5.16:1 */
+  --pl-ink-soft: var(--pl-sand-deep);  /* body and sub, 4.98:1 */
+  --pl-taupe:    var(--pl-sand-deep);  /* muted, 4.98:1 */
   --pl-line:     rgba(255, 255, 255, .22);
   --wf-rail:     var(--pl-olive-pale); /* 4.46:1, past the 3:1 a rule needs */
 }
@@ -88,7 +89,7 @@
    says how to use the thing without hurting the animal. Both were sitting in
    the product record unread.
 
-   Contrast on the deep cream: the brown label 6.03:1, the body 8.22:1. The
+   Contrast on the deep cream: the brown label 6.03:1, the body 8.21:1. The
    label is .82rem, 13.1px, which is the floor the rest of the site holds. */
 .wf-aside {
   max-width: 62ch;
@@ -119,8 +120,8 @@
    than in wf.css with the older buy box rules because it is product page only
    and this is the product page's sheet; the rules in wf.css predate it.
 
-   Contrast on the deep cream: the brown figure 6.03:1, the label 12.71:1, the
-   note 5.06:1. The note is .82rem, 13.1px, which is the floor this site holds,
+   Contrast on the deep cream: the brown figure 6.03:1, the label 12.69:1, the
+   note 4.65:1. The note is .82rem, 13.1px, which is the floor this site holds,
    and at three columns on a 390px screen each cell is about 118px, so a note
    of four or five words wraps to two lines by design rather than by accident. */
 .wf-spot {
@@ -200,7 +201,7 @@
   font-family: var(--pl-sans);
   font-size: .95rem;
   font-weight: 700;
-  color: var(--wf-accent);
+  color: var(--wf-accent-deep);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -238,9 +239,11 @@
    on a product page raises an alarm where the section only means "this is the
    version we are dismissing". Muted reads as dismissed; red reads as danger.
 
-   White on the taupe is 5.92:1 and white on the accent 4.69:1, so both badges
+   White on the taupe is 5.45:1 and white on the accent 4.69:1, so both badges
    clear AA for small bold text, and the pair now says brand-green for the
-   thing that is true and a warm grey for the thing that is not. */
+   thing that is true and the brown muted for the thing that is not. The taupe
+   used to be a near neutral at saturation 0.10; it is the brown at 89% now,
+   so even the dismissed side is one of the two colours. */
 .wf-ba__tag--before { background: var(--pl-taupe); }
 .wf-ba__tag--after  { background: var(--wf-accent); }
 .wf-ba__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -260,7 +263,7 @@
   line-height: 1.5;
 }
 .wf-ba__col--before .wf-ba__list li::before { content: '\00D7'; color: var(--pl-taupe); font-size: 1.05em; }
-.wf-ba__col--after  .wf-ba__list li::before { content: '\2713'; color: var(--wf-accent); }
+.wf-ba__col--after  .wf-ba__list li::before { content: '\2713'; color: var(--wf-accent-deep); }
 
 /* ---- highlights, the icon rows ------------------------------------------ */
 .wf-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 62ch; margin-inline: auto; }
@@ -316,199 +319,9 @@
 .wf-reason__t { font-family: var(--pl-display); font-size: 1.1rem; font-weight: 700; color: var(--pl-ink); margin: 0 0 6px; }
 .wf-reason__x { font-family: var(--pl-sans); font-size: .95rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
 
-/* ---- the steps rail ------------------------------------------------------
-   A single column with a rule running down the numbers, so the eye is told
-   this is a sequence rather than a set of unrelated tips. */
-.wf-steps { list-style: none; margin: 0; padding: 0; max-width: 62ch; margin-inline: auto; display: grid; gap: 0; }
-.wf-step {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 14px;
-  padding-bottom: 22px;
-}
-.wf-step:last-child { padding-bottom: 0; }
-.wf-step__n {
-  position: relative;
-  z-index: 1;
-  width: 32px; height: 32px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  background: var(--pl-white);
-  border: 2px solid var(--wf-accent);
-  color: var(--wf-accent);
-  font-family: var(--pl-display);
-  font-size: .9rem;
-  font-weight: 700;
-}
-/* The rule is drawn from the number down, and the last step does not draw it,
-   so the sequence ends rather than trailing into whitespace. */
-.wf-step:not(:last-child)::before {
-  content: '';
-  position: absolute;
-  inset-block: 32px 0;
-  inset-inline-start: 15px;
-  width: 2px;
-  background: var(--wf-rail);
-}
-.wf-step__t { font-family: var(--pl-display); font-size: 1.02rem; font-weight: 700; color: var(--pl-ink); margin: 5px 0 4px; }
-.wf-step__x { font-family: var(--pl-sans); font-size: .93rem; line-height: 1.6; color: var(--pl-ink-soft); margin: 0; }
-
-/* ---- myth versus reality ------------------------------------------------- */
-.wf-vs { max-width: 760px; margin-inline: auto; display: grid; gap: 12px; }
-.wf-vs__row {
-  background: var(--pl-white);
-  border: 1px solid var(--pl-line);
-  border-radius: var(--wf-r-lg);
-  overflow: hidden;
-}
-.wf-vs__side {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: start;
-  column-gap: 12px;
-  padding: 14px clamp(14px, 2.2vw, 20px);
-}
-.wf-vs__side + .wf-vs__side { border-top: 1px solid var(--pl-line); }
-.wf-vs__side--myth { background: var(--pl-cream); }
-.wf-vs__mark {
-  width: 24px; height: 24px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  font-size: .82rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--pl-white);
-}
-.wf-vs__side--myth .wf-vs__mark { background: var(--pl-taupe); }
-.wf-vs__side--real .wf-vs__mark { background: var(--wf-accent); }
-.wf-vs__label {
-  font-family: var(--pl-sans);
-  font-size: .82rem;
-  font-weight: 700;
-  letter-spacing: .04em;
-  color: var(--pl-taupe);
-  display: block;
-  margin-bottom: 3px;
-}
-.wf-vs__text { font-family: var(--pl-sans); font-size: clamp(.9rem, 2.3vw, 1rem); line-height: 1.55; color: var(--pl-ink); margin: 0; }
-.wf-vs__side--real .wf-vs__text { color: var(--pl-ink-soft); }
-
-/* ---- faq and specs ------------------------------------------------------- */
-.wf-faq { max-width: 760px; margin-inline: auto; display: grid; gap: 10px; }
-.wf-faq__item {
-  background: var(--pl-white);
-  border: 1px solid var(--pl-line);
-  border-radius: var(--wf-r);
-}
-/* <details> keeps the answers in the document for a crawler and for a visitor
-   with JavaScript off, which an accordion built out of divs and a click
-   handler does not. */
-.wf-faq__q {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  cursor: pointer;
-  list-style: none;
-  padding: 16px clamp(14px, 2.2vw, 20px);
-  font-family: var(--pl-sans);
-  font-size: clamp(.95rem, 2.4vw, 1.02rem);
-  font-weight: 700;
-  color: var(--pl-ink);
-  min-height: 44px;
-}
-.wf-faq__q::-webkit-details-marker { display: none; }
-.wf-faq__q::after {
-  content: '';
-  flex: 0 0 auto;
-  width: 9px; height: 9px;
-  border-inline-end: 2px solid var(--pl-taupe);
-  border-block-end: 2px solid var(--pl-taupe);
-  transform: rotate(45deg);
-  transition: transform .18s var(--pl-ease);
-  margin-block-start: -4px;
-}
-.wf-faq__item[open] .wf-faq__q::after { transform: rotate(-135deg); margin-block-start: 4px; }
-.wf-faq__a {
-  padding: 0 clamp(14px, 2.2vw, 20px) 16px;
-  font-family: var(--pl-sans);
-  font-size: .95rem;
-  line-height: 1.7;
-  color: var(--pl-ink-soft);
-  margin: 0;
-}
-
-.wf-specs { max-width: 620px; margin-inline: auto; border: 1px solid var(--pl-line); border-radius: var(--wf-r-lg); overflow: hidden; background: var(--pl-white); }
-.wf-specs__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px; padding: 12px clamp(14px, 2.2vw, 18px); font-family: var(--pl-sans); font-size: .92rem; line-height: 1.5; }
-.wf-specs__row + .wf-specs__row { border-top: 1px solid var(--pl-line); }
-.wf-specs__row:nth-child(odd) { background: var(--pl-cream); }
-.wf-specs__k { font-weight: 700; color: var(--pl-ink); }
-.wf-specs__v { color: var(--pl-ink-soft); }
-
-.wf-chips { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.wf-chips li {
-  font-family: var(--pl-sans);
-  font-size: .84rem;
-  color: var(--pl-ink);
-  background: var(--pl-white);
-  border: 1px solid var(--pl-line);
-  border-radius: var(--wf-pill);
-  padding: 7px 14px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wf-faq__q::after { transition: none; }
-}
-
-/* The same points, set as a lede above the buy box: aligned to the column
-   rather than centred in the band, and tighter, because here they are read on
-   the way to a price rather than as a section of their own. */
-.wf-points--lede {
-  max-width: none;
-  margin-inline: 0;
-  gap: 9px;
-  margin-bottom: 20px;
-}
-.wf-points--lede li { font-size: clamp(.9rem, 2.3vw, .98rem); }
-.wf-points--lede .wf-points__mark { width: 22px; height: 22px; font-size: .85rem; }
-
-/* ---- the photographs, set large ------------------------------------------
-   One column lets each picture keep its own proportions. There is nothing
-   beside it to line up with, so a fixed frame would only letterbox: Bloom is
-   shot at 2:3 and a 4:5 box leaves a white margin down both sides of every
-   photograph for no gain. The width and height attributes on the <img> hold
-   the space while it loads, so nothing shifts.
-
-   Two columns do take a fixed box, because a pair read side by side is a
-   comparison and a comparison wants the same box twice. Which box is a section
-   setting, arriving as --wf-shot-ratio, so the frame can be told the shape the
-   product was actually photographed in. Contained rather than cropped, since
-   this catalogue runs from 1145x1374 to 1254x1254 to 1206x1806 inside a single
-   product, and cover would take a third off the tall ones and nothing off the
-   square ones. */
-.wf-shots { display: grid; gap: clamp(14px, 2.6vw, 28px); }
-.wf-shots--one { max-width: 620px; margin-inline: auto; }
-.wf-shots--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin-inline: auto; }
-.wf-shot { margin: 0; }
-/* The deep cream for the same reason .wf-card__frame takes it: the catalogue
-   is photographed on #F0ECE0, which is 1.18 against white and 1.01 against
-   this. These are the largest pictures on the page, so the white box was
-   largest here too. */
-.wf-shot__frame {
-  background: var(--pl-cream-deep);
-  border: 1px solid var(--pl-line);
-  border-radius: var(--wf-r-lg);
-  overflow: hidden;
-}
-.wf-shot__frame img { width: 100%; height: auto; display: block; }
-.wf-shots--two .wf-shot__frame { aspect-ratio: var(--wf-shot-ratio, 1 / 1); }
-.wf-shots--two .wf-shot__frame img { height: 100%; object-fit: contain; }
-.wf-shot__cap {
-  font-family: var(--pl-sans);
-  font-size: .86rem;
-  line-height: 1.5;
-  color: var(--pl-taupe);
-  margin: 10px 0 0;
-  text-align: center;
-}
+/* The page continues in wf-pdp-long.css: the steps rail, the comparison
+   table, the questions and the large photographs. The split is a transport
+   limit rather than a design one. A theme file has to cross the Admin API in
+   one piece, that piece tops out at about 16KB, and this sheet passed it. The
+   seam was put between two blocks that never reference each other so the
+   division costs nothing but a second request, which HTTP/2 multiplexes. */
