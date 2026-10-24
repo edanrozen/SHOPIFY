@@ -348,9 +348,12 @@
 }
 
 /* The divider is the cell's own edge, so it can never land at the start of a
-   line: there is only ever one line of cells. */
+   line: there is only ever one line of cells. It reads --pl-rule-soft rather
+   than an rgba written here, because a brand colour at an opacity written as
+   a literal in a sheet is the one thing a palette swap cannot reach: it left
+   a brown hairline on the sky palette's blue strip. */
 .wf-perks__i + .wf-perks__i {
-  border-inline-start: 1px solid rgba(115, 82, 47, .38);
+  border-inline-start: 1px solid var(--pl-rule-soft);
 }
 
 /* ── The email capture ──────────────────────────────────────────────────

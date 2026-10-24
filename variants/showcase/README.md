@@ -181,6 +181,31 @@ One brown block per page: the hero panel on the homepage, the how-to band on
 the product page. The guarantee band was a second brown slab directly under
 the hero and is the tinted surface now.
 
+## Trying another palette
+
+`assets/wf-tokens-sky.css` is the whole shop in light blue, and it exists to
+show what the split bought: every colour in the theme resolves through one
+file, so a palette is a file swap rather than a sweep. It is a trial and the
+blue is not in the mark, which the file says at the top.
+
+Swapping it takes five files, and only the first is a palette:
+
+    assets/wf-tokens.css          replace with wf-tokens-sky.css
+    config/settings_data.json     #70784B -> #2079B8, #5F663F -> #1C679C,
+                                  #E0D9D1 -> #CDDCE7, #2A2722 -> #1E2930
+    sections/header-group.json    the same substitutions
+    sections/footer-group.json    plus #F8F6F5 -> #EBF3F9 and the scrim
+                                  #73522F26 -> #265D8426
+
+The four JSON values are there because Horizon's own sections take colours as
+settings and Liquid cannot read a CSS custom property. They are the only part
+of a palette swap that is not one file, and that is worth knowing before
+anyone tries a third colour.
+
+Every sky value was solved for the contrast of the value it replaces, so the
+theme keeps its measured behaviour: the type blue 7.04:1 against the brown's
+7.05:1, white on the button blue 4.68:1 against the green's 4.69:1.
+
 Greys are gone on purpose, and that includes the taupe, which used to be a near
 neutral at saturation 0.10, and the pale olive, which used to paint the trust
 band, the footer and the announcement bar and is deleted.

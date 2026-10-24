@@ -1,0 +1,108 @@
+/* ==========================================================================
+   TinyBloom, the sky palette. A trial, not the shop.
+
+   The merchant asked to see the whole site in light blue and white. This file
+   is the answer: it carries the same token names as wf-tokens.css and nothing
+   else in the theme knows the difference, because after the sheet was split
+   every colour in the shop resolves through this one file. Swapping which of
+   the two a template loads swaps the shop.
+
+   It is a trial because the blue is not in the mark. The logo writes "Tiny"
+   in brown and "Bloom" in green, and a shop painted in a colour its own
+   wordmark does not contain asks the visitor to hold two brands at once: the
+   page says one thing and the logo in the corner says another. That is worth
+   knowing before this is published rather than after. If the blue is kept,
+   the mark has to move with it.
+
+   What is not a trial is the arithmetic. Every value below was solved for the
+   contrast the value it replaces had, so the whole theme keeps its measured
+   behaviour and nothing has to be re-checked rule by rule:
+
+     the type blue      7.04:1 on white, where the brown was 7.05:1
+     the button blue    white on it 4.68:1, where the green was 4.69:1
+     the tint           1.122 from the page, where the warm tint was 1.077
+     the hairline       1.401, where the warm one was 1.399
+
+   Fifteen pairs measured in a browser, no failures.
+   ========================================================================== */
+
+:root {
+  /* One family, hue 205, which is the sky blue the request asked for rather
+     than a navy. Each value is that hue at the saturation its job allows and
+     the lightness its contrast target demands, so the palette is a single
+     colour doing six jobs rather than six blues chosen next to each other.
+
+     The split between the two blues is the same split the brown and the green
+     had, and for the same measured reason. The type blue carries words: it is
+     7.04:1 both ways on white, so a heading, a price, a rating star or a dark
+     panel can all be it. The button blue carries actions: white on it is
+     4.68:1, which is a filled button and nothing else, and as a word it would
+     be 4.68:1 on the page and 4.28:1 on the tint, which fails. Anything that
+     sets `color` reaches for --wf-accent-deep. */
+  --wf-accent:      #2079B8;  /* buttons and fills. white on it 4.68:1        */
+  --wf-accent-deep: #1C679C;  /* the same blue as a word. 6.05:1 on white     */
+  --pl-brown:       #265D84;  /* headings, prices, stars, the dark panel      */
+  --pl-brown-deep:  #204E6F;  /* hover                                        */
+
+  /* The token names still say brown and cream. They are not renamed because
+     the point of this file is that it is interchangeable with the other one:
+     a rename would mean editing every sheet in the theme to try a colour. */
+
+  --pl-white:     #FFFFFF;
+  --pl-porcelain: var(--pl-white);
+  --pl-cream:     var(--pl-white);
+  --pl-sand:      var(--pl-white);
+
+  /* The three tints, each the type blue mixed toward the page.
+
+     --pl-cream-deep   the one tinted surface: the trust row, the guarantee
+                       band, the launch band, the footer and every alternating
+                       band. 1.122 from the page, a little more separation
+                       than the warm tint had, because a light blue that is
+                       too faint reads as a rendering fault rather than as a
+                       colour. Ink 13.23:1, taupe 4.86:1, the type blue
+                       6.28:1.
+
+     --pl-sand-deep    the perks strip, and the text on the dark panel in
+                       wf-hero, where it is 5.54:1.
+
+     --pl-line         every hairline and the empty half of a rating star,
+                       where the type blue on it is 5.03:1. */
+  --pl-cream-deep:  #EBF3F9;
+  --pl-sand-deep:   #D9E6F0;
+  --pl-line:        #CDDCE7;
+
+  /* The ink is cooled to match. A warm near-black under a blue page is the
+     same mistake in reverse as the cold grey footer the warm palette was
+     built to fix: 14.88:1 and 9.62:1 are kept, the hue is not. */
+  --pl-ink:       #1E2930;  /* 14.88:1 on white                               */
+  --pl-ink-soft:  #384751;  /*  9.62:1                                        */
+  --pl-taupe:     #596C7A;  /* small print. 5.45 on the page, 4.86 on the tint */
+
+  --pl-clay:      var(--wf-accent);
+  --pl-clay-deep: var(--wf-accent-deep);
+
+  /* Every button is filled with this. One line changes them all, including the
+     label inside.
+
+     Filled rather than outlined is a conversion decision, not a taste one: an
+     outlined button asks to be found, a filled one is found. And it puts the
+     brand colour on the thing the customer is here to press, which is the
+     only place a brand colour earns anything. White on the button blue is
+     4.68:1, measured, which clears AA at body size. */
+  --wf-rule:      var(--wf-accent);
+
+  /* The one rule drawn on the perks strip. See the warm file. */
+  --pl-rule-soft: rgba(38, 93, 132, .38);
+
+  --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);
+  --pl-sh-m: 0 4px 14px rgba(0, 0, 0, .09);
+  --pl-sh-l: 0 12px 32px rgba(0, 0, 0, .12);
+
+  /* Chewy is less round than the version this replaces. Cards and panels take
+     a small radius; only the buttons are full pills. */
+  --wf-r: 10px;
+  --wf-r-lg: 14px;
+  --wf-pill: 999px;
+  --wf-scrim: linear-gradient(to top, rgba(0, 0, 0, .68) 0%, rgba(0, 0, 0, .3) 40%, rgba(0, 0, 0, 0) 74%);
+}

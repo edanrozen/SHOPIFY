@@ -145,6 +145,12 @@
      quote belonged to a darker olive that is not in the mark. */
   --wf-rule:      var(--wf-accent);
 
+  /* The one rule drawn on the perks strip. It lives here rather than in
+     wf-vow.css because it is the brand colour at an opacity, and a brand
+     colour written as a literal in a sheet is the one thing a palette swap
+     cannot reach. */
+  --pl-rule-soft: rgba(115, 82, 47, .38);
+
   --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .05);
   --pl-sh-m: 0 4px 14px rgba(0, 0, 0, .09);
   --pl-sh-l: 0 12px 32px rgba(0, 0, 0, .12);
