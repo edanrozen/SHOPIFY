@@ -46,6 +46,14 @@
 {{ 'wf-vow.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
+  The phone's corrections to the inherited components, on every template.
+  It is last of the shared sheets because it overrides them, and it is tiny
+  because it is a list of eleven type sizes and one tap target, not a
+  parallel design.
+{%- endcomment -%}
+{{ 'df-mobile.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
   The home page, in its own 12KB sheet. It is the only template that uses any
   of it, and it is also the one template that has to paint before a visitor
   decides whether this shop is worth a second screen, so it is requested

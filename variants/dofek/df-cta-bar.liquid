@@ -1,0 +1,173 @@
+{%- doc -%}
+  The phone's standing call to action.
+
+  One fixed bar at the bottom of the home page carrying the shop's main
+  action, shown only on a phone and only in the stretch of the page where
+  nothing else is asking for the tap: after the hero's buttons have scrolled
+  away, and before the closing band, which is a button of its own.
+
+  Placed last in the template. It is fixed, so its position in the order
+  changes nothing about where it draws, and last is where the spacer it
+  needs belongs.
+{%- enddoc -%}
+
+{%- liquid
+  assign target = section.settings.product
+  assign href = section.settings.link
+  if href == blank and target != blank
+    assign href = target.url
+  endif
+  if href == blank
+    assign href = routes.all_products_collection_url
+  endif
+
+  assign title = section.settings.title
+  if title == blank and target != blank
+    assign title = target.title
+  endif
+
+  assign sub = section.settings.subtitle
+  if sub == blank and target != blank
+    assign sub = target.price | money
+  endif
+-%}
+
+{%- if section.settings.enabled -%}
+  <div class="df-bar" id="df-bar-{{ section.id }}" aria-hidden="true">
+    <div class="df-bar__text">
+      {%- if title != blank -%}<span class="df-bar__title">{{ title }}</span>{%- endif -%}
+      {%- if sub != blank -%}<span class="df-bar__sub">{{ sub }}</span>{%- endif -%}
+    </div>
+    <a class="wf-btn" href="{{ href }}" tabindex="-1">{{ section.settings.label }}</a>
+  </div>
+  <div class="df-bar-spacer" aria-hidden="true"></div>
+
+  <script>
+    (function () {
+      var bar = document.getElementById('df-bar-{{ section.id }}');
+      if (!bar || !('IntersectionObserver' in window)) return;
+
+      var hero = document.querySelector('.df-hero');
+      var tail = document.querySelector('.df-promise');
+      if (!hero) return;
+
+      var heroGone = false;
+      var tailHere = false;
+
+      /* The link is taken out of the tab order while the bar is hidden.
+         A fixed element translated off screen is still focusable, and a
+         keyboard user tabbing through the page would otherwise land on a
+         button they cannot see. */
+      function apply() {
+        var on = heroGone && !tailHere;
+        bar.classList.toggle('is-on', on);
+        bar.setAttribute('aria-hidden', on ? 'false' : 'true');
+        var a = bar.querySelector('a');
+        if (a) a.tabIndex = on ? 0 : -1;
+      }
+
+      new IntersectionObserver(function (entries) {
+        heroGone = !entries[0].isIntersecting;
+        apply();
+      }, { threshold: 0 }).observe(hero);
+
+      if (tail) {
+        new IntersectionObserver(function (entries) {
+          tailHere = entries[0].isIntersecting;
+          apply();
+        }, { threshold: 0 }).observe(tail);
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  /* ---- the phone's standing call to action --------------------------------
+     A shop read on a phone loses its buttons the moment the first screen
+     scrolls away, and this page is six screens tall. The bar puts one back
+     and keeps it there.
+
+     It is a phone control and nothing else: above 820px the desktop still has
+     the hero's buttons in view beside the picture for most of the fold, and a
+     fixed bar there is a cookie banner nobody asked for.
+
+     It appears when the hero leaves and hides again when the closing band
+     arrives, because that band is itself a button and two of them stacked is
+     the shop shouting. Both transitions are driven by the section's own
+     observer; with JavaScript off the bar never shows, which is the correct
+     failure: the page still has three buttons in its flow. */
+  .df-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px var(--pl-gutter) calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--pl-ink);
+    border-top: 1px solid var(--pl-on-dark-line);
+    transform: translateY(110%);
+    transition: transform .26s var(--pl-ease);
+    will-change: transform;
+  }
+  .df-bar.is-on { transform: none; }
+  @media (prefers-reduced-motion: reduce) { .df-bar { transition: none; } }
+  .df-bar__text { min-width: 0; flex: 1 1 auto; }
+  .df-bar__title {
+    display: block;
+    font-family: var(--pl-display);
+    font-size: .95rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--pl-on-dark);
+    /* One line. A product title that wraps turns a 64px bar into a 96px one
+       halfway down the page, which moves the button under the thumb that was
+       already reaching for it. */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .df-bar__sub {
+    display: block;
+    font-family: var(--pl-sans);
+    font-size: .875rem;
+    line-height: 1.3;
+    color: var(--pl-on-dark-soft);
+    margin-top: 2px;
+  }
+  .df-bar .wf-btn {
+    flex: 0 0 auto;
+    min-height: 46px;
+    padding: 12px 22px;
+    font-size: .95rem;
+    background: var(--pl-white);
+    color: var(--pl-ink);
+    border-color: var(--pl-white);
+  }
+  .df-bar .wf-btn:hover { background: var(--pl-sand-deep); border-color: var(--pl-sand-deep); color: var(--pl-ink); }
+  .df-bar a:focus-visible { outline: 2px solid var(--pl-white); outline-offset: 3px; }
+
+  /* The spacer sits in the flow at the end of the page so the bar, which is
+     out of it, never covers the last thing the page says. */
+  .df-bar-spacer { height: 68px; }
+  @media (min-width: 820px) {
+    .df-bar, .df-bar-spacer { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DOFEK · פס קבוע בנייד",
+  "tag": "div",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "להציג בנייד", "default": true },
+    { "type": "product", "id": "product", "label": "מוצר" },
+    { "type": "text", "id": "title", "label": "כותרת, ברירת מחדל שם המוצר" },
+    { "type": "text", "id": "subtitle", "label": "שורה שנייה, ברירת מחדל המחיר" },
+    { "type": "text", "id": "label", "label": "כפתור", "default": "לפרטים" },
+    { "type": "url", "id": "link", "label": "קישור, ברירת מחדל דף המוצר" }
+  ],
+  "presets": [{ "name": "DOFEK · פס קבוע בנייד" }]
+}
+{% endschema %}

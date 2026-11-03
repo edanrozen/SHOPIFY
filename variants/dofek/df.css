@@ -18,14 +18,23 @@
    is wrong for one selling a knee brace to somebody whose knee hurts.
    Quieter, tighter, and with a measure that stops before the line gets hard
    to track back. */
+/* 14px is the floor on the phone, which is where this shop is read.
+
+   Every size below starts at the phone and shrinks on the desktop rather
+   than the other way round. The kicker, the hero's facts and the closing
+   address were all under 14px at 390px, which on a shop whose buyers are
+   mostly over forty is not a style choice, it is a wall. */
 .df-kicker {
   font-family: var(--pl-sans);
-  font-size: .78rem;
+  font-size: .875rem;
   font-weight: 700;
-  letter-spacing: .14em;
-  line-height: 1;
+  letter-spacing: .12em;
+  line-height: 1.2;
   color: var(--pl-taupe);
-  margin: 0 0 14px;
+  margin: 0 0 12px;
+}
+@media (min-width: 860px) {
+  .df-kicker { font-size: .8rem; letter-spacing: .14em; margin-bottom: 14px; }
 }
 .df-h2 {
   font-family: var(--pl-display);
@@ -45,7 +54,7 @@
   margin: 0;
   max-width: 52ch;
 }
-.df-points { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
+.df-points { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 11px; }
 .df-points li {
   position: relative;
   padding-inline-start: 26px;
@@ -70,7 +79,14 @@
    .wf-btn from wf.css is the filled one and needs nothing here. These are
    the two it cannot be: the outline beside it on white, and the reverse of
    both on the black bands. */
-.df-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.df-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+/* Thumb first. On a phone the two buttons share the row evenly and fill it,
+   so neither is a small target beside a large one, and the 32px side padding
+   that fits a 1280px column is cut to 22px so the pair still fits at 360. */
+@media (max-width: 559px) {
+  .df-btn-row .wf-btn { flex: 1 1 0; padding-inline: 22px; min-height: 50px; }
+}
+@media (min-width: 860px) { .df-btn-row { margin-top: 28px; } }
 .df-btn--ghost {
   background: transparent;
   color: var(--pl-ink);
@@ -111,21 +127,25 @@
    The file is 940x1672, a ratio of .5622, and the part that has to survive
    every frame runs from 28% (the top of his head) to 86% (the bottom of the
    brace), which is 58% of its height. A frame shows `frame_ratio x .5622` of
-   that height, so the two aspect ratios below were solved rather than
-   chosen: 5:6 on the phone shows 67.5%, 9:10 on the desktop shows 62.5%, and
-   both leave the 58% intact with margin to spare.
+   that height, so the 9:10 below was solved rather than chosen: it shows
+   62.5%, which leaves the 58% intact with 4.5 points to spare, and it is
+   the shortest frame that does. One ratio serves the phone and the desktop,
+   and `object-position: 50% 68%` puts the spare margin at both ends.
 
    Giving the frame the ratio instead of a fixed height is what keeps that
    true at every width: a `min-height: 600px` on a half-viewport column shows
    63% of the picture at 1280px and 42% at 1920px, and the second one cuts
    the product out of the shop's opening photograph.
 
-   One object-position serves both, because the window where both frames
-   clear the subject is p in [.627, .746] and .68 sits in the middle of it. */
+   At 9:10 the window where the frame clears the subject is p in
+   [.627, .746], and .68 sits in the middle of it. */
 .df-hero__media {
   order: -1;
   margin: 0;
-  aspect-ratio: 5 / 6;
+  /* 9:10 rather than the 5:6 this started at. It is the shortest frame that
+     still clears the 28%-to-86% band, it buys 35px of the first screen
+     back, and on a phone the first screen is the whole argument. */
+  aspect-ratio: 9 / 10;
 }
 .df-hero__media img {
   display: block;
@@ -135,7 +155,7 @@
   object-position: 50% 68%;
 }
 .df-hero__panel {
-  padding: clamp(32px, 7vw, 56px) var(--pl-gutter) clamp(36px, 8vw, 64px);
+  padding: 24px var(--pl-gutter) 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -147,7 +167,7 @@
   line-height: 1.08;
   letter-spacing: -.02em;
   color: var(--pl-ink);
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   text-wrap: balance;
 }
 .df-hero__lede {
@@ -163,17 +183,18 @@
    view and this is where the decision is being made. */
 .df-hero__facts {
   list-style: none;
-  margin: 32px 0 0;
-  padding: 20px 0 0;
+  margin: 22px 0 0;
+  padding: 16px 0 0;
   border-top: 1px solid var(--pl-line);
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 22px;
+  gap: 8px 18px;
 }
 .df-hero__facts li {
   font-family: var(--pl-sans);
-  font-size: .86rem;
+  font-size: .9rem;
   font-weight: 600;
+  line-height: 1.4;
   color: var(--pl-ink-soft);
 }
 
@@ -204,6 +225,7 @@
      section's: the wrapper's gutter, plus whatever the 1240px cap leaves. */
   .df-hero__panel {
     padding-block: clamp(56px, 6vw, 88px);
+    padding-inline: var(--pl-gutter);
     padding-inline-start: calc(max((100vw - var(--pl-wrap)) / 2, 0px) + var(--pl-gutter));
     padding-inline-end: clamp(32px, 4vw, 64px);
   }
@@ -220,7 +242,7 @@
   padding-block: 4px;
 }
 .df-strip__item {
-  padding: 18px 0;
+  padding: 15px 0;
   text-align: center;
 }
 .df-strip__item + .df-strip__item { border-top: 1px solid var(--pl-on-dark-line); }
@@ -252,13 +274,13 @@
    One section used three times: the picture on one side, the argument on the
    other, flipped and inverted by modifier. Three near-identical sections
    would have been three places to fix the same spacing bug. */
-.df-split { padding-block: clamp(48px, 8vw, 96px); background: var(--pl-white); }
+.df-split { padding-block: clamp(40px, 8vw, 96px); background: var(--pl-white); }
 .df-split--tint { background: var(--pl-cream-deep); }
 .df-split--dark { background: var(--pl-ink); }
 .df-split__in {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(28px, 5vw, 56px);
+  gap: clamp(22px, 5vw, 56px);
   align-items: center;
 }
 .df-split__media { margin: 0; }
@@ -304,7 +326,7 @@
 /* ---- the closing band ---------------------------------------------------
    Black, centred, one sentence and one button. It is the last thing on the
    page and the only place the shop asks twice. */
-.df-promise { background: var(--pl-ink); padding-block: clamp(52px, 9vw, 104px); }
+.df-promise { background: var(--pl-ink); padding-block: clamp(44px, 9vw, 104px); }
 .df-promise__in { text-align: center; max-width: 720px; margin-inline: auto; }
 .df-promise__title {
   font-family: var(--pl-display);
@@ -327,10 +349,11 @@
 .df-promise .df-btn-row { justify-content: center; }
 .df-promise__note {
   font-family: var(--pl-sans);
-  font-size: .84rem;
+  font-size: .9rem;
   line-height: 1.6;
   color: var(--pl-on-dark-mute);
-  margin: 22px 0 0;
+  margin: 20px 0 0;
+  word-break: break-word;
 }
 
 /* Anything focusable on a black band needs a ring that is visible on black.

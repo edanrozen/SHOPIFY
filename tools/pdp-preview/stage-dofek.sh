@@ -24,9 +24,9 @@ for f in "$BASE"/collection.json "$BASE"/product*.json; do cp "$f" "$OUT/templat
 
 # ---- the DOFEK layer -----------------------------------------------------
 cp "$SRC"/df-*.liquid          "$OUT/sections/"
-cp "$SRC"/wf-tokens.css "$SRC"/df.css "$OUT/assets/"
+cp "$SRC"/wf-tokens.css "$SRC"/df.css "$SRC"/df-mobile.css "$OUT/assets/"
 cp "$SRC"/stylesheets.liquid   "$OUT/snippets/"
 cp "$SRC"/header-group.json "$SRC"/footer-group.json "$OUT/sections/"
 cp "$SRC"/settings_data.json   "$OUT/config/"
-cp "$SRC"/index.json           "$OUT/templates/"
+cp "$SRC"/index.json "$SRC"/collection.json "$OUT/templates/"
 echo "staged $OUT"

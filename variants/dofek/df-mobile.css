@@ -1,0 +1,63 @@
+/* ==========================================================================
+   DOFEK, the phone.
+
+   The shop is read on a phone. Everything in this file is a correction to a
+   value that was chosen for a 1280px column and is wrong at 390px, applied
+   only below the split so the desktop keeps the proportions it was drawn
+   with.
+
+   It is a separate sheet rather than edits scattered through wf.css,
+   wf-shop.css and wf-vow.css for two reasons. Those three are each within a
+   kilobyte of the 16KB a theme file can cross the Admin API in, so every
+   edit to them risks making them unsendable. And a phone correction that
+   lives in twenty places is a phone correction nobody can audit: this file
+   is the whole list.
+
+   Loaded on every template, unlike df.css, because the collection page, the
+   cart and the product page inherit the same components the home page does.
+   ========================================================================== */
+
+@media (max-width: 859px) {
+  /* ---- the 14px floor --------------------------------------------------
+     Eleven inherited components set text between 12.8px and 13.8px. At a
+     1280px reading distance that is a caption; held eighteen inches from
+     the face of somebody who is shopping for a knee brace it is a wall.
+     None of these is decorative, so all of them come up to 14px or past it. */
+  .wf-trust__title   { font-size: .95rem; }
+  .wf-trust__text    { font-size: .9rem; }
+  .wf-flag__eyebrow  { font-size: .875rem; }
+  .wf-collhead__count { font-size: .9rem; }
+  .wf-launch__eyebrow { font-size: .875rem; }
+  .wf-pdp__note      { font-size: .875rem; }
+  .wf-card__was      { font-size: .875rem; }
+  .wf-card__off      { font-size: .875rem; }
+  .wf-card__tag      { font-size: .8125rem; }
+  .wf-vow__badge     { font-size: .875rem; }
+  .wf-vow__eyebrow   { font-size: .875rem; }
+  .wf-vow__fine      { font-size: .875rem; }
+  .wf-vow__pt-x      { font-size: .875rem; }
+  .wf-optin__err     { font-size: .875rem; }
+
+  /* ---- the thumb -------------------------------------------------------
+     48px is the floor a finger needs. The pill was 50px tall at its desktop
+     padding and 46px wherever a section had tightened it, and the second
+     number is a button that gets missed. The side padding comes down at the
+     same time so a pair of them still fits across a 360px screen. */
+  .wf-btn {
+    min-height: 48px;
+    padding-inline: 24px;
+  }
+
+  /* A single button in a row of its own goes full width. On a phone the
+     alternative is a pill floating in the middle of the screen with the
+     thumb having to find it, and a full-width target cannot be missed. */
+  .wf-more .wf-btn { width: 100%; }
+}
+
+@media (max-width: 559px) {
+  /* The discount flag and the product badge sit on the photograph, and on a
+     168px card the desktop insets put them a third of the way across it. */
+  .wf-card__off, .wf-card__tag { inset-inline-start: 8px; }
+  .wf-card__off { inset-block-start: 8px; }
+  .wf-card__tag { inset-block-end: 8px; }
+}

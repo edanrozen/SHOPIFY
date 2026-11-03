@@ -7,7 +7,7 @@
         "image_alt": "זוג הולך בשביל הרים, על הברך של הגבר מגן ברך DOFEK",
         "eyebrow": "DOFEK",
         "heading": "לחזור לזוז בלי לחשוב על זה",
-        "text": "תמיכה, ריפוד ויציבות לברך ולכף הרגל. אביזרים נבחרים לשגרה היומיומית, עם משלוחים לכל הארץ ושירות בעברית.",
+        "text": "תמיכה, ריפוד ויציבות לברך ולכף הרגל. אביזרים נבחרים לשגרה היומיומית.",
         "cta_label": "לכל המוצרים",
         "cta_link": "/collections/all",
         "alt_label": "מגן הברך",
@@ -107,6 +107,15 @@
         "cta_link": "/collections/all",
         "note": "DOFEK.support@gmail.com"
       }
+    },
+    "ctabar": {
+      "type": "df-cta-bar",
+      "settings": {
+        "enabled": true,
+        "product": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+        "title": "מגן ברך DOFEK",
+        "label": "לפרטים"
+      }
     }
   },
   "order": [
@@ -116,6 +125,7 @@
     "science",
     "grid",
     "expert",
-    "promise"
+    "promise",
+    "ctabar"
   ]
 }

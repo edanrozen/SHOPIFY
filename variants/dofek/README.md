@@ -35,13 +35,14 @@ before shipping it.
 
 ## The home page
 
-    hero      df-hero     the couple on the trail, the brace on
-    strip     df-strip    three facts, black band
-    problem   df-split    the stairs, white
-    science   df-split    the knee render, black, flipped
-    grid      wf-grid     the five products, three across
-    expert    df-split    the doctor, tinted. the disclaimer
-    promise   df-promise  ask before you order the wrong size
+    hero      df-hero      the couple on the trail, the brace on
+    strip     df-strip     three facts, black band
+    problem   df-split     the stairs, white
+    science   df-split     the knee render, black, flipped
+    grid      wf-grid      the five products, three across
+    expert    df-split     the doctor, tinted. the disclaimer
+    promise   df-promise   ask before you order the wrong size
+    ctabar    df-cta-bar   the phone's standing button
 
 Four photographs, all of them the merchant's own uploads, placed and never
 altered:
@@ -58,15 +59,52 @@ altered:
 The opening photograph is the one measurement in this build that is worth
 keeping. It is 940 x 1672, a ratio of .5622, and the part that has to survive
 every frame runs from 28% of its height (the top of his head) to 86% (the
-bottom of the brace). A frame shows `frame_ratio x .5622` of the picture's
-height, so the two ratios in `df.css` were solved rather than chosen: 5:6 on
-the phone shows 67.5%, 9:10 on the desktop shows 62.5%, and both clear the 58%
-that matters. One `object-position: 50% 68%` serves both, because the window
-where both frames clear the subject is p in [.627, .746].
+bottom of the brace), which is 58%. A frame shows `frame_ratio x .5622` of the
+picture's height, so the 9:10 in `df.css` was solved rather than chosen: it
+shows 62.5%, it clears the 58% with 4.5 points to spare, and it is the
+shortest frame that does. One ratio serves the phone and the desktop, and
+`object-position: 50% 68%` sits in the middle of the window where the frame
+clears the subject, p in [.627, .746].
 
 A fixed pixel height would not have held: on a half-viewport column, a
 `min-height: 600px` shows 63% of the picture at 1280px and 42% at 1920px, and
 the second one crops the product out of the shop's opening image.
+
+## The phone
+
+The shop is read on a phone, so the phone is the design and the desktop is the
+variation. Three things carry that:
+
+`df-mobile.css` loads on every template and is the whole list of corrections
+to the inherited components. Eleven of them set text between 12.8px and
+13.8px, which was a caption on a 1280px column and a wall held eighteen inches
+from the face of somebody shopping for a knee brace; all eleven come up to
+14px or past it. The pill gets a 48px floor and the button under the product
+grid goes full width.
+
+`df-cta-bar` is the standing button. The home page is six screens tall and its
+buttons leave with the first one, so a fixed bar carries the main action
+through the middle of the page. It appears when the hero scrolls out, hides
+again when the closing band arrives (that band is itself a button), and above
+820px it does not exist. With JavaScript off it never shows, which is correct:
+the page still has three buttons in its flow.
+
+The fold. Measured on the three phones that matter, with 110px allowed for the
+announcement bar and the sticky header, the photograph, the headline, the
+sentence and both buttons are all above the fold:
+
+| | viewport | fold | buttons end |
+|---|---|---|---|
+| iPhone SE, 13 mini | 360 x 780 | 670 | 665 |
+| iPhone 14, 15 | 390 x 844 | 734 | 699 |
+| iPhone 15 Pro Max | 430 x 932 | 822 | 709 |
+
+That cost one clause of the hero sentence, which repeated the three facts
+drawn directly under it.
+
+Checked at 360, 390, 430, 768, 1280 and 1920: no horizontal overflow at any
+width, no text under 14px and no tap target under 44px on either the home page
+or the collection page.
 
 ## What is honest here and why it matters
 
@@ -88,9 +126,12 @@ held to throughout, and anyone editing the copy should hold to them:
 
     sh tools/pdp-preview/stage-dofek.sh /tmp/dofek
     PREVIEW_THEME=/tmp/dofek PREVIEW_CATALOGUE=dofek \
-    PREVIEW_SHEETS="assets/pluma.css,assets/wf-tokens.css,assets/wf.css,assets/wf-shop.css,assets/wf-vow.css,assets/df.css" \
+    PREVIEW_SHEETS="assets/pluma.css,assets/wf-tokens.css,assets/wf.css,assets/wf-shop.css,assets/wf-vow.css,assets/df-mobile.css,assets/df.css" \
       node tools/pdp-preview/render.js index > /tmp/home.html
     node tools/pdp-preview/shoot.js /tmp/home.html /tmp/shots 390
+
+Drop `assets/df.css` from `PREVIEW_SHEETS` for any template other than the
+home page, and add `PREVIEW_COLLECTION=all` for the collection one.
 
 `shoot.js` reports horizontal overflow as well as taking the pictures. The
 image CDN is unreachable from the sandbox, so the photographs render as
