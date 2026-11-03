@@ -1,0 +1,114 @@
+{%- doc -%}
+  A picture on one side, an argument on the other.
+
+  Used three times on the home page: the problem, the mechanism and the
+  disclaimer. One section with two modifiers rather than three sections,
+  because three copies of the same grid is three places to fix the same
+  spacing bug, and the only things that actually differ between them are the
+  ground colour and which side the picture is on.
+
+  The dark variant exists for the anatomical render, which is shot on a dark
+  ground. On the white page it sat in a visible dark rectangle; on the black
+  band it has no edge at all.
+{%- enddoc -%}
+
+{%- liquid
+  assign img = section.settings.image
+  assign classes = 'df-split'
+  case section.settings.ground
+    when 'tint'
+      assign classes = classes | append: ' df-split--tint'
+    when 'dark'
+      assign classes = classes | append: ' df-split--dark'
+  endcase
+  if section.settings.flip
+    assign classes = classes | append: ' df-split--flip'
+  endif
+-%}
+
+<section class="{{ classes }}">
+  <div class="pl-wrap">
+    <div class="df-split__in">
+      {%- if img != blank -%}
+        <figure class="df-split__media">
+          <img
+            src="{{ img | image_url: width: 900 }}"
+            srcset="{{ img | image_url: width: 520 }} 520w, {{ img | image_url: width: 900 }} 900w"
+            sizes="(min-width: 860px) 46vw, 100vw"
+            width="{{ img.width }}"
+            height="{{ img.height }}"
+            alt="{{ section.settings.image_alt | escape }}"
+            loading="lazy"
+            decoding="async"
+          >
+        </figure>
+      {%- endif -%}
+
+      <div class="df-split__body">
+        {%- if section.settings.kicker != blank -%}
+          <p class="df-kicker">{{ section.settings.kicker }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="df-h2">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="df-lede">{{ section.settings.text }}</p>
+        {%- endif -%}
+
+        {%- assign points = section.settings.points | split: '|' -%}
+        {%- assign drawn = 0 -%}
+        {%- for point in points -%}
+          {%- assign p = point | strip -%}
+          {%- if p != blank -%}{%- assign drawn = drawn | plus: 1 -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if drawn > 0 -%}
+          <ul class="df-points">
+            {%- for point in points -%}
+              {%- assign p = point | strip -%}
+              {%- if p != blank -%}<li>{{ p }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank -%}
+          <div class="df-btn-row">
+            <a class="wf-btn{% if section.settings.ground == 'dark' %} df-btn--inv{% endif %}"
+               href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+              {{ section.settings.cta_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DOFEK · תמונה וטקסט",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "תמונה" },
+    { "type": "text", "id": "image_alt", "label": "תיאור התמונה לקוראי מסך" },
+    {
+      "type": "select",
+      "id": "ground",
+      "label": "רקע",
+      "default": "white",
+      "options": [
+        { "value": "white", "label": "לבן" },
+        { "value": "tint", "label": "אפור בהיר" },
+        { "value": "dark", "label": "שחור" }
+      ]
+    },
+    { "type": "checkbox", "id": "flip", "label": "התמונה בצד השני", "default": false },
+    { "type": "text", "id": "kicker", "label": "שורת פתיחה" },
+    { "type": "text", "id": "heading", "label": "כותרת" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "textarea", "id": "points", "label": "נקודות, מופרדות בקו אנכי" },
+    { "type": "text", "id": "cta_label", "label": "כפתור" },
+    { "type": "url", "id": "cta_link", "label": "קישור הכפתור" }
+  ],
+  "presets": [{ "name": "DOFEK · תמונה וטקסט" }]
+}
+{% endschema %}

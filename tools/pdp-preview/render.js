@@ -133,6 +133,24 @@ const CATALOGUE = [
 // because a section that features one product reads them from a product drop
 // rather than from the page's `product`, and without them here the homepage
 // renders a flagship band with its two best sentences missing.
+// DOFEK's five products, with the real handles, prices, variant counts and
+// image dimensions off the Admin API. Selected with PREVIEW_CATALOGUE=dofek,
+// because the two shops share every section below the palette and the home
+// page, and a grid rendered against the previous shop's nine products proves
+// nothing about this one's five.
+const CATALOGUE_DOFEK = [
+  ['מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד', 'מגן ברך DOFEK – תמיכה ויציבות בכל צעד', 11999, 7, ['all'],
+    [[1254, 1254], [1199, 1312], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1206, 1178]]],
+  ['גרבי-במבוק-לעבודה-נוחות-ורכות-לאורך-כל-היום', 'גרבי במבוק לעבודה – נוחות ורכות לאורך כל היום', 5999, 4, ['all'],
+    [[1284, 1225], [1254, 1254], [1282, 1227], [1254, 1254]]],
+  ['נעלי-יחפנות-dofek-חופש-בכל-צעד', 'נעלי יחפנות DOFEK – חופש בכל צעד', 15999, 5, ['all'],
+    [[1206, 1123], [1206, 1144], [1206, 1139], [1206, 1144], [1206, 1139]]],
+  ['מדרסי-dofek-לעיסוי-כף-הרגל-נוחות-ותמיכה-בכל-צעד-1', 'מדרסי DOFEK לעיסוי כף הרגל – נוחות ותמיכה בכל צעד', 5990, 9, ['all'],
+    [[1206, 1133], [1206, 1210], [1206, 1187], [1297, 1213], [1267, 1241], [1206, 1210], [1206, 1198], [1206, 1133], [1206, 1187]]],
+  ['נעלי-יחפנות-לקרקוע-של-dofek', 'נעלי יחפנות לקרקוע של DOFEK', 19999, 5, ['all'],
+    [[1206, 1131], [1206, 1170], [1206, 1155], [1206, 1144], [1206, 1182]]],
+];
+
 const PS = {
   'bloom-grooming-station': ['יד אחת מחזיקה, השנייה מנסה לסרק, ואין יד שלישית.', 'מקום קבוע ויציב לעמוד בו, וכל כלי שכבר יש לכם עובד בשתי ידיים.'],
   'pro-grooming-comb': ['קשר קטן שלא מרגישים ביד הופך תוך שבוע למספריים או לתור אצל ספר חיות.', 'שיני נירוסטה בשני מרווחים מפרידות את הסבך בזמן שהוא עוד נפתח באצבעות.'],
@@ -199,10 +217,15 @@ const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   };
 };
 
-const products = CATALOGUE.map(makeProduct);
+const IS_DOFEK = process.env.PREVIEW_CATALOGUE === 'dofek';
+const products = (IS_DOFEK ? CATALOGUE_DOFEK : CATALOGUE).map(makeProduct);
 const all_products = Object.fromEntries(products.map((p) => [p.handle, p]));
 
 const COLL_META = {
+  // `all` is the fallback every grid lands on when no collection is picked,
+  // and on the previous shop it was never exercised because every grid named
+  // one. DOFEK's does not.
+  all: 'כל המוצרים',
   grooming: 'טיפוח הפרווה',
   'clean-home': 'בית נקי מפרווה',
   cats: 'לחתולים',
@@ -234,6 +257,13 @@ const engine = new Liquid({ strictFilters: false, strictVariables: false });
 // shape, which is exactly how the hero shipped with a landscape photograph
 // inside a portrait frame.
 const PICKED = {
+  // DOFEK's home page. Read off the Files API, not guessed: the hero is a
+  // 940x1672 portrait and the band that holds it is a 4:5 crop, so a stub of
+  // the wrong shape would hide exactly the crop that has to be checked.
+  'CAF342F0-6E13-481F-8D06-BAED8B6EE6C1.png': [940, 1672],
+  'IMG_1718.jpg': [1048, 1101],
+  'IMG_1670.jpg': [1206, 1178],
+  'F43E7CBB-F61D-4355-A20D-22EBF47FCF81.png': [1427, 1102],
   '1CFBD4F3-2618-44A9-BD31-D101DB73E276.png': [1672, 941],
   'IMG-0633.png': [1536, 1024],
   '6EA1D042-50C7-443A-9E5A-6B0E60FEBF4F.png': [1145, 1374],

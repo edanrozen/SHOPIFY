@@ -1,0 +1,343 @@
+/* ==========================================================================
+   DOFEK, the home page.
+
+   Five sections and one button. Everything here reads wf-tokens.css and
+   defines no colour of its own, so the shop stays black and white because
+   the palette says so rather than because every sheet remembered to.
+
+   Written start-first rather than left-first. The shop is Hebrew, the page
+   is RTL, and every edge below is named inline-start or inline-end, so the
+   same rules would lay out correctly in a Latin locale without a mirrored
+   copy of the sheet.
+   ========================================================================== */
+
+/* ---- shared type --------------------------------------------------------
+   Four classes the five sections share. They exist rather than reusing
+   .wf-h2 and .pl-body because those carry the previous brand's rhythm: a
+   heading that shouts was right for a shop selling toys to a dog owner and
+   is wrong for one selling a knee brace to somebody whose knee hurts.
+   Quieter, tighter, and with a measure that stops before the line gets hard
+   to track back. */
+.df-kicker {
+  font-family: var(--pl-sans);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1;
+  color: var(--pl-taupe);
+  margin: 0 0 14px;
+}
+.df-h2 {
+  font-family: var(--pl-display);
+  font-size: clamp(1.6rem, 4.4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -.01em;
+  color: var(--pl-ink);
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.df-lede {
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.4vw, 1.08rem);
+  line-height: 1.75;
+  color: var(--pl-ink-soft);
+  margin: 0;
+  max-width: 52ch;
+}
+.df-points { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
+.df-points li {
+  position: relative;
+  padding-inline-start: 26px;
+  font-family: var(--pl-sans);
+  font-size: .97rem;
+  line-height: 1.6;
+  color: var(--pl-ink);
+}
+/* A rule rather than a bullet glyph. A dot in a list of three reads as a
+   bullet point; a short rule reads as an index, which is what these are. */
+.df-points li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: .72em;
+  width: 14px;
+  height: 2px;
+  background: var(--pl-ink);
+}
+
+/* ---- buttons ------------------------------------------------------------
+   .wf-btn from wf.css is the filled one and needs nothing here. These are
+   the two it cannot be: the outline beside it on white, and the reverse of
+   both on the black bands. */
+.df-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.df-btn--ghost {
+  background: transparent;
+  color: var(--pl-ink);
+  border-color: var(--pl-ink);
+}
+.df-btn--ghost:hover {
+  background: var(--pl-ink);
+  color: var(--pl-white);
+  border-color: var(--pl-ink);
+}
+.df-btn--inv {
+  background: var(--pl-white);
+  color: var(--pl-ink);
+  border-color: var(--pl-white);
+}
+.df-btn--inv:hover {
+  background: var(--pl-sand-deep);
+  color: var(--pl-ink);
+  border-color: var(--pl-sand-deep);
+}
+
+/* ---- the hero -----------------------------------------------------------
+   Two halves on the desktop, stacked on the phone with the photograph first.
+
+   The copy is the first grid child so that in RTL it takes the inline-start
+   half, which is where a Hebrew reader's eye lands. The photograph is pulled
+   above it on the phone with `order`, because the brief was that this
+   picture is the first thing on the shop and on a 390px screen the first
+   thing is whatever is at the top. */
+.df-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--pl-white);
+  border-bottom: 1px solid var(--pl-line);
+}
+/* The crop is measured off the photograph rather than guessed.
+
+   The file is 940x1672, a ratio of .5622, and the part that has to survive
+   every frame runs from 28% (the top of his head) to 86% (the bottom of the
+   brace), which is 58% of its height. A frame shows `frame_ratio x .5622` of
+   that height, so the two aspect ratios below were solved rather than
+   chosen: 5:6 on the phone shows 67.5%, 9:10 on the desktop shows 62.5%, and
+   both leave the 58% intact with margin to spare.
+
+   Giving the frame the ratio instead of a fixed height is what keeps that
+   true at every width: a `min-height: 600px` on a half-viewport column shows
+   63% of the picture at 1280px and 42% at 1920px, and the second one cuts
+   the product out of the shop's opening photograph.
+
+   One object-position serves both, because the window where both frames
+   clear the subject is p in [.627, .746] and .68 sits in the middle of it. */
+.df-hero__media {
+  order: -1;
+  margin: 0;
+  aspect-ratio: 5 / 6;
+}
+.df-hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 68%;
+}
+.df-hero__panel {
+  padding: clamp(32px, 7vw, 56px) var(--pl-gutter) clamp(36px, 8vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.df-hero__title {
+  font-family: var(--pl-display);
+  font-size: clamp(2rem, 7.2vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  color: var(--pl-ink);
+  margin: 0 0 18px;
+  text-wrap: balance;
+}
+.df-hero__lede {
+  font-family: var(--pl-sans);
+  font-size: clamp(1.02rem, 2.6vw, 1.14rem);
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0;
+  max-width: 44ch;
+}
+/* Three facts under the buttons, hairline-separated. They are the same three
+   the announcement bar carries, repeated here because the bar scrolls out of
+   view and this is where the decision is being made. */
+.df-hero__facts {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--pl-line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+.df-hero__facts li {
+  font-family: var(--pl-sans);
+  font-size: .86rem;
+  font-weight: 600;
+  color: var(--pl-ink-soft);
+}
+
+/* Between the phone and the split, the photograph stops running edge to
+   edge. Full width at 768px it is 922px tall, which is a screen and a half
+   of one picture, and the only ways to shorten it are to crop the product
+   out or to narrow it. It narrows. */
+@media (min-width: 560px) and (max-width: 819px) {
+  /* `inline-size: 100%` is load-bearing: `margin-inline: auto` turns off
+     the grid item's stretch, and a figure whose only other size is an
+     aspect-ratio then shrinks to its content instead of to the cap. */
+  .df-hero__media { inline-size: 100%; max-inline-size: min(64vw, 460px); margin-inline: auto; }
+}
+
+@media (min-width: 820px) {
+  /* The media column stops growing at 800px, so the hero stops at 889px
+     tall however wide the screen gets. The copy takes the rest rather than
+     half, which is also what keeps its outer edge on the page's own margin:
+     a centred max-width on the hero would have pulled that edge inward at
+     exactly the widths where the grid below it did not move. */
+  .df-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, min(50%, 800px));
+    align-items: stretch;
+  }
+  .df-hero__media { order: 0; aspect-ratio: 9 / 10; }
+  /* In RTL the copy is the inline-start half, so its outer edge is the
+     start edge. That edge has to land on the same line as every other
+     section's: the wrapper's gutter, plus whatever the 1240px cap leaves. */
+  .df-hero__panel {
+    padding-block: clamp(56px, 6vw, 88px);
+    padding-inline-start: calc(max((100vw - var(--pl-wrap)) / 2, 0px) + var(--pl-gutter));
+    padding-inline-end: clamp(32px, 4vw, 64px);
+  }
+}
+
+/* ---- the fact strip -----------------------------------------------------
+   Black, three cells, hairline rules between them. On the phone it is three
+   rows rather than a three-column squeeze, because at 390px three columns
+   leaves eleven characters a line. */
+.df-strip { background: var(--pl-ink); }
+.df-strip__in {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-block: 4px;
+}
+.df-strip__item {
+  padding: 18px 0;
+  text-align: center;
+}
+.df-strip__item + .df-strip__item { border-top: 1px solid var(--pl-on-dark-line); }
+.df-strip__title {
+  font-family: var(--pl-display);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--pl-on-dark);
+  margin: 0 0 6px;
+}
+.df-strip__text {
+  font-family: var(--pl-sans);
+  font-size: .88rem;
+  line-height: 1.5;
+  color: var(--pl-on-dark-soft);
+  margin: 0;
+}
+@media (min-width: 760px) {
+  .df-strip__in { grid-template-columns: repeat(3, 1fr); padding-block: 10px; }
+  .df-strip__item { padding: 26px 22px; }
+  .df-strip__item + .df-strip__item {
+    border-top: 0;
+    border-inline-start: 1px solid var(--pl-on-dark-line);
+  }
+}
+
+/* ---- the split band -----------------------------------------------------
+   One section used three times: the picture on one side, the argument on the
+   other, flipped and inverted by modifier. Three near-identical sections
+   would have been three places to fix the same spacing bug. */
+.df-split { padding-block: clamp(48px, 8vw, 96px); background: var(--pl-white); }
+.df-split--tint { background: var(--pl-cream-deep); }
+.df-split--dark { background: var(--pl-ink); }
+.df-split__in {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+.df-split__media { margin: 0; }
+/* Square, at every width. The three pictures this frame holds are .95, 1.02
+   and 1.30, so a square crops the first two by under 5% and the third by 23%
+   of its width, which on a photograph of a man beside a model keeps both. A
+   4:3 frame would have cut a third of the height off the tallest of them,
+   and the top of that one is the woman's head. */
+.df-split__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: 50% 40%;
+  border-radius: var(--wf-r-lg);
+}
+/* On the black band the picture is a medical render on its own dark ground,
+   so a white border would be the only bright edge on the section. A faint
+   white rule keeps it from bleeding into the band without framing it. */
+.df-split--dark .df-split__media img { border: 1px solid var(--pl-on-dark-line); }
+.df-split--dark .df-kicker { color: var(--pl-on-dark-mute); }
+.df-split--dark .df-h2 { color: var(--pl-on-dark); }
+.df-split--dark .df-lede { color: var(--pl-on-dark-soft); }
+.df-split--dark .df-points li { color: var(--pl-on-dark); }
+.df-split--dark .df-points li::before { background: var(--pl-on-dark); }
+
+@media (min-width: 860px) {
+  .df-split__in { grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 72px); }
+  .df-split--flip .df-split__media { order: 2; }
+}
+
+/* ---- the product grid, on this page only --------------------------------
+   wf-shop.css puts four cards in a row, which is right for a catalogue page
+   and wrong here: the shop has five products, so four across leaves one card
+   alone on a second row. Three across makes the last row a pair, which reads
+   as a grid rather than as a mistake, and at 358px a card the photographs are
+   large enough to be looked at rather than identified. */
+@media (min-width: 900px) {
+  .wf-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---- the closing band ---------------------------------------------------
+   Black, centred, one sentence and one button. It is the last thing on the
+   page and the only place the shop asks twice. */
+.df-promise { background: var(--pl-ink); padding-block: clamp(52px, 9vw, 104px); }
+.df-promise__in { text-align: center; max-width: 720px; margin-inline: auto; }
+.df-promise__title {
+  font-family: var(--pl-display);
+  font-size: clamp(1.7rem, 5.2vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -.01em;
+  color: var(--pl-on-dark);
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.df-promise__text {
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.4vw, 1.08rem);
+  line-height: 1.75;
+  color: var(--pl-on-dark-soft);
+  margin: 0 auto;
+  max-width: 54ch;
+}
+.df-promise .df-btn-row { justify-content: center; }
+.df-promise__note {
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  line-height: 1.6;
+  color: var(--pl-on-dark-mute);
+  margin: 22px 0 0;
+}
+
+/* Anything focusable on a black band needs a ring that is visible on black.
+   The theme's default ring is the ink, which on the ink is nothing. */
+.df-split--dark a:focus-visible,
+.df-promise a:focus-visible,
+.df-strip a:focus-visible {
+  outline: 2px solid var(--pl-white);
+  outline-offset: 3px;
+}
