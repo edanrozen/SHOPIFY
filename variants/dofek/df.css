@@ -313,15 +313,10 @@
   .df-split--flip .df-split__media { order: 2; }
 }
 
-/* ---- the product grid, on this page only --------------------------------
-   wf-shop.css puts four cards in a row, which is right for a catalogue page
-   and wrong here: the shop has five products, so four across leaves one card
-   alone on a second row. Three across makes the last row a pair, which reads
-   as a grid rather than as a mistake, and at 358px a card the photographs are
-   large enough to be looked at rather than identified. */
-@media (min-width: 900px) {
-  .wf-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
+/* The product grid needs no override here any more. It used to force three
+   across because five products left one card alone on a second row; the
+   flagship band above it now carries the knee brace and the grid carries the
+   other four, which is exactly one row of wf-shop.css's four. */
 
 /* ---- the closing band ---------------------------------------------------
    Black, centred, one sentence and one button. It is the last thing on the

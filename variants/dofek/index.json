@@ -77,12 +77,13 @@
     "grid": {
       "type": "wf-grid",
       "settings": {
-        "heading": "המוצרים",
-        "text": "חמישה פריטים, כל אחד לשלב אחר ביום.",
+        "heading": "שאר השורה",
+        "text": "נעליים, מדרסים וגרביים. כל פריט לשלב אחר באותו יום.",
         "limit": 12,
         "empty_text": "אין מוצרים להצגה.",
         "more_label": "לכל המוצרים",
-        "more_link": "/collections/all"
+        "more_link": "/collections/all",
+        "exclude": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד"
       }
     },
     "expert": {
@@ -116,12 +117,24 @@
         "title": "מגן ברך DOFEK",
         "label": "לפרטים"
       }
+    },
+    "flagship": {
+      "type": "wf-flagship",
+      "settings": {
+        "product": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+        "eyebrow": "מוצר הדגל",
+        "problem": "הברך לא כואבת כל היום. היא כואבת במדרגות, בקימה מכיסא נמוך ובסוף יום שלם על הרגליים.",
+        "heading": "מגן ברך DOFEK",
+        "body": "לחץ אחיד סביב המפרק, צמצום תנועות צד ותחושת יציבות בהליכה. שני צבעים, ארבע מידות, M עד XLL.",
+        "cta_label": "לעמוד המוצר"
+      }
     }
   },
   "order": [
     "hero",
     "strip",
     "problem",
+    "flagship",
     "science",
     "grid",
     "expert",

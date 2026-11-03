@@ -51,7 +51,14 @@
   /* A single button in a row of its own goes full width. On a phone the
      alternative is a pill floating in the middle of the screen with the
      thumb having to find it, and a full-width target cannot be missed. */
-  .wf-more .wf-btn { width: 100%; }
+  .wf-more .wf-btn,
+  .wf-flag .wf-btn { width: 100%; }
+
+  /* The flagship frame is 4:5 and contains rather than covers, which was
+     right for a 1206x1806 grooming station. DOFEK's product photography is
+     square, so a 4:5 frame draws a band of empty ground above and below
+     every one of them. */
+  .wf-flag__media { aspect-ratio: 1 / 1; }
 }
 
 @media (max-width: 559px) {

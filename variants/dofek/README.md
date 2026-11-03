@@ -35,14 +35,20 @@ before shipping it.
 
 ## The home page
 
-    hero      df-hero      the couple on the trail, the brace on
-    strip     df-strip     three facts, black band
-    problem   df-split     the stairs, white
-    science   df-split     the knee render, black, flipped
-    grid      wf-grid      the five products, three across
-    expert    df-split     the doctor, tinted. the disclaimer
-    promise   df-promise   ask before you order the wrong size
-    ctabar    df-cta-bar   the phone's standing button
+    hero      df-hero       the couple on the trail, the brace on
+    strip     df-strip      three facts, black band
+    problem   df-split      the stairs, white
+    flagship  wf-flagship   the knee brace, on its own
+    science   df-split      the knee render, black, flipped
+    grid      wf-grid       the other four, one row
+    expert    df-split      the doctor, tinted. the disclaimer
+    promise   df-promise    ask before you order the wrong size
+    ctabar    df-cta-bar    the phone's standing button
+
+The knee brace is the flagship, so it is not in the grid. It gets the band
+above it, the second hero button, the standing bar on the phone, and the
+`custom.badge` that puts "מוצר הדגל" on its card everywhere else. The grid
+carries the other four, which is exactly one row of wf-shop.css's four.
 
 Four photographs, all of them the merchant's own uploads, placed and never
 altered:
@@ -140,12 +146,33 @@ are not.
 
 ## Still the previous brand's
 
-Flagged rather than fixed, because each one is a commercial statement that is
-the merchant's to make:
+The four content pages were rewritten for DOFEK. The five store policies were
+not, because `write_legal_policies` is not granted to this session, and they
+are the binding documents. Four of them still read:
 
-  * `/pages/about`, `/pages/faq` are written about dogs and cats.
-  * `/pages/shipping-returns` promises free shipping and a 10 to 14 day
-    delivery window that nobody has confirmed for this supplier.
-  * `/pages/contact` gives `tinybloom917@gmail.com`.
-  * The five store policies are the previous brand's text, and the API scope
-    to rewrite them is not granted to this session.
+  * **Contact information** gives `tinybloom917@gmail.com` and carries the
+    literal placeholder "(להכניס כאן את שם המותג שלך)".
+  * **Refund policy** names `tinybloom` twice, and promises a refund within
+    "90 ימי עסקים". Israeli consumer law gives 14 days from the cancellation
+    notice, so that clause is both wrong and unenforceable in the merchant's
+    favour.
+  * **Shipping policy** is headed TINYBLOOM and states 14 to 56 business
+    days, against the 10 to 14 the checkout's own shipping rate promises.
+  * **Terms of service** name `tinybloom` and `tinybloom917@gmail.com`.
+
+The pages were written around that rather than against it. Where a policy is
+clear they transcribe it (the ₪30 return shipping floor, the 5% or ₪100
+cancellation fee, trying on not counting as use, an uncollected parcel losing
+the right to cancel). Where a policy is wrong they point at it instead of
+repeating it: the refund timing line says "מועד ההחזר מופיע במדיניות
+ההחזרים", so correcting the policy corrects the page.
+
+Also outstanding:
+
+  * Nine TinyBloom product templates (`product.bloom.json` and friends) are
+    dead files in the theme. `themeFilesDelete` is blocked for this session;
+    they are removed from the admin's code editor in one click each.
+  * The store has no meta description of its own, which lives in the online
+    store Preferences page rather than in the API.
+  * Every product's description is empty. That is the product page work,
+    deliberately left.
