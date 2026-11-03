@@ -41,7 +41,7 @@ before shipping it.
     flagship  wf-flagship   the knee brace, on its own
     science   df-split      the knee render, black, flipped
     grid      wf-grid       the other four, one row
-    expert    df-split      the doctor, tinted. the disclaimer
+    expert    df-split      the doctor, tinted. why the brace helps
     promise   df-promise    ask before you order the wrong size
     ctabar    df-cta-bar    the phone's standing button
 
@@ -117,16 +117,26 @@ or the collection page.
 The shop sells support braces to people whose knees hurt. Three rules were
 held to throughout, and anyone editing the copy should hold to them:
 
-  * No medical claim. `science` says what a brace does mechanically and then
-    says, in the same paragraph, that it is not a medicine. `expert` says
-    outright that these are not a diagnosis, not a treatment and not a
-    substitute for a doctor, and that a persistent pain should be examined
-    before it is wrapped.
+  * No medical claim. Both `science` and `expert` describe what the brace
+    does mechanically and nothing beyond it: even pressure around the joint,
+    fewer small lateral movements, heat retained in the area, confidence in
+    the step on stairs and getting out of a low chair. No cure, no
+    treatment, no diagnosis, no condition named. The merchant asked for the
+    two hedging paragraphs to come off the home page, and they did; the
+    sentences that matter ("we do not diagnose and we do not treat", "a
+    persistent pain should be examined first") moved to the FAQ and the
+    about page, where somebody looking for them will find them.
   * No invented review, rating or count. There are none on this page, because
     the shop has no orders.
   * No commercial promise that is not already true. The three facts are
-    nationwide delivery, the statutory 14 day cancellation right, and support
-    in Hebrew. Free shipping is not claimed anywhere.
+    nationwide delivery, 30 days to a refund, and support in Hebrew. Free
+    shipping is not claimed anywhere.
+
+    The 30 days are the merchant's own decision and they are legal: Israeli
+    consumer law sets 14 days as the floor, not the ceiling, so offering
+    more is allowed and is a real differentiator. It does mean the shop now
+    promises 30 where the store's refund policy still says 14, and that
+    policy is the binding document.
 
 ## Verifying a change
 
@@ -152,10 +162,11 @@ are the binding documents. Four of them still read:
 
   * **Contact information** gives `tinybloom917@gmail.com` and carries the
     literal placeholder "(להכניס כאן את שם המותג שלך)".
-  * **Refund policy** names `tinybloom` twice, and promises a refund within
-    "90 ימי עסקים". Israeli consumer law gives 14 days from the cancellation
-    notice, so that clause is both wrong and unenforceable in the merchant's
-    favour.
+  * **Refund policy** names `tinybloom` twice, promises a refund within
+    "90 ימי עסקים" where Israeli law gives 14 days from the cancellation
+    notice, and still states a 14 day return window against the 30 the shop
+    now advertises on every page. This one is the most exposed of the four
+    and should be rewritten first.
   * **Shipping policy** is headed TINYBLOOM and states 14 to 56 business
     days, against the 10 to 14 the checkout's own shipping rate promises.
   * **Terms of service** name `tinybloom` and `tinybloom917@gmail.com`.

@@ -21,7 +21,7 @@
         "announcement_ret14": {
           "type": "_announcement",
           "settings": {
-            "text": "14 יום לביטול עסקה",
+            "text": "30 יום להחזר כספי",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
             "weight": "700",
