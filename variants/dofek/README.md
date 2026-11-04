@@ -112,6 +112,60 @@ Checked at 360, 390, 430, 768, 1280 and 1920: no horizontal overflow at any
 width, no text under 14px and no tap target under 44px on either the home page
 or the collection page.
 
+## The knee brace's own product page
+
+`product.dofek-knee.json` is the template, set on the knee brace as
+`templateSuffix: "dofek-knee"`. It is its own page rather than a variation of
+the inherited `wf-product` one, because it is the only product in the shop
+worth ten sections and the only one whose photographs justify a gallery. Every
+other product still uses the inherited template and is untouched by any of it.
+
+Ten sections, in the order a visitor meets them:
+
+  * `df-pdp` — the buying block. Gallery, pickers, quantity, button.
+  * `df-feature` — four rows: dial, laces, padding, knit.
+  * `df-split` — when the knee is actually felt. Stairs, low chairs, hours
+    standing.
+  * `df-feature`, on black — what turning the dial does.
+  * `df-steps` — three pictures, under half a minute.
+  * `df-compare` — six rows against a plain sleeve, all of them visible in
+    the photographs.
+  * `df-voices` — where the reviews will go, saying plainly that there are
+    none yet.
+  * `df-faq` — seven questions, native `<details>`.
+  * `wf-trust` — thirty days, delivery window, Hebrew support, secure payment.
+  * `df-end` — the last ask, with the price read off the product.
+
+Two decisions in `df-pdp.liquid` are worth keeping.
+
+The form posts a plain `<select name="id">` carrying every variant. That select
+is the truth: it is what the browser submits, it works with JavaScript off, and
+`df-pdp.js` hides it and drives it from the swatches rather than replacing it.
+Nothing computes a variant id at submit time and no hidden field has to be kept
+in step.
+
+The gallery renders every frame into the page instead of swapping one `src`.
+The browser has decoded the next photograph before the thumbnail is pressed,
+and with no JavaScript the first frame is simply the picture. The cost is that
+the inactive frames sit stacked over the active one, so they carry
+`visibility: hidden; pointer-events: none` — without those the top of the stack
+swallows the click and the zoom opens the last photograph in the gallery
+whichever thumbnail was pressed. That was found by clicking it, not by reading
+it.
+
+A Playwright pass over the rendered page exercised the pickers, the select
+sync, the quantity floor, the gallery, the lightbox, the questions and the
+standing bar. It found three real faults, all fixed and all commented at the
+line that fixes them: the click-swallowing frames above; `.dp__fallback`
+staying painted because `display: grid` on a class beats the user agent's
+`[hidden] { display: none }`; and the standing bar never appearing on a scroll
+jump, because an IntersectionObserver never fires if the element goes from
+below the viewport to above it in one scroll. The bar now reads a rect behind
+`requestAnimationFrame`.
+
+Checked at 360, 390, 430, 768, 1280 and 1920: no horizontal overflow, no text
+under 14px, no tap target under 44px.
+
 ## What is honest here and why it matters
 
 The shop sells support braces to people whose knees hurt. Three rules were
@@ -185,5 +239,8 @@ Also outstanding:
     they are removed from the admin's code editor in one click each.
   * The store has no meta description of its own, which lives in the online
     store Preferences page rather than in the API.
-  * Every product's description is empty. That is the product page work,
-    deliberately left.
+  * Every product's description is still empty, the knee brace included.
+    Its selling copy lives in the template rather than in the description
+    field, which is right for the page and wrong for everywhere Shopify
+    reuses that field: search results, the cart, Google Shopping, a
+    marketplace export. One paragraph per product, five products.

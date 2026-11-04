@@ -1,0 +1,87 @@
+{%- doc -%}
+  The last ask.
+
+  A photograph, a sentence and the button, on black. The price comes off
+  the product rather than out of a setting, so it cannot go stale: change
+  the price in the admin and this band changes with it.
+
+  The button scrolls back to the buy box rather than linking to the product
+  page, because on this template the buy box is already on the page and a
+  link that reloads the page the visitor is standing on is a lost sale.
+{%- enddoc -%}
+
+{%- liquid
+  assign p = section.settings.product | default: product
+  assign classes = 'dl dl--dark'
+-%}
+
+{%- if p != blank -%}
+  <section class="{{ classes }}">
+    <div class="pl-wrap">
+      <div class="dl-end">
+        <figure class="dl-end__media">
+          {%- assign img = section.settings.image | default: p.featured_image -%}
+          {%- if img != blank -%}
+            <img
+              src="{{ img | image_url: width: 900 }}"
+              srcset="{{ img | image_url: width: 520 }} 520w, {{ img | image_url: width: 900 }} 900w"
+              sizes="(min-width: 860px) 46vw, 100vw"
+              width="{{ img.width }}"
+              height="{{ img.height }}"
+              alt="{{ section.settings.alt | default: p.title | escape }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {%- endif -%}
+        </figure>
+
+        <div>
+          {%- if section.settings.kicker != blank -%}
+            <p class="dl__kicker">{{ section.settings.kicker }}</p>
+          {%- endif -%}
+          <h2 class="dl__h2">{{ section.settings.heading }}</h2>
+          {%- if section.settings.text != blank -%}
+            <p class="dl__sub">{{ section.settings.text }}</p>
+          {%- endif -%}
+
+          <p class="dl-end__price">{{ p.price | money }}</p>
+
+          {%- liquid
+            assign href = section.settings.link
+            if href == blank
+              if template.name == 'product' and p.id == product.id
+                assign href = '#dp-buy'
+              else
+                assign href = p.url
+              endif
+            endif
+          -%}
+          <a class="wf-btn" href="{{ href }}">{{ section.settings.cta_label }}</a>
+
+          {%- if section.settings.note != blank -%}
+            <p class="dl__sub" style="margin-top:16px">{{ section.settings.note }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DOFEK · קריאה אחרונה",
+  "tag": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "מוצר, ריק לוקח את המוצר של הדף" },
+    { "type": "image_picker", "id": "image", "label": "תמונה, ריק לוקח את תמונת המוצר" },
+    { "type": "text", "id": "alt", "label": "תיאור התמונה לקוראי מסך" },
+    { "type": "text", "id": "kicker", "label": "שורת פתיחה" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "זה הזמן לזוז עם יותר ביטחון" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "רוכשים עכשיו את מגן הברך DOFEK" },
+    { "type": "url", "id": "link", "label": "קישור, ריק גולל חזרה לקנייה" },
+    { "type": "text", "id": "note", "label": "שורה תחתונה" }
+  ],
+  "presets": [{ "name": "DOFEK · קריאה אחרונה" }]
+}
+{% endschema %}

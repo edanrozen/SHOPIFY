@@ -1,0 +1,414 @@
+/* ==========================================================================
+   DOFEK, the product page.
+
+   Loaded only on templates/product.dofek-knee.json. The shop's other product
+   pages still get wf-pdp*.css and are untouched by anything in here.
+
+   Phone first, like the rest of the shop: every rule below is the 390px one
+   unless a min-width says otherwise. The desktop is the variation.
+   ========================================================================== */
+
+/* ---- the buying block ---------------------------------------------------
+   Gallery and buy box. The gallery is the first grid child, so in RTL it
+   takes the inline-start half, which on a Hebrew product page is where the
+   eye lands and what the visitor came to look at. */
+.dp { padding-block: 0 clamp(32px, 6vw, 64px); }
+.dp__in { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 4vw, 48px); }
+@media (min-width: 900px) {
+  .dp__in { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+  .dp__buy { position: sticky; top: 96px; }
+}
+
+/* ---- gallery ------------------------------------------------------------ */
+.dp__gal { margin: 0; display: grid; gap: 10px; }
+.dp__stage {
+  position: relative;
+  margin: 0;
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.dp__stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+}
+/* Every frame but the first is stacked underneath and revealed by the
+   thumbnails. Keeping them in the DOM rather than swapping one `src` means
+   the browser has already decoded the next picture by the time it is asked
+   for, and the gallery still shows something with JavaScript off. */
+/* The frames that are not showing are transparent, but they are still
+   laid over the one that is. Without the last two declarations the top of
+   that stack swallows the click, and the zoom opens the last photograph in
+   the gallery whichever thumbnail was pressed. Found by clicking it. */
+.dp__frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s var(--pl-ease);
+}
+.dp__frame[data-on] {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.dp__zoom {
+  position: absolute;
+  inset-block-end: 10px;
+  inset-inline-end: 10px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-pill);
+  background: var(--pl-white);
+  color: var(--pl-ink);
+  font-size: 1rem;
+  pointer-events: none;
+}
+.dp__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-block-end: 2px;
+}
+.dp__thumbs::-webkit-scrollbar { display: none; }
+.dp__thumb {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+  background: var(--pl-cream-deep);
+  overflow: hidden;
+  cursor: pointer;
+}
+.dp__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dp__thumb[aria-current='true'] { border-color: var(--pl-ink); border-width: 2px; }
+@media (min-width: 900px) {
+  .dp__thumb { flex-basis: 78px; width: 78px; height: 78px; }
+}
+
+/* The lightbox. One element, built once, reused for every frame. */
+.dp-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  place-items: center;
+  background: rgba(10, 10, 10, .93);
+  padding: 16px;
+}
+.dp-lb[open] { display: grid; }
+.dp-lb img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+.dp-lb__x {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--wf-pill);
+  background: var(--pl-white);
+  color: var(--pl-ink);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ---- buy box ------------------------------------------------------------ */
+.dp__kicker {
+  font-family: var(--pl-sans);
+  font-size: .875rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--pl-taupe);
+  margin: 0 0 10px;
+}
+.dp__title {
+  font-family: var(--pl-display);
+  font-size: clamp(1.7rem, 6vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  color: var(--pl-ink);
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.dp__lede {
+  font-family: var(--pl-sans);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0 0 18px;
+  max-width: 46ch;
+}
+.dp__bullets { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 10px; }
+.dp__bullets li {
+  position: relative;
+  padding-inline-start: 26px;
+  font-family: var(--pl-sans);
+  font-size: .97rem;
+  line-height: 1.55;
+  color: var(--pl-ink);
+}
+.dp__bullets li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: .68em;
+  width: 14px;
+  height: 2px;
+  background: var(--pl-ink);
+}
+
+.dp__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--pl-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  margin: 0 0 4px;
+}
+.dp__was { font-size: 1.05rem; font-weight: 500; color: var(--pl-taupe); }
+.dp__off {
+  font-family: var(--pl-sans);
+  font-size: .8125rem;
+  font-weight: 700;
+  color: var(--pl-white);
+  background: var(--pl-ink);
+  border-radius: var(--wf-pill);
+  padding: 4px 10px;
+}
+.dp__ship { font-family: var(--pl-sans); font-size: .9rem; color: var(--pl-ink-soft); margin: 0 0 20px; }
+
+/* ---- option pickers ----------------------------------------------------- */
+.dp__opt { border: 0; margin: 0 0 18px; padding: 0; }
+.dp__legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  width: 100%;
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  margin-bottom: 10px;
+  padding: 0;
+}
+.dp__legend b { font-weight: 400; color: var(--pl-ink-soft); }
+/* The size-help link is a 16px line of text, which is a 16px target. The
+   padding takes it to 44 without moving the baseline it sits on, and the
+   negative margin gives the height back to the row. */
+.dp__legend a {
+  display: inline-block;
+  padding-block: 14px;
+  margin-block: -14px;
+  color: var(--pl-ink-soft);
+}
+.dp__row { display: flex; flex-wrap: wrap; gap: 8px; }
+.dp__row input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+/* A size is a pill. 48px tall and 56px wide is the thumb floor, and the
+   four of them fit one row at 360px. */
+.dp__size {
+  display: grid;
+  place-items: center;
+  min-width: 56px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-pill);
+  background: var(--pl-white);
+  font-family: var(--pl-sans);
+  font-size: .97rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  cursor: pointer;
+  transition: border-color .15s var(--pl-ease), background .15s var(--pl-ease), color .15s var(--pl-ease);
+}
+.dp__size:hover { border-color: var(--pl-edge); }
+input:checked + .dp__size { background: var(--pl-ink); border-color: var(--pl-ink); color: var(--pl-white); }
+input:focus-visible + .dp__size { outline: 2px solid var(--pl-ink); outline-offset: 2px; }
+.dp__size--out { color: var(--pl-taupe); text-decoration: line-through; cursor: not-allowed; }
+
+/* A colour is the colour, with its name beside it so the shop is still
+   usable by somebody who cannot tell the two circles apart. */
+.dp__col {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 16px 0 12px;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-pill);
+  background: var(--pl-white);
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--pl-ink);
+  cursor: pointer;
+  transition: border-color .15s var(--pl-ease);
+}
+.dp__dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--pl-edge);
+  flex: 0 0 auto;
+}
+input:checked + .dp__col { border-color: var(--pl-ink); box-shadow: inset 0 0 0 1px var(--pl-ink); }
+input:focus-visible + .dp__col { outline: 2px solid var(--pl-ink); outline-offset: 2px; }
+
+/* The select is what the form posts without JavaScript. The script hides it
+   and shows the pickers, so the page works either way. */
+.dp__fallback { display: grid; gap: 8px; margin-bottom: 18px; }
+/* `display: grid` on a class beats the user agent's `[hidden] { display:
+   none }`, so without this line the script sets the attribute, the test
+   reports the element hidden, and the shopper still sees a second picker
+   under the first one. */
+.dp__fallback[hidden] { display: none; }
+.dp__fallback select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--pl-edge);
+  border-radius: var(--wf-r);
+  background: var(--pl-white);
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  color: var(--pl-ink);
+}
+.dp__pickers[hidden] { display: none; }
+
+/* ---- quantity and submit ------------------------------------------------ */
+.dp__buyrow { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: stretch; }
+.dp__qty {
+  display: inline-grid;
+  grid-template-columns: 44px auto 44px;
+  align-items: center;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-pill);
+  background: var(--pl-white);
+  overflow: hidden;
+}
+.dp__qty button {
+  min-height: 48px;
+  border: 0;
+  background: none;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--pl-ink);
+  cursor: pointer;
+}
+.dp__qty button:hover { background: var(--pl-cream-deep); }
+.dp__qty input {
+  width: 44px;
+  min-height: 48px;
+  border: 0;
+  text-align: center;
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  background: none;
+  -moz-appearance: textfield;
+}
+.dp__qty input::-webkit-outer-spin-button,
+.dp__qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.dp__atc { width: 100%; min-height: 54px; font-size: 1.05rem; }
+.dp__done {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+  background: var(--pl-cream-deep);
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  color: var(--pl-ink);
+}
+.dp__done[data-on] { display: flex; }
+.dp__done a { color: var(--pl-ink); font-weight: 700; }
+
+/* ---- the reassurance row under the button ------------------------------- */
+.dp__perks {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--pl-line);
+  display: grid;
+  gap: 12px;
+}
+.dp__perks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--pl-sans);
+  font-size: .92rem;
+  line-height: 1.5;
+  color: var(--pl-ink-soft);
+}
+.dp__perks b { display: block; font-weight: 700; color: var(--pl-ink); }
+.dp__perks svg { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 1px; }
+
+/* ---- the standing buy bar on the phone ---------------------------------- */
+.dp-bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px var(--pl-gutter) calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--pl-ink);
+  border-top: 1px solid var(--pl-on-dark-line);
+  transform: translateY(110%);
+  transition: transform .26s var(--pl-ease);
+}
+.dp-bar.is-on { transform: none; }
+@media (prefers-reduced-motion: reduce) { .dp-bar { transition: none; } }
+.dp-bar__t { flex: 1 1 auto; min-width: 0; }
+.dp-bar__p {
+  display: block;
+  font-family: var(--pl-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--pl-on-dark);
+}
+.dp-bar__v {
+  display: block;
+  font-family: var(--pl-sans);
+  font-size: .875rem;
+  color: var(--pl-on-dark-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dp-bar .wf-btn {
+  flex: 0 0 auto;
+  min-height: 46px;
+  padding: 12px 24px;
+  background: var(--pl-white);
+  color: var(--pl-ink);
+  border-color: var(--pl-white);
+}
+.dp-bar-spacer { height: 70px; }
+@media (min-width: 900px) { .dp-bar, .dp-bar-spacer { display: none; } }

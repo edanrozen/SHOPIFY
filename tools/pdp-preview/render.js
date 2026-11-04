@@ -139,8 +139,9 @@ const CATALOGUE = [
 // page, and a grid rendered against the previous shop's nine products proves
 // nothing about this one's five.
 const CATALOGUE_DOFEK = [
-  ['מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד', 'מגן ברך DOFEK – תמיכה ויציבות בכל צעד', 11999, 7, ['all'],
-    [[1254, 1254], [1199, 1312], [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1206, 1178]]],
+  ['מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד', 'מגן ברך DOFEK – תמיכה ויציבות בכל צעד', 11999, 10, ['all'],
+    [[1319, 1192], [1317, 1194], [1254, 1254], [1254, 1254], [1199, 1312],
+     [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1206, 1178]]],
   ['גרבי-במבוק-לעבודה-נוחות-ורכות-לאורך-כל-היום', 'גרבי במבוק לעבודה – נוחות ורכות לאורך כל היום', 5999, 4, ['all'],
     [[1284, 1225], [1254, 1254], [1282, 1227], [1254, 1254]]],
   ['נעלי-יחפנות-dofek-חופש-בכל-צעד', 'נעלי יחפנות DOFEK – חופש בכל צעד', 15999, 5, ['all'],
@@ -178,6 +179,48 @@ const COMPARE = {
   'pro-grooming-comb': 7999,
 };
 
+// Real options, for the products that have them. Everything else in the shop
+// is single variant, and a stub that pretended the knee brace were too would
+// render df-pdp's pickers as an empty <div> and prove nothing about the one
+// interaction the product page exists for: picking a colour and a size and
+// watching the hidden <select> follow.
+//
+// Order matters. Option 1 is the colour because that is its position in the
+// store, and df-pdp.liquid decides whether to draw a swatch or a size pill
+// from the option's name, so the names here are the store's names.
+const OPTIONS = {
+  'מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד': [
+    ['צבע', ['שחור', 'לבן']],
+    ['מידה', ['M', 'L', 'XL', 'XLL']],
+  ],
+};
+
+// The cartesian product of the option values, in the order Shopify generates
+// it: the last option varies fastest. A stub built in any other order would
+// still pick the right variant, which is exactly why getting it wrong here
+// would hide a template that reads p.variants positionally.
+const makeVariants = (handle, price) => {
+  const spec = OPTIONS[handle];
+  if (!spec) return null;
+  let rows = [[]];
+  for (const [, values] of spec) {
+    const next = [];
+    for (const row of rows) for (const v of values) next.push(row.concat(v));
+    rows = next;
+  }
+  return rows.map((options, i) => ({
+    id: 90000 + i,
+    title: options.join(' / '),
+    options,
+    option1: options[0],
+    option2: options[1] || null,
+    option3: options[2] || null,
+    price,
+    available: true,
+    featured_media: null,
+  }));
+};
+
 const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   const perImage = Array.isArray(dims && dims[0]);
   const sizeOf = (i) => (perImage ? dims[Math.min(i, dims.length - 1)] : dims) || [1206, 1760];
@@ -195,7 +238,16 @@ const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
   // products are single variant in the store, so the stub is too: a template
   // branching on has_only_default_variant must take the branch it will live on.
   for (const m of images) m.media_type = 'image';
-  const variant = { id: 1000 + price, title: 'Default Title', price, available: true };
+  const multi = makeVariants(handle, price);
+  const variant = multi
+    ? multi[0]
+    : { id: 1000 + price, title: 'Default Title', price, available: true };
+  const options_with_values = (OPTIONS[handle] || []).map(([name, values], i) => ({
+    name,
+    position: i + 1,
+    values,
+    selected_value: values[0],
+  }));
   return {
     handle, title, price, compare_at_price: COMPARE[handle] || null, available: true,
     url: '/products/' + handle,
@@ -203,8 +255,10 @@ const makeProduct = ([handle, title, price, nImages, colls, dims]) => {
     description: '<p>' + title + '</p>',
     images, media: images,
     featured_media: images[0], featured_image: images[0],
-    has_only_default_variant: true,
-    variants: [variant],
+    has_only_default_variant: !multi,
+    options: options_with_values.map((o) => o.name),
+    options_with_values,
+    variants: multi || [variant],
     selected_or_first_available_variant: variant,
     metafields: {
       custom: {

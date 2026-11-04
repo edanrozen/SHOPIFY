@@ -1,0 +1,81 @@
+{%- doc -%}
+  The questions, as native <details>.
+
+  No script. A <details> opens, closes, is reachable by keyboard, is found
+  by the browser's own in-page search and prints open, all of which a
+  hand-rolled accordion has to be given back one at a time.
+
+  The section carries the id the buy box's "not sure about your size" link
+  points at, so that link lands on the answer rather than on a modal.
+{%- enddoc -%}
+
+{%- liquid
+  assign classes = 'dl'
+  if section.settings.ground == 'tint'
+    assign classes = classes | append: ' dl--tint'
+  endif
+-%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="{{ classes }}" id="{{ section.settings.anchor | default: 'dp-faq' }}">
+    <div class="pl-wrap">
+      <div class="dl__head{% if section.settings.centred %} dl__head--mid{% endif %}">
+        {%- if section.settings.kicker != blank -%}
+          <p class="dl__kicker">{{ section.settings.kicker }}</p>
+        {%- endif -%}
+        <h2 class="dl__h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="dl__sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="dl-faq">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.q != blank -%}
+            <details {% if forloop.first and section.settings.open_first %}open{% endif %} {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.q }}</summary>
+              <p class="dl-faq__a">{{ block.settings.a }}</p>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DOFEK · שאלות ותשובות",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "שורת פתיחה" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "שאלות ותשובות" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "checkbox", "id": "centred", "label": "כותרת במרכז", "default": true },
+    { "type": "checkbox", "id": "open_first", "label": "לפתוח את השאלה הראשונה", "default": true },
+    { "type": "text", "id": "anchor", "label": "מזהה לעוגן", "default": "dp-faq" },
+    {
+      "type": "select",
+      "id": "ground",
+      "label": "רקע",
+      "default": "white",
+      "options": [
+        { "value": "white", "label": "לבן" },
+        { "value": "tint", "label": "אפור בהיר" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "שאלה",
+      "settings": [
+        { "type": "text", "id": "q", "label": "שאלה" },
+        { "type": "textarea", "id": "a", "label": "תשובה" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "DOFEK · שאלות ותשובות" }]
+}
+{% endschema %}

@@ -64,13 +64,23 @@
 {%- endif -%}
 
 {%- comment -%}
+  DOFEK's own product page, which is its own template and shares nothing
+  with the one below but the palette. Two sheets: the buying block, and
+  everything under it.
+{%- endcomment -%}
+{%- if template.suffix == 'dofek-knee' -%}
+  {{ 'df-pdp.css' | asset_url | stylesheet_tag }}
+  {{ 'df-long.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
   The long product page carries about 10KB of rules nothing else uses: the
   before and after pair, the numbered rails, the comparison table and the
   questions. Shipping that on the homepage and the collection pages would be
   pure weight on the two templates that decide whether a visitor stays at
   all, so it is requested on the product template and nowhere else.
 {%- endcomment -%}
-{%- if template.name == 'product' -%}
+{%- if template.name == 'product' and template.suffix != 'dofek-knee' -%}
   {{ 'wf-pdp.css' | asset_url | stylesheet_tag }}
   {{ 'wf-pdp-long.css' | asset_url | stylesheet_tag }}
   {{ 'wf-pdp2.css' | asset_url | stylesheet_tag }}
