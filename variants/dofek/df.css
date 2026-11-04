@@ -1,7 +1,9 @@
 /* ==========================================================================
    DOFEK, the home page.
 
-   Five sections and one button. Everything here reads wf-tokens.css and
+   The hero, the fact strip and the closing band. The split band and the
+   type the three of them share moved to df-band.css, which the product
+   templates load too. Everything here reads wf-tokens.css and
    defines no colour of its own, so the shop stays black and white because
    the palette says so rather than because every sheet remembered to.
 
@@ -10,103 +12,6 @@
    same rules would lay out correctly in a Latin locale without a mirrored
    copy of the sheet.
    ========================================================================== */
-
-/* ---- shared type --------------------------------------------------------
-   Four classes the five sections share. They exist rather than reusing
-   .wf-h2 and .pl-body because those carry the previous brand's rhythm: a
-   heading that shouts was right for a shop selling toys to a dog owner and
-   is wrong for one selling a knee brace to somebody whose knee hurts.
-   Quieter, tighter, and with a measure that stops before the line gets hard
-   to track back. */
-/* 14px is the floor on the phone, which is where this shop is read.
-
-   Every size below starts at the phone and shrinks on the desktop rather
-   than the other way round. The kicker, the hero's facts and the closing
-   address were all under 14px at 390px, which on a shop whose buyers are
-   mostly over forty is not a style choice, it is a wall. */
-.df-kicker {
-  font-family: var(--pl-sans);
-  font-size: .875rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  line-height: 1.2;
-  color: var(--pl-taupe);
-  margin: 0 0 12px;
-}
-@media (min-width: 860px) {
-  .df-kicker { font-size: .8rem; letter-spacing: .14em; margin-bottom: 14px; }
-}
-.df-h2 {
-  font-family: var(--pl-display);
-  font-size: clamp(1.6rem, 4.4vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.16;
-  letter-spacing: -.01em;
-  color: var(--pl-ink);
-  margin: 0 0 16px;
-  text-wrap: balance;
-}
-.df-lede {
-  font-family: var(--pl-sans);
-  font-size: clamp(1rem, 2.4vw, 1.08rem);
-  line-height: 1.75;
-  color: var(--pl-ink-soft);
-  margin: 0;
-  max-width: 52ch;
-}
-.df-points { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 11px; }
-.df-points li {
-  position: relative;
-  padding-inline-start: 26px;
-  font-family: var(--pl-sans);
-  font-size: .97rem;
-  line-height: 1.6;
-  color: var(--pl-ink);
-}
-/* A rule rather than a bullet glyph. A dot in a list of three reads as a
-   bullet point; a short rule reads as an index, which is what these are. */
-.df-points li::before {
-  content: "";
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block-start: .72em;
-  width: 14px;
-  height: 2px;
-  background: var(--pl-ink);
-}
-
-/* ---- buttons ------------------------------------------------------------
-   .wf-btn from wf.css is the filled one and needs nothing here. These are
-   the two it cannot be: the outline beside it on white, and the reverse of
-   both on the black bands. */
-.df-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-/* Thumb first. On a phone the two buttons share the row evenly and fill it,
-   so neither is a small target beside a large one, and the 32px side padding
-   that fits a 1280px column is cut to 22px so the pair still fits at 360. */
-@media (max-width: 559px) {
-  .df-btn-row .wf-btn { flex: 1 1 0; padding-inline: 22px; min-height: 50px; }
-}
-@media (min-width: 860px) { .df-btn-row { margin-top: 28px; } }
-.df-btn--ghost {
-  background: transparent;
-  color: var(--pl-ink);
-  border-color: var(--pl-ink);
-}
-.df-btn--ghost:hover {
-  background: var(--pl-ink);
-  color: var(--pl-white);
-  border-color: var(--pl-ink);
-}
-.df-btn--inv {
-  background: var(--pl-white);
-  color: var(--pl-ink);
-  border-color: var(--pl-white);
-}
-.df-btn--inv:hover {
-  background: var(--pl-sand-deep);
-  color: var(--pl-ink);
-  border-color: var(--pl-sand-deep);
-}
 
 /* ---- the hero -----------------------------------------------------------
    Two halves on the desktop, stacked on the phone with the photograph first.
@@ -270,48 +175,6 @@
   }
 }
 
-/* ---- the split band -----------------------------------------------------
-   One section used three times: the picture on one side, the argument on the
-   other, flipped and inverted by modifier. Three near-identical sections
-   would have been three places to fix the same spacing bug. */
-.df-split { padding-block: clamp(40px, 8vw, 96px); background: var(--pl-white); }
-.df-split--tint { background: var(--pl-cream-deep); }
-.df-split--dark { background: var(--pl-ink); }
-.df-split__in {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(22px, 5vw, 56px);
-  align-items: center;
-}
-.df-split__media { margin: 0; }
-/* Square, at every width. The three pictures this frame holds are .95, 1.02
-   and 1.30, so a square crops the first two by under 5% and the third by 23%
-   of its width, which on a photograph of a man beside a model keeps both. A
-   4:3 frame would have cut a third of the height off the tallest of them,
-   and the top of that one is the woman's head. */
-.df-split__media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: 50% 40%;
-  border-radius: var(--wf-r-lg);
-}
-/* On the black band the picture is a medical render on its own dark ground,
-   so a white border would be the only bright edge on the section. A faint
-   white rule keeps it from bleeding into the band without framing it. */
-.df-split--dark .df-split__media img { border: 1px solid var(--pl-on-dark-line); }
-.df-split--dark .df-kicker { color: var(--pl-on-dark-mute); }
-.df-split--dark .df-h2 { color: var(--pl-on-dark); }
-.df-split--dark .df-lede { color: var(--pl-on-dark-soft); }
-.df-split--dark .df-points li { color: var(--pl-on-dark); }
-.df-split--dark .df-points li::before { background: var(--pl-on-dark); }
-
-@media (min-width: 860px) {
-  .df-split__in { grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 72px); }
-  .df-split--flip .df-split__media { order: 2; }
-}
 
 /* The product grid needs no override here any more. It used to force three
    across because five products left one card alone on a second row; the
@@ -351,11 +214,3 @@
   word-break: break-word;
 }
 
-/* Anything focusable on a black band needs a ring that is visible on black.
-   The theme's default ring is the ink, which on the ink is nothing. */
-.df-split--dark a:focus-visible,
-.df-promise a:focus-visible,
-.df-strip a:focus-visible {
-  outline: 2px solid var(--pl-white);
-  outline-offset: 3px;
-}

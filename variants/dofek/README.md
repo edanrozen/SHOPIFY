@@ -126,6 +126,22 @@ than naming each page, so the third DOFEK product page is a template file and
 nothing else. The cost is a naming rule: a suffix starting `dofek-` has to mean
 a DOFEK product page.
 
+One component crosses between the home page and these: the split band, which
+both use for the section about the problem. It lived in `df.css`, which is
+requested on the home page and nowhere else, so for two pages and several days
+that section rendered with no rules at all: a full-bleed photograph, about a
+hundred and fifty characters to a line, and the browser's own bullets. It now
+lives in `df-band.css` with the type and the button it is built from, and both
+templates ask for it.
+
+Nothing in the test suite noticed, because the suite asked whether the page
+overflowed, whether the type was large enough and whether the tap targets were
+big enough, and an unstyled section passes all three. It now also measures the
+line length at 1280 and fails anything past about 95 characters, which is a
+typographic rule worth having on its own and is also what an unstyled text band
+looks like. Removing `df-band.css` from the sheet list makes that check fail at
+141 characters, which is how it was confirmed to work.
+
 Ten sections, in the order a visitor meets them:
 
   * `df-pdp` — the buying block. Gallery, pickers, quantity, button.

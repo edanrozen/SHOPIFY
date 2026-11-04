@@ -54,29 +54,41 @@
 {{ 'df-mobile.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
-  The home page, in its own 12KB sheet. It is the only template that uses any
-  of it, and it is also the one template that has to paint before a visitor
-  decides whether this shop is worth a second screen, so it is requested
-  there and nowhere else.
+  Which templates are DOFEK product pages. Matched on the prefix rather than
+  named one at a time, so the next DOFEK product page is a template file and
+  nothing else. The cost is that a suffix starting `dofek-` must mean a DOFEK
+  product page, which is a naming rule worth keeping anyway.
+{%- endcomment -%}
+{%- assign df_pdp = false -%}
+{%- if template.suffix and template.suffix contains 'dofek-' -%}
+  {%- assign df_pdp = true -%}
+{%- endif -%}
+
+{%- comment -%}
+  The one band the home page and the product pages share: the picture on one
+  side and the argument on the other, with the type and the button it is
+  built from. It used to live in df.css, which is requested on the home page
+  and nowhere else, so the product pages rendered that section with no rules
+  at all. Both templates ask for it now.
+{%- endcomment -%}
+{%- if template.name == 'index' or df_pdp -%}
+  {{ 'df-band.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
+  The rest of the home page: the hero, the fact strip and the closing band.
+  No other template uses any of it, and it is the one template that has to
+  paint before a visitor decides whether this shop is worth a second screen,
+  so it is requested there and nowhere else.
 {%- endcomment -%}
 {%- if template.name == 'index' -%}
   {{ 'df.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
 {%- comment -%}
-  DOFEK's own product pages, which are their own templates and share nothing
-  with the one below but the palette. Two sheets: the buying block, and
-  everything under it.
-
-  Matched on the prefix rather than named one at a time, so the next DOFEK
-  product page is a template file and nothing else. The cost is that a
-  suffix starting `dofek-` must mean a DOFEK product page, which is a naming
-  rule worth keeping anyway.
+  DOFEK's own product pages. Two sheets: the buying block, and everything
+  under it.
 {%- endcomment -%}
-{%- assign df_pdp = false -%}
-{%- if template.suffix and template.suffix contains 'dofek-' -%}
-  {%- assign df_pdp = true -%}
-{%- endif -%}
 {%- if df_pdp -%}
   {{ 'df-pdp.css' | asset_url | stylesheet_tag }}
   {{ 'df-long.css' | asset_url | stylesheet_tag }}

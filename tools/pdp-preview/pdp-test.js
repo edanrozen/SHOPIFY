@@ -184,6 +184,33 @@ const check = (name, pass, detail) => {
   });
   check('nothing under 14px on the phone', small.length === 0, small.join(' | '));
 
+  /* The measure. This is here because the test suite missed a whole section
+     shipping with no rules at all: the split band lived in the home page's
+     sheet, which the product templates do not request, so it rendered
+     full-bleed with a hundred and fifty characters to a line. Overflow was
+     clean, the type was large enough, every tap target was fine, and the
+     section was broken. A line that long is a typographic fault in its own
+     right and it is also what an unstyled text band looks like. */
+  await page.setViewportSize({ width: 1280, height: 1000 });
+  await page.waitForTimeout(150);
+  const long = await page.evaluate(() => {
+    const out = [];
+    for (const el of document.querySelectorAll('p, li, h1, h2, h3')) {
+      const t = el.textContent.trim();
+      if (t.length < 60 || el.children.length) continue;
+      const cs = getComputedStyle(el);
+      const w = el.getBoundingClientRect().width;
+      // 0.5em is a fair average advance for this type at this size; the
+      // threshold is deliberately loose, it is looking for 150, not 80.
+      const ch = w / (parseFloat(cs.fontSize) * 0.5);
+      if (ch > 95) out.push(`${el.className || el.tagName} ~${Math.round(ch)}ch`);
+    }
+    return Array.from(new Set(out));
+  });
+  check('no line runs past a readable measure at 1280', long.length === 0, long.join(' | '));
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(150);
   const tiny = await page.evaluate(() => {
     const out = [];
     for (const el of document.querySelectorAll('.dp a, .dp button, .dp input, .dp label, .dl a, .dl summary')) {
