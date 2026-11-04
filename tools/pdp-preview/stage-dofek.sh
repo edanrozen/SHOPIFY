@@ -29,5 +29,5 @@ cp "$SRC"/wf-tokens.css "$SRC"/df.css "$SRC"/df-mobile.css \
 cp "$SRC"/stylesheets.liquid   "$OUT/snippets/"
 cp "$SRC"/header-group.json "$SRC"/footer-group.json "$OUT/sections/"
 cp "$SRC"/settings_data.json   "$OUT/config/"
-cp "$SRC"/index.json "$SRC"/collection.json "$SRC"/product.dofek-knee.json "$OUT/templates/"
+cp "$SRC"/index.json "$SRC"/collection.json "$SRC"/product.dofek-*.json "$OUT/templates/"
 echo "staged $OUT"

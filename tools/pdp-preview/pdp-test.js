@@ -47,20 +47,38 @@ const check = (name, pass, detail) => {
   check('select fallback hidden once the script runs', !fallbackShown);
   check('swatch pickers shown', await page.locator('[data-dp-pickers]').isVisible());
 
+  /* The counts are read off the page rather than hard-coded, because this
+     runs against more than one product: four sizes on the brace, twelve on
+     the insoles. What is asserted is that every option value got a control
+     and that the product of the groups is the variant count. */
   const groups = await page.locator('[data-dp-opt]').count();
-  check('two option groups', groups === 2, `found ${groups}`);
+  check('every option got a group', groups >= 2, `found ${groups}`);
+  const shape = await page.evaluate(() => {
+    const out = [];
+    for (const fs of document.querySelectorAll('[data-dp-opt]')) {
+      out.push({
+        radios: fs.querySelectorAll('input[type=radio]').length,
+        faces: fs.querySelectorAll('.dp__dot, .dp__size').length,
+      });
+    }
+    return out;
+  });
   check(
-    'colour group draws swatches',
-    (await page.locator('[data-dp-opt="1"] .dp__dot').count()) === 2,
+    'every option value got a visible control',
+    shape.every((g) => g.radios > 0 && g.radios === g.faces),
+    JSON.stringify(shape),
   );
+  const variants = await page.locator('[data-dp-select] option').count();
   check(
-    'size group draws four pills',
-    (await page.locator('[data-dp-opt="2"] .dp__size').count()) === 4,
+    'the groups multiply out to the variant count',
+    shape.reduce((n, g) => n * g.radios, 1) === variants,
+    `${shape.map((g) => g.radios).join(' x ')} vs ${variants} variants`,
   );
 
   /* ---- picking an option moves the hidden select ---- */
   const before = await sel.inputValue();
-  await page.locator('[data-dp-opt="2"] label', { hasText: 'XLL' }).first().click();
+  const lastGroup = `[data-dp-opt="${groups}"]`;
+  await page.locator(`${lastGroup} label`).last().click();
   await page.waitForTimeout(60);
   const afterSize = await sel.inputValue();
   check('picking a size changes the posted variant', afterSize !== before, `${before} -> ${afterSize}`);

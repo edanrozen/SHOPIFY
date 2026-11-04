@@ -64,11 +64,20 @@
 {%- endif -%}
 
 {%- comment -%}
-  DOFEK's own product page, which is its own template and shares nothing
+  DOFEK's own product pages, which are their own templates and share nothing
   with the one below but the palette. Two sheets: the buying block, and
   everything under it.
+
+  Matched on the prefix rather than named one at a time, so the next DOFEK
+  product page is a template file and nothing else. The cost is that a
+  suffix starting `dofek-` must mean a DOFEK product page, which is a naming
+  rule worth keeping anyway.
 {%- endcomment -%}
-{%- if template.suffix == 'dofek-knee' -%}
+{%- assign df_pdp = false -%}
+{%- if template.suffix and template.suffix contains 'dofek-' -%}
+  {%- assign df_pdp = true -%}
+{%- endif -%}
+{%- if df_pdp -%}
   {{ 'df-pdp.css' | asset_url | stylesheet_tag }}
   {{ 'df-long.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
@@ -80,7 +89,7 @@
   pure weight on the two templates that decide whether a visitor stays at
   all, so it is requested on the product template and nowhere else.
 {%- endcomment -%}
-{%- if template.name == 'product' and template.suffix != 'dofek-knee' -%}
+{%- if template.name == 'product' and df_pdp == false -%}
   {{ 'wf-pdp.css' | asset_url | stylesheet_tag }}
   {{ 'wf-pdp-long.css' | asset_url | stylesheet_tag }}
   {{ 'wf-pdp2.css' | asset_url | stylesheet_tag }}

@@ -112,29 +112,47 @@ Checked at 360, 390, 430, 768, 1280 and 1920: no horizontal overflow at any
 width, no text under 14px and no tap target under 44px on either the home page
 or the collection page.
 
-## The knee brace's own product page
+## The DOFEK product pages
 
-`product.dofek-knee.json` is the template, set on the knee brace as
-`templateSuffix: "dofek-knee"`. It is its own page rather than a variation of
-the inherited `wf-product` one, because it is the only product in the shop
-worth ten sections and the only one whose photographs justify a gallery. Every
-other product still uses the inherited template and is untouched by any of it.
+Two so far, each its own template: `product.dofek-knee.json` on the knee brace
+and `product.dofek-insoles.json` on the massage insoles, set on the products as
+`templateSuffix`. They are their own pages rather than variations of the
+inherited `wf-product` one, because they are the products worth ten sections
+and the ones whose photographs justify a gallery. The rest of the catalogue
+still uses the inherited template and is untouched by any of it.
+
+`snippets/stylesheets.liquid` matches the suffix on its `dofek-` prefix rather
+than naming each page, so the third DOFEK product page is a template file and
+nothing else. The cost is a naming rule: a suffix starting `dofek-` has to mean
+a DOFEK product page.
 
 Ten sections, in the order a visitor meets them:
 
   * `df-pdp` — the buying block. Gallery, pickers, quantity, button.
-  * `df-feature` — four rows: dial, laces, padding, knit.
-  * `df-split` — when the knee is actually felt. Stairs, low chairs, hours
-    standing.
-  * `df-feature`, on black — what turning the dial does.
-  * `df-steps` — three pictures, under half a minute.
-  * `df-compare` — six rows against a plain sleeve, all of them visible in
-    the photographs.
+  * `df-feature` — the four things in the product worth a photograph each.
+  * `df-split` — when the problem is actually felt.
+  * `df-feature`, on black — why that matters beyond the part it sits on.
+  * `df-steps` — three pictures, under a minute.
+  * `df-compare` — six rows against the ordinary version of the thing, all of
+    them visible in the photographs.
   * `df-voices` — where the reviews will go, saying plainly that there are
     none yet.
   * `df-faq` — seven questions, native `<details>`.
   * `wf-trust` — thirty days, delivery window, Hebrew support, secure payment.
   * `df-end` — the last ask, with the price read off the product.
+
+The insoles page differs from the brace's in two places worth knowing. Its
+size row carries twelve pills rather than four, which wraps to three lines at
+360px and is the case the preview stub exercises. And its colour option has a
+value the monochrome palette cannot express: the swatch in `df-pdp.liquid` maps
+`כתום` to a real orange, because a swatch that shows the wrong colour is worse
+than no swatch, and a colour the product actually comes in is product data
+rather than decoration.
+
+Its gallery also had three byte-identical duplicates in it, the same three
+photographs uploaded twice under `IMG-` and `IMG_` names. The later copies were
+detached from the product with `fileUpdate(referencesToRemove:)`, which leaves
+the files themselves in Files; six distinct photographs remain.
 
 Two decisions in `df-pdp.liquid` are worth keeping.
 
