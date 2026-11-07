@@ -88,6 +88,28 @@
       });
     };
 
+    /* Is there a live variant whose option `i` is `value`, given the picks
+       in the groups to its LEFT only?
+
+       The "to its left" is the whole trick, and it was a bug before it was a
+       rule. Constraining every group by every other group reads as symmetric
+       and fair, and it traps people: the grounding shoe comes in 47 only in
+       black, so a shopper who picked 47 and then wanted the white pair found
+       the white swatch disabled, with no way back except to guess that the
+       size was the thing blocking them. Now the first group is never
+       constrained, each later group narrows against the ones before it, and
+       `repair` moves the later picks when an earlier one changes under
+       them. */
+    var liveWith = function (i, value, picked) {
+      return data.some(function (v) {
+        if (!v.a || v.o[i] !== value) return false;
+        for (var n = 0; n < i; n++) {
+          if (picked[n] !== null && v.o[n] !== picked[n]) return false;
+        }
+        return true;
+      });
+    };
+
     /* A combination that does not exist is struck through rather than
        removed. A size that vanishes when a colour is picked reads as a
        broken page; a struck-through size reads as a size that is gone. */
@@ -95,11 +117,7 @@
       var picked = chosen();
       groups.forEach(function (fs, i) {
         $$('input[type=radio]', fs).forEach(function (r) {
-          var trial = picked.slice();
-          trial[i] = r.value;
-          var ok = data.some(function (v) {
-            return v.a && trial.every(function (val, n) { return val === null || v.o[n] === val; });
-          });
+          var ok = liveWith(i, r.value, picked);
           r.disabled = !ok;
           var face = r.nextElementSibling;
           if (face && face.classList.contains('dp__size')) face.classList.toggle('dp__size--out', !ok);
@@ -107,7 +125,25 @@
       });
     };
 
+    /* After a pick, the groups to its right may point at a combination that
+       no longer exists. Move each of them to its first live value rather
+       than leaving the form on a variant that cannot be bought. */
+    var repair = function () {
+      var picked = chosen();
+      for (var i = 0; i < groups.length; i++) {
+        if (picked[i] !== null && liveWith(i, picked[i], picked)) continue;
+        var radios = $$('input[type=radio]', groups[i]);
+        for (var k = 0; k < radios.length; k++) {
+          if (!liveWith(i, radios[k].value, picked)) continue;
+          radios[k].checked = true;
+          picked[i] = radios[k].value;
+          break;
+        }
+      }
+    };
+
     var sync = function () {
+      repair();
       var picked = chosen();
       var hit = null;
       for (var i = 0; i < data.length; i++) {

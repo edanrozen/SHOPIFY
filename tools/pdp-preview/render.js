@@ -142,10 +142,10 @@ const CATALOGUE_DOFEK = [
   ['מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד', 'מגן ברך DOFEK – תמיכה ויציבות בכל צעד', 11999, 10, ['all'],
     [[1319, 1192], [1317, 1194], [1254, 1254], [1254, 1254], [1199, 1312],
      [1254, 1254], [1254, 1254], [1254, 1254], [1254, 1254], [1206, 1178]]],
-  ['גרבי-במבוק-לעבודה-נוחות-ורכות-לאורך-כל-היום', 'גרבי במבוק לעבודה – נוחות ורכות לאורך כל היום', 5999, 4, ['all'],
-    [[1284, 1225], [1254, 1254], [1282, 1227], [1254, 1254]]],
-  ['נעלי-יחפנות-dofek-חופש-בכל-צעד', 'נעלי יחפנות DOFEK – חופש בכל צעד', 15999, 5, ['all'],
-    [[1206, 1123], [1206, 1144], [1206, 1139], [1206, 1144], [1206, 1139]]],
+  ['גרבי-במבוק-לעבודה-נוחות-ורכות-לאורך-כל-היום', 'גרבי במבוק לעבודה – נוחות ורכות לאורך כל היום', 5999, 3, ['all'],
+    [[1284, 1225], [1254, 1254], [1254, 1254]]],
+  ['נעלי-יחפנות-dofek-חופש-בכל-צעד', 'נעלי יחפנות DOFEK – חופש בכל צעד', 15999, 3, ['all'],
+    [[1206, 1123], [1206, 1144], [1206, 1139]]],
   ['מדרסי-dofek-לעיסוי-כף-הרגל-נוחות-ותמיכה-בכל-צעד-1', 'מדרסי DOFEK לעיסוי כף הרגל – נוחות ותמיכה בכל צעד', 5990, 6, ['all'],
     [[1297, 1213], [1267, 1241], [1206, 1210], [1206, 1198], [1206, 1133], [1206, 1187]]],
   ['נעלי-יחפנות-לקרקוע-של-dofek', 'נעלי יחפנות לקרקוע של DOFEK', 19999, 5, ['all'],
@@ -200,6 +200,33 @@ const OPTIONS = {
     ['צבע', ['שחור', 'אפור', 'כתום']],
     ['מידה', ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']],
   ],
+  // One option and no sizes at all, which is the other end of the range the
+  // buy box has to handle: one group, two values, and a size-help link that
+  // must not draw because there is no size to help with.
+  'גרבי-במבוק-לעבודה-נוחות-ורכות-לאורך-כל-היום': [
+    ['צבע', ['לבן', 'שחור']],
+  ],
+  'נעלי-יחפנות-dofek-חופש-בכל-צעד': [
+    ['צבע', ['לבן', 'ורוד/סגול', 'שחור']],
+    ['מידה', ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']],
+  ],
+  'נעלי-יחפנות-לקרקוע-של-dofek': [
+    ['צבע', ['שחור', 'לבן/ורוד']],
+    ['מידה', ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47']],
+  ],
+};
+
+// Combinations the shop does not stock. These are the interesting ones: a
+// size that exists for one colour and not for another is not a variant that
+// is out of stock, it is a variant that was never created, and the page has
+// to strike the pill through rather than let it be picked. A stub built on a
+// full cartesian product would never show that path.
+const MISSING = {
+  'נעלי-יחפנות-dofek-חופש-בכל-צעד': [['לבן', '35']],
+  'נעלי-יחפנות-לקרקוע-של-dofek': [
+    ['שחור', '35'],
+    ['לבן/ורוד', '45'], ['לבן/ורוד', '46'], ['לבן/ורוד', '47'],
+  ],
 };
 
 // The cartesian product of the option values, in the order Shopify generates
@@ -215,6 +242,8 @@ const makeVariants = (handle, price) => {
     for (const row of rows) for (const v of values) next.push(row.concat(v));
     rows = next;
   }
+  const gone = MISSING[handle] || [];
+  rows = rows.filter((o) => !gone.some((m) => m.every((v, i) => o[i] === v)));
   return rows.map((options, i) => ({
     id: 90000 + i,
     title: options.join(' / '),

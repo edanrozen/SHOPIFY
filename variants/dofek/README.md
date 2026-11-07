@@ -114,12 +114,23 @@ or the collection page.
 
 ## The DOFEK product pages
 
-Two so far, each its own template: `product.dofek-knee.json` on the knee brace
-and `product.dofek-insoles.json` on the massage insoles, set on the products as
-`templateSuffix`. They are their own pages rather than variations of the
-inherited `wf-product` one, because they are the products worth ten sections
-and the ones whose photographs justify a gallery. The rest of the catalogue
-still uses the inherited template and is untouched by any of it.
+All five products now have one, each its own template, set on the product as
+`templateSuffix`:
+
+  * `product.dofek-knee.json`, the knee brace. Ten sections.
+  * `product.dofek-insoles.json`, the massage insoles. Ten.
+  * `product.dofek-grounding.json`, the grounding shoes. Nine.
+  * `product.dofek-barefoot.json`, the barefoot shoes. Nine.
+  * `product.dofek-socks.json`, the bamboo socks. Eight.
+
+The section count is not a ranking, it is the photography. The brace has ten
+usable photographs and the socks have three, and a page padded past what its
+pictures can carry reads as padding. Nothing on these pages is written from
+the category: every claim is something visible in a photograph of that
+product, which is why the barefoot page talks about the five toe lobes on the
+outsole and the drainage holes, and does not quote a stack height or a heel
+drop. Those numbers exist in the supplier's listing and nowhere we can verify,
+so the page says that too.
 
 `snippets/stylesheets.liquid` matches the suffix on its `dofek-` prefix rather
 than naming each page, so the third DOFEK product page is a template file and
@@ -141,6 +152,17 @@ line length at 1280 and fails anything past about 95 characters, which is a
 typographic rule worth having on its own and is also what an unstyled text band
 looks like. Removing `df-band.css` from the sheet list makes that check fail at
 141 characters, which is how it was confirmed to work.
+
+The shoes found the next one. Both shoe products have combinations that were
+never made: the grounding shoe comes in 47 in black only, the barefoot shoe has
+no 35 in white. The buy box constrained every option group by every other one,
+so a shopper who picked 47 and then wanted the white pair found the white
+swatch disabled, with no way back except to guess that the size was what had
+locked it. Each group is now constrained only by the groups before it, so the
+first group never locks, and a `repair` pass moves the later picks when an
+earlier one changes under them. The suite checks that the first group stays
+clickable after a pick, and that a combination which does not exist is struck
+through rather than hidden, so the size is still visibly a size.
 
 Ten sections, in the order a visitor meets them:
 
@@ -199,6 +221,32 @@ below the viewport to above it in one scroll. The bar now reads a rect behind
 
 Checked at 360, 390, 430, 768, 1280 and 1920: no horizontal overflow, no text
 under 14px, no tap target under 44px.
+
+## Two things found by finally looking at the photographs
+
+`cdn.shopify.com` is not on the Default environment's allowlist, so for the
+whole of the first build nobody on this side of the wire had seen a single
+product photograph. The pages were written from filenames, pixel dimensions
+and file sizes. Opening the host changed two things that no amount of care
+would have caught otherwise.
+
+The first: one of the four images on the bamboo socks is **TREDVIK's**
+infographic, still carrying `TREDVIK R` on the toe of the sock, sitting on a
+DOFEK product. The other three had been re-branded and that one had not. It is
+detached from the product; the file is still in Files.
+
+The second: three of the insoles' content slots were paired with the wrong
+photograph, exactly as warned when the pairing was a guess. The row about the
+shock-absorbing base pointed at a stock photograph of a woman in a lab coat,
+and the row about massage nubs pointed at a six-up lifestyle collage. All of
+them now point at the photograph that shows the thing the row is about.
+
+The lab-coat image is still in the gallery and is no longer used in the page
+body. A model dressed as a doctor, in a hospital corridor, holding a product
+that makes no clinical claim, is an implied endorsement the shop cannot stand
+behind, and it is the cheapest-looking element on an otherwise restrained
+page. Removing it from the gallery is the merchant's call, and the
+recommendation is to remove it.
 
 ## What is honest here and why it matters
 

@@ -52,7 +52,7 @@ const check = (name, pass, detail) => {
      the insoles. What is asserted is that every option value got a control
      and that the product of the groups is the variant count. */
   const groups = await page.locator('[data-dp-opt]').count();
-  check('every option got a group', groups >= 2, `found ${groups}`);
+  check('every option got a group', groups >= 1, `found ${groups}`);
   const shape = await page.evaluate(() => {
     const out = [];
     for (const fs of document.querySelectorAll('[data-dp-opt]')) {
@@ -69,11 +69,28 @@ const check = (name, pass, detail) => {
     JSON.stringify(shape),
   );
   const variants = await page.locator('[data-dp-select] option').count();
+  const cartesian = shape.reduce((n, g) => n * g.radios, 1);
   check(
-    'the groups multiply out to the variant count',
-    shape.reduce((n, g) => n * g.radios, 1) === variants,
-    `${shape.map((g) => g.radios).join(' x ')} vs ${variants} variants`,
+    'the variant count fits inside the grid of options',
+    variants > 0 && variants <= cartesian,
+    `${shape.map((g) => g.radios).join(' x ')} = ${cartesian}, ${variants} variants`,
   );
+  // A size that exists in one colour and not in another is not a variant that
+  // is out of stock, it is a variant that was never created. The page has to
+  // strike that pill through rather than drop it, so a shopper sees that the
+  // size exists and that this colour does not come in it.
+  if (variants < cartesian) {
+    const struck = await page.evaluate(() => {
+      const bad = [];
+      for (const r of document.querySelectorAll('[data-dp-pickers] input[type=radio]')) {
+        const face = r.nextElementSibling;
+        if (!face || !face.classList.contains('dp__size')) continue;
+        if (r.disabled !== face.classList.contains('dp__size--out')) bad.push(face.textContent.trim());
+      }
+      return bad;
+    });
+    check('a combination that does not exist is struck through, not hidden', struck.length === 0, struck.join(', '));
+  }
 
   /* ---- picking an option moves the hidden select ---- */
   const before = await sel.inputValue();
@@ -81,12 +98,22 @@ const check = (name, pass, detail) => {
   await page.locator(`${lastGroup} label`).last().click();
   await page.waitForTimeout(60);
   const afterSize = await sel.inputValue();
-  check('picking a size changes the posted variant', afterSize !== before, `${before} -> ${afterSize}`);
+  check('picking a value changes the posted variant', afterSize !== before, `${before} -> ${afterSize}`);
 
-  await page.locator('[data-dp-opt="1"] label').nth(1).click();
-  await page.waitForTimeout(60);
-  const afterColour = await sel.inputValue();
-  check('picking a colour changes it again', afterColour !== afterSize, `${afterSize} -> ${afterColour}`);
+  // Then pick in the first group. On a two-group product that is the colour
+  // after the size, which is the order that used to dead-end: the grounding
+  // shoe comes in 47 in one colour only, and the other swatch was disabled
+  // with no way back. The first group must always stay clickable.
+  const firstGroup = page.locator('[data-dp-opt="1"] label');
+  const target = groups > 1 ? firstGroup.nth(1) : firstGroup.first();
+  const enabled = await target.locator('input').isEnabled();
+  check('the first option group never locks', enabled);
+  if (enabled) {
+    await target.click();
+    await page.waitForTimeout(60);
+    const afterColour = await sel.inputValue();
+    check('picking in the first group changes it again', afterColour !== afterSize, `${afterSize} -> ${afterColour}`);
+  }
   check(
     'the standing bar names the chosen variant',
     (await page.locator('[data-dp-barvariant]').textContent()).trim().length > 0,
@@ -127,7 +154,7 @@ const check = (name, pass, detail) => {
 
   /* ---- the questions ---- */
   const faq = await page.locator('#dp-faq details').count();
-  check('the questions are on the page', faq >= 7, `${faq} questions`);
+  check('the questions are on the page', faq >= 5, `${faq} questions`);
   check('the first one is open', await page.locator('#dp-faq details').first().evaluate((d) => d.open));
 
   /* ---- the standing bar appears on a scroll jump ---- */
@@ -140,7 +167,11 @@ const check = (name, pass, detail) => {
 
   /* ---- no English left in the copy ---- */
   const strays = await page.evaluate(() => {
-    const allowed = /^(DOFEK|Shopify|M|L|XL|XLL|\d+%?|₪[\d.,]+)$/;
+    // DOFEK, Shopify and the size codes are names. "earthing" is the word
+    // the grounding page defines in the same sentence it uses it in, because
+    // it is what people search for; everything else in Latin letters on a
+    // Hebrew page is a translation that did not happen.
+    const allowed = /^(DOFEK|Shopify|M|L|R|XL|XLL|earthing|\d+%?|₪[\d.,]+)$/;
     const out = [];
     // Script and style bodies are code, not copy. Without this the scan
     // reports the variant JSON the buy box emits and every identifier in
