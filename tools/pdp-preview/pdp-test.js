@@ -171,7 +171,7 @@ const check = (name, pass, detail) => {
     // the grounding page defines in the same sentence it uses it in, because
     // it is what people search for; everything else in Latin letters on a
     // Hebrew page is a translation that did not happen.
-    const allowed = /^(DOFEK|Shopify|M|L|R|XL|XLL|earthing|\d+%?|₪[\d.,]+)$/;
+    const allowed = /^(DOFEK|Shopify|M|L|R|XL|XLL|earthing|ESD|\d+%?|₪[\d.,]+)$/;
     const out = [];
     // Script and style bodies are code, not copy. Without this the scan
     // reports the variant JSON the buy box emits and every identifier in
