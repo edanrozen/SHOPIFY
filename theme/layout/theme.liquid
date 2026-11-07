@@ -10,12 +10,30 @@
     The list is the RTL scripts, not the RTL countries: a locale is right to
     left because of the alphabet it is written in.
   endcomment
+  comment
+    Reading the direction off the locale alone was right in principle and
+    wrong here. Every word in this shop is Hebrew, and its only published
+    locale is still `en`: a store setting nobody changed, not a statement
+    about the content. Taking it at face value sent every page out left to
+    right, which is the whole shop laid out backwards.
+
+    So the shop states its own language and direction, and the locale is
+    allowed to confirm it rather than to contradict it. The moment Hebrew is
+    the default language under Settings, Languages, `iso_root` reads `he` on
+    its own, the loop below takes over, and these two lines stop mattering.
+    On the day an English storefront is real, set them to ltr and en.
+  endcomment
+  assign shop_dir = 'rtl'
+  assign shop_lang = 'he'
+
   assign rtl_locales = 'ar,arc,ckb,dv,fa,ha,he,iw,khw,ks,ps,sd,ug,ur,uz-af,yi' | split: ','
   assign iso_root = request.locale.iso_code | downcase | split: '-' | first
-  assign page_dir = 'ltr'
+  assign page_dir = shop_dir
+  assign page_lang = shop_lang
   for code in rtl_locales
     if iso_root == code
       assign page_dir = 'rtl'
+      assign page_lang = request.locale.iso_code
     endif
   endfor
 -%}
@@ -24,7 +42,7 @@
   {% if request.design_mode %}
     class="shopify-design-mode"
   {% endif %}
-  lang="{{ request.locale.iso_code }}"
+  lang="{{ page_lang }}"
   dir="{{ page_dir }}"
 >
   <head>
