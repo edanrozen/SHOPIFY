@@ -1,0 +1,137 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "wf-product",
+      "settings": {
+        "atc_label": "הוספה לסל",
+        "note": "משלוח לכל הארץ · 30 יום להחזר כספי",
+        "points_above": true
+      }
+    },
+    "trust": {
+      "type": "wf-trust",
+      "blocks": {
+        "t1": {
+          "type": "fact",
+          "settings": {
+            "icon": "return",
+            "title": "30 יום להחזר כספי",
+            "text": "החוק מחייב 14 יום. אצלנו זה 30."
+          }
+        },
+        "t2": {
+          "type": "fact",
+          "settings": {
+            "icon": "box",
+            "title": "משלוח לכל הארץ",
+            "text": "10 עד 14 ימי עסקים, עם מספר מעקב."
+          }
+        },
+        "t3": {
+          "type": "fact",
+          "settings": {
+            "icon": "chat",
+            "title": "שאלה לפני שקונים",
+            "text": "כתבו לנו ונענה באותו יום עסקים."
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {}
+    },
+    "shots": {
+      "type": "wf-pdp-shots",
+      "settings": {
+        "heading": "מקרוב",
+        "layout": "one",
+        "skip": 1,
+        "limit": 2,
+        "band": "white"
+      }
+    },
+    "story": {
+      "type": "wf-pdp-story",
+      "settings": {
+        "heading": "המצב היום, והמצב אחרי",
+        "before_label": "לפני",
+        "after_label": "אחרי"
+      }
+    },
+    "why": {
+      "type": "wf-pdp-why",
+      "settings": {
+        "heading": "סיבות שזה עובד"
+      }
+    },
+    "details": {
+      "type": "wf-pdp-shots",
+      "settings": {
+        "heading": "עוד זוויות",
+        "layout": "two",
+        "ratio": "1 / 1",
+        "skip": 3,
+        "limit": 4,
+        "band": "cream"
+      }
+    },
+    "how": {
+      "type": "wf-pdp-how",
+      "settings": {
+        "heading": "איך משתמשים בזה"
+      }
+    },
+    "versus": {
+      "type": "wf-pdp-versus",
+      "settings": {
+        "heading": "מה שחושבים, ומה שקורה בפועל",
+        "myth_label": "מה שחושבים",
+        "real_label": "מה שקורה בפועל"
+      }
+    },
+    "facts": {
+      "type": "wf-pdp-faq",
+      "settings": {
+        "specs_heading": "המפרט",
+        "for_label": "מתאים ל",
+        "faq_heading": "שאלות שחוזרות"
+      }
+    },
+    "related": {
+      "type": "wf-grid",
+      "settings": {
+        "heading": "עוד מהחנות",
+        "text": "כל מוצר כאן עובד על אותו דבר במקום אחר בגוף.",
+        "collection": "all-products",
+        "limit": 8,
+        "empty_text": "אין מוצרים להצגה.",
+        "more_label": "לכל המוצרים",
+        "more_link": "/collections/all-products"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "trust",
+    "shots",
+    "story",
+    "why",
+    "details",
+    "how",
+    "versus",
+    "facts",
+    "related"
+  ]
+}

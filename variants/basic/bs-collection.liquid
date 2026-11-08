@@ -1,0 +1,62 @@
+{%- doc -%}
+  The plain collection page.
+
+  Title, how many items, the description if the collection has one, then the
+  same grid the homepage uses. Paginated at 24 because a collection is the one
+  page that grows without anyone deciding it should.
+{%- enddoc -%}
+
+{%- paginate collection.products by 24 -%}
+  <div class="bs-wrap bs-coll">
+    <h1>{{ collection.title }}</h1>
+    <p class="bs-coll__count">{{ collection.products_count }} מוצרים</p>
+    {%- if collection.description != blank -%}
+      <div class="bs-rte bs-coll__desc">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="bs-wrap">
+    <ul class="bs-grid" role="list">
+      {%- for item in collection.products -%}
+        <li>
+          <a href="{{ item.url }}">
+            <div class="bs-thumb">
+              {%- if item.featured_image != blank -%}
+                <img
+                  src="{{ item.featured_image | image_url: width: 600 }}"
+                  srcset="{{ item.featured_image | image_url: width: 300 }} 300w, {{ item.featured_image | image_url: width: 600 }} 600w"
+                  sizes="(max-width: 700px) 46vw, 23vw"
+                  width="{{ item.featured_image.width }}"
+                  height="{{ item.featured_image.height }}"
+                  alt="{{ item.featured_image.alt | default: item.title | escape }}"
+                  loading="lazy" decoding="async"
+                >
+              {%- endif -%}
+            </div>
+            <span class="bs-name">{{ item.title }}</span>
+            <span class="bs-price">{{ item.price | money }}</span>
+          </a>
+        </li>
+      {%- else -%}
+        <li>{{ section.settings.empty_text }}</li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="bs-pages" aria-label="עמודים">
+        {{ paginate | default_pagination }}
+      </nav>
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "בייסיק · אוסף",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "empty_text", "label": "טקסט לאוסף ריק", "default": "האוסף הזה עדיין ריק." }
+  ],
+  "presets": [{ "name": "בייסיק · אוסף" }]
+}
+{% endschema %}

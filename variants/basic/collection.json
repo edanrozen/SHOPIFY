@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "bs-collection",
+      "settings": {
+        "empty_text": "האוסף הזה עדיין ריק. חזרו בקרוב."
+      }
+    }
+  },
+  "order": ["main"]
+}

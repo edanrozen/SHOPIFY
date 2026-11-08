@@ -1,0 +1,47 @@
+{%- doc -%}
+  Why it works, as numbered cards, from custom.why.
+
+  The heading counts the cards itself rather than carrying a number in the
+  copy, so a product with three reasons never announces four. That is the one
+  thing a hand-written heading gets wrong the moment somebody edits the
+  metafield and forgets the title.
+{%- enddoc -%}
+
+{%- liquid
+  assign why = product.metafields.custom.why.value
+-%}
+
+{%- if why.size > 0 -%}
+  <section class="wf-band">
+    <div class="pl-wrap">
+      <div class="wf-band__head">
+        <h2 class="wf-h2">{{ why.size }} {{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="wf-sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <ul class="wf-reasons" role="list">
+        {%- for item in why -%}
+          <li class="wf-reason">
+            <div class="wf-reason__n" aria-hidden="true">{{ forloop.index }}</div>
+            <h3 class="wf-reason__t">{{ item.title }}</h3>
+            <p class="wf-reason__x">{{ item.text }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "מוצר · למה זה עובד",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת (המספר מתווסף לפניה אוטומטית)", "default": "סיבות שזה עובד" },
+    { "type": "textarea", "id": "text", "label": "טקסט מתחת לכותרת" }
+  ],
+  "presets": [{ "name": "מוצר · למה זה עובד" }]
+}
+{% endschema %}

@@ -1,0 +1,100 @@
+{%- doc -%}
+  Putting the brace on, in three pictures.
+
+  Three across on a tablet and up, stacked on a phone. A block with no
+  picture still draws, because the words are the instruction and the
+  photograph is the illustration: the section has to be useful the day it
+  is written and get better the day the shoot arrives.
+{%- enddoc -%}
+
+{%- liquid
+  assign classes = 'dl'
+  if section.settings.ground == 'tint'
+    assign classes = classes | append: ' dl--tint'
+  endif
+-%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="{{ classes }}" id="{{ section.settings.anchor | default: 'dp-steps' }}">
+    <div class="pl-wrap">
+      <div class="dl__head{% if section.settings.centred %} dl__head--mid{% endif %}">
+        {%- if section.settings.kicker != blank -%}
+          <p class="dl__kicker">{{ section.settings.kicker }}</p>
+        {%- endif -%}
+        <h2 class="dl__h2">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="dl__sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <ol class="dl-steps" role="list">
+        {%- for block in section.blocks -%}
+          <li class="dl-step" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 700 }}"
+                srcset="{{ block.settings.image | image_url: width: 420 }} 420w, {{ block.settings.image | image_url: width: 700 }} 700w"
+                sizes="(min-width: 760px) 30vw, 100vw"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                alt="{{ block.settings.alt | escape }}"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- endif -%}
+            <p class="dl-step__t">
+              <span class="dl-step__n" aria-hidden="true">{{ forloop.index }}</span>
+              <span>{{ block.settings.title }}</span>
+            </p>
+            {%- if block.settings.text != blank -%}
+              <p class="dl-step__b">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DOFEK · שלושה שלבים",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "שורת פתיחה" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "איך לובשים את זה" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "checkbox", "id": "centred", "label": "כותרת במרכז", "default": true },
+    { "type": "text", "id": "anchor", "label": "מזהה לעוגן" },
+    {
+      "type": "select",
+      "id": "ground",
+      "label": "רקע",
+      "default": "tint",
+      "options": [
+        { "value": "white", "label": "לבן" },
+        { "value": "tint", "label": "אפור בהיר" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "שלב",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "תמונה" },
+        { "type": "text", "id": "alt", "label": "תיאור התמונה לקוראי מסך" },
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "textarea", "id": "text", "label": "טקסט" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DOFEK · שלושה שלבים",
+      "blocks": [{ "type": "step" }, { "type": "step" }, { "type": "step" }]
+    }
+  ]
+}
+{% endschema %}

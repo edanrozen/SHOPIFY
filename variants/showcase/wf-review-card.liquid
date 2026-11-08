@@ -1,0 +1,30 @@
+{%- doc -%}
+  One review card.
+
+  It is a snippet rather than a loop body repeated twice because the six cards
+  above the fold and the rest inside the <details> have to stay identical, and
+  two copies of the same markup drift the first time one of them is edited.
+
+  @param {object} r - one row of custom.reviews
+  @param {string} out_of - the tail of the star widget's accessible name
+{%- enddoc -%}
+
+{%- assign pct = r.rating | times: 20 -%}
+<li class="wf-rev__c">
+  <span class="wf-stars" role="img" aria-label="{{ r.rating }} {{ out_of }}">
+    <span class="wf-stars__row wf-stars__row--track" aria-hidden="true">
+      {%- for i in (1..5) -%}<svg class="wf-star"><use href="#wf-star-g"/></svg>{%- endfor -%}
+    </span>
+    <span class="wf-stars__row wf-stars__row--fill" style="width: {{ pct }}%" aria-hidden="true">
+      {%- for i in (1..5) -%}<svg class="wf-star"><use href="#wf-star-g"/></svg>{%- endfor -%}
+    </span>
+  </span>
+
+  <div class="wf-rev__who">
+    <span class="wf-rev__name">{{ r.name }}</span>
+    {%- if r.pet != blank -%}<span class="wf-rev__pet">{{ r.pet }}</span>{%- endif -%}
+  </div>
+
+  {%- if r.title != blank -%}<p class="wf-rev__t">{{ r.title }}</p>{%- endif -%}
+  {%- if r.text != blank -%}<p class="wf-rev__x">{{ r.text }}</p>{%- endif -%}
+</li>

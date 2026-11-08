@@ -1,0 +1,96 @@
+{%- doc -%}
+  The opening of the shop.
+
+  One photograph, one sentence, two buttons and three facts. The brief named
+  the picture: the couple on the trail, with the brace on. It is the only
+  image on the shop showing the product being used by somebody who is not in
+  pain, which is the thing being sold. Everything below it explains; this
+  states.
+
+  The photograph is 940x1672, so it cannot be a full-bleed desktop banner
+  without losing the people. It takes half the viewport instead, which on a
+  portrait frame is the crop that keeps them.
+{%- enddoc -%}
+
+{%- liquid
+  assign img = section.settings.image
+-%}
+
+<section class="df-hero">
+  <div class="df-hero__panel">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="df-kicker">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <h1 class="df-hero__title">{{ section.settings.heading }}</h1>
+
+    {%- if section.settings.text != blank -%}
+      <p class="df-hero__lede">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    <div class="df-btn-row">
+      {%- if section.settings.cta_label != blank -%}
+        <a class="wf-btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_label }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.alt_label != blank -%}
+        <a class="wf-btn df-btn--ghost" href="{{ section.settings.alt_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.alt_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%}
+      Split on a pipe rather than given three settings, so adding or dropping
+      a fact is one field instead of a schema change. Blank entries are
+      dropped, which is what a merchant who clears one of them means.
+    {%- endcomment -%}
+    {%- assign facts = section.settings.facts | split: '|' -%}
+    {%- if facts.size > 0 -%}
+      <ul class="df-hero__facts">
+        {%- for fact in facts -%}
+          {%- assign f = fact | strip -%}
+          {%- if f != blank -%}<li>{{ f }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+
+  {%- if img != blank -%}
+    <figure class="df-hero__media">
+      <img
+        src="{{ img | image_url: width: 1100 }}"
+        srcset="{{ img | image_url: width: 560 }} 560w,
+                {{ img | image_url: width: 820 }} 820w,
+                {{ img | image_url: width: 1100 }} 1100w"
+        sizes="(min-width: 820px) 50vw, 100vw"
+        width="{{ img.width }}"
+        height="{{ img.height }}"
+        alt="{{ section.settings.image_alt | escape }}"
+        fetchpriority="high"
+        decoding="async"
+      >
+    </figure>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "DOFEK · פתיח",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "תמונה" },
+    { "type": "text", "id": "image_alt", "label": "תיאור התמונה לקוראי מסך", "default": "זוג הולך בשביל הרים, על הברך של הגבר מגן ברך DOFEK" },
+    { "type": "text", "id": "eyebrow", "label": "שורת פתיחה", "default": "DOFEK" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "לחזור לזוז בלי לחשוב על זה" },
+    { "type": "textarea", "id": "text", "label": "טקסט", "default": "תמיכה, ריפוד ויציבות לברך ולכף הרגל. אביזרים נבחרים לשגרה היומיומית." },
+    { "type": "text", "id": "cta_label", "label": "כפתור ראשי", "default": "לכל המוצרים" },
+    { "type": "url", "id": "cta_link", "label": "קישור הכפתור הראשי" },
+    { "type": "text", "id": "alt_label", "label": "כפתור משני", "default": "מגן הברך" },
+    { "type": "url", "id": "alt_link", "label": "קישור הכפתור המשני" },
+    { "type": "text", "id": "facts", "label": "עובדות, מופרדות בקו אנכי", "default": "משלוחים לכל הארץ|14 יום לביטול עסקה|שירות ותמיכה בעברית" }
+  ],
+  "presets": [{ "name": "DOFEK · פתיח" }]
+}
+{% endschema %}

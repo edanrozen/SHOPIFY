@@ -1,0 +1,6 @@
+/* The parts of Horizon base.css that pluma.css relies on. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1,h2,h3,h4,p,figure,blockquote { margin: 0; }

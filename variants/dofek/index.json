@@ -1,0 +1,156 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "df-hero",
+      "settings": {
+        "image": "shopify://shop_images/CAF342F0-6E13-481F-8D06-BAED8B6EE6C1.png",
+        "image_alt": "זוג הולך בשביל הרים, על הברך של הגבר מגן ברך DOFEK",
+        "eyebrow": "DOFEK",
+        "heading": "לחזור לזוז בלי לחשוב על זה",
+        "text": "תמיכה, ריפוד ויציבות לברך ולכף הרגל. אביזרים נבחרים לשגרה היומיומית.",
+        "cta_label": "לכל המוצרים",
+        "cta_link": "/collections/all",
+        "alt_label": "מגן הברך",
+        "alt_link": "/products/מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+        "facts": "משלוחים לכל הארץ|30 יום להחזר כספי|שירות ותמיכה בעברית"
+      }
+    },
+    "strip": {
+      "type": "df-strip",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "title": "משלוחים לכל הארץ",
+            "text": "לכל יישוב בישראל, עם מספר מעקב להזמנה."
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "title": "30 יום להחזר כספי",
+            "text": "החוק מחייב 14 יום. אצלנו זה 30."
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "title": "שירות בעברית",
+            "text": "לפני הקנייה ואחריה, מול בן אדם ולא מול טופס."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {}
+    },
+    "problem": {
+      "type": "df-split",
+      "settings": {
+        "image": "shopify://shop_images/IMG_1718.jpg",
+        "image_alt": "אישה יורדת במדרגות ונעצרת, יד על הברך",
+        "ground": "white",
+        "flip": false,
+        "kicker": "מתי מרגישים את זה",
+        "heading": "המדרגות הן המבחן הראשון",
+        "text": "ירידה במדרגות מעמיסה על הברך יותר מהליכה על מישור, ולכן זה בדרך כלל המקום הראשון שבו שמים לב שמשהו השתנה. אותו דבר קורה בקימה מכיסא נמוך, בעמידה ארוכה ובסוף יום שלם על הרגליים.",
+        "points": "ירידה במדרגות|קימה מכיסא נמוך|עמידה ממושכת בעבודה"
+      }
+    },
+    "science": {
+      "type": "df-split",
+      "settings": {
+        "image": "shopify://shop_images/IMG_1670.jpg",
+        "image_alt": "איור רפואי של מפרק הברך במבט צד",
+        "ground": "dark",
+        "flip": true,
+        "kicker": "מה האביזר עושה",
+        "heading": "לחץ אחיד, במקום הנכון",
+        "text": "מגן ברך הוא אביזר מכני. הוא עוטף את המפרק בלחץ אחיד, מצמצם תנועות צד ונותן תחושת יציבות בזמן ההליכה. זה מה שהוא עושה, וזה מה שמרגישים ברגע שלובשים אותו.",
+        "points": "לחץ אחיד סביב המפרק|צמצום תנועות צד|תחושת יציבות בהליכה",
+        "cta_label": "למגן הברך",
+        "cta_link": "/products/מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד"
+      }
+    },
+    "grid": {
+      "type": "wf-grid",
+      "settings": {
+        "heading": "שאר השורה",
+        "text": "נעליים, מדרסים וגרביים. כל פריט לשלב אחר באותו יום.",
+        "exclude": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+        "limit": 12,
+        "empty_text": "אין מוצרים להצגה.",
+        "more_label": "לכל המוצרים",
+        "more_link": "/collections/all"
+      }
+    },
+    "expert": {
+      "type": "df-split",
+      "settings": {
+        "image": "shopify://shop_images/F43E7CBB-F61D-4355-A20D-22EBF47FCF81.png",
+        "image_alt": "רופא מצביע על דגם אנטומי של ברך",
+        "ground": "tint",
+        "flip": false,
+        "kicker": "למה זה עובד",
+        "heading": "למה מגן הברך עוזר",
+        "text": "הברך היא מפרק שנשען על רצועות ועל שרירים כדי להישאר מיוצב, ובסוף יום ארוך הם עייפים. מגן ברך מוסיף שכבת תמיכה מבחוץ: לחץ אחיד סביב המפרק, פחות תנועות צד קטנות שמעמיסות עליו, ושמירה על חום באזור. מה שמרגישים בפועל הוא ביטחון בצעד, בעיקר במדרגות, בקימה מכיסא נמוך ובעמידה ממושכת.",
+        "points": "לחץ אחיד שמייצב את המפרק|פחות תנועות צד שמעמיסות על הברך|חום שנשמר באזור לאורך היום|ביטחון בצעד במדרגות ובקימה",
+        "cta_label": "למגן הברך",
+        "cta_link": "/products/מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד"
+      }
+    },
+    "promise": {
+      "type": "df-promise",
+      "settings": {
+        "heading": "שאלה לפני שקונים?",
+        "text": "כתבו לנו לפני ההזמנה ונענה באותו יום עסקים. עדיף להחליף הודעה אחת מאשר לקבל משהו שלא מתאים.",
+        "cta_label": "לכל המוצרים",
+        "cta_link": "/collections/all",
+        "note": "DOFEK.support@gmail.com"
+      }
+    },
+    "ctabar": {
+      "type": "df-cta-bar",
+      "settings": {
+        "enabled": true,
+        "product": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+        "title": "מגן ברך DOFEK",
+        "label": "לפרטים"
+      }
+    },
+    "flagship": {
+      "type": "wf-flagship",
+      "settings": {
+        "product": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+        "eyebrow": "מוצר הדגל",
+        "problem": "הברך לא כואבת כל היום. היא כואבת במדרגות, בקימה מכיסא נמוך ובסוף יום שלם על הרגליים.",
+        "heading": "מגן ברך DOFEK",
+        "body": "לחץ אחיד סביב המפרק, צמצום תנועות צד ותחושת יציבות בהליכה. וסת שמכוונן ביד אחת, גם תוך כדי תנועה.",
+        "cta_label": "לעמוד המוצר"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "strip",
+    "problem",
+    "flagship",
+    "science",
+    "grid",
+    "expert",
+    "promise",
+    "ctabar"
+  ]
+}

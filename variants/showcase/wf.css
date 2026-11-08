@@ -1,0 +1,360 @@
+/* ==========================================================================
+   TinyBloom, in the shape the pet themes in the Shopify theme store use.
+
+   This sits on top of pluma.css rather than replacing it: the palette, the two
+   Hebrew faces and the wrapper are already right, and rebuilding them would
+   only risk getting them wrong. What changes is the posture.
+
+   Three things those themes do that this store was not doing:
+
+   1. The page opens with a photograph and a sentence on top of it, not with a
+      layout. Feeling first, catalogue second.
+   2. The visitor is asked what they came for before being shown anything, so a
+      nine product catalogue arrives as three intents instead of nine choices.
+   3. Headings are loud and frames are round. In this category that reads as
+      friendly; restraint reads as cold.
+
+   Two things they do that are not copied: a countdown on a sale that is not
+   running, and a review count for reviews that do not exist. Both are the
+   fastest way to lose a customer who checks.
+
+   The colours live in wf-tokens.css, which loads before this.
+
+   The sheet is in three files for a transport limit rather than a design
+   one: wf-tokens.css, this one, and wf-shop.css. wf-tokens.css carries the
+   reason and the division.
+   ========================================================================== */
+
+.wf-section { padding-block: clamp(40px, 6.5vw, 88px); }
+.wf-section--tight { padding-block: clamp(28px, 4vw, 52px); }
+.wf-cream { background: var(--pl-cream); }
+/* The deeper cream as a surface. Bloom is the one section
+   that is not a row of products, and a warm band says so without a label. */
+.wf-blush { background: var(--pl-cream-deep); }
+
+/* Louder than pl-h2, because in this category a quiet heading reads as a shop
+   that is not sure it wants you. */
+.wf-h2 {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 6.4vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  color: var(--pl-brown);
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.wf-sub {
+  font-family: var(--pl-sans);
+  font-size: clamp(.98rem, 2.4vw, 1.08rem);
+  line-height: 1.6;
+  color: var(--pl-ink-soft);
+  margin: 0 0 clamp(20px, 3.4vw, 34px);
+  max-width: 56ch;
+}
+
+/* ---- buttons -------------------------------------------------------------
+   One shape, no primary and secondary, on the hero, in the buy box, in the
+   sticky bar and in the grid alike. That part has not changed.
+
+   What changed is the fill, and this reverses an earlier decision of the
+   merchant's, so the reasoning on both sides is kept rather than overwritten.
+
+   The button used to be white with a black rule around it. The case for it was
+   restraint: an outlined button repaints the 1px ring rather than 100% of its
+   own area, so it sits quieter on the page. That case was argued here and it
+   is not wrong.
+
+   The case against it is that quiet is not free. A white fill on a white page
+   stands at 1.00:1 against the page; the rule alone carries the whole signal.
+   The button is not less legible, it is less findable, and on a shop with no
+   orders yet the scarcest thing is a visitor who finds the one thing to press.
+   Filled is therefore a conversion decision, not a taste one.
+
+   The second reason is the one the palette note above already makes. #000000
+   was the single cold value in a system built entirely out of warm neutrals
+   sampled from the mark, and it sat on every call to action, which is the one
+   element a customer actually looks at. Black CTAs on a cream shop are the
+   same mistake as the cold grey footer that note describes.
+
+   So the button is now the green, filled, white label. It puts the brand
+   colour on the thing the customer came to press, which is the only place a
+   brand colour earns anything.
+
+   Two consequences, recorded so nobody rediscovers them. Hierarchy is still
+   absent by construction: two buttons side by side in the hero are the same
+   object, so reading order is writing order, not designed emphasis. And the
+   hover no longer inverts, it deepens to --wf-accent-deep, because an inverted
+   fill on a filled button reads as the button switching off.
+
+   Padding stays 16px rather than 17px. The 1px rule still contributes to the
+   height, so every button is the same box it was and the sticky bar's 76px
+   spacer stays honest.
+
+   Contrast is measured, not assumed: white on the green is 4.69:1 for the
+   label and the green on the white page is 4.69:1 for the edge, against a
+   4.5:1 floor for body text and a 3:1 floor for a UI edge. The 6.64:1 this
+   note used to quote was a darker olive that is not in the mark. */
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 16px 32px;
+  border: 1px solid var(--wf-rule);
+  border-radius: var(--wf-pill);
+  background: var(--wf-rule);
+  color: var(--pl-white);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s var(--pl-ease), color .18s var(--pl-ease), transform .18s var(--pl-ease);
+}
+.wf-btn:hover { background: var(--wf-accent-deep); border-color: var(--wf-accent-deep); color: var(--pl-white); transform: translateY(-1px); }
+/* Kept as aliases so the templates that already name them keep working. They
+   are deliberately identical to the base: there is one button now. */
+.wf-btn--light,
+.wf-btn--clay { background: var(--wf-rule); color: var(--pl-white); }
+.wf-btn--light:hover,
+.wf-btn--clay:hover { background: var(--wf-accent-deep); border-color: var(--wf-accent-deep); color: var(--pl-white); }
+/* Unavailable reads as a drawn-back rule rather than a faded black one, so it
+   never looks like a button that failed to load. */
+.wf-btn[disabled] {
+  background: var(--pl-white);
+  border-color: var(--pl-line);
+  color: var(--pl-taupe);
+  opacity: 1;
+  cursor: not-allowed;
+  transform: none;
+}
+.wf-btn[disabled]:hover { background: var(--pl-white); color: var(--pl-taupe); }
+
+/* ---- hero ---------------------------------------------------------------
+   Portrait on the phone and wide on the desktop, because the same photograph
+   has to hold a face at 390px and a room at 1440px. The copy is anchored to
+   the bottom under a scrim: over a photograph, centred copy lands wherever the
+   subject happens to be, and in this catalogue the subject is an animal. */
+.wf-hero { position: relative; isolation: isolate; }
+.wf-hero__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--pl-sand); }
+@media (min-width: 750px) { .wf-hero__media { aspect-ratio: 16 / 8; } }
+@media (min-width: 1100px) { .wf-hero__media { aspect-ratio: 16 / 6.6; } }
+/* The <picture> is positioned, not left in flow. In flow it has no height of
+   its own, so height:100% on the image resolves to auto and cover has nothing
+   to fit against, which leaves the frame half empty. */
+.wf-hero__media picture { position: absolute; inset: 0; display: block; }
+.wf-hero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wf-hero__media::after { content: ''; position: absolute; inset: 0; background: var(--wf-scrim); }
+
+/* Slides are stacked and cross faded rather than slid sideways. The copy on
+   top does not move, and copy sitting still over a photograph that slides
+   reads as a rendering fault rather than as a transition.
+
+   The fade is deliberately a small fraction of the hold. At a 2.5s cycle the
+   old .9s fade left both photographs part transparent for 36% of the time,
+   which reads as a screen that cannot decide what it is showing rather than as
+   a sequence of pictures. .55s keeps roughly two full seconds of a settled,
+   fully opaque image, which is the part that actually sells anything. */
+.wf-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .55s var(--pl-ease);
+}
+.wf-hero__slide[data-active='true'] { opacity: 1; }
+
+/* 44px targets with a 9px dot inside them. The dot is what you see; the square
+   around it is what a thumb actually hits. */
+.wf-hero__dots { display: flex; justify-content: center; gap: 2px; margin-top: 10px; }
+.wf-hero__dot {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.wf-hero__dot span {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .45);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+  transition: background .2s var(--pl-ease), transform .2s var(--pl-ease);
+}
+.wf-hero__dot[aria-selected='true'] span { background: #FFFFFF; transform: scale(1.3); }
+
+.wf-hero__copy {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1;
+  text-align: center;
+  padding: var(--pl-gutter);
+  padding-bottom: clamp(28px, 5vw, 64px);
+}
+.wf-hero__title {
+  font-family: var(--pl-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 8.6vw, 4.2rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  color: var(--pl-white);
+  margin: 0 0 12px;
+  text-wrap: balance;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, .3);
+}
+.wf-hero__text {
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.6vw, 1.15rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, .93);
+  margin: 0 auto clamp(18px, 3vw, 26px);
+  max-width: 46ch;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, .34);
+}
+.wf-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+/* ---- trust row ----------------------------------------------------------
+   Four facts, every one of them checkable. Directly under the hero, because
+   the questions it answers are the ones asked before the first click. */
+/* The tinted surface, not a colour of its own. This band used to be a pale
+   olive, which put a third large coloured area on a page that already had a
+   brown hero and a green button, and on a white shop that reads as decoration
+   rather than as the four facts it is.
+
+   It also carried a token remap: the taupe measured 3.45:1 on the olive, so
+   every muted line in here had to be pointed at ink-soft to clear the floor.
+   On the tinted white the taupe is 5.06:1 and the remap is gone with it, one
+   fewer thing to know about this band. The icons are 6.55:1. */
+.wf-trust { background: var(--pl-cream-deep); }
+.wf-trust__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 28px);
+}
+@media (min-width: 900px) { .wf-trust__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* Icon beside the words rather than above them, so four facts fit in a band
+   instead of a block. On a phone they stack two by two. */
+.wf-trust__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 10px;
+  text-align: start;
+}
+.wf-trust__icon { width: 30px; height: 30px; display: grid; place-items: center; grid-row: span 2; }
+/* Brown, not the accent. It was already the brown while this band was a pale
+   olive, where the accent measured 2.97:1 against the 3:1 an icon needs. On
+   the tint the accent would pass at 4.35:1, and the brown is kept anyway: it
+   is 6.55:1, and a brown mark on a light ground is what the wordmark does. */
+.wf-trust__icon svg { width: 26px; height: 26px; stroke: var(--pl-brown); fill: none; stroke-width: 1.5; }
+.wf-trust__title { font-family: var(--pl-sans); font-size: .86rem; font-weight: 700; color: var(--pl-ink); }
+.wf-trust__text { font-family: var(--pl-sans); font-size: .84rem; line-height: 1.4; font-weight: 400; color: var(--pl-taupe); }
+
+/* ---- what did you come for ----------------------------------------------
+   Chewy's "Shop by pet" row, which is a circle of photograph with the label
+   under it and nothing else. It is the most recognisable thing on their
+   homepage and it does the same job here that the tall photo cards did, in a
+   fifth of the height: nine products arrive as three jobs rather than as nine
+   choices.
+
+   Three circles is fewer than the eight Chewy runs, so the row is centred
+   rather than scrolled. It still scrolls if more collections are added. */
+.wf-circles {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 6px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 44px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.wf-circles::-webkit-scrollbar { display: none; }
+.wf-circle {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: clamp(104px, 26vw, 156px);
+  color: var(--pl-ink);
+  text-decoration: none;
+}
+.wf-circle__media {
+  width: clamp(104px, 26vw, 156px);
+  height: clamp(104px, 26vw, 156px);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  transition: border-color .2s var(--pl-ease), transform .2s var(--pl-ease);
+}
+.wf-circle:hover .wf-circle__media { border-color: var(--wf-accent); transform: translateY(-3px); }
+.wf-circle__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wf-circle__title {
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--pl-ink);
+  text-align: center;
+  margin: 0;
+}
+.wf-circle:hover .wf-circle__title { color: var(--wf-accent-deep); text-decoration: underline; }
+
+/* ---- flagship -----------------------------------------------------------
+   Bloom is twice the price of anything else in the shop, so it does not sit
+   in the grid and take its chances. The problem comes first and the product
+   answers it, which is the order a buyer actually thinks in. */
+.wf-flag { display: grid; gap: clamp(22px, 4vw, 48px); align-items: center; }
+@media (min-width: 900px) { .wf-flag { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); } }
+.wf-flag__media {
+  border-radius: var(--wf-r-lg);
+  overflow: hidden;
+  background: var(--pl-cream-deep);
+  border: 1px solid var(--pl-line);
+  aspect-ratio: 4 / 5;
+}
+@media (min-width: 900px) { .wf-flag__media { aspect-ratio: 1 / 1; } }
+/* Contain: Bloom is 1206x1806 and any frame that fills with cover cuts the
+   stand off it. */
+.wf-flag__media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.wf-flag__eyebrow {
+  display: inline-block;
+  font-family: var(--pl-sans);
+  font-size: .84rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: var(--pl-white);
+  background: var(--pl-clay);
+  padding: 7px 14px;
+  border-radius: var(--wf-pill);
+  margin-bottom: 16px;
+}
+.wf-flag__problem {
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 2.4vw, 1.04rem);
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--pl-taupe);
+  margin: 0 0 10px;
+  padding-inline-start: 14px;
+  border-inline-start: 2px solid var(--pl-sand-deep);
+}
+.wf-flag__price {
+  font-family: var(--pl-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--pl-ink);
+  margin: 0 0 20px;
+}

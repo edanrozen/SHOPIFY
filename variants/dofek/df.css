@@ -1,0 +1,216 @@
+/* ==========================================================================
+   DOFEK, the home page.
+
+   The hero, the fact strip and the closing band. The split band and the
+   type the three of them share moved to df-band.css, which the product
+   templates load too. Everything here reads wf-tokens.css and
+   defines no colour of its own, so the shop stays black and white because
+   the palette says so rather than because every sheet remembered to.
+
+   Written start-first rather than left-first. The shop is Hebrew, the page
+   is RTL, and every edge below is named inline-start or inline-end, so the
+   same rules would lay out correctly in a Latin locale without a mirrored
+   copy of the sheet.
+   ========================================================================== */
+
+/* ---- the hero -----------------------------------------------------------
+   Two halves on the desktop, stacked on the phone with the photograph first.
+
+   The copy is the first grid child so that in RTL it takes the inline-start
+   half, which is where a Hebrew reader's eye lands. The photograph is pulled
+   above it on the phone with `order`, because the brief was that this
+   picture is the first thing on the shop and on a 390px screen the first
+   thing is whatever is at the top. */
+.df-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--pl-white);
+  border-bottom: 1px solid var(--pl-line);
+}
+/* The crop is measured off the photograph rather than guessed.
+
+   The file is 940x1672, a ratio of .5622, and the part that has to survive
+   every frame runs from 28% (the top of his head) to 86% (the bottom of the
+   brace), which is 58% of its height. A frame shows `frame_ratio x .5622` of
+   that height, so the 9:10 below was solved rather than chosen: it shows
+   62.5%, which leaves the 58% intact with 4.5 points to spare, and it is
+   the shortest frame that does. One ratio serves the phone and the desktop,
+   and `object-position: 50% 68%` puts the spare margin at both ends.
+
+   Giving the frame the ratio instead of a fixed height is what keeps that
+   true at every width: a `min-height: 600px` on a half-viewport column shows
+   63% of the picture at 1280px and 42% at 1920px, and the second one cuts
+   the product out of the shop's opening photograph.
+
+   At 9:10 the window where the frame clears the subject is p in
+   [.627, .746], and .68 sits in the middle of it. */
+.df-hero__media {
+  order: -1;
+  margin: 0;
+  /* 9:10 rather than the 5:6 this started at. It is the shortest frame that
+     still clears the 28%-to-86% band, it buys 35px of the first screen
+     back, and on a phone the first screen is the whole argument. */
+  aspect-ratio: 9 / 10;
+}
+.df-hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 68%;
+}
+.df-hero__panel {
+  padding: 24px var(--pl-gutter) 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.df-hero__title {
+  font-family: var(--pl-display);
+  font-size: clamp(2rem, 7.2vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  color: var(--pl-ink);
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+.df-hero__lede {
+  font-family: var(--pl-sans);
+  font-size: clamp(1.02rem, 2.6vw, 1.14rem);
+  line-height: 1.7;
+  color: var(--pl-ink-soft);
+  margin: 0;
+  max-width: 44ch;
+}
+/* Three facts under the buttons, hairline-separated. They are the same three
+   the announcement bar carries, repeated here because the bar scrolls out of
+   view and this is where the decision is being made. */
+.df-hero__facts {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--pl-line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+.df-hero__facts li {
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--pl-ink-soft);
+}
+
+/* Between the phone and the split, the photograph stops running edge to
+   edge. Full width at 768px it is 922px tall, which is a screen and a half
+   of one picture, and the only ways to shorten it are to crop the product
+   out or to narrow it. It narrows. */
+@media (min-width: 560px) and (max-width: 819px) {
+  /* `inline-size: 100%` is load-bearing: `margin-inline: auto` turns off
+     the grid item's stretch, and a figure whose only other size is an
+     aspect-ratio then shrinks to its content instead of to the cap. */
+  .df-hero__media { inline-size: 100%; max-inline-size: min(64vw, 460px); margin-inline: auto; }
+}
+
+@media (min-width: 820px) {
+  /* The media column stops growing at 800px, so the hero stops at 889px
+     tall however wide the screen gets. The copy takes the rest rather than
+     half, which is also what keeps its outer edge on the page's own margin:
+     a centred max-width on the hero would have pulled that edge inward at
+     exactly the widths where the grid below it did not move. */
+  .df-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, min(50%, 800px));
+    align-items: stretch;
+  }
+  .df-hero__media { order: 0; aspect-ratio: 9 / 10; }
+  /* In RTL the copy is the inline-start half, so its outer edge is the
+     start edge. That edge has to land on the same line as every other
+     section's: the wrapper's gutter, plus whatever the 1240px cap leaves. */
+  .df-hero__panel {
+    padding-block: clamp(56px, 6vw, 88px);
+    padding-inline: var(--pl-gutter);
+    padding-inline-start: calc(max((100vw - var(--pl-wrap)) / 2, 0px) + var(--pl-gutter));
+    padding-inline-end: clamp(32px, 4vw, 64px);
+  }
+}
+
+/* ---- the fact strip -----------------------------------------------------
+   Black, three cells, hairline rules between them. On the phone it is three
+   rows rather than a three-column squeeze, because at 390px three columns
+   leaves eleven characters a line. */
+.df-strip { background: var(--pl-ink); }
+.df-strip__in {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-block: 4px;
+}
+.df-strip__item {
+  padding: 15px 0;
+  text-align: center;
+}
+.df-strip__item + .df-strip__item { border-top: 1px solid var(--pl-on-dark-line); }
+.df-strip__title {
+  font-family: var(--pl-display);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--pl-on-dark);
+  margin: 0 0 6px;
+}
+.df-strip__text {
+  font-family: var(--pl-sans);
+  font-size: .88rem;
+  line-height: 1.5;
+  color: var(--pl-on-dark-soft);
+  margin: 0;
+}
+@media (min-width: 760px) {
+  .df-strip__in { grid-template-columns: repeat(3, 1fr); padding-block: 10px; }
+  .df-strip__item { padding: 26px 22px; }
+  .df-strip__item + .df-strip__item {
+    border-top: 0;
+    border-inline-start: 1px solid var(--pl-on-dark-line);
+  }
+}
+
+
+/* The product grid needs no override here any more. It used to force three
+   across because five products left one card alone on a second row; the
+   flagship band above it now carries the knee brace and the grid carries the
+   other four, which is exactly one row of wf-shop.css's four. */
+
+/* ---- the closing band ---------------------------------------------------
+   Black, centred, one sentence and one button. It is the last thing on the
+   page and the only place the shop asks twice. */
+.df-promise { background: var(--pl-ink); padding-block: clamp(44px, 9vw, 104px); }
+.df-promise__in { text-align: center; max-width: 720px; margin-inline: auto; }
+.df-promise__title {
+  font-family: var(--pl-display);
+  font-size: clamp(1.7rem, 5.2vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -.01em;
+  color: var(--pl-on-dark);
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.df-promise__text {
+  font-family: var(--pl-sans);
+  font-size: clamp(1rem, 2.4vw, 1.08rem);
+  line-height: 1.75;
+  color: var(--pl-on-dark-soft);
+  margin: 0 auto;
+  max-width: 54ch;
+}
+.df-promise .df-btn-row { justify-content: center; }
+.df-promise__note {
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  line-height: 1.6;
+  color: var(--pl-on-dark-mute);
+  margin: 20px 0 0;
+  word-break: break-word;
+}
+
