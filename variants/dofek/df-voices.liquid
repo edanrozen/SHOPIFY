@@ -1,23 +1,30 @@
 {%- doc -%}
-  Where the reviews go.
+  Where the reviews go, and nothing at all until there are any.
 
-  The shop has no orders, so it has no reviews, and this section invents
-  none. What it does is put the container the review app writes into on the
-  page and, until that container has something in it, say plainly that
-  there are no reviews yet.
+  This section used to render a heading that promised social proof followed
+  by a paragraph admitting there was none, on all five product pages, in the
+  band directly above the questions. That is the worst place on the page to
+  tell somebody that nobody has bought this yet, and it was doing it five
+  times. An empty section should disappear, not apologise.
 
-  Three sources, in order of trust:
+  So the section ships hidden and reveals itself the moment there is
+  something real to show. Three sources, in order of trust:
 
-    1. The review app's own container. Loox is installed on this shop and
-       fills `#looxReviews` by product id. If another app replaces it, the
-       container id is a setting.
-    2. `product.metafields.reviews.rating`, which is the standard Shopify
-       field every review app writes. It is read, never written, and it is
-       the only place a star count on this page can come from.
-    3. Nothing. Which is the honest state today, and is what shows.
+    1. `product.metafields.reviews.rating_count`, the standard Shopify field
+       every review app writes. When it is above zero the section renders
+       visible server side, with the score, and there is no flash.
+    2. The review app's own container, filled client side by product id.
+       Loox writes `#looxReviews`; another app's id is a setting. When the
+       container gets content the script unhides the section.
+    3. Nothing, which is the honest state today. Nothing renders: no
+       heading, no kicker, no apology, no empty band.
 
-  The note hides itself the moment the app puts a review in the container,
-  so nobody has to remember to come back and switch it off.
+  In the theme editor it is always visible, with the empty note, so the
+  section can still be found and edited while it has nothing to show.
+
+  Note for whoever installs the review app: a review app with no mechanism
+  for asking buyers for a review will keep this section hidden forever. The
+  post purchase request is the part that matters.
 {%- enddoc -%}
 
 {%- liquid
@@ -25,11 +32,27 @@
   if section.settings.ground == 'tint'
     assign classes = classes | append: ' dl--tint'
   endif
+
   assign rating = product.metafields.reviews.rating.value
   assign count = product.metafields.reviews.rating_count
+
+  assign has_reviews = false
+  if count != blank and count > 0
+    assign has_reviews = true
+  endif
+
+  assign editing = false
+  if request.design_mode
+    assign editing = true
+  endif
 -%}
 
-<section class="{{ classes }}" id="{{ section.settings.anchor | default: 'dp-reviews' }}">
+<section
+  class="{{ classes }}"
+  id="{{ section.settings.anchor | default: 'dp-reviews' }}"
+  data-df-voices-wrap
+  {% unless has_reviews or editing %}hidden{% endunless %}
+>
   <div class="pl-wrap">
     <div class="dl__head dl__head--mid">
       {%- if section.settings.kicker != blank -%}
@@ -37,7 +60,7 @@
       {%- endif -%}
       <h2 class="dl__h2">{{ section.settings.heading }}</h2>
 
-      {%- if rating != blank and count != blank and count > 0 -%}
+      {%- if has_reviews and rating != blank -%}
         <p class="dl__sub">
           {{ rating.rating }} מתוך {{ rating.scale_max }}, לפי {{ count }} חוות דעת.
         </p>
@@ -50,27 +73,32 @@
          data-product-id="{{ product.id }}"
          data-df-voices></div>
 
-    {%- if section.settings.empty_text != blank -%}
-      <p class="dl-empty" data-df-empty>{{ section.settings.empty_text }}</p>
+    {%- comment -%}
+      The empty note survives only for the theme editor, so the merchant can
+      see what this band is while it is holding nothing. It never reaches a
+      customer: outside the editor the whole section is hidden in that state.
+    {%- endcomment -%}
+    {%- if editing and has_reviews == false and section.settings.empty_text != blank -%}
+      <p class="dl-empty">{{ section.settings.empty_text }}</p>
     {%- endif -%}
   </div>
 </section>
 
 <script>
   (function () {
-    var box = document.querySelector('[data-df-voices]');
-    var note = document.querySelector('[data-df-empty]');
-    if (!box || !note) return;
-    var check = function () {
-      if (box.children.length || box.textContent.trim()) {
-        note.hidden = true;
-        return true;
-      }
-      return false;
+    var wrap = document.querySelector('[data-df-voices-wrap]');
+    var box = wrap && wrap.querySelector('[data-df-voices]');
+    if (!wrap || !box || !wrap.hidden) return;
+
+    var reveal = function () {
+      if (!box.children.length && !box.textContent.trim()) return false;
+      wrap.hidden = false;
+      return true;
     };
-    if (check()) return;
+    if (reveal()) return;
     if (!('MutationObserver' in window)) return;
-    var mo = new MutationObserver(function () { if (check()) mo.disconnect(); });
+
+    var mo = new MutationObserver(function () { if (reveal()) mo.disconnect(); });
     mo.observe(box, { childList: true, subtree: true });
     /* The app has either written by now or it is not installed. Either way
        the page stops watching rather than holding an observer open. */
@@ -83,14 +111,17 @@
   "name": "DOFEK · חוות דעת",
   "tag": "section",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "הסקשן הזה מוסתר לגמרי כל עוד אין חוות דעת אמיתיות, ומופיע מעצמו ברגע שיש. בעורך התמה הוא תמיד גלוי."
+    },
     { "type": "text", "id": "kicker", "label": "שורת פתיחה" },
     { "type": "text", "id": "heading", "label": "כותרת", "default": "מה אומרים עלינו" },
     { "type": "textarea", "id": "text", "label": "טקסט" },
     {
       "type": "textarea",
       "id": "empty_text",
-      "label": "טקסט כשאין עדיין ביקורות",
-      "default": "החנות חדשה ועדיין אין כאן חוות דעת. לא נכתוב ביקורות שלא נכתבו, אז עד שיגיעו הביקורות הראשונות האזור הזה יישאר ריק. אם קניתם, נשמח לשמוע."
+      "label": "טקסט כשאין עדיין ביקורות, נראה רק בעורך התמה"
     },
     { "type": "text", "id": "container", "label": "מזהה המכולה של אפליקציית הביקורות", "default": "looxReviews" },
     { "type": "text", "id": "anchor", "label": "מזהה לעוגן", "default": "dp-reviews" },

@@ -184,6 +184,14 @@
      "settings": {
       "label": "בד ויסקוז במבוק",
       "us": true,
+      "them": false
+     }
+    },
+    "line_honest": {
+     "type": "line",
+     "settings": {
+      "label": "סיב טבעי שלא עבר עיבוד כימי",
+      "us": false,
       "them": true
      }
     }
@@ -194,12 +202,13 @@
     "line3",
     "line4",
     "line5",
-    "line6"
+    "line6",
+    "line_honest"
    ],
    "settings": {
     "kicker": "השוואה",
     "heading": "מול גרב כותנה רגילה",
-    "text": "רק דברים שאפשר לראות בתמונות ולבדוק ביד.",
+    "text": "רק דברים שאפשר לראות בתמונות ולבדוק ביד. השורה האחרונה היא זו שבה הצד השני מנצח.",
     "centred": true,
     "us": "DOFEK",
     "them": "גרב רגילה",
@@ -264,8 +273,8 @@
     }
    },
    "block_order": [
-    "qa2",
     "qa2b",
+    "qa2",
     "qa3",
     "qa4",
     "qa5",

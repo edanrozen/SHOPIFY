@@ -273,6 +273,74 @@ held to throughout, and anyone editing the copy should hold to them:
     more is allowed and is a real differentiator. The store's refund policy
     now states the same 30 days, so the page and the binding document agree.
 
+## What each product page is still missing
+
+Reviewed page by page on 8 November 2026. What could be fixed here was fixed;
+what is left needs the merchant, a price decision, or the supplier.
+
+Fixed on all five:
+
+  * **The reviews band no longer apologises.** It used to render a heading
+    promising social proof and then a paragraph saying nobody had bought yet,
+    directly above the questions, on all five pages. It now ships hidden and
+    reveals itself the moment `reviews.rating_count` is above zero or a review
+    app writes into its container. A review app with no post purchase request
+    will keep it hidden forever, which is the honest outcome.
+  * **A cross sell row.** A product page used to end at the buy button with
+    nothing else in the shop mentioned on it. `df-end` now draws the other
+    products above the last ask, off `all-products`, using the same card as the
+    home page. It lives in that section rather than as a sixth section in each
+    template because the knee template is near the transport ceiling.
+  * **One row in every comparison table where the other side wins.** Every
+    table scored us ahead or level on every row, which is the one thing on
+    these pages that reads like marketing in among copy that is otherwise
+    unusually frank. The honest row is last and the sub heading points at it.
+
+Two of those tables were not merely one sided, they were wrong:
+
+  * The grounding table claimed a regular barefoot shoe has neither a wide toe
+    box nor a thin flexible sole. Those are the definition of a barefoot shoe.
+    Both rows are now level and the differences that remain are real: the
+    copper rivet, the pull lace, the drainage, and a price that goes the other
+    way.
+  * The socks table claimed a cotton sock is bamboo viscose.
+
+Per page:
+
+  * **Knee.** The strongest page. The honest row is the dial's bulge under
+    tight trousers, which its own FAQ already admitted in words.
+  * **Insoles.** The buy box led with massage, which is the weakest promise on
+    the site and the closest to a health claim, while the page's own mechanism
+    section argues pressure over area. Support and cushioning lead now and the
+    raised points are a feature.
+  * **Socks.** The "is it really bamboo" answer is the trust moment on that
+    page and it was last in the FAQ. It is first now, so `open_first` leaves it
+    open.
+  * **Barefoot.** The gradual transition answer gave the buyer a reason to
+    postpone. It now ends on the 30 days, so the adaptation period is on us.
+  * **Grounding.** It argued honestly that grounding evidence is weak and that
+    underneath it is a barefoot shoe, while costing 40 shekels more than the
+    barefoot shoe two clicks away. It now says that itself, in the buy box and
+    in the comparison, instead of leaving the shopper to find it.
+
+Still open, and not ours:
+
+  * **Bundles.** The socks FAQ says three pairs are the practical minimum and
+    the insoles FAQ walks the buyer through adding to the cart twice. Both are
+    bundles that do not exist. The merchant is building them.
+  * **Photographs.** Three images for a 159.99 shoe and three for a sock whose
+    comparison table lists six features nobody can see. This needs the
+    supplier; nothing here generates images.
+  * **A review app with a post purchase request.** Without the request the
+    reviews band stays hidden, correctly, forever.
+  * **Sole thickness in millimetres and heel to toe drop** for both shoes.
+    For a barefoot buyer those are the specifications, and the FAQ currently
+    says, accurately, that we do not have verified numbers.
+  * **An anchor price.** No product carries a `compare at price`, while the
+    theme already ships the CSS for a struck price and a discount flag.
+  * Inventory is set to 10,000 a variant, so nothing can ever read as out of
+    stock and no stock based urgency is available.
+
 ## Verifying a change
 
     sh tools/pdp-preview/stage-dofek.sh /tmp/dofek
