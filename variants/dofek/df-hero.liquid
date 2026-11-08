@@ -10,10 +10,21 @@
   The photograph is 940x1672, so it cannot be a full-bleed desktop banner
   without losing the people. It takes half the viewport instead, which on a
   portrait frame is the crop that keeps them.
+
+  One button sits on the photograph itself. It is there because the picture
+  is the first thing on the shop and the brace in it is the thing being
+  sold, so the shortest path from seeing it to buying it should not require
+  reading the column beside it first. It points at the one product, not at
+  the catalogue: the panel's button already does that.
+
+  Its arrow points the way the page reads. The mark is drawn pointing right
+  and flipped under `dir="rtl"`, so it follows the document instead of
+  assuming Hebrew.
 {%- enddoc -%}
 
 {%- liquid
   assign img = section.settings.image
+  assign shop_link = section.settings.shop_link | default: section.settings.alt_link
 -%}
 
 <section class="df-hero">
@@ -71,6 +82,15 @@
         fetchpriority="high"
         decoding="async"
       >
+
+      {%- if section.settings.shop_label != blank and shop_link != blank -%}
+        <a class="df-hero__shop" href="{{ shop_link }}">
+          <span>{{ section.settings.shop_label }}</span>
+          <svg class="df-hero__arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <path d="M4 12h15m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      {%- endif -%}
     </figure>
   {%- endif -%}
 </section>
@@ -87,8 +107,11 @@
     { "type": "textarea", "id": "text", "label": "טקסט", "default": "תמיכה, ריפוד ויציבות לברך ולכף הרגל. אביזרים נבחרים לשגרה היומיומית." },
     { "type": "text", "id": "cta_label", "label": "כפתור ראשי", "default": "לכל המוצרים" },
     { "type": "url", "id": "cta_link", "label": "קישור הכפתור הראשי" },
-    { "type": "text", "id": "alt_label", "label": "כפתור משני", "default": "מגן הברך" },
+    { "type": "text", "id": "alt_label", "label": "כפתור משני" },
     { "type": "url", "id": "alt_link", "label": "קישור הכפתור המשני" },
+    { "type": "header", "content": "הכפתור שעל התמונה" },
+    { "type": "text", "id": "shop_label", "label": "טקסט", "default": "קחו אותי למגן הברך" },
+    { "type": "url", "id": "shop_link", "label": "קישור, ריק לוקח את הקישור של הכפתור המשני" },
     { "type": "text", "id": "facts", "label": "עובדות, מופרדות בקו אנכי", "default": "משלוחים לכל הארץ|14 יום לביטול עסקה|שירות ותמיכה בעברית" }
   ],
   "presets": [{ "name": "DOFEK · פתיח" }]

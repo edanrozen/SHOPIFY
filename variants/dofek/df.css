@@ -136,6 +136,66 @@
   }
 }
 
+/* ---- the button on the photograph ---------------------------------------
+   White pill, bottom of the frame. The picture is the first thing on the
+   shop and the brace in it is the product, so this is the shortest path
+   there is from seeing the thing to the page that sells it.
+
+   A white button on a photograph is only legible while the pixels behind it
+   stay dark, and nothing guarantees that: a different picture, a brighter
+   crop at another width. The gradient under it is what guarantees it, and
+   it is on the frame rather than on the button so the button keeps a clean
+   edge. It is 42% of the frame at .42 alpha, which darkens the gravel at
+   the bottom of this photograph and never reaches the faces.
+
+   Capped at 520px and centred rather than run to both insets, because the
+   media column goes to 800px on a desktop and a pill that wide stops
+   reading as a button. */
+.df-hero__media { position: relative; }
+.df-hero__media::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 42%;
+  background: linear-gradient(to top, rgba(10, 10, 10, .42), rgba(10, 10, 10, 0));
+  pointer-events: none;
+}
+.df-hero__shop {
+  position: absolute;
+  z-index: 1;
+  inset-inline: clamp(14px, 4vw, 28px);
+  inset-block-end: clamp(14px, 4vw, 28px);
+  max-inline-size: 520px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-block-size: 56px;
+  padding: 14px 26px;
+  border-radius: var(--pl-r-pill);
+  background: var(--pl-white);
+  color: var(--pl-ink);
+  font-family: var(--pl-sans);
+  font-size: clamp(.95rem, 3.4vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(10, 10, 10, .28);
+  transition: transform .25s var(--pl-ease), box-shadow .25s var(--pl-ease);
+}
+.df-hero__shop:focus-visible { outline: 3px solid var(--pl-white); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .df-hero__shop:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(10, 10, 10, .34); }
+}
+.df-hero__shop:active { transform: scale(.99); }
+.df-hero__arrow { flex: 0 0 auto; }
+/* The arrow is drawn pointing right and flipped where the page reads the
+   other way, so it always means forward rather than always meaning east. */
+[dir="rtl"] .df-hero__arrow { transform: scaleX(-1); }
+
 /* ---- the fact strip -----------------------------------------------------
    Black, three cells, hairline rules between them. On the phone it is three
    rows rather than a three-column squeeze, because at 390px three columns
