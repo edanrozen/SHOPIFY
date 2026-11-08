@@ -29,5 +29,55 @@ cp "$SRC"/wf-tokens.css "$SRC"/df.css "$SRC"/df-band.css "$SRC"/df-mobile.css \
 cp "$SRC"/stylesheets.liquid   "$OUT/snippets/"
 cp "$SRC"/header-group.json "$SRC"/footer-group.json "$OUT/sections/"
 cp "$SRC"/settings_data.json   "$OUT/config/"
-cp "$SRC"/index.json "$SRC"/collection.json "$SRC"/product.dofek-*.json "$OUT/templates/"
+cp "$SRC"/index.json "$SRC"/collection.json "$SRC"/product.json "$SRC"/product.dofek-*.json "$OUT/templates/"
+
+# ---- retired with the previous brand ------------------------------------
+# Twenty-four sections and nine product templates from the pet shop. Nothing
+# on this theme renders any of them, but Shopify bundles every section
+# stylesheet in a theme onto every page, so the sections alone were charging
+# each visitor about 50KB of CSS for a design that is gone. They are emptied
+# on the deployed theme, because the Admin API cannot delete a theme file,
+# and they are emptied here so the staged tree matches it. The base theme
+# under theme/ keeps the originals: the previous brand's theme is still the
+# published one and still needs them.
+RETIRED_SECTIONS="pl-banner pl-bundle pl-categories pl-collection pl-cta pl-faq
+pl-hero pl-hero-full pl-hero-photo pl-marquee pl-problem pl-product-main
+pl-product-opener pl-product-reviews pl-product-story pl-product-tabs
+pl-products pl-promise pl-related pl-reviews pl-ritual pl-row pl-showcase
+pl-story"
+RETIRED_TEMPLATES="bloom clipper comb-daily comb-pro glove roller-wood
+roller-xl scratcher toy"
+
+for s in $RETIRED_SECTIONS; do
+  cat > "$OUT/sections/$s.liquid" <<EOF
+{%- comment -%}
+  Retired with the previous brand. Nothing on this theme renders it, and its
+  stylesheet was being bundled onto every page. Safe to delete in the editor.
+{%- endcomment -%}
+{% schema %}
+{ "name": "$s", "settings": [] }
+{% endschema %}
+EOF
+done
+
+for t in $RETIRED_TEMPLATES; do
+  cat > "$OUT/templates/product.$t.json" <<'EOF'
+/*
+ * Retired with the previous brand. No product uses this template; all five
+ * carry a `dofek-` suffix. Kept only because the Admin API cannot delete a
+ * theme file. Safe to delete from the theme code editor.
+ */
+{
+  "sections": { "main": { "type": "wf-product", "settings": {} } },
+  "order": ["main"]
+}
+EOF
+done
+
+for a in pl-story tb-fit; do
+  cat > "$OUT/assets/$a.css" <<EOF
+/* Retired with the previous brand. No template requests this sheet. */
+EOF
+done
+
 echo "staged $OUT"

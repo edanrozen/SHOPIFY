@@ -28,7 +28,7 @@ product pages from the template name alone.
 | נעלי יחפנות DOFEK – חופש בכל צעד | `dofek-barefoot` | `shoes` |
 | נעלי יחפנות לקרקוע של DOFEK | `dofek-grounding` | `shoes` |
 
-`all-products` carries all five. The header menu is `pluma-main`, which links
+`all-products` carries all five. The header menu is `dofek-main`, which links
 the three category collections; the footer menu is `footer`.
 
 ## Layout of this repository
@@ -49,12 +49,12 @@ not name, the cart, the search, the account pages, is inherited unchanged.
 
 ## The theme
 
-    DOFEK · שחור ולבן (לא לפרסום)    187986182196, unpublished
+    DOFEK · שחור ולבן (זו התמה לפרסם)   187986182196, unpublished
     preview https://dofek.shop/?preview_theme_id=187986182196
 
-**It is not published.** The live theme is still `TinyBloom · טסט תכלת ולבן`,
-187628781620. Publishing is the merchant's call and is done from the admin;
-nothing in this repository does it.
+**It is not published.** The live theme is 187628781620, now named
+`העיצוב הישן · מפורסם כרגע, להחליף`. Publishing is the merchant's call and is
+done from the admin; nothing in this repository does it.
 
 Two colours, `#0A0A0A` and `#FFFFFF`, with five greys that are each black at a
 stated opacity over the page. `variants/dofek/wf-tokens.css` lists every one
@@ -105,22 +105,36 @@ when it exists and the bundled one anywhere else.
 
 ## Leftovers
 
-Everything below is from the pet shop and still exists. None of it is reachable
-from the storefront, and none of it can be removed through the Admin API, which
-blocks `themeFilesDelete` and `themePublish`. Each line is a manual job in the
-admin.
+The previous brand is gone from everything the Admin API can reach: the
+catalogue, the collections, the pages, the policies, the menus, the blog, the
+redirects, every theme name, and every file on this theme.
 
-* **The published theme is a TinyBloom one.** Until the merchant publishes
-  187986182196, every page a customer sees is the old shop.
-* Nine dead product templates on the DOFEK theme: `product.bloom.json`,
-  `product.clipper.json`, `product.comb-daily.json`, `product.comb-pro.json`,
-  `product.glove.json`, `product.roller-wood.json`, `product.roller-xl.json`,
-  `product.scratcher.json`, `product.toy.json`. No product points at any of
-  them; all five carry a `dofek-` suffix.
-* Twenty-four `sections/pl-*.liquid` from the previous design, unused by any
-  template on this theme.
-* Three unused stylesheets, `pdp.css`, `pl-story.css` and `tb-fit.css`. No
-  template requests them.
-* Fifteen of the eighteen themes in the admin are still named `TinyBloom · …`.
-* `variants/nuve/` and `variants/showcase/` documentation, and the archive
-  under `docs/archive/`, describe the old shop on purpose.
+Two things are left, and the first is the only one that matters.
+
+* **The published theme is still the pet shop's.** 187628781620, named
+  `העיצוב הישן · מפורסם כרגע, להחליף` so nobody mistakes it for the new one.
+  Until the merchant publishes 187986182196 from the admin, every page a
+  customer reaches is the old shop. `themePublish` is blocked here and
+  publishing is the merchant's call either way.
+* Twenty-four `sections/pl-*.liquid`, nine `templates/product.*.json` and two
+  stylesheets from the previous design still exist as files on this theme,
+  because `themeFilesDelete` is blocked. They are **emptied**: each is a few
+  hundred bytes carrying a comment that says it is retired and safe to delete.
+  Nothing renders them and they carry no copy, no markup and no CSS. The
+  sections mattered most: Shopify bundles every section stylesheet in a theme
+  onto every page, so the dead ones were charging each visitor about 50KB of
+  CSS for a design that no longer exists. `tools/pdp-preview/stage-dofek.sh`
+  applies the same emptying to the staged tree, so a local render matches what
+  is deployed. The originals stay in `theme/`, which is the previous brand's
+  theme and still needs them while it is the published one.
+
+Two names are deliberately left alone. `assets/pluma.css`, `pluma-2.css` and
+`pluma.js` keep their filenames: "pluma" was an internal design-system name
+that no customer ever saw, renaming them would leave three undeletable stubs
+at the old paths, and a theme's asset filenames are not branding (`base.css`
+and `overflow-list.css` are Horizon's). The `link-list` menu, labelled
+"תפריט ראשי ישן" in the admin, is an unused leftover that no theme here
+references; deleting a merchant's menu is their call, not this repository's.
+
+`variants/nuve/`, `variants/showcase/` and `docs/archive/` describe the old
+shop on purpose.

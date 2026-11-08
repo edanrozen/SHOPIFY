@@ -7,7 +7,7 @@ theme settings. Everything else, the catalogue page, the product page, the
 cards, the buy box, is inherited unchanged and goes monochrome because the
 palette file says so.
 
-    theme   DOFEK · שחור ולבן (לא לפרסום)   187986182196, unpublished
+    theme   DOFEK · שחור ולבן (זו התמה לפרסם)  187986182196, unpublished
     preview https://dofek.shop/?preview_theme_id=187986182196
 
 Not published. The live theme is still the previous brand's.
@@ -298,21 +298,22 @@ read back in full on 8 November 2026 and carry no TinyBloom text, the right
 support address, and the 30 day return window the pages advertise.
 
 What is left of the previous brand cannot be removed through the Admin API,
-which blocks `themeFilesDelete` and `themePublish`. Each line below is a
-manual job in the admin.
+which blocks `themeFilesDelete` and `themePublish`.
 
-  * **The published theme is still a TinyBloom one**, `TinyBloom · טסט תכלת
-    ולבן`, 187628781620. Until the merchant publishes 187986182196, every page
-    a customer reaches is the old shop. This outranks everything else on this
-    list by a wide margin.
-  * Nine dead product templates (`product.bloom.json` and friends) sit in the
-    theme. No product points at one; all five carry a `dofek-` suffix. They
-    are removed from the admin's code editor in one click each.
-  * Twenty-four `sections/pl-*.liquid` from the previous design, unused by any
-    template on this theme.
-  * Three stylesheets no template requests: `pdp.css`, `pl-story.css`,
-    `tb-fit.css`.
-  * Fifteen of the eighteen themes in the admin are named `TinyBloom · …`.
-    Renaming them is cosmetic and admin side only.
+  * **The published theme is still the pet shop's**, 187628781620, renamed to
+    `העיצוב הישן · מפורסם כרגע, להחליף` so it cannot be confused with this
+    one. Until the merchant publishes 187986182196, every page a customer
+    reaches is the old shop. This outranks everything else by a wide margin.
+  * The twenty-four `sections/pl-*.liquid`, the nine dead product templates
+    and `assets/pl-story.css` and `assets/tb-fit.css` could not be deleted,
+    so they were emptied instead: a few hundred bytes each, carrying a comment
+    that says the file is retired. The sections were the expensive ones.
+    Shopify bundles every section stylesheet in a theme onto every page, so
+    about 50KB of CSS for a design nobody renders was being downloaded on
+    every visit. `stage-dofek.sh` empties the same files in the staged tree so
+    a local render matches the deployed theme; `theme/` keeps the originals,
+    because that is the previous brand's theme and it is still published.
+  * Fifteen themes named `TinyBloom · …` were renamed to `ארכיון · …`, and the
+    menu handle `pluma-main` is now `dofek-main`.
   * The store has no meta description of its own, which lives in the online
     store Preferences page rather than in the API.

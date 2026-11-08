@@ -78,7 +78,7 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "pluma-main",
+            "menu": "dofek-main",
             "type_font_primary_size": "0.9rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
