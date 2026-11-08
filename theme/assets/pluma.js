@@ -1,5 +1,5 @@
 /**
- * TinyBloom, progressive enhancement.
+ * DOFEK, progressive enhancement.
  * Reveals `.pl-reveal` elements once, on first intersection. No dependencies,
  * no layout thrash: everything runs off a single IntersectionObserver.
  */

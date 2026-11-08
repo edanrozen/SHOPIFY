@@ -8,7 +8,7 @@ cards, the buy box, is inherited unchanged and goes monochrome because the
 palette file says so.
 
     theme   DOFEK · שחור ולבן (לא לפרסום)   187986182196, unpublished
-    preview https://tiny-bloom.com/?preview_theme_id=187986182196
+    preview https://dofek.shop/?preview_theme_id=187986182196
 
 Not published. The live theme is still the previous brand's.
 
@@ -270,15 +270,14 @@ held to throughout, and anyone editing the copy should hold to them:
 
     The 30 days are the merchant's own decision and they are legal: Israeli
     consumer law sets 14 days as the floor, not the ceiling, so offering
-    more is allowed and is a real differentiator. It does mean the shop now
-    promises 30 where the store's refund policy still says 14, and that
-    policy is the binding document.
+    more is allowed and is a real differentiator. The store's refund policy
+    now states the same 30 days, so the page and the binding document agree.
 
 ## Verifying a change
 
     sh tools/pdp-preview/stage-dofek.sh /tmp/dofek
     PREVIEW_THEME=/tmp/dofek PREVIEW_CATALOGUE=dofek \
-    PREVIEW_SHEETS="assets/pluma.css,assets/wf-tokens.css,assets/wf.css,assets/wf-shop.css,assets/wf-vow.css,assets/df-mobile.css,assets/df.css" \
+    PREVIEW_SHEETS="assets/pluma.css,assets/pluma-2.css,assets/wf-tokens.css,assets/wf.css,assets/wf-shop.css,assets/wf-vow.css,assets/df-mobile.css,assets/df.css" \
       node tools/pdp-preview/render.js index > /tmp/home.html
     node tools/pdp-preview/shoot.js /tmp/home.html /tmp/shots 390
 
@@ -292,37 +291,28 @@ are not.
 
 ## Still the previous brand's
 
-The four content pages were rewritten for DOFEK. The five store policies were
-not, because `write_legal_policies` is not granted to this session, and they
-are the binding documents. Four of them still read:
+The four content pages and all five store policies are DOFEK now. The policies
+were rewritten by the merchant in the admin, which is the only place they can
+be written: `write_legal_policies` is not granted to this session. They were
+read back in full on 8 November 2026 and carry no TinyBloom text, the right
+support address, and the 30 day return window the pages advertise.
 
-  * **Contact information** gives `tinybloom917@gmail.com` and carries the
-    literal placeholder "(להכניס כאן את שם המותג שלך)".
-  * **Refund policy** names `tinybloom` twice, promises a refund within
-    "90 ימי עסקים" where Israeli law gives 14 days from the cancellation
-    notice, and still states a 14 day return window against the 30 the shop
-    now advertises on every page. This one is the most exposed of the four
-    and should be rewritten first.
-  * **Shipping policy** is headed TINYBLOOM and states 14 to 56 business
-    days, against the 10 to 14 the checkout's own shipping rate promises.
-  * **Terms of service** name `tinybloom` and `tinybloom917@gmail.com`.
+What is left of the previous brand cannot be removed through the Admin API,
+which blocks `themeFilesDelete` and `themePublish`. Each line below is a
+manual job in the admin.
 
-The pages were written around that rather than against it. Where a policy is
-clear they transcribe it (the ₪30 return shipping floor, the 5% or ₪100
-cancellation fee, trying on not counting as use, an uncollected parcel losing
-the right to cancel). Where a policy is wrong they point at it instead of
-repeating it: the refund timing line says "מועד ההחזר מופיע במדיניות
-ההחזרים", so correcting the policy corrects the page.
-
-Also outstanding:
-
-  * Nine TinyBloom product templates (`product.bloom.json` and friends) are
-    dead files in the theme. `themeFilesDelete` is blocked for this session;
-    they are removed from the admin's code editor in one click each.
+  * **The published theme is still a TinyBloom one**, `TinyBloom · טסט תכלת
+    ולבן`, 187628781620. Until the merchant publishes 187986182196, every page
+    a customer reaches is the old shop. This outranks everything else on this
+    list by a wide margin.
+  * Nine dead product templates (`product.bloom.json` and friends) sit in the
+    theme. No product points at one; all five carry a `dofek-` suffix. They
+    are removed from the admin's code editor in one click each.
+  * Twenty-four `sections/pl-*.liquid` from the previous design, unused by any
+    template on this theme.
+  * Three stylesheets no template requests: `pdp.css`, `pl-story.css`,
+    `tb-fit.css`.
+  * Fifteen of the eighteen themes in the admin are named `TinyBloom · …`.
+    Renaming them is cosmetic and admin side only.
   * The store has no meta description of its own, which lives in the online
     store Preferences page rather than in the API.
-  * Every product's description is still empty, the knee brace included.
-    Its selling copy lives in the template rather than in the description
-    field, which is right for the page and wrong for everywhere Shopify
-    reuses that field: search results, the cart, Google Shopping, a
-    marketplace export. One paragraph per product, five products.

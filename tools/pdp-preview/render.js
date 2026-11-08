@@ -467,7 +467,12 @@ const suffix = process.argv[3] || '';
 const file = which === 'product'
   ? (suffix ? `templates/product.${suffix}.json` : 'templates/product.json')
   : `templates/${which}.json`;
-const tpl = JSON.parse(read(file));
+// Shopify writes an "auto-generated, do not edit" block comment at the top of
+// a JSON template whenever it normalises one, so a template pulled back from
+// the Admin API is JSON with a comment in front of it and JSON.parse chokes.
+// Strip a single leading block comment; anything after that has to be valid.
+const stripHeader = (s) => s.replace(/^\uFEFF?\s*\/\*[\s\S]*?\*\/\s*/, '');
+const tpl = JSON.parse(stripHeader(read(file)));
 
 // Which product the page is about. Bloom is the default because it is the one
 // with every metafield filled, but the generic product template has to be
@@ -540,7 +545,7 @@ const optional = (f) => { try { return read(f); } catch { return ''; } };
 // basic theme, for instance, loads one and none of the design system.
 const sheets = process.env.PREVIEW_SHEETS
   ? [reset, ...process.env.PREVIEW_SHEETS.split(',').map((f) => read(f.trim()))]
-  : [reset, read('assets/pluma.css'), optional('assets/tb.css'), optional('assets/tb-warm.css'), optional('assets/tb-fit.css')];
+  : [reset, read('assets/pluma.css'), read('assets/pluma-2.css'), optional('assets/tb.css'), optional('assets/tb-warm.css'), optional('assets/tb-fit.css')];
 if (which === 'product' && !process.env.PREVIEW_SHEETS) sheets.push(read('assets/pdp.css'));
 
 // Section stylesheets are concatenated by Shopify and served after the assets,

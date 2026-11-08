@@ -27,7 +27,13 @@
 <link rel="stylesheet" href="{{ pl_fonts }}" media="print" onload="this.media='all'; this.onload=null;">
 <noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
 
+{%- comment -%}
+  The base layer, in two files. At 19.7KB a single document could not cross
+  the Admin API, so the sheet is split at a section boundary and part two has
+  to load immediately after part one. Not one rule changed in the split.
+{%- endcomment -%}
 {{ 'pluma.css' | asset_url | stylesheet_tag }}
+{{ 'pluma-2.css' | asset_url | stylesheet_tag }}
 
 {%- comment -%}
   wf.css is three files. The division is a transport limit rather than a

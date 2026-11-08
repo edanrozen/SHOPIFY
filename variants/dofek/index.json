@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -44,7 +53,8 @@
         "f1",
         "f2",
         "f3"
-      ]
+      ],
+      "settings": {}
     },
     "problem": {
       "type": "df-split",
@@ -79,11 +89,11 @@
       "settings": {
         "heading": "שאר השורה",
         "text": "נעליים, מדרסים וגרביים. כל פריט לשלב אחר באותו יום.",
+        "exclude": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
         "limit": 12,
         "empty_text": "אין מוצרים להצגה.",
         "more_label": "לכל המוצרים",
-        "more_link": "/collections/all",
-        "exclude": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד"
+        "more_link": "/collections/all"
       }
     },
     "expert": {
@@ -104,8 +114,8 @@
     "promise": {
       "type": "df-promise",
       "settings": {
-        "heading": "לא בטוחים באיזו מידה לבחור?",
-        "text": "כתבו לנו לפני ההזמנה ונעזור לבחור מידה ודגם. עדיף להחליף הודעה אחת מאשר לקבל מידה שלא מתאימה.",
+        "heading": "שאלה לפני שקונים?",
+        "text": "כתבו לנו לפני ההזמנה ונענה באותו יום עסקים. עדיף להחליף הודעה אחת מאשר לקבל משהו שלא מתאים.",
         "cta_label": "לכל המוצרים",
         "cta_link": "/collections/all",
         "note": "DOFEK.support@gmail.com"
@@ -127,7 +137,7 @@
         "eyebrow": "מוצר הדגל",
         "problem": "הברך לא כואבת כל היום. היא כואבת במדרגות, בקימה מכיסא נמוך ובסוף יום שלם על הרגליים.",
         "heading": "מגן ברך DOFEK",
-        "body": "לחץ אחיד סביב המפרק, צמצום תנועות צד ותחושת יציבות בהליכה. שני צבעים, ארבע מידות, M עד XLL.",
+        "body": "לחץ אחיד סביב המפרק, צמצום תנועות צד ותחושת יציבות בהליכה. וסת שמכוונן ביד אחת, גם תוך כדי תנועה.",
         "cta_label": "לעמוד המוצר"
       }
     }

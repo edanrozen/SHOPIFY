@@ -55,7 +55,7 @@
   .wf-flag .wf-btn { width: 100%; }
 
   /* The flagship frame is 4:5 and contains rather than covers, which was
-     right for a 1206x1806 grooming station. DOFEK's product photography is
+     right for a 1206x1806 portrait. DOFEK's product photography is
      square, so a 4:5 frame draws a band of empty ground above and below
      every one of them. */
   .wf-flag__media { aspect-ratio: 1 / 1; }
