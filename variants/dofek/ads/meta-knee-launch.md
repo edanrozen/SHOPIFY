@@ -104,25 +104,21 @@ UTM (בשדה `url_tags` של הקריאייטיב, לא בקישור):
     כותרת  תמיכה ויציבות לברך שלך
     תיאור  מגן ברך DOFEK · שחור או לבן
 
-## התמונות כבר בחשבון
+## התמונות והקריאייטיב בחשבון
 
-הועלו ב־15 בנובמבר. ה־hash נשמר בחשבון המודעות ולא פג, אז אין צורך להעלות
-שוב גם אם הטוקן יתחלף.
+גרסה שנייה, 15 בנובמבר, על התמונות המתוקנות שהמוכר שלח. כל טקסט מחובר
+לתמונה שנבנתה עבורו; הסדר שבו הן נשלחו שונה מהסט הראשון, אז המיפוי נעשה
+מחדש ולא הונח. ה־hash וה־creative id לא פגים, אז החלפת טוקן לא מחייבת
+להעלות שוב.
 
-    ad1-gym            ee3522b65d2d6ca672b125d671664ef0
-    ad2-beforeafter    0d4b53d25075de9fea5b75bbc62b07c6
-    ad3-stairs         fd3715588a949ff6ab3a03755363b808
-    ad4-product        397730dbc7b63eebd6bcc372acf2e128
-
-## הקריאייטיב כבר קיים בחשבון
-
-נוצרו ב־15 בנובמבר, אחרי שהאפליקציה הועברה ל־Live. נשאר רק ליצור מודעה לכל
-אחד מהם בקבוצת המודעות, והשמות למטה הם מה שייכנס ל־utm_content.
-
-    ad1-gym          creative 2213526362592122   ad name dofek-knee-gym
-    ad2-beforeafter  creative 1722222122801576   ad name dofek-knee-beforeafter
-    ad3-stairs       creative 29639564492315149  ad name dofek-knee-stairs
-    ad4-product      creative 2323944138400962   ad name dofek-knee-product
+    ad1-gym          image f5900f6d7f22fb4aadc9c6aad3d89176
+                     creative 1127491743096073   ad name dofek-knee-gym
+    ad2-beforeafter  image 3a56dede0cea1caa180de980deb00665
+                     creative 1480956720837848   ad name dofek-knee-beforeafter
+    ad3-stairs       image c04a11853ca1d67091e1cb30785cb2ad
+                     creative 1127363193518050   ad name dofek-knee-stairs
+    ad4-product      image 9b486e83ffd51e6c728209bd0bd83ec9
+                     creative 1697546991713267   ad name dofek-knee-product
 
 `standard_enhancements` הוצא משימוש אצל מטא באמצע העבודה. במקומו כל תכונה
 מבוטלת בנפרד, וזה מה שיושב על ארבעת הקריאייטיב:
@@ -130,15 +126,7 @@ UTM (בשדה `url_tags` של הקריאייטיב, לא בקישור):
     image_touchups · image_brightness_and_contrast · image_templates
     add_text_overlay · text_optimizations
 
-## מה שצריך לתקן בתמונות לפני העלאה
-
-  * **תמונה 3, שתי שגיאות כתיב.** בבולטים: "תמיכה ו**ציבות** לברך" חסרה
-    יו״ד, ו"נוח וקל **לשמוש יומימי**" במקום "לשימוש יומיומי". במוצר ב־199.99
-    שגיאת כתיב במודעה קוראת כמו הונאה.
-  * **תמונה 3 נושאת DOFEK®.** אם הסימן לא רשום בפועל, להוריד את ה־®.
-  * **לוגו נייק גלוי בתמונות 1 ו־2**, על החולצה ועל שתי הנעליים. סימן מסחרי
-    של צד שלישי בקריאייטיב.
-  * תמונה 4 נקייה ואין בה מה לתקן.
+הגרסה הראשונה נשארה בחשבון ולא בשימוש. אף מודעה לא מצביעה עליה.
 
 ## מה שחוסם את ההעלאה
 
