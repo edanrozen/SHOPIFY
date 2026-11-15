@@ -110,6 +110,22 @@ UTM (בשדה `url_tags` של הקריאייטיב, לא בקישור):
     ad3-stairs         fd3715588a949ff6ab3a03755363b808
     ad4-product        397730dbc7b63eebd6bcc372acf2e128
 
+## הקריאייטיב כבר קיים בחשבון
+
+נוצרו ב־15 בנובמבר, אחרי שהאפליקציה הועברה ל־Live. נשאר רק ליצור מודעה לכל
+אחד מהם בקבוצת המודעות, והשמות למטה הם מה שייכנס ל־utm_content.
+
+    ad1-gym          creative 2213526362592122   ad name dofek-knee-gym
+    ad2-beforeafter  creative 1722222122801576   ad name dofek-knee-beforeafter
+    ad3-stairs       creative 29639564492315149  ad name dofek-knee-stairs
+    ad4-product      creative 2323944138400962   ad name dofek-knee-product
+
+`standard_enhancements` הוצא משימוש אצל מטא באמצע העבודה. במקומו כל תכונה
+מבוטלת בנפרד, וזה מה שיושב על ארבעת הקריאייטיב:
+
+    image_touchups · image_brightness_and_contrast · image_templates
+    add_text_overlay · text_optimizations
+
 ## מה שצריך לתקן בתמונות לפני העלאה
 
   * **תמונה 3, שתי שגיאות כתיב.** בבולטים: "תמיכה ו**ציבות** לברך" חסרה
