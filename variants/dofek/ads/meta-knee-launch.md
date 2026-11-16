@@ -192,3 +192,25 @@ UTM (בשדה `url_tags` של הקריאייטיב, לא בקישור):
 יהיה `ready`, ואז `POST act_.../adcreatives` עם
 `object_story_spec.video_data` ובתוכו `video_id`, `image_url` של תמונת
 הכיסוי, `title`, `message`, `link_description` ו־`call_to_action`.
+
+## מה הועלה בפועל · 16 בנובמבר 2026
+
+כל המודעות נוצרו במצב `PAUSED`. הקמפיין וקבוצת המודעות מושהים גם הם.
+שום דבר לא רץ ולא מוציא כסף עד החלטה מפורשת.
+
+    ad1-gym          120255279841560523   creative 1127491743096073
+    ad2-beforeafter  120255279841860523   creative 1480956720837848
+    ad3-stairs       120255279842440523   creative 1127363193518050
+    ad4-product      120255279842610523   creative 1697546991713267
+    ad5-film         120255279852430523   creative 1825527565426195
+
+הסרטון: `video_id` ‏2094308457876473, שם `dofek-knee-film-55s`. הועלה
+המאסטר H.264 של 43MB, לא גרסה דחוסה. תמונת הכיסוי היא הפריים הפותח,
+הסבא יושב על המיטה ואוחז בברך.
+
+הערה טכנית לפעם הבאה: `degrees_of_freedom_spec` עם
+`standard_enhancements` כבר לא מתקבל ומחזיר `error_subcode 3858504`.
+אם רוצים לכבות שיפורים אוטומטיים, מגדירים כל תכונה בנפרד.
+
+העלאת הווידאו עברה דרך `graph.facebook.com` ולא דרך
+`graph-video.facebook.com`, כך שהטוקן הוזרק כרגיל.
