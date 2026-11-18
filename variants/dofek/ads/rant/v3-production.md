@@ -135,3 +135,30 @@ Measured on the same line:
 **Rule: check `models_explore` for the capability before re-rolling inside the
 default model's options.** Four rounds of voice selection were spent inside a
 library that could not produce the required result.
+
+## v4 — the voice the client chose
+
+Screened 12 untested male preset voices on one Hebrew test line, then ranked
+them by measured median pitch and sent the client only the five deepest, so
+every option already met "older man" before he listened:
+
+    Gideon    93.0 Hz      <- chosen
+    Vlad     103.9 Hz      (Slavic; a Russian-Israeli accent is native to this
+    Sterling 109.6 Hz       market, unlike an English one)
+    Alden    127.0 Hz
+    Desmond  127.0 Hz
+
+Measuring first turned an open-ended listening task into a five-way choice.
+
+Also dropped at the client's request: the word "באחריות", everywhere — script,
+voice take and captions.
+
+Take selection among three recordings of the full script went by measurement
+too: G3 had the tightest level spread (1.9 dB against 2.4 and 2.0) and its
+phrase boundaries mapped one-to-one onto the script lines.
+
+### Mastering gain is per-cut, again
+
+The chain that gave -15.0 LUFS on v3 gave **-13.4** on v4 with the same
+settings, because this voice is denser. Corrected -2.8 dB -> -4.4 dB.
+Never carry a mastering trim between cuts; measure after every encode.
