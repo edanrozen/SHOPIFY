@@ -149,3 +149,61 @@ No clip carries baked audio any more. All eight voice tracks — six talking
 lines and two cutaway lines — are placed on the timeline in `mix.sh`, so the
 whole soundtrack is in one place and a line can be moved without regenerating
 anything.
+
+---
+
+## Three corrections after the first cut
+
+### 1. A line was sitting on the picture that contradicted it
+
+«במקום לקנות כבר את מגן הברך של דופק **ולחזור ללכת כמו בן אדם, לא כמו חיה
+פצועה**» is one sentence describing two opposite states: with the brace, and
+without it. Both halves were laid over the same suffering shot, so «walking
+like a human» played while the man was bent double under a plaster sack, and
+the only braced image came *before* it.
+
+Split across two pictures, which is what the sentence asks for:
+
+```
+«ולחזור ללכת כמו בן אדם»   c10 — the braced leg stepping up the ladder
+«לא כמו חיה פצועה»          c02 — bent under the sack
+```
+
+Free; both clips already existed. The section now reads brace → walking →
+animal → suffering, which is the order the words are in.
+
+### 2. Speech and mouth were not starting together
+
+`onset.py` reports the first frame where the mouth crosses 30% of its peak
+motion. Compared against where each voice line actually begins:
+
+```
+shot   mouth at   speech at   drift
+  1      0.65       0.65       ok
+  2      3.65       3.63       ok
+  3      8.80       8.73      -0.07
+  4     21.11      21.19      +0.08
+  5     26.47      26.24      -0.23   audible
+  6     31.19      31.50      +0.31   audible
+```
+
+Each talking segment is now trimmed to start **0.18s before its measured
+mouth onset**, and its line is placed at exactly that point. Speech and lips
+begin together in every shot. Where a line runs longer than the shot's
+mouth-movement window it overruns into the next talking shot, which is
+ordinary editing and reads as continuous speech.
+
+**What this does not fix:** generic articulation still does not track Hebrew
+phonemes, because no lip-sync model on this account handles this character —
+`sync_so` reduces mouth motion (measured above) and `grok_video_v15`, the only
+audio-driven option, failed twice on these inputs. Aligning the onsets removes
+the part of the mismatch the eye actually catches.
+
+### 3. Words that were not landing
+
+«באחריות» came out slurred. Re-recorded as «בְּאַחְרָיוּת מְלֵאָה» — fuller
+vocalisation plus a following word, which stops the model swallowing the
+ending. Its internal sentence gap was tightened from 0.60s to 0.25s so the
+longer line still fits the shot.
+
+Master: **36.88s, −14.8 LUFS, −4.2 dBTP.**
