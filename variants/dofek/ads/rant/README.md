@@ -207,3 +207,62 @@ ending. Its internal sentence gap was tightened from 0.60s to 0.25s so the
 longer line still fits the shot.
 
 Master: **36.88s, −14.8 LUFS, −4.2 dBTP.**
+
+---
+
+## v2 — built on the voice timeline (this supersedes everything above about sync)
+
+Client on v1: *"יש פה דיליי מטורף והקול חייב להיות אחיד."* Both were true and
+both are now measured.
+
+### The delay, as a number
+
+`sync.py` correlates mouth-region motion with the audio envelope and scans
+lags. On the rejected cut the correlation was **negative** — the mouth moved
+during the silences:
+
+```
+              v1 (articulation prompt)   v2 (wan2_7, audio-driven)
+shot 1              -0.29                 +0.52   lag 1 frame
+shot 2                                    +0.42   lag 0
+shot 3                                    +0.23   lag 0   (wide shot, small mouth; checked by eye)
+shot 4              -0.12                 +0.63   lag 1 frame
+shot 5                                    +0.66   lag 0   (after a 2-frame edit offset)
+shot 6                                    +0.53   lag 1 frame
+```
+
+The v2 figures are measured on the **finished film against its final
+soundtrack**, not on the source clips.
+
+**What fixed it: `wan2_7` with `start_image` + `audio_references`.** It
+generates the talking face *from* the audio slice instead of animating first
+and syncing afterwards. `sync_so` damped the mouth on this character and
+`grok_video_v15` failed outright; this is the model that works for a stylised
+face with a moustache. Duration is free (2–15s), so each shot is generated at
+the length of its line.
+
+### The voice, as a number
+
+v1 was nine separately generated lines, two of them re-recorded later. Mean
+level per line ranged from −19.0 to −23.9 dB — a **4.9 dB** spread, with the
+re-recorded lines audibly louder than the rest. v2 is **one continuous take of
+the whole monologue**, compressed 4:1: **2.8 dB** spread across its phrases.
+`sent.py` lists every phrase with its level.
+
+### The method
+
+The voice take is the master clock and the picture is cut to it:
+
+1. Record the monologue once. Read phrase boundaries off `sent.py`.
+2. Slice it at shot boundaries; each talking shot's slice goes to `wan2_7`
+   with that shot's start frame.
+3. Assemble with segment lengths in **frames** (`build2.sh`), so the picture
+   cannot drift against the continuous audio. Frame 0 of each talking shot is
+   the first sample of its slice.
+4. Score the finished film with `sync.py`. Shot 5 led by two frames at source;
+   it is offset in the edit and now peaks at lag 0.
+
+Cutaways are unchanged: «ולחזור ללכת כמו בן אדם» on the braced leg, «לא כמו
+חיה פצועה» on the sack, «לא נמאס לך…» at the ladder.
+
+Master: **35.17s, −15.0 LUFS, −5.1 dBTP.**
