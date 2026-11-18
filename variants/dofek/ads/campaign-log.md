@@ -61,3 +61,54 @@ At this budget the campaign cannot produce a verdict in a useful timeframe.
 Raising the budget before fixing the page only buys the same mistake faster.
 Items 1-4 are free and take about an hour. They were offered; the client chose
 the campaign changes first.
+
+## Correction, same evening — the reviews claim was wrong
+
+I reported "no reviews, no star ratings" after loading the product page and
+reading its text 3.5 seconds in. **Loox had not finished injecting.** The
+product carries `reviews.rating 4.5` and `reviews.rating_count 12`. There are
+twelve reviews at 4.5 out of 5.
+
+Measuring a page before its third-party scripts settle is the same class of
+error as judging a render before looking at the frames. Load, then wait nine
+seconds, then read.
+
+### The real defect is worse, and fixable in minutes
+
+The page prints one line — "4.5 מתוך 5.0, לפי 12 חוות דעת" — rendered server
+side from the metafield by `sections/df-voices.liquid`. Below it sits
+`<div id="looxReviews" data-product-id="…">`, the container Loox is supposed
+to fill. **Loox never fills it.** No cards, no stars, no names, no photos.
+
+Twelve pieces of social proof exist and the visitor sees none of them, on a
+page converting at 3.8%. The container id matches Loox's documented default
+and the app embed is enabled in `settings_data.json`, so the cause is on the
+Loox side: the product-reviews widget is off, unpublished, or restricted by
+plan. That is an app setting, not a theme change.
+
+## What was changed, in a draft theme only
+
+Theme `188538322996`, "DOFEK · תיקוני המרה (טיוטה)", duplicated from live.
+Nothing published.
+
+* `perk2` reframed: "משלוח חינם עם מעקב / 10 עד 14 ימי עסקים עד הבית, עם מספר
+  מעקב לכל אורך הדרך." The wait is stated as plainly as before — it is true
+  and hiding it would cost more than it saves — but it now arrives attached
+  to tracking rather than alone beside the buy button.
+* A new FAQ entry on delivery time that ends on the fact that the 30 days
+  run **from the day the parcel arrives, not from the order**. That is the
+  answer to the objection the shipping window creates.
+* One self-inflicted bug, found and fixed: the first pass rewrote the reviews
+  heading to "החנות חדשה, אז הסיכון עלינו" — which then sat directly above
+  "4.5 מתוך 5.0, לפי 12 חוות דעת". Reverted. The `empty_text` it was written
+  for never reaches a customer at all; the section's own documentation says
+  it renders only in the theme editor.
+
+## Still open, and needs app access rather than theme access
+
+1. **Loox**: turn the product-reviews widget on. Twelve reviews at 4.5 are the
+   single biggest trust asset this page has and none of them render.
+2. **Kaching Bundles**: the sticky bar's label is the English "Choose bundle"
+   on a Hebrew RTL store, and the bundle tiles show the free insoles as
+   "0.00 ₪" beside a struck-through 59.90 ₪, which reads as broken rather
+   than as a gift. Both are strings inside that app.
