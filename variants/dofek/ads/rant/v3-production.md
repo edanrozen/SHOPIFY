@@ -197,3 +197,53 @@ a man deliver a monologue, which is what was asked for.
 
 **Rule: when a fix for one complaint is a workaround rather than a repair,
 write down what it costs. The cost arrives as the next complaint.**
+
+## v6 — pronunciation, and the end of the lip-sync road
+
+### The /k/ bug
+
+Client: "sometimes כלום comes out with the כ stressed as ח instead of ק."
+Correct. Hebrew כ is /x/ without a dagesh and /k/ with one, and an **English**
+voice engine does not apply the dagesh reliably. Rather than hope it does, the
+hard-/k/ words are now spelled with ק in the text sent to the engine — it is
+never displayed anywhere, only read:
+
+    כלום → קלום      כבר → קבר       כן → קן
+    כמו  → קמו       כל  → קול       מכאבים → מקאבים
+
+Words where כ really is /x/ (בכל, ללכת, הליכה) are left alone.
+
+### Four lip-sync hypotheses, all measured, three dead
+
+| tried | silence/speech mouth ratio |
+|---|---|
+| wan2_7, 720p (v5) | 1.08 |
+| **wan2_7, 1080p (v6)** | **1.24** |
+| closed-mouth start frame | 1.24 → no gain over 1.30 baseline |
+| seedance_2_0 (untested model) | 0.57 / 0.80 — moves MORE in silence |
+| sync_so (earlier) | reduced mouth motion 22% |
+
+* **Closed-mouth start frames**: the theory was that a start image with an open
+  mouth gives the model nothing to close to. Generated three, tested one for
+  7 credits. No improvement. Theory dead — and 7 credits spent to avoid
+  spending 80 on it.
+* **seedance_2_0**: takes `audio_references` like wan2_7 and had never been
+  tried. It scores *below 1.0*, meaning it does not track the audio at all.
+* **1080p native** (1076x1924, no upscale) is the only thing that helped:
+  1.08 → 1.24 on the mouth crop, a 15% gain, because the mouth is rendered
+  with more pixels.
+
+A properly synced head scores 5-10. wan2_7 at 1080p is the best of everything
+in the catalog and reaches 1.24. **This is the ceiling of the available tools
+on this character, and it has now been established by measurement rather than
+by impression.** Beyond it, the options are a real filmed actor or a different
+platform.
+
+### A caption was missing and the frame strip caught it
+
+`wins[:16]` truncated a 17-entry list and dropped the final caption,
+"יאללה, תזמין ותספר לי איך היה" — the call to action. The mix reported a
+clean -15.0 LUFS and the right duration either way. Only looking at frames
+from the finished file found it.
+
+**Rule: a build that reports success has not been checked. Look at the output.**
