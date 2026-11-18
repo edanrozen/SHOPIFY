@@ -286,3 +286,48 @@ Four phrasings were generated and offered; all four measured clean, so the
 choice was dramatic rather than technical. Client chose **C · «כמה אפשר לסבול»**.
 It is the only one of the four that is a question rather than an order, which is
 what makes her going behind his back read as character instead of plot.
+
+---
+
+## Measure motion before deciding a shot is boring
+
+`motion.py` samples at 6fps, downscales to 48x85 grey, and prints the mean
+absolute frame difference in 0.5s buckets. Run it on the assembled cut before
+calling any edit finished.
+
+It corrected one wrong instinct and found a real defect the eye had skated over.
+
+**Wrong instinct:** sampling frames every 2s made the opening three shots look
+like the same frozen pose. Motion there measures 13–30 — he is moving the whole
+time. A sparse contact sheet is not evidence about motion; the measurement is.
+
+**Real defect:** ten of the forty seconds were visually frozen.
+
+```
+ 8.7 – 12.2   3.5s   the colleague — over the film's only selling line
+21.2 – 24.2   3.0s   the phone
+36.6 – 40.2   3.6s   the end card, at exactly 0.0
+```
+
+### The fixes, none of which needed new footage
+
+**Punch-in cut on the selling line.** The colleague shot is two men sitting
+still for 4.25s carrying both «די להיות עקשן איציק» and «תקנה את מגן הברך של
+DOFEK». Split the same clip in two and crop the second at 1.28x: a hard cut
+appears where the footage has no motion of its own, and it lands exactly on the
+line that sells. The 3.5s block became two blocks of ~1.5s.
+
+**Slow push on shots that do not move.** `mksz` wraps `zoompan`. Note the form:
+`z='1+0.0022*on'` driven by the output frame counter. The accumulating form
+`z=min(1.0012*zoom,1.10)` silently did nothing here — the measurement is how
+that was caught, not the eye.
+
+**The end card is now a reveal, not a still.** `titles/endseq.js` renders 86
+frames at 24fps: the claim rises and fades in, the rule draws, the brand letter-
+spacing tightens, then the CTA scales up, then the domain — over a 3.5% push on
+the whole card. The reveal order is also the reading order we want. A single PNG
+measured 0.0 for its entire 3.6s, which is the worst possible place in a direct-
+response ad to lose the eye.
+
+Remaining sub-6 readings are all ≤1.5s and sit inside dialogue close-ups where
+only the face moves. That is normal; the 3s+ blocks are gone.
