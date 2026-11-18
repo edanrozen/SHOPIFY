@@ -380,3 +380,39 @@ the payoff shot; the narrator ducks it on the end card, which is correct.
 
 `mix.sh` takes the bed and its gain as arguments (`./mix.sh vo/arc3.mp3 0.23`)
 so swapping music is one command, not an edit.
+
+### Then the arc was right and the genre was still wrong
+
+Client: *"זה מרגיש לי בנאלי מדי, בוא נלך על משהו אחר לגמרי."*
+
+Correct, and the reason is worth naming: **acoustic guitar building to strings
+and brass is the default template of every insurance, health-fund and bank ad
+in this market.** Asking for "uplifting" gets you the thing everyone else has.
+A bed that sounds like everyone makes the ad look like everyone, against an
+audience whose default action is to keep scrolling.
+
+Three directions that are actually different, not three versions of one:
+
+```
+Mizrahi      energy x2.47   brightness x2.53   both rise          ← chosen
+percussion   energy x1.13   brightness x0.76   loud from bar one, no build
+industrial   energy x2.81   brightness x0.67   louder but darker — wrong direction
+```
+
+Brightness is what separates them. The industrial bed has the biggest energy
+rise of the three and is still wrong: it gets *darker* as it gets louder, so it
+reads as heavy rather than joyful. Energy alone would have picked it.
+
+**Why Mizrahi is the business answer, not just the measured one.** The audience
+is Israeli men roughly 45–65. It is what a large share of them actually listen
+to, no competitor in this category uses it — they all buy international stock —
+and it signals "this was made here, for you" before a word is spoken. The genre
+also performs the sorrow-to-celebration move natively; it is its defining
+gesture, so the arc does not have to be engineered on top of it.
+
+In the finished mix the music bus measures **energy x3.70, brightness x3.25** —
+the strongest of anything tried, and still up at the end card.
+
+`mix.sh` takes a third argument, music tempo. The chosen bed's tail drops at
+38s; at `0.95` the 40s track covers the 39.79s cut with its ending past the
+edit, so the end card is not left in silence.
