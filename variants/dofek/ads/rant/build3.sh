@@ -20,8 +20,8 @@ sgz () { ffmpeg -y -loglevel error -ss $2 -i $1 \
 sg  cl/X1.mp4   0        55    p01   #   0.00- 2.29  hook, tight
 sgz cl/X2.mp4   0       113    p02   #   2.29- 7.00  wide, pointing, slow push
 sg  cl/X3.mp4   0        96    p03   #   7.00-11.00  brace, foot on block
-sg  $A/c12.mp4  0.5      29    p04   #  11.00-12.21  dial macro on "מגן הברך של דופק"
-sg  $A/c10.mp4  0.35     53    p05   #  12.21-14.42  "ולחזור ללכת כמו בן אדם"
+sg  $A/c11.mp4  0.4      29    p04   #  11.00-12.21  brace on the knee, on "מגן הברך של דופק"
+sg  $A/c10.mp4  0.00     53    p05   #  12.21-14.42  "ולחזור ללכת כמו בן אדם"
 sg  $A/c02.mp4  0.60     37    p06   #  14.42-15.96  "לא כמו חיה פצועה"
 sg  $A/c01.mp4  0.45     68    p07   #  15.96-18.79  "לא נמאס לך ללכת לעבודה ולסבול"
 sg  $A/c03.mp4  0.30     55    p08   #  18.79-21.08  sidelined while the young one works

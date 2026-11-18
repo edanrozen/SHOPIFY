@@ -62,7 +62,7 @@ accumulate into drift.
     p01 X1   55 fr  0.00- 2.29  hook, tight
     p02 X2  113 fr  2.29- 7.00  wide, pointing, slow push
     p03 X3   96 fr  7.00-11.00  brace, foot on block
-    p04 c12  29 fr 11.00-12.21  dial macro, lands on "מגן הברך של דופק"
+    p04 c11  29 fr 11.00-12.21  brace on the knee, lands on "מגן הברך של דופק"
     p05 c10  53 fr 12.21-14.42
     p06 c02  37 fr 14.42-15.96
     p07 c01  68 fr 15.96-18.79
@@ -86,3 +86,19 @@ accumulate into drift.
   Use `z='1+k*on'`.
 * Mastering gain must be re-measured per cut: the same chain gave -15.0 LUFS on
   v2 and -18.5 on v3 because the dialogue density differs.
+
+## Review pass on the finished cut
+
+Two faults found by looking at a frame strip of the master, not by looking at
+the plan:
+
+* the dial macro (`c12`) is so tight it reads as abstract texture — nobody
+  seeing it for 1.2s knows it is a knee brace. Replaced with `c11`, the brace
+  worn on the knee.
+* `c10` at in-point 0.35 has already tilted past his head, so the line
+  "ולחזור ללכת כמו בן אדם" played over a headless torso. In-point moved to
+  0.00, where his face is in frame and smiling.
+
+Both are the same mistake: a clip was chosen from a contact sheet taken at one
+timecode and then used at another. Pick the in-point from the frame you will
+actually show.
