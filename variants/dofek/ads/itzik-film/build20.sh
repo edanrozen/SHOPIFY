@@ -14,12 +14,12 @@ mks () { ffmpeg -y -loglevel error -ss $2 -t $3 -i $C/$1.mp4 \
   -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 \
   -vf "$V" -shortest -c:v libx264 -crf 18 -preset veryfast -c:a aac -b:a 192k $S/$4.mp4; }
 
-mka T00  0.30 5.00 k1   # walking, limping      "זה הגיל, אני אומר לך"
+mka G02  0.30 3.70 k1   # HOOK: the ladder, the knee gives  "אוף... לא מצליח"
 mka K03n 0.40 4.25 k2   # colleague             "די להיות עקשן איציק / תקנה..."
-mka L06n 0.70 2.65 k3   # wife                  "חלאס לסבול כבר"
+mka L06n 0.70 2.65 k3   # wife                  "כמה אפשר לסבול"
 mks c12  0.40 2.30 k4   # macro on the dial
 mka G12  0.50 2.95 k5   # the ladder, climbed   "וואלה... זה עובד"
-ffmpeg -y -loglevel error -loop 1 -t 3.00 -i $T/endcard.png \
+ffmpeg -y -loglevel error -loop 1 -t 4.15 -i $T/endcard.png \
   -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 \
   -vf "fps=24,setsar=1" -shortest -c:v libx264 -crf 18 -preset veryfast \
   -pix_fmt yuv420p -c:a aac -b:a 192k $S/k6.mp4

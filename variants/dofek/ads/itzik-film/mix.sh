@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 cd /tmp/claude-0/-home-user-SHOPIFY/06af39bb-792a-5cc6-a4be-ecbf44972499/scratchpad/anim
-D=40.45
+D=40.20
 # dialogue (baked into the clips) + narrator over the end card + ducked music bed
 ffmpeg -y -loglevel error -i capped.mp4 -i vo/v6.mp3 -i vo/music40.mp3 \
  -filter_complex "\
-[0:a]volume=1.0[dlg];[1:a]adelay=37200|37200,volume=1.18[nar];\
+[0:a]volume=1.0[dlg];[1:a]adelay=36950|36950,volume=1.18[nar];\
 [dlg][nar]amix=inputs=2:duration=longest:normalize=0,apad,atrim=0:$D,asetpts=N/SR/TB,asplit=2[vb1][vb2];\
 [2:a]atempo=0.990,volume=0.34,apad,atrim=0:$D,asetpts=N/SR/TB[mus];\
 [mus][vb1]sidechaincompress=threshold=0.035:ratio=10:attack=10:release=400[musduck];\

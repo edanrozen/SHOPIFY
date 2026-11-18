@@ -223,3 +223,66 @@ go when there is no room — it is plot, not persuasion.
 | narrator | `563f728c-e249-5a85-97ab-8461e8c09da6` |
 
 Arthur (`30fc8796-…`) was rejected: *"למה הקול של איציק נשמע כמו קריין."*
+
+---
+
+## The hook was the real defect
+
+Client, 18.11: *"בכללי ההוק לא טוב בשני הסרטונים."*
+
+The film opened on five seconds of Itzik walking across a dirt lot, limping,
+saying «זה הגיל, אני אומר לך». Three things were wrong with it and only the
+third is about craft:
+
+1. **It gave away the thesis.** «זה הגיל» is the belief the film exists to
+   destroy. Stating it at 0:02 spends the twist before the viewer has a reason
+   to care.
+2. **Walking is not an event.** Five seconds of locomotion in a feed where the
+   whole attention budget is about two.
+3. **The frame was empty and wide.** Nothing in shot but the man and dust. At
+   thumbnail size he is a blob — no readable face, no object naming the problem.
+
+Replaced with the **ladder failure**: he grips the rung, the knee gives, «אוף...
+לא מצליח». The ladder is in frame stating the obstacle without a word, the crop
+is tight enough that face and knee both read on a phone, and there is an action
+in progress rather than a pose.
+
+The argument underneath the composition: **a contractor who cannot climb a
+ladder is failing at his trade, not merely in pain.** That is identity, and
+identity is what stops a 55-year-old scrolling — not suffering.
+
+New act-1 order: **fail → rationalise → be challenged → refuse.** The walking
+shot was not cut; it moved to position 2, where it is now the consequence of the
+failure instead of a preamble to it. The ladder now opens *and* closes the film —
+the same ladder, failed at 0:01 and climbed at 0:34.
+
+In the 20s cut the walk is gone entirely. There is no room, and the hook has to
+be the hook.
+
+## Two words the model will not keep together
+
+«תודה רבה» came back with a **140ms drop between the two words** — not silence,
+so the 50ms-window measurement in `gap.py` reported "no gaps" and the client
+still heard a stutter. `fine.py` resolves to 10ms and shows the envelope, which
+is how it was found:
+
+```
+תודה                רבה
+*####*#*****++=--:::............::--==***#@@@@@#
+                   └── 140ms ──┘
+```
+
+A maqaf (`תּוֹדָה־רַבָּה`) changed nothing — the envelope came back identical.
+The fix is not punctuation but vocabulary: **«תודה אחי»**, 0.79s continuous,
+and better Israeli register for a woman to a courier anyway.
+
+**Rule: when a client reports a break that `gap.py` cannot see, re-measure with
+`fine.py` before concluding the line is clean.** A sub-threshold dip inside a
+1.4s phrase is audible even though it is not silence.
+
+## The wife's line
+
+Four phrasings were generated and offered; all four measured clean, so the
+choice was dramatic rather than technical. Client chose **C · «כמה אפשר לסבול»**.
+It is the only one of the four that is a question rather than an order, which is
+what makes her going behind his back read as character instead of plot.

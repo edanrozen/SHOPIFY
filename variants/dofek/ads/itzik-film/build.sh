@@ -16,15 +16,15 @@ mks () { ffmpeg -y -loglevel error -ss $2 -t $3 -i $C/$1.mp4 \
   -vf "$V" -shortest -c:v libx264 -crf 18 -preset veryfast -c:a aac -b:a 192k $S/$4.mp4; }
 
 # ---- ACT 1 · the site -----------------------------------------------
-mka T00  0.30 5.00  s1   # walking, limping     groan + "זה הגיל, אני אומר לך"
-mka G02  0.55 3.95  s2   # ladder, cannot climb "אוף... לא מצליח"
+mka G02  0.30 3.70  s1   # HOOK: the ladder, the knee gives     "אוף... לא מצליח"
+mka T00  0.30 5.00  s2   # walking it off, limping              "זה הגיל, אני אומר לך"
 mka K03n 0.40 4.25  s3   # colleague            "די להיות עקשן איציק / תקנה..."
 mka G04  0.25 3.90  s4   # refusal              "לא מגן ולא נעליים. זה הגיל"
 # ---- ACT 2 · home ---------------------------------------------------
 mka G05n 0.60 2.70  s5   # chair, reaching up   "אני לא מגיע לזה"
-mka L06n 0.70 2.65  s6   # wife in the doorway  "חלאס לסבול כבר"
+mka L06n 0.70 2.65  s6   # wife in the doorway  "כמה אפשר לסבול"
 mks c07  0.80 2.60  s7   # she orders on the phone
-mka G08n 0.80 2.45  s8   # courier at the door  "תודה רבה לך"
+mka G08n 0.80 2.45  s8   # courier at the door  "תודה אחי"
 mka L09n 0.75 2.30  s9   # box on the table     "נו תמדוד אותו"
 # ---- ACT 3 · the product --------------------------------------------
 mks c11  0.30 2.60  s10  # hands fitting the brace
