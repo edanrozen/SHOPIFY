@@ -162,3 +162,38 @@ phrase boundaries mapped one-to-one onto the script lines.
 The chain that gave -15.0 LUFS on v3 gave **-13.4** on v4 with the same
 settings, because this voice is denser. Corrected -2.8 dB -> -4.4 dB.
 Never carry a mastering trim between cuts; measure after every encode.
+
+## v5 — undoing the fix that caused the next problem
+
+Client on v4: "it sounds like bad narration; it has to look like the man is
+actually speaking — but the sound is good." The voice was finally accepted;
+the structure was the fault, and the fault was mine.
+
+Back at the lip-sync complaint I measured that the model keeps the mouth
+moving through silences and concluded the levers were framing and cut rate.
+So I made him small in frame and cut away constantly. Counted on the v4
+master: **461 of 873 frames had a speaking face. 47% of the ad was stock
+footage with a voice over it.** That is the definition of narration. I
+optimised away the symptom the client named first and manufactured the one he
+named next.
+
+v5 reverses it:
+
+* **Three continuous wan2_7 takes** (12s / 12s / 9s) carry the entire script
+  instead of six short ones. Fewer cuts read as a person talking; many cuts
+  read as an edit. `wan2_7` holds identity and motion across 12s — measured,
+  no freeze (frame-difference stays 2.0-8.0 through to 11.7s).
+* **Cutaways dropped from 47% to 10%** of screen time: the brace, the
+  colleague, the button. Each is placed *inside* a take and returned to at
+  that take's own timecode, so sync survives the cut.
+* **Pauses tightened** from 0.28-0.58s to a flat 0.17s (0.26-0.30s at the hook
+  and before the CTA). Less silence means less time for a mouth to move
+  without sound — the same defect, attacked through the audio instead of by
+  hiding the face. It also cuts 1.74s and a rant should be breathless.
+
+Silence/speech mouth ratios are unchanged (1.30 / 1.56 / 1.64) because the
+model's ceiling has not moved. What changed is that the viewer is now watching
+a man deliver a monologue, which is what was asked for.
+
+**Rule: when a fix for one complaint is a workaround rather than a repair,
+write down what it costs. The cost arrives as the next complaint.**
