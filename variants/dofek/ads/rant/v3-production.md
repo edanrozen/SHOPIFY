@@ -1,0 +1,88 @@
+# DOFEK rant ad — v3
+
+Client-approved voice (take "D_b"), restored script line, reframed and recut.
+
+## What changed from v2
+
+1. **A line of the client's script was missing from the take.**
+   `לחשוב על כל פעילות כאירוע שלם גם אם זה הליכה של דקה` never made it into the
+   continuous recording. Found by comparing the phrase count of the approved
+   take (10) against the earlier one (15) and reading back the text that was
+   actually submitted to TTS. Restored as a pick-up (see below).
+
+2. **Reframed.** Only three shots stay close on the face: the 2.3s hook, the
+   product shot and the warm close. The rest are wide or medium.
+
+3. **Recut on the pauses.** Every face shot longer than ~3.5s is cut away from
+   on an internal pause.
+
+## Why reframing and recutting, and not a better lip-sync tool
+
+`autosil.py` finds the highest-motion patch in a locked-off shot (that is the
+mouth) and compares how much it moves during silence against during speech.
+
+    properly synced head   ratio 5-10
+    wan2_7 on this face    ratio 1.1 - 3.3
+    sync_so on this face   reduced mouth motion by 22% (worse, 18 cr/shot)
+
+The mouth never fully stops between words. That is the model's ceiling on this
+stylised character, not a frame offset — container A/V alignment is clean and
+cross-correlation lag is within one frame of zero. A viewer reads a mouth that
+flaps through a pause as "delay", so the only levers left are:
+
+* make the mouth small on screen (framing), and
+* never hold a face shot across a pause (cutting).
+
+Both are free. More generation is not.
+
+## The pick-up
+
+A separately generated line cannot be dropped in blind. Checks run:
+
+    main take, per phrase   102.6 - 166.7 Hz   -19.1 to -21.6 dB
+    pick-up (x_a)           135.6 Hz            -23.3 dB
+
+Pitch sat inside the take's own range, so no pitch processing (which would
+also shift formants and change the apparent size of the speaker). Level was
+corrected +3.8 dB, the internal pause trimmed 0.18s and `atempo=1.08` applied
+to match the take's pace. Result: 4.28s, -19.7 dB, 131 Hz — indistinguishable
+in context.
+
+It is spliced at 18.80s, which is a **slice boundary**: the shots before it and
+after it keep their sync, because each wan2_7 shot speaks its own slice and
+everything after simply shifts by a constant 4.58s. Nothing already rendered
+was wasted.
+
+## Build method
+
+`vo/take3.wav` is the master clock. Cut points are **absolute frame numbers**
+computed from the audio, never per-segment lengths, so rounding cannot
+accumulate into drift.
+
+    p01 X1   55 fr  0.00- 2.29  hook, tight
+    p02 X2  113 fr  2.29- 7.00  wide, pointing, slow push
+    p03 X3   96 fr  7.00-11.00  brace, foot on block
+    p04 c12  29 fr 11.00-12.21  dial macro, lands on "מגן הברך של דופק"
+    p05 c10  53 fr 12.21-14.42
+    p06 c02  37 fr 14.42-15.96
+    p07 c01  68 fr 15.96-18.79
+    p08 c03  55 fr 18.79-21.08  restored line
+    p09 c05  55 fr 21.08-23.38  restored line
+    p10 X4   84 fr 23.38-26.88  slow push
+    p11 X5   29 fr 26.88-28.09
+    p12 c07  27 fr 28.09-29.21  the button, on "תלחץ פה"
+    p13 X5   32 fr 29.21-30.54  resumed at its own timecode
+    p14 X6   63 fr 30.54-33.17
+    p15 end  65 fr 33.17-35.87
+
+861 frames @ 24fps = 35.875s.
+
+## Rules carried forward
+
+* A generated asset is what came back, not what you asked for. Measure it.
+* A direction prompt does not change pitch. Process deterministically or pick
+  a different voice.
+* `zoompan` with an accumulating `z=min(k*zoom,max)` silently does nothing.
+  Use `z='1+k*on'`.
+* Mastering gain must be re-measured per cut: the same chain gave -15.0 LUFS on
+  v2 and -18.5 on v3 because the dialogue density differs.
