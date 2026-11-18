@@ -331,3 +331,52 @@ response ad to lose the eye.
 
 Remaining sub-6 readings are all ≤1.5s and sit inside dialogue close-ups where
 only the face moves. That is normal; the 3s+ blocks are gone.
+
+---
+
+## The music has to carry the same arc as the story
+
+Client, 18.11: *"מה זה המוסיקה הזאת... מה אנחנו בהלוויה? תשים מוזיקה כזאת שלאט
+לאט הופכת מעצב וקושי לשמח והצלחה."*
+
+He was right twice. The bed was wrong **and** the brief was wrong: the film goes
+from pain to resolution and the music was the same from the first second to the
+last. A flat bed under an arc-shaped story fights the story.
+
+The first attempt also exposed a process failure worth naming: the prompt said
+"optimistic major key from the first bar" and the track came back mournful. It
+was shipped on the strength of the prompt rather than the result. **A generated
+asset is not what you asked for, it is what came back — measure it.**
+
+`arc.py` prints per-2-second energy (RMS) and brightness (zero-crossing rate)
+plus a first-half / second-half ratio. Three candidates:
+
+```
+arc1   energy x1.40   but collapses to zero at 36s, right as the end card lands
+arc2   energy x0.98   no rise at all — the same failure as the first bed
+arc3   energy x1.94   real ramp, and still loud at the finish        ← chosen
+```
+
+Short cut, same test: `arc20b` at x1.64 / brightness x2.27, against `arc20a`
+at x1.01 which fell apart at the end.
+
+### Measure the music bus, not the master
+
+Running `arc.py` on the finished master reports energy **x0.71** — apparently
+inverted. That number is meaningless here: the first half of the film is wall-
+to-wall dialogue and the second half is largely silent product shots, so the
+master's envelope measures speech density, not music.
+
+Render the music bus alone — same gain, same sidechain, no dialogue — and
+measure that:
+
+```
+music bus in the mix:  energy x2.26
+```
+
+Stronger than the raw track's x1.94, because the sidechain ducks hardest under
+the dialogue-heavy opening and so deepens the arc for free. The peak lands on
+the payoff shot; the narrator ducks it on the end card, which is correct.
+
+`mix.sh` takes the bed and its gain as arguments (`./mix.sh vo/arc3.mp3 0.23`)
+so swapping music is one command, not an edit.
