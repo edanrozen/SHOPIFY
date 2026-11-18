@@ -102,3 +102,36 @@ the plan:
 Both are the same mistake: a clip was chosen from a contact sheet taken at one
 timecode and then used at another. Pick the in-point from the frame you will
 actually show.
+
+## The accent: root cause
+
+The client's verdict on the approved take was "he sounds like a tourist
+speaking Hebrew". Checking the voice ids showed the choice was never the
+problem — `6705e465-7b52-5915-a1d8-b1222885e01d` is Fraser, the voice he
+picked for pronunciation, and it is also the voice of the take he rejected.
+
+Every voice tried so far (Fraser, Archie, Reid, Grady, Holden, Cillian,
+Dylan, Emmett) comes from the ElevenLabs **English** preset library. They are
+English speakers reading pointed Hebrew. No amount of re-rolling inside that
+library fixes the accent, and no direction prompt does either.
+
+`models_explore(action:"search", type:"audio")` turned up what the preset list
+does not show:
+
+* **`inworld_text_to_speech`** carries native-language voices, including
+  `Oren (he)` and `Yael (he)` — Hebrew, not English reading Hebrew.
+* **`seed_audio`** (ByteDance) is multilingual and takes `audio_references`
+  for cloning, plus `pitch_rate` / `speech_rate` controls.
+* **`text2speech_v2`** exposes other engines (`minimax`, `seed_speech`,
+  `vibe_voice`, `cozy_voice`) behind a `variant` param.
+
+Measured on the same line:
+
+    Oren (inworld)      13.92s   150.9 Hz
+    Oren, shifted 0.85  13.92s   131.1 Hz
+    seed_audio          12.18s   114.3 Hz
+    minimax             14.90s    92.0 Hz
+
+**Rule: check `models_explore` for the capability before re-rolling inside the
+default model's options.** Four rounds of voice selection were spent inside a
+library that could not produce the required result.
