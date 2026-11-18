@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 cd /tmp/claude-0/-home-user-SHOPIFY/06af39bb-792a-5cc6-a4be-ecbf44972499/scratchpad/rant
-T=t; D=37.04
+T=t; D=36.99
 ffmpeg -y -loglevel error -i base.mp4 \
  -loop 1 -i $T/c1.png  -loop 1 -i $T/c2.png  -loop 1 -i $T/c3.png  -loop 1 -i $T/c4.png \
  -loop 1 -i $T/c5.png  -loop 1 -i $T/c6.png  -loop 1 -i $T/c7.png  -loop 1 -i $T/c8.png \

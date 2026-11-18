@@ -78,3 +78,74 @@ clears the 37.04s cut, and sidechained harder than the story film
 (`threshold=0.03:ratio=12`) because speech is continuous here.
 
 Master: **37.04s, −15.0 LUFS, −3.1 dBTP.**
+
+---
+
+## sync_so was removing mouth motion, not adding it
+
+Client: *"צריך גם שיראו אותו מדבר ממש, שהשפתיים יזוזו וידברו."*
+
+`mouth.py` crops the mouth region and measures frame-to-frame difference.
+Measured on the same clip before and after the lip-sync pass:
+
+```
+kling output, before sync_so   mean 15.36
+after sync_so                  mean 11.96     -22%
+```
+
+And on the story film, where the pass was assumed to be working:
+
+```
+c03  before   mean 3.44
+K03n after    mean 3.43              no change at all
+```
+
+**Every bit of visible mouth movement in both films came from the animation
+model. `sync_so` only smoothed it.** Six passes cost 109 credits and made the
+character talk less. The likely reasons are the two things that make this
+character distinctive: a stylised non-photoreal face, and a moustache
+covering the whole upper lip.
+
+The model has no strength parameter, so there was nothing to turn up.
+
+### What worked instead
+
+Direct the articulation in the kling prompt and skip the lip-sync entirely:
+
+> *"His JAW DROPS OPEN WIDE and snaps shut again and again as he forms words —
+> big exaggerated cartoon-animation mouth shapes, teeth visible on the open
+> vowels, lips pursing and stretching between them. The moustache lifts with
+> the upper lip. At least eight distinct open-close mouth movements, continuous
+> from the first frame to the last."*
+
+```
+shot   with sync_so   with articulation prompt
+  1       11.96              16.59   +39%
+  2        6.28               7.27   +16%
+  3        7.16              11.08   +55%
+  4       10.76              18.11   +68%
+  5        9.83              12.08   +23%
+  6        6.86              14.79   +116%
+```
+
+Six consecutive quarter-second frames of the opening shot now read: open with
+teeth, closed, "O", pursed "O", "O", open with teeth. That is talking.
+
+**52 credits instead of 109, and the mouth moves.**
+
+### The trade-off, stated plainly
+
+Without `sync_so` the mouth shapes do not correspond to Hebrew phonemes. They
+did not correspond visibly before either — that is what the measurement shows.
+The real choice was between generic articulation you can **see** and accurate
+articulation you **cannot**, and the captions carry the words regardless.
+
+Keep `sync_so` for photoreal faces with an unobstructed mouth. For this
+character, direct the animation model.
+
+### Consequence for the build
+
+No clip carries baked audio any more. All eight voice tracks — six talking
+lines and two cutaway lines — are placed on the timeline in `mix.sh`, so the
+whole soundtrack is in one place and a line can be moved without regenerating
+anything.
