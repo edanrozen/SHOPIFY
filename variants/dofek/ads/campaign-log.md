@@ -511,3 +511,53 @@ on the new page to say anything.
 Open, all waiting on him: the UGC video he is making himself (I upload it as
 `ad8-ugc` when it arrives), the Loox review import, and the Kaching Bundles
 strings — the English "Choose bundle" label and the "0.00 ₪" insole tiles.
+
+## 19.11, 21:30 — new campaign built for 20.11 06:00
+
+    campaign  120255333119900523  DOFEK · מגן ברך · 20.11   ACTIVE
+    ad set    120255333119990523  ישראל · כל הגילים · עברית  ACTIVE  70₪/day
+              start 2026-11-20T06:00:00+0200
+              geo IL · age 18-65 · locales [29] עברית · advantage_audience off
+    ad-film55 120255333121540523  the 55s video (ad5's winner)
+    ad-gever  120255333122310523  the new "גבר, לא נמאס לך" image
+
+Old campaign `120255262154620523` stays PAUSED. Nothing was reused from it
+except the winning video and its proven creative spec.
+
+**ad5-film was the right video to carry over.** CTR 2.84% (the best of seven),
+92% of clicks reached the page (against 76% and 38%), and it is the only ad in
+the account's history that ever produced an add to cart.
+
+Both creatives were validated with `execution_options:["validate_only"]` before
+anything was created; both came back `{"success": true}`. The campaign create
+first failed on `is_adset_budget_sharing_enabled` being required when the budget
+sits on the ad set — set to false, re-validated, then built live.
+
+### The one deviation from a literal reading of his spec
+
+He did not name an optimization event. **I set ADD_TO_CART, not PURCHASE.**
+
+The old ad set optimized for PURCHASE on a pixel with zero purchases, so Meta
+had no signal and distributed on noise — which is exactly how ad6 collected
+109₪ of 208₪ at the worst CTR in the account. At 70₪/day against a 107₪
+break-even CPA the ceiling is ~4 purchases a week against the ~50 needed to
+leave the learning phase, so PURCHASE could not work here either. AddToCart is
+reachable, it is down-funnel enough to find buyers rather than browsers, and it
+feeds the pixel the signal a future PURCHASE campaign would need.
+
+Meta refuses to change this field after an ad set publishes (error_subcode
+3260011, verified earlier), so if he wants PURCHASE the ad set has to be rebuilt
+— flagged to him tonight, with hours to spare before 06:00.
+
+### Two risks on the image, flagged not fixed
+
+* It draws a **fake UI button** ("לחץ כאן") with a cursor hand. Meta's policy on
+  non-functional interface elements is enforced unevenly; it is a real rejection
+  risk and `effective_status` reads IN_PROCESS until review clears.
+* **1199x1312, ratio 0.914.** Between 1:1 and 4:5, so feed will crop or letterbox
+  slightly, and Stories/Reels heavily. Offered to pad it to 1080x1350 without
+  touching the artwork; not done unasked.
+
+Copy: the video keeps ad5's proven body verbatim. The image got new copy in the
+voice of the artwork — direct, male, blue-collar — with the same product facts,
+the 199.99₪ shipping-included price and the 30-day return.
