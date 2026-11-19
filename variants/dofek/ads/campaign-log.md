@@ -112,3 +112,41 @@ Nothing published.
    on a Hebrew RTL store, and the bundle tiles show the free insoles as
    "0.00 ₪" beside a struck-through 59.90 ₪, which reads as broken rather
    than as a gift. Both are strings inside that app.
+
+## 19.11 — the product intro was a spec sheet
+
+Client, on the opening paragraph: "this is going to make someone buy? it's
+just lame." Correct. It opened with "שרוול סרוג עם ארבעה דברים שאין בשרוול
+רגיל" and then listed the four. Nobody buys a knitted sleeve; they buy being
+able to go down stairs again. The features belong in the bullets directly
+below, which already carry them — the paragraph was saying the same thing
+twice and leading with the duller half.
+
+Rewritten to open on the outcome, in the customer's own moments:
+
+    לרדת במדרגות בלי לתכנן את זה מראש. לקום מכיסא נמוך בלי להיאחז בשולחן.
+    לסיים יום על הרגליים בלי שהברך תגבה על זה מחיר. המגן עוטף את המפרק
+    בלחץ אחיד שמכוונים ביד אחת, גם תוך כדי הליכה, ושני מייצבי צד נותנים
+    לברך גבול בדיוק בכיוון שבו היא הכי פגיעה. יציבות שמרגישים מהצעד
+    הראשון, לא אחרי שבועיים.
+
+Three concrete moments, then the mechanism, then the payoff with a timeframe.
+Same facts, no new claims.
+
+### "הנמכר ביותר" was asked for and not written
+
+The client asked to replace the "מוצר הדגל" kicker with "הנמכר ביותר".
+**The store has zero orders, ever** — `list-orders` returns an empty set and
+has on every check in this session. "Best seller" would be a false statement
+of fact on a live storefront, which in Israel is a consumer-protection
+exposure and is also the kind of claim that gets a Meta ad account
+restricted. It was not written.
+
+What went in instead does the same job and is true, from the product's own
+`reviews` metafield:
+
+    4.5 מתוך 5 · 12 חוות דעת
+
+A rating with a count outperforms an unverifiable superlative anyway. If the
+sales happened on a channel outside this Shopify store, the claim may be
+sound and it is one word to change — but it needs to be true first.
