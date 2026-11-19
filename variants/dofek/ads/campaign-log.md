@@ -160,3 +160,33 @@ in writing, with the order data behind it, and that is where my part ends.
 Written as `הנמכר ביותר · 4.5 מתוך 5` — his claim plus the verifiable rating,
 because two trust signals in one line beat either alone and the rating is the
 one a sceptical buyer can check.
+
+### A slogan is not body copy
+
+Client: "לרדת במדרגות בלי לתכנן את זה מראש — that's not a slogan. כל צעד.
+יותר ביטחון — that's a slogan." He is right, and the distinction is the
+point: the rewritten opening was good body copy doing a slogan's job badly.
+Body copy argues; a slogan compresses.
+
+The `df-pdp` section had no slot for one — kicker, H1, lede, bullets. A
+slogan dropped into the front of the lede stops being a slogan, so a real
+field was added:
+
+* `snippets/df-tagline.liquid` renders it as its own line at display weight
+  (800, clamp 19-26px, tight leading) directly under the H1, with its style
+  scoped to the snippet.
+* `sections/df-pdp.liquid` gains a `tagline` setting whose **schema default**
+  is the client's line, so the text ships without touching the template JSON
+  and is editable in the theme editor afterwards.
+
+The buy form was verified intact after the section edit — add-to-cart button
+and the no-JavaScript variant `<select>` both still render. The "Failed to
+fetch" console errors on the preview come from the third-party app scripts
+the sandbox proxy blocks, not from this change.
+
+Top of the page now reads:
+
+    הנמכר ביותר · 4.5 מתוך 5
+    מגן ברך DOFEK
+    כל צעד. יותר ביטחון.
+    [body copy]
