@@ -435,3 +435,31 @@ now on, so no second change is needed in the Shopify app.**
 Nothing observable confirms this yet — match quality only shows up once
 conversions exist. It cannot hurt: it adds identifiers to events that were
 already being transmitted.
+
+## 19.11, 19:11 — the page fixes are live
+
+He published. Verified rather than taken on trust:
+
+* `themes(roles:[MAIN])` now returns `188538322996`; the previous live theme
+  `187986182196` dropped to UNPUBLISHED and is intact as a one-click rollback.
+* Fetched the live product page as an iPhone UA: HTTP 200, no Liquid errors,
+  TTFB 0.41s, 1.06s total. All five changes render — the slogan, «הנמכר ביותר ·
+  4.5 מתוך 5», the outcome-led opening, «משלוח חינם עם מעקב», the returns FAQ —
+  and `מוצר הדגל` is gone.
+
+### The baseline, locked before the new page gets any traffic
+
+Added `ab.py`, which splits pixel events at the publish hour and reports
+**ViewContent → AddToCart**: of the people who looked at the product, how many
+put it in the cart. Measured on the pixel, so ad attribution cannot flatter it.
+
+    OLD page   PageView 268 | ViewContent 161 | AddToCart 5 -> 3.1% | Checkout 0 | Purchase 0
+    NEW page   PageView   0 | ViewContent   0 | AddToCart 0 ->   -  | Checkout 0 | Purchase 0
+
+**3.1% is the number to beat.** And it is the generous reading: all five of
+those carts landed on 16.11, in one hour block, and some are plausibly his own
+tests. The honest range for the old page is 0% to 3.1%.
+
+`ab.py` refuses to call a winner under 30 product views on the new page — at
+~26 views a day that is a verdict in roughly a day, not an hour. The campaign
+state is unchanged: 239₪, ad5 + ad6 running, ad7 paused.
