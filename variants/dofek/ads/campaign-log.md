@@ -190,3 +190,40 @@ Top of the page now reads:
     מגן ברך DOFEK
     כל צעד. יותר ביטחון.
     [body copy]
+
+## Correction #2 on the reviews — and this one is on the instrument
+
+I reported that Loox "never fills" the `#looxReviews` container and called it
+the biggest open item on the page, twice.
+
+**That finding is void.** Checking the network rather than the DOM:
+
+    FAILED https://loox.io/widget/…/loox.…js?shop=rgu1ui-ta.myshopify.com
+           :: net::ERR_TUNNEL_CONNECTION_FAILED
+
+`loox.io` is not in this environment's allowed hosts. The Loox script never
+loaded in **my** browser, so of course the container stayed empty. Whether
+the reviews render for a real visitor is unknown from here and always was.
+
+The repo's own environment (`dofek-shopify`) is the one that should carry a
+host like this, and a running session cannot be moved to another environment,
+so this blindness stays for the rest of this session. Only the merchant can
+see that part of his own page.
+
+**Two wrong calls on the same element, from the same root cause: judging a
+page by what my sandbox could render.** First reading the DOM before Loox had
+injected, then reading it when Loox could never inject at all. The rule that
+came out of the video work — *a generated asset is what came back, not what
+you asked for* — has a sibling: **a page is what the visitor's browser
+renders, not what mine does.** Before reporting that a third-party widget is
+broken, check that its script actually loaded.
+
+### Removing the real blocker instead
+
+The merchant has more reviews than the twelve and says importing them is the
+hassle. Loox takes a CSV, so the hassle is a formatting job, which is work
+that belongs here and not with him:
+`scratchpad/loox-import-template.csv`, product handle pre-filled, columns
+`product_handle,name,email,rating,title,body,date,photo_url,verified`.
+He sends the reviews in whatever form he has them; the file comes back ready
+to upload.
