@@ -404,3 +404,34 @@ pixel firing through 15:00. That field is stale, the pixel is healthy.
 improves match rate and attribution for free — but it sends hashed customer
 email and phone to Meta, which is a privacy decision with legal exposure, not a
 performance knob. Recommended to him rather than flipped silently.
+
+## 19.11, 19:00 — Advanced Matching enabled (approved)
+
+`POST /1063551259717066 enable_automatic_matching=true` with
+`automatic_matching_fields=["em","ph","fn","ln","ct","st","zp","country","external_id"]`.
+Dry-run first with `execution_options:["validate_only"]` to confirm the field
+names were accepted before committing. Verified after:
+
+    enable_automatic_matching: true
+    automatic_matching_fields: em ph fn ln ct st zp country external_id
+    first_party_cookie_status: first_party_cookie_enabled
+    data_use_setting:          advertising_and_analytics
+
+### The Shopify half was already in place
+
+A pixel-side flag alone does nothing if the store is not sending the fields.
+Pulled the Meta entry out of `webPixelsConfigList` on the live page:
+
+    dataSharingState: "optimized"
+    protectedCustomerApprovalScopes: read_customer_address, read_customer_email,
+      read_customer_name, read_customer_personal_data, read_customer_phone
+    dataSharingControls: ["share_all_events"]
+    privacyPurposes: ANALYTICS, MARKETING, SALE_OF_DATA
+
+Shopify has been sending email, phone, name and address all along. Meta simply
+was not using them to match, because the pixel flag was off. **Both halves are
+now on, so no second change is needed in the Shopify app.**
+
+Nothing observable confirms this yet — match quality only shows up once
+conversions exist. It cannot hurt: it adds identifiers to events that were
+already being transmitted.
