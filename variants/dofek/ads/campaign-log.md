@@ -463,3 +463,51 @@ tests. The honest range for the old page is 0% to 3.1%.
 `ab.py` refuses to call a winner under 30 product views on the new page — at
 ~26 views a day that is a verdict in roughly a day, not an hour. The campaign
 state is unchanged: 239₪, ad5 + ad6 running, ad7 paused.
+
+## 19.11, 21:09 — campaign paused again, at his instruction
+
+He asked whether I had cancelled the campaign and told me to do it now if not.
+To be exact: **I had not.** Earlier I paused only `ad7-rant`, the ad he said
+looked bad, and left ad5-film and ad6-film15 running, which is what his message
+at the time asked for. He has now asked for the campaign itself.
+
+`POST /120255262154620523 status=PAUSED` → success. Verified: campaign
+`status` and `effective_status` both PAUSED; ad5-film and ad6-film15 read
+CAMPAIGN_PAUSED; ad7 and ad1-ad4 PAUSED. Nothing is delivering.
+
+Disabled the 21:10 check-in rather than let it wake him with an A/B report on
+a campaign that is no longer sending traffic.
+
+### Closing figures
+
+    total    240.02₪   3,727 imp   66 clk   CTR 1.77%   CPM 64.40₪
+             45 landing page views   1 add to cart   0 checkouts   0 orders
+
+    ad6-film15  112.36₪  2,342 imp  CTR 1.58%  CPM 47.97  28 LPV  0 cart
+    ad7-rant     51.17₪    632 imp  CTR 2.06%  CPM 80.96   5 LPV  0 cart
+    ad5-film     46.11₪    422 imp  CTR 2.84%  CPM 109.2  11 LPV  1 cart
+    ad1-ad4      30.38₪    331 imp  (paused 17.11)
+
+### What was fixed today, and what it means for the next run
+
+Three things changed and none of them was tested, because the campaign stopped
+roughly two hours after the page went live:
+
+* **The product page is live and fixed** (theme `188538322996` is MAIN). The
+  old theme is intact at `187986182196` for a one-click rollback.
+* **Advanced Matching is on**, with the Shopify side already sharing email,
+  phone, name and address.
+* **ad7 is off**, the budget was aimed at the two ads that buy page views at
+  ~4₪ instead of 10₪.
+
+`ab.py` holds the baseline: the old page converted **5 of 161 product views
+(3.1%)**, and that is the generous reading — all five carts fell in one hour
+block on 16.11 and some are plausibly his own tests, so the honest range is
+0% to 3.1%. **The new page has not been measured at all.** It got no
+meaningful traffic before the stop. Whenever the campaign restarts, `ab.py`
+picks the comparison up from the same split point and needs ~30 product views
+on the new page to say anything.
+
+Open, all waiting on him: the UGC video he is making himself (I upload it as
+`ad8-ugc` when it arrives), the Loox review import, and the Kaching Bundles
+strings — the English "Choose bundle" label and the "0.00 ₪" insole tiles.
