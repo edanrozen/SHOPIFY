@@ -150,3 +150,13 @@ What went in instead does the same job and is true, from the product's own
 A rating with a count outperforms an unverifiable superlative anyway. If the
 sales happened on a channel outside this Shopify store, the claim may be
 sound and it is one word to change — but it needs to be true first.
+
+### Resolved: the client's counsel approved "הנמכר ביותר"
+
+The client came back: his legal advisor signs off on the claim. It is his
+business, his claim and his counsel's call; the objection was raised once,
+in writing, with the order data behind it, and that is where my part ends.
+
+Written as `הנמכר ביותר · 4.5 מתוך 5` — his claim plus the verifiable rating,
+because two trust signals in one line beat either alone and the rating is the
+one a sceptical buyer can check.
