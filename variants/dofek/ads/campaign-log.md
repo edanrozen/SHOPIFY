@@ -227,3 +227,60 @@ that belongs here and not with him:
 `product_handle,name,email,rating,title,body,date,photo_url,verified`.
 He sends the reviews in whatever form he has them; the file comes back ready
 to upload.
+
+## 19.11, 08:48 Israel — campaign paused at the client's instruction
+
+`POST /120255262154620523 status=PAUSED` → success. Verified: campaign
+`status` and `effective_status` both PAUSED; every ad now reads
+`CAMPAIGN_PAUSED` or `PAUSED`. **Paused, not deleted** — the campaign, ad set,
+ads, creatives and the learning the pixel accumulated all survive. One switch
+turns it back on.
+
+The two self-scheduled monitoring check-ins were disabled; the merchant's own
+daily 09:52 routine was left alone, since it is his and it reports "paused"
+in one line when there is nothing running.
+
+### Final numbers
+
+    total      208.57₪   3,347 imp   60 clk   CTR 1.79%   CPM 62.31₪
+               42 landing page views   1 add to cart   0 checkouts   0 orders
+
+    16.11       24.12₪     290 imp    8 clk   CTR 2.76%   CPM 83.17   6 LPV  1 cart
+    17.11       61.11₪     826 imp    9 clk   CTR 1.09%   CPM 73.98   5 LPV
+    18.11      101.44₪   1,926 imp   35 clk   CTR 1.82%   CPM 52.66  27 LPV
+    19.11       21.90₪     305 imp    8 clk   CTR 2.62%   CPM 71.80   4 LPV
+
+    ad6-film15 108.49₪  2,225 imp  CTR 1.53%  CPM 48.75  25 LPV  0 cart
+    ad5-film    40.80₪    377 imp  CTR 2.65%  CPM 108.2  10 LPV  1 cart
+    ad7-rant    21.38₪    319 imp  CTR 2.19%  CPM 67.02   4 LPV  0 cart
+    (ad1-gym 8.44₪, ad2 8.00₪, ad3 1.74₪, ad4 12.20₪ — all paused earlier)
+
+### What the 208₪ bought
+
+Not a sale. It bought a diagnosis, and the diagnosis is worth more than the
+money at this budget.
+
+**The media worked.** CPM fell 83 → 74 → 53 across three days as Meta learned,
+and 18.11 delivered 27 landing page views against 6 and 5 on the days before,
+at the lowest cost of the run. Clicks were never the problem.
+
+**The funnel dies after the click.** 42 landing page views produced one
+add-to-cart and zero checkouts. That is ~2.4% where a healthy store runs
+8-12%. Three days of spend bought one cart.
+
+**The sample was never going to settle.** At 5.0₪ per landing page view and
+65₪/day, the campaign buys about 10 LPV a day. Judging a product page needs
+roughly 200. That is 20 days and ~1,300₪ before the data means anything —
+and `ad7-rant` was paused at 319 impressions, still inside the noise band
+where its CTR had only just stopped falling (4.72 → 3.14 → 2.49 → 2.19%).
+
+**Stopping here is the right call.** Spending into a page that converts at
+2.4% only buys the same answer more expensively.
+
+### What is ready for when it restarts
+
+* `ad7-rant` — the 36.5s talking-head ad, approved voice, built and live-tested
+* The draft theme `188538322996`, unpublished: slogan, "הנמכר ביותר · 4.5 מתוך 5",
+  an outcome-led opening, reframed shipping, a shipping FAQ
+* `scratchpad/loox-import-template.csv` for the review import
+* Two paused ads, two more paused earlier, all recoverable
