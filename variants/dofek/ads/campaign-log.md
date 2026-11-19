@@ -284,3 +284,61 @@ where its CTR had only just stopped falling (4.72 → 3.14 → 2.49 → 2.19%).
   an outcome-led opening, reframed shipping, a shipping FAQ
 * `scratchpad/loox-import-template.csv` for the review import
 * Two paused ads, two more paused earlier, all recoverable
+
+## 19.11 — resumed, unchanged, at the client's instruction
+
+He said the campaign can keep running. Before touching anything I pulled the
+pixel's own event history, and it changed the diagnosis.
+
+### The ad set was optimizing for an event that has never once fired
+
+    PageView          255
+    ViewContent       155
+    AddToCart           5
+    Search              2
+    InitiateCheckout    0
+    Purchase            0      <- and the ad set optimizes for PURCHASE
+
+`optimization_goal: OFFSITE_CONVERSIONS`, `custom_event_type: PURCHASE`, on a
+pixel with zero purchases since the store opened. Meta needs ~50 conversions of
+the optimized event per week to leave the learning phase. At 65₪/day against a
+107₪ break-even CPA the ceiling is ~4/week. **This ad set could never exit
+learning — not "did not", could not.** It spent 208₪ distributing on a guess,
+which is also why ad6 collected half the budget at the worst CTR in the account:
+there was no signal for the algorithm to prefer anything by.
+
+**And it cannot be edited.** Checked against Meta with `execution_options:
+["validate_only"]`, so nothing was applied:
+
+> error_subcode 3260011 — לא ניתן לערוך את הפיקסל שלך, את אירוע ההמרה שלך או את
+> המיטוב עבור סדרת מודעות לאחר שסדרת המודעות פורסמה. יש ליצור סדרת מודעות חדשה.
+
+A new ad set is the only route to a different optimization event.
+
+### Two more things the pixel corrected
+
+* **AddToCart is 5, not 1.** Ad attribution credited one; the pixel logged five.
+  The page is less broken than the ad report alone suggests.
+* **InitiateCheckout has never fired.** Zero, against five carts. Either nobody
+  reached checkout, or the event is not installed. Five carts cannot tell those
+  apart — but if it is not installed, no future ad set can optimize on it either.
+
+### The decision
+
+I put four options to him, ranked, recommending a new AddToCart-optimized ad set
+with ad5 + ad7 only plus publishing the page fixes. **He chose to resume what
+exists, as it is.** His call; recorded, not re-argued.
+
+`POST /120255262154620523 status=ACTIVE` → success. Verified live at every level:
+campaign ACTIVE, ad set ACTIVE at 6500 (65₪/day), ad5-film / ad6-film15 /
+ad7-rant ACTIVE, ad1-ad4 still PAUSED. Identical to the state before the stop.
+
+Re-enabled the two monitoring check-ins that were disabled when it stopped.
+
+### What to watch, given the structure
+
+ad6 is the risk: last run it took 109₪ of 208₪ at 1.51% CTR and produced no
+carts, and with no purchase signal nothing stops that happening again. ad5
+(2.90% CTR, the one cart) and ad7 (2.81%, frequency 1.13) are the ads worth
+the money. If ad6 repeats the pattern, moving the budget off it is the
+cheapest single intervention available.
