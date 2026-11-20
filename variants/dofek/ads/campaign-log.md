@@ -608,3 +608,33 @@ built. The new page has still not had a fair test. The next ~30-50 views, now
 that delivery is Facebook and Instagram only, are the first honest sample.
 
 Still zero InitiateCheckout and zero Purchase in the store's history.
+
+## 20.11, 12:37 — third ad added: "עד מתי הברך הזאת"
+
+    ad-ad-matai  120255340936560523   creative 2464672364062538
+    image hash   b0e9fb8d6b22f7af1733e1db554c3a9f   1254x1254
+
+Source arrived as a 1.8MB WebP; PIL is broken in this container (`_imaging`
+missing), so converted with ffmpeg to a 573KB JPEG at the same 1254x1254.
+Creative validated with `validate_only` before anything was created.
+
+The ad set now carries three ads on 70₪/day: the video, "גבר לא נמאס לך", and
+this one. Placements still facebook + instagram, IL, 18-65, locale 29.
+
+### Flagged before uploading, overruled, uploaded
+
+The man in the artwork is raising his middle finger. I told him plainly that
+this breaks Meta's policy on offensive content, and that the cost is not a
+rejected ad but a **policy strike against the ad account the whole business
+runs on** — and that this would be the second creative in a row carrying
+policy risk, after the fake "לחץ כאן" button. He said upload it.
+
+That is his call to make and he made it with the risk in front of him, so it
+went up. Worth recording honestly: I raised it once, did not relitigate, and
+the exposure is now a known accepted risk rather than an accident. The 13:10
+check reads `issues_info` on all three ads first.
+
+Copy is new, in the artwork's voice, opening on "עד מתי אתה מתכוון לתת לברך
+הזאת לנהל לך את היום?" and closing on the image's own promise — "תלחץ, תזמין,
+ותראה איך זה מרגיש לזוז בלי כאבים". Headline «תזוז בלי לחשוב על הברך».
+Same product facts, same 199.99₪ shipping-included price, same 30-day return.
