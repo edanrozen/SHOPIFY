@@ -745,3 +745,49 @@ checkouts was retracted at 17:20. Zero checkouts off one cart is expected, not
 a defect.
 
 Needs ~150 clean product views before the comparison means anything.
+
+## 20.11, 19:15 — he sent Shopify's own funnel. The pixel was inflating 6x.
+
+    Shopify, today    sessions 61..70 | added to cart 2 | reached checkout 1 | completed 0
+    pixel,    today    AddToCart 12 events | InitiateCheckout 2 events
+
+**Twelve pixel AddToCart events are two sessions.** Everything I built on the
+pixel's cart count was noise at a factor of six, and I had already been caught
+by it twice today. Switching the measurement to ShopifyQL `sessions`, which is
+deduplicated by session and is what the merchant's own dashboard shows.
+
+    FROM sessions SHOW sessions, sessions_with_cart_additions,
+         sessions_that_reached_checkout, sessions_that_completed_checkout
+         TIMESERIES day SINCE -6d UNTIL today
+
+    14.11   2 sessions   0 cart  0 checkout  0 order
+    15.11   5            0       0           0
+    16.11  19            1       0           0
+    17.11  13            0       0           0
+    18.11  30            0       0           0
+    19.11  40            0       0           0
+    20.11  70            2       1           0     <- biggest traffic day ever
+
+### What is actually true now
+
+* **70 sessions today**, 1.75x yesterday and 5x 17.11. The new campaign works.
+* **The first checkout in the store's history.** Not a pixel artefact — Shopify
+  counted one session that reached checkout. There had never been one.
+* **The new page converts better, directionally:** old page 1 cart / 109
+  sessions = 0.92%; new page 2 / 70 = 2.86%. Three times better, on two carts.
+  Two. One empty day puts it back at 1.4%. Right direction, no weight yet.
+* Cumulative: 179 sessions, 3 carts (1.7%), 1 checkout, 0 orders. Still about
+  five times under the 8-12% a healthy store runs.
+
+### The projection worth holding on to
+
+At today's rate — 70 sessions, 2.9% to cart, about half of carts reaching
+checkout — the store produces roughly one checkout a day. If checkout→payment
+runs at a normal ~50%, that is **an order every two days on 140₪ of spend**
+against a 107₪ break-even. Still a loss, but a closable one rather than a
+chasm. That is the first time any projection in this account has landed in
+closable range.
+
+Rule recorded, third counting lesson of the day: *the pixel counts events, the
+merchant's analytics counts sessions, and only the second answers "how many
+people". Query Shopify before reporting any funnel number.*
