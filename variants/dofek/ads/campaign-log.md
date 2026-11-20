@@ -638,3 +638,38 @@ Copy is new, in the artwork's voice, opening on "עד מתי אתה מתכוון
 הזאת לנהל לך את היום?" and closing on the image's own promise — "תלחץ, תזמין,
 ותראה איך זה מרגיש לזוז בלי כאבים". Headline «תזוז בלי לחשוב על הברך».
 Same product facts, same 199.99₪ shipping-included price, same 30-day return.
+
+## 20.11, 14:15 — correction: the old campaign produced ONE cart, not two
+
+He questioned the "2 carts" in my comparison table. He was right and I was wrong.
+
+`cmp.py` summed `add_to_cart` and `omni_add_to_cart` as if they were separate
+events. **Meta reports a single cart under six aliases at once:**
+
+    add_to_cart                               1
+    offsite_conversion.fb_pixel_add_to_cart   1
+    onsite_web_add_to_cart                    1
+    onsite_web_app_add_to_cart                1
+    offsite_add_to_cart_add_20_s_calls        1
+    omni_add_to_cart                          1
+
+Adding any two of them doubles the count. The correct figure is **1**, which is
+what `rep.py` reported correctly throughout the old campaign; the bug was in the
+comparison script I wrote fifteen minutes earlier. Patched `cmp.py` to read the
+single canonical `add_to_cart` field, with a comment saying why.
+
+### What the correction changes
+
+The old campaign converted **1 of 45 landing page views = 2.2%**, not 4.4%. That
+lowers the old campaign, it does not raise the new one, and it strengthens the
+earlier reading: at 2.2%, twelve clean landing page views would be expected to
+produce 0.26 carts, so zero is exactly on expectation and is still no evidence
+the new campaign converts worse.
+
+It also sharpens the page's real number. `ab.py`'s 3.1% baseline comes from the
+pixel (5 of 161 product views) and includes organic traffic and his own tests.
+What the advertising actually bought was 1 cart from 45 visits. Both are far
+from the 8-12% a healthy store runs.
+
+Rule recorded: *a metric that appears under several names in one payload is one
+metric — never sum the aliases.*
