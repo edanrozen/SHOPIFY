@@ -711,3 +711,37 @@ This is the second counting bug today, after the cart-alias double count at
 14:15, and both inflated the figures in the direction of good news. Rule:
 *before reporting a conversion number, ask what the source counts — events,
 sessions or orders — and say which.*
+
+## 20.11, 17:41 — the English button is gone, by removal not translation
+
+Verified on the live page rather than taken on trust. Two flags flipped in the
+Kaching config:
+
+    stickyAtcEnabled   true -> false
+    badgesEnabled      true -> false
+
+`buttonText` is still the string `Choose bundle`, but `stickyAtcEnabled:false`
+means the bar never renders, so **no visitor sees English at the buy point any
+more.** The page's own Hebrew `הוספה לסל` button is intact and the bundle app
+still loads.
+
+Worth naming once, not nagging: he removed the sticky bar rather than
+translating it. A persistent buy button on mobile usually helps conversion, so
+this trades one small negative (an English word) for the loss of one small
+positive (an always-visible CTA). Translating `buttonText` to «בחרו חבילה» and
+re-enabling would have kept both. His call; the setting is one toggle either way.
+
+### Measurement marker
+
+    at the moment of the change, 20.11 17:41
+      pixel since 12.11   PageView 435 · ViewContent 276 · AddToCart 9
+      new page since 19.11 19:11   ViewContent 115 · real carts 1   (~0.9%)
+      campaign today      51.75₪ · 451 imp · 43 LPV · 1 cart · 0 checkout
+
+Everything after this timestamp is the post-fix sample. The step being measured
+is **product view → cart**, which is where the money actually dies; it is not
+cart → checkout, and the earlier claim that the bundle widget explained zero
+checkouts was retracted at 17:20. Zero checkouts off one cart is expected, not
+a defect.
+
+Needs ~150 clean product views before the comparison means anything.
