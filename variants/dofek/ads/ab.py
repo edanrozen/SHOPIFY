@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""ab.py — the old product page against the new one, on the pixel.
+"""ab.py
+
+WARNING, learned the hard way on 20.11: AddToCart here is an EVENT COUNT, not a
+cart count. One person pressing the button four times (two sizes, a re-click)
+logs four events. On 20.11 the pixel showed 4 and Shopify showed one cart, and
+this tool called the new page "better" off the difference. Treat the rate below
+as an upper bound and confirm real carts in Shopify before believing any verdict.
+The gate is 150 product views, not 30: four events landing in one hour were
+enough to flip a 30-view verdict from failing to winning.
+
+ab.py — the old product page against the new one, on the pixel.
 
 The page was published 19.11 at 19:11 Israel time (17:11Z). Everything before
 that hour is the old page, everything after is the new one. The number that
@@ -42,8 +52,8 @@ vcb, vca = before.get("ViewContent", 0), after.get("ViewContent", 0)
 atb, ata = before.get("AddToCart", 0),  after.get("AddToCart", 0)
 rb = atb / vcb if vcb else 0.0
 print("\nbaseline to beat: %.1f%% (%d of %d)" % (100 * rb, atb, vcb))
-if vca < 30:
-    need = max(0, 30 - vca)
+if vca < 150:
+    need = max(0, 150 - vca)
     print("NEW page has %d product views. Too few to judge; %d more needed before"
           " the rate means anything. Expected at this rate: %.1f carts."
           % (vca, need, rb * vca))

@@ -673,3 +673,41 @@ from the 8-12% a healthy store runs.
 
 Rule recorded: *a metric that appears under several names in one payload is one
 metric — never sum the aliases.*
+
+## 20.11, 15:40 — correction: one cart, not four. The pixel counts clicks.
+
+He said his dashboard shows one cart where I had reported four. He was right.
+
+The pixel logged 4 `AddToCart` events in the 14:00 hour. Those are four presses
+of the button — one person, two sizes, a re-click — not four shoppers. Shopify
+is the deduplicated truth and it says one.
+
+Verified independently: `abandonedCheckouts` holds **no record for the knee
+brace, ever**. The most recent abandoned checkout in the store is 11.11, for a
+different product. That matches `InitiateCheckout = 0` — nobody has reached
+checkout, so no record exists.
+
+### The corrected comparison
+
+    OLD page   ViewContent 161 | real carts 1 | checkout 0 | purchase 0
+    NEW page   ViewContent 106 | real carts 1 | checkout 0 | purchase 0
+
+No improvement and no regression. One cart against one cart.
+
+### What I got wrong
+
+I wrote, in the same message, that 4 carts from 13 product views "is the
+signature of one person", and then kept presenting the figure as 4. I had the
+right reading and did not apply it to my own numbers.
+
+Worse, `ab.py` announced "3.8% — better" twenty minutes earlier, off two faults
+at once: a 30-view gate low enough that four events in a single hour could flip
+the verdict, and counting events as if they were carts. Both patched — the gate
+is now 150 views, and the docstring carries the warning that AddToCart is an
+event count and an upper bound, to be confirmed in Shopify before anything is
+believed. The tool now correctly refuses to judge at 106 views.
+
+This is the second counting bug today, after the cart-alias double count at
+14:15, and both inflated the figures in the direction of good news. Rule:
+*before reporting a conversion number, ask what the source counts — events,
+sessions or orders — and say which.*
