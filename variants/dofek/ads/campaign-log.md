@@ -824,3 +824,44 @@ narrative.*
    translated as «בחרו חבילה».
 3. Nothing else. Reviews are done, the page is published, the pixel is on
    Advanced Matching, placements are clean.
+
+## 21.11, 00:10 — 20.11 closed at 88 sessions. Checkout plumbing audited.
+
+Final for 20.11, from ShopifyQL:
+
+    14-19.11  (6 days)   109 sessions   1 cart  0.92%   0 checkout   0 orders
+    20.11     (1 day)     88 sessions   3 cart  3.41%   1 checkout   0 orders
+
+One day nearly matched six, and the funnel opened at a stage that had never
+opened. Three carts is still three — at that count the true rate sits somewhere
+between roughly 1% and 9% — and there is no measurement at all of
+checkout→payment, which is 0 of 1.
+
+### Audited the one thing that could kill 100% of checkouts
+
+Three delivery profiles exist, and one is a trap:
+
+    פרופיל כללי (default)    IL → "משלוח חינם" ACTIVE at 0.00₪   ✅
+    General shipping profile  North America only
+    מוצריםלישראל              IL zone, methodDefinitions: []      ← no rates at all
+
+A product sitting on the third would show a customer "no shipping available" at
+checkout and could never be bought. Checked every active product, including the
+insoles the bundle gives away free — **all five are on the default profile.**
+The empty profile is attached to nothing. Dormant, not active; worth deleting
+before some future product lands on it.
+
+Also verified on the knee brace: status ACTIVE, 10,000 sellable per variant
+across all eight, `requiresShipping` true against a rate that exists.
+
+### What remains unverifiable from here
+
+Whether a payment provider is connected and working. `paymentSettings` is not
+exposed on this Admin API version and no order has ever completed, so the
+payments schema has nothing to report either.
+
+Asked him to place a real end-to-end test order and refund it. Three minutes,
+and it separates "we are in a numbers game, first order is days away" from
+"every shekel spent today and tomorrow is wasted". One person reached checkout
+yesterday and did not pay; at n=1 that is either an ordinary change of mind or
+the defect, and there is no way to tell them apart without the test.
