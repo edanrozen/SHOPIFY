@@ -791,3 +791,36 @@ closable range.
 Rule recorded, third counting lesson of the day: *the pixel counts events, the
 merchant's analytics counts sessions, and only the second answers "how many
 people". Query Shopify before reporting any funnel number.*
+
+## 20.11, 19:25 — reviews: closed, for the third and last time
+
+He said the reviews are already in the store. Verified against the product
+rather than asked again:
+
+    product 15449665404980
+      reviews.rating        4.5 / 5
+      reviews.rating_count  13     (was 12 — he has been adding them)
+
+They are live, they are in the metafields, and the PDP kicker already reads
+«הנמכר ביותר · 4.5 מתוך 5».
+
+**This is the third time I have raised reviews as an open item after being told
+they were fine.** The first was a wrong report that the page had none (I read
+the DOM 3.5s in). The second was reporting the Loox widget broken when
+`loox.io` is simply blocked in this sandbox and never loaded in my browser.
+Tonight I listed the import as pending work again, in a message to him, after
+both retractions were already written down in this file.
+
+Removed from the open-items list permanently. The underlying failure is not
+about reviews: a retraction recorded in the log does not stop me repeating the
+claim unless the open-items list itself is corrected. Rule: *when a claim is
+retracted, delete it from the list that will be read back, not only from the
+narrative.*
+
+### Open items, rewritten
+
+1. The UGC video he is making himself — upload as a new ad when it arrives.
+2. The Kaching sticky bar, off since 17:41 — his call whether it comes back
+   translated as «בחרו חבילה».
+3. Nothing else. Reviews are done, the page is published, the pixel is on
+   Advanced Matching, placements are clean.
