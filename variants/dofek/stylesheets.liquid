@@ -1,0 +1,116 @@
+{%- comment -%}
+  DOFEK's style layer.
+
+  The sheets sit on top of `pluma.css` rather than replacing it: the two
+  Hebrew faces and the wrapper are already right, and rebuilding them would
+  only risk getting them wrong. They load after it so their posture wins,
+  and `wf-tokens.css` restates the palette, which is the one file to open to
+  change a colour. It is the file that makes this shop black and white.
+
+  `pdp.css` and `pl-story.css` are gone. The product page here is `wf-product`,
+  which carries its own rules in these sheets, so neither has anything left
+  to style and both were pure weight on the heaviest page in the shop.
+{%- endcomment -%}
+
+{{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
+{{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- comment -%}
+  Rubik for headlines, Assistant for text. Both are drawn for Hebrew, so the
+  page never falls back to a Latin face with patched Hebrew glyphs. Fetched as
+  print and promoted on load, so a slow font server cannot hold up first paint.
+{%- endcomment -%}
+{%- assign pl_fonts = 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rubik:wght@500;600;700&display=swap' -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="{{ pl_fonts }}">
+<link rel="stylesheet" href="{{ pl_fonts }}" media="print" onload="this.media='all'; this.onload=null;">
+<noscript><link rel="stylesheet" href="{{ pl_fonts }}"></noscript>
+
+{%- comment -%}
+  The base layer, in two files. At 19.7KB a single document could not cross
+  the Admin API, so the sheet is split at a section boundary and part two has
+  to load immediately after part one. Not one rule changed in the split.
+{%- endcomment -%}
+{{ 'pluma.css' | asset_url | stylesheet_tag }}
+{{ 'pluma-2.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  wf.css is three files. The division is a transport limit rather than a
+  design one, and wf-tokens.css carries the reason. Order matters only in
+  that the tokens come first; nothing in wf-shop.css is overridden by wf.css.
+{%- endcomment -%}
+{{ 'wf-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'wf.css' | asset_url | stylesheet_tag }}
+{{ 'wf-shop.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The guarantee, in its own sheet. It is the one block of rules that states a
+  commercial promise rather than a layout, the merchant will edit it when the
+  promise changes, and a named 5KB file is where they will find it.
+{%- endcomment -%}
+{{ 'wf-vow.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  The phone's corrections to the inherited components, on every template.
+  It is last of the shared sheets because it overrides them, and it is tiny
+  because it is a list of eleven type sizes and one tap target, not a
+  parallel design.
+{%- endcomment -%}
+{{ 'df-mobile.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Which templates are DOFEK product pages. Matched on the prefix rather than
+  named one at a time, so the next DOFEK product page is a template file and
+  nothing else. The cost is that a suffix starting `dofek-` must mean a DOFEK
+  product page, which is a naming rule worth keeping anyway.
+{%- endcomment -%}
+{%- assign df_pdp = false -%}
+{%- if template.suffix and template.suffix contains 'dofek-' -%}
+  {%- assign df_pdp = true -%}
+{%- endif -%}
+
+{%- comment -%}
+  The one band the home page and the product pages share: the picture on one
+  side and the argument on the other, with the type and the button it is
+  built from. It used to live in df.css, which is requested on the home page
+  and nowhere else, so the product pages rendered that section with no rules
+  at all. Both templates ask for it now.
+{%- endcomment -%}
+{%- if template.name == 'index' or df_pdp -%}
+  {{ 'df-band.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
+  The rest of the home page: the hero, the fact strip and the closing band.
+  No other template uses any of it, and it is the one template that has to
+  paint before a visitor decides whether this shop is worth a second screen,
+  so it is requested there and nowhere else.
+{%- endcomment -%}
+{%- if template.name == 'index' -%}
+  {{ 'df.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
+  DOFEK's own product pages. Two sheets: the buying block, and everything
+  under it.
+{%- endcomment -%}
+{%- if df_pdp -%}
+  {{ 'df-pdp.css' | asset_url | stylesheet_tag }}
+  {{ 'df-long.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- comment -%}
+  The long product page carries about 10KB of rules nothing else uses: the
+  before and after pair, the numbered rails, the comparison table and the
+  questions. Shipping that on the homepage and the collection pages would be
+  pure weight on the two templates that decide whether a visitor stays at
+  all, so it is requested on the product template and nowhere else.
+{%- endcomment -%}
+{%- if template.name == 'product' and df_pdp == false -%}
+  {{ 'wf-pdp.css' | asset_url | stylesheet_tag }}
+  {{ 'wf-pdp-long.css' | asset_url | stylesheet_tag }}
+  {{ 'wf-pdp2.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+<script src="{{ 'pluma.js' | asset_url }}" defer></script>
