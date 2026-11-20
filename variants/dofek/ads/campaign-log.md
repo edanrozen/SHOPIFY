@@ -561,3 +561,50 @@ Meta refuses to change this field after an ad set publishes (error_subcode
 Copy: the video keeps ad5's proven body verbatim. The image got new copy in the
 voice of the artwork — direct, male, blue-collar — with the same product facts,
 the 199.99₪ shipping-included price and the 30-day return.
+
+## 20.11, 08:21 — launch check. A 15.76% CTR that was not real.
+
+Both ads cleared review and are ACTIVE; the fake-button image was not rejected.
+The campaign started on time and spent 33.60₪ in the first two hours.
+
+The headline numbers looked like a breakthrough: **CTR 15.76%, 26 landing page
+views in two hours** against 42 in four days on the old campaign. A tenfold CTR
+jump is not a win, it is a symptom, so I broke delivery down by placement before
+reporting any of it.
+
+    audience_network / rewarded_video  11.10₪   39 imp  CTR 30.8%  CPM 285₪  11 LPV
+    audience_network / an_classic      15.93₪   58 imp  CTR 17.2%  CPM 275₪  10 LPV
+    facebook / feed                     2.09₪   26 imp  CTR 15.4%  CPM  80₪   2 LPV
+    facebook / facebook_reels           2.57₪   51 imp  CTR  7.8%  CPM  50₪   1 LPV
+    instagram / all positions           1.34₪   19 imp                        1 LPV
+
+**27.03₪ of 33.60₪ — 80% of the spend — went to Audience Network**, at a CPM of
+275-285₪, five times what Facebook feed cost. `rewarded_video` is the worst
+inventory on the platform: people watch an ad to unlock an in-game reward and
+click to get through it. A 30.8% CTR there is not interest, it is the mechanic
+of the placement. The 21 landing page views it bought are worthless.
+
+**This was my defect, not his brief.** He specified geography, age, language and
+budget. I never set `publisher_platforms`, so the ad set inherited automatic
+placements, and a new ad set optimizing for a cheap event explored straight into
+the cheapest-looking inventory. Left alone it would have burned about 56₪ of
+today's 70₪ on nothing.
+
+Fixed: `publisher_platforms` set to `["facebook","instagram"]`, validated first,
+then applied — the first apply hit the 1-call-per-30-seconds limit and went
+through on retry. Verified after: Audience Network gone, everything he actually
+specified untouched (IL, 18-65, locale 29, Advantage Audience off, 70₪/day).
+Unlike `optimization_goal`, placements are editable on a live ad set.
+
+### The new page's first read is contaminated
+
+    OLD page   ViewContent 161 | AddToCart 5 -> 3.1%
+    NEW page   ViewContent  65 | AddToCart 0 -> 0.0%
+
+65 product views is past `ab.py`'s 30-view gate, so the tool called it "not
+better yet" — **and that verdict should not be trusted.** Most of those 65 views
+came from the rewarded-video traffic, which would not convert on any page ever
+built. The new page has still not had a fair test. The next ~30-50 views, now
+that delivery is Facebook and Instagram only, are the first honest sample.
+
+Still zero InitiateCheckout and zero Purchase in the store's history.
