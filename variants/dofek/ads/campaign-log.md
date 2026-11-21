@@ -865,3 +865,52 @@ and it separates "we are in a numbers game, first order is days away" from
 "every shekel spent today and tomorrow is wasted". One person reached checkout
 yesterday and did not pay; at n=1 that is either an ordinary change of mind or
 the defect, and there is no way to tell them apart without the test.
+
+## 21.11, 14:05 — found it. The checkout is in English.
+
+    shopLocales:  [ { locale: "en", name: "אנגלית", primary: true, published: true } ]
+
+**Hebrew is not installed as a store language at all.** One locale, English, and
+it is the primary. The theme reads Hebrew because its content is hard-coded
+Hebrew text — but Shopify's own checkout renders in the *store's* locale, so
+every label, button, field and error on the payment flow is in English.
+
+Confirmed independently by the abandoned checkout's own recovery URL, which
+ends `&locale=en-IL`. An Israeli customer, served an English checkout.
+
+### And there is a real customer sitting in it right now
+
+A named customer in Israel created an abandoned checkout at 14:03 today for one
+knee brace at 199.99₪; `completedAt` is null. Not the merchant, and not the test
+order I asked him for — a real person who got far enough to leave contact
+details and then stopped at payment. First time anyone has reached that depth on
+this product. Details are in his Shopify admin, deliberately not copied here.
+
+### Why this is the find of the project
+
+Every zero we have been chasing now has one mechanism behind it:
+
+* 0 completed checkouts, ever, across 208 sessions.
+* The one checkout on 20.11 that went nowhere.
+* This one, abandoned at the payment step today.
+
+Someone clicks a Hebrew ad, reads a Hebrew page, adds to cart — and the payment
+screen switches to English: "Contact information", "Shipping address", "Pay
+now". That is where trust dies, and it is two minutes to fix: Settings →
+Languages → add Hebrew → publish → make default.
+
+This also retires the payment-provider hypothesis as the likely cause. The test
+order is still worth doing, but the language explains every data point rather
+than only the missing ones.
+
+### Today so far
+
+    21.11   35 sessions   4 carts  11.4%   1 checkout   0 orders
+    20.11   88 sessions   3 carts   3.4%   1 checkout   0 orders
+
+**11.4% add-to-cart is inside the healthy 8-12% band** — on four carts, so it
+carries no weight yet, but for the first time the top of the funnel is not the
+problem by any reading. All four of today's carts came from `ad-film55`, the
+55-second video, which has now produced every cart the account has ever seen.
+
+Campaign: 35.57₪ of 70₪ at 14:05, Audience Network still fully closed.
