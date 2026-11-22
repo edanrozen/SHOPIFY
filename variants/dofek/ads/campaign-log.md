@@ -914,3 +914,21 @@ problem by any reading. All four of today's carts came from `ad-film55`, the
 55-second video, which has now produced every cart the account has ever seen.
 
 Campaign: 35.57₪ of 70₪ at 14:05, Audience Network still fully closed.
+
+## 22.11 — Hebrew published; recovery email written
+
+`shopLocales` now returns one entry: `he`, primary, published. The checkout
+renders in Hebrew. Verified before writing the email, because sending it a day
+earlier would have walked the customer back into the English screen that
+probably stopped him.
+
+The abandoned checkout is still open (`completedAt: null`), one knee brace,
+black / M, 199.99₪. Store orders: still zero.
+
+Wrote the recovery email. First draft led with "the payment screen was in
+English, we fixed it" — he rejected it, and he was right: explaining a bug to a
+customer draws attention to it and reads as amateur. The shipped version says
+nothing about the fault. Two product lines in the middle carry one benefit and
+the single differentiator (the one-handed dial), and the close removes pressure
+rather than adding it — no discount, no fake scarcity against 10,000 units in
+stock. First person plural throughout, to match the DOFEK signature.
