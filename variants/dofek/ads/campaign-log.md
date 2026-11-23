@@ -932,3 +932,50 @@ nothing about the fault. Two product lines in the middle carry one benefit and
 the single differentiator (the one-handed dial), and the close removes pressure
 rather than adding it — no discount, no fake scarcity against 10,000 units in
 stock. First person plural throughout, to match the DOFEK signature.
+
+## 23.11, 18:50 — eight checkouts, zero payments. The language was not the cause.
+
+    20.11    88 sessions   3 carts   1 checkout   0 orders
+    21.11    60 sessions   7 carts   2 checkouts  0 orders
+    22.11   105 sessions   5 carts   5 checkouts  0 orders
+    23.11    22 sessions   0         0            0      (campaign paused)
+
+**Eight sessions have now reached the payment screen and not one has paid.**
+A working store converts roughly 40-60% of checkouts. Zero of eight is not a
+sample problem any more.
+
+Hebrew went live on 22.11 and **five checkouts happened after it, all of them
+empty.** The locale was a real defect and worth fixing, but it was not the
+cause. I called it "the find of the project" on 21.11; that was premature and
+is now disproved by the data.
+
+### The shape of the failure points at the payment step
+
+Shopify only creates an abandoned-checkout record once a customer enters
+contact details. There is **one** such record since 21.11 against eight
+checkout sessions — so seven people reached the checkout page and left before
+typing an email. That is not deliberation, that is hitting a wall on arrival.
+
+And the one who did enter details came back, **added the insoles, and the cart
+grew from 199.99₪ to 399.98₪** — still `completedAt: null`. Someone who wants
+to buy more, twice, and cannot.
+
+### What I cannot check
+
+`shopifyPaymentsAccount` → "Access denied, requires `read_shopify_payments`".
+`paymentSettings` is not on QueryRoot in 2026-10. There is no route from this
+session to the payment configuration, so the test order is not a nice-to-have;
+it is the only instrument left.
+
+### Also noted
+
+* The knee-brace campaign is **PAUSED** — he paused it, not me. 23.11 drew 22
+  sessions with no spend.
+* Three unrelated campaigns from October are still ACTIVE on the same ad
+  account and presumably spending. Not mine to touch; flagged to him.
+* Cart rate across 20-22.11: 15 carts from 253 sessions, 5.9%, with 21.11 at
+  11.7%. The top of the funnel is healthy. Everything is working except the
+  one step that takes money.
+* No new offer found on the knee brace: price still 199.99₪, no
+  `compareAtPrice`, no new discount beyond the old BLOOM10 and the Kaching app
+  discount, and the bundle widget no longer renders on the page at all.
