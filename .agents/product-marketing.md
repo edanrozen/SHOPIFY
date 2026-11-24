@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.8
+**Document version:** 1.9
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -35,7 +35,7 @@ orthopaedic-supply sleeves, not beside sports gear.
 | Price | 199.99₪, VAT included (`taxesIncluded: true`) |
 | Landed cost | ~80₪ |
 | Fees + returns | ~13₪ |
-| **Break-even CPA** | **~113₪** (see section 12c — עוסק פטור, no VAT) |
+| **Break-even CPA** | **~93₪** at the Black Friday price of 180₪ (see 12c) · ~113₪ at 199.99₪ |
 | **Contribution per order** | **~93₪** |
 | Shipping | Free, 10–14 business days, tracked |
 | Returns | 30 days (Israeli law requires 14) |
@@ -462,6 +462,37 @@ An exempt dealer also **cannot reclaim VAT on inputs**. Any Israeli import VAT
 inside the 80₪ is a sunk cost, not recoverable — which is one of the arguments
 for registering as a מורשה once volume justifies it.
 
+### Black Friday is live, and it moves the break-even
+
+From 24.11, Kaching Bundles runs a Black Friday offer on the product page.
+**Verified by rendering the live page in a mobile browser** — the variant
+price fields in the Admin API do **not** reflect app-level bundle discounts,
+so a GraphQL check reported full price and was wrong.
+
+What a buyer actually sees:
+
+| Offer | Price | Was |
+|---|---|---|
+| Single unit | **180.00₪** | 199.99₪ struck through, labelled 10% Black Friday |
+| Two units + free socks | **259.99₪** | 399.98₪, "saving 139.99₪" |
+
+**Single-unit economics at the offer price:**
+
+| | |
+|---|---|
+| Revenue | **180₪** |
+| Landed cost | ~80₪ |
+| Gross profit | **~100₪** |
+| **Break-even CPA** | **~93₪** after payment fees — down from ~113₪ |
+| Break-even ROAS | **~1.80** |
+
+**Every media plan while the offer runs uses 93₪, not 113₪.** The two-unit
+bundle has better unit economics and is the thing worth steering buyers to,
+which no creative currently does.
+
+**Lesson recorded:** app-level discounts are invisible to the Admin API's
+price fields. To know what a customer sees, render the page.
+
 ### 🔴 The turnover ceiling is a growth constraint, not a detail
 
 The 2026 exempt-dealer ceiling is reported as **122,833₪ of annual turnover**
@@ -552,6 +583,12 @@ recommend; Edan executes.
 ---
 
 ## Changelog
+
+- **1.9** (2026-11-24) — Black Friday offer is live via Kaching Bundles:
+  **180₪ for a single unit**, 259.99₪ for two plus socks. **Break-even CPA
+  drops to ~93₪.** An earlier GraphQL check reported full price and was
+  wrong — app-level discounts do not appear in the Admin API's variant price
+  fields; the live page was rendered in a browser to confirm.
 
 - **1.8** (2026-11-24) — Added section 12c. Edan trades as an **עוסק פטור**:
   he charges no VAT, so 199.99₪ is full revenue and **break-even CPA is ~113₪**,
