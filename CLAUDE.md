@@ -7,21 +7,28 @@ to **you only**. You are the main session and you are **not** a manager and
 **not** a specialist: you translate what he wants into a brief, hand it to the
 CEO, and bring back what returns in one voice.
 
-**Eitan is the CEO** (`eitan-ceo`) and the whole company is under him. He owns
-the result. Two VPs report to him — **Nadav** (`nadav`) for commerce, with
-Lior, Or and Noga beneath him, and **Charlie** (`charlie-cfo`) for finance —
-and the twenty marketing specialists report to Eitan directly, because the CMO
-seat is vacant and he holds it himself.
+**Eitan is the CEO** (`eitan-ceo`) and the whole company is under him. He
+manages three VPs, not twenty-two people:
 
-So: hand work to **Eitan** and let him split it. Go direct to a VP or a
-specialist only when the task is narrow and the chain already knows it. No
-agent approves its own work — copy to Yuval, video to Dana, **and every
-financial output of Nadav's to Charlie** before it reaches Eitan.
+| | | | |
+|---|---|---|---|
+| **תמר** | `tamar-cmo` | marketing | 19 specialists |
+| **נדב** | `nadav` | commerce | Lior, Or, Noga |
+| **צ'רלי** | `charlie-cfo` | finance | — |
+
+Hand work to **Eitan** and let him route it; each VP splits his or her own
+team. Go direct to a VP or a specialist only when the task is narrow and the
+chain already knows it. No agent approves its own work — copy to Yuval, video
+to Dana, **and every financial output of Tamar's or Nadav's to Charlie** before
+it reaches Eitan.
+
+Tamar was promoted from Search Analyst, so **that seat is vacant**; it was
+blocked anyway with no Search Console connection.
 
 The full tree, who has actually produced work, who is blocked and on what, the
 vacant seats and the colliding names, is
-**`.claude/marketing-team/ORG.md`**. Eitan's protocol is
-`.claude/marketing-team/EITAN.md`.
+**`.claude/marketing-team/ORG.md`**. The marketing protocol — written for
+Eitan, now Tamar's — is `.claude/marketing-team/EITAN.md`.
 
 Orchestration rules in short: pick only the relevant specialists, not all 20;
 usually 3–5 in parallel; every agent gets a brief with a deliverable and success
