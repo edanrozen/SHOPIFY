@@ -17,7 +17,7 @@ body{font-family:Rubik,'Liberation Sans',sans-serif;background:${CREAM};overflow
   background-position:${a.pos};transform:scale(${a.zoom})}
 
 /* TEXT — its own panel, below the photo */
-.tx{position:absolute;top:${a.phH}px;left:0;right:0;bottom:${Math.round(H*0.082)}px;background:${CREAM};
+.tx{position:absolute;top:${a.phH}px;left:0;right:0;bottom:${Math.round(H*0.062)}px;background:${CREAM};
   padding:${Math.round(H*0.030)}px ${Math.round(W*0.075)}px 0;text-align:right}
 .st{color:${OR};font-size:${Math.round(W*0.036)}px;letter-spacing:5px;margin-bottom:${Math.round(H*0.015)}px}
 h1{font-family:'Secular One';font-size:${Math.round(W*0.060)}px;line-height:1.14;color:${NAVY};letter-spacing:-.022em}
@@ -26,33 +26,33 @@ h1 em{font-style:normal;color:${OR}}
 .who{margin-top:${Math.round(H*0.018)}px;padding-top:${Math.round(H*0.014)}px;border-top:2px solid rgba(11,23,37,.13);
   font-size:${Math.round(W*0.0245)}px;font-weight:700;color:#67717F}
 
-.bar{position:absolute;bottom:0;left:0;right:0;height:${Math.round(H*0.082)}px;background:${NAVY};
-  display:flex;align-items:center;justify-content:space-between;padding:0 ${Math.round(W*0.075)}px}
+.bar{position:absolute;bottom:0;left:0;right:0;height:${Math.round(H*0.062)}px;background:${NAVY};
+  display:flex;align-items:center;justify-content:center}
 .pr{color:#fff;font-weight:900;font-size:${Math.round(W*0.0315)}px}.pr b{color:${OR}}
-.lg{color:#fff;font-weight:900;font-size:${Math.round(W*0.033)}px;letter-spacing:.15em}
+.lg{color:#fff;font-weight:900;font-size:${Math.round(W*0.032)}px;letter-spacing:.34em}
 </style></head><body>
 <div class="ph"><i></i></div>
 <div class="tx"><div class="st">★★★★★</div>
 <h1>${a.head}</h1>
 <div class="q">${a.q}</div>
 <div class="who">${a.who}</div></div>
-<div class="bar"><div class="lg">DOFEK</div><div class="pr"><b>משלוח חינם</b> · 30 יום להחזר כספי</div></div>
+<div class="bar"><div class="lg">DOFEK</div></div>
 </body></html>`;
 
 const ADS=[
- { id:'DOFEK-story-A', img:'w1.png', phH:Math.round(H*0.545), pos:'center 50%', zoom:1.0,
+ { id:'DOFEK-story-A', img:'w1.png', phH:Math.round(H*0.565), pos:'center 50%', zoom:1.0,
    head:'לפני חודשיים הוא לא<br>הצליח ללכת <em>מאה מטר</em>',
    q:'בשבת האחרונה עשינו מסלול שלם. הוא אמר שלא הרגיש אפילו מעט כאב.',
    who:'לימור ל. · חוות דעת באתר' },
- { id:'DOFEK-story-B', img:'w1.png', phH:Math.round(H*0.545), pos:'center 50%', zoom:1.0,
+ { id:'DOFEK-story-B', img:'w1.png', phH:Math.round(H*0.565), pos:'center 50%', zoom:1.0,
    head:'ניסינו הכל.<br>ואז <em>הוא חזר לחיות</em>',
    q:'אבא שלי סובל מכאבי ברכיים כבר עשור. שבוע אחרי שהתחיל עם המגן עשינו מסלול שלם בהרים.',
    who:'לימור ל. · חוות דעת באתר' },
- { id:'DOFEK-story-C', img:'w2.png', phH:Math.round(H*0.545), pos:'center 50%', zoom:1.0,
+ { id:'DOFEK-story-C', img:'w2.png', phH:Math.round(H*0.565), pos:'center 50%', zoom:1.0,
    head:'שבועיים ברצף אני לוקחת<br>את הנכדים <em>מהגן</em>',
    q:'ונעלמו הכאבים.',
    who:'רינה מ. · חוות דעת באתר' },
- { id:'DOFEK-story-D', img:'w3.png', phH:Math.round(H*0.545), pos:'center 50%', zoom:1.0,
+ { id:'DOFEK-story-D', img:'w3.png', phH:Math.round(H*0.565), pos:'center 50%', zoom:1.0,
    head:'סוף סוף אני לא צריך<br>להמר שיהיה <em>בול עליי</em>',
    q:'השימוש בו קל מאוד, והגלגלת מאוד עוזרת לי. אני פשוט מכוון אותו.',
    who:'משה פ. · חוות דעת באתר' },
