@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.1
+**Document version:** 1.2
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -333,3 +333,28 @@ a price cut, which is what keeps their unit margin intact. Three
 independent sources report unanswered support, knockoff product, hidden
 ownership and return shipping charged to the customer. **Trust, not product, is
 where DOFEK can be positioned.**
+
+**1.2 — 2026-11-24.** Reframed Tredvik: it sells in the US and does not
+advertise in Israel, so it is **not a competitor** — it is a proxy audience
+source, with hundreds of reviews where DOFEK has 13 imported ones. Mined in
+`variants/dofek/research/competitor-tredvik-2026-11-24.md`.
+
+Five things that change the brief:
+
+* **Shipping is not the blocker.** A buyer waited a month and wrote "it was
+  worth the wait". DOFEK's 10-14 business days is half that. Stop hedging it on
+  the page; state it as a certainty instead.
+* **The language is stability, not pain relief** — "more stability walking and
+  climbing stairs", "stay steady on my feet all afternoon", "does not feel like
+  a rigid orthopedic brace". Safer legally and closer to how they speak.
+* **Sizing fails a third time**, in a third independent source. Tredvik also
+  sells left- and right-specific sleeves and ships the wrong one. **Check
+  whether the DOFEK brace is universal** — if it is, "fits either leg, you
+  cannot order the wrong one" is an unused advantage.
+* **Re-tightening is expected, not a flaw:** "I did have to adjust the sleeve a
+  little, but I think that's normal for any sleeve covering a moving joint."
+  For every other brand that is a tolerated weakness. For DOFEK it is the dial.
+* **Stairs and prolonged standing** are the two activities that recur in both
+  markets.
+
+Adjacent segment seen once, not built on: post knee-replacement patients.
