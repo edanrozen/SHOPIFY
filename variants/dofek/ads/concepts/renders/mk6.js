@@ -40,14 +40,14 @@ h1 em{font-style:normal;color:${OR}}
 </body></html>`;
 
 const ADS=[
- { id:'story-A', img:'e3.png', phH:Math.round(H*0.545), pos:'center 26%', zoom:1.00,
+ { id:'final-A', img:'f1.png', phH:Math.round(H*0.545), pos:'center 30%', zoom:1.02,
    head:'לפני חודשיים הוא לא<br>הצליח ללכת <em>מאה מטר</em>',
    q:'בשבת האחרונה עשינו מסלול שלם. הוא אמר שלא הרגיש אפילו מעט כאב.',
-   who:'לימור ל. · חוות דעת באתר · 4.5 מתוך 5 ב-13 חוות דעת' },
- { id:'story-B', img:'e3.png', phH:Math.round(H*0.545), pos:'center 26%', zoom:1.00,
+   who:'לימור ל. · חוות דעת באתר' },
+ { id:'final-B', img:'f1.png', phH:Math.round(H*0.545), pos:'center 30%', zoom:1.02,
    head:'ניסינו הכל.<br>ואז <em>הוא חזר לחיות</em>',
    q:'אבא שלי סובל מכאבי ברכיים כבר עשור. שבוע אחרי שהתחיל עם המגן עשינו מסלול שלם בהרים.',
-   who:'לימור ל. · חוות דעת באתר · 4.5 מתוך 5 ב-13 חוות דעת' },
+   who:'לימור ל. · חוות דעת באתר' },
 ];
 (async()=>{const br=await chromium.launch();
 for(const a of ADS){const p=await br.newPage({viewport:{width:W,height:H},deviceScaleFactor:1});
