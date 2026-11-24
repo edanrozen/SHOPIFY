@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.6
+**Document version:** 1.7
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -364,6 +364,80 @@ denied); **the client has stated payment works.**
 
 ---
 
+## 12b. On-page defects found 24.11.2026 — verified in the repo
+
+Found by the team and then **verified directly against
+`variants/dofek/product.dofek-knee.json` and `df-pdp.liquid`**, not from a
+summary. These are the most likely explanation on the table for eight checkouts
+that never paid. **Nothing has been changed in the store — these are findings
+awaiting Edan's approval.**
+
+### 1. There is no size chart, and the size-help link does not render
+
+No circumference, no centimetres, no "how to measure" anywhere in the PDP
+files. `df-pdp.liquid:134` renders a size-help link only
+`if section.settings.size_help != blank`, and `product.dofek-knee.json:43`
+holds `"size_help": ""` — **so the link is absent from the live page.** The
+buyer picks M / L / XL / XLL from a dropdown with no data at all.
+
+Two independent lines meet here. Section 4 already records that *"לא צריך
+להמר שיהיה בול עליי"* is the strongest argument in the whole corpus. Research
+on this category says the single most common post-purchase failure is **the
+size being wrong on opening the box** — five independent sources, in both
+directions, including buyers who measured against a chart and still got it
+wrong. The strongest argument and the commonest failure are the same thing,
+and the page is silent on it.
+
+**Blocked on the supplier:** we hold no circumference ranges per size.
+`MISSING`.
+
+### 2. The FAQ contradicts itself on who pays
+
+Verbatim, four accordion rows apart on the same page:
+
+- `qa4` — *"כתבו לנו ונחליף."*
+- `qa8` — *"עלות משלוח ההחזרה חלה על הלקוח."*
+
+A buyer whose brace does not fit reads both. On 199.99₪ from a store they have
+never heard of, that is precisely the risk that stops a payment. Whichever is
+true, the page must say the same thing twice.
+
+### 3. A claim of ours was wrong, and positioning was built on it
+
+`variants/dofek/research/competitor-tredvik-2026-11-24.md` argued DOFEK's
+30-day policy beats Tredvik's 99 days because *"אצלך המשלוח חינם ואין החזרה
+על חשבון הלקוח"*. `qa8` says the exact opposite. **The claim is false and the
+trust positioning resting on it is void.** The file now carries a correction at
+the top. This was a finding about us, not about a competitor.
+
+### 4. One thing resolved in our favour
+
+`qa1` confirms the brace is **universal to either leg** — previously UNKNOWN.
+The only difference is which side the dial sits on. That makes *"you cannot
+order the wrong one"* a true, available and entirely unused argument. Note the
+same answer calls the dial **"הווסת"**; customers call it **"הגלגלת"**
+(section 9).
+
+### What is NOT established
+
+Everything above about the *category* came from search-engine summaries, not
+from reading review pages — `amazon.com`, `walmart.com`, `reddit.com`,
+`trustpilot.com` and others are all blocked by this environment. **No quote
+from that research may appear in creative or on the page without manual
+verification.** And there is still **not one complaint in Hebrew** in the whole
+corpus: two searches returned nothing usable. Section 9 did not grow in Hebrew.
+Resolved by Israeli Facebook groups, Zap/KSP seller reviews, or DOFEK's own
+support queue once orders exist.
+
+A fourth possible failure — **the dial itself jamming or breaking** — has four
+sources reporting a mechanical component failing, but **not one of them is a
+knit sleeve's dial**. Unranked, `MISSING`. Reported anyway because the risk is
+asymmetric: one component is both our only differentiator and our only point of
+failure. A torn knit sleeve still supports; a jammed dial is 199.99₪ that
+cannot be tightened.
+
+---
+
 ## 13. Hard constraints for the agent team
 
 Binding on every agent in `.claude/agents/` and on every skill they invoke.
@@ -422,6 +496,14 @@ recommend; Edan executes.
 ---
 
 ## Changelog
+
+- **1.7** (2026-11-24) — Added section 12b: on-page defects found by the team
+  and verified directly in the repo. No size chart exists and `size_help` is
+  empty so the link never renders, while the commonest failure in the category
+  is the size being wrong. `qa4` and `qa8` contradict each other on who pays
+  for a return. The claim that DOFEK has no customer-paid return shipping was
+  false and is corrected in the Tredvik file. `qa1` resolves universal
+  either-leg fit in our favour. Nothing changed in the store.
 
 - **1.6** (2026-11-24) — Section 5 corrected. v1.5 asserted the HMO route costs
   **0₪**; a second research pass found itemised co-payments (86₪ with a
