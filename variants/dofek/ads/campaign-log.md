@@ -979,3 +979,40 @@ it is the only instrument left.
 * No new offer found on the knee brace: price still 199.99₪, no
   `compareAtPrice`, no new discount beyond the old BLOOM10 and the Kaching app
   discount, and the bundle widget no longer renders on the page at all.
+
+---
+
+## 24.11.2026 — Marketing Agent Kit installed; a finding on `ad-ad-matai`
+
+Installed `marketing-agent-kit@marketing-agent-kit` v2.1.0 (MIT) and defined the
+21-agent department. **No campaign or budget was touched.** Roster: `TEAM.md`.
+QA output: `variants/dofek/team/qa-test-2026-11-24.md`.
+
+**Ad-level finding, from live Graph API data, maximum range, pulled 24.11:**
+
+| ad | spend ₪ | imp | CTR% | clicks | LPV | click→LPV | ATC* |
+|---|---|---|---|---|---|---|---|
+| `ad-film55` | 171.19 | 2,072 | 10.81 | 168 | 160 | 95.2% | 23 |
+| `ad-gever` | 47.49 | 642 | 8.41 | 47 | 42 | 89.4% | 9 |
+| `ad-ad-matai` | 18.33 | 331 | 4.83 | 17 | 13 | 76.5% | 0 |
+
+\* `add_to_cart` — a **pixel event count**, not carts. ShopifyQL shows 16 carts
+in total against 32 events in the account. Never plan on this column.
+
+`ad-ad-matai` opens by accusing the viewer ("עד מתי אתה מתכוון לתת לברך הזאת
+לנהל לך את היום?"). The two ads that produce carts open with a first-person
+story. The accusing opener loses on **two independent measures at once** — CTR
+55% lower, and click→LPV hold 76.5% vs 95.2% — same product, price, audience and
+week. Not statistically significant at 331 impressions; the claim rests on two
+metrics moving together plus an explained mechanism.
+
+Separately, and independent of performance: that opener **asserts the viewer's
+physical condition**, which is what Meta prohibits under personal attributes.
+It is a policy exposure whether or not it converts.
+
+**Recommendation, not executed:** when the campaign next runs, drop the accusing
+opener. **No approval requested or given for any spend change.**
+
+**Also found — the real competing price is 0₪.** Maccabi grants members one
+orthopaedic knee brace per limb per calendar year. Recorded in
+`.agents/product-marketing.md` v1.5, sections 5 and 7.

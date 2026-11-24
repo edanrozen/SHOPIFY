@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.3
+**Document version:** 1.5
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -139,6 +139,27 @@ the price.
 **Secondary:** physiotherapy, painkillers, orthopaedic insoles, walking sticks.
 **Indirect:** doing nothing, and simply doing less.
 
+**The real alternative is free, and it is the HMO.** Maccabi grants members of
+Maccabi Sheli / Gold / Silver an orthopaedic knee brace or stabiliser as a shelf
+item — **one device per limb per calendar year**
+([maccabi4u.co.il, read 2026-11-24](https://www.maccabi4u.co.il/eligibilites/4122/?id=1407)).
+Most Israelis aged 45–60 hold supplementary HMO cover, so for a large share of
+the target audience the competing price is **0₪**, not the 65.90₪ pharmacy
+sleeve. Clalit and Meuhedet plans are assumed to be comparable but this is
+**UNKNOWN** — not checked.
+
+What the HMO route costs instead of money: a doctor's appointment, a referral,
+a pickup, one device a year, a basic elastic or hinged brace rather than a dial,
+and — the part that matters most for this audience — **becoming a patient**. The
+offer DOFEK actually sells to this segment is avoiding the medical route, not
+the brace alone. See the objection in section 7.
+
+**UNKNOWN:** share of 45–60 Israelis holding supplementary cover (no official
+source pulled yet); whether any dial-tensioned brace is sold in Israel (one
+search found none — not a survey). A comparable price point exists at Agnon
+House (hinged stabilisers ~$20, free shipping, 30-day returns) and has not been
+profiled.
+
 **How they fall short:** physical shops win on trust and instant possession but
 rarely carry a dial-tensioned sleeve; cheap marketplace sleeves win on price but
 offer no adjustment and weeks of shipping with no recourse.
@@ -183,6 +204,12 @@ athletes wanting a hinged competition brace; bargain hunters who will buy the
 ואינו תחליף לאבחון או לטיפול רפואי." Never claim it treats, cures or heals.
 
 ---
+
+**"אני יכול לקבל אחד בחינם ממכבי."** True, and it is the strongest objection
+we have. The answer is never to dispute it. It is: a referral, a queue and one
+basic brace a year, versus one that arrives at the door, tightens with one hand,
+and does not require turning a stiff knee into a medical file. Never phrase the
+answer so that it mocks the HMO or implies the buyer is ill.
 
 ## 8. Switching Dynamics (JTBD Four Forces)
 
@@ -304,7 +331,75 @@ denied); **the client has stated payment works.**
 
 ---
 
+## 13. Hard constraints for the agent team
+
+Binding on every agent in `.claude/agents/` and on every skill they invoke.
+These are not style preferences; a deliverable that breaks one is rejected, not
+revised. The team roster and who enforces what is in `TEAM.md`.
+
+### Language
+
+Hebrew is the language, not a translation layer. Copy is written in spoken
+Israeli Hebrew and must survive being read aloud to a 55-year-old. A sentence
+that reads as English word order in Hebrew letters is rewritten. Customer
+language stays verbatim (section 9) — agents quote it, they do not re-phrase it
+into their own register.
+
+### Claims — what may never be said
+
+- **No medical cure.** Not "cures", not "fixes knee pain", not "replaces
+  treatment", not "heals". Permitted: support, stability, confidence walking,
+  relief under load.
+- **No invented testimonials.** The 13 Loox reviews predate every order and
+  must never be presented as verified purchases. This store has never completed
+  an order. An agent that needs a customer quote uses section 9 or says
+  `MISSING`.
+- **No number without a source.** Every figure carries the tool, the date and
+  the cut. No source means `MISSING` plus what would resolve it. An estimate
+  labelled as a fact is a rejection, at any seniority.
+- **No funnel number from the Meta pixel.** ShopifyQL `sessions` only. The
+  pixel counts *events* and inflates carts roughly 6×.
+
+### Meta advertising policy
+
+- No personal-attribute targeting in the copy: never assert the viewer's
+  condition ("סובל מכאבי ברכיים?"). Describe the situation, not the person.
+- No before/after body imagery, no implied physical transformation.
+- No absolute health claims and no clinical language the product cannot carry.
+- Audience Network stays excluded on every campaign, permanently.
+
+### Money and live assets
+
+No agent changes a budget, pauses or starts an ad, edits live creative, or
+publishes anything without Edan's explicit approval for that specific action.
+Approval given yesterday for one action is not approval today. Agents
+recommend; Edan executes.
+
+### Creative craft rules earned the hard way
+
+- Check a generated product's **orientation**, not only its likeness. A brace
+  shot from behind cannot show the patella pad, the laces or the dial.
+- Prompt how the brace **sits** — hugging the leg's contour, bands gripping
+  thigh and calf, correctly sized — not how it looks.
+- Text never sits on the photograph. It gets its own solid cream panel below.
+- Palette `#0B1725` / `#FB911B` / `#F8F1E7`; type Secular One + Rubik.
+- No price and no review count on the creative.
+- Every ad in one campaign gets a different photograph.
+
+---
+
 ## Changelog
+
+- **1.5** (2026-11-24) — Section 5: the real competing price for much of the
+  45–60 audience is **0₪ via the HMO** (Maccabi grants one orthopaedic knee
+  brace per limb per calendar year), not the 65.90₪ pharmacy sleeve. Added the
+  matching objection to section 7. Found by the team's QA test task,
+  `variants/dofek/team/qa-test-2026-11-24.md`.
+
+- **1.4** (2026-11-24) — Added section 13, the hard constraints binding the
+  21-agent marketing team installed from `marketing-agent-kit` v2.1.0: language,
+  forbidden claims, Meta policy, money, and the creative craft rules. Roster and
+  activation in `TEAM.md`.
 
 **1.0 — 2026-11-24.** First version. Drafted from the live store, 13 Loox
 reviews read verbatim, the Shopify Admin API, ShopifyQL session data and the

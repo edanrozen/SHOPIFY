@@ -1,26 +1,46 @@
 # DOFEK — working notes for Claude
 
-## "עומר" is the marketing agent
+## The marketing department: "איתן" is the entry point
 
-When Edan says **עומר** (Omer), he means the marketing brain of this project:
+When Edan addresses the marketing team, he goes through **איתן** (Eitan) — the
+CMO agent at `.claude/agents/eitan-cmo.md`. Eitan receives the task, splits it,
+runs specialists in parallel, reviews what they return, and consolidates one
+revenue-ranked plan. He does not invent data and does not let a specialist
+present an estimate as a fact.
 
-1. **`.agents/product-marketing.md`** — the shared context document. Product,
-   audience, pains, competitors, differentiation, objections, verbatim customer
-   language, brand voice, proof points, and the current state of the funnel and
-   the ad account. **Read it before any marketing work.**
+The full roster — 21 agents, who does what, how to invoke them, and which
+connections are still missing — is **`TEAM.md`**. Read it before any marketing
+work.
+
+**"עומר" now means איתן.** Edan originally named the marketing brain עומר. His
+agent mapping later assigned that name to the Sound Designer, and two Omers in
+one project would break every instruction that says "תגיד לעומר". So the
+marketing-brain role moved to Eitan, who is the entry point anyway, and
+**Omer** is now only the Sound Designer — addressed as "Omer – Sound Designer"
+or "עומר סאונד", never bare. A bare "עומר" from Edan routes to Eitan. This is
+reversible on one word from him.
+
+### What the agents read
+
+1. **`.agents/product-marketing.md`** (v1.4) — the shared context document, and
+   the only source of product facts. Product, audience, pains, competitors,
+   differentiation, objections, verbatim Hebrew customer language, brand voice,
+   proof points, the current funnel and ad-account state, and **section 13: the
+   hard constraints binding every agent** (language, forbidden claims, Meta
+   policy, money, creative craft rules). Not in there means it does not exist —
+   agents write `MISSING`, they do not fill it in.
 2. **`.claude/skills/`** — the 53 skills from `coreyhaines31/marketingskills`,
-   pinned in `skills-lock.json`. Every one of them reads the document above
-   first.
+   pinned in `skills-lock.json`.
+3. **`marketing-agent-kit@marketing-agent-kit`** v2.1.0 (MIT) — 20 skills plus
+   the original `copy-critic` agent, declared in project settings. **Its own
+   files are never edited and its skill names are never renamed**; our agent
+   definitions invoke them under their original names so updates stay safe.
 
-So "תשאל את עומר", "עומר יבנה את זה", "מה עומר אומר" all mean: load the context
-document, pick the fitting skill, and work as that marketing specialist. Omer is
-not a separate chat or a subagent to spawn — it is this project's marketing
-context plus its skills, under one name.
-
-**Keep Omer current.** When something material changes — a campaign result, a
-price, a new creative angle, a finding from reviews or data — update
-`.agents/product-marketing.md`, bump its version and add a changelog line. A
-stale context document is worse than none, because every skill trusts it.
+**Keep the context document current.** When something material changes — a
+campaign result, a price, a new creative angle, a finding from reviews or data —
+update `.agents/product-marketing.md`, bump its version and add a changelog
+line. A stale context document is worse than none, because every skill and
+every agent trusts it.
 
 ## Ground rules on this project
 
