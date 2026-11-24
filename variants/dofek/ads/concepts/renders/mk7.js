@@ -17,7 +17,7 @@ body{font-family:Rubik,'Liberation Sans',sans-serif;background:${CREAM};overflow
   background-position:${a.pos};transform:scale(${a.zoom})}
 
 /* TEXT — its own panel, below the photo */
-.tx{position:absolute;top:${a.phH}px;left:0;right:0;bottom:${Math.round(H*0.062)}px;background:${CREAM};
+.tx{position:absolute;top:${a.phH}px;left:0;right:0;bottom:${Math.round(H*0.078)}px;background:${CREAM};
   padding:${Math.round(H*0.030)}px ${Math.round(W*0.075)}px 0;text-align:right}
 .st{color:${OR};font-size:${Math.round(W*0.036)}px;letter-spacing:5px;margin-bottom:${Math.round(H*0.015)}px}
 h1{font-family:'Secular One';font-size:${Math.round(W*0.060)}px;line-height:1.14;color:${NAVY};letter-spacing:-.022em}
@@ -26,8 +26,11 @@ h1 em{font-style:normal;color:${OR}}
 .who{margin-top:${Math.round(H*0.018)}px;padding-top:${Math.round(H*0.014)}px;border-top:2px solid rgba(11,23,37,.13);
   font-size:${Math.round(W*0.0245)}px;font-weight:700;color:#67717F}
 
-.bar{position:absolute;bottom:0;left:0;right:0;height:${Math.round(H*0.062)}px;background:${NAVY};
-  display:flex;align-items:center;justify-content:center}
+.bar{position:absolute;bottom:0;left:0;right:0;height:${Math.round(H*0.078)}px;background:${NAVY};
+  display:flex;align-items:center;justify-content:space-between;padding:0 ${Math.round(W*0.062)}px}
+.cta{background:${OR};color:${NAVY};font-weight:900;font-size:${Math.round(W*0.0335)}px;
+  padding:${Math.round(H*0.0135)}px ${Math.round(W*0.052)}px;border-radius:999px;display:flex;align-items:center;gap:12px}
+.cta span{font-size:${Math.round(W*0.036)}px;line-height:1}
 .pr{color:#fff;font-weight:900;font-size:${Math.round(W*0.0315)}px}.pr b{color:${OR}}
 .lg{color:#fff;font-weight:900;font-size:${Math.round(W*0.032)}px;letter-spacing:.34em}
 </style></head><body>
@@ -36,7 +39,7 @@ h1 em{font-style:normal;color:${OR}}
 <h1>${a.head}</h1>
 <div class="q">${a.q}</div>
 <div class="who">${a.who}</div></div>
-<div class="bar"><div class="lg">DOFEK</div></div>
+<div class="bar"><div class="lg">DOFEK</div><div class="cta">רוצה גם <span>&#8592;</span></div></div>
 </body></html>`;
 
 const ADS=[
