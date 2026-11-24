@@ -36,15 +36,15 @@ h1 em{font-style:normal;color:${OR}}
 <h1>${a.head}</h1>
 <div class="q">${a.q}</div>
 <div class="who">${a.who}</div></div>
-<div class="bar"><div class="lg">DOFEK</div><div class="pr"><b>199.99 ₪</b> · משלוח חינם · 30 יום להחזר</div></div>
+<div class="bar"><div class="lg">DOFEK</div><div class="pr"><b>משלוח חינם</b> · 30 יום להחזר כספי</div></div>
 </body></html>`;
 
 const ADS=[
- { id:'final-A', img:'f1.png', phH:Math.round(H*0.545), pos:'center 30%', zoom:1.02,
+ { id:'DOFEK-story-A', img:'w1.png', phH:Math.round(H*0.545), pos:'center 50%', zoom:1.0,
    head:'לפני חודשיים הוא לא<br>הצליח ללכת <em>מאה מטר</em>',
    q:'בשבת האחרונה עשינו מסלול שלם. הוא אמר שלא הרגיש אפילו מעט כאב.',
    who:'לימור ל. · חוות דעת באתר' },
- { id:'final-B', img:'f1.png', phH:Math.round(H*0.545), pos:'center 30%', zoom:1.02,
+ { id:'DOFEK-story-B', img:'w1.png', phH:Math.round(H*0.545), pos:'center 50%', zoom:1.0,
    head:'ניסינו הכל.<br>ואז <em>הוא חזר לחיות</em>',
    q:'אבא שלי סובל מכאבי ברכיים כבר עשור. שבוע אחרי שהתחיל עם המגן עשינו מסלול שלם בהרים.',
    who:'לימור ל. · חוות דעת באתר' },
