@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.5
+**Document version:** 1.6
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -139,20 +139,52 @@ the price.
 **Secondary:** physiotherapy, painkillers, orthopaedic insoles, walking sticks.
 **Indirect:** doing nothing, and simply doing less.
 
-**The real alternative is free, and it is the HMO.** Maccabi grants members of
-Maccabi Sheli / Gold / Silver an orthopaedic knee brace or stabiliser as a shelf
-item — **one device per limb per calendar year**
-([maccabi4u.co.il, read 2026-11-24](https://www.maccabi4u.co.il/eligibilites/4122/?id=1407)).
-Most Israelis aged 45–60 hold supplementary HMO cover, so for a large share of
-the target audience the competing price is **0₪**, not the 65.90₪ pharmacy
-sleeve. Clalit and Meuhedet plans are assumed to be comparable but this is
-**UNKNOWN** — not checked.
+**The HMO route is the real alternative — but its price is CONTESTED and
+unverified.** Two passes over the same question returned two different answers,
+and **neither read a primary page**: `maccabi4u.co.il`, `mushlam.clalit.co.il`
+and `meuhedet.co.il` are all blocked by this environment's network policy
+(verified 24.11.2026 — every one returns no response). Both readings below come
+from search-engine summaries only.
 
-What the HMO route costs instead of money: a doctor's appointment, a referral,
-a pickup, one device a year, a basic elastic or hinged brace rather than a dial,
-and — the part that matters most for this audience — **becoming a patient**. The
-offer DOFEK actually sells to this segment is avoiding the medical route, not
-the brace alone. See the objection in section 7.
+| Reading | What it says | Status |
+|---|---|---|
+| A (first pass, 24.11) | Maccabi Sheli/Gold/Silver grant one orthopaedic knee brace per limb per calendar year as a shelf item, i.e. **0₪** | **UNVERIFIED** |
+| B (second pass, 24.11) | The same page carries itemised co-payments: **86₪** for a knee-joint stabiliser *with* a doctor's referral, and **22.87₪** for a knitted knee support *with no referral*, after a 12-month waiting period from joining | **UNVERIFIED** |
+
+**Do not put either number in an ad, a comparison page or a sales argument
+until someone opens the Maccabi eligibility page in a browser and reads it.**
+Reading B, if it holds, is the more dangerous one for us: a **22.87₪ knitted
+support with no referral and no queue** removes the "becoming a patient" cost
+entirely, and against it our only remaining argument is product-level — the
+dial and the lateral stabilisers.
+
+What is NOT in dispute: a Maccabi member in a supplementary plan can obtain a
+knee support for **far less than 199.99₪**, and the entitlement exists. The
+magnitude and the conditions are open.
+
+Clalit: orthopaedic accessories appear under the upper tiers, reportedly two
+per calendar year at a low co-payment, redeemed at contracted suppliers with a
+referral from a Clalit orthopaedist — **UNVERIFIED**, same reason.
+Meuhedet: knee braces are not named on the page that lists accessory discounts
+— **UNKNOWN**. Leumit: not checked.
+
+**The dial is a channel gap, not a product moat.** BOA-style dials are
+documented in commercial medical knee braces — DonJoy OA GO and medi Smartfit
+OA — and **medi already appears as a manufacturer inside Maccabi's shelf-item
+catalogue**. So the dial is absent from Israel's *consumer* channel, not from
+Israel. **Do not build creative on "the only one in Israel with a dial."** The
+defensible claim is the bundle neither channel offers: dial + consumer price +
+delivered to the door + 30-day return — the medical channel demands a doctor,
+the consumer channel has no dial. (Both product pages read 24.11.2026 via
+summaries; whether either is imported to Israel is UNKNOWN.)
+
+**Paid retail, reported but unverified:** Be Pharm 67.40₪ / 70.60₪ / 75.90₪
+(from a delivery-app branch menu with no update date, not Be's own site);
+**Danel4u 99₪ for a knee brace with gel *and* reinforcements** — if real, that
+is two of our five differentiators at half our price, and it makes "you cannot
+get the size wrong" a *necessary* argument for 199.99₪, not a nice one.
+SmartBuy ~23₪; hinged ROM ~290₪. **The 65.90₪ Super-Pharm figure previously
+recorded here could not be re-verified today — treat it as unconfirmed.**
 
 **UNKNOWN:** share of 45–60 Israelis holding supplementary cover (no official
 source pulled yet); whether any dial-tensioned brace is sold in Israel (one
@@ -205,8 +237,9 @@ athletes wanting a hinged competition brace; bargain hunters who will buy the
 
 ---
 
-**"אני יכול לקבל אחד בחינם ממכבי."** True, and it is the strongest objection
-we have. The answer is never to dispute it. It is: a referral, a queue and one
+**"אני יכול לקבל אחד ממכבי כמעט בחינם."** Probably true, and it is the
+strongest objection we have. The exact price is CONTESTED (see section 5) —
+**never quote a number back at the buyer that we have not verified.** The answer is never to dispute it. It is: a referral, a queue and one
 basic brace a year, versus one that arrives at the door, tightens with one hand,
 and does not require turning a stiff knee into a medical file. Never phrase the
 answer so that it mocks the HMO or implies the buyer is ill.
@@ -389,6 +422,16 @@ recommend; Edan executes.
 ---
 
 ## Changelog
+
+- **1.6** (2026-11-24) — Section 5 corrected. v1.5 asserted the HMO route costs
+  **0₪**; a second research pass found itemised co-payments (86₪ with a
+  referral, 22.87₪ without) on the same page. **Neither reading opened a
+  primary page** — all four HMO sites are blocked by this environment's network
+  policy, verified today — so both are recorded as UNVERIFIED and neither may
+  be used in an ad. Also: the dial is documented in DonJoy OA GO and medi
+  Smartfit OA, and medi already supplies Maccabi, so "the only dial in Israel"
+  is retired as a creative foundation; and a reported 99₪ competitor with gel
+  and reinforcements raises the bar our price has to clear.
 
 - **1.5** (2026-11-24) — Section 5: the real competing price for much of the
   45–60 audience is **0₪ via the HMO** (Maccabi grants one orthopaedic knee
