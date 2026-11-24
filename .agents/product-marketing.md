@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.7
+**Document version:** 1.8
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -35,7 +35,7 @@ orthopaedic-supply sleeves, not beside sports gear.
 | Price | 199.99₪, VAT included (`taxesIncluded: true`) |
 | Landed cost | ~80₪ |
 | Fees + returns | ~13₪ |
-| **Break-even CPA** | **~107₪** |
+| **Break-even CPA** | **~113₪** (see section 12c — עוסק פטור, no VAT) |
 | **Contribution per order** | **~93₪** |
 | Shipping | Free, 10–14 business days, tracked |
 | Returns | 30 days (Israeli law requires 14) |
@@ -438,6 +438,62 @@ cannot be tightened.
 
 ---
 
+## 12c. Tax status: עוסק פטור — binding on every financial calculation
+
+**Edan trades as an עוסק פטור (exempt dealer), confirmed by him 24.11.2026.
+He does not charge VAT and does not remit it.**
+
+### What this changes
+
+**199.99₪ is the full revenue per unit.** Nothing is deducted for VAT. Every
+earlier calculation that treated the price as VAT-inclusive and netted it down
+was wrong, and the figures below replace them.
+
+| | |
+|---|---|
+| Revenue per unit | **199.99₪** |
+| Landed cost | **~80₪** (split between product / shipping / duty is `MISSING`) |
+| Gross profit per unit | **~120₪** |
+| Payment processing | **`MISSING` — not supplied.** At a typical ~3% + ~1₪ it is ~7₪ |
+| **Break-even CPA** | **~113₪** (120₪ gross less ~7₪ fees) — supersedes the 107₪ recorded earlier |
+| Break-even ROAS | **~1.67** |
+
+An exempt dealer also **cannot reclaim VAT on inputs**. Any Israeli import VAT
+inside the 80₪ is a sunk cost, not recoverable — which is one of the arguments
+for registering as a מורשה once volume justifies it.
+
+### 🔴 The turnover ceiling is a growth constraint, not a detail
+
+The 2026 exempt-dealer ceiling is reported as **122,833₪ of annual turnover**
+(2025: 120,000₪). **Turnover, not profit.**
+[Source](https://www.bizportal.co.il/additives/312/vat-dealer-status-ca.html),
+read 24.11.2026 — **not from the Tax Authority directly; treat as UNVERIFIED
+until gov.il is checked.**
+
+At 199.99₪ per unit that ceiling is:
+
+- **~614 units per year**
+- **~51 units per month**
+- **~1.7 units per day**
+
+A campaign that works lands him over the ceiling inside a year. Crossing it
+forces registration as an **עוסק מורשה** mid-year, which means charging 18% VAT
+on top of — or out of — the same 199.99₪ price. If the price stays, revenue per
+unit drops to ~169.5₪ and **break-even CPA falls from ~113₪ to ~82₪**: the media
+plan changes overnight.
+
+**This is not a reason to slow down.** It is a reason to decide, before the
+ceiling arrives, whether the price rises to absorb VAT or the margin absorbs it.
+Every agent modelling growth past ~50 units a month must state which assumption
+it used.
+
+### Still missing before any number here is trustworthy
+
+Payment processing fee · Shopify monthly plan cost · the 80₪ split ·
+actual return rate (no orders yet) · the ceiling verified at gov.il.
+
+---
+
 ## 13. Hard constraints for the agent team
 
 Binding on every agent in `.claude/agents/` and on every skill they invoke.
@@ -496,6 +552,12 @@ recommend; Edan executes.
 ---
 
 ## Changelog
+
+- **1.8** (2026-11-24) — Added section 12c. Edan trades as an **עוסק פטור**:
+  he charges no VAT, so 199.99₪ is full revenue and **break-even CPA is ~113₪**,
+  replacing the 107₪ recorded earlier. Records the 2026 turnover ceiling
+  (~122,833₪, UNVERIFIED) as a hard growth constraint — ~1.7 units a day — and
+  what crossing it does to the media plan.
 
 - **1.7** (2026-11-24) — Added section 12b: on-page defects found by the team
   and verified directly in the repo. No size chart exists and `size_help` is
