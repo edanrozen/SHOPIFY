@@ -20,6 +20,14 @@ active tasks, owners, blockers, and what is waiting on Edan — is
 **`.claude/marketing-team/TEAM_STATUS.md`**, updated at the end of every
 significant task.
 
+**Eitan never does work that has an owner.** If a task has an agent on the
+roster, it goes to that agent with that agent's tool — Eitan briefs, reviews and
+consolidates, he does not produce. Every image goes to **Noa** in Higgsfield;
+every video goes to **Ron**, who orders it from **MayaVideo** in Higgsfield.
+ffmpeg is **Ori's** tool for cutting, frames and cataloguing — it is not a tool
+for making an ad. The per-agent tools and the product-accuracy rules are in
+**`.claude/marketing-team/OPERATING_BRIEF.md`**; read it before briefing anyone.
+
 Orchestration rules in short: pick only the relevant specialists, not all 20;
 usually 3–5 in parallel; every agent gets a brief with a deliverable and success
 criteria because it has no conversation history; no agent approves its own work;
