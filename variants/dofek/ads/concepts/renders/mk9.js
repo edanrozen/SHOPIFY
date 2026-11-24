@@ -36,35 +36,29 @@ h1 em{font-style:normal;color:${OR}}
 </body></html>`;
 
 const ADS=[
- { id:'C1-galgelet', img:'pr1.png', fit:'cover', pos:'58% 46%', zoom:1.0, bg:'#F2F2F2',
+ { id:'H1-galgelet', img:'h1.png', fit:'cover', pos:'center 42%', zoom:1.02,
    kick:'★★★★★', sp:'5px', hs:0.058,
    head:'״לא צריך להמר<br><em>שיהיה בול עליי</em>״',
    q:'סיבוב אחד של הגלגלת מהדק בדיוק כמה שצריך. ביד אחת, באמצע היום, בלי להוריד נעל.',
    who:'חוות דעת באתר' },
 
- { id:'C2-shtey-raglayim', img:'pr2.png', fit:'cover', pos:'center 40%', zoom:1.0, bg:'#F2F2F2',
-   kick:'לפני שמזמינים', hs:0.058,
-   head:'מתאים לימין<br><em>ולשמאל</em>',
-   q:'אותו מגן לשתי הרגליים, וההידוק מתכוונן בגלגלת אחרי שהוא כבר עליך. אין צד לא נכון להזמין.',
-   who:'DOFEK · שחור או לבן · M עד XLL' },
+ { id:'H2-madregot', img:'h2.png', fit:'cover', pos:'center 44%', zoom:1.02,
+   kick:'במדרגות',
+   head:'חזרתי לעלות במדרגות<br><em>בלי לעצור באמצע</em>',
+   q:'סיבוב אחד של הגלגלת בבוקר, והברך יושבת במקום עד הערב. גם בקומה שלישית.',
+   who:'DOFEK · יציבות מהצעד הראשון' },
 
- { id:'C3-kariot', img:'pr3.png', fit:'cover', pos:'center 52%', zoom:1.0, bg:'#F2F2F2',
-   kick:'איפה שזה תופס', hs:0.057,
-   head:'הכרית יושבת<br><em>בדיוק על הפיקה</em>',
-   q:'ומסביבה לחץ אחיד על כל המפרק. זה מה שמחזיק את הברך במקום כשאתה יורד במדרגות או קם מכיסא.',
-   who:'DOFEK · תמיכה ויציבות מהצעד הראשון' },
+ { id:'H3-nechadim', img:'h3.png', fit:'cover', pos:'center 42%', zoom:1.02, hs:0.057,
+   kick:'בגן, אחרי הצהריים',
+   head:'חזרתי לרדת אליהם<br><em>לגובה העיניים</em>',
+   q:'לא חיכיתי שמישהו יביא לי כיסא. מגן אחד עם גלגלת, ואני שוב מתכופפת כמו שצריך.',
+   who:'DOFEK · תמיכה ויציבות בכל צעד' },
 
- { id:'C4-tmicha', img:'pr4.png', fit:'contain', pos:'center 42%', zoom:1.14, bg:'#F4F4F4',
-   kick:'מה שיש בפנים', hs:0.057,
-   head:'לא עוד שרוול.<br>זה <em>מחזיק</em> את הברך',
-   q:'לחץ אחיד על כל המפרק, כרית מחוררת על הפיקה, ושרוכים שנמתחים מהגלגלת לאורך הצד — כדי שהברך תישאר במקום שבו שמת אותה.',
-   who:'DOFEK · משלוח חינם · 30 יום להחזר כספי' },
-
- { id:'C5-gil', img:'n3.png', fit:'cover', pos:'center 44%', zoom:1.02,
-   kick:'בהליכה', hs:0.064,
+ { id:'H4-gil', img:'h4.png', fit:'cover', pos:'center 40%', zoom:1.02, hs:0.064,
+   kick:'בהליכה',
    head:'זה לא הגיל.<br>זו <em>ברך אחת</em>',
    q:'אחת שהתחילה להחליט בשבילי לאן אני הולך ולאן לא. מגן עם גלגלת החזיר לי את ההחלטה.',
-   who:'DOFEK · תמיכה ויציבות, בלי להרגיש מוגבל בתנועה' },
+   who:'DOFEK · בלי להרגיש מוגבל בתנועה' },
 ];
 (async()=>{const br=await chromium.launch({executablePath:'/opt/pw-browsers/chromium',args:['--no-sandbox']});
 for(const a of ADS){const p=await br.newPage({viewport:{width:W,height:H},deviceScaleFactor:1});
