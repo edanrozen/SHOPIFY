@@ -12,7 +12,13 @@ run at once, who reviews whom, and the iron rules (no invented data, no estimate
 presented as fact, nothing touching money without Edan's approval for that
 specific action).
 
-The 20 specialists are real Claude Code agent types, invoked with the `Agent`
+The department is **24 agents**: 20 marketing specialists plus an e-commerce
+division under **Nadav** (Chief E-commerce & Dropshipping Officer), who has
+**Lior** (operations), **Or** (supply chain) and **Noga** (pricing) reporting
+to him. Commerce tasks go to Nadav, who decides which of his three to run.
+Note **Or** (`or-supply-chain`) is not **Ori** (`ori-creative-ops`).
+
+The specialists are real Claude Code agent types, invoked with the `Agent`
 tool by their type name — `noam-market-intel`, `adam-copywriter`, `copy-critic`,
 and so on. **Never recreate them and never rename them.** The roster, what each
 one is for, and which connections are missing is **`TEAM.md`**. The live board —
