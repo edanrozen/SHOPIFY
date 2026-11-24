@@ -14,14 +14,17 @@ body{font-family:Rubik,'Liberation Sans',sans-serif;background:${CREAM};overflow
 .ph i{position:absolute;inset:0;background-image:url('${b64(a.img)}');
   background-size:${a.fit||'cover'};background-repeat:no-repeat;
   background-position:${a.pos};transform:scale(${a.zoom||1});transform-origin:${a.org||'center'}}
-.tx{position:absolute;top:${PH}px;left:0;right:0;bottom:${BAR}px;background:${CREAM};
-  padding:${Math.round(H*0.030)}px ${Math.round(W*0.075)}px 0;text-align:right}
-.st{color:${OR};font-size:${Math.round(W*0.0285)}px;font-weight:700;letter-spacing:${a.sp||'4px'};margin-bottom:${Math.round(H*0.014)}px}
+.tx{position:absolute;top:${PH}px;left:0;right:0;bottom:${BAR+Math.round(H*0.052)}px;background:${CREAM};
+  padding:${Math.round(H*0.019)}px ${Math.round(W*0.075)}px 0;text-align:right}
+.st{color:${OR};font-size:${Math.round(W*0.0275)}px;font-weight:700;letter-spacing:${a.sp||'4px'};margin-bottom:${Math.round(H*0.009)}px}
 h1{font-family:'Secular One';font-size:${Math.round(W*(a.hs||0.060))}px;line-height:1.14;color:${NAVY};letter-spacing:-.022em}
 h1 em{font-style:normal;color:${OR}}
-.q{margin-top:${Math.round(H*0.019)}px;font-size:${Math.round(W*0.0300)}px;font-weight:500;line-height:1.46;color:#39434F}
-.who{margin-top:${Math.round(H*0.018)}px;padding-top:${Math.round(H*0.014)}px;border-top:2px solid rgba(11,23,37,.13);
+.q{margin-top:${Math.round(H*0.013)}px;font-size:${Math.round(W*0.0288)}px;font-weight:500;line-height:1.42;color:#39434F}
+.who{margin-top:${Math.round(H*0.011)}px;padding-top:${Math.round(H*0.009)}px;border-top:2px solid rgba(11,23,37,.13);
   font-size:${Math.round(W*0.0245)}px;font-weight:700;color:#67717F}
+.bf{position:absolute;left:0;right:0;bottom:${BAR}px;height:${Math.round(H*0.052)}px;background:${OR};
+  display:flex;align-items:center;justify-content:center}
+.bf b{color:${NAVY};font-family:'Secular One';font-size:${Math.round(W*0.034)}px;letter-spacing:-.01em}
 .bar{position:absolute;bottom:0;left:0;right:0;height:${BAR}px;background:${NAVY};
   display:flex;align-items:center;justify-content:space-between;padding:0 ${Math.round(W*0.062)}px}
 .cta{background:${OR};color:${NAVY};font-weight:900;font-size:${Math.round(W*0.0335)}px;
@@ -32,6 +35,7 @@ h1 em{font-style:normal;color:${OR}}
 <div class="ph"><i></i></div>
 <div class="tx"><div class="st">${a.kick}</div>
 <h1>${a.head}</h1><div class="q">${a.q}</div><div class="who">${a.who}</div></div>
+<div class="bf"><b>עכשיו במבצעי הבלאק פריידי</b></div>
 <div class="bar"><div class="lg">DOFEK</div><div class="cta">${a.cta||'רוצה גם'} <span>&#8592;</span></div></div>
 </body></html>`;
 
