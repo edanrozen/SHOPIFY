@@ -52,10 +52,10 @@ const ADS=[
    head:'שבועיים ברצף אני לוקחת<br>את הנכדים <em>מהגן</em>',
    q:'ונעלמו הכאבים.',
    who:'רינה מ. · חוות דעת באתר' },
- { id:'DOFEK-story-D', img:'w3.png', phH:Math.round(H*0.565), pos:'center 50%', zoom:1.0,
-   head:'סוף סוף אני לא צריך<br>להמר שיהיה <em>בול עליי</em>',
-   q:'השימוש בו קל מאוד, והגלגלת מאוד עוזרת לי. אני פשוט מכוון אותו.',
-   who:'משה פ. · חוות דעת באתר' },
+ { id:'DOFEK-story-D', img:'w5.png', phH:Math.round(H*0.565), pos:'center 52%', zoom:1.0,
+   head:'אני עומד הרבה שעות<br><em>במהלך היום</em>',
+   q:'חיפשתי משהו שייתן לי תמיכה נוספת. המגן נוח, מתכוונן בקלות ומרגיש איכותי.',
+   who:'ניר א. · חוות דעת באתר' },
 ];
 (async()=>{const br=await chromium.launch();
 for(const a of ADS){const p=await br.newPage({viewport:{width:W,height:H},deviceScaleFactor:1});
