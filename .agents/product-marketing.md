@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.2
+**Document version:** 1.3
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -358,3 +358,29 @@ Five things that change the brief:
   markets.
 
 Adjacent segment seen once, not built on: post knee-replacement patients.
+
+**1.3 — 2026-11-24.** Added a fourth avatar aimed at older buyers, 65-80:
+`variants/dofek/research/avatar-seniors-2026-11-24.md`. Confidence medium, five
+local data points plus two foreign; the channel and payment implications are
+flagged as assumptions from Israeli market context, not findings.
+
+What separates it from avatar 1: there the knee trims the routine, here it
+threatens independence itself, and the unspoken fear is becoming dependent. The
+trigger is always in front of someone else — a grandchild, a son, a family trip.
+
+Three implications that change execution:
+
+* **The current creative may actively repel this group.** A drawn "לחץ כאן"
+  button with a cursor hand reads as an advert rather than a shop, and "גבר, לא
+  נמאס לך" lands as shouting at an older man. Untested — worth an A/B before
+  concluding.
+* **The purchase is a conversation**, with a spouse, an adult child or a friend
+  ("חברה טובה סיפרה לי"). Creative has to survive being forwarded on WhatsApp
+  and still explain itself.
+* **Bit and instalments are defaults at this age in Israel, and neither exists
+  at checkout.** This is the best-fitting hypothesis for seven of eight checkout
+  sessions leaving before typing an email. It is a hypothesis, not a finding,
+  and the client has said payment works.
+
+Also: no phone number on the page. At this age a phone number is a trust signal
+whether or not anyone calls it.
