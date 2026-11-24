@@ -326,7 +326,10 @@ from Shenzhen at 47–60₪ against an 80₪ landed cost, making sourcing the hi
 
 **Tredvik (tredvik.com) is a direct competitor selling the same dial brace**
 at $39.99 **buy-one-get-one** with a 99-day guarantee, across its own store,
-Amazon and Walmart — roughly 74₪ a sleeve against DOFEK's 199.99₪. Three
+Amazon and Walmart. **The customer pays ~148₪ and receives two sleeves**, against
+199.99₪ for one at DOFEK — 35% cheaper for twice the quantity. The first unit is
+not discounted; the second is given, so it is a perceived-value offer rather than
+a price cut, which is what keeps their unit margin intact. Three
 independent sources report unanswered support, knockoff product, hidden
 ownership and return shipping charged to the customer. **Trust, not product, is
 where DOFEK can be positioned.**
