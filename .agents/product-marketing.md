@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.9
+**Document version:** 2.0
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -525,6 +525,69 @@ actual return rate (no orders yet) · the ceiling verified at gov.il.
 
 ---
 
+## 12d. The checkout works — tested with a real order, 24.11.2026
+
+**Edan placed a real order through the live storefront and refunded it.**
+Order `#1001`, 2026-11-24 21:13 UTC. Verified in Shopify Admin:
+
+| | |
+|---|---|
+| Source | `sourceName: web` · Online Store — **not a draft or admin order** |
+| Gateway | **Hyp** · `SALE` **SUCCESS** 180.00₪ · then `REFUND` SUCCESS 180.00₪ |
+| Paid | **180.00₪** — list 199.99₪ less a **19.99₪ automatic 10% discount** |
+| Shipping | **0.00₪** — free shipping worked |
+| Fulfilment | FULFILLED |
+
+**The single biggest hypothesis of the project is now dead.** Eight sessions
+reached payment and none paid, and the leading explanation was that the
+checkout was broken or that Israeli buyers had no usable payment method.
+**It processes.** The Black Friday discount applies at checkout, not only on
+the product page, and shipping is genuinely free.
+
+**What this does NOT prove:** that the payment methods a 45–60 Israeli buyer
+prefers are offered. Edan paid as himself, with his own method. Whether Bit
+or instalments appear at checkout is still **UNKNOWN** — `read_payments` is
+not in this session's Shopify scope. The 0/8 result now needs a different
+explanation, and the page defects in 12b are the strongest remaining
+candidates.
+
+### 🔴 The store is charging VAT, and Edan is an עוסק פטור
+
+The same order recorded **`totalTax: 27.46₪`** inside the 180₪ paid
+(180 ÷ 1.18 = 152.54, VAT 27.46 — exactly 18%, tax-inclusive).
+
+**An exempt dealer does not charge VAT and cannot remit it.** The cash is
+unaffected — he received 180₪ — but:
+
+- Shopify will report revenue as **152.54₪ + 27.46₪ tax** instead of 180₪
+- `shopify-admin-tax-liability-summary` will show a liability that does not exist
+- He is recording collected tax he is not registered to collect
+
+**Fix:** turn off "charge tax on this product" on the product, or clear the
+store's tax settings for Israel. **Store action, Edan's to make.** Every
+margin figure in this document already treats the full price as revenue, so
+none of them change.
+
+### ⏳ Open and decisive: did the pixel record the Purchase?
+
+Four minutes after the order, the pixel showed **PageView 46, ViewContent 11,
+and no Purchase, AddToCart or InitiateCheckout for the day.** Four minutes is
+inside Meta's normal reporting lag, so **this is not yet a finding.**
+
+It matters more than anything else open: **the live campaign optimises for
+PURCHASE.** If the Purchase event never reaches Meta, the campaign cannot
+optimise, will report zero conversions forever, and 60₪/day buys nothing but
+traffic. Across the account's entire history — 1,750₪ spent, 97,316
+impressions, 41 AddToCart, 18 InitiateCheckout, 4 AddPaymentInfo — **no
+purchase action of any type has ever been recorded.** Until tonight there
+were no orders, so that proved nothing. Tonight there was one.
+
+**Re-check required** before the campaign starts at 06:00. `read_pixels` is
+not in this session's Shopify scope, so the pixel's own configuration cannot
+be inspected from here — only Meta's side.
+
+---
+
 ## 13. Hard constraints for the agent team
 
 Binding on every agent in `.claude/agents/` and on every skill they invoke.
@@ -583,6 +646,14 @@ recommend; Edan executes.
 ---
 
 ## Changelog
+
+- **2.0** (2026-11-24) — **The checkout works.** A real storefront order
+  processed through Hyp at 180₪ with the discount applied and free shipping,
+  then refunded. The project's leading hypothesis for 0 orders is dead and
+  12b's page defects are now the strongest candidates. Two new findings: the
+  store charges 18% VAT on an **עוסק פטור**, and the pixel had not recorded
+  the Purchase four minutes later — too early to conclude, decisive for the
+  purchase-optimised campaign, re-check before 06:00.
 
 - **1.9** (2026-11-24) — Black Friday offer is live via Kaching Bundles:
   **180₪ for a single unit**, 259.99₪ for two plus socks. **Break-even CPA
