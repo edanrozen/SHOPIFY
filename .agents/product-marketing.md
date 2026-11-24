@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 1.0
+**Document version:** 1.1
 **Last updated:** 2026-11-24
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -77,7 +77,23 @@ with real evidence behind it, not a proven segment.
 
 ## 3. Personas
 
-B2C. Not applicable, except for the buyer-vs-user split in §2.
+Three avatars, built with the `customer-research` skill and written up in
+`variants/dofek/research/avatars-2026-11-24.md`. All three are **provisional**:
+the 13 reviews predate any order, so they describe the category rather than this
+store's actual buyers.
+
+1. **"אני עוד מתפקדת" — woman, 50–70.** Confidence **high**, 6 of 13 reviews,
+   the largest single group. Walks, errands, grandchildren. Buys continuity, not
+   pain relief. **Every current ad addresses a man, so this group is excluded by
+   the creative.**
+2. **"אני עומד על זה כל היום" — man, 45–65.** Confidence **medium**, 3 local
+   plus 2 foreign. On his feet for work. Owns the sizing-gamble pain: "לא צריך
+   להמר שיהיה בול עליי". This is who the current ads speak to.
+3. **"אני לא יכולה לראות אותו ככה" — the proxy buyer.** Confidence
+   **medium-low**, 2 local plus 3 foreign, and **zero presence in strategy**.
+   A daughter for her father, a wife for her husband. Triggered by one moment she
+   watched. **Decides on a friend's recommendation, not on an ad** — so creative
+   for her has to be shareable, not clickable.
 
 ---
 
@@ -297,3 +313,20 @@ Meta Marketing API, plus the campaign log at
 written down anywhere: customers call the dial **"הגלגלת"**; the **sizing
 gamble** is the strongest unused differentiation; and a **second buyer** (the
 daughter, the wife) appears repeatedly in reviews and is absent from targeting.
+
+**1.1 — 2026-11-24.** Added three avatars (§3) from the `customer-research`
+skill. Added two research files: `variants/dofek/research/market-survey-2026-11-24.md`
+(40+ listings on 7 platforms) and `competitor-tredvik-2026-11-24.md`.
+
+Two corrections to 1.0: the dial is **not** unique — Amazon carries a crowded
+category of dial braces including SOZO with a licensed BOA dial, so the moat is
+geographic and temporary, not a product advantage. And comparable braces ship
+from Shenzhen at 47–60₪ against an 80₪ landed cost, making sourcing the highest
+-return lever on the table.
+
+**Tredvik (tredvik.com) is a direct competitor selling the same dial brace**
+at $39.99 **buy-one-get-one** with a 99-day guarantee, across its own store,
+Amazon and Walmart — roughly 74₪ a sleeve against DOFEK's 199.99₪. Three
+independent sources report unanswered support, knockoff product, hidden
+ownership and return shipping charged to the customer. **Trust, not product, is
+where DOFEK can be positioned.**
