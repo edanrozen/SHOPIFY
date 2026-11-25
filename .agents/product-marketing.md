@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 2.3
+**Document version:** 2.4
 **Last updated:** 2026-11-25
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -704,6 +704,38 @@ into their own register.
 - **No number without a source.** Every figure carries the tool, the date and
   the cut. No source means `MISSING` plus what would resolve it. An estimate
   labelled as a fact is a rejection, at any seniority.
+
+#### Owner ruling — 25.11.2026 · the Meirav script
+
+🗣️ **עידן, 25.11:** *"יש לי ייעוץ משפטי, הכל בסדר."*
+
+**The owner has reviewed the Meirav voiceover with his own legal counsel and
+approved it as written.** That wording is therefore **approved copy**, and no
+agent rejects an asset for carrying it:
+
+> *"זאת מירב. מירב הפסיקה לסבול מכאבים בברך וחזרה ללכת בדיוק כמו פעם בזכות
+> דופק. תהיו מירב. תצטרפו לדופק."*
+> *"רוצה להצטרף למירב? לחצי כאן ותפסיקי לסבול."*
+
+**Scope of this ruling — read it exactly.** It covers **this script only**.
+It does not repeal the rules above. New copy is still written to them, and an
+agent still flags a new claim rather than inventing permission from this
+entry. **The approval is the owner's, not the agent's, and only the owner
+extends it.**
+
+**What it does not change, because it is not ours to waive:**
+- ⚠️ **Meta reviews on its own policy, not on Israeli law.** A rejection
+  remains possible; `ad-ad-matai` was rejected on this boundary on 24.11.
+  Agents **report** a rejection, they do not pre-emptively block the asset.
+- ✅ **No invented testimonials still stands in full.** Meirav may not be
+  framed as a real customer: no "לקוחה", no stars, no review styling, no
+  date, no before/after. This store has completed no order.
+- ✅ The on-screen line *"המגן מיועד לתמיכה חיצונית ואינו תחליף לאבחון או
+  לטיפול רפואי"* stays on the asset.
+
+**Build the asset so a rejection is cheap:** the claim lives in the voiceover
+and the captions, which are assembled locally, never baked into the generated
+clip. A rejection then costs a re-record, not the clip.
 - **No funnel number from the Meta pixel.** ShopifyQL `sessions` only. The
   pixel counts *events* and inflates carts roughly 6×.
 
@@ -737,6 +769,7 @@ recommend; Edan executes.
 
 ## Changelog
 
+- **v2.4 · 25.11.2026** — נרשמה הכרעת הבעלים: סקריפט מירב אושר על ידו עם ייעוץ משפטי, ולכן סוכן אינו פוסל נכס שנושא אותו. ההכרעה תחומה לסקריפט הזה בלבד ואינה מבטלת את כללי הטענות; איסור ההמלצות המפוברקות עומד במלואו, וסיכון דחייה של מטה נשאר ומדווח ולא חוסם.
 - **v2.3 · 25.11.2026** — **תיקון:** v2.2 טענה שאין ארנקים דיגיטליים, על בסיס `supportedDigitalWallets` ריק. **שגוי.** הבעלים תיקן: **יש Apple Pay ו-Google Pay, אין ביט ואין תשלומים.** ההסבר ל-8→0 נפתח מחדש. סעיף 12f נכתב מחדש עם אזהרת מתודולוגיה: השדה אינו מקור אמין, וזו הפעם השנייה שהסתמכות על ה-API במקום על רינדור הולידה מסקנה שגויה.
 - **v2.2 · 25.11.2026** — נוסף סעיף 12f על אמצעי התשלום. **הנתון שבו תוקן ב-v2.3.**
 - **v2.1 · 25.11.2026** — נסגרה סתירת עלות הנחיתה: **45₪ כולל הכל**, מאומת מול הבעלים ומול הגדרת משלוח חינם פעילה. CPA לאיזון עולה ~39% (129₪ בלאק פריידי, 149₪ מחיר רגיל). נוסף סעיף 12e.
