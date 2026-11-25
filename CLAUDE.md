@@ -42,7 +42,7 @@ or "עומר סאונד". Reversible on one word from him.
 
 ### What the agents read
 
-1. **`.agents/product-marketing.md`** (v1.4) — the shared context document, and
+1. **`.agents/product-marketing.md`** (v2.1) — the shared context document, and
    the only source of product facts. Product, audience, pains, competitors,
    differentiation, objections, verbatim Hebrew customer language, brand voice,
    proof points, the current funnel and ad-account state, and **section 13: the

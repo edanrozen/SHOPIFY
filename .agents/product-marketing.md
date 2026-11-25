@@ -1,7 +1,7 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 2.0
-**Last updated:** 2026-11-24
+**Document version:** 2.1
+**Last updated:** 2026-11-25
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
 
