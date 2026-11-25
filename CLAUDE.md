@@ -30,6 +30,12 @@ vacant seats and the colliding names, is
 **`.claude/marketing-team/ORG.md`**. The marketing protocol — written for
 Eitan, now Tamar's — is `.claude/marketing-team/EITAN.md`.
 
+**Nested delegation does not work.** A subagent gets no working `Task`
+tool, so Eitan cannot convene a room — verified 25.11.2026. **Claudie runs
+the specialists directly** and hands Eitan the outputs to judge. The
+hierarchy stands as the accountability and review model, not as a technical
+delegation path. Detail in `.claude/marketing-team/ORG.md`.
+
 Orchestration rules in short: pick only the relevant specialists, not all 20;
 usually 3–5 in parallel; every agent gets a brief with a deliverable and success
 criteria because it has no conversation history; no agent approves its own work;
