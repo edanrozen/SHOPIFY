@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 2.4
+**Document version:** 2.5
 **Last updated:** 2026-11-25
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -32,11 +32,11 @@ orthopaedic-supply sleeves, not beside sports gear.
 
 | | |
 |---|---|
-| Price | 199.99₪, VAT included (`taxesIncluded: true`) |
-| Landed cost | ~80₪ |
-| Fees + returns | ~13₪ |
-| **Break-even CPA** | **~93₪** at the Black Friday price of 180₪ (see 12c) · ~113₪ at 199.99₪ |
-| **Contribution per order** | **~93₪** |
+| Price | 199.99₪ · **עוסק פטור, no VAT is owed** (the store nonetheless charged 27.46₪ on order #1001 — open compliance item, see 12d) |
+| **Landed cost** | **45₪ — full landed, everything in.** ✅ Confirmed by the owner 25.11 and matched against `unitCost` on all 8 variants and the active free-shipping method. The old ~80₪ was an assumption and was conservative by 35₪ a unit. |
+| Fees | ⚠️ ~3% as an upper bound only. No `read_payments` scope, so the real rate is **`MISSING`**. Returns rate also `MISSING`. |
+| **Break-even CPA** | **~149₪** at 199.99₪ · ~129₪ at the Black Friday 180₪ (ends 27.11) · **~162₪** on the two-pack at 259.99₪ |
+| **Contribution per order** | **~149₪ — a 74% margin** |
 | Shipping | Free, 10–14 business days, tracked |
 | Returns | 30 days (Israeli law requires 14) |
 | Variants | 8 — black/white × M/L/XL/XLL. Sold as one unit, not a pair. |
@@ -769,6 +769,7 @@ recommend; Edan executes.
 
 ## Changelog
 
+- **v2.5 · 25.11.2026** — תוקנה סתירה פנימית שצ'רלי תפס: טבלת סעיף 1 עדיין נשאה עלות נחיתה 80₪ ו-CPA לאיזון 93₪ בעוד שסעיף 12e נושא את ה-45₪ המאומת. סוכנים קוראים את סעיף 1 ראשון ולכן חזרו לתקרת CPA נמוכה ב-35₪ ליחידה. הטבלה מעודכנת ל-45₪ · 149₪ · 129₪ · 162₪.
 - **v2.4 · 25.11.2026** — נרשמה הכרעת הבעלים: סקריפט מירב אושר על ידו עם ייעוץ משפטי, ולכן סוכן אינו פוסל נכס שנושא אותו. ההכרעה תחומה לסקריפט הזה בלבד ואינה מבטלת את כללי הטענות; איסור ההמלצות המפוברקות עומד במלואו, וסיכון דחייה של מטה נשאר ומדווח ולא חוסם.
 - **v2.3 · 25.11.2026** — **תיקון:** v2.2 טענה שאין ארנקים דיגיטליים, על בסיס `supportedDigitalWallets` ריק. **שגוי.** הבעלים תיקן: **יש Apple Pay ו-Google Pay, אין ביט ואין תשלומים.** ההסבר ל-8→0 נפתח מחדש. סעיף 12f נכתב מחדש עם אזהרת מתודולוגיה: השדה אינו מקור אמין, וזו הפעם השנייה שהסתמכות על ה-API במקום על רינדור הולידה מסקנה שגויה.
 - **v2.2 · 25.11.2026** — נוסף סעיף 12f על אמצעי התשלום. **הנתון שבו תוקן ב-v2.3.**
