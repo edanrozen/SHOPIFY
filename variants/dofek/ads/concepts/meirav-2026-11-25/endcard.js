@@ -13,7 +13,7 @@ body{font-family:Rubik,sans-serif;background:${NAVY};overflow:hidden;
 .rule{width:${Math.round(W*0.17)}px;height:5px;background:${OR};border-radius:9px}
 .ask{font-family:'Secular One';color:${CREAM};font-size:${Math.round(W*0.086)}px;
  line-height:1.22;text-align:center;letter-spacing:-.02em;padding:0 ${Math.round(W*0.09)}px}
-.ask em{font-style:normal;color:${OR}}
+.ask em{font-style:normal;color:#FFFFFF}
 .cta{margin-top:${Math.round(H*0.012)}px;background:${OR};color:${NAVY};font-weight:900;
  font-size:${Math.round(W*0.062)}px;padding:${Math.round(H*0.027)}px ${Math.round(W*0.105)}px;
  border-radius:999px;display:flex;align-items:center;gap:${Math.round(W*0.03)}px;
