@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "marketing-agent-kit": {
+      "source": {
+        "source": "github",
+        "repo": "tymoshenko-dmytro/claude-marketing-skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "marketing-agent-kit@marketing-agent-kit": true
+  }
+}

@@ -1,0 +1,100 @@
+/* ==========================================================================
+   DOFEK, the palette and the shared tokens.
+
+   The brief was one sentence: the only colours on this shop are black and
+   white. This file is where that sentence is enforced. Every other sheet in
+   the theme reads these names and none of them defines one, so the whole
+   shop, Horizon's own parts included, is monochrome because this file says
+   so and for no other reason.
+
+   The file keeps the names it had under the previous brand rather than
+   inventing a parallel set. A rename would have touched six sheets and
+   twenty sections to change nothing a visitor can see; the names are
+   internal, the values are the design. Where a name still reads "brown" or
+   "cream" it now resolves to black or to white, and the comment beside it
+   says which.
+
+   The greys. There are five, and none of them is a third colour: each is
+   black at a stated percentage over the white page, which is what a hairline
+   and a caption have to be if the page is to have any structure at all. They
+   are listed with the contrast they carry, measured rather than assumed, so
+   the next person to change one knows what it is holding up.
+   ========================================================================== */
+
+:root {
+  /* Black does every job the two brand colours used to split between them:
+     it fills the buttons, it sets the headings, it draws the dark bands. At
+     19.80:1 on white it has no caveat at any size, which is the whole
+     advantage of a monochrome shop over a tinted one. */
+  --wf-accent:      #0A0A0A;  /* fills, edges, every button. white on it 19.80:1 */
+  --wf-accent-deep: #000000;  /* hover and press. 21:1                           */
+  --pl-brown:       #0A0A0A;  /* headings, prices, the dark panel. 19.80:1       */
+  --pl-brown-deep:  #000000;  /* hover                                           */
+
+  /* The paper. Three names resolve to it because callers across the theme
+     ask for it by three different words, and renaming them would be churn
+     for nothing. */
+  --pl-white:     #FFFFFF;
+  --pl-porcelain: var(--pl-white);
+  --pl-cream:     var(--pl-white);
+  --pl-sand:      var(--pl-white);
+
+  /* The three neutrals, each black over white at a stated percentage.
+
+     --pl-cream-deep   black 4%. The one tinted surface in the shop: every
+                       band that is not white and not black is this. 1.09
+                       from the page, which separates two adjacent bands
+                       without reading as a colour. Ink on it 18.16:1.
+
+     --pl-sand-deep    black 16%, read as text on the black panels in
+                       df-hero and df-promise at 13.6:1.
+
+     --pl-line         black 12%. A card edge, a table rule, the empty half
+                       of a rating star. 1.32 against the page, so an edge is
+                       faint and present rather than absent, and black on it
+                       is 15.0:1. */
+  --pl-cream-deep:  #F5F5F5;
+  --pl-sand-deep:   #D6D6D6;
+  --pl-line:        #E0E0E0;
+
+  /* The one grey that is allowed to touch a control rather than a surface.
+     WCAG 1.4.11 puts the floor for a non-text boundary at 3:1 and --pl-line
+     is nowhere near it, so an input border, a focus ring and a divider that
+     has to be found all take this instead. 3.45:1 on white, measured. */
+  --pl-edge:      #8A8A8A;
+
+  --pl-ink:       #0A0A0A;  /* 19.80:1 on white                                 */
+  --pl-ink-soft:  #595959;  /*  7.00:1, long paragraphs and captions            */
+  --pl-taupe:     #6E6E6E;  /*  5.10:1, the quietest text on the shop           */
+  --pl-clay:      var(--wf-accent);
+  --pl-clay-deep: var(--wf-accent-deep);
+
+  /* Ink on the black bands. White carries the headline, this carries the
+     paragraph under it, and the hairline is the third. */
+  --pl-on-dark:      #FFFFFF;  /* 19.80:1 on #0A0A0A */
+  --pl-on-dark-soft: #B8B8B8;  /*  9.98:1            */
+  --pl-on-dark-mute: #8F8F8F;  /*  6.12:1            */
+  --pl-on-dark-line: rgba(255, 255, 255, .16);
+  --pl-on-dark-edge: #666666;  /*  3.45:1, the 1.4.11 floor for a control */
+
+  --wf-rule:      var(--wf-accent);
+  --pl-rule-soft: rgba(10, 10, 10, .22);
+
+  /* Shadows are black at an opacity, so they cost the palette nothing. They
+     are shallower than the previous brand's: on a white page under a black
+     mark, a soft drop reads as dirt rather than as depth. */
+  --pl-sh-s: 0 1px 2px rgba(0, 0, 0, .06);
+  --pl-sh-m: 0 4px 16px rgba(0, 0, 0, .08);
+  --pl-sh-l: 0 16px 40px rgba(0, 0, 0, .10);
+
+  /* Cards take 4px and buttons stay full pills.
+
+     Square corners and pure black and white is an editorial look, and this
+     shop is selling knee support to people who are already uncomfortable.
+     The pill on the one thing they have to press is the friendlier of the
+     two reads at no cost to the palette. */
+  --wf-r: 4px;
+  --wf-r-lg: 6px;
+  --wf-pill: 999px;
+  --wf-scrim: linear-gradient(to top, rgba(0, 0, 0, .72) 0%, rgba(0, 0, 0, .34) 42%, rgba(0, 0, 0, 0) 76%);
+}

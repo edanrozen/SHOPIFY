@@ -1,0 +1,123 @@
+{%- doc -%}
+  A stack of picture-beside-argument rows.
+
+  Used twice on the product page: once for what the brace is made of, once
+  for how the dial actually tightens it. One section rather than two,
+  because the only difference between them is the ground colour and whether
+  the rows are numbered.
+
+  The rows alternate sides automatically on the even ones rather than
+  carrying a per-row setting. A merchant who inserts a row in the middle
+  should not then have to go and flip every row underneath it.
+{%- enddoc -%}
+
+{%- liquid
+  assign classes = 'dl'
+  case section.settings.ground
+    when 'tint'
+      assign classes = classes | append: ' dl--tint'
+    when 'dark'
+      assign classes = classes | append: ' dl--dark'
+  endcase
+
+  assign drawn = 0
+  for block in section.blocks
+    if block.settings.title != blank or block.settings.image != blank
+      assign drawn = drawn | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if drawn > 0 -%}
+  <section class="{{ classes }}">
+    <div class="pl-wrap">
+      {%- if section.settings.heading != blank -%}
+        <div class="dl__head{% if section.settings.centred %} dl__head--mid{% endif %}">
+          {%- if section.settings.kicker != blank -%}
+            <p class="dl__kicker">{{ section.settings.kicker }}</p>
+          {%- endif -%}
+          <h2 class="dl__h2">{{ section.settings.heading }}</h2>
+          {%- if section.settings.text != blank -%}
+            <p class="dl__sub">{{ section.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="dl-rows">
+        {%- assign n = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.title == blank and block.settings.image == blank -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- assign n = n | plus: 1 -%}
+          <div class="dl-row" {{ block.shopify_attributes }}>
+            <figure class="dl-row__media">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 900 }}"
+                  srcset="{{ block.settings.image | image_url: width: 520 }} 520w, {{ block.settings.image | image_url: width: 900 }} 900w"
+                  sizes="(min-width: 860px) 46vw, 100vw"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  alt="{{ block.settings.alt | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                >
+              {%- endif -%}
+            </figure>
+            <div>
+              {%- if section.settings.numbered -%}
+                <span class="dl-row__n" aria-hidden="true">{{ n }}</span>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <h3 class="dl-row__t">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="dl-row__b">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DOFEK · שורות תכונות",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "שורת פתיחה" },
+    { "type": "text", "id": "heading", "label": "כותרת" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "checkbox", "id": "centred", "label": "כותרת במרכז", "default": false },
+    { "type": "checkbox", "id": "numbered", "label": "למספר את השורות", "default": false },
+    {
+      "type": "select",
+      "id": "ground",
+      "label": "רקע",
+      "default": "white",
+      "options": [
+        { "value": "white", "label": "לבן" },
+        { "value": "tint", "label": "אפור בהיר" },
+        { "value": "dark", "label": "שחור" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "שורה",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "תמונה" },
+        { "type": "text", "id": "alt", "label": "תיאור התמונה לקוראי מסך" },
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "textarea", "id": "text", "label": "טקסט" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "DOFEK · שורות תכונות" }]
+}
+{% endschema %}

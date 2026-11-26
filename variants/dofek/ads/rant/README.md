@@ -1,0 +1,268 @@
+# DOFEK · «סתום ת'פה» — the direct-address cut
+
+A second creative, written by the client, that does the opposite of the story
+film: it does not ask the viewer to identify with a character, it accuses him.
+
+```
+סתום ת'פה. כן כן, אתה. אם הברך כואבת לך כל יום ובכל זאת אתה לא עושה עם זה
+כלום — אז תמשיך. תמשיך לסבול, במקום לקנות כבר את מגן הברך של דופק ולחזור
+ללכת כמו בן אדם, לא כמו חיה פצועה. לא נמאס לך ללכת לעבודה ולסבול? די. די
+כבר. אתה רוצה להתלונן או למצוא פתרון? רוצה פתרון — תלחץ פה ובוא נגמור את
+זה. באחריות. יאללה, תזמין ותספר לי איך היה.
+```
+
+## Why this format suits the tooling
+
+The lip-sync finding from the story film was that it only registers on close,
+stable faces — in wide or fast-moving shots the mouth is a few dozen blurred
+pixels and the sync is invisible. **An ad that is nothing but a talking
+close-up is the case the tool is best at**, so the format and the technology
+agree for once.
+
+## The one line that was changed, and why
+
+The client's original was «כן כן אתה, שכל היום סובל מכאבים». That asserts
+knowledge of the viewer's health, which is what Meta's **Personal Attributes**
+policy prohibits and a common rejection reason in this category. A rejected ad
+costs days, and repeated rejections put the account at risk.
+
+Changed to a conditional, which keeps the whole accusation:
+
+> «כן כן, אתה. **אם הברך כואבת לך כל יום** ובכל זאת אתה לא עושה עם זה כלום»
+
+Everything else is verbatim.
+
+## Structure — nine beats, six of them generated
+
+| # | beat | shot |
+|---|---|---|
+| 1 | «סתום ת'פה» · «כן כן, אתה» | new — tight close, finger at the lens |
+| 2 | «אם הברך כואבת לך כל יום…» | new — palms spread, disbelief |
+| 3 | «אז תמשיך. תמשיך לסבול…» | new — foot up, braced knee in frame |
+| 4 | «ולחזור ללכת כמו בן אדם, לא כמו חיה פצועה» | **reused** `c02`, bent under a sack |
+| 5 | «לא נמאס לך ללכת לעבודה ולסבול?» | **reused** `c01`, slumped at the ladder |
+| 6 | «די. די כבר…» | new — flat palm, stop |
+| 7 | «רוצה פתרון? תלחץ פה…» | new — pointing straight at the viewer |
+| 8 | «יאללה, תזמין ותספר לי איך היה» | new — the first warmth in the film |
+| 9 | end card | 77-frame reveal, «מספיק להתלונן. תפסיק לסבול.» |
+
+**Beats 4 and 5 are reused silent footage with voice laid over, and they are
+better that way.** «לא כמו חיה פצועה» while you watch him bent double under a
+plaster sack beats him saying it to camera: the words describe, the picture
+proves. It also took the build from 242 credits to 172 and left a margin for
+mistakes, which a full-generation cut would not have.
+
+A third cutaway («לחשוב על כל פעילות כמו אירוע שלם») was cut: three VO lines
+ran 9.9s against 7.0s of available picture, and that one is the abstract one
+while «לא נמאס לך ללכת לעבודה ולסבול» already makes the point concretely.
+
+**He wears the brace throughout.** He is not lecturing from outside the
+problem, he is the man who already solved it — which is what earns him the
+right to shout. It also keeps the product on screen without a single product
+shot.
+
+## Music
+
+A rant bed must not swell; it must drive and stay out of the voice. Two
+candidates, both steady-energy Mizrahi as intended, separated by brightness:
+
+```
+mzr1   energy flat 19   brightness 1219   dense exactly where the voice sits
+mzr2   energy flat 19   brightness  480   leaves room for speech   ← chosen
+```
+
+In an ad whose product is the voice, a bright bed forces the music down until
+it is not there. `mzr2` delivers the same drive without the collision and
+lifts 44% in brightness at the CTA. Stretched to `atempo 0.94` so its tail
+clears the 37.04s cut, and sidechained harder than the story film
+(`threshold=0.03:ratio=12`) because speech is continuous here.
+
+Master: **37.04s, −15.0 LUFS, −3.1 dBTP.**
+
+---
+
+## sync_so was removing mouth motion, not adding it
+
+Client: *"צריך גם שיראו אותו מדבר ממש, שהשפתיים יזוזו וידברו."*
+
+`mouth.py` crops the mouth region and measures frame-to-frame difference.
+Measured on the same clip before and after the lip-sync pass:
+
+```
+kling output, before sync_so   mean 15.36
+after sync_so                  mean 11.96     -22%
+```
+
+And on the story film, where the pass was assumed to be working:
+
+```
+c03  before   mean 3.44
+K03n after    mean 3.43              no change at all
+```
+
+**Every bit of visible mouth movement in both films came from the animation
+model. `sync_so` only smoothed it.** Six passes cost 109 credits and made the
+character talk less. The likely reasons are the two things that make this
+character distinctive: a stylised non-photoreal face, and a moustache
+covering the whole upper lip.
+
+The model has no strength parameter, so there was nothing to turn up.
+
+### What worked instead
+
+Direct the articulation in the kling prompt and skip the lip-sync entirely:
+
+> *"His JAW DROPS OPEN WIDE and snaps shut again and again as he forms words —
+> big exaggerated cartoon-animation mouth shapes, teeth visible on the open
+> vowels, lips pursing and stretching between them. The moustache lifts with
+> the upper lip. At least eight distinct open-close mouth movements, continuous
+> from the first frame to the last."*
+
+```
+shot   with sync_so   with articulation prompt
+  1       11.96              16.59   +39%
+  2        6.28               7.27   +16%
+  3        7.16              11.08   +55%
+  4       10.76              18.11   +68%
+  5        9.83              12.08   +23%
+  6        6.86              14.79   +116%
+```
+
+Six consecutive quarter-second frames of the opening shot now read: open with
+teeth, closed, "O", pursed "O", "O", open with teeth. That is talking.
+
+**52 credits instead of 109, and the mouth moves.**
+
+### The trade-off, stated plainly
+
+Without `sync_so` the mouth shapes do not correspond to Hebrew phonemes. They
+did not correspond visibly before either — that is what the measurement shows.
+The real choice was between generic articulation you can **see** and accurate
+articulation you **cannot**, and the captions carry the words regardless.
+
+Keep `sync_so` for photoreal faces with an unobstructed mouth. For this
+character, direct the animation model.
+
+### Consequence for the build
+
+No clip carries baked audio any more. All eight voice tracks — six talking
+lines and two cutaway lines — are placed on the timeline in `mix.sh`, so the
+whole soundtrack is in one place and a line can be moved without regenerating
+anything.
+
+---
+
+## Three corrections after the first cut
+
+### 1. A line was sitting on the picture that contradicted it
+
+«במקום לקנות כבר את מגן הברך של דופק **ולחזור ללכת כמו בן אדם, לא כמו חיה
+פצועה**» is one sentence describing two opposite states: with the brace, and
+without it. Both halves were laid over the same suffering shot, so «walking
+like a human» played while the man was bent double under a plaster sack, and
+the only braced image came *before* it.
+
+Split across two pictures, which is what the sentence asks for:
+
+```
+«ולחזור ללכת כמו בן אדם»   c10 — the braced leg stepping up the ladder
+«לא כמו חיה פצועה»          c02 — bent under the sack
+```
+
+Free; both clips already existed. The section now reads brace → walking →
+animal → suffering, which is the order the words are in.
+
+### 2. Speech and mouth were not starting together
+
+`onset.py` reports the first frame where the mouth crosses 30% of its peak
+motion. Compared against where each voice line actually begins:
+
+```
+shot   mouth at   speech at   drift
+  1      0.65       0.65       ok
+  2      3.65       3.63       ok
+  3      8.80       8.73      -0.07
+  4     21.11      21.19      +0.08
+  5     26.47      26.24      -0.23   audible
+  6     31.19      31.50      +0.31   audible
+```
+
+Each talking segment is now trimmed to start **0.18s before its measured
+mouth onset**, and its line is placed at exactly that point. Speech and lips
+begin together in every shot. Where a line runs longer than the shot's
+mouth-movement window it overruns into the next talking shot, which is
+ordinary editing and reads as continuous speech.
+
+**What this does not fix:** generic articulation still does not track Hebrew
+phonemes, because no lip-sync model on this account handles this character —
+`sync_so` reduces mouth motion (measured above) and `grok_video_v15`, the only
+audio-driven option, failed twice on these inputs. Aligning the onsets removes
+the part of the mismatch the eye actually catches.
+
+### 3. Words that were not landing
+
+«באחריות» came out slurred. Re-recorded as «בְּאַחְרָיוּת מְלֵאָה» — fuller
+vocalisation plus a following word, which stops the model swallowing the
+ending. Its internal sentence gap was tightened from 0.60s to 0.25s so the
+longer line still fits the shot.
+
+Master: **36.88s, −14.8 LUFS, −4.2 dBTP.**
+
+---
+
+## v2 — built on the voice timeline (this supersedes everything above about sync)
+
+Client on v1: *"יש פה דיליי מטורף והקול חייב להיות אחיד."* Both were true and
+both are now measured.
+
+### The delay, as a number
+
+`sync.py` correlates mouth-region motion with the audio envelope and scans
+lags. On the rejected cut the correlation was **negative** — the mouth moved
+during the silences:
+
+```
+              v1 (articulation prompt)   v2 (wan2_7, audio-driven)
+shot 1              -0.29                 +0.52   lag 1 frame
+shot 2                                    +0.42   lag 0
+shot 3                                    +0.23   lag 0   (wide shot, small mouth; checked by eye)
+shot 4              -0.12                 +0.63   lag 1 frame
+shot 5                                    +0.66   lag 0   (after a 2-frame edit offset)
+shot 6                                    +0.53   lag 1 frame
+```
+
+The v2 figures are measured on the **finished film against its final
+soundtrack**, not on the source clips.
+
+**What fixed it: `wan2_7` with `start_image` + `audio_references`.** It
+generates the talking face *from* the audio slice instead of animating first
+and syncing afterwards. `sync_so` damped the mouth on this character and
+`grok_video_v15` failed outright; this is the model that works for a stylised
+face with a moustache. Duration is free (2–15s), so each shot is generated at
+the length of its line.
+
+### The voice, as a number
+
+v1 was nine separately generated lines, two of them re-recorded later. Mean
+level per line ranged from −19.0 to −23.9 dB — a **4.9 dB** spread, with the
+re-recorded lines audibly louder than the rest. v2 is **one continuous take of
+the whole monologue**, compressed 4:1: **2.8 dB** spread across its phrases.
+`sent.py` lists every phrase with its level.
+
+### The method
+
+The voice take is the master clock and the picture is cut to it:
+
+1. Record the monologue once. Read phrase boundaries off `sent.py`.
+2. Slice it at shot boundaries; each talking shot's slice goes to `wan2_7`
+   with that shot's start frame.
+3. Assemble with segment lengths in **frames** (`build2.sh`), so the picture
+   cannot drift against the continuous audio. Frame 0 of each talking shot is
+   the first sample of its slice.
+4. Score the finished film with `sync.py`. Shot 5 led by two frames at source;
+   it is offset in the edit and now peaks at lag 0.
+
+Cutaways are unchanged: «ולחזור ללכת כמו בן אדם» on the braced leg, «לא כמו
+חיה פצועה» on the sack, «לא נמאס לך…» at the ladder.
+
+Master: **35.17s, −15.0 LUFS, −5.1 dBTP.**

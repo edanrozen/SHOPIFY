@@ -1,0 +1,451 @@
+/* ── The promises ──────────────────────────────────────────────────────
+   Every rule in this sheet draws something the shop promises the customer: the
+   guarantee as a band, the same guarantee as a modal, and the strip of perks
+   above the product page. They share a file because they share a job, and
+   because the merchant edits all three when the offer changes.
+
+   It is a sheet of its own rather than more of wf.css because a promise moves,
+   and a promise that moves is easier to find in a small file named after it
+   than inside the shop's own sheets. It loads on every template rather than
+   only on the ones carrying these sections today, so a band dropped onto a
+   third template in the editor is styled the moment it lands.
+
+   The band is the tinted surface, not a brown slab, and that is a decision
+   about how much colour a page can carry rather than about this section. On
+   the homepage it lands directly under the hero, which is already a brown
+   panel: two full width brown blocks in a row read as a page built out of
+   colour, and on a white shop the colour is supposed to be on the button and
+   the heading. One brown block per page, and this is not it.
+
+   Measured on the tint: the brown heading 6.55:1, ink-soft 8.93:1, the taupe
+   5.06:1, the green link 5.64:1 and white on the green button 4.69:1. */
+
+.wf-vow--band {
+  background: var(--pl-cream-deep);
+  padding-block: clamp(30px, 5vw, 60px);
+}
+
+.wf-vow__inner { display: grid; gap: clamp(22px, 4vw, 34px); }
+
+.wf-vow__eyebrow {
+  font-family: var(--pl-sans);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.3;
+  margin: 0 0 10px;
+}
+
+.wf-vow__h {
+  font-family: var(--pl-display);
+  font-size: clamp(1.35rem, 5.2vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+
+.wf-vow__x {
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 54ch;
+}
+
+.wf-vow__fine {
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  line-height: 1.55;
+  margin: 12px 0 0;
+  max-width: 54ch;
+}
+
+.wf-vow--band .wf-vow__eyebrow { color: var(--pl-taupe); }
+.wf-vow--band .wf-vow__h { color: var(--pl-brown); }
+.wf-vow--band .wf-vow__x { color: var(--pl-ink-soft); }
+.wf-vow--band .wf-vow__fine { color: var(--pl-taupe); }
+
+/* Stacked on a phone, side by side once there is room. Side by side at 390px
+   left the button and the link sharing about 337px of a 358px column, which
+   squeezed the link onto two cramped lines beside a pill. A button and a
+   secondary link are not a row until the row fits. */
+.wf-vow__acts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: clamp(18px, 3vw, 24px);
+}
+
+@media (min-width: 560px) {
+  .wf-vow__acts {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+  }
+}
+
+.wf-vow__go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding-inline: 26px;
+  border: 0;
+  border-radius: var(--wf-pill);
+  font-family: var(--pl-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .16s ease, transform .16s ease;
+}
+
+/* The same button as every other button in the shop. It used to be inverted,
+   a cream pill on brown, because the band was dark; on the tint there is no
+   reason for this one call to action to look like a different product. */
+.wf-vow--band .wf-vow__go { background: var(--wf-accent); color: var(--pl-white); }
+.wf-vow--band .wf-vow__go:hover { background: var(--wf-accent-deep); }
+
+/* 44px tall, not just the 20px the text occupies. In the actions row this is a
+   target rather than a word inside a sentence, so the inline exception does
+   not cover it; it measured 20px before the min-height. */
+.wf-vow__pol {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wf-vow--band .wf-vow__pol { color: var(--wf-accent-deep); }
+
+.wf-vow__pts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wf-vow__pt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: var(--wf-r);
+}
+
+.wf-vow__pt-t {
+  font-family: var(--pl-sans);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.wf-vow__pt-x {
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  line-height: 1.45;
+}
+
+/* White cards on the tint, which is the same pair the catalogue cards use, so
+   the three points are read the same way as everything else on the page. The
+   darkened brown panel these replace existed only because the band was dark. */
+.wf-vow--band .wf-vow__pt {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-line);
+}
+.wf-vow--band .wf-vow__pt-t { color: var(--pl-ink); }
+.wf-vow--band .wf-vow__pt-x { color: var(--pl-taupe); }
+
+/* The copy and the three points sit one under the other on a phone and beside
+   each other once there is room for the points to stay on one line each. */
+@media (min-width: 900px) {
+  .wf-vow__inner {
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+    align-items: center;
+    gap: clamp(34px, 5vw, 64px);
+  }
+}
+
+/* ── The same promise as a modal ───────────────────────────────────────────
+   The element is a real <dialog>, so the focus trap, the Escape key and the
+   top layer are the browser's. Nothing below styles a state the browser does
+   not already manage. */
+
+.wf-vow__pop {
+  width: min(92vw, 420px);
+  max-width: none;
+  max-height: 88dvh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--wf-r-lg);
+  background: transparent;
+  overflow: visible;
+}
+
+.wf-vow__pop::backdrop { background: rgba(42, 39, 34, .62); }
+
+.wf-vow__card {
+  position: relative;
+  display: block;
+  max-height: 88dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(26px, 6vw, 34px) clamp(20px, 5vw, 30px) clamp(20px, 4vw, 26px);
+  border-radius: var(--wf-r-lg);
+  background: var(--pl-cream);
+  box-shadow: var(--pl-sh-l);
+  text-align: center;
+}
+
+.wf-vow__close {
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--minimum-touch-target, 44px);
+  height: var(--minimum-touch-target, 44px);
+  padding: 0;
+  border: 0;
+  border-radius: var(--wf-pill);
+  background: transparent;
+  color: var(--pl-ink-soft);
+  cursor: pointer;
+}
+
+.wf-vow__close:hover { background: var(--pl-sand-deep); }
+
+.wf-vow__badge {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 6px 14px;
+  border-radius: var(--wf-pill);
+  background: var(--wf-accent);
+  color: var(--pl-white);
+  font-family: var(--pl-sans);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  line-height: 1.3;
+}
+
+.wf-vow__pop .wf-vow__h { color: var(--pl-brown); }
+.wf-vow__pop .wf-vow__x { color: var(--pl-ink-soft); margin-inline: auto; }
+.wf-vow__pop .wf-vow__fine { color: var(--pl-taupe); margin-inline: auto; }
+
+/* Flat rows in the modal, not the cards the band uses, and the reason is a
+   measurement. As cards the three points made the modal 653px tall, and an
+   iPhone SE is 667px: at 88dvh the button that the whole interruption exists
+   for sat below an internal scroll. Stripping the boxes and running each point
+   on one line takes about 90px out and puts the button back on screen.
+
+   The rows carry a tick rather than a bullet, because each one is a thing the
+   reader is being given, not an item in a list. */
+.wf-vow__pop .wf-vow__pts {
+  margin: clamp(14px, 3vw, 18px) 0 0;
+  gap: 7px;
+  text-align: start;
+}
+
+.wf-vow__pop .wf-vow__pt {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 6px;
+  padding: 0;
+  border-radius: 0;
+}
+
+.wf-vow__pop .wf-vow__pt::before {
+  content: '\2713';
+  flex: 0 0 auto;
+  align-self: start;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--wf-accent-deep);
+}
+
+.wf-vow__pop .wf-vow__pt-t { color: var(--pl-ink); }
+.wf-vow__pop .wf-vow__pt-x { color: var(--pl-taupe); }
+
+.wf-vow__pop .wf-vow__go {
+  width: 100%;
+  margin-top: clamp(18px, 4vw, 24px);
+  background: var(--wf-accent);
+  color: var(--pl-white);
+}
+.wf-vow__pop .wf-vow__go:hover { background: var(--wf-accent-deep); }
+
+.wf-vow__pop .wf-vow__pol {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--pl-brown);
+}
+
+.wf-vow__pop[open] { animation: wf-vow-in .22s ease-out both; }
+
+@keyframes wf-vow-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-vow__pop[open] { animation: none; }
+  .wf-vow__go { transition: none; }
+}
+
+/* ── The perks strip, above the product page ────────────────────────────────
+   The sand under the header, dark brown and bold on it, the way the merchant
+   drew it. Measured: --pl-brown on --pl-sand-deep is 4.98:1, which clears the
+   4.5:1 a small bold line needs without going to black. It was 5.16:1 while
+   the sand was mixed toward the dog tan; the brown-derived sand gives up that
+   much and buys a palette with nothing in it but the two logo colours.
+
+   Fixed columns rather than a flex row with pipe separators, and that is the
+   whole trick. A wrapped flex row puts a separator at the start of the second
+   line, and a row that scrolls hides a perk on exactly the screen most of the
+   traffic arrives on. With one row of equal columns the divider is a border on
+   the cell, the text wraps inside its own column on a phone, and every perk
+   stays on screen at every width.
+
+   --wf-perks-n is written by the section from the number of non blank perks,
+   so dropping one in the editor gives two real columns instead of an empty
+   third. */
+.wf-perks {
+  background: var(--pl-sand-deep);
+  padding-block: 11px;
+}
+
+.wf-perks__list {
+  display: grid;
+  grid-template-columns: repeat(var(--wf-perks-n, 3), minmax(0, 1fr));
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wf-perks__i {
+  padding-inline: clamp(6px, 2vw, 18px);
+  text-align: center;
+  font-family: var(--pl-sans);
+  font-size: clamp(.75rem, 2.5vw, .95rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--pl-brown);
+}
+
+/* The divider is the cell's own edge, so it can never land at the start of a
+   line: there is only ever one line of cells. It reads --pl-rule-soft rather
+   than an rgba written here, because a brand colour at an opacity written as
+   a literal in a sheet is the one thing a palette swap cannot reach: it left
+   a brown hairline on the sky palette's blue strip. */
+.wf-perks__i + .wf-perks__i {
+  border-inline-start: 1px solid var(--pl-rule-soft);
+}
+
+/* ── The email capture ──────────────────────────────────────────────────
+   It borrows the modal chrome from the guarantee popup, .wf-vow__pop and
+   .wf-vow__card, so only the form parts are new. Two modals on one site that
+   look like two different products of two different shops is a worse problem
+   than a slightly generic one.
+
+   Contrast on the cream card: the label is the ink at 8.80:1, the consent line
+   the taupe at 4.99:1, the code chip is the paper on the brown at 6.46:1. */
+.wf-optin__form { display: block; }
+
+.wf-optin__label {
+  display: block;
+  margin: clamp(12px, 3vw, 16px) 0 5px;
+  text-align: start;
+  font-family: var(--pl-sans);
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--pl-ink-soft);
+}
+
+/* 16px is not a taste decision. Below it iOS Safari zooms the whole page on
+   focus and the visitor lands mid-field with the modal off screen. */
+.wf-optin__field {
+  display: block;
+  width: 100%;
+  min-height: var(--minimum-touch-target, 44px);
+  padding: 10px 14px;
+  border: 1px solid var(--pl-line);
+  border-radius: var(--wf-r);
+  background: var(--pl-white);
+  font-family: var(--pl-sans);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--pl-ink);
+}
+
+.wf-optin__field:focus-visible {
+  outline: 2px solid var(--wf-accent);
+  outline-offset: 1px;
+  border-color: var(--wf-accent);
+}
+
+.wf-optin__err {
+  margin: 8px 0 0;
+  text-align: start;
+  font-family: var(--pl-sans);
+  font-size: .85rem;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--pl-brown-deep);
+}
+
+/* The whole row is the target, not the 16px box, so the tick is reachable
+   with a thumb without aiming. */
+.wf-optin__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 12px;
+  padding-block: 6px;
+  min-height: var(--minimum-touch-target, 44px);
+  text-align: start;
+  cursor: pointer;
+  font-family: var(--pl-sans);
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--pl-taupe);
+}
+
+.wf-optin__consent input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  accent-color: var(--wf-accent);
+}
+
+.wf-optin__code {
+  margin: clamp(16px, 4vw, 20px) 0 0;
+  padding: 12px 18px;
+  border-radius: var(--wf-r);
+  background: var(--pl-brown);
+  color: var(--pl-cream);
+  font-family: var(--pl-display);
+  font-size: clamp(1.3rem, 6vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.2;
+  user-select: all;
+}
+
+.wf-vow__card:focus-visible { outline: 2px solid var(--wf-accent); outline-offset: -4px; }

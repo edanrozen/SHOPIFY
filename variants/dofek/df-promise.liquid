@@ -1,0 +1,44 @@
+{%- doc -%}
+  The last band. One question, one button, one address.
+
+  It asks for the message rather than the order. The shop sells braces and
+  shoes in sizes, the single most expensive mistake a first-time buyer makes
+  here is the wrong size, and a returned parcel costs more than the reply
+  that prevents it.
+{%- enddoc -%}
+
+<section class="df-promise">
+  <div class="pl-wrap">
+    <div class="df-promise__in">
+      <h2 class="df-promise__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="df-promise__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <div class="df-btn-row">
+          <a class="wf-btn df-btn--inv" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+            {{ section.settings.cta_label }}
+          </a>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}
+        <p class="df-promise__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DOFEK · סיום",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "לא בטוחים באיזו מידה לבחור?" },
+    { "type": "textarea", "id": "text", "label": "טקסט", "default": "כתבו לנו לפני ההזמנה ונעזור לבחור מידה ודגם. עדיף להחליף הודעה אחת מאשר לקבל מידה שלא מתאימה." },
+    { "type": "text", "id": "cta_label", "label": "כפתור", "default": "לכל המוצרים" },
+    { "type": "url", "id": "cta_link", "label": "קישור הכפתור" },
+    { "type": "text", "id": "note", "label": "שורה תחתונה", "default": "DOFEK.support@gmail.com" }
+  ],
+  "presets": [{ "name": "DOFEK · סיום" }]
+}
+{% endschema %}

@@ -1,0 +1,113 @@
+{%- doc -%}
+  The plain version.
+
+  One section renders the whole homepage, so there is nothing to arrange and
+  nothing to get out of sync. It is deliberately ordinary: a picture, a line,
+  a button, a grid of everything, three facts. That is the shape almost every
+  familiar shop uses, and the point of this version is to see the store wearing
+  it before deciding whether it needs anything more.
+
+  Nothing here inherits from the main design system. The whole theme is dressed
+  by one stylesheet, `assets/bs.css`: system fonts, white ground, black text,
+  square frames, one hairline. No animation, no shadow, no gradient.
+{%- enddoc -%}
+
+{%- liquid
+  assign coll = collections[section.settings.collection]
+  assign items = coll.products
+  if coll == blank
+    assign items = collections.all.products
+  endif
+-%}
+
+{%- if section.settings.image != blank -%}
+  <div class="bs-hero">
+    <img
+      src="{{ section.settings.image | image_url: width: 1600 }}"
+      srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1600 }} 1600w"
+      sizes="100vw"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+      alt="{{ section.settings.image.alt | escape }}"
+      fetchpriority="high" decoding="async"
+    >
+  </div>
+{%- endif -%}
+
+<div class="bs-wrap bs-intro">
+  <h1>{{ section.settings.heading }}</h1>
+  {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+  {%- if section.settings.cta != blank -%}
+    <a class="bs-btn" href="{{ section.settings.cta_link | default: '/collections/all' }}">{{ section.settings.cta }}</a>
+  {%- endif -%}
+</div>
+
+<div class="bs-wrap">
+  <h2 class="bs-h2">{{ section.settings.grid_heading }}</h2>
+  <ul class="bs-grid" role="list">
+    {%- for item in items limit: section.settings.limit -%}
+      <li>
+        <a href="{{ item.url }}">
+          <div class="bs-thumb">
+            {%- if item.featured_image != blank -%}
+              <img
+                src="{{ item.featured_image | image_url: width: 600 }}"
+                srcset="{{ item.featured_image | image_url: width: 300 }} 300w, {{ item.featured_image | image_url: width: 600 }} 600w"
+                sizes="(max-width: 700px) 46vw, 23vw"
+                width="{{ item.featured_image.width }}"
+                height="{{ item.featured_image.height }}"
+                alt="{{ item.featured_image.alt | default: item.title | escape }}"
+                loading="lazy" decoding="async"
+              >
+            {%- endif -%}
+          </div>
+          <span class="bs-name">{{ item.title }}</span>
+          <span class="bs-price">{{ item.price | money }}</span>
+        </a>
+      </li>
+    {%- else -%}
+      <li>אין מוצרים להצגה.</li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{%- if section.blocks.size > 0 -%}
+  <div class="bs-facts">
+    <ul class="bs-wrap bs-facts__list" role="list">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>
+          <strong>{{ block.settings.title }}</strong>
+          <span>{{ block.settings.text }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "בייסיק · דף הבית",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "תמונה ראשית" },
+    { "type": "text", "id": "heading", "label": "כותרת", "default": "TinyBloom" },
+    { "type": "textarea", "id": "text", "label": "טקסט" },
+    { "type": "text", "id": "cta", "label": "כפתור", "default": "לכל המוצרים" },
+    { "type": "url", "id": "cta_link", "label": "קישור הכפתור" },
+    { "type": "text", "id": "grid_heading", "label": "כותרת הרשימה", "default": "המוצרים שלנו" },
+    { "type": "collection", "id": "collection", "label": "אוסף" },
+    { "type": "range", "id": "limit", "label": "כמה מוצרים", "min": 4, "max": 24, "step": 1, "default": 12 }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "שורת מידע",
+      "settings": [
+        { "type": "text", "id": "title", "label": "כותרת" },
+        { "type": "text", "id": "text", "label": "טקסט" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "בייסיק · דף הבית" }]
+}
+{% endschema %}
