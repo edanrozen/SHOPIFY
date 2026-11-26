@@ -1,0 +1,1163 @@
+{
+  "log": [
+    {
+      "ev": "nav retry",
+      "url": "https://dofek.shop/cart",
+      "i": 0,
+      "e": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://dofek.shop/cart"
+    },
+    {
+      "ev": "nav retry",
+      "url": "https://dofek.shop/cart",
+      "i": 1,
+      "e": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://dofek.shop/cart"
+    },
+    {
+      "ev": "nav retry",
+      "url": "https://dofek.shop/cart",
+      "i": 2,
+      "e": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://dofek.shop/cart"
+    },
+    {
+      "ev": "nav retry",
+      "url": "https://dofek.shop/cart",
+      "i": 3,
+      "e": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://dofek.shop/cart"
+    },
+    {
+      "ev": "nav FAILED",
+      "url": "https://dofek.shop/cart",
+      "e": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://dofek.shop/cart"
+    },
+    {
+      "ev": "/cart",
+      "status": null,
+      "ms": 13482,
+      "url": "chrome-error://chromewebdata/"
+    },
+    {
+      "ev": "cart page",
+      "h": 660,
+      "buttons": [],
+      "wallets": []
+    },
+    {
+      "ev": "/checkout",
+      "status": 200,
+      "ms": 988,
+      "url": "https://dofek.shop/checkouts/cn/hWNJbrKMV515xf36jfHAzwW2/he-il?_r=AQABU5wLRLJKmT7MiuzJrp8ouquVVt-_KmAmR38arimZdhCVlsr5"
+    },
+    {
+      "ev": "checkout content",
+      "url": "https://dofek.shop/checkouts/cn/hWNJbrKMV515xf36jfHAzwW2/he-il?_r=AQABU5wLRLJKmT7MiuzJrp8ouquVVt-_KmAmR38arimZdhCVlsr5",
+      "title": "תשלום - DOFEK",
+      "h": 1579,
+      "fields": [
+        {
+          "name": "email",
+          "type": "text",
+          "ph": "דוא\"ל",
+          "label": null,
+          "req": true,
+          "autoc": "shipping email"
+        },
+        {
+          "name": "marketing_opt_in",
+          "type": "checkbox",
+          "ph": "",
+          "label": null,
+          "req": false,
+          "autoc": null
+        },
+        {
+          "name": "countryCode",
+          "type": "select-one",
+          "label": null,
+          "req": true,
+          "autoc": "shipping country-name"
+        },
+        {
+          "name": "firstName",
+          "type": "text",
+          "ph": "שם פרטי",
+          "label": null,
+          "req": true,
+          "autoc": "shipping given-name"
+        },
+        {
+          "name": "lastName",
+          "type": "text",
+          "ph": "שם משפחה",
+          "label": null,
+          "req": true,
+          "autoc": "shipping family-name"
+        },
+        {
+          "name": "address1",
+          "type": "text",
+          "ph": "כתובת",
+          "label": null,
+          "req": true,
+          "autoc": "shipping address-line1"
+        },
+        {
+          "name": "address2",
+          "type": "text",
+          "ph": "דירה, סוויטה וכו׳ (אופציונלי)",
+          "label": null,
+          "req": false,
+          "autoc": "shipping address-line2"
+        },
+        {
+          "name": "postalCode",
+          "type": "text",
+          "ph": "מיקוד (אופציונלי)",
+          "label": null,
+          "req": false,
+          "autoc": "shipping postal-code"
+        },
+        {
+          "name": "city",
+          "type": "text",
+          "ph": "עיר",
+          "label": null,
+          "req": true,
+          "autoc": "shipping address-level2"
+        },
+        {
+          "name": "phone",
+          "type": "tel",
+          "ph": "טלפון (אופציונלי)",
+          "label": null,
+          "req": false,
+          "autoc": "shipping tel-national"
+        },
+        {
+          "name": "save_shipping_information",
+          "type": "checkbox",
+          "ph": "",
+          "label": null,
+          "req": false,
+          "autoc": null
+        },
+        {
+          "name": "firstName",
+          "type": "text",
+          "ph": "",
+          "label": "שם פרטי",
+          "req": false,
+          "autoc": "shipping given-name"
+        },
+        {
+          "name": "lastName",
+          "type": "text",
+          "ph": "",
+          "label": "שם משפחה",
+          "req": false,
+          "autoc": "shipping family-name"
+        },
+        {
+          "name": "address1",
+          "type": "text",
+          "ph": "",
+          "label": "כתובת",
+          "req": false,
+          "autoc": "shipping address-line1"
+        },
+        {
+          "name": "city",
+          "type": "text",
+          "ph": "",
+          "label": "עיר",
+          "req": false,
+          "autoc": "shipping address-level2"
+        },
+        {
+          "name": "country",
+          "type": "text",
+          "ph": "",
+          "label": "מדינה/אזור",
+          "req": false,
+          "autoc": "shipping country"
+        },
+        {
+          "name": "zone",
+          "type": "text",
+          "ph": "",
+          "label": "מחוז",
+          "req": false,
+          "autoc": "shipping address-level1"
+        },
+        {
+          "name": "address-level1",
+          "type": "text",
+          "ph": "",
+          "label": "מחוז",
+          "req": false,
+          "autoc": "shipping address-level1"
+        },
+        {
+          "name": "province",
+          "type": "text",
+          "ph": "",
+          "label": "מחוז",
+          "req": false,
+          "autoc": "shipping address-level1"
+        },
+        {
+          "name": "postalCode",
+          "type": "text",
+          "ph": "",
+          "label": "מיקוד",
+          "req": false,
+          "autoc": "shipping postal-code"
+        },
+        {
+          "name": "autofill_phone_capture",
+          "type": "text",
+          "ph": "",
+          "label": "טלפון",
+          "req": false,
+          "autoc": "shipping tel-national"
+        },
+        {
+          "name": "basic",
+          "type": "radio",
+          "ph": "",
+          "label": "PayPal",
+          "req": false,
+          "autoc": null
+        },
+        {
+          "name": "basic",
+          "type": "radio",
+          "ph": "",
+          "label": "כרטיס אשראי ואמצעי תשלום נוספים, american_express, diners_club ו-jcb",
+          "req": false,
+          "autoc": null
+        },
+        {
+          "name": "billing_address_selector",
+          "type": "radio",
+          "ph": "",
+          "label": "זהה לכתובת לשילוח",
+          "req": false,
+          "autoc": null
+        },
+        {
+          "name": "billing_address_selector",
+          "type": "radio",
+          "ph": "",
+          "label": "שימוש בכתובת חיוב אחרת",
+          "req": false,
+          "autoc": null
+        }
+      ],
+      "payRadios": [
+        "PayPal",
+        "כרטיס אשראי ואמצעי תשלום נוספים"
+      ],
+      "walletBtns": [
+        {
+          "cls": "aaBmU Iclgp",
+          "tag": "IFRAME",
+          "txt": ""
+        }
+      ],
+      "iframes": [
+        {
+          "src": "https://checkout.shopify.com/77707149364/sandboxes/wallets?shopHost=dofek.shop&wallet=PAY_WITH_PAYPAL&hmac=f4a754e78009526a8a614dede332e1b4c0fcc4f981578ca1c3983",
+          "title": "שלם באמצעות PayPal",
+          "vis": true
+        },
+        {
+          "src": "https://dofek.shop/web-pixels@15451528w2c618d7fpfa16f52dm59493539/custom/web-pixel-shopify-custom-pixel@0520/sandbox/legacy/checkouts/cn/hWNJbrKMV515xf36jfHAzwW",
+          "title": "",
+          "vis": false
+        }
+      ]
+    }
+  ],
+  "cons": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "verbose",
+      "text": "Rendering was performed in a subtree hidden by content-visibility."
+    },
+    {
+      "type": "verbose",
+      "text": "Rendering was performed in a subtree hidden by content-visibility."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "info",
+      "text": "Clear-Site-Data header on 'https://dofek.shop/cart/add.js': Cleared data types: \"prefetchCache\", \"prerenderCache\"."
+    },
+    {
+      "type": "pageerror",
+      "text": "Required ref \"cartBubbleCount\" not found in component cart-icon"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "verbose",
+      "text": "Rendering was performed in a subtree hidden by content-visibility."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "[bugsnag-light] failed to start session"
+    },
+    {
+      "type": "warning",
+      "text": "BreadcrumbsPluginFetchError: Failed to fetch\n    at https://dofek.shop/cdn/shopifycloud/checkout-web/assets/c1/630ba094-legacy.Cr6CSOPr.js:3:63052"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('https://dofek.shop') does not match the recipient window's origin ('null')."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 3."
+    },
+    {
+      "type": "pageerror",
+      "text": "Failed to fetch"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 3."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 3 of 3."
+    },
+    {
+      "type": "log",
+      "text": "CardFieldsLoadError: Failed to load CardFields SDK. Script src: https://checkout.pci.shopifyinc.com/build/c07a878/card_fields.js . Internet connection boolean: true\n    at https://dofek.shop/cdn/shopifycloud/checkout-web/assets/c1/6ec9a0fa-legacy.BbN79aRa.js:32:165557"
+    },
+    {
+      "type": "log",
+      "text": "CardFieldsLoadError: Failed to load CardFields SDK. Script src: https://checkout.pci.shopifyinc.com/build/c07a878/card_fields.js . Internet connection boolean: true\n    at https://dofek.shop/cdn/shopifycloud/checkout-web/assets/c1/6ec9a0fa-legacy.BbN79aRa.js:32:165557"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 2 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "warning",
+      "text": "Failed to execute action on attempt 1 of 2."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    }
+  ],
+  "netfail": [
+    {
+      "url": "blob:https://dofek.shop/8f33a646-a433-4533-a40c-a9be343a5c55",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "blob:https://dofek.shop/a338b2a9-c277-426f-822a-c6e4ce7abac3",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://connect.facebook.net/en_US/fbevents.js",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://bundles-stats.kachingappz.app/impressions",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchMediaImages",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchNativeBundleProductIds",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=ef78bed8-666a-4333-a8be-d3b53c332125&flow=embed&flow_version=account_menu&target_origin=https%3A%2F",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://bundles-stats.kachingappz.app/add-to-carts",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNTcsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE1NzUxNywicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNTcsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE1NzUxNywicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNjAsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE2MDg5NywicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNjAsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE2MDg5NywicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNjQsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE2NDI2MCwicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNjQsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE2NDI2MCwicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNjcsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE2NzYzMywicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNjcsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE2NzYzMywicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://shop.app/accounts/sur?code=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3OTU3MzQxNjcsImJvZHkiOnsiaXAiOiIxNjAuNzkuMTA2LjIyOCIsImlzc3VlZF9hdF9tcyI6MTc5NTczNDE2NzYzMywicmVkaXJlY3RfdXJpIjoiaHR0",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://error-analytics-sessions-production.shopifysvc.com/observeonly",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/private_access_tokens?id=49a038b1d9d4a66bcdb2ecf21a50c8cd&checkout_type=c1",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://checkout.shopify.com/77707149364/sandboxes/wallets?shopHost=dofek.shop&wallet=PAYPAL_EXPRESS&hmac=ac0866673eb9c865f5baf164dc2b0f7ad55273ca01074b9eb6f4b9f825d5052a",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://checkout.pci.shopifyinc.com/build/c07a878/card_fields.js",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://connect.facebook.net/en_US/fbevents.js",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://checkout.shopify.com/77707149364/sandboxes/wallets?shopHost=dofek.shop&wallet=PAY_WITH_PAYPAL&hmac=f4a754e78009526a8a614dede332e1b4c0fcc4f981578ca1c3983fb5160b3ccf",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://bundles-stats.kachingappz.app/checkouts",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://checkout.pci.shopifyinc.com/build/c07a878/card_fields.js",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://api.config-security.com/event",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "err": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://checkout.pci.shopifyinc.com/build/c07a878/card_fields.js",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/logs",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://otlp-http-production-edge.shopifysvc.com/v1/metrics",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "url": "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    }
+  ],
+  "bad": [
+    {
+      "url": "https://dofek.shop/private_access_tokens?id=49a038b1d9d4a66bcdb2ecf21a50c8cd&checkout_type=c1",
+      "status": 401
+    }
+  ]
+}

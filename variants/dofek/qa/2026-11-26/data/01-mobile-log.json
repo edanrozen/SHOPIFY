@@ -1,0 +1,2830 @@
+{
+  "log": [
+    {
+      "t": 1795733926733,
+      "ev": "navigated",
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93"
+    },
+    {
+      "t": 1795733927657,
+      "ev": "navigated",
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596"
+    },
+    {
+      "t": 1795733927965,
+      "ev": "pdp loaded",
+      "ms": 1671,
+      "status": 200,
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596"
+    },
+    {
+      "t": 1795733934401,
+      "ev": "page height",
+      "prefix": "02-pdp-mobile",
+      "scrollHeight": 12450,
+      "viewport": 664,
+      "screens": 18.8
+    },
+    {
+      "t": 1795733958286,
+      "ev": "cart.js BEFORE",
+      "item_count": 0,
+      "total": 0,
+      "items": []
+    },
+    {
+      "t": 1795733958302,
+      "ev": "button inventory",
+      "count": 30,
+      "atc_like": 5
+    },
+    {
+      "t": 1795733958330,
+      "ev": "atc locator count",
+      "n": 1
+    },
+    {
+      "t": 1795733958357,
+      "ev": "ATC element",
+      "info": {
+        "txt": "הוספה לסל",
+        "cls": "wf-btn dp__atc",
+        "id": "",
+        "name": null,
+        "disabled": false,
+        "w": 207,
+        "h": 54,
+        "y": 1917,
+        "form": "/cart/add",
+        "listeners": "n/a"
+      }
+    },
+    {
+      "t": 1795733958509,
+      "ev": ">>> CLICK ATC"
+    },
+    {
+      "t": 1795733959721,
+      "ev": "POST-CLICK +500ms",
+      "since_click": 1212,
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596",
+      "bodyLen": 173272,
+      "bodyDelta": 9,
+      "drawers": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "header__drawer",
+          "txt": ""
+        },
+        {
+          "tag": "HEADER-DRAWER",
+          "id": "",
+          "cls": "header-drawer ",
+          "txt": ""
+        },
+        {
+          "tag": "DETAILS",
+          "id": "Details-menu-drawer-container",
+          "cls": "menu-drawer-container",
+          "txt": ""
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "svg-wrapper header-drawer-icon header-drawer-icon--open",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block kaching-bundles__block--loaded",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block-title",
+          "txt": "BUNDLE & SAVE"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bars",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – "
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar kaching-bundles__bar--selected",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "מגן הברך של DOFEK"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-label",
+          "txt": "מבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variants",
+          "txt": "צבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-names",
+          "txt": "צבעמידה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selector-wrapper",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant__content",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-main",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selects",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "שחור\nלבן"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "M\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-radio",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-subtitle",
+          "txt": "139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "259.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__divider-icon",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "79.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift",
+          "txt": "! מתנה בחינם\n59.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__main",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__content",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__text",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__full-price",
+          "txt": "59.99 ₪"
+        }
+      ],
+      "cartCountEls": [
+        "0"
+      ],
+      "cart_item_count": 1,
+      "cart_total": 18000,
+      "cart_items": [
+        {
+          "t": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד - שחור / M",
+          "q": 1,
+          "p": 18000
+        }
+      ]
+    },
+    {
+      "t": 1795733960955,
+      "ev": "POST-CLICK +1500ms",
+      "since_click": 2446,
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596",
+      "bodyLen": 173144,
+      "bodyDelta": -119,
+      "drawers": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "header__drawer",
+          "txt": ""
+        },
+        {
+          "tag": "HEADER-DRAWER",
+          "id": "",
+          "cls": "header-drawer ",
+          "txt": ""
+        },
+        {
+          "tag": "DETAILS",
+          "id": "Details-menu-drawer-container",
+          "cls": "menu-drawer-container",
+          "txt": ""
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "svg-wrapper header-drawer-icon header-drawer-icon--open",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block kaching-bundles__block--loaded",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block-title",
+          "txt": "BUNDLE & SAVE"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bars",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – "
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar kaching-bundles__bar--selected",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "מגן הברך של DOFEK"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-label",
+          "txt": "מבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variants",
+          "txt": "צבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-names",
+          "txt": "צבעמידה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selector-wrapper",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant__content",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-main",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selects",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "שחור\nלבן"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "M\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-radio",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-subtitle",
+          "txt": "139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "259.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__divider-icon",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "79.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift",
+          "txt": "! מתנה בחינם\n59.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__main",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__content",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__text",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__full-price",
+          "txt": "59.99 ₪"
+        }
+      ],
+      "cartCountEls": [
+        "1",
+        "1"
+      ],
+      "cart_item_count": 1,
+      "cart_total": 18000,
+      "cart_items": [
+        {
+          "t": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד - שחור / M",
+          "q": 1,
+          "p": 18000
+        }
+      ]
+    },
+    {
+      "t": 1795733962695,
+      "ev": "POST-CLICK +3000ms",
+      "since_click": 4186,
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596",
+      "bodyLen": 173144,
+      "bodyDelta": -119,
+      "drawers": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "header__drawer",
+          "txt": ""
+        },
+        {
+          "tag": "HEADER-DRAWER",
+          "id": "",
+          "cls": "header-drawer ",
+          "txt": ""
+        },
+        {
+          "tag": "DETAILS",
+          "id": "Details-menu-drawer-container",
+          "cls": "menu-drawer-container",
+          "txt": ""
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "svg-wrapper header-drawer-icon header-drawer-icon--open",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block kaching-bundles__block--loaded",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block-title",
+          "txt": "BUNDLE & SAVE"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bars",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – "
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar kaching-bundles__bar--selected",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "מגן הברך של DOFEK"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-label",
+          "txt": "מבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variants",
+          "txt": "צבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-names",
+          "txt": "צבעמידה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selector-wrapper",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant__content",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-main",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selects",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "שחור\nלבן"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "M\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-radio",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-subtitle",
+          "txt": "139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "259.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__divider-icon",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "79.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift",
+          "txt": "! מתנה בחינם\n59.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__main",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__content",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__text",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__full-price",
+          "txt": "59.99 ₪"
+        }
+      ],
+      "cartCountEls": [
+        "1",
+        "1"
+      ],
+      "cart_item_count": 1,
+      "cart_total": 18000,
+      "cart_items": [
+        {
+          "t": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד - שחור / M",
+          "q": 1,
+          "p": 18000
+        }
+      ]
+    },
+    {
+      "t": 1795733965912,
+      "ev": "POST-CLICK +6000ms",
+      "since_click": 7403,
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596",
+      "bodyLen": 173144,
+      "bodyDelta": -119,
+      "drawers": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "header__drawer",
+          "txt": ""
+        },
+        {
+          "tag": "HEADER-DRAWER",
+          "id": "",
+          "cls": "header-drawer ",
+          "txt": ""
+        },
+        {
+          "tag": "DETAILS",
+          "id": "Details-menu-drawer-container",
+          "cls": "menu-drawer-container",
+          "txt": ""
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "svg-wrapper header-drawer-icon header-drawer-icon--open",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block kaching-bundles__block--loaded",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block-title",
+          "txt": "BUNDLE & SAVE"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bars",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – "
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar kaching-bundles__bar--selected",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "מגן הברך של DOFEK"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-label",
+          "txt": "מבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variants",
+          "txt": "צבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-names",
+          "txt": "צבעמידה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selector-wrapper",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant__content",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-main",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selects",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "שחור\nלבן"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "M\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-radio",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-subtitle",
+          "txt": "139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "259.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__divider-icon",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "79.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift",
+          "txt": "! מתנה בחינם\n59.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__main",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__content",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__text",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__full-price",
+          "txt": "59.99 ₪"
+        }
+      ],
+      "cartCountEls": [
+        "1",
+        "1"
+      ],
+      "cart_item_count": 1,
+      "cart_total": 18000,
+      "cart_items": [
+        {
+          "t": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד - שחור / M",
+          "q": 1,
+          "p": 18000
+        }
+      ]
+    },
+    {
+      "t": 1795733972146,
+      "ev": "POST-CLICK +12000ms",
+      "since_click": 13637,
+      "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596",
+      "bodyLen": 173144,
+      "bodyDelta": -119,
+      "drawers": [
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "header__drawer",
+          "txt": ""
+        },
+        {
+          "tag": "HEADER-DRAWER",
+          "id": "",
+          "cls": "header-drawer ",
+          "txt": ""
+        },
+        {
+          "tag": "DETAILS",
+          "id": "Details-menu-drawer-container",
+          "cls": "menu-drawer-container",
+          "txt": ""
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "svg-wrapper header-drawer-icon header-drawer-icon--open",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block kaching-bundles__block--loaded",
+          "txt": "BUNDLE & SAVE\nמגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמג"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__block-title",
+          "txt": "BUNDLE & SAVE"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bars",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL\nDOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – "
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar kaching-bundles__bar--selected",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪\nצבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "מגן הברך של DOFEK\nמבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "מגן הברך של DOFEK"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-label",
+          "txt": "מבצע בלאק פריידי על כל החנות 10 % הנחה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variants",
+          "txt": "צבעמידה\nשחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-names",
+          "txt": "צבעמידה"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selector-wrapper",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant__content",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-main",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-selects",
+          "txt": "שחור\nלבן\nM\nL\nXL\nXLL"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "שחור\nלבן"
+        },
+        {
+          "tag": "SELECT",
+          "id": "",
+          "cls": "kaching-bundles__bar-variant-select kaching-bundles-option",
+          "txt": "M\nL\nXL\nXLL"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "LABEL",
+          "id": "",
+          "cls": "kaching-bundles__bar-container",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪\n! מת"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-wrapper",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-main",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-radio",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים\n259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-content-left",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק\n139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-first-line",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bar-title",
+          "txt": "DOFEK חבילת מפסיקים לסבול של דופק"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-subtitle",
+          "txt": "139.99 ₪ קניה זאת אתם חוסכים"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-pricing",
+          "txt": "259.99 ₪\n399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-price",
+          "txt": "259.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bar-full-price",
+          "txt": "399.98 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪\n​\n​\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "180.00 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "180.00 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__divider-icon",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__product",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד\n79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__link",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__title",
+          "txt": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__pricing",
+          "txt": "79.99 ₪\n199.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__price",
+          "txt": "79.99 ₪"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__bundle-products__full-price",
+          "txt": "199.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift",
+          "txt": "! מתנה בחינם\n59.99 ₪"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__main",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__link",
+          "txt": ""
+        },
+        {
+          "tag": "IMG",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__image",
+          "txt": ""
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__content",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__text",
+          "txt": "! מתנה בחינם"
+        },
+        {
+          "tag": "DIV",
+          "id": "",
+          "cls": "kaching-bundles__free-gift__full-price",
+          "txt": "59.99 ₪"
+        }
+      ],
+      "cartCountEls": [
+        "1",
+        "1"
+      ],
+      "cart_item_count": 1,
+      "cart_total": 18000,
+      "cart_items": [
+        {
+          "t": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד - שחור / M",
+          "q": 1,
+          "p": 18000
+        }
+      ]
+    },
+    {
+      "t": 1795733972262,
+      "ev": "page height",
+      "prefix": "05-after-click",
+      "scrollHeight": 12513,
+      "viewport": 664,
+      "screens": 18.8
+    },
+    {
+      "t": 1795733996711,
+      "ev": "requests in click window",
+      "count": 14,
+      "cart_add": [
+        {
+          "url": "https://dofek.shop/cart/add.js",
+          "m": "POST",
+          "post": "{\"items\":[{\"id\":67897878380596,\"quantity\":1,\"properties\":{\"__kaching_bundles\":\"{\\\"deal\\\":\\\"fkz8\\\",\\\"pp\\\":15449665404980,\\\"main\\\":true,\\\"v\\\":\\\"a940094c-8799-44f0-96a1-18cd6c23c486\\\",\\\"id\\\":\\\"Egr8\\\",\\\"bid\\\":\\\"hFcm\\\"}\"}}]}"
+        }
+      ],
+      "checkout": []
+    }
+  ],
+  "console": [
+    {
+      "t": 1795733927701,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733927928,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733927932,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchMediaImages",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733927933,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchNativeBundleProductIds",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733927935,
+      "type": "pageerror",
+      "text": "Failed to fetch",
+      "stack": "TypeError: Failed to fetch\n    at Ht (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22210)\n    at Vt.window.__kachingBundlesFetchObserver (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22083)\n    at networkFetch (https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93:1342:32)\n    at window.fetch (https://dofek.s"
+    },
+    {
+      "t": 1795733927951,
+      "type": "pageerror",
+      "text": "Failed to fetch",
+      "stack": "TypeError: Failed to fetch\n    at Ht (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22210)\n    at Vt.window.__kachingBundlesFetchObserver (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22083)\n    at networkFetch (https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93:1342:32)\n    at window.fetch (https://dofek.s"
+    },
+    {
+      "t": 1795733927954,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://connect.facebook.net/en_US/fbevents.js",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733927986,
+      "type": "pageerror",
+      "text": "Failed to fetch",
+      "stack": "TypeError: Failed to fetch\n    at r.fetch (https://dofek.shop/cdn/wpm/s15451528w2c618d7fpfa16f52dm59493539m.js:1:74629)\n    at https://dofek.shop/web-pixels/strict/app/web-pixel-2302672948@b7538b501dc4cf9c9e3f27f250e633f5.js:1:1439\n    at Generator.next (<anonymous>)\n    at https://dofek.shop/web-pixels/strict/app/web-pixel-2302672948@b7538b501dc4cf9c9e3f27f250e633f5.js:1:1203\n    at new Promise (<anonymous>)\n    at u (https://dofek.shop/web-pixels/strict/app/web-pixel-2302672948@b7538b501dc4cf9c9e3f27f250e633f5.js:1:1023)\n    at le (https://dofek.shop/web-pixels/strict/app/web-pixel-230267294"
+    },
+    {
+      "t": 1795733928009,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928052,
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "loc": {
+        "url": "https://dofek.shop/favicon.ico",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928272,
+      "type": "verbose",
+      "text": "Rendering was performed in a subtree hidden by content-visibility.",
+      "loc": {
+        "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.colors_CaG6LKvC.esm.js",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928290,
+      "type": "verbose",
+      "text": "Rendering was performed in a subtree hidden by content-visibility.",
+      "loc": {
+        "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.ShopLogin_jaXRvPZb.esm.js",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928297,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928505,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928510,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928511,
+      "type": "pageerror",
+      "text": "Failed to fetch",
+      "stack": "TypeError: Failed to fetch\n    at Ht (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22210)\n    at Vt.window.__kachingBundlesFetchObserver (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22083)\n    at networkFetch (https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93:1342:32)\n    at https://cdn.shopify.com/exten"
+    },
+    {
+      "t": 1795733928568,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928776,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733928776,
+      "type": "pageerror",
+      "text": "Failed to fetch",
+      "stack": "TypeError: Failed to fetch\n    at Ht (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22210)\n    at Vt.window.__kachingBundlesFetchObserver (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22083)\n    at networkFetch (https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93:1342:32)\n    at https://cdn.shopify.com/exten"
+    },
+    {
+      "t": 1795733928914,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733932695,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733936288,
+      "type": "verbose",
+      "text": "Rendering was performed in a subtree hidden by content-visibility.",
+      "loc": {
+        "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.ShopLogin_jaXRvPZb.esm.js",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733936564,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733936565,
+      "type": "pageerror",
+      "text": "Failed to fetch",
+      "stack": "TypeError: Failed to fetch\n    at Ht (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22210)\n    at Vt.window.__kachingBundlesFetchObserver (https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/kaching-bundles-api.js:1:22083)\n    at networkFetch (https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93:1342:32)\n    at https://cdn.shopify.com/exten"
+    },
+    {
+      "t": 1795733937695,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733957702,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733959478,
+      "type": "info",
+      "text": "Clear-Site-Data header on 'https://dofek.shop/cart/add.js': Cleared data types: \"prefetchCache\", \"prerenderCache\".",
+      "loc": {
+        "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733959609,
+      "type": "pageerror",
+      "text": "Required ref \"cartBubbleCount\" not found in component cart-icon",
+      "stack": "MissingRefError: Required ref \"cartBubbleCount\" not found in component cart-icon\n    at #updateRefs (https://dofek.shop/cdn/shop/t/37/assets/component.js?v=175690430936884589731795023627:1:1432)\n    at #mutationObserver (https://dofek.shop/cdn/shop/t/37/assets/component.js?v=175690430936884589731795023627:1:1700)"
+    },
+    {
+      "t": 1795733959743,
+      "type": "pageerror",
+      "text": "Failed to fetch",
+      "stack": "TypeError: Failed to fetch\n    at r.fetch (https://dofek.shop/cdn/wpm/s15451528w2c618d7fpfa16f52dm59493539m.js:1:74629)\n    at https://dofek.shop/web-pixels/strict/app/web-pixel-2302672948@b7538b501dc4cf9c9e3f27f250e633f5.js:1:1439\n    at Generator.next (<anonymous>)\n    at https://dofek.shop/web-pixels/strict/app/web-pixel-2302672948@b7538b501dc4cf9c9e3f27f250e633f5.js:1:1203\n    at new Promise (<anonymous>)\n    at u (https://dofek.shop/web-pixels/strict/app/web-pixel-2302672948@b7538b501dc4cf9c9e3f27f250e633f5.js:1:1023)\n    at le (https://dofek.shop/web-pixels/strict/app/web-pixel-230267294"
+    },
+    {
+      "t": 1795733959766,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733960774,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "t": 1795733987708,
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "loc": {
+        "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "netfail": [
+    {
+      "t": 1795733927248,
+      "url": "blob:https://dofek.shop/a93422fa-ead2-4bca-80a0-509bcb509e0d",
+      "method": "GET",
+      "err": "net::ERR_ABORTED",
+      "type": "script"
+    },
+    {
+      "t": 1795733927248,
+      "url": "blob:https://dofek.shop/e5816357-e62f-4031-a370-54f4e6a8bf47",
+      "method": "GET",
+      "err": "net::ERR_ABORTED",
+      "type": "script"
+    },
+    {
+      "t": 1795733927700,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733927928,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733927932,
+      "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchMediaImages",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733927933,
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "method": "POST",
+      "err": "net::ERR_ABORTED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733927933,
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "method": "POST",
+      "err": "net::ERR_ABORTED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733927933,
+      "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchNativeBundleProductIds",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733927953,
+      "url": "https://connect.facebook.net/en_US/fbevents.js",
+      "method": "GET",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "script"
+    },
+    {
+      "t": 1795733927986,
+      "url": "https://bundles-stats.kachingappz.app/impressions",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928008,
+      "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+      "method": "GET",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "script"
+    },
+    {
+      "t": 1795733928038,
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "method": "POST",
+      "err": "net::ERR_ABORTED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928066,
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "method": "POST",
+      "err": "net::ERR_ABORTED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928122,
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "method": "POST",
+      "err": "net::ERR_ABORTED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928297,
+      "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928505,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928510,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928568,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928663,
+      "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=15f6259e-9758-4662-b3e1-fc7d61faf2a9&flow=embed&flow_version=account_menu&target_origin=https%3A%2F%2Fdofek.shop&storefront_domain=https%3A%2F%2Fdofek.shop&scope=openid+email%3Averified+pay%3Asession_token+profile+shop%3Aaccount_uuid&locale=he",
+      "method": "GET",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "document"
+    },
+    {
+      "t": 1795733928775,
+      "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733928914,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733932695,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733936564,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733937695,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733957701,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733959560,
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "method": "POST",
+      "err": "net::ERR_ABORTED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733959660,
+      "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+      "method": "POST",
+      "err": "net::ERR_ABORTED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733959743,
+      "url": "https://bundles-stats.kachingappz.app/add-to-carts",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733959766,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733960774,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    },
+    {
+      "t": 1795733987708,
+      "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+      "method": "POST",
+      "err": "net::ERR_TUNNEL_CONNECTION_FAILED",
+      "type": "fetch"
+    }
+  ],
+  "http4xx": []
+}

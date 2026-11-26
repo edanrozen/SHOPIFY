@@ -1,0 +1,33 @@
+{
+  "inlineLinkCount": 1,
+  "url": "https://dofek.shop/cart",
+  "cart": {
+    "h": 1946,
+    "text": "דילוג לתוכן\n30 יום להחזר כספי\nשירות ותמיכה בעברית, לפני הקנייה ואחריה\nDOFEK\n1\nהסל שלי\n1\n1\nסך הכול לסל 180.00 ₪\nתמונת מוצר\nפרטי המוצר\nכמות\nסך הכול למוצרים\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\nצבע:\nשחור,  \nמידה:\nM\nמגן הברך של DOFEK\nמחיר מבצע\n180.00 ₪ \nמחיר רגיל\n199.99 ₪\nהקטנת הכמות\nהגדלת הכמות\nהסרה\n180.00 ₪\nהנחה\nסכום כולל משוער\n180.00 ₪\nכולל מכס ומסים. השילוח יחושב בשלב התשלום.\nלסיים תשלום\nמשלימים את הערכה\nלכל המוצרים\nגרבי במבוק לעבודה – נוחות ורכות לאורך כל היום\n59.99 ₪\nמגן ברך DOFEK – תמיכה ויציבות בכל צעד\n199.99 ₪\nמדרסי DOFEK לעיסוי כף הרגל – נוחות ותמיכה בכל צעד\n59.90 ₪\nנעלי יחפנות DOFEK – חופש בכל צעד\n159.99 ₪\nנשארים מעודכנים\nמוצרים חדשים, עדכונים קצרים ומבצעים לפני כולם. ישירות למייל, בלי ספאם.\nדוא\"ל\nמידע\nמי אנחנו\nמשלוחים והחזרות\nשאלות נפוצות\nדברו איתנו\nחיפוש\nבחירות הפרטיות שלי\nדברו איתנו\nDOFEK.support@gmail.com\nמענה בעברית, בדרך כלל באותו יום.\n© 2026 DOFEK\nתנאים ומדיניות",
+    "ctas": [
+      {
+        "t": "לסיים תשלום",
+        "n": "checkout",
+        "href": null,
+        "w": 358,
+        "h": 52,
+        "y": 522
+      }
+    ],
+    "accel": [
+      {
+        "cls": "\n        additional-checkout-buttons\n        additional-checkout-butto",
+        "vis": false,
+        "txt": ""
+      },
+      {
+        "cls": "dynamic-checkout__content",
+        "vis": false,
+        "txt": ""
+      }
+    ]
+  },
+  "checkoutBtn": 1,
+  "checkoutNavMs": 1922,
+  "checkoutUrl": "https://dofek.shop/checkouts/cn/hWNJbrbChMpstRd1I37h5IHq/he-il?_r=AQABEZpT6Zb8EAmoBTShHG8PdTSih-ukeVF20r57YPU1kzHWNntE"
+}

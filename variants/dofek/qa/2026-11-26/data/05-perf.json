@@ -1,0 +1,3829 @@
+{
+  "mobile": {
+    "home": {
+      "ttfb": 316,
+      "domContentLoaded": 4654,
+      "loadEvent": 7611,
+      "transferDoc": 51913,
+      "fcp": 1820,
+      "lcp": null,
+      "lcpEl": null,
+      "lcpSize": null,
+      "longTasks": 0,
+      "longTaskTotal": 0,
+      "longTaskMax": 0,
+      "totalBytes": 2088488,
+      "byType": {
+        "link": 1047399,
+        "early-hints": 17308,
+        "script": 419242,
+        "other": 67128,
+        "img": 385168,
+        "fetch": 33833,
+        "beacon": 900,
+        "iframe": 813,
+        "css": 64784
+      },
+      "byHost": {
+        "dofek.shop": 1758032,
+        "cdn.shopify.com": 277253,
+        "fonts.googleapis.com": 1290,
+        "otlp-http-production.shopifysvc.com": 0,
+        "monorail-edge.shopifysvc.com": 0,
+        "rgu1ui-ta.myshopify.com": 0,
+        "connect.facebook.net": 0,
+        "loox.io": 0
+      },
+      "requests": 251,
+      "blocking": [
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/base.css?v=132492467252896707531795023627",
+          "dur": 2,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma.css?v=135348331379751105961795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma-2.css?v=174994288419164164421795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-tokens.css?v=23841026423926759431795023627",
+          "dur": 9,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf.css?v=59978148742122538011795023627",
+          "dur": 9,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-shop.css?v=24934833803764957341795023627",
+          "dur": 9,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-vow.css?v=169572682066153026911795023627",
+          "dur": 10,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-mobile.css?v=177118987223653343881795023627",
+          "dur": 10,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-band.css?v=16885450740547507791795023627",
+          "dur": 10,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df.css?v=53168413025135147871795023627",
+          "dur": 10,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css",
+          "dur": 208,
+          "sz": 1931
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/compiled_assets/styles.css?v=123564169888421814981795059502&subset=gADAAwAAAAAAAAAAAAAAYAAAAEAMAgCBCLAbQABw",
+          "dur": 873,
+          "sz": 21199
+        }
+      ],
+      "docHeight": 5574,
+      "imgs": 17,
+      "scripts": [
+        {
+          "src": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://connect.facebook.net/en_US/fbevents.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/pluma.js?v=13561352270160528021795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/importmap-polyfill/es-modules-shim.2.4.0.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/standard-actions-override.js?v=171683365447094389611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/page-view-event.js?v=12823247316348680231795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/view-transitions.js?v=116552130480572511441795023627",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/popover-polyfill.js?v=119029313658895111201795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/overflow-list.js?v=46858356770684902511795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/quick-add.js?v=160295260742220749141795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-discount.js?v=138990160074728809221795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/variant-picker.js?v=76692244208061220611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-card.js?v=80689566448612614681795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-form.js?v=156247955454460663281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/fly-to-cart.js?v=48483246440248933081795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/accordion-custom.js?v=105323356731531709191795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media.js?v=37825095869491791421795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-price.js?v=179333985604099329921795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-sku.js?v=28741104639155857071795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-inventory.js?v=7173209571153411411795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/show-more.js?v=94563802205717136101795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/slideshow.js?v=28306258147874261831795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/layered-slideshow.js?v=30135417790894624731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/anchored-popover.js?v=143987075196095667371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/floating-panel.js?v=151277338116891310371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/video-background.js?v=25237992823806706551795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-quantity-selector.js?v=67906657287482036641795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media-gallery.js?v=154207211298275592001795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/rte-formatter.js?v=40306132146590816021795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing.js?v=15442793518842484731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/price-per-item.js?v=115937180292451397851795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/auto-close-details.js?v=58350291535404441581795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/checkouts/internal/preloads.js?locale=he-IL",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.he.esm.js",
+          "async": true,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/autosizes-84416378.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-6af5f5e9.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/loader.js",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/wpm/b15451528w2c618d7fpfa16f52dm59493539m.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/shop_events_listener-819172a8.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.16.1.min.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/web-components/account.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/webmcp-f2c7e115.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/web-pixels@15451528w2c618d7fpfa16f52dm59493539/app/web-pixel-2264760372@40c1ba743dab9e5db86afcf6ffa06155~2/pixel.modern.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/announcement-bar.js?v=34024675399582161451795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-drawer.js?v=121243031541024704371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-menu.js?v=1177411761452820701795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-icon.js?v=109428858171217037751795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-actions.js?v=157135685635924702181795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header.js?v=183210491532312943441795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-drawer.js?v=101430053943909765251795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-items.js?v=14476580701730542761795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-quantity-selector.js?v=168493463479860323171795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/theme-drawer.js?v=155110645205299884131795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/predictive-search.js?v=162722252387887966571795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/gift-card-recipient-form.js?v=170482155849799299241795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/standard-actions.js",
+          "async": false,
+          "defer": false
+        }
+      ],
+      "webvitalsErr": "page.addScriptTag: Error: Failed to load script at https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+      "cls": null,
+      "inp": null,
+      "wallClockLoadMs": 7619,
+      "navStatus": 200,
+      "consoleIssues": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ],
+      "requestFailed": [
+        {
+          "url": "blob:https://dofek.shop/db4ad81a-d72c-4fcd-8d6f-4e6654c28fe2",
+          "type": "script",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "blob:https://dofek.shop/b4fb9258-c7b1-4dc4-a8d8-56118cfd2de3",
+          "type": "script",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=3b7d1dc8-dded-475e-b910-69b0ab9e8152&flow=embed&flow_version=account_menu&targe",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ]
+    },
+    "collection": {
+      "ttfb": 121,
+      "domContentLoaded": 3914,
+      "loadEvent": 6458,
+      "transferDoc": 49415,
+      "fcp": 1716,
+      "lcp": null,
+      "lcpEl": null,
+      "lcpSize": null,
+      "longTasks": 0,
+      "longTaskTotal": 0,
+      "longTaskMax": 0,
+      "totalBytes": 1754522,
+      "byType": {
+        "early-hints": 17293,
+        "link": 1038888,
+        "script": 421926,
+        "other": 66828,
+        "fetch": 36831,
+        "beacon": 1980,
+        "img": 55764,
+        "iframe": 813,
+        "css": 64784
+      },
+      "byHost": {
+        "dofek.shop": 1426564,
+        "cdn.shopify.com": 277253,
+        "fonts.googleapis.com": 1290,
+        "otlp-http-production.shopifysvc.com": 0,
+        "monorail-edge.shopifysvc.com": 0,
+        "rgu1ui-ta.myshopify.com": 0,
+        "connect.facebook.net": 0,
+        "loox.io": 0
+      },
+      "requests": 249,
+      "blocking": [
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/base.css?v=132492467252896707531795023627",
+          "dur": 2,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma.css?v=135348331379751105961795023627",
+          "dur": 3,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma-2.css?v=174994288419164164421795023627",
+          "dur": 3,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-tokens.css?v=23841026423926759431795023627",
+          "dur": 3,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf.css?v=59978148742122538011795023627",
+          "dur": 4,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-shop.css?v=24934833803764957341795023627",
+          "dur": 4,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-vow.css?v=169572682066153026911795023627",
+          "dur": 5,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-mobile.css?v=177118987223653343881795023627",
+          "dur": 5,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css",
+          "dur": 4,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/compiled_assets/styles.css?v=123564169888421814981795059502&subset=AADAAwAAAAAAAAAAAAAAYAAAAEAMAgCBCLAbQABw",
+          "dur": 937,
+          "sz": 20921
+        }
+      ],
+      "docHeight": 1512,
+      "imgs": 9,
+      "scripts": [
+        {
+          "src": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://connect.facebook.net/en_US/fbevents.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/pluma.js?v=13561352270160528021795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/importmap-polyfill/es-modules-shim.2.4.0.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/standard-actions-override.js?v=171683365447094389611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/page-view-event.js?v=12823247316348680231795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/view-transitions.js?v=116552130480572511441795023627",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/popover-polyfill.js?v=119029313658895111201795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/overflow-list.js?v=46858356770684902511795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/quick-add.js?v=160295260742220749141795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-discount.js?v=138990160074728809221795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/variant-picker.js?v=76692244208061220611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-card.js?v=80689566448612614681795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-form.js?v=156247955454460663281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/fly-to-cart.js?v=48483246440248933081795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/accordion-custom.js?v=105323356731531709191795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media.js?v=37825095869491791421795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-price.js?v=179333985604099329921795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-sku.js?v=28741104639155857071795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-inventory.js?v=7173209571153411411795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/show-more.js?v=94563802205717136101795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/slideshow.js?v=28306258147874261831795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/layered-slideshow.js?v=30135417790894624731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/anchored-popover.js?v=143987075196095667371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/floating-panel.js?v=151277338116891310371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/video-background.js?v=25237992823806706551795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-quantity-selector.js?v=67906657287482036641795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media-gallery.js?v=154207211298275592001795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/rte-formatter.js?v=40306132146590816021795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing.js?v=15442793518842484731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/price-per-item.js?v=115937180292451397851795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/auto-close-details.js?v=58350291535404441581795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/checkouts/internal/preloads.js?locale=he-IL",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.he.esm.js",
+          "async": true,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/autosizes-84416378.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-6af5f5e9.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/loader.js",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/wpm/b15451528w2c618d7fpfa16f52dm59493539m.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/shop_events_listener-819172a8.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.16.1.min.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/web-components/account.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/webmcp-f2c7e115.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/web-pixels@15451528w2c618d7fpfa16f52dm59493539/app/web-pixel-2264760372@40c1ba743dab9e5db86afcf6ffa06155~2/pixel.modern.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/announcement-bar.js?v=34024675399582161451795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-drawer.js?v=121243031541024704371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-menu.js?v=1177411761452820701795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-icon.js?v=109428858171217037751795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-actions.js?v=157135685635924702181795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header.js?v=183210491532312943441795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-drawer.js?v=101430053943909765251795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-items.js?v=14476580701730542761795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-quantity-selector.js?v=168493463479860323171795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/theme-drawer.js?v=155110645205299884131795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/predictive-search.js?v=162722252387887966571795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/gift-card-recipient-form.js?v=170482155849799299241795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/standard-actions.js",
+          "async": false,
+          "defer": false
+        }
+      ],
+      "webvitalsErr": "page.addScriptTag: Error: Failed to load script at https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+      "cls": null,
+      "inp": null,
+      "wallClockLoadMs": 6471,
+      "navStatus": 200,
+      "consoleIssues": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ],
+      "requestFailed": [
+        {
+          "url": "blob:https://dofek.shop/5792bb48-4976-4b54-8783-1290fd1e9ea4",
+          "type": "script",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "blob:https://dofek.shop/87bd7f12-e640-4e0a-b4cc-ee3e01c175ff",
+          "type": "script",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=42a2610d-acd2-41ff-9b8d-21e83ee1c14d&flow=embed&flow_version=account_menu&targe",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ]
+    },
+    "pdp": {
+      "ttfb": 123,
+      "domContentLoaded": 6185,
+      "loadEvent": 12383,
+      "transferDoc": 60580,
+      "fcp": 1864,
+      "lcp": null,
+      "lcpEl": null,
+      "lcpSize": null,
+      "longTasks": 0,
+      "longTaskTotal": 0,
+      "longTaskMax": 0,
+      "totalBytes": 3463927,
+      "byType": {
+        "early-hints": 18043,
+        "link": 1059552,
+        "script": 425515,
+        "other": 218319,
+        "img": 1572219,
+        "fetch": 42482,
+        "beacon": 1620,
+        "iframe": 813,
+        "css": 64784
+      },
+      "byHost": {
+        "dofek.shop": 2971791,
+        "cdn.shopify.com": 430266,
+        "fonts.googleapis.com": 1290,
+        "otlp-http-production.shopifysvc.com": 0,
+        "rgu1ui-ta.myshopify.com": 0,
+        "monorail-edge.shopifysvc.com": 0,
+        "connect.facebook.net": 0,
+        "loox.io": 0
+      },
+      "requests": 286,
+      "blocking": [
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/base.css?v=132492467252896707531795023627",
+          "dur": 4,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma.css?v=135348331379751105961795023627",
+          "dur": 2,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma-2.css?v=174994288419164164421795023627",
+          "dur": 4,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-tokens.css?v=23841026423926759431795023627",
+          "dur": 6,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf.css?v=59978148742122538011795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-shop.css?v=24934833803764957341795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-vow.css?v=169572682066153026911795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-mobile.css?v=177118987223653343881795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-band.css?v=16885450740547507791795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-pdp.css?v=82091209938853370501795023627",
+          "dur": 9,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-long.css?v=12113364018528193791795023627",
+          "dur": 193,
+          "sz": 1742
+        },
+        {
+          "u": "https://dofek.shop/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css",
+          "dur": 243,
+          "sz": 1931
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/compiled_assets/styles.css?v=123564169888421814981795059502&subset=AADAAwAAAAAAAAAAAAAAYAAAAEAMAgCBCLAbQABw",
+          "dur": 1284,
+          "sz": 20921
+        }
+      ],
+      "docHeight": 12450,
+      "imgs": 47,
+      "scripts": [
+        {
+          "src": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://connect.facebook.net/en_US/fbevents.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/pluma.js?v=13561352270160528021795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/importmap-polyfill/es-modules-shim.2.4.0.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/standard-actions-override.js?v=171683365447094389611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/page-view-event.js?v=12823247316348680231795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/view-transitions.js?v=116552130480572511441795023627",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/popover-polyfill.js?v=119029313658895111201795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/overflow-list.js?v=46858356770684902511795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/quick-add.js?v=160295260742220749141795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-discount.js?v=138990160074728809221795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/variant-picker.js?v=76692244208061220611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-card.js?v=80689566448612614681795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-form.js?v=156247955454460663281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/fly-to-cart.js?v=48483246440248933081795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/accordion-custom.js?v=105323356731531709191795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media.js?v=37825095869491791421795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-price.js?v=179333985604099329921795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-sku.js?v=28741104639155857071795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-inventory.js?v=7173209571153411411795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/show-more.js?v=94563802205717136101795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/slideshow.js?v=28306258147874261831795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/layered-slideshow.js?v=30135417790894624731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/anchored-popover.js?v=143987075196095667371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/floating-panel.js?v=151277338116891310371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/video-background.js?v=25237992823806706551795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-quantity-selector.js?v=67906657287482036641795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media-gallery.js?v=154207211298275592001795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/rte-formatter.js?v=40306132146590816021795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing.js?v=15442793518842484731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/price-per-item.js?v=115937180292451397851795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/sticky-add-to-cart.js?v=130489688094345781431795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/auto-close-details.js?v=58350291535404441581795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/checkouts/internal/preloads.js?locale=he-IL",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.he.esm.js",
+          "async": true,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/autosizes-84416378.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-6af5f5e9.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/loader.js",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/wpm/b15451528w2c618d7fpfa16f52dm59493539m.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/shop_events_listener-819172a8.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.16.1.min.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/web-components/account.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/webmcp-f2c7e115.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/web-pixels@15451528w2c618d7fpfa16f52dm59493539/app/web-pixel-2264760372@40c1ba743dab9e5db86afcf6ffa06155~2/pixel.modern.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/announcement-bar.js?v=34024675399582161451795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-drawer.js?v=121243031541024704371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-menu.js?v=1177411761452820701795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-icon.js?v=109428858171217037751795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-actions.js?v=157135685635924702181795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header.js?v=183210491532312943441795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/df-pdp.js?v=181837868478355510831795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-drawer.js?v=101430053943909765251795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-items.js?v=14476580701730542761795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-quantity-selector.js?v=168493463479860323171795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/theme-drawer.js?v=155110645205299884131795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/predictive-search.js?v=162722252387887966571795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/gift-card-recipient-form.js?v=170482155849799299241795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/standard-actions.js",
+          "async": false,
+          "defer": false
+        }
+      ],
+      "webvitalsErr": "page.addScriptTag: Error: Failed to load script at https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+      "cls": null,
+      "inp": null,
+      "wallClockLoadMs": 12387,
+      "navStatus": 200,
+      "consoleIssues": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ],
+      "requestFailed": [
+        {
+          "url": "blob:https://dofek.shop/53ac9325-3266-43e7-86c1-2c553e7dfe4d",
+          "type": "script",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "blob:https://dofek.shop/56f2fdf6-aee0-4adb-98d2-17ef3f3bd6f1",
+          "type": "script",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=60939053-5848-447c-94db-367c6c45b9d9&flow=embed&flow_version=account_menu&targe",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchMediaImages",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchNativeBundleProductIds",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://bundles-stats.kachingappz.app/impressions",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ]
+    }
+  },
+  "desktop": {
+    "home": {
+      "ttfb": 137,
+      "domContentLoaded": 837,
+      "loadEvent": 1155,
+      "transferDoc": 51832,
+      "fcp": 684,
+      "lcp": null,
+      "lcpEl": null,
+      "lcpSize": null,
+      "longTasks": 0,
+      "longTaskTotal": 0,
+      "longTaskMax": 0,
+      "totalBytes": 2061107,
+      "byType": {
+        "early-hints": 17308,
+        "link": 1091011,
+        "script": 389586,
+        "other": 83237,
+        "img": 344752,
+        "beacon": 1260,
+        "fetch": 16524,
+        "iframe": 813,
+        "css": 64784
+      },
+      "byHost": {
+        "dofek.shop": 1730758,
+        "cdn.shopify.com": 277253,
+        "fonts.googleapis.com": 1264,
+        "otlp-http-production.shopifysvc.com": 0,
+        "connect.facebook.net": 0,
+        "shop.app": 0,
+        "loox.io": 0,
+        "monorail-edge.shopifysvc.com": 0,
+        "rgu1ui-ta.myshopify.com": 0
+      },
+      "requests": 361,
+      "blocking": [
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/base.css?v=132492467252896707531795023627",
+          "dur": 3,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma.css?v=135348331379751105961795023627",
+          "dur": 7,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma-2.css?v=174994288419164164421795023627",
+          "dur": 7,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-tokens.css?v=23841026423926759431795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf.css?v=59978148742122538011795023627",
+          "dur": 9,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-shop.css?v=24934833803764957341795023627",
+          "dur": 9,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-vow.css?v=169572682066153026911795023627",
+          "dur": 10,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-mobile.css?v=177118987223653343881795023627",
+          "dur": 11,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-band.css?v=16885450740547507791795023627",
+          "dur": 12,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df.css?v=53168413025135147871795023627",
+          "dur": 12,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css",
+          "dur": 46,
+          "sz": 1931
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/compiled_assets/styles.css?v=123564169888421814981795059502&subset=gADAAwAAAAAAAAAAAAAAYAAAAEAMAgCBCLAbQABw",
+          "dur": 47,
+          "sz": 21199
+        }
+      ],
+      "docHeight": 900,
+      "imgs": 17,
+      "scripts": [
+        {
+          "src": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://connect.facebook.net/en_US/fbevents.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/pluma.js?v=13561352270160528021795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/standard-actions-override.js?v=171683365447094389611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/page-view-event.js?v=12823247316348680231795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/view-transitions.js?v=116552130480572511441795023627",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/popover-polyfill.js?v=119029313658895111201795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/overflow-list.js?v=46858356770684902511795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/quick-add.js?v=160295260742220749141795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-discount.js?v=138990160074728809221795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/variant-picker.js?v=76692244208061220611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-card.js?v=80689566448612614681795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-form.js?v=156247955454460663281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/fly-to-cart.js?v=48483246440248933081795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/accordion-custom.js?v=105323356731531709191795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media.js?v=37825095869491791421795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-price.js?v=179333985604099329921795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-sku.js?v=28741104639155857071795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-inventory.js?v=7173209571153411411795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/show-more.js?v=94563802205717136101795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/slideshow.js?v=28306258147874261831795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/layered-slideshow.js?v=30135417790894624731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/anchored-popover.js?v=143987075196095667371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/floating-panel.js?v=151277338116891310371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/video-background.js?v=25237992823806706551795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-quantity-selector.js?v=67906657287482036641795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media-gallery.js?v=154207211298275592001795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/rte-formatter.js?v=40306132146590816021795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing.js?v=15442793518842484731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/price-per-item.js?v=115937180292451397851795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/auto-close-details.js?v=58350291535404441581795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/checkouts/internal/preloads.js?locale=he-IL",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.he.esm.js",
+          "async": true,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-6af5f5e9.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/loader.js",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/wpm/b15451528w2c618d7fpfa16f52dm59493539m.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/shop_events_listener-819172a8.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.16.1.min.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/web-components/account.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/web-pixels@15451528w2c618d7fpfa16f52dm59493539/app/web-pixel-2264760372@40c1ba743dab9e5db86afcf6ffa06155~2/pixel.modern.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/webmcp-f2c7e115.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/announcement-bar.js?v=34024675399582161451795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-drawer.js?v=121243031541024704371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-menu.js?v=1177411761452820701795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-icon.js?v=109428858171217037751795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-actions.js?v=157135685635924702181795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header.js?v=183210491532312943441795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-drawer.js?v=101430053943909765251795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-items.js?v=14476580701730542761795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-quantity-selector.js?v=168493463479860323171795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/theme-drawer.js?v=155110645205299884131795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/predictive-search.js?v=162722252387887966571795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/gift-card-recipient-form.js?v=170482155849799299241795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/standard-actions.js",
+          "async": false,
+          "defer": false
+        }
+      ],
+      "webvitalsErr": "page.addScriptTag: Error: Failed to load script at https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+      "cls": null,
+      "inp": null,
+      "wallClockLoadMs": 1163,
+      "navStatus": 200,
+      "consoleIssues": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ],
+      "requestFailed": [
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://shop.app/pay/hop?analytics_trace_id=db0f9515-5a7b-4022-aacf-ccbec0eb7199&target_origin=https%3A%2F%2Fdofek.shop&client_handle=rgu1ui-ta.myshopify.com",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=eb8b9677-e482-4abd-8e3b-102ecc6fd269&flow=embed&flow_version=account_menu&targe",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ]
+    },
+    "collection": {
+      "ttfb": 121,
+      "domContentLoaded": 682,
+      "loadEvent": 1074,
+      "transferDoc": 49293,
+      "fcp": 552,
+      "lcp": null,
+      "lcpEl": null,
+      "lcpSize": null,
+      "longTasks": 0,
+      "longTaskTotal": 0,
+      "longTaskMax": 0,
+      "totalBytes": 1737605,
+      "byType": {
+        "early-hints": 17293,
+        "link": 1088357,
+        "script": 389586,
+        "other": 86520,
+        "beacon": 2280,
+        "img": 22140,
+        "fetch": 16539,
+        "iframe": 813,
+        "css": 64784
+      },
+      "byHost": {
+        "dofek.shop": 1409795,
+        "cdn.shopify.com": 277253,
+        "fonts.googleapis.com": 1264,
+        "otlp-http-production.shopifysvc.com": 0,
+        "connect.facebook.net": 0,
+        "shop.app": 0,
+        "loox.io": 0,
+        "monorail-edge.shopifysvc.com": 0,
+        "rgu1ui-ta.myshopify.com": 0
+      },
+      "requests": 365,
+      "blocking": [
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/base.css?v=132492467252896707531795023627",
+          "dur": 2,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma.css?v=135348331379751105961795023627",
+          "dur": 5,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma-2.css?v=174994288419164164421795023627",
+          "dur": 5,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-tokens.css?v=23841026423926759431795023627",
+          "dur": 5,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf.css?v=59978148742122538011795023627",
+          "dur": 5,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-shop.css?v=24934833803764957341795023627",
+          "dur": 7,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-vow.css?v=169572682066153026911795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-mobile.css?v=177118987223653343881795023627",
+          "dur": 8,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css",
+          "dur": 9,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/compiled_assets/styles.css?v=123564169888421814981795059502&subset=AADAAwAAAAAAAAAAAAAAYAAAAEAMAgCBCLAbQABw",
+          "dur": 52,
+          "sz": 20921
+        }
+      ],
+      "docHeight": 900,
+      "imgs": 9,
+      "scripts": [
+        {
+          "src": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://connect.facebook.net/en_US/fbevents.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/pluma.js?v=13561352270160528021795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/standard-actions-override.js?v=171683365447094389611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/page-view-event.js?v=12823247316348680231795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/view-transitions.js?v=116552130480572511441795023627",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/popover-polyfill.js?v=119029313658895111201795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/overflow-list.js?v=46858356770684902511795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/quick-add.js?v=160295260742220749141795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-discount.js?v=138990160074728809221795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/variant-picker.js?v=76692244208061220611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-card.js?v=80689566448612614681795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-form.js?v=156247955454460663281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/fly-to-cart.js?v=48483246440248933081795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/accordion-custom.js?v=105323356731531709191795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media.js?v=37825095869491791421795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-price.js?v=179333985604099329921795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-sku.js?v=28741104639155857071795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-inventory.js?v=7173209571153411411795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/show-more.js?v=94563802205717136101795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/slideshow.js?v=28306258147874261831795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/layered-slideshow.js?v=30135417790894624731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/anchored-popover.js?v=143987075196095667371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/floating-panel.js?v=151277338116891310371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/video-background.js?v=25237992823806706551795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-quantity-selector.js?v=67906657287482036641795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media-gallery.js?v=154207211298275592001795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/rte-formatter.js?v=40306132146590816021795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing.js?v=15442793518842484731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/price-per-item.js?v=115937180292451397851795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/auto-close-details.js?v=58350291535404441581795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/checkouts/internal/preloads.js?locale=he-IL",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.he.esm.js",
+          "async": true,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-6af5f5e9.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/loader.js",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/wpm/b15451528w2c618d7fpfa16f52dm59493539m.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/shop_events_listener-819172a8.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.16.1.min.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/web-components/account.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/web-pixels@15451528w2c618d7fpfa16f52dm59493539/app/web-pixel-2264760372@40c1ba743dab9e5db86afcf6ffa06155~2/pixel.modern.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/webmcp-f2c7e115.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/announcement-bar.js?v=34024675399582161451795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-drawer.js?v=121243031541024704371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-menu.js?v=1177411761452820701795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-icon.js?v=109428858171217037751795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-actions.js?v=157135685635924702181795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header.js?v=183210491532312943441795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-drawer.js?v=101430053943909765251795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-items.js?v=14476580701730542761795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-quantity-selector.js?v=168493463479860323171795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/theme-drawer.js?v=155110645205299884131795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/predictive-search.js?v=162722252387887966571795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/gift-card-recipient-form.js?v=170482155849799299241795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/standard-actions.js",
+          "async": false,
+          "defer": false
+        }
+      ],
+      "webvitalsErr": "page.addScriptTag: Error: Failed to load script at https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+      "cls": null,
+      "inp": null,
+      "wallClockLoadMs": 1077,
+      "navStatus": 200,
+      "consoleIssues": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ],
+      "requestFailed": [
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://shop.app/pay/hop?analytics_trace_id=c944d8ce-3701-4330-a44c-751c81424102&target_origin=https%3A%2F%2Fdofek.shop&client_handle=rgu1ui-ta.myshopify.com",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=d57b049c-33eb-4365-bde4-64bbd8c9410e&flow=embed&flow_version=account_menu&targe",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ]
+    },
+    "pdp": {
+      "ttfb": 203,
+      "domContentLoaded": 1052,
+      "loadEvent": 1482,
+      "transferDoc": 60533,
+      "fcp": 796,
+      "lcp": null,
+      "lcpEl": null,
+      "lcpSize": null,
+      "longTasks": 0,
+      "longTaskTotal": 0,
+      "longTaskMax": 0,
+      "totalBytes": 2938393,
+      "byType": {
+        "early-hints": 18043,
+        "link": 1092797,
+        "script": 394336,
+        "other": 234728,
+        "img": 1044606,
+        "beacon": 1980,
+        "fetch": 25773,
+        "iframe": 813,
+        "css": 64784
+      },
+      "byHost": {
+        "dofek.shop": 2447852,
+        "cdn.shopify.com": 428744,
+        "fonts.googleapis.com": 1264,
+        "otlp-http-production.shopifysvc.com": 0,
+        "connect.facebook.net": 0,
+        "shop.app": 0,
+        "rgu1ui-ta.myshopify.com": 0,
+        "loox.io": 0,
+        "monorail-edge.shopifysvc.com": 0
+      },
+      "requests": 391,
+      "blocking": [
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/base.css?v=132492467252896707531795023627",
+          "dur": 5,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma.css?v=135348331379751105961795023627",
+          "dur": 14,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/pluma-2.css?v=174994288419164164421795023627",
+          "dur": 14,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-tokens.css?v=23841026423926759431795023627",
+          "dur": 15,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf.css?v=59978148742122538011795023627",
+          "dur": 15,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-shop.css?v=24934833803764957341795023627",
+          "dur": 15,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/wf-vow.css?v=169572682066153026911795023627",
+          "dur": 16,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-mobile.css?v=177118987223653343881795023627",
+          "dur": 16,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-band.css?v=16885450740547507791795023627",
+          "dur": 16,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-pdp.css?v=82091209938853370501795023627",
+          "dur": 17,
+          "sz": 0
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/assets/df-long.css?v=12113364018528193791795023627",
+          "dur": 68,
+          "sz": 1742
+        },
+        {
+          "u": "https://dofek.shop/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css",
+          "dur": 55,
+          "sz": 1931
+        },
+        {
+          "u": "https://dofek.shop/cdn/shop/t/37/compiled_assets/styles.css?v=123564169888421814981795059502&subset=AADAAwAAAAAAAAAAAAAAYAAAAEAMAgCBCLAbQABw",
+          "dur": 71,
+          "sz": 20921
+        }
+      ],
+      "docHeight": 900,
+      "imgs": 47,
+      "scripts": [
+        {
+          "src": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://connect.facebook.net/en_US/fbevents.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/pluma.js?v=13561352270160528021795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/standard-actions-override.js?v=171683365447094389611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/page-view-event.js?v=12823247316348680231795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/view-transitions.js?v=116552130480572511441795023627",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/popover-polyfill.js?v=119029313658895111201795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/overflow-list.js?v=46858356770684902511795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/quick-add.js?v=160295260742220749141795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-discount.js?v=138990160074728809221795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/variant-picker.js?v=76692244208061220611795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-card.js?v=80689566448612614681795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-form.js?v=156247955454460663281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/fly-to-cart.js?v=48483246440248933081795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/accordion-custom.js?v=105323356731531709191795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media.js?v=37825095869491791421795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-price.js?v=179333985604099329921795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-sku.js?v=28741104639155857071795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/product-inventory.js?v=7173209571153411411795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/show-more.js?v=94563802205717136101795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/slideshow.js?v=28306258147874261831795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/layered-slideshow.js?v=30135417790894624731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/anchored-popover.js?v=143987075196095667371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/floating-panel.js?v=151277338116891310371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/video-background.js?v=25237992823806706551795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-quantity-selector.js?v=67906657287482036641795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/media-gallery.js?v=154207211298275592001795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/rte-formatter.js?v=40306132146590816021795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing.js?v=15442793518842484731795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/price-per-item.js?v=115937180292451397851795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/sticky-add-to-cart.js?v=130489688094345781431795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/auto-close-details.js?v=58350291535404441581795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/checkouts/internal/preloads.js?locale=he-IL",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.he.esm.js",
+          "async": true,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-6af5f5e9.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/extensions/01a218ad-13d3-7164-b6a6-bfec447b73ea/kaching-bundles-2510/assets/loader.js",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/wpm/b15451528w2c618d7fpfa16f52dm59493539m.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/shop_events_listener-819172a8.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/perf-kit/shopify-perf-kit-3.16.1.min.js",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/web-components/account.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/web-pixels@15451528w2c618d7fpfa16f52dm59493539/app/web-pixel-2264760372@40c1ba743dab9e5db86afcf6ffa06155~2/pixel.modern.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shopifycloud/storefront/assets/storefront/webmcp-f2c7e115.js",
+          "async": true,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/announcement-bar.js?v=34024675399582161451795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-drawer.js?v=121243031541024704371795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-menu.js?v=1177411761452820701795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-icon.js?v=109428858171217037751795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header-actions.js?v=157135685635924702181795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/header.js?v=183210491532312943441795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/df-pdp.js?v=181837868478355510831795023627",
+          "async": false,
+          "defer": true
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/cart-drawer.js?v=101430053943909765251795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-items.js?v=14476580701730542761795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/component-cart-quantity-selector.js?v=168493463479860323171795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/volume-pricing-info.js?v=94479640769665442661795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/theme-drawer.js?v=155110645205299884131795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/dialog.js?v=144816527575655702281795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/predictive-search.js?v=162722252387887966571795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://dofek.shop/cdn/shop/t/37/assets/gift-card-recipient-form.js?v=170482155849799299241795023627",
+          "async": false,
+          "defer": false
+        },
+        {
+          "src": "https://cdn.shopify.com/storefront/standard-actions.js",
+          "async": false,
+          "defer": false
+        }
+      ],
+      "webvitalsErr": "page.addScriptTag: Error: Failed to load script at https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+      "cls": null,
+      "inp": null,
+      "wallClockLoadMs": 1488,
+      "navStatus": 200,
+      "consoleIssues": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "pageerror",
+          "text": "Failed to fetch"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "warning",
+          "text": "Deprecated API for given entry type."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ],
+      "requestFailed": [
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://shop.app/pay/hop?analytics_trace_id=aa97f381-00cf-4c35-ad0c-161a6473e09a&target_origin=https%3A%2F%2Fdofek.shop&client_handle=rgu1ui-ta.myshopify.com",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://connect.facebook.net/en_US/fbevents.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchMediaImages",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchNativeBundleProductIds",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+          "type": "fetch",
+          "err": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://bundles-stats.kachingappz.app/impressions",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/logs",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://loox.io/widget/ny9XJ-cvX1/loox.1789113085428.js?shop=rgu1ui-ta.myshopify.com",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://shop.app/accounts/pre_auth?client_id=c58db85d-0420-4aef-9d92-0d3d2574b24d&analytics_trace_id=d8852782-d9a1-4dbf-8aca-24a45b71e6c1&flow=embed&flow_version=account_menu&targe",
+          "type": "document",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://monorail-edge.shopifysvc.com/v1/produce",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://rgu1ui-ta.myshopify.com/api/2026-07/graphql.json?operation_name=FetchDealBlocks",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+          "type": "fetch",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        },
+        {
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js",
+          "type": "script",
+          "err": "net::ERR_TUNNEL_CONNECTION_FAILED"
+        }
+      ]
+    }
+  }
+}

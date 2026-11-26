@@ -1,0 +1,100 @@
+[
+  {
+    "t": 1795733958197,
+    "url": "https://dofek.shop/cart.js",
+    "method": "GET",
+    "type": "fetch",
+    "post": ""
+  },
+  {
+    "t": 1795733958570,
+    "url": "https://dofek.shop/cart/add.js",
+    "method": "POST",
+    "type": "fetch",
+    "post": "{\"items\":[{\"id\":67897878380596,\"quantity\":1,\"properties\":{\"__kaching_bundles\":\"{\\\"deal\\\":\\\"fkz8\\\",\\\"pp\\\":15449665404980,\\\"main\\\":true,\\\"v\\\":\\\"a940094c-8799-44f0-96a1-18cd6c23c486\\\",\\\"id\\\":\\\"Egr8\\\",\\\"bid\\\":\\\"hFcm\\\"}\"}}]}"
+  },
+  {
+    "t": 1795733959488,
+    "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+    "method": "POST",
+    "type": "fetch",
+    "post": "{\"resourceMetrics\":[{\"resource\":{\"attributes\":[{\"key\":\"service.name\",\"value\":{\"stringValue\":\"web-pixels-manager\"}}]},\"scopeMetrics\":[{\"scope\":{\"name\":\"open-telemetry-mini-client\",\"version\":\"1.1.0\",\"attributes\":[]},\"metrics\":[{\"name\":\"web_pixels_manager_feature_usage\",\"unit\":\"1\",\"sum\":{\"aggregationTemporality\":1,\"isMonotonic\":true,\"dataPoints\":[{\"startTimeUnixNano\":1795733959486000000,\"timeUnixNano"
+  },
+  {
+    "t": 1795733959492,
+    "url": "https://dofek.shop/cart.js",
+    "method": "GET",
+    "type": "fetch",
+    "post": ""
+  },
+  {
+    "t": 1795733959493,
+    "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+    "method": "POST",
+    "type": "ping",
+    "post": "{\"events\":[{\"schema_id\":\"storefront_customer_tracking/5.11\",\"payload\":{\"event_id\":\"sh-1a1634dd-90F4-4DC1-9D5F-A7D3CBEEE4FA\",\"event_time\":1795733959485,\"event_source_url\":\"https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596\",\"unique_token\":\"f1776"
+  },
+  {
+    "t": 1795733959494,
+    "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+    "method": "POST",
+    "type": "fetch",
+    "post": "{\"events\":[{\"schema_id\":\"web_pixels_manager_event_publish/1.7\",\"payload\":{\"version\":\"15451528w2c618d7fpfa16f52dm59493539\",\"bundle_target\":\"modern\",\"page_url\":\"https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596\",\"shop_id\":77707149364,\"surface\":\""
+  },
+  {
+    "t": 1795733959506,
+    "url": "https://bundles-stats.kachingappz.app/add-to-carts",
+    "method": "POST",
+    "type": "fetch",
+    "post": "{\"shopDomain\":\"rgu1ui-ta.myshopify.com\",\"dealBlockId\":\"6186e5a9-6b6f-41dd-afbc-bd4921e8de96\",\"dealBarId\":\"hFcm\",\"dealBlockVersionId\":\"a940094c-8799-44f0-96a1-18cd6c23c486\"}"
+  },
+  {
+    "t": 1795733959556,
+    "url": "https://dofek.shop/.well-known/shopify/monorail/unstable/produce_batch",
+    "method": "POST",
+    "type": "fetch",
+    "post": "{\"events\":[{\"schema_id\":\"web_pixels_manager_subscriber_event_emit/4.1\",\"payload\":{\"version\":\"15451528w2c618d7fpfa16f52dm59493539\",\"bundle_target\":\"modern\",\"page_url\":\"https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897878380596\",\"shop_id\":77707149364,\"su"
+  },
+  {
+    "t": 1795733959604,
+    "url": "https://dofek.shop/cart.js",
+    "method": "GET",
+    "type": "fetch",
+    "post": ""
+  },
+  {
+    "t": 1795733960488,
+    "url": "https://otlp-http-production.shopifysvc.com/v1/metrics",
+    "method": "POST",
+    "type": "fetch",
+    "post": "{\"resourceMetrics\":[{\"resource\":{\"attributes\":[{\"key\":\"service.name\",\"value\":{\"stringValue\":\"web-pixels-manager\"}}]},\"scopeMetrics\":[{\"scope\":{\"name\":\"open-telemetry-mini-client\",\"version\":\"1.1.0\",\"attributes\":[]},\"metrics\":[{\"name\":\"web_pixels_manager_feature_usage\",\"unit\":\"1\",\"sum\":{\"aggregationTemporality\":1,\"isMonotonic\":true,\"dataPoints\":[{\"startTimeUnixNano\":1795733959487000000,\"timeUnixNano"
+  },
+  {
+    "t": 1795733960849,
+    "url": "https://dofek.shop/cart.js",
+    "method": "GET",
+    "type": "fetch",
+    "post": ""
+  },
+  {
+    "t": 1795733962578,
+    "url": "https://dofek.shop/cart.js",
+    "method": "GET",
+    "type": "fetch",
+    "post": ""
+  },
+  {
+    "t": 1795733962876,
+    "url": "https://dofek.shop/api/collect",
+    "method": "POST",
+    "type": "fetch",
+    "post": "{\"v\":1,\"s\":{\"wd\":true,\"ua\":false,\"cf\":true,\"be\":true,\"nm\":false,\"nc\":false,\"ka\":false,\"sa\":true,\"ta\":false,\"pt\":true,\"mp\":false,\"sd\":false},\"r\":\"change\",\"l\":\"2.8.0\"}"
+  },
+  {
+    "t": 1795733965811,
+    "url": "https://dofek.shop/cart.js",
+    "method": "GET",
+    "type": "fetch",
+    "post": ""
+  }
+]
