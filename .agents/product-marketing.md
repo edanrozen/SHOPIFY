@@ -1,6 +1,6 @@
 # Product Marketing Context — DOFEK
 
-**Document version:** 2.8
+**Document version:** 2.9
 **Last updated:** 2026-11-26
 **Market:** Israel, Hebrew-speaking, RTL
 **Store:** dofek.shop (Shopify, `rgu1ui-ta.myshopify.com`)
@@ -452,14 +452,15 @@ was wrong, and the figures below replace them.
 | | |
 |---|---|
 | Revenue per unit | **199.99₪** |
-| Landed cost | **~80₪** (split between product / shipping / duty is `MISSING`) |
-| Gross profit per unit | **~120₪** |
-| Payment processing | **`MISSING` — not supplied.** At a typical ~3% + ~1₪ it is ~7₪ |
-| **Break-even CPA** | **~113₪** (120₪ gross less ~7₪ fees) — supersedes the 107₪ recorded earlier |
-| Break-even ROAS | **~1.67** |
+| Landed cost | **45₪ — full landed, everything in.** Confirmed by the owner and matched against `unitCost` on all 8 variants, 25.11 |
+| Gross profit per unit | **~155₪** |
+| Payment processing | **`MISSING` — no `read_payments`.** ~3% is an upper bound, ~6₪ |
+| **Break-even CPA** | **~149₪** |
+| Break-even ROAS | **~1.34** |
+| **Target CPA** | **~89₪** (30% of revenue). Charlie's ruling 26.11: the 104₪ figure was 30% of *contribution*, mislabelled |
 
 An exempt dealer also **cannot reclaim VAT on inputs**. Any Israeli import VAT
-inside the 80₪ is a sunk cost, not recoverable — which is one of the arguments
+inside the 45₪ is a sunk cost, not recoverable — which is one of the arguments
 for registering as a מורשה once volume justifies it.
 
 ### Black Friday is live, and it moves the break-even
@@ -481,12 +482,12 @@ What a buyer actually sees:
 | | |
 |---|---|
 | Revenue | **180₪** |
-| Landed cost | ~80₪ |
-| Gross profit | **~100₪** |
-| **Break-even CPA** | **~93₪** after payment fees — down from ~113₪ |
-| Break-even ROAS | **~1.80** |
+| Landed cost | **45₪** |
+| Gross profit | **~135₪** |
+| **Break-even CPA** | **~129₪** after payment fees |
+| Break-even ROAS | **~1.39** |
 
-**Every media plan while the offer runs uses 93₪, not 113₪.** The two-unit
+⚠️ **The offer ends 27.11.** From 28.11 every media plan uses **149₪**, not 129₪. The two-unit
 bundle has better unit economics and is the thing worth steering buyers to,
 which no creative currently does.
 
@@ -510,8 +511,15 @@ At 199.99₪ per unit that ceiling is:
 A campaign that works lands him over the ceiling inside a year. Crossing it
 forces registration as an **עוסק מורשה** mid-year, which means charging 18% VAT
 on top of — or out of — the same 199.99₪ price. If the price stays, revenue per
-unit drops to ~169.5₪ and **break-even CPA falls from ~113₪ to ~82₪**: the media
+unit drops to ~169.5₪ and **break-even CPA falls from ~149₪ to ~118₪**: the media
 plan changes overnight.
+
+🔴 **And the ceiling meter is already broken, which Charlie established on 26.11.**
+The store charges VAT today, so Shopify books net revenue of 169.48₪ on a
+199.99₪ sale — **understating turnover by 15.25%.** The real ceiling is crossed
+at 614 units while the books still read 104,060₪, and the books only reach
+122,833₪ at 725 units. That is **~111 units and ~22,199₪ of turnover past the
+actual crossing.** The size of any penalty is `MISSING` and is not guessed here.
 
 **This is not a reason to slow down.** It is a reason to decide, before the
 ceiling arrives, whether the price rises to absorb VAT or the margin absorbs it.
@@ -864,6 +872,7 @@ recommend; Edan executes.
 
 ## Changelog
 
+- **v2.9 · 26.11.2026** — **תיקון רוחבי שצ'רלי אכף:** סעיף 12c עדיין נשא עלות נחיתה 80₪, CPA לאיזון 113₪/93₪ ו-ROAS 1.67/1.80 — כולם נגזרים מהעלות שבוטלה ב-25.11. תשעה משטחים בפרויקט נשאו את המספר הישן, וכל סוכן שקרא אותם תכנן מדיה בתקרת CPA נמוכה ב-56₪. כולם תוקנו: **45₪ · CPA לאיזון 149₪ / 129₪ במבצע · ROAS 1.34 · CPA יעד 89₪.** נוסף ש-**162₪ לחבילה הוא גבול עליון** — עלות הגרביים החינם אינה מנוכה (`MISSING`), ושעלות Shopify החודשית חסרה מכל טבלת יחידה. זו הפעם השנייה שאותה עלות מבוטלת שרדה בעותק אחר.
 - **v2.8 · 26.11.2026** — **תיקון:** v2.7 רשמה התנגשות בין האנימציה המצוירת לבין "לא נראה כמו פרסומת", והכריעה בה לטובת פוטוריאליזם. **ההתנגשות לא קיימת** — קלודי המציאה אותה ואז הכריעה בה לבד. הבעלים תיקן: הסרט מצויר, והוא **סיפור שהפואנטה שלו בסוף היא הפרסומת**. סעיף 12h נכתב מחדש עם הצורה המחייבת ומבחן הקבלה (הורדת חמש השניות האחרונות). זו הפעם השלישית שהסקה שלי החליפה אמירה מפורשת של הבעלים.
 - **v2.7 · 26.11.2026** — נוספה הנחיית הרגיסטר מהבעלים: הסרטון צריך להיקרא כ"מישהו מספר לי", לא כפרסומת. סעיף 12h, כולל טבלת החובה/האיסור הנגזרת וההכרעה בהתנגשות מול האנימציה המצוירת — ההנחיה החדשה גוברת, והסרט הראשון בפורמט הופק פוטוריאליסטי. ההכרעה הוצגה לבעלים וניתנת להיפוך.
 - **v2.7 · 26.11.2026** — נוספו האווטארים הרשמיים מפי הבעלים: **אסף ומירב**, 50–66, זוג שרץ וטייל יחד והפסיק. ברך ימין של אסף גמורה אחרי שנות עומס; מירב הפסיקה ללכת בטיילת. החלטת הקנייה מגיעה אחרי המלצת אלון ואוסנת. סעיף 12g, כולל האילוצים הנגזרים: אלון ואוסנת אינם לקוחות אמיתיים, ואסור סיום שטוען ריפוי.
