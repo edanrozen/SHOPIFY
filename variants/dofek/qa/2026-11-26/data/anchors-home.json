@@ -1,0 +1,230 @@
+{
+  "anchors": [
+    {
+      "href": "#MainContent",
+      "abs": "https://dofek.shop/#MainContent",
+      "txt": "דילוג לתוכן",
+      "w": 116,
+      "h": 56
+    },
+    {
+      "href": "/collections/all",
+      "abs": "https://dofek.shop/collections/all",
+      "txt": "",
+      "w": 333,
+      "h": 47
+    },
+    {
+      "href": "/collections/knee",
+      "abs": "https://dofek.shop/collections/knee",
+      "txt": "",
+      "w": 333,
+      "h": 47
+    },
+    {
+      "href": "/collections/shoes",
+      "abs": "https://dofek.shop/collections/shoes",
+      "txt": "",
+      "w": 333,
+      "h": 47
+    },
+    {
+      "href": "/collections/foot",
+      "abs": "https://dofek.shop/collections/foot",
+      "txt": "",
+      "w": 333,
+      "h": 47
+    },
+    {
+      "href": "/",
+      "abs": "https://dofek.shop/",
+      "txt": "DOFEK",
+      "w": 212,
+      "h": 60
+    },
+    {
+      "href": "/products/מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+      "abs": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93",
+      "txt": "קחו אותי למגן הברך",
+      "w": 362,
+      "h": 62
+    },
+    {
+      "href": "/products/%D7%92%D7%A8%D7%91%D7%99-%D7%91%D7%9E%D7%91%D7%95%D7%A7-%D7%9C%D7%A2%D7%91%D7%95%D7%93%D7%94-%D7%A0%D7%95%D7%97%D7%95%D7%AA-%D7%95%D7%A8%D7%9B%D7%95%D7%AA-%D7%9C%D7%90%D7%95%D7%A8%D7%9A-%D7%9B%D7%9C-%D7%94%D7%99%D7%95%D7%9D",
+      "abs": "https://dofek.shop/products/%D7%92%D7%A8%D7%91%D7%99-%D7%91%D7%9E%D7%91%D7%95%D7%A7-%D7%9C%D7%A2%D7%91%D7%95%D7%93%D7%94-%D7%A0%D7%95%D7%97%D7%95%D7%AA-%D7%95%D7%A8%D7%9B%D7%95%D7%AA-%D7%9C%D7%90%D7%95%D7%A8%D7%9A-%D7%9B%D7%9C-%D7%94%D7%99%D7%95%D7%9D",
+      "txt": "גרבי במבוק לעבודה – נוחות ורכות לאורך כל היום",
+      "w": 169,
+      "h": 257
+    },
+    {
+      "href": "/products/%D7%9E%D7%93%D7%A8%D7%A1%D7%99-dofek-%D7%9C%D7%A2%D7%99%D7%A1%D7%95%D7%99-%D7%9B%D7%A3-%D7%94%D7%A8%D7%92%D7%9C-%D7%A0%D7%95%D7%97%D7%95%D7%AA-%D7%95%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93-1",
+      "abs": "https://dofek.shop/products/%D7%9E%D7%93%D7%A8%D7%A1%D7%99-dofek-%D7%9C%D7%A2%D7%99%D7%A1%D7%95%D7%99-%D7%9B%D7%A3-%D7%94%D7%A8%D7%92%D7%9C-%D7%A0%D7%95%D7%97%D7%95%D7%AA-%D7%95%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93-1",
+      "txt": "מדרסי DOFEK לעיסוי כף הרגל – נוחות ותמיכה בכל",
+      "w": 169,
+      "h": 257
+    },
+    {
+      "href": "/products/%D7%A0%D7%A2%D7%9C%D7%99-%D7%99%D7%97%D7%A4%D7%A0%D7%95%D7%AA-dofek-%D7%97%D7%95%D7%A4%D7%A9-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93",
+      "abs": "https://dofek.shop/products/%D7%A0%D7%A2%D7%9C%D7%99-%D7%99%D7%97%D7%A4%D7%A0%D7%95%D7%AA-dofek-%D7%97%D7%95%D7%A4%D7%A9-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93",
+      "txt": "נעלי יחפנות DOFEK – חופש בכל צעד 159.99 ₪",
+      "w": 169,
+      "h": 257
+    },
+    {
+      "href": "/products/%D7%A0%D7%A2%D7%9C%D7%99-%D7%99%D7%97%D7%A4%D7%A0%D7%95%D7%AA-%D7%9C%D7%A7%D7%A8%D7%A7%D7%95%D7%A2-%D7%A9%D7%9C-dofek",
+      "abs": "https://dofek.shop/products/%D7%A0%D7%A2%D7%9C%D7%99-%D7%99%D7%97%D7%A4%D7%A0%D7%95%D7%AA-%D7%9C%D7%A7%D7%A8%D7%A7%D7%95%D7%A2-%D7%A9%D7%9C-dofek",
+      "txt": "נעלי יחפנות לקרקוע של DOFEK 199.99 ₪",
+      "w": 169,
+      "h": 257
+    },
+    {
+      "href": "/pages/about",
+      "abs": "https://dofek.shop/pages/about",
+      "txt": "",
+      "w": 53,
+      "h": 19
+    },
+    {
+      "href": "/pages/shipping-returns",
+      "abs": "https://dofek.shop/pages/shipping-returns",
+      "txt": "",
+      "w": 111,
+      "h": 19
+    },
+    {
+      "href": "/pages/faq",
+      "abs": "https://dofek.shop/pages/faq",
+      "txt": "",
+      "w": 88,
+      "h": 19
+    },
+    {
+      "href": "/pages/contact",
+      "abs": "https://dofek.shop/pages/contact",
+      "txt": "",
+      "w": 66,
+      "h": 19
+    },
+    {
+      "href": "/search",
+      "abs": "https://dofek.shop/search",
+      "txt": "",
+      "w": 37,
+      "h": 19
+    },
+    {
+      "href": "/pages/data-sharing-opt-out",
+      "abs": "https://dofek.shop/pages/data-sharing-opt-out",
+      "txt": "",
+      "w": 131,
+      "h": 19
+    },
+    {
+      "href": "/policies/privacy-policy",
+      "abs": "https://dofek.shop/policies/privacy-policy",
+      "txt": "מדיניות הפרטיות",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "href": "/policies/refund-policy",
+      "abs": "https://dofek.shop/policies/refund-policy",
+      "txt": "מדיניות החזרים כספיים",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "href": "/policies/terms-of-service",
+      "abs": "https://dofek.shop/policies/terms-of-service",
+      "txt": "תנאי שימוש",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "href": "/policies/shipping-policy",
+      "abs": "https://dofek.shop/policies/shipping-policy",
+      "txt": "שילוח",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "href": "/policies/contact-information",
+      "abs": "https://dofek.shop/policies/contact-information",
+      "txt": "יצירת קשר",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "href": "https://dofek.shop/customer_authentication/redirect?locale=he&region_country=IL",
+      "abs": "https://dofek.shop/customer_authentication/redirect?locale=he&region_country=IL",
+      "txt": "להיכנס",
+      "w": 0,
+      "h": 0
+    }
+  ],
+  "buttons": [
+    {
+      "txt": "השקף הקודם",
+      "type": "submit",
+      "inForm": false,
+      "cls": "\n    slideshow-control slideshow-control--pre",
+      "w": 44,
+      "h": 44,
+      "disabled": false
+    },
+    {
+      "txt": "השקף הבא",
+      "type": "submit",
+      "inForm": false,
+      "cls": "\n    slideshow-control slideshow-control--nex",
+      "w": 44,
+      "h": 44,
+      "disabled": false
+    },
+    {
+      "txt": "סגירה",
+      "type": "button",
+      "inForm": false,
+      "cls": "button close-button menu-drawer__close-button",
+      "w": 52,
+      "h": 52,
+      "disabled": false
+    },
+    {
+      "txt": "חיפוש",
+      "type": "submit",
+      "inForm": false,
+      "cls": "button-unstyled header-actions__action",
+      "w": 44,
+      "h": 44,
+      "disabled": false
+    },
+    {
+      "txt": "סל",
+      "type": "submit",
+      "inForm": false,
+      "cls": "header-actions__action button-unstyled",
+      "w": 44,
+      "h": 44,
+      "disabled": false
+    },
+    {
+      "txt": "הרשמה",
+      "type": "submit",
+      "inForm": true,
+      "cls": "email-signup__button email-signup__button--in",
+      "w": 42,
+      "h": 42,
+      "disabled": false
+    },
+    {
+      "txt": "תנאים ומדיניות",
+      "type": "submit",
+      "inForm": false,
+      "cls": "policy-list-trigger button-unstyled",
+      "w": 88,
+      "h": 17,
+      "disabled": false
+    }
+  ]
+}

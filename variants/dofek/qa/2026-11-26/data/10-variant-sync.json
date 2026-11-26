@@ -1,0 +1,251 @@
+{
+  "pickers": [
+    {
+      "name": "",
+      "tag": "SELECT",
+      "value": "שחור",
+      "label": "מגן הברך של DOFEK\nמב",
+      "docY": 1282,
+      "inKaching": true,
+      "vis": true
+    },
+    {
+      "name": "",
+      "tag": "SELECT",
+      "value": "M",
+      "label": "מגן הברך של DOFEK\nמב",
+      "docY": 1282,
+      "inKaching": true,
+      "vis": true
+    },
+    {
+      "name": "id",
+      "tag": "SELECT",
+      "value": "67897878380596",
+      "label": "בחירת צבע ומידה",
+      "docY": 0,
+      "inKaching": false,
+      "vis": false
+    },
+    {
+      "name": "dp-opt-1",
+      "tag": "INPUT",
+      "value": "שחור",
+      "label": "שחור",
+      "checked": true,
+      "docY": 1775,
+      "inKaching": false,
+      "vis": true
+    },
+    {
+      "name": "dp-opt-1",
+      "tag": "INPUT",
+      "value": "לבן",
+      "label": "לבן",
+      "checked": false,
+      "docY": 1775,
+      "inKaching": false,
+      "vis": true
+    },
+    {
+      "name": "dp-opt-2",
+      "tag": "INPUT",
+      "value": "M",
+      "label": "M",
+      "checked": true,
+      "docY": 1874,
+      "inKaching": false,
+      "vis": true
+    },
+    {
+      "name": "dp-opt-2",
+      "tag": "INPUT",
+      "value": "L",
+      "label": "L",
+      "checked": false,
+      "docY": 1874,
+      "inKaching": false,
+      "vis": true
+    },
+    {
+      "name": "dp-opt-2",
+      "tag": "INPUT",
+      "value": "XL",
+      "label": "XL",
+      "checked": false,
+      "docY": 1874,
+      "inKaching": false,
+      "vis": true
+    },
+    {
+      "name": "dp-opt-2",
+      "tag": "INPUT",
+      "value": "XLL",
+      "label": "XLL",
+      "checked": false,
+      "docY": 1874,
+      "inKaching": false,
+      "vis": true
+    }
+  ],
+  "themeSizeOptions": [
+    {
+      "label": "M",
+      "value": "M",
+      "checked": true,
+      "docY": 1874
+    },
+    {
+      "label": "L",
+      "value": "L",
+      "checked": false,
+      "docY": 1874
+    },
+    {
+      "label": "XL",
+      "value": "XL",
+      "checked": false,
+      "docY": 1874
+    },
+    {
+      "label": "XLL",
+      "value": "XLL",
+      "checked": false,
+      "docY": 1874
+    }
+  ],
+  "kachingSizeOptions": [],
+  "themeXLcount": 0,
+  "clickedThemeXL": {
+    "docY": 1851,
+    "cls": ""
+  },
+  "afterSelect": {
+    "url": "https://dofek.shop/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897881755700",
+    "themeChecked": [
+      "שחור",
+      "XL"
+    ],
+    "kachingChecked": [
+      "hFcm"
+    ],
+    "kachingSelectedText": [
+      "מגן הברך של DOFEK מבצע בלאק פריידי על כל החנות 10 % הנחה 180.00 ₪ 199.99 ₪ צבעמי"
+    ],
+    "priceShown": [
+      "199.99 ₪",
+      "180.00 ₪",
+      "259.99 ₪"
+    ]
+  },
+  "cartAfter": {
+    "token": "hWNJbtsZlvpKhHu5UrnV4H7S?key=3a79a7a6ee055873bb6b4ab6c1c57e5d",
+    "note": "",
+    "attributes": {},
+    "original_total_price": 19999,
+    "total_price": 18000,
+    "total_discount": 1999,
+    "total_weight": 0,
+    "item_count": 1,
+    "items": [
+      {
+        "id": 67897881755700,
+        "properties": {
+          "__kaching_bundles": "{\"deal\":\"fkz8\",\"pp\":15449665404980,\"main\":true,\"v\":\"a940094c-8799-44f0-96a1-18cd6c23c486\",\"id\":\"Egr8\",\"bid\":\"hFcm\"}"
+        },
+        "quantity": 1,
+        "variant_id": 67897881755700,
+        "key": "67897881755700:d28679aa459a64dbcff0d68b7d94f342",
+        "title": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד - שחור / XL",
+        "price": 19999,
+        "original_price": 19999,
+        "presentment_price": 199.99,
+        "discounted_price": 18000,
+        "line_price": 18000,
+        "original_line_price": 19999,
+        "total_discount": 1999,
+        "discounts": [
+          {
+            "amount": 1999,
+            "title": "מגן הברך של DOFEK"
+          }
+        ],
+        "sku": null,
+        "grams": 0,
+        "vendor": "DOFEK",
+        "taxable": true,
+        "product_id": 15449665404980,
+        "product_has_only_default_variant": false,
+        "gift_card": false,
+        "final_price": 18000,
+        "final_line_price": 18000,
+        "url": "/products/%D7%9E%D7%92%D7%9F-%D7%91%D7%A8%D7%9A-dofek-%D7%AA%D7%9E%D7%99%D7%9B%D7%94-%D7%95%D7%99%D7%A6%D7%99%D7%91%D7%95%D7%AA-%D7%91%D7%9B%D7%9C-%D7%A6%D7%A2%D7%93?variant=67897881755700",
+        "featured_image": {
+          "aspect_ratio": 1.024,
+          "alt": "מגן ברך DOFEK בשחור, וסת הלחץ, כרית הג'ל ומייצבי הצד",
+          "height": 1178,
+          "url": "https://cdn.shopify.com/s/files/1/0777/0714/9364/files/IMG-1670.jpg?v=1793623672",
+          "width": 1206
+        },
+        "image": "https://cdn.shopify.com/s/files/1/0777/0714/9364/files/IMG-1670.jpg?v=1793623672",
+        "handle": "מגן-ברך-dofek-תמיכה-ויציבות-בכל-צעד",
+        "requires_shipping": true,
+        "product_type": "תמיכה לברך",
+        "product_title": "מגן ברך DOFEK – תמיכה ויציבות בכל צעד",
+        "product_description": "מגן ברך עם וסת לחץ שמכוונן ביד אחת, גם תוך כדי תנועה.\n\nשני מייצבי צד לאורך המפרק\nכרית ג׳ל מחוררת שיושבת סביב פיקת הברך\nאחיזה פנימית שמונעת גלישה למטה\nנמכר כיחידה אחת, לא כזוג\n\nהמגן מיועד לתמיכה חיצונית ואינו תחליף לאבחון או לטיפול רפואי. בכאב מתמשך או פציעה כדאי להיוועץ באיש מקצוע מוסמך.",
+        "variant_title": "שחור / XL",
+        "variant_options": [
+          "שחור",
+          "XL"
+        ],
+        "options_with_values": [
+          {
+            "name": "צבע",
+            "value": "שחור"
+          },
+          {
+            "name": "מידה",
+            "value": "XL"
+          }
+        ],
+        "line_level_discount_allocations": [
+          {
+            "amount": 1999,
+            "discount_application": {
+              "type": "",
+              "key": "3179ec97-dc49-4322-b692-bfa7a25a6779",
+              "title": "מגן הברך של DOFEK",
+              "description": null,
+              "value": "10.0",
+              "created_at": "2026-11-26T23:27:44.819Z",
+              "value_type": "percentage",
+              "allocation_method": "each",
+              "target_selection": "entitled",
+              "target_type": "line_item",
+              "total_allocated_amount": 1999
+            }
+          }
+        ],
+        "line_level_total_discount": 1999,
+        "quantity_rule": {
+          "min": 1,
+          "max": null,
+          "increment": 1
+        },
+        "has_components": false
+      }
+    ],
+    "requires_shipping": true,
+    "currency": "ILS",
+    "items_subtotal_price": 18000,
+    "cart_level_discount_applications": [],
+    "discount_codes": []
+  },
+  "cartAddPosts": [
+    {
+      "url": "https://dofek.shop/cart/add.js",
+      "post": "{\"items\":[{\"id\":67897881755700,\"quantity\":1,\"properties\":{\"__kaching_bundles\":\"{\\\"deal\\\":\\\"fkz8\\\",\\\"pp\\\":15449665404980,\\\"main\\\":true,\\\"v\\\":\\\"a940094c-8799-44f0-96a1-18cd6c23c486\\\",\\\"id\\\":\\\"Egr8\\\",\\\"bid\\\":\\\"hFcm\\\"}\"}}]}"
+    }
+  ],
+  "errorResponses": []
+}

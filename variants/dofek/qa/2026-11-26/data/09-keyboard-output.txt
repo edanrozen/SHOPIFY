@@ -1,0 +1,16 @@
+status 200 anchors 34
+tabToATC 26 true | noFocusIndicator 0
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://dofek.shop/
+Call log:
+[2m  - navigating to "https://dofek.shop/", waiting until "load"[22m
+
+    at /home/user/SHOPIFY/variants/dofek/qa/2026-11-26/scripts/09-keyboard-links.js:36:9 {
+  log: [ '  - navigating to "https://dofek.shop/", waiting until "load"' ],
+  name: 'Error'
+}
+
+Node.js v22.23.4

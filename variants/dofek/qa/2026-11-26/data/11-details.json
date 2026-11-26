@@ -1,0 +1,195 @@
+{
+  "jsonld": [
+    {
+      "type": "Organization",
+      "keys": [
+        "@context",
+        "@type",
+        "name",
+        "url"
+      ]
+    },
+    {
+      "type": "Product",
+      "keys": [
+        "@context",
+        "@type",
+        "name",
+        "aggregateRating"
+      ]
+    }
+  ],
+  "biggestImages": [
+    {
+      "src": "https://dofek.shop/cdn/shop/files/6188BB48-D1E2-4DCA-8F6D-A2605BA011C6.png?v=1793736264&width=1100",
+      "natural": "390x352",
+      "display": "349x315",
+      "loading": "auto",
+      "fetchpriority": "high",
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/F787217F-DDFC-417F-9019-74887FD9C5AD.png?v=1793736260&width=1100",
+      "natural": "390x353",
+      "display": "349x349",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/617333E2-0973-48CC-A20B-8CB7A742FFDC.png?v=1793736263&width=1100",
+      "natural": "390x390",
+      "display": "349x349",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/F5B1725B-A15D-48C7-8ABC-BB5EC1282C3A.png?v=1793636523&width=1100",
+      "natural": "390x426",
+      "display": "349x349",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/D14EE562-3595-42D2-B0B3-BB2C8774DD97.png?v=1793623577&width=1100",
+      "natural": "390x390",
+      "display": "349x349",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/5B8952B6-1D3F-4F25-AE9E-7AB3C8EB09F3.png?v=1793623561&width=1100",
+      "natural": "390x390",
+      "display": "349x349",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/357BFDE1-7B4E-49C3-8E6B-B202A0E86611.png?v=1793623551&width=1100",
+      "natural": "390x390",
+      "display": "349x349",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/IMG-1670.jpg?v=1793623672&width=1100",
+      "natural": "390x380",
+      "display": "349x349",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/617333E2-0973-48CC-A20B-8CB7A742FFDC.png?v=1793736263&width=900",
+      "natural": "390x390",
+      "display": "351x351",
+      "loading": "lazy",
+      "fetchpriority": null,
+      "oversizeRatio": 0.37
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/IMG-1670.jpg?height=200&v=1793623672",
+      "natural": "205x200",
+      "display": "40x39",
+      "loading": "auto",
+      "fetchpriority": null,
+      "oversizeRatio": 1.71
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/IMG-1670.jpg?height=200&v=1793623672",
+      "natural": "205x200",
+      "display": "51x50",
+      "loading": "auto",
+      "fetchpriority": null,
+      "oversizeRatio": 1.33
+    },
+    {
+      "src": "https://dofek.shop/cdn/shop/files/IMG-1670.jpg?height=200&v=1793623672",
+      "natural": "205x200",
+      "display": "51x50",
+      "loading": "auto",
+      "fetchpriority": null,
+      "oversizeRatio": 1.33
+    }
+  ],
+  "stickyATC": [
+    {
+      "w": 207,
+      "h": 54,
+      "docY": 1917,
+      "position": "static",
+      "fontSize": "16.8px",
+      "visibleNow": false
+    },
+    {
+      "w": 120,
+      "h": 46,
+      "docY": 684,
+      "position": "fixed",
+      "fontSize": "16px",
+      "visibleNow": false
+    }
+  ],
+  "stickyAtMidScroll": [
+    {
+      "inViewport": false,
+      "top": -5553,
+      "w": 207
+    },
+    {
+      "inViewport": true,
+      "top": 606,
+      "w": 120
+    }
+  ],
+  "noticeMeasure": [
+    {
+      "text": "const Theme = {\n    translations: {\n      placeholder_image:",
+      "fontSize": "16px",
+      "color": "rgb(0, 0, 0)",
+      "bg": "rgb(255,255,255)",
+      "contrast": 21,
+      "inViewport": true,
+      "top": 0,
+      "h": 0,
+      "cls": ""
+    },
+    {
+      "text": "המוצר נוסף לסל.",
+      "fontSize": "15.2px",
+      "color": "rgb(10, 10, 10)",
+      "bg": "rgb(245,245,245)",
+      "contrast": 18.16,
+      "inViewport": true,
+      "top": 432,
+      "h": 24,
+      "cls": ""
+    }
+  ],
+  "scrollChangedOnAdd": 0,
+  "headerBadge": [
+    {
+      "txt": "1",
+      "cls": "cart-bubble visually-hidden",
+      "w": 20,
+      "h": 1,
+      "fontSize": "15px",
+      "visible": true,
+      "inViewport": true
+    },
+    {
+      "txt": "1",
+      "cls": "cart-bubble__text",
+      "w": 4,
+      "h": 10,
+      "fontSize": "10px",
+      "visible": true,
+      "inViewport": true
+    }
+  ]
+}
